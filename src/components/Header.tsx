@@ -14,6 +14,7 @@ import {
 import { CodePlacedLogo } from "./CodePlacedLogo";
 import { NAV_ITEMS } from "@/lib/data";
 import { ServicesMegaMenu, MEGA_MENU_CATEGORIES } from "./ServicesMegaMenu";
+import { IndustriesMegaMenu, INDUSTRIES_MENU_ITEMS } from "./IndustriesMegaMenu";
 
 interface HeaderProps {
   onOpenBookAudit?: (scope?: string) => void;
@@ -26,22 +27,37 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
 
   // Mega menu states
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [industriesMenuOpen, setIndustriesMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
   const [mobileActiveCat, setMobileActiveCat] = useState<string | null>("data-platforms");
 
-  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnterServices = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
+    if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+    if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
+    setIndustriesMenuOpen(false);
     setMegaMenuOpen(true);
   };
 
   const handleMouseLeaveServices = () => {
-    closeTimeoutRef.current = setTimeout(() => {
+    servicesTimeoutRef.current = setTimeout(() => {
       setMegaMenuOpen(false);
+    }, 180);
+  };
+
+  const handleMouseEnterIndustries = () => {
+    if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+    if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
+    setMegaMenuOpen(false);
+    setIndustriesMenuOpen(true);
+  };
+
+  const handleMouseLeaveIndustries = () => {
+    industriesTimeoutRef.current = setTimeout(() => {
+      setIndustriesMenuOpen(false);
     }, 180);
   };
 
@@ -73,11 +89,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           <nav className="hidden lg:flex items-center gap-1 bg-slate-100/70 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200/80 shadow-2xs">
             {NAV_ITEMS.map((item) => {
               const isServices = item.label === "Services";
+              const isIndustries = item.label === "Industries";
               const isActive =
                 item.href === "/"
                   ? pathname === "/"
                   : isServices
                   ? pathname.startsWith("/services")
+                  : isIndustries
+                  ? pathname.startsWith("/industries")
                   : pathname === item.href || pathname.startsWith(item.href);
 
               if (isServices) {
@@ -100,6 +119,41 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
                           megaMenuOpen
+                            ? "rotate-180 text-[#0B4F6C]"
+                            : "text-slate-400 group-hover:text-[#0B4F6C]"
+                        }`}
+                      />
+                      {/* Underline hover line */}
+                      <span
+                        className={`absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#0B4F6C] transition-transform duration-200 origin-center ${
+                          isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </div>
+                );
+              }
+
+              if (isIndustries) {
+                return (
+                  <div
+                    key={item.label}
+                    onMouseEnter={handleMouseEnterIndustries}
+                    onMouseLeave={handleMouseLeaveIndustries}
+                    className="relative"
+                  >
+                    <Link
+                      href="/industries"
+                      className={`relative px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 group inline-flex items-center gap-1 ${
+                        industriesMenuOpen || isActive
+                          ? "text-[#0B4F6C] bg-white shadow-2xs font-bold"
+                          : "text-slate-600 hover:text-[#0B4F6C] hover:bg-white/60"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          industriesMenuOpen
                             ? "rotate-180 text-[#0B4F6C]"
                             : "text-slate-400 group-hover:text-[#0B4F6C]"
                         }`}
@@ -152,6 +206,18 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             <ServicesMegaMenu
               isOpen={megaMenuOpen}
               onClose={() => setMegaMenuOpen(false)}
+              onOpenBookAudit={onOpenBookAudit}
+            />
+          </div>
+
+          {/* Industries Mega Menu Dropdown Container */}
+          <div
+            onMouseEnter={handleMouseEnterIndustries}
+            onMouseLeave={handleMouseLeaveIndustries}
+          >
+            <IndustriesMegaMenu
+              isOpen={industriesMenuOpen}
+              onClose={() => setIndustriesMenuOpen(false)}
               onOpenBookAudit={onOpenBookAudit}
             />
           </div>
@@ -291,6 +357,76 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 </div>
                               );
                             })}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                if (item.label === "Industries") {
+                  return (
+                    <div key="Industries" className="border-b border-slate-100 pb-2">
+                      <div className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold text-[#082F49] hover:bg-slate-50 transition-colors">
+                        <Link
+                          href="/industries"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2"
+                        >
+                          <span className="w-2 h-2 rounded-full bg-[#0E7490]" />
+                          <span>Industries Overview</span>
+                        </Link>
+                        <button
+                          onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+                          className="p-1 rounded-md text-[#0B4F6C]"
+                          aria-label="Toggle Industries list"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform text-[#0B4F6C] ${
+                              mobileIndustriesOpen ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      {/* Expanded Mobile Industries List */}
+                      <AnimatePresence>
+                        {mobileIndustriesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden pl-2 pr-1 pt-2 space-y-1.5"
+                          >
+                            <div className="grid grid-cols-1 gap-1.5">
+                              {INDUSTRIES_MENU_ITEMS.map((ind) => {
+                                const IndIcon = ind.icon;
+                                return (
+                                  <Link
+                                    key={ind.id}
+                                    href={ind.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="p-2.5 rounded-xl border border-slate-200/80 bg-[#F8FAFC] hover:bg-[#ECFEFF]/60 flex items-center justify-between group transition-colors"
+                                  >
+                                    <div className="flex items-center gap-2.5 min-w-0">
+                                      <div className="w-7 h-7 rounded-lg bg-[rgba(11,79,108,0.08)] text-[#0B4F6C] flex items-center justify-center flex-shrink-0">
+                                        <IndIcon className="w-3.5 h-3.5" />
+                                      </div>
+                                      <div className="min-w-0">
+                                        <div className="text-xs font-bold text-[#082F49] group-hover:text-[#0B4F6C] truncate">
+                                          {ind.name}
+                                        </div>
+                                        <div className="text-[10px] text-slate-500 truncate">
+                                          {ind.badge}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0B4F6C] group-hover:translate-x-0.5 transition-transform" />
+                                  </Link>
+                                );
+                              })}
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
