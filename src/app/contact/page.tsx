@@ -4,7 +4,6 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { AppShell } from "@/components/AppShell";
 import { CaseStudyModal } from "@/components/CaseStudyModal";
 import { BookAuditModal } from "@/components/BookAuditModal";
 import { CaseStudy } from "@/types";
@@ -433,15 +432,14 @@ export default function ContactPage() {
   ];
 
   return (
-    <AppShell>
-      <div className="bg-white text-[#0F172A]">
-        {/* ==================================================== */}
-        {/* SECTION 1 — HERO + CONTACT FORM (Two-Column Layout) */}
-        {/* ==================================================== */}
-        <section
-          ref={formRef}
-          className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/20 to-white border-b border-slate-200/80 overflow-hidden"
-        >
+    <div className="bg-white text-[#0F172A]">
+      {/* ==================================================== */}
+      {/* SECTION 1 — HERO + CONTACT FORM (Two-Column Layout) */}
+      {/* ==================================================== */}
+      <section
+        ref={formRef}
+        className="relative pt-28 pb-20 lg:pt-36 lg:pb-24 bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/20 to-white border-b border-slate-200/80 overflow-hidden"
+      >
           {/* Ambient subtle glow background */}
           <div className="absolute top-0 right-1/4 w-[600px] h-[350px] bg-[#0B4F6C]/5 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute bottom-10 left-10 w-[500px] h-[300px] bg-[#14B8A6]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -1547,6 +1545,5 @@ export default function ContactPage() {
           onClose={() => setIsBookModalOpen(false)}
         />
       </div>
-    </AppShell>
   );
 }

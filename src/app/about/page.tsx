@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { AppShell } from "@/components/AppShell";
 import {
   Sparkles,
   ArrowRight,
@@ -27,10 +26,9 @@ const awardIcons: Record<string, React.ReactNode> = {
 
 export default function AboutPage() {
   return (
-    <AppShell>
-      <div className="bg-white">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/25 to-white pt-16 pb-20 lg:pt-24 lg:pb-28 border-b border-slate-200/80 text-center">
+    <div className="bg-white">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/25 to-white pt-28 pb-20 lg:pt-36 lg:pb-28 border-b border-slate-200/80 text-center">
           <div className="site-container max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs mb-6">
               <Sparkles className="w-3.5 h-3.5 text-[#0E7490]" /> About CodePlaced Inc.
@@ -184,6 +182,5 @@ export default function AboutPage() {
           </div>
         </section>
       </div>
-    </AppShell>
   );
 }

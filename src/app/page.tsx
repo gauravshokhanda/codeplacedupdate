@@ -3,10 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { BookAuditModal } from "@/components/BookAuditModal";
-import { CaseStudyModal } from "@/components/CaseStudyModal";
 import { CaseStudy } from "@/types";
 import {
   Sparkles,
@@ -227,57 +223,30 @@ const INDUSTRIES_LIST = [
 ];
 
 export default function Home() {
-  const [isBookModalOpen, setIsBookModalOpen] = useState(false);
-  const [selectedAuditScope, setSelectedAuditScope] = useState<string | undefined>(undefined);
-  const [activeCaseStudy, setActiveCaseStudy] = useState<CaseStudy | null>(null);
   const [isMarqueePaused, setIsMarqueePaused] = useState(false);
-
-  const handleOpenBookAudit = (scope?: string) => {
-    setSelectedAuditScope(scope);
-    setIsBookModalOpen(true);
-  };
-
-  const handleCloseBookAudit = () => {
-    setIsBookModalOpen(false);
-    setSelectedAuditScope(undefined);
-  };
 
   const marqueeLogos = [...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS];
 
   return (
     <div className="relative min-h-screen bg-white text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans">
-      {/* 1. Sticky Navigation Header */}
-      <Header onOpenBookAudit={handleOpenBookAudit} />
-
-      <main className="overflow-hidden">
-        {/* ========================================================================= */}
-        {/* 1. HERO SECTION (TechAhead-Inspired Centered Enterprise Hero) */}
-        {/* ========================================================================= */}
-        <section
-          className="relative overflow-hidden pt-12 pb-14 lg:pt-20 lg:pb-18 border-b border-slate-200/80"
+      {/* Unified Top Hero & Navigation Wrapper (Seamless Gradient Background) */}
+      <div
+        className="relative overflow-hidden border-b border-slate-200/80"
+        style={{
+          background: "linear-gradient(180deg, #F4FBFD 0%, #EDF8FB 60%, #FFFFFF 100%)",
+        }}
+      >
+        {/* Ambient Soft Glow Behind Content */}
+        <div
+          className="absolute top-16 left-1/2 -translate-x-1/2 w-[850px] h-[450px] pointer-events-none -z-0"
           style={{
-            background: "linear-gradient(180deg, #f8fdff 0%, #eefcff 50%, #ffffff 100%)",
+            background:
+              "radial-gradient(ellipse at center, rgba(20,184,197,0.14), rgba(11,107,136,0.06), transparent 70%)",
           }}
-        >
-          {/* Subtle Background Grid Pattern */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.4] -z-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(#00b7c2 0.75px, transparent 0.75px), radial-gradient(#0f4c81 0.75px, #f8fdff 0.75px)",
-              backgroundSize: "36px 36px",
-              backgroundPosition: "0 0, 18px 18px",
-            }}
-          />
+        />
 
-          {/* Ambient Soft Glow */}
-          <div
-            className="absolute top-10 left-1/2 -translate-x-1/2 w-[850px] h-[450px] pointer-events-none -z-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(0,183,194,0.12), rgba(15,76,129,0.06), transparent 70%)",
-            }}
-          />
+        {/* HERO SECTION (TechAhead-Inspired Centered Enterprise Hero) */}
+        <section className="relative pt-24 pb-14 sm:pt-28 lg:pt-36 lg:pb-18">
 
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             {/* Pill Badge */}
@@ -331,13 +300,13 @@ export default function Home() {
               transition={{ duration: 0.55, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-7"
             >
-              <button
-                onClick={() => handleOpenBookAudit("Enterprise Consultation")}
+              <Link
+                href="/contact"
                 className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
 
               <Link
                 href="/services"
@@ -369,7 +338,9 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+      </div>
 
+      <main className="overflow-hidden">
         {/* ========================================================================= */}
         {/* 2. PARTNER LOGOS (Simple Horizontal Infinite Marquee ~100px) */}
         {/* ========================================================================= */}
@@ -575,7 +546,7 @@ export default function Home() {
                       {/* Results Metric */}
                       <div className="pt-2">
                         <div className="grid grid-cols-2 gap-2">
-                          {study.metrics.map((m, i) => (
+                          {study.metrics?.map((m: { label: string; value: string }, i: number) => (
                             <div key={i} className="p-2.5 rounded-xl bg-[#F8FAFC] border border-slate-100">
                               <div className="text-[11px] text-slate-400 font-medium">{m.label}</div>
                               <div className="text-sm font-extrabold text-[#0f4c81]">{m.value}</div>
@@ -587,13 +558,13 @@ export default function Home() {
                   </div>
 
                   <div className="p-6 pt-0">
-                    <button
-                      onClick={() => setActiveCaseStudy(study)}
+                    <Link
+                      href="/case-studies"
                       className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAFC] group-hover:bg-[#0f4c81] group-hover:text-white text-[#0f4c81] text-xs font-bold border border-slate-200 transition-all flex items-center justify-center gap-1.5"
                     >
                       <span>View Case Study Details</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -721,13 +692,13 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <button
-                onClick={() => handleOpenBookAudit("Final CTA")}
+              <Link
+                href="/contact"
                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-sm transition-all shadow-lg shadow-[#38BDF8]/20 flex items-center justify-center gap-2"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
 
               <Link
                 href="/contact"
@@ -754,38 +725,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* Global Footer */}
-      <Footer onOpenBookAudit={handleOpenBookAudit} />
-
-      {/* Floating Action Trigger */}
-      <div className="fixed bottom-6 right-6 z-30">
-        <button
-          onClick={() => handleOpenBookAudit()}
-          className="group flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#0F172A] hover:bg-[#0B4F6C] text-white font-bold text-xs shadow-2xl hover:shadow-cyan-900/30 transition-all duration-300 border border-slate-700/80 active:scale-95"
-          aria-label="Book 30-min Technical Audit"
-        >
-          <span className="flex h-2 w-2 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06B6D4] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0284C7]" />
-          </span>
-          <span className="hidden sm:inline">Book Strategy Call</span>
-          <Sparkles className="w-3.5 h-3.5 text-[#06B6D4] group-hover:rotate-12 transition-transform" />
-        </button>
-      </div>
-
-      {/* Interactive Modals */}
-      <BookAuditModal
-        isOpen={isBookModalOpen}
-        onClose={handleCloseBookAudit}
-        defaultScope={selectedAuditScope}
-      />
-
-      <CaseStudyModal
-        study={activeCaseStudy}
-        onClose={() => setActiveCaseStudy(null)}
-        onBookCall={handleOpenBookAudit}
-      />
     </div>
   );
 }

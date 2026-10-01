@@ -8,21 +8,29 @@ import {
   Menu,
   X,
   ArrowRight,
-  Sparkles,
   ChevronDown,
 } from "lucide-react";
 import { CodePlacedLogo } from "./CodePlacedLogo";
-import { NAV_ITEMS } from "@/lib/data";
-import { ServicesMegaMenu, MEGA_MENU_CATEGORIES } from "./ServicesMegaMenu";
-import { IndustriesMegaMenu, INDUSTRIES_MENU_ITEMS } from "./IndustriesMegaMenu";
+import { ServicesMegaMenu } from "./ServicesMegaMenu";
+import { IndustriesMegaMenu } from "./IndustriesMegaMenu";
 
 interface HeaderProps {
   onOpenBookAudit?: (scope?: string) => void;
 }
 
+const NAV_ITEMS_LIST = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services", hasDropdown: "services" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Industries", href: "/industries", hasDropdown: "industries" },
+  { label: "Insights", href: "/blog" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
 export function Header({ onOpenBookAudit }: HeaderProps) {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [showSticky, setShowSticky] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Mega menu states
@@ -30,7 +38,6 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   const [industriesMenuOpen, setIndustriesMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
-  const [mobileActiveCat, setMobileActiveCat] = useState<string | null>("data-platforms");
 
   const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -61,302 +68,376 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     }, 180);
   };
 
+  // Scroll listener: Trigger sticky navbar instantly when user scrolls past 80px (0ms delay)
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      const scrollPos = window.scrollY;
+      setShowSticky(scrollPos > 80);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setMegaMenuOpen(false);
+    setIndustriesMenuOpen(false);
+  }, [pathname]);
+
+  // Shared Navigation Links component
+  const renderNavLinks = () => (
+    <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+      {NAV_ITEMS_LIST.map((item) => {
+        const isServices = item.hasDropdown === "services";
+        const isIndustries = item.hasDropdown === "industries";
+        const isActive =
+          item.href === "/"
+            ? pathname === "/"
+            : isServices
+            ? pathname.startsWith("/services")
+            : isIndustries
+            ? pathname.startsWith("/industries")
+            : pathname === item.href || pathname.startsWith(item.href);
+
+        if (isServices) {
+          return (
+            <div
+              key={item.label}
+              onMouseEnter={handleMouseEnterServices}
+              onMouseLeave={handleMouseLeaveServices}
+              className="relative"
+            >
+              <Link
+                href="/services"
+                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${
+                  megaMenuOpen || isActive
+                    ? "text-[#0B6B88] font-bold"
+                    : "text-[#12344A] hover:text-[#14B8C5]"
+                }`}
+              >
+                <span>{item.label}</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    megaMenuOpen
+                      ? "rotate-180 text-[#14B8C5]"
+                      : "text-[#12344A]/60 group-hover:text-[#14B8C5]"
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#14B8C5] transition-transform duration-300 origin-center ${
+                    isActive && !megaMenuOpen
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
+              </Link>
+            </div>
+          );
+        }
+
+        if (isIndustries) {
+          return (
+            <div
+              key={item.label}
+              onMouseEnter={handleMouseEnterIndustries}
+              onMouseLeave={handleMouseLeaveIndustries}
+              className="relative"
+            >
+              <Link
+                href="/industries"
+                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${
+                  industriesMenuOpen || isActive
+                    ? "text-[#0B6B88] font-bold"
+                    : "text-[#12344A] hover:text-[#14B8C5]"
+                }`}
+              >
+                <span>{item.label}</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    industriesMenuOpen
+                      ? "rotate-180 text-[#14B8C5]"
+                      : "text-[#12344A]/60 group-hover:text-[#14B8C5]"
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#14B8C5] transition-transform duration-300 origin-center ${
+                    isActive && !industriesMenuOpen
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
+              </Link>
+            </div>
+          );
+        }
+
+        return (
+          <Link
+            key={item.label}
+            href={item.href}
+            className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${
+              isActive
+                ? "text-[#0B6B88] font-bold"
+                : "text-[#12344A] hover:text-[#14B8C5]"
+            }`}
+          >
+            <span>{item.label}</span>
+            <span
+              className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#14B8C5] transition-transform duration-300 origin-center ${
+                isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              }`}
+            />
+          </Link>
+        );
+      })}
+    </nav>
+  );
+
+  // Shared CTA button
+  const renderCtaButton = () => (
+    <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
+      {onOpenBookAudit ? (
+        <button
+          onClick={() => onOpenBookAudit("Schedule Architecture Call")}
+          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#14B8C5]/25 active:scale-95 cursor-pointer"
+          style={{
+            background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+          }}
+        >
+          <span>Schedule Call</span>
+        </button>
+      ) : (
+        <Link
+          href="/contact"
+          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#14B8C5]/25 active:scale-95 cursor-pointer"
+          style={{
+            background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+          }}
+        >
+          <span>Schedule Call</span>
+        </Link>
+      )}
+    </div>
+  );
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 h-[60px] flex items-center ${
-          isScrolled
-            ? "glass-nav shadow-sm bg-white/95"
-            : "bg-white/85 backdrop-blur-md border-b border-slate-200/60"
-        }`}
-      >
-        <div className="site-container flex items-center justify-between w-full relative">
+      {/* ========================================================================= */}
+      {/* 1. INITIAL STATIC NAVBAR (Blends seamlessly with Page Hero Background) */}
+      {/* ========================================================================= */}
+      <header className="absolute top-0 left-0 w-full h-[78px] sm:h-[84px] bg-transparent z-40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-            <CodePlacedLogo size="sm" variant="dark" />
+            <CodePlacedLogo size="md" variant="dark" />
           </Link>
 
-          {/* Desktop Navigation: Centered with hover underline animation & Mega Menu */}
-          <nav className="hidden lg:flex items-center gap-1 bg-slate-100/70 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200/80 shadow-2xs">
-            {NAV_ITEMS.map((item) => {
-              const isServices = item.label === "Services";
-              const isIndustries = item.label === "Industries";
-              const isActive =
-                item.href === "/"
-                  ? pathname === "/"
-                  : isServices
-                  ? pathname.startsWith("/services")
-                  : isIndustries
-                  ? pathname.startsWith("/industries")
-                  : pathname === item.href || pathname.startsWith(item.href);
+          {/* Navigation Links */}
+          {renderNavLinks()}
 
-              if (isServices) {
-                return (
-                  <div
-                    key={item.label}
-                    onMouseEnter={handleMouseEnterServices}
-                    onMouseLeave={handleMouseLeaveServices}
-                    className="relative"
-                  >
-                    <Link
-                      href="/services"
-                      className={`relative px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 group inline-flex items-center gap-1 ${
-                        megaMenuOpen || isActive
-                          ? "text-[#0B4F6C] bg-white shadow-2xs font-bold"
-                          : "text-slate-600 hover:text-[#0B4F6C] hover:bg-white/60"
-                      }`}
-                    >
-                      <span>{item.label}</span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          megaMenuOpen
-                            ? "rotate-180 text-[#0B4F6C]"
-                            : "text-slate-400 group-hover:text-[#0B4F6C]"
-                        }`}
-                      />
-                      {/* Underline hover line */}
-                      <span
-                        className={`absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#0B4F6C] transition-transform duration-200 origin-center ${
-                          isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                        }`}
-                      />
-                    </Link>
-                  </div>
-                );
-              }
+          {/* Right CTA */}
+          {renderCtaButton()}
 
-              if (isIndustries) {
-                return (
-                  <div
-                    key={item.label}
-                    onMouseEnter={handleMouseEnterIndustries}
-                    onMouseLeave={handleMouseLeaveIndustries}
-                    className="relative"
-                  >
-                    <Link
-                      href="/industries"
-                      className={`relative px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 group inline-flex items-center gap-1 ${
-                        industriesMenuOpen || isActive
-                          ? "text-[#0B4F6C] bg-white shadow-2xs font-bold"
-                          : "text-slate-600 hover:text-[#0B4F6C] hover:bg-white/60"
-                      }`}
-                    >
-                      <span>{item.label}</span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          industriesMenuOpen
-                            ? "rotate-180 text-[#0B4F6C]"
-                            : "text-slate-400 group-hover:text-[#0B4F6C]"
-                        }`}
-                      />
-                      {/* Underline hover line */}
-                      <span
-                        className={`absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#0B4F6C] transition-transform duration-200 origin-center ${
-                          isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                        }`}
-                      />
-                    </Link>
-                  </div>
-                );
-              }
-
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`relative px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 group ${
-                    isActive
-                      ? "text-[#0B4F6C] bg-white shadow-2xs font-bold"
-                      : "text-slate-600 hover:text-[#0B4F6C] hover:bg-white/60"
-                  }`}
-                >
-                  <span className="flex items-center gap-1.5">
-                    {item.label}
-                    {item.badge && (
-                      <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-[#0B4F6C] text-white leading-tight">
-                        {item.badge}
-                      </span>
-                    )}
-                  </span>
-                  {/* Subtle underline hover line */}
-                  <span
-                    className={`absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#0B4F6C] transition-transform duration-200 origin-center ${
-                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    }`}
-                  />
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Mega Menu Dropdown Container */}
-          <div
-            onMouseEnter={handleMouseEnterServices}
-            onMouseLeave={handleMouseLeaveServices}
-          >
-            <ServicesMegaMenu
-              isOpen={megaMenuOpen}
-              onClose={() => setMegaMenuOpen(false)}
-              onOpenBookAudit={onOpenBookAudit}
-            />
-          </div>
-
-          {/* Industries Mega Menu Dropdown Container */}
-          <div
-            onMouseEnter={handleMouseEnterIndustries}
-            onMouseLeave={handleMouseLeaveIndustries}
-          >
-            <IndustriesMegaMenu
-              isOpen={industriesMenuOpen}
-              onClose={() => setIndustriesMenuOpen(false)}
-              onOpenBookAudit={onOpenBookAudit}
-            />
-          </div>
-
-          {/* Right Side CTA Button */}
-          <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-5 h-9 rounded-full bg-[#0F172A] hover:bg-[#0B4F6C] text-white font-bold text-xs tracking-wide transition-all duration-200 shadow-sm active:scale-95 border border-slate-700 hover:border-[#0B4F6C]"
-            >
-              <span>Schedule Call</span>
-            </Link>
-          </div>
-
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Menu Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/contact"
-              className="sm:hidden px-3 py-1 rounded-full bg-[#0F172A] text-white text-xs font-bold"
+              className="sm:hidden px-3.5 py-1.5 rounded-full text-white text-xs font-bold shadow-xs"
+              style={{
+                background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+              }}
             >
               Call
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 rounded-lg text-slate-700 hover:text-[#0B4F6C] hover:bg-slate-100 transition-colors"
-              aria-label="Toggle mobile menu"
+              className="p-2 rounded-xl text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100 transition-colors"
+              aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
+
+        {/* Mega Menu Dropdowns (Attached to initial navbar) */}
+        {!showSticky && (
+          <>
+            <div
+              onMouseEnter={handleMouseEnterServices}
+              onMouseLeave={handleMouseLeaveServices}
+            >
+              <ServicesMegaMenu
+                isOpen={megaMenuOpen}
+                onClose={() => setMegaMenuOpen(false)}
+                onOpenBookAudit={onOpenBookAudit}
+              />
+            </div>
+
+            <div
+              onMouseEnter={handleMouseEnterIndustries}
+              onMouseLeave={handleMouseLeaveIndustries}
+            >
+              <IndustriesMegaMenu
+                isOpen={industriesMenuOpen}
+                onClose={() => setIndustriesMenuOpen(false)}
+                onOpenBookAudit={onOpenBookAudit}
+              />
+            </div>
+          </>
+        )}
       </header>
 
-      {/* Mobile Drawer with Accordion for Services */}
+      {/* ========================================================================= */}
+      {/* 2. SMART STICKY NAVBAR (Appears instantly at 80px with 0.16s animation) */}
+      {/* ========================================================================= */}
+      <AnimatePresence>
+        {showSticky && (
+          <motion.div
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className="fixed top-0 left-0 w-full h-[70px] sm:h-[72px] z-[999] bg-white/95 backdrop-blur-[12px] border-b border-[rgba(20,184,197,0.08)] shadow-[0_6px_24px_rgba(0,0,0,0.06)]"
+          >
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+              {/* Logo on Left */}
+              <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
+                <CodePlacedLogo size="md" variant="dark" />
+              </Link>
+
+              {/* Navigation Links */}
+              {renderNavLinks()}
+
+              {/* Right CTA */}
+              {renderCtaButton()}
+
+              {/* Mobile Menu Toggle */}
+              <div className="flex items-center gap-2 lg:hidden">
+                <Link
+                  href="/contact"
+                  className="sm:hidden px-3.5 py-1.5 rounded-full text-white text-xs font-bold shadow-xs"
+                  style={{
+                    background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+                  }}
+                >
+                  Call
+                </Link>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 rounded-xl text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100 transition-colors"
+                  aria-label="Toggle navigation menu"
+                >
+                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Mega Menu Dropdowns (Attached to sticky navbar) */}
+            <div
+              onMouseEnter={handleMouseEnterServices}
+              onMouseLeave={handleMouseLeaveServices}
+            >
+              <ServicesMegaMenu
+                isOpen={megaMenuOpen}
+                onClose={() => setMegaMenuOpen(false)}
+                onOpenBookAudit={onOpenBookAudit}
+              />
+            </div>
+
+            <div
+              onMouseEnter={handleMouseEnterIndustries}
+              onMouseLeave={handleMouseLeaveIndustries}
+            >
+              <IndustriesMegaMenu
+                isOpen={industriesMenuOpen}
+                onClose={() => setIndustriesMenuOpen(false)}
+                onOpenBookAudit={onOpenBookAudit}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ========================================================================= */}
+      {/* 3. MOBILE SLIDE-DOWN DRAWER */}
+      {/* ========================================================================= */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[60px] max-h-[85vh] overflow-y-auto z-30 bg-white/98 backdrop-blur-xl border-b border-slate-200 shadow-xl px-5 py-6 lg:hidden"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-x-0 top-[72px] z-[998] bg-white/98 backdrop-blur-2xl border-b border-slate-200/90 shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto"
           >
-            <nav className="flex flex-col space-y-1">
-              {NAV_ITEMS.map((item) => {
+            <nav className="flex flex-col space-y-1.5">
+              {NAV_ITEMS_LIST.map((item) => {
                 if (item.label === "Services") {
                   return (
                     <div key="Services" className="border-b border-slate-100 pb-2">
-                      <div className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold text-[#082F49] hover:bg-slate-50 transition-colors">
+                      <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold text-[#062B38] hover:bg-slate-50 transition-colors">
                         <Link
                           href="/services"
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2"
                         >
-                          <span className="w-2 h-2 rounded-full bg-[#0B4F6C]" />
+                          <span className="w-2 h-2 rounded-full bg-[#14B8C5]" />
                           <span>Services Overview</span>
                         </Link>
                         <button
                           onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                          className="p-1 rounded-md text-[#0B4F6C]"
-                          aria-label="Toggle Services categories"
+                          className="p-1.5 rounded-md text-[#0B6B88]"
+                          aria-label="Toggle Services"
                         >
                           <ChevronDown
-                            className={`w-4 h-4 transition-transform text-[#0B4F6C] ${
+                            className={`w-4 h-4 transition-transform ${
                               mobileServicesOpen ? "rotate-180" : ""
                             }`}
                           />
                         </button>
                       </div>
 
-                      {/* Expanded Mobile Services Accordion */}
                       <AnimatePresence>
                         {mobileServicesOpen && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden pl-2 pr-1 pt-2 space-y-2.5"
+                            transition={{ duration: 0.25 }}
+                            className="overflow-hidden pl-4 space-y-2 pt-1"
                           >
-                            {MEGA_MENU_CATEGORIES.map((cat) => {
-                              const isCatOpen = mobileActiveCat === cat.id;
-                              const CatIcon = cat.icon;
-
-                              return (
-                                <div
-                                  key={cat.id}
-                                  className="rounded-xl border border-slate-200/80 bg-[#F8FAFC] overflow-hidden"
-                                >
-                                  <div className="flex items-center justify-between p-3 text-xs font-bold text-[#082F49]">
-                                    <Link
-                                      href={cat.href}
-                                      onClick={() => setMobileMenuOpen(false)}
-                                      className="flex items-center gap-2.5 flex-1"
-                                    >
-                                      <div className="w-7 h-7 rounded-lg bg-[rgba(11,79,108,0.08)] text-[#0B4F6C] flex items-center justify-center">
-                                        <CatIcon className="w-3.5 h-3.5" />
-                                      </div>
-                                      <span>{cat.name}</span>
-                                    </Link>
-                                    <button
-                                      onClick={() =>
-                                        setMobileActiveCat(isCatOpen ? null : cat.id)
-                                      }
-                                      className="p-1 text-slate-400"
-                                    >
-                                      <ChevronDown
-                                        className={`w-3.5 h-3.5 transition-transform ${
-                                          isCatOpen ? "rotate-180" : ""
-                                        }`}
-                                      />
-                                    </button>
-                                  </div>
-
-                                  {isCatOpen && (
-                                    <div className="px-3 pb-3 pt-1 space-y-1 border-t border-slate-200/60 bg-white">
-                                      {cat.services.map((svc) => (
-                                        <Link
-                                          key={svc.title}
-                                          href={svc.href}
-                                          onClick={() => setMobileMenuOpen(false)}
-                                          className="w-full text-left p-2 rounded-lg text-xs font-medium text-slate-700 hover:text-[#0B4F6C] hover:bg-[#ECFEFF]/60 flex items-center justify-between group"
-                                        >
-                                          <div>
-                                            <div className="font-bold text-[#082F49] group-hover:text-[#0B4F6C]">
-                                              {svc.title}
-                                            </div>
-                                            <div className="text-[10px] text-slate-500">
-                                              {svc.description}
-                                            </div>
-                                          </div>
-                                          <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-[#0B4F6C] group-hover:translate-x-0.5 transition-transform" />
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
+                            <Link
+                              href="/services/data-platforms"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • Data Platforms & Lakehouses
+                            </Link>
+                            <Link
+                              href="/services/ai-copilots"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • AI Copilots & Enterprise RAG
+                            </Link>
+                            <Link
+                              href="/services/executive-dashboards"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • Executive & Growth Dashboards
+                            </Link>
+                            <Link
+                              href="/services/cloud-infrastructure"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • Cloud Modernization & FinOps
+                            </Link>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -367,66 +448,65 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 if (item.label === "Industries") {
                   return (
                     <div key="Industries" className="border-b border-slate-100 pb-2">
-                      <div className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold text-[#082F49] hover:bg-slate-50 transition-colors">
+                      <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold text-[#062B38] hover:bg-slate-50 transition-colors">
                         <Link
                           href="/industries"
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2"
                         >
-                          <span className="w-2 h-2 rounded-full bg-[#0E7490]" />
+                          <span className="w-2 h-2 rounded-full bg-[#14B8C5]" />
                           <span>Industries Overview</span>
                         </Link>
                         <button
                           onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
-                          className="p-1 rounded-md text-[#0B4F6C]"
-                          aria-label="Toggle Industries list"
+                          className="p-1.5 rounded-md text-[#0B6B88]"
+                          aria-label="Toggle Industries"
                         >
                           <ChevronDown
-                            className={`w-4 h-4 transition-transform text-[#0B4F6C] ${
+                            className={`w-4 h-4 transition-transform ${
                               mobileIndustriesOpen ? "rotate-180" : ""
                             }`}
                           />
                         </button>
                       </div>
 
-                      {/* Expanded Mobile Industries List */}
                       <AnimatePresence>
                         {mobileIndustriesOpen && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden pl-2 pr-1 pt-2 space-y-1.5"
+                            transition={{ duration: 0.25 }}
+                            className="overflow-hidden pl-4 space-y-2 pt-1"
                           >
-                            <div className="grid grid-cols-1 gap-1.5">
-                              {INDUSTRIES_MENU_ITEMS.map((ind) => {
-                                const IndIcon = ind.icon;
-                                return (
-                                  <Link
-                                    key={ind.id}
-                                    href={ind.href}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="p-2.5 rounded-xl border border-slate-200/80 bg-[#F8FAFC] hover:bg-[#ECFEFF]/60 flex items-center justify-between group transition-colors"
-                                  >
-                                    <div className="flex items-center gap-2.5 min-w-0">
-                                      <div className="w-7 h-7 rounded-lg bg-[rgba(11,79,108,0.08)] text-[#0B4F6C] flex items-center justify-center flex-shrink-0">
-                                        <IndIcon className="w-3.5 h-3.5" />
-                                      </div>
-                                      <div className="min-w-0">
-                                        <div className="text-xs font-bold text-[#082F49] group-hover:text-[#0B4F6C] truncate">
-                                          {ind.name}
-                                        </div>
-                                        <div className="text-[10px] text-slate-500 truncate">
-                                          {ind.badge}
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0B4F6C] group-hover:translate-x-0.5 transition-transform" />
-                                  </Link>
-                                );
-                              })}
-                            </div>
+                            <Link
+                              href="/industries"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • Healthcare & Life Sciences
+                            </Link>
+                            <Link
+                              href="/industries"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • FinTech & Banking
+                            </Link>
+                            <Link
+                              href="/industries"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • Logistics & Fleet Telematics
+                            </Link>
+                            <Link
+                              href="/industries"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                            >
+                              • SaaS & High-Concurrency
+                            </Link>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -441,31 +521,29 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                     key={item.label}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                    className={`px-3 py-2.5 rounded-xl text-base font-bold transition-colors ${
                       isActive
-                        ? "bg-[#ECFEFF] text-[#0B4F6C] font-bold"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#0B4F6C]"
+                        ? "text-[#0B6B88] bg-[rgba(20,184,197,0.08)]"
+                        : "text-[#12344A] hover:bg-slate-50 hover:text-[#0B6B88]"
                     }`}
                   >
-                    <span>{item.label}</span>
-                    {item.badge && (
-                      <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#0B4F6C]/10 text-[#0B4F6C]">
-                        {item.badge}
-                      </span>
-                    )}
+                    {item.label}
                   </Link>
                 );
               })}
             </nav>
 
-            <div className="mt-5 pt-4 border-t border-slate-100 space-y-3">
+            <div className="mt-6 pt-6 border-t border-slate-200/80">
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#0F172A] hover:bg-[#0B4F6C] text-white font-bold text-sm shadow-md"
+                className="w-full py-3.5 rounded-full text-white font-bold text-sm tracking-wide shadow-md flex items-center justify-center gap-2"
+                style={{
+                  background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+                }}
               >
-                <Sparkles className="w-4 h-4 text-cyan-300" />
-                Schedule Audit Call
+                <span>Schedule Architecture Call</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </motion.div>

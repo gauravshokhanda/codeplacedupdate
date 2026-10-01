@@ -12,16 +12,16 @@ export function CodePlacedLogo({
   size = "md",
 }: CodePlacedLogoProps) {
   const sizeClasses = {
-    sm: "h-7 text-lg",
-    md: "h-9 text-xl",
-    lg: "h-11 text-2xl",
+    sm: "h-7 text-base tracking-tight",
+    md: "h-8 text-lg tracking-tight",
+    lg: "h-10 text-xl tracking-tight",
   };
 
   const isLight = variant === "light" || variant === "white";
 
   return (
     <div className={`flex items-center gap-2.5 font-bold tracking-tight select-none ${className}`}>
-      {/* 4-Quadrant Icon as seen in CodePlaced screenshot */}
+      {/* Data Dashboard Style Logo Icon with Teal Outline */}
       <div className="relative flex-shrink-0">
         <svg
           viewBox="0 0 40 40"
@@ -36,7 +36,7 @@ export function CodePlacedLogo({
             width="37"
             height="37"
             rx="9"
-            stroke={isLight ? "#38BDF8" : "#0B4F6C"}
+            stroke={isLight ? "#14B8C5" : "#0B6B88"}
             strokeWidth="2.5"
             className="transition-colors duration-300"
           />
@@ -46,8 +46,9 @@ export function CodePlacedLogo({
             y1="4"
             x2="20"
             y2="36"
-            stroke={isLight ? "#0E7490" : "#94A3B8"}
-            strokeWidth="1.8"
+            stroke={isLight ? "#14B8C5" : "#0B6B88"}
+            strokeWidth="1.6"
+            strokeOpacity="0.4"
             strokeLinecap="round"
           />
           <line
@@ -55,15 +56,16 @@ export function CodePlacedLogo({
             y1="20"
             x2="36"
             y2="20"
-            stroke={isLight ? "#0E7490" : "#94A3B8"}
-            strokeWidth="1.8"
+            stroke={isLight ? "#14B8C5" : "#0B6B88"}
+            strokeWidth="1.6"
+            strokeOpacity="0.4"
             strokeLinecap="round"
           />
 
           {/* Top Left: Code Brackets </> */}
           <path
             d="M9 13.5L7 15.5L9 17.5M15 13.5L17 15.5L15 17.5M13 13L11 18"
-            stroke={isLight ? "#BAE6FD" : "#082F49"}
+            stroke={isLight ? "#E0F7FA" : "#062B38"}
             strokeWidth="1.4"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -72,7 +74,7 @@ export function CodePlacedLogo({
           {/* Top Right: Growth Trend / Bar Chart */}
           <path
             d="M24 18V15M28 18V12M32 18V9"
-            stroke={isLight ? "#38BDF8" : "#0B4F6C"}
+            stroke={isLight ? "#14B8C5" : "#0B6B88"}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -80,33 +82,33 @@ export function CodePlacedLogo({
           {/* Bottom Left: Data Analytics Curve */}
           <path
             d="M7 32L11 28L14 30L17 25"
-            stroke={isLight ? "#2DD4BF" : "#14B8A6"}
+            stroke={isLight ? "#14B8C5" : "#14B8C5"}
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
 
-          {/* Bottom Right: Thumbs Up / Checkmark */}
+          {/* Bottom Right: Verified Checkmark */}
           <path
             d="M24 29.5L27 32.5L33 26.5"
-            stroke={isLight ? "#34D399" : "#10B981"}
+            stroke={isLight ? "#10B981" : "#10B981"}
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         </svg>
 
-        {/* Subtle glowing ambient behind logo */}
-        <div className="absolute -inset-1 bg-cyan-500/20 rounded-xl blur-sm -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+        {/* Ambient Glow */}
+        <div className="absolute -inset-1 bg-[#14B8C5]/20 rounded-xl blur-sm -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
       {/* Typography: CODEPLACED */}
       <span
-        className={`font-extrabold tracking-tight uppercase transition-colors duration-200 ${
+        className={`font-[800] uppercase transition-colors duration-200 ${
           sizeClasses[size]
-        } ${isLight ? "text-white" : "text-slate-900"}`}
+        } ${isLight ? "text-white" : "text-[#062B38]"}`}
       >
-        Code<span className={isLight ? "text-[#38BDF8]" : "text-[#0B4F6C]"}>Placed</span>
+        Code<span className="text-[#14B8C5]">Placed</span>
       </span>
     </div>
   );

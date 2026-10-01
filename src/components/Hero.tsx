@@ -47,26 +47,15 @@ export function Hero({ onOpenBookAudit }: HeroProps) {
       id="hero"
       className="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-20 border-b border-slate-200/80"
       style={{
-        background: "linear-gradient(180deg, #f8fdff 0%, #eefcff 50%, #ffffff 100%)",
+        background: "linear-gradient(180deg, #F4FBFD 0%, #EDF8FB 60%, #FFFFFF 100%)",
       }}
     >
-      {/* Subtle Background Grid Pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.4] -z-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(#00b7c2 0.75px, transparent 0.75px), radial-gradient(#0f4c81 0.75px, #f8fdff 0.75px)",
-          backgroundSize: "36px 36px",
-          backgroundPosition: "0 0, 18px 18px",
-        }}
-      />
-
       {/* Ambient Soft Glow Behind Content */}
       <div
         className="absolute top-10 left-1/2 -translate-x-1/2 w-[850px] h-[450px] pointer-events-none -z-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(0,183,194,0.12), rgba(15,76,129,0.06), transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(20,184,197,0.14), rgba(11,107,136,0.06), transparent 70%)",
         }}
       />
 
