@@ -621,115 +621,305 @@ export default function ServicesMasterPage() {
         {/* ========================================================================= */}
         {/* 1. HERO SECTION (Full Stack Technology Partner Positioning) */}
         {/* ========================================================================= */}
-        <section className="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 bg-gradient-to-b from-white via-[#ECFEFF]/25 to-[#F8FAFC] border-b border-slate-200/80">
-          {/* Subtle Ambient Radial Glow */}
+        {/* ========================================================================= */}
+        {/* 1. HERO SECTION (Full Stack Technology Partner Positioning) */}
+        {/* ========================================================================= */}
+        <section className="relative overflow-hidden pt-10 pb-12 lg:pt-14 lg:pb-16 bg-gradient-to-b from-[#F0F9FF]/80 via-[#ECFEFF]/30 to-[#F8FAFC] border-b border-slate-200/80">
+          {/* Subtle Ambient Radial Glows */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[600px] pointer-events-none -z-0"
+            className="absolute top-10 left-1/3 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none -z-0"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(14,116,144,0.09), rgba(20,184,166,0.05), transparent 70%)",
+                "radial-gradient(ellipse at center, rgba(17,138,178,0.12), rgba(35,199,167,0.06), transparent 70%)",
+            }}
+          />
+          <div
+            className="absolute bottom-0 right-10 w-[600px] h-[400px] pointer-events-none -z-0"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(15,61,92,0.08), transparent 70%)",
             }}
           />
 
-          <div className="site-container relative z-10 max-w-5xl mx-auto text-center">
-            {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-              <Link href="/" className="hover:text-[#0B4F6C] transition-colors">
-                Home
-              </Link>
-              <span>/</span>
-              <span className="text-[#0B4F6C] font-bold">Services & Architecture</span>
-            </div>
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Two-Column Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 xl:gap-14 items-center">
+              {/* ========================================================================= */}
+              {/* LEFT SIDE (Content & Positioning) */}
+              {/* ========================================================================= */}
+              <div className="lg:col-span-7 xl:col-span-6 space-y-6">
+                {/* Small Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0A4D68] border border-[#0A4D68]/20 shadow-xs"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#118ab2] animate-pulse" />
+                  <span>FULL STACK TECHNOLOGY PARTNER</span>
+                </motion.div>
 
-            {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[#14B8A6]" />
-              <span>FULL-SPECTRUM SOFTWARE & AI ENGINEERING</span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-[38px] sm:text-[54px] lg:text-[68px] font-[900] leading-[1.02] tracking-tight text-[#082F49] mb-6 [text-wrap:balance]">
-              Full Stack Development Services{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B4F6C] via-[#0E7490] to-[#14B8A6]">
-                Built for Scale, Data, AI & Enterprise Growth
-              </span>
-            </h1>
-
-            {/* Subheading */}
-            <div className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10 space-y-3 font-normal">
-              <p>
-                CodePlaced designs, develops, and scales modern software products—from web and mobile applications to enterprise platforms, AI systems, cloud infrastructure, analytics, and embedded customer experiences.
-              </p>
-              <p className="text-sm sm:text-base text-slate-500">
-                Whether you need a startup MVP, SaaS platform, internal operations software, executive dashboards, customer portals, AI copilots, or cloud modernization, our senior engineers deliver production-ready systems in weeks.
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-[#0B4F6C] hover:bg-[#0E7490] text-white font-bold text-sm shadow-xl shadow-[#0B4F6C]/20 flex items-center justify-center gap-2.5 transition-all border border-[#14B8A6]/30 active:scale-95"
-              >
-                <span>Book Architecture Call</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="#services-categories"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-white hover:bg-slate-50 text-[#082F49] font-bold text-sm border border-slate-200 shadow-xs flex items-center justify-center transition-all"
-              >
-                <span>Explore Services</span>
-              </a>
-            </div>
-
-            {/* Visual Element: Floating Service Badges Ribbon */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
-              {FLOATING_SERVICE_BADGES.map((badge) => {
-                const BadgeIcon = badge.icon;
-                return (
-                  <div
-                    key={badge.label}
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200/90 shadow-2xs text-xs font-bold text-[#082F49] hover:border-[#14B8A6]/50 transition-colors"
+                {/* Main Heading */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.1 }}
+                  className="text-[38px] sm:text-[54px] lg:text-[62px] xl:text-[72px] font-[900] leading-[1.05] tracking-tight text-[#082F49]"
+                >
+                  We Build Scalable <br />
+                  Digital Products, Powered <br className="hidden sm:inline" />
+                  by{" "}
+                  <span
+                    className="bg-clip-text text-transparent font-black"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #0f3d5c 0%, #118ab2 50%, #23c7a7 100%)",
+                    }}
                   >
-                    <div className="w-5 h-5 rounded-full bg-[rgba(11,79,108,0.08)] text-[#0B4F6C] flex items-center justify-center">
-                      <BadgeIcon className="w-3 h-3" />
+                    Data, AI & Cloud
+                  </span>
+                </motion.h1>
+
+                {/* Description */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.2 }}
+                  className="text-base sm:text-[17px] text-slate-600 leading-relaxed space-y-3 font-normal"
+                >
+                  <p>
+                    CodePlaced helps businesses design, develop, and scale modern software solutions — from web and mobile applications to enterprise platforms, AI systems, cloud infrastructure, analytics, and digital growth services.
+                  </p>
+                  <p className="text-slate-500 text-sm sm:text-[15px]">
+                    Whether you need an MVP, custom software platform, BI dashboard, automation system, or ongoing technical support, our team delivers production-ready solutions that create measurable business outcomes.
+                  </p>
+                </motion.div>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.3 }}
+                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
+                >
+                  <Link
+                    href="/contact"
+                    className="h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f3d5c] via-[#118ab2] to-[#23c7a7] hover:from-[#082F49] hover:to-[#118ab2] text-white font-extrabold text-sm shadow-xl shadow-[#118ab2]/25 flex items-center justify-center gap-2.5 transition-all border border-[#23c7a7]/30 active:scale-95 group"
+                  >
+                    <span>Book Strategy Call</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <a
+                    href="#services-categories"
+                    className="h-[54px] px-8 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-sm border border-slate-200/90 shadow-xs flex items-center justify-center transition-all hover:border-[#118ab2]/40"
+                  >
+                    <span>Explore Services</span>
+                  </a>
+                </motion.div>
+
+                {/* Trust Indicators Below CTA with Icons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.4 }}
+                  className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-200/80"
+                >
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                    <Clock className="w-4 h-4 text-[#118ab2] flex-shrink-0" />
+                    <span>30-Min Consultation</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>NDA Signed</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                    <Zap className="w-4 h-4 text-[#23c7a7] flex-shrink-0" />
+                    <span>2–4 Week Delivery</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                    <Users className="w-4 h-4 text-[#0f3d5c] flex-shrink-0" />
+                    <span>Dedicated Team</span>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* ========================================================================= */}
+              {/* RIGHT SIDE (Animated Visual Ecosystem Illustration) */}
+              {/* ========================================================================= */}
+              <div className="lg:col-span-5 xl:col-span-6 relative flex items-center justify-center py-6 sm:py-10">
+                {/* Ambient Radial Glow behind illustration */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#118ab2]/15 via-[#23c7a7]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+                {/* Main Illustration Canvas */}
+                <div className="relative w-full max-w-[540px] aspect-[4/3] flex items-center justify-center">
+                  {/* Outer Circuit Halo / Glow Ring */}
+                  <div className="absolute inset-4 rounded-[36px] border border-cyan-500/20 bg-gradient-to-br from-white/40 via-cyan-50/20 to-teal-50/30 backdrop-blur-xs -z-0" />
+
+                  {/* CENTER: Floating Laptop Mockup */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative z-10 w-[78%] max-w-[380px] rounded-2xl bg-[#082F49] p-3 shadow-2xl shadow-[#082F49]/30 border border-slate-700/60"
+                  >
+                    {/* Screen Header Bar */}
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-700/60 text-[10px] text-slate-400">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                        <span className="ml-1 font-mono text-slate-300 font-semibold flex items-center gap-1">
+                          <Code2 className="w-3 h-3 text-[#23c7a7]" /> app.tsx
+                        </span>
+                      </div>
+                      <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/20 text-emerald-400 font-bold">
+                        LIVE : READY
+                      </span>
                     </div>
-                    <span>{badge.label}</span>
-                  </div>
-                );
-              })}
-            </div>
 
-            {/* Metrics Bar Directly Below Hero (5 Cards) */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 p-6 rounded-[24px] bg-white border border-slate-200 shadow-sm text-left">
-              {HERO_METRICS.map((item, idx) => (
-                <div key={item.label} className={idx !== 0 ? "md:border-l md:border-slate-200/80 md:pl-4" : "pl-1"}>
-                  <div className="text-2xl sm:text-3xl font-black text-[#0B4F6C] tracking-tight">
-                    {item.value}
-                  </div>
-                  <div className="text-xs font-bold text-[#082F49] mt-0.5">{item.label}</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">{item.sub}</div>
-                </div>
-              ))}
-            </div>
+                    {/* IDE / Terminal Content */}
+                    <div className="rounded-lg bg-[#041D27] p-3 font-mono text-[11px] leading-relaxed text-slate-300 space-y-1.5 shadow-inner">
+                      <div className="text-cyan-300 flex items-center gap-1.5">
+                        <Terminal className="w-3 h-3 text-[#23c7a7]" />
+                        <span>codeplaced deploy --stack=full</span>
+                      </div>
+                      <div className="text-slate-400 pl-4 text-[10px]">
+                        ✓ AI Pipeline: Active (sub-18ms) <br />
+                        ✓ Lakehouse ETL: Snowflake Connected <br />
+                        ✓ Cloud Cluster: AWS EKS Autoscaling <br />
+                        ✓ UI Framework: Next.js 15 Ready
+                      </div>
+                      <div className="pt-1 flex items-center gap-1 text-[10px] text-emerald-400 font-semibold">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        <span>Production verified in 14 days</span>
+                      </div>
+                    </div>
 
-            {/* Client / Partner Logo Strip Directly Below Metrics */}
-            <div className="pt-8 mt-8 border-t border-slate-200/60 text-center">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
-                Trusted by engineering leaders across 150+ organizations & 18+ industries
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
-                {TRUSTED_PARTNERS.map((partner) => (
-                  <div
-                    key={partner.name}
-                    className="px-4 py-2 rounded-xl bg-white/80 hover:bg-white border border-slate-200/80 shadow-2xs flex items-center gap-2 transition-all hover:border-[#14B8A6]/40"
+                    {/* Laptop Keyboard Base */}
+                    <div className="h-3 bg-gradient-to-b from-slate-700 to-slate-800 rounded-b-xl mt-2 flex items-center justify-center">
+                      <div className="w-12 h-1 bg-slate-500 rounded-full" />
+                    </div>
+                  </motion.div>
+
+                  {/* ========================================================================= */}
+                  {/* 6 FLOATING SERVICE PILLS (Glassmorphism Cards with Micro-Animations) */}
+                  {/* ========================================================================= */}
+
+                  {/* 1. TOP LEFT: AI & ML */}
+                  <motion.div
+                    animate={{ y: [0, -8, 0], x: [0, -2, 0] }}
+                    transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
+                    className="absolute -top-2 left-0 sm:left-2 z-20 px-3.5 py-2 rounded-2xl bg-white/85 backdrop-blur-[16px] border border-white/60 shadow-xl shadow-slate-900/10 flex items-center gap-2 hover:scale-105 transition-transform"
                   >
-                    <span className="font-extrabold text-[#082F49] text-xs tracking-tight">
-                      {partner.name}
-                    </span>
-                    <span className="text-[9px] font-semibold text-[#0E7490] bg-[#ECFEFF] px-2 py-0.5 rounded-md border border-[#0B4F6C]/10">
-                      {partner.role}
-                    </span>
+                    <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#0f3d5c] to-[#118ab2] text-white flex items-center justify-center shadow-xs">
+                      <BrainCircuit className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-[#082F49]">AI & ML</div>
+                      <div className="text-[9px] font-semibold text-[#118ab2]">LLM & Agents</div>
+                    </div>
+                  </motion.div>
+
+                  {/* 2. LEFT CENTER: Web Apps */}
+                  <motion.div
+                    animate={{ y: [0, 8, 0], x: [0, -3, 0] }}
+                    transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                    className="absolute top-1/2 -translate-y-1/2 -left-3 sm:-left-6 z-20 px-3.5 py-2 rounded-2xl bg-white/85 backdrop-blur-[16px] border border-white/60 shadow-xl shadow-slate-900/10 flex items-center gap-2 hover:scale-105 transition-transform"
+                  >
+                    <div className="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/60 flex items-center justify-center shadow-xs">
+                      <AppWindow className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-[#082F49]">Web Apps</div>
+                      <div className="text-[9px] font-semibold text-emerald-600">Next.js & SaaS</div>
+                    </div>
+                  </motion.div>
+
+                  {/* 3. BOTTOM LEFT: Data Analytics */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0], x: [0, -2, 0] }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
+                    className="absolute -bottom-2 left-2 sm:left-4 z-20 px-3.5 py-2 rounded-2xl bg-white/85 backdrop-blur-[16px] border border-white/60 shadow-xl shadow-slate-900/10 flex items-center gap-2 hover:scale-105 transition-transform"
+                  >
+                    <div className="w-7 h-7 rounded-xl bg-sky-50 text-[#118ab2] border border-sky-200/60 flex items-center justify-center shadow-xs">
+                      <Database className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-[#082F49]">Data Analytics</div>
+                      <div className="text-[9px] font-semibold text-[#118ab2]">Lakehouses & BI</div>
+                    </div>
+                  </motion.div>
+
+                  {/* 4. TOP RIGHT: Cloud */}
+                  <motion.div
+                    animate={{ y: [0, -7, 0], x: [0, 2, 0] }}
+                    transition={{ duration: 4.1, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                    className="absolute -top-2 right-0 sm:right-2 z-20 px-3.5 py-2 rounded-2xl bg-white/85 backdrop-blur-[16px] border border-white/60 shadow-xl shadow-slate-900/10 flex items-center gap-2 hover:scale-105 transition-transform"
+                  >
+                    <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#118ab2] to-[#23c7a7] text-white flex items-center justify-center shadow-xs">
+                      <Cloud className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-[#082F49]">Cloud</div>
+                      <div className="text-[9px] font-semibold text-[#23c7a7]">AWS, GCP, Azure</div>
+                    </div>
+                  </motion.div>
+
+                  {/* 5. MIDDLE RIGHT: Mobile Apps */}
+                  <motion.div
+                    animate={{ y: [0, 7, 0], x: [0, 3, 0] }}
+                    transition={{ duration: 3.9, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                    className="absolute top-1/2 -translate-y-1/2 -right-3 sm:-right-6 z-20 px-3.5 py-2 rounded-2xl bg-white/85 backdrop-blur-[16px] border border-white/60 shadow-xl shadow-slate-900/10 flex items-center gap-2 hover:scale-105 transition-transform"
+                  >
+                    <div className="w-7 h-7 rounded-xl bg-teal-50 text-[#23c7a7] border border-teal-200/60 flex items-center justify-center shadow-xs">
+                      <Smartphone className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-[#082F49]">Mobile Apps</div>
+                      <div className="text-[9px] font-semibold text-[#0f3d5c]">iOS & Android</div>
+                    </div>
+                  </motion.div>
+
+                  {/* 6. BOTTOM RIGHT: Enterprise Solutions */}
+                  <motion.div
+                    animate={{ y: [0, -8, 0], x: [0, 2, 0] }}
+                    transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
+                    className="absolute -bottom-2 right-2 sm:right-4 z-20 px-3.5 py-2 rounded-2xl bg-white/85 backdrop-blur-[16px] border border-white/60 shadow-xl shadow-slate-900/10 flex items-center gap-2 hover:scale-105 transition-transform"
+                  >
+                    <div className="w-7 h-7 rounded-xl bg-slate-900 text-cyan-300 flex items-center justify-center shadow-xs">
+                      <Briefcase className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-[#082F49]">Enterprise Solutions</div>
+                      <div className="text-[9px] font-semibold text-slate-500">Core Integrations</div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+
+            {/* ========================================================================= */}
+            {/* CLIENT LOGOS STRIP (Immediately Below Hero) */}
+            {/* ========================================================================= */}
+            <div className="mt-14 pt-8 border-t border-slate-200/70 text-center">
+              <h2 className="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-slate-400 mb-5">
+                Trusted by modern businesses using world-class technology
+              </h2>
+
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 lg:gap-8">
+                {[
+                  "AWS",
+                  "Google Cloud",
+                  "Microsoft Azure",
+                  "OpenAI",
+                  "Snowflake",
+                  "Databricks",
+                  "Power BI",
+                ].map((logo) => (
+                  <div
+                    key={logo}
+                    className="px-4 py-2 rounded-xl bg-white/80 hover:bg-white border border-slate-200 text-slate-500 hover:text-[#082F49] hover:border-[#118ab2]/40 text-xs sm:text-sm font-bold tracking-tight shadow-2xs transition-all duration-200"
+                  >
+                    {logo}
                   </div>
                 ))}
               </div>
