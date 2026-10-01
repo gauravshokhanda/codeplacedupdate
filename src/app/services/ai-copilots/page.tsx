@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { AppShell } from "@/components/AppShell";
 import {
   BrainCircuit,
   Bot,
@@ -314,12 +313,11 @@ export default function AiCopilotsPage() {
   };
 
   return (
-    <AppShell>
-      <div className="bg-[#F6FBFA] text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white">
-        {/* ========================================================================= */}
-        {/* 1. HERO SECTION (Centered Layout, Breadcrumb, Soft Green-Blue Radial Glow) */}
-        {/* ========================================================================= */}
-        <section className="relative overflow-hidden pt-12 pb-20 lg:pt-16 lg:pb-24 border-b border-slate-200/80">
+    <div className="bg-[#F6FBFA] text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white">
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION (Centered Layout, Breadcrumb, Soft Green-Blue Radial Glow) */}
+      {/* ========================================================================= */}
+      <section className="relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80">
           {/* Soft radial glow matching CodePlaced green-blue gradient */}
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0"
@@ -1125,6 +1123,5 @@ export default function AiCopilotsPage() {
           </div>
         </section>
       </div>
-    </AppShell>
   );
 }

@@ -3,7 +3,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { AppShell } from "@/components/AppShell";
 import {
   Sparkles,
   ArrowRight,
@@ -627,12 +626,11 @@ export default function IndustriesPage() {
   };
 
   return (
-    <AppShell>
-      <div className="bg-[#F7FAFC] text-[#0B2035] selection:bg-[#083A5B] selection:text-white font-sans">
-        {/* ========================================================================= */}
-        {/* 1. HERO SECTION */}
-        {/* ========================================================================= */}
-        <section className="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 bg-gradient-to-b from-white via-[#ECFEFF]/25 to-[#F7FAFC] border-b border-[#D9E6EF]">
+    <div className="bg-[#F7FAFC] text-[#0B2035] selection:bg-[#083A5B] selection:text-white font-sans">
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION */}
+      {/* ========================================================================= */}
+      <section className="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-b from-white via-[#ECFEFF]/25 to-[#F7FAFC] border-b border-[#D9E6EF]">
           {/* Ambient Glow */}
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0"
@@ -1360,6 +1358,5 @@ export default function IndustriesPage() {
           </div>
         </section>
       </div>
-    </AppShell>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { AppShell } from "@/components/AppShell";
 import "./globals.css";
 
 const inter = Inter({
@@ -73,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth font-sans`}>
       <body className="min-h-screen bg-white text-[#0F172A] antialiased selection:bg-[#0B4F6C] selection:text-white">
-        {children}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

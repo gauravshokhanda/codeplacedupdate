@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { AppShell } from "@/components/AppShell";
 import {
   Cloud,
   CloudCog,
@@ -19,10 +18,9 @@ import {
 
 export default function CloudInfrastructurePage() {
   return (
-    <AppShell>
-      <div className="bg-white">
-        {/* 1. Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/25 to-white pt-16 pb-20 lg:pt-24 lg:pb-28 border-b border-slate-200/80">
+    <div className="bg-white">
+      {/* 1. Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/25 to-white pt-28 pb-20 lg:pt-36 lg:pb-28 border-b border-slate-200/80">
           <div className="site-container relative z-10 max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs mb-6">
               <Cloud className="w-3.5 h-3.5 text-[#0E7490]" /> Cloud Reliability & FinOps Optimization
@@ -131,6 +129,5 @@ export default function CloudInfrastructurePage() {
           </div>
         </section>
       </div>
-    </AppShell>
   );
 }
