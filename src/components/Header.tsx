@@ -68,11 +68,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     }, 180);
   };
 
-  // Scroll listener: Trigger sticky navbar instantly when user scrolls past 80px (0ms delay)
+  // Scroll listener: Trigger sticky navbar immediately after scrolling 30px
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY;
-      setShowSticky(scrollPos > 80);
+      setShowSticky(scrollPos > 30);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -88,7 +88,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     setIndustriesMenuOpen(false);
   }, [pathname]);
 
-  // Shared Navigation Links component
+  // Shared Navigation Links component (Centered)
   const renderNavLinks = () => (
     <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
       {NAV_ITEMS_LIST.map((item) => {
@@ -197,28 +197,28 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     </nav>
   );
 
-  // Shared CTA button
+  // Shared CTA button (Height: 42px, Pill radius: 999px, Blue/Teal Gradient)
   const renderCtaButton = () => (
     <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
       {onOpenBookAudit ? (
         <button
-          onClick={() => onOpenBookAudit("Schedule Architecture Call")}
-          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#14B8C5]/25 active:scale-95 cursor-pointer"
+          onClick={() => onOpenBookAudit("Schedule Strategy Call")}
+          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#14B8C5]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
           style={{
-            background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+            background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
           }}
         >
-          <span>Schedule Call</span>
+          <span>Book Strategy Call</span>
         </button>
       ) : (
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#14B8C5]/25 active:scale-95 cursor-pointer"
+          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#14B8C5]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
           style={{
-            background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+            background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
           }}
         >
-          <span>Schedule Call</span>
+          <span>Book Strategy Call</span>
         </Link>
       )}
     </div>
@@ -227,17 +227,19 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. INITIAL STATIC NAVBAR (Blends seamlessly with Page Hero Background) */}
+      {/* 1. INITIAL STATIC NAVBAR (Sits naturally on page background) */}
       {/* ========================================================================= */}
-      <header className="absolute top-0 left-0 w-full h-[78px] sm:h-[84px] bg-transparent z-40">
+      <header className="absolute top-0 left-0 w-full h-[74px] sm:h-[80px] bg-transparent z-40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
             <CodePlacedLogo size="md" variant="dark" />
           </Link>
 
-          {/* Navigation Links */}
-          {renderNavLinks()}
+          {/* Navigation Links (Centered) */}
+          <div className="flex-1 flex justify-center">
+            {renderNavLinks()}
+          </div>
 
           {/* Right CTA */}
           {renderCtaButton()}
@@ -246,9 +248,9 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/contact"
-              className="sm:hidden px-3.5 py-1.5 rounded-full text-white text-xs font-bold shadow-xs"
+              className="sm:hidden px-4 h-[36px] rounded-full text-white text-xs font-bold shadow-xs flex items-center justify-center"
               style={{
-                background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+                background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
               }}
             >
               Call
@@ -292,16 +294,16 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
       </header>
 
       {/* ========================================================================= */}
-      {/* 2. SMART STICKY NAVBAR (Appears instantly at 80px with 0.16s animation) */}
+      {/* 2. STICKY NAVBAR (Full width, Clean TechAhead Style) */}
       {/* ========================================================================= */}
       <AnimatePresence>
         {showSticky && (
           <motion.div
-            initial={{ y: -10, opacity: 0 }}
+            initial={{ y: -8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -10, opacity: 0 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className="fixed top-0 left-0 w-full h-[70px] sm:h-[72px] z-[999] bg-white/95 backdrop-blur-[12px] border-b border-[rgba(20,184,197,0.08)] shadow-[0_6px_24px_rgba(0,0,0,0.06)]"
+            exit={{ y: -8, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed top-0 left-0 right-0 w-full h-[72px] sm:h-[76px] z-[999] bg-white/95 backdrop-blur-[12px] border-b border-slate-200/80 shadow-xs"
           >
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
               {/* Logo on Left */}
@@ -309,8 +311,10 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 <CodePlacedLogo size="md" variant="dark" />
               </Link>
 
-              {/* Navigation Links */}
-              {renderNavLinks()}
+              {/* Navigation Links (Centered) */}
+              <div className="flex-1 flex justify-center">
+                {renderNavLinks()}
+              </div>
 
               {/* Right CTA */}
               {renderCtaButton()}
@@ -319,9 +323,9 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               <div className="flex items-center gap-2 lg:hidden">
                 <Link
                   href="/contact"
-                  className="sm:hidden px-3.5 py-1.5 rounded-full text-white text-xs font-bold shadow-xs"
+                  className="sm:hidden px-4 h-[36px] rounded-full text-white text-xs font-bold shadow-xs flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
+                    background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
                   }}
                 >
                   Call

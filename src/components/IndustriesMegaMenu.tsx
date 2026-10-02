@@ -5,139 +5,135 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   HeartPulse,
-  Landmark,
-  MonitorSmartphone,
-  Truck,
-  ShoppingBag,
-  Building2,
   GraduationCap,
+  Building2,
+  ShoppingBag,
+  Landmark,
   Factory,
-  ShieldCheck,
+  Truck,
   Plane,
-  Radio,
+  MonitorSmartphone,
+  Utensils,
+  Film,
   Zap,
-  Building,
   ArrowRight,
-  Sparkles,
-  PhoneCall,
-  FileText,
-  Workflow,
-  ChevronRight,
 } from "lucide-react";
-
-export interface IndustryMenuItem {
-  id: string;
-  name: string;
-  desc: string;
-  href: string;
-  icon: React.ElementType;
-  badge: string;
-}
-
-export const INDUSTRIES_MENU_ITEMS: IndustryMenuItem[] = [
-  {
-    id: "healthcare",
-    name: "Healthcare & MedTech",
-    desc: "HIPAA Clinical Triage & EHR Lakehouses",
-    href: "/industries#healthcare",
-    icon: HeartPulse,
-    badge: "HIPAA Ready",
-  },
-  {
-    id: "fintech",
-    name: "Finance & FinTech",
-    desc: "Real-time Ledger Reconciliations & SEC Audits",
-    href: "/industries#finance",
-    icon: Landmark,
-    badge: "SOC 2 Ready",
-  },
-  {
-    id: "saas",
-    name: "SaaS & Technology",
-    desc: "Embedded Analytics & In-App AI Copilots",
-    href: "/industries#saas",
-    icon: MonitorSmartphone,
-    badge: "Multi-Tenant",
-  },
-  {
-    id: "retail",
-    name: "Retail & Commerce",
-    desc: "Multi-Touch ROAS & Dynamic Pricing ML",
-    href: "/industries#retail",
-    icon: ShoppingBag,
-    badge: "ROAS ML",
-  },
-  {
-    id: "logistics",
-    name: "Logistics & Supply Chain",
-    desc: "Fleet Telematics & Route Optimization",
-    href: "/industries#logistics",
-    icon: Truck,
-    badge: "Sub-25ms GPS",
-  },
-  {
-    id: "manufacturing",
-    name: "Manufacturing & Industrial",
-    desc: "Sensor Streaming & Predictive Downtime",
-    href: "/industries#manufacturing",
-    icon: Factory,
-    badge: "Industry 4.0",
-  },
-  {
-    id: "education",
-    name: "Education & EdTech",
-    desc: "Adaptive Learning & Student Retention BI",
-    href: "/industries#education",
-    icon: GraduationCap,
-    badge: "FERPA Ready",
-  },
-  {
-    id: "realestate",
-    name: "Real Estate & PropTech",
-    desc: "Lease OCR & Portfolio Valuation ML",
-    href: "/industries#realestate",
-    icon: Building2,
-    badge: "Doc AI",
-  },
-  {
-    id: "insurance",
-    name: "Insurance & Underwriting",
-    desc: "Claims Triage OCR & Actuarial Risk Models",
-    href: "/industries#insurance",
-    icon: ShieldCheck,
-    badge: "Risk AI",
-  },
-  {
-    id: "hospitality",
-    name: "Hospitality & Travel",
-    desc: "Dynamic Yield Management & RevPAR BI",
-    href: "/industries#hospitality",
-    icon: Plane,
-    badge: "Yield ML",
-  },
-  {
-    id: "energy",
-    name: "Energy & Utilities",
-    desc: "Smart Meter Kafka Streams & Grid Load ML",
-    href: "/industries#energy",
-    icon: Zap,
-    badge: "Grid Analytics",
-  },
-  {
-    id: "public-sector",
-    name: "Public Sector & Gov",
-    desc: "FedRAMP Data Environments & Citizen Portals",
-    href: "/industries#government",
-    icon: Building,
-    badge: "FedRAMP Ready",
-  },
-];
 
 interface IndustriesMegaMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenBookAudit?: (scope?: string) => void;
 }
+
+interface IndustryItem {
+  name: string;
+  desc: string;
+  href: string;
+  icon: React.ElementType;
+  emoji: string;
+}
+
+const INDUSTRY_COLUMNS: { title: string; items: IndustryItem[] }[] = [
+  {
+    title: "Healthcare, Public & Commerce",
+    items: [
+      {
+        name: "Healthcare",
+        desc: "Clinical data pipelines, HIPAA patient portals & health telemetry",
+        href: "/industries#healthcare",
+        icon: HeartPulse,
+        emoji: "🏥",
+      },
+      {
+        name: "Education",
+        desc: "Adaptive learning systems, FERPA portals & student analytics",
+        href: "/industries#education",
+        icon: GraduationCap,
+        emoji: "🎓",
+      },
+      {
+        name: "Real Estate",
+        desc: "CRM lead automation, tenant portals & valuation models",
+        href: "/industries#realestate",
+        icon: Building2,
+        emoji: "🏠",
+      },
+      {
+        name: "Ecommerce",
+        desc: "Omni-channel storefronts, inventory sync & dynamic pricing",
+        href: "/industries#retail",
+        icon: ShoppingBag,
+        emoji: "🛒",
+      },
+    ],
+  },
+  {
+    title: "Finance, Supply & Operations",
+    items: [
+      {
+        name: "FinTech",
+        desc: "Real-time ledger audit, fraud detection & risk analytics",
+        href: "/industries#finance",
+        icon: Landmark,
+        emoji: "💰",
+      },
+      {
+        name: "Manufacturing",
+        desc: "IoT telemetry, predictive maintenance & quality gates",
+        href: "/industries#manufacturing",
+        icon: Factory,
+        emoji: "🏭",
+      },
+      {
+        name: "Logistics",
+        desc: "Fleet telematics, route planning & warehouse automation",
+        href: "/industries#logistics",
+        icon: Truck,
+        emoji: "🚚",
+      },
+      {
+        name: "Travel",
+        desc: "Booking engines, loyalty platforms & dynamic reservations",
+        href: "/industries",
+        icon: Plane,
+        emoji: "✈️",
+      },
+    ],
+  },
+  {
+    title: "Technology, Media & Energy",
+    items: [
+      {
+        name: "SaaS & Startups",
+        desc: "Multi-tenant platforms, rapid MVP builds & scaling",
+        href: "/industries#saas",
+        icon: MonitorSmartphone,
+        emoji: "📊",
+      },
+      {
+        name: "Food & Restaurant",
+        desc: "POS integration, delivery aggregators & order pipelines",
+        href: "/industries",
+        icon: Utensils,
+        emoji: "🍽",
+      },
+      {
+        name: "Media & Entertainment",
+        desc: "Streaming infrastructure, digital assets & CMS portals",
+        href: "/industries",
+        icon: Film,
+        emoji: "📱",
+      },
+      {
+        name: "Energy & Utilities",
+        desc: "Smart grid telemetry, IoT monitoring & compliance reporting",
+        href: "/industries",
+        icon: Zap,
+        emoji: "⚡",
+      },
+    ],
+  },
+];
 
 export function IndustriesMegaMenu({
   isOpen,
@@ -148,140 +144,102 @@ export function IndustriesMegaMenu({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -10, scale: 0.98 }}
-          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          onMouseEnter={() => {}}
-          onMouseLeave={onClose}
-          className="absolute top-[54px] left-1/2 -translate-x-1/2 w-[1140px] max-w-[92vw] bg-white rounded-[24px] border border-slate-200 shadow-[0_25px_80px_rgba(2,6,23,0.12)] overflow-hidden z-50 text-slate-900"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
+          className="absolute top-full left-0 right-0 w-full z-[1000] bg-white border-t border-[rgba(14,165,233,0.12)] border-b border-x border-slate-200/80 rounded-b-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.12)] max-h-[calc(100vh-90px)] overflow-y-auto"
         >
-          <div className="grid grid-cols-12 min-h-[440px]">
-            {/* LEFT 9 COLUMNS: 3x4 Grid of 12 Major Industries */}
-            <div className="col-span-9 p-6 flex flex-col justify-between border-r border-slate-200/80">
-              <div>
-                <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
-                  <div>
-                    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#0E7490] block mb-0.5">
-                      MISSION-CRITICAL DOMAINS
-                    </span>
-                    <h3 className="text-lg font-black text-[#082F49] tracking-tight">
-                      Industry Solutions & Architecture Blueprints
+          {/* Main 3-Column Categorized Grid */}
+          <div className="max-w-[1280px] mx-auto px-6 sm:px-8 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              {INDUSTRY_COLUMNS.map((col, cIdx) => (
+                <div key={cIdx} className="space-y-4">
+                  {/* Column Header */}
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <h3 className="text-sm font-extrabold text-[#082F49] uppercase tracking-wider">
+                      {col.title}
                     </h3>
                   </div>
 
-                  <Link
-                    href="/industries"
-                    onClick={onClose}
-                    className="text-xs font-bold text-[#0B4F6C] hover:text-[#0E7490] inline-flex items-center gap-1 group"
-                  >
-                    <span>View All Industries Hub</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-
-                {/* 3 Columns x 4 Rows = 12 Industries */}
-                <div className="grid grid-cols-3 gap-3">
-                  {INDUSTRIES_MENU_ITEMS.map((ind) => {
-                    const IndIcon = ind.icon;
-                    return (
-                      <Link
-                        key={ind.id}
-                        href={ind.href}
-                        onClick={onClose}
-                        className="p-3.5 rounded-xl bg-[#F8FAFC] hover:bg-[#ECFEFF]/60 border border-slate-200/70 hover:border-[#0B4F6C]/40 transition-all duration-200 group flex items-start gap-3 shadow-2xs hover:shadow-xs"
-                      >
-                        <div className="w-9 h-9 rounded-lg bg-[rgba(11,79,108,0.08)] text-[#0B4F6C] flex items-center justify-center flex-shrink-0 group-hover:bg-[#0B4F6C] group-hover:text-white transition-colors">
-                          <IndIcon className="w-4 h-4" />
-                        </div>
-                        <div className="space-y-0.5 min-w-0">
-                          <div className="flex items-center justify-between gap-1">
-                            <h4 className="text-xs font-bold text-[#082F49] group-hover:text-[#0B4F6C] truncate">
-                              {ind.name}
-                            </h4>
+                  {/* Industry Items */}
+                  <div className="space-y-1">
+                    {col.items.map((item, iIdx) => {
+                      const ItemIcon = item.icon;
+                      return (
+                        <Link
+                          key={iIdx}
+                          href={item.href}
+                          onClick={onClose}
+                          className="group p-3 -mx-2.5 rounded-xl transition-all duration-150 flex items-start gap-3 hover:bg-gradient-to-r hover:from-[rgba(6,182,212,0.08)] hover:to-[rgba(14,165,233,0.08)] block"
+                        >
+                          <div className="w-9 h-9 rounded-lg bg-slate-100 group-hover:bg-[#06b6d4] text-[#06b6d4] group-hover:text-white flex items-center justify-center flex-shrink-0 transition-colors text-base mt-0.5">
+                            <span className="group-hover:hidden">{item.emoji}</span>
+                            <ItemIcon className="w-4 h-4 hidden group-hover:block text-white" />
                           </div>
-                          <p className="text-[10px] text-slate-500 leading-tight line-clamp-1">
-                            {ind.desc}
-                          </p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Bottom Trust Ribbon in Mega Menu */}
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span className="flex items-center gap-2 text-[11px]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#0E7490]" />
-                  <span>Battle-tested architecture blueprints delivered in 2–4 week sprints.</span>
-                </span>
-                <Link
-                  href="/contact"
-                  onClick={onClose}
-                  className="font-bold text-[#0B4F6C] hover:text-[#0E7490] inline-flex items-center gap-1 group text-xs"
-                >
-                  <span>Schedule Domain Consultation</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* RIGHT 3 COLUMNS: Quick Domain Actions & Blueprint Downloads */}
-            <div className="col-span-3 bg-[#F8FAFC] p-5 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                  Featured Blueprint
-                </div>
-
-                {/* Featured Card */}
-                <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                    Live Case Study
-                  </span>
-                  <h5 className="text-xs font-bold text-[#082F49] leading-snug">
-                    Healthcare Clinical Triage & EHR Lakehouse
-                  </h5>
-                  <p className="text-[11px] text-slate-500 leading-relaxed">
-                    How MedHealth cut patient intake time by 4.8x with zero hallucinations.
-                  </p>
-                  <Link
-                    href="/case-studies"
-                    onClick={onClose}
-                    className="text-xs font-bold text-[#0B4F6C] hover:text-[#0E7490] inline-flex items-center gap-1 pt-1"
-                  >
-                    <span>Read Case Study</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-
-                {/* Quick Action: Book Call */}
-                <Link
-                  href="/contact"
-                  onClick={onClose}
-                  className="p-3.5 rounded-xl bg-white hover:bg-white border border-slate-200/80 hover:border-[#0B4F6C]/30 shadow-2xs cursor-pointer transition-all duration-200 group block"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[rgba(11,79,108,0.08)] text-[#0B4F6C] flex items-center justify-center group-hover:bg-[#0B4F6C] group-hover:text-white transition-colors">
-                      <PhoneCall className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h6 className="text-xs font-bold text-[#082F49] group-hover:text-[#0B4F6C] transition-colors">
-                        Book Domain Review
-                      </h6>
-                      <p className="text-[10px] text-slate-500 mt-0.5">
-                        30-min architecture session
-                      </p>
-                    </div>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-sm font-bold text-[#12344A] group-hover:text-[#0f4c81] transition-colors block leading-tight">
+                              {item.name}
+                            </span>
+                            <span className="text-xs text-slate-400 group-hover:text-slate-600 transition-colors block truncate leading-normal mt-0.5">
+                              {item.desc}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
-                </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom CTA Bar */}
+          <div
+            className="border-t border-slate-200/80 px-6 sm:px-8 py-4 sm:py-5"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(6,182,212,0.06), rgba(14,165,233,0.06))",
+            }}
+          >
+            <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div>
+                <h4 className="text-sm font-extrabold text-[#082F49]">
+                  Looking for industry-specific solutions?
+                </h4>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">
+                  Our domain architects engineer custom platforms tailored to your regulatory and operational requirements.
+                </p>
               </div>
 
-              {/* Security Badge */}
-              <div className="pt-3 border-t border-slate-200/70 text-center">
-                <span className="text-[10px] font-semibold text-slate-400">
-                  NDA Signed Upfront • SOC2 Ready
-                </span>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                {onOpenBookAudit ? (
+                  <button
+                    onClick={() => {
+                      onClose();
+                      onOpenBookAudit("Industry Consultation");
+                    }}
+                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                    style={{
+                      background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                    }}
+                  >
+                    <span>Schedule Strategy Call</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <Link
+                    href="/contact"
+                    onClick={onClose}
+                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                    style={{
+                      background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                    }}
+                  >
+                    <span>Schedule Strategy Call</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
