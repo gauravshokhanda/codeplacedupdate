@@ -236,18 +236,23 @@ export default function Home() {
           background: "linear-gradient(180deg, #F4FBFD 0%, #EDF8FB 60%, #FFFFFF 100%)",
         }}
       >
-        {/* Ambient Soft Glow Behind Content */}
-        <div
-          className="absolute top-16 left-1/2 -translate-x-1/2 w-[850px] h-[450px] pointer-events-none -z-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(20,184,197,0.14), rgba(11,107,136,0.06), transparent 70%)",
-          }}
-        />
+        {/* Soft Concentric Circles Behind Heading (TechAhead Style) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] pointer-events-none -z-0">
+          <div className="absolute inset-0 rounded-full border border-[#00b7c2]/10" />
+          <div className="absolute inset-[150px] rounded-full border border-[#00b7c2]/10" />
+          <div className="absolute inset-[300px] rounded-full border border-[#00b7c2]/15" />
+          <div className="absolute inset-[450px] rounded-full border border-[#00b7c2]/20" />
+          <div
+            className="absolute inset-[350px] rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(20,184,197,0.12), rgba(11,107,136,0.05), transparent 70%)",
+            }}
+          />
+        </div>
 
         {/* HERO SECTION (TechAhead-Inspired Centered Enterprise Hero) */}
-        <section className="relative pt-24 pb-14 sm:pt-28 lg:pt-36 lg:pb-18">
-
+        <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-20 min-h-[850px] flex flex-col justify-center">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             {/* Pill Badge */}
             <motion.div
@@ -258,7 +263,7 @@ export default function Home() {
             >
               <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>FULL STACK TECHNOLOGY PARTNER</span>
+                <span>TRUSTED SOFTWARE, DATA & AI PARTNER</span>
               </div>
             </motion.div>
 
@@ -267,17 +272,33 @@ export default function Home() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[38px] sm:text-[56px] lg:text-[72px] font-[800] leading-[1.05] tracking-[-0.03em] text-[#082F49] mb-6 max-w-[1050px] mx-auto [text-wrap:balance]"
+              className="text-[40px] sm:text-[58px] lg:text-[76px] font-[800] leading-[1.05] tracking-[-0.04em] text-[#082F49] mb-6 max-w-[1100px] mx-auto [text-wrap:balance]"
             >
-              We Build Scalable Digital Products, <br className="hidden sm:inline" />
-              Powered by{" "}
+              Building Scalable{" "}
               <span
                 className="bg-clip-text text-transparent font-extrabold inline-block"
                 style={{
                   backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
                 }}
               >
-                Data, AI & Cloud
+                Digital Products,
+              </span>{" "}
+              <span
+                className="bg-clip-text text-transparent font-extrabold inline-block"
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                }}
+              >
+                Data Platforms
+              </span>{" "}
+              &{" "}
+              <span
+                className="bg-clip-text text-transparent font-extrabold inline-block"
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                }}
+              >
+                Growth Systems
               </span>
             </motion.h1>
 
@@ -286,14 +307,14 @@ export default function Home() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}
-              className="text-base sm:text-[18px] text-slate-600 leading-[1.65] max-w-[700px] mx-auto mb-9 font-normal"
+              className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-[700px] mx-auto mb-8 font-normal"
             >
-              CodePlaced helps businesses design, develop, and scale modern software solutions—from
-              websites and mobile applications to analytics, automation, cloud infrastructure, and
-              digital growth systems.
+              CodePlaced helps businesses build websites, mobile applications, analytics
+              dashboards, automation systems, and digital growth engines that scale with
+              confidence.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -304,7 +325,7 @@ export default function Home() {
                 href="/contact"
                 className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
               >
-                <span>Book Strategy Call</span>
+                <span>Schedule Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
@@ -312,16 +333,16 @@ export default function Home() {
                 href="/services"
                 className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
               >
-                <span>Explore Services</span>
+                <span>View Services</span>
               </Link>
             </motion.div>
 
-            {/* Trust Indicators */}
+            {/* Trust Bullet Items */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 text-xs sm:text-sm font-semibold text-slate-700"
+              className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm font-semibold text-slate-700 mb-14"
             >
               <div className="flex items-center gap-1.5 text-slate-700">
                 <span className="text-[#00b7c2] font-black">✓</span>
@@ -329,11 +350,86 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-1.5 text-slate-700">
                 <span className="text-[#00b7c2] font-black">✓</span>
-                <span>NDA Signed</span>
+                <span>NDA Signed Upfront</span>
               </div>
               <div className="flex items-center gap-1.5 text-slate-700">
                 <span className="text-[#00b7c2] font-black">✓</span>
                 <span>2–4 Week Delivery</span>
+              </div>
+            </motion.div>
+
+            {/* Bottom Visual Gallery (Horizontal 5-Image Collage - TechAhead Style) */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="pt-2"
+            >
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5 max-w-[1240px] mx-auto items-center">
+                {/* Image 1: Team collaboration */}
+                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+                    alt="Team Collaboration"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
+                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
+                    Cross-Functional Pods
+                  </span>
+                </div>
+
+                {/* Image 2: Software development (center emphasized) */}
+                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-lg group h-[220px] sm:h-[270px] lg:h-[300px] border-2 border-white bg-slate-900">
+                  <img
+                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+                    alt="Software Engineering"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/80 via-transparent to-transparent" />
+                  <span className="absolute bottom-4 left-4 right-4 text-left text-white text-xs sm:text-sm font-extrabold leading-tight">
+                    Production Engineering
+                  </span>
+                </div>
+
+                {/* Image 3: Analytics dashboard */}
+                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-900 col-span-2 sm:col-span-1">
+                  <img
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80"
+                    alt="Analytics Command Center"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
+                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
+                    Real-Time Intelligence
+                  </span>
+                </div>
+
+                {/* Image 4: Client workshop */}
+                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
+                    alt="Architecture Workshop"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
+                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
+                    Strategic Scoping
+                  </span>
+                </div>
+
+                {/* Image 5: Office/team culture */}
+                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80"
+                    alt="Team & Culture"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
+                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
+                    Velocity & Craft
+                  </span>
+                </div>
               </div>
             </motion.div>
           </div>
