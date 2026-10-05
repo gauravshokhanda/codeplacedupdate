@@ -26,7 +26,7 @@ export function AppShell({ children }: AppShellProps) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-white text-[#0F172A]">
+    <div className="min-h-screen flex flex-col justify-between text-[#0F172A] relative">
       <Header onOpenBookAudit={handleOpenBookAudit} />
 
       <main className="flex-1">

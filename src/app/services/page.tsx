@@ -308,16 +308,11 @@ export default function ServicesPage() {
   const marqueeLogos = [...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS];
 
   return (
-    <div className="bg-white text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans">
+    <div className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans relative">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (TechAhead-Inspired Centered Enterprise Hero) */}
+      {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <div
-        className="relative overflow-hidden border-b border-slate-200/80"
-        style={{
-          background: "linear-gradient(180deg, #F4FBFD 0%, #EDF8FB 60%, #FFFFFF 100%)",
-        }}
-      >
+      <div className="relative overflow-hidden border-b border-slate-200/60">
         {/* Ambient Soft Glow Behind Content */}
         <div
           className="absolute top-16 left-1/2 -translate-x-1/2 w-[850px] h-[450px] pointer-events-none -z-0"
@@ -327,16 +322,16 @@ export default function ServicesPage() {
           }}
         />
 
-        <section className="relative pt-28 pb-14 sm:pt-32 lg:pt-36 lg:pb-18">
+        <section className="relative pt-32 pb-8 sm:pt-36 sm:pb-9 lg:pt-40 lg:pb-10">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             {/* Pill Badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex justify-center mb-6"
+              className="flex justify-center mb-5"
             >
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
                 <span>FULL STACK SOFTWARE & AI ENGINEERING</span>
               </div>
@@ -347,11 +342,11 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[38px] sm:text-[54px] lg:text-[68px] font-[800] leading-[1.06] tracking-[-0.03em] text-[#082F49] mb-6 max-w-[1050px] mx-auto [text-wrap:balance]"
+              className="text-[38px] sm:text-[54px] lg:text-[68px] font-[800] leading-[1.12] sm:leading-[1.14] tracking-[-0.03em] text-[#082F49] mb-5 max-w-[1050px] mx-auto [text-wrap:balance]"
             >
               Custom Software, Data Analytics &{" "}
               <span
-                className="bg-clip-text text-transparent font-extrabold inline-block"
+                className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
                 style={{
                   backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
                 }}
@@ -365,7 +360,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}
-              className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-[820px] mx-auto mb-8 leading-relaxed font-normal"
+              className="text-base sm:text-lg text-slate-600 max-w-[800px] mx-auto mb-7 leading-relaxed font-normal"
             >
               From websites and mobile apps to analytics dashboards, social media growth, and
               ongoing maintenance, CodePlaced helps businesses build, launch, and scale faster.
@@ -376,11 +371,11 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-7"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
             >
               <Link
                 href="/contact"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
+                className="w-full sm:w-auto h-[50px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -388,7 +383,7 @@ export default function ServicesPage() {
 
               <a
                 href="#services-grid"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
+                className="w-full sm:w-auto h-[50px] px-8 rounded-2xl bg-white/80 backdrop-blur-sm hover:bg-white text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
               >
                 <span>Explore Services</span>
               </a>
@@ -417,11 +412,11 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Partner Tech Marquee */}
-        <div className="py-6 bg-white/70 backdrop-blur-xs border-t border-slate-200/60 overflow-hidden">
+        {/* Partner Tech Marquee (Continuous Gradient, Subtle Divider, Monochrome) */}
+        <div className="py-4 border-t border-[#0F3D5E]/10 overflow-hidden relative select-none">
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div
-              className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_80px,_black_calc(100%-80px),transparent_100%)] select-none"
+              className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_60px,_black_calc(100%-60px),transparent_100%)] select-none"
               onMouseEnter={() => setIsMarqueePaused(true)}
               onMouseLeave={() => setIsMarqueePaused(false)}
             >
@@ -431,7 +426,7 @@ export default function ServicesPage() {
                   x: {
                     repeat: Infinity,
                     repeatType: "loop",
-                    duration: 22,
+                    duration: 24,
                     ease: "linear",
                   },
                 }}
@@ -440,11 +435,11 @@ export default function ServicesPage() {
                 {marqueeLogos.map((logo, idx) => (
                   <div
                     key={`${logo.name}-${idx}`}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50/80 border border-slate-200/70 text-slate-700 font-bold text-xs sm:text-sm tracking-tight whitespace-nowrap hover:border-[#00b7c2]/40 transition-colors"
+                    className="flex items-center gap-2.5 text-[#36546F]/80 hover:text-[#082F49] transition-colors shrink-0 cursor-default"
                   >
-                    <span className="w-2 h-2 rounded-full bg-[#00b7c2]" />
-                    <span>{logo.name}</span>
-                    <span className="text-[10px] text-slate-400 font-medium">({logo.category})</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00b7c2]" />
+                    <span className="text-sm sm:text-[15px] font-semibold tracking-[-0.02em]">{logo.name}</span>
+                    <span className="text-[11px] text-slate-400 font-medium">({logo.category})</span>
                   </div>
                 ))}
               </motion.div>
@@ -454,13 +449,13 @@ export default function ServicesPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. SERVICES GRID (8 Cards Only - Most Important Section) */}
+      {/* 2. SERVICES GRID (8 Glassmorphic Cards) */}
       {/* ========================================================================= */}
-      <section id="services-grid" className="py-20 lg:py-24 bg-white">
+      <section id="services-grid" className="pt-14 pb-20 sm:pt-16 sm:pb-24 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>CORE SERVICE OFFERINGS</span>
             </div>
@@ -480,7 +475,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={svc.id}
-                  className="rounded-[20px] bg-white border border-slate-200/90 p-7 shadow-xs hover:shadow-xl hover:border-[#00b7c2]/50 transition-all duration-300 flex flex-col justify-between group min-h-[280px]"
+                  className="rounded-[20px] glass-service-card p-7 shadow-xs hover:shadow-xl hover:border-[#00b7c2]/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[280px]"
                 >
                   <div>
                     {/* Icon Header */}
@@ -502,7 +497,7 @@ export default function ServicesPage() {
                     </p>
 
                     {/* Features List */}
-                    <ul className="space-y-2.5 mb-6 pt-4 border-t border-slate-100">
+                    <ul className="space-y-2.5 mb-6 pt-4 border-t border-slate-200/40">
                       {svc.features.map((feature, fIdx) => (
                         <li
                           key={fIdx}
@@ -520,7 +515,7 @@ export default function ServicesPage() {
                   {/* Card Bottom Link */}
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-between w-full pt-4 border-t border-slate-100 text-xs font-bold text-[#0f4c81] group-hover:text-[#00b7c2] transition-colors"
+                    className="inline-flex items-center justify-between w-full pt-4 border-t border-slate-200/40 text-xs font-bold text-[#0f4c81] group-hover:text-[#00b7c2] transition-colors"
                   >
                     <span>Request Scoping</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -533,13 +528,13 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. DELIVERY PROCESS (TechAhead Style - Horizontal Connected Line) */}
+      {/* 3. DELIVERY PROCESS */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-[#F8FAFC] border-y border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Zap className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE CODEPLACED BLUEPRINT</span>
             </div>
@@ -559,7 +554,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={step.step}
-                  className="rounded-[20px] bg-white border border-slate-200/90 p-5 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/40 transition-all duration-200 flex flex-col justify-between relative group"
+                  className="rounded-[20px] glass-panel-card p-5 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/40 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between relative group"
                 >
                   <div>
                     {/* Step Number Badge */}
@@ -567,7 +562,7 @@ export default function ServicesPage() {
                       <span className="text-xs font-black text-[#00b7c2] tracking-wider">
                         {step.step}
                       </span>
-                      <div className="w-8 h-8 rounded-xl bg-[#ECFEFF] flex items-center justify-center text-[#0f4c81]">
+                      <div className="w-8 h-8 rounded-xl bg-[#ECFEFF]/80 flex items-center justify-center text-[#0f4c81]">
                         <StepIcon className="w-4 h-4" />
                       </div>
                     </div>
@@ -584,7 +579,7 @@ export default function ServicesPage() {
                   </div>
 
                   {/* Status Indicator */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
+                  <div className="mt-4 pt-3 border-t border-slate-200/40 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                     <span>Milestone Gate</span>
                   </div>
@@ -596,13 +591,13 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. WHY BUSINESSES CHOOSE CODEPLACED (6 Cards) */}
+      {/* 4. WHY BUSINESSES CHOOSE CODEPLACED */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-white">
+      <section className="py-20 lg:py-24 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE CODEPLACED ADVANTAGE</span>
             </div>
@@ -622,12 +617,12 @@ export default function ServicesPage() {
               return (
                 <div
                   key={idx}
-                  className="rounded-[20px] bg-[#F8FAFC] border border-slate-200/90 p-8 shadow-2xs hover:shadow-lg hover:border-[#00b7c2]/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="rounded-[20px] glass-panel-card p-8 shadow-2xs hover:shadow-lg hover:border-[#00b7c2]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     {/* Top Row: Icon & Tag */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300">
+                      <div className="w-12 h-12 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs flex items-center justify-center text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300">
                         <ItemIcon className="w-6 h-6" />
                       </div>
                       <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
@@ -647,7 +642,7 @@ export default function ServicesPage() {
                   </div>
 
                   {/* Checked Guarantee */}
-                  <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-2 text-xs font-bold text-slate-700">
+                  <div className="mt-6 pt-4 border-t border-slate-200/40 flex items-center gap-2 text-xs font-bold text-slate-700">
                     <CheckCircle2 className="w-4 h-4 text-[#00b7c2]" />
                     <span>CodePlaced Commitment</span>
                   </div>
@@ -685,13 +680,13 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. TECHNOLOGY STACK (Simple, Curated 12–16 Technologies) */}
+      {/* 6. TECHNOLOGY STACK */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-white">
+      <section className="py-20 lg:py-24 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Cpu className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>MODERN TECH STACK</span>
             </div>
@@ -709,10 +704,10 @@ export default function ServicesPage() {
             {TECH_CATEGORIES.map((cat, cIdx) => (
               <div
                 key={cIdx}
-                className="rounded-[20px] bg-[#F8FAFC] border border-slate-200/90 p-6 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/30 transition-all duration-200"
+                className="rounded-[20px] glass-panel-card p-6 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/30 hover:-translate-y-1 transition-all duration-200"
               >
                 {/* Category Header */}
-                <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200/70">
+                <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200/40">
                   <h3 className="text-lg font-bold text-[#082F49]">
                     {cat.category}
                   </h3>
@@ -726,12 +721,12 @@ export default function ServicesPage() {
                   {cat.technologies.map((tech, tIdx) => (
                     <div
                       key={tIdx}
-                      className="p-3 rounded-xl bg-white border border-slate-200/80 flex items-center justify-between hover:border-[#00b7c2]/40 transition-colors"
+                      className="p-3 rounded-xl bg-white/70 backdrop-blur-xs border border-slate-200/60 flex items-center justify-between hover:border-[#00b7c2]/40 transition-colors"
                     >
                       <span className="text-sm font-bold text-[#082F49]">
                         {tech.name}
                       </span>
-                      <span className="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+                      <span className="text-[11px] font-semibold text-slate-600 bg-white/80 px-2 py-0.5 rounded-md border border-slate-200/50">
                         {tech.tag}
                       </span>
                     </div>

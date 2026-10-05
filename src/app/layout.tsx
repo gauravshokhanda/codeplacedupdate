@@ -73,7 +73,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth font-sans`}>
-      <body className="min-h-screen bg-white text-[#0F172A] antialiased selection:bg-[#0B4F6C] selection:text-white">
+      <body className="min-h-screen page-background text-[#0F172A] antialiased selection:bg-[#0B4F6C] selection:text-white">
         <AppShell>{children}</AppShell>
       </body>
     </html>

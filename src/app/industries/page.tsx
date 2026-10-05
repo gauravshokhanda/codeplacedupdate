@@ -626,737 +626,735 @@ export default function IndustriesPage() {
   };
 
   return (
-    <div className="bg-[#F7FAFC] text-[#0B2035] selection:bg-[#083A5B] selection:text-white font-sans">
+    <div className="text-[#0B2035] selection:bg-[#083A5B] selection:text-white font-sans relative">
       {/* ========================================================================= */}
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-b from-white via-[#ECFEFF]/25 to-[#F7FAFC] border-b border-[#D9E6EF]">
-          {/* Ambient Glow */}
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(13,110,138,0.1), rgba(19,181,234,0.05), transparent 70%)",
-            }}
-          />
+      <section className="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24 border-b border-slate-200/60">
+        {/* Ambient Glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(13,110,138,0.1), rgba(19,181,234,0.05), transparent 70%)",
+          }}
+        />
 
-          <div className="site-container relative z-10 max-w-5xl mx-auto text-center">
-            {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-              <Link href="/" className="hover:text-[#083A5B] transition-colors">
-                Home
-              </Link>
-              <span>/</span>
-              <span className="text-[#083A5B] font-bold">Industries Discovery Hub</span>
-            </div>
-
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#083A5B] border border-[#083A5B]/20 shadow-2xs mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[#13B5EA]" />
-              <span>ENTERPRISE DOMAIN INTELLIGENCE</span>
-            </div>
-
-            {/* Outcome-focused Headline */}
-            <h1 className="text-[38px] sm:text-[54px] lg:text-[68px] font-[900] leading-[1.03] tracking-tight text-[#052B45] mb-6 [text-wrap:balance]">
-              Digital Transformation Fuelled Growth Across{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#052B45] via-[#0D6E8A] to-[#13B5EA]">
-                Critical Industries
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10 font-normal">
-              We engineer production lakehouses, sub-second OLAP marts, deterministic AI copilots, and C-suite analytics cockpits tailored to your industry’s compliance guardrails and latency SLAs.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-              <a
-                href="#solutions-carousel"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-[#052B45] hover:bg-[#083A5B] text-white font-bold text-sm shadow-xl shadow-[#052B45]/20 flex items-center justify-center gap-2.5 transition-all border border-[#13B5EA]/30 active:scale-95"
-              >
-                <span>Explore Featured Solutions</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-white hover:bg-slate-50 text-[#052B45] font-bold text-sm border border-[#D9E6EF] shadow-xs flex items-center justify-center transition-all"
-              >
-                <span>Schedule Domain Review</span>
-              </Link>
-            </div>
-
-            {/* 4-Metric Trust Ribbon */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-[24px] bg-white/90 backdrop-blur-md border border-[#D9E6EF] shadow-md text-left">
-              {TRUST_METRICS.map((metric, i) => (
-                <div key={metric.label} className={i !== 0 ? "border-l border-slate-200/80 pl-4" : "pl-2"}>
-                  <div className="text-2xl sm:text-3xl font-black text-[#052B45] tracking-tight">
-                    {metric.value}
-                  </div>
-                  <div className="text-xs font-bold text-[#083A5B] mt-0.5">{metric.label}</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">{metric.sub}</div>
-                </div>
-              ))}
-            </div>
+        <div className="site-container relative z-10 max-w-5xl mx-auto text-center">
+          {/* Breadcrumb */}
+          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+            <Link href="/" className="hover:text-[#083A5B] transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <span className="text-[#083A5B] font-bold">Industries Discovery Hub</span>
           </div>
-        </section>
 
-        {/* ========================================================================= */}
-        {/* 2. FEATURED INDUSTRY SOLUTIONS CAROUSEL (Horizontal Slider) */}
-        {/* ========================================================================= */}
-        <section id="solutions-carousel" className="section-py bg-white border-b border-[#D9E6EF]">
-          <div className="site-container">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-              <div className="space-y-3">
-                <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-                  FLAGSHIP SOLUTIONS
-                </span>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
-                  Featured Industry Solutions
-                </h2>
-                <p className="text-slate-600 text-base max-w-2xl">
-                  Deep-dive into battle-tested architectures solving high-impact domain challenges with measurable client outcomes.
-                </p>
-              </div>
-
-              {/* Slider Controls */}
-              <div className="flex items-center gap-2 self-start md:self-auto">
-                <button
-                  onClick={handlePrevSolution}
-                  className="w-11 h-11 rounded-full border border-slate-200 hover:border-[#052B45] bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all shadow-xs"
-                  aria-label="Previous solution"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={handleNextSolution}
-                  className="w-11 h-11 rounded-full border border-slate-200 hover:border-[#052B45] bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all shadow-xs"
-                  aria-label="Next solution"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Carousel Active Card */}
-            <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white border border-slate-700 shadow-2xl p-8 sm:p-12">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Left 7 Cols */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="text-xs font-bold uppercase tracking-wider text-cyan-300 bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
-                      {FEATURED_SOLUTIONS[solutionIndex].industry}
-                    </span>
-                    <span className="text-xs font-bold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-500/30">
-                      {FEATURED_SOLUTIONS[solutionIndex].badge}
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-4xl font-black leading-tight text-white">
-                    {FEATURED_SOLUTIONS[solutionIndex].title}
-                  </h3>
-
-                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                    {FEATURED_SOLUTIONS[solutionIndex].desc}
-                  </p>
-
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                    <div className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                      Proven Impact:
-                    </div>
-                    <div className="text-sm font-semibold text-white">
-                      {FEATURED_SOLUTIONS[solutionIndex].highlight}
-                    </div>
-                  </div>
-
-                  {/* Architecture Data Flow String */}
-                  <div className="text-xs text-slate-300 font-mono bg-black/30 p-3.5 rounded-xl border border-white/10 overflow-x-auto whitespace-nowrap">
-                    <span className="text-cyan-400 font-bold">Data Flow: </span>
-                    {FEATURED_SOLUTIONS[solutionIndex].architecture}
-                  </div>
-
-                  {/* Tech Stack Pills */}
-                  <div className="space-y-2">
-                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                      Core Technology Stack:
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {FEATURED_SOLUTIONS[solutionIndex].tech.map((t) => (
-                        <span
-                          key={t}
-                          className="px-3 py-1 rounded-lg bg-white/10 border border-white/15 text-xs font-bold text-cyan-100"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right 5 Cols: Highlight Metric & Quick Action */}
-                <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-[24px] bg-white/10 border border-white/15 backdrop-blur-md space-y-6">
-                  <div className="space-y-2 text-center sm:text-left">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300">
-                      Quantified Result
-                    </span>
-                    <div className="text-5xl sm:text-6xl font-black text-white tracking-tight">
-                      {FEATURED_SOLUTIONS[solutionIndex].metric}
-                    </div>
-                    <div className="text-sm font-bold text-slate-200">
-                      {FEATURED_SOLUTIONS[solutionIndex].metricLabel}
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 pt-4 border-t border-white/10">
-                    <Link
-                      href="/contact"
-                      className="w-full h-12 rounded-xl bg-white hover:bg-slate-100 text-[#052B45] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
-                    >
-                      <span>Deploy Similar Architecture</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                    <Link
-                      href="/case-studies"
-                      className="w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center justify-center border border-white/20 transition-all"
-                    >
-                      <span>Read Complete Case Study</span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Progress Dots */}
-              <div className="flex items-center justify-center gap-2 mt-8">
-                {FEATURED_SOLUTIONS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSolutionIndex(i)}
-                    className={`h-2 rounded-full transition-all ${
-                      solutionIndex === i ? "w-8 bg-cyan-400" : "w-2 bg-white/30 hover:bg-white/50"
-                    }`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#083A5B] border border-[#083A5B]/20 shadow-2xs mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-[#13B5EA]" />
+            <span>ENTERPRISE DOMAIN INTELLIGENCE</span>
           </div>
-        </section>
 
-        {/* ========================================================================= */}
-        {/* 3. INDUSTRY EXPLORER GRID (16 Industries with Search + Filter) */}
-        {/* ========================================================================= */}
-        <section id="industries-explorer" className="section-py site-container">
-          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-              COMPLETE DOMAIN CATALOG
+          {/* Outcome-focused Headline */}
+          <h1 className="text-[38px] sm:text-[54px] lg:text-[68px] font-[900] leading-[1.03] tracking-tight text-[#052B45] mb-6 [text-wrap:balance]">
+            Digital Transformation Fuelled Growth Across{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#052B45] via-[#0D6E8A] to-[#13B5EA]">
+              Critical Industries
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
-              Explore 16 Mission-Critical Industries
-            </h2>
-            <p className="text-slate-600 text-base">
-              Select your industry vertical to inspect specialized architecture patterns, compliance frameworks, and benchmark metrics.
-            </p>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10 font-normal">
+            We engineer production lakehouses, sub-second OLAP marts, deterministic AI copilots, and C-suite analytics cockpits tailored to your industry’s compliance guardrails and latency SLAs.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <a
+              href="#solutions-carousel"
+              className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-[#052B45] hover:bg-[#083A5B] text-white font-bold text-sm shadow-xl shadow-[#052B45]/20 flex items-center justify-center gap-2.5 transition-all border border-[#13B5EA]/30 active:scale-95"
+            >
+              <span>Explore Featured Solutions</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-white hover:bg-slate-50 text-[#052B45] font-bold text-sm border border-[#D9E6EF] shadow-xs flex items-center justify-center transition-all"
+            >
+              <span>Schedule Domain Review</span>
+            </Link>
           </div>
 
-          {/* Search & Category Filter Bar */}
-          <div className="p-4 sm:p-6 rounded-[24px] bg-white border border-[#D9E6EF] shadow-sm mb-10 space-y-4">
-            {/* Search Input */}
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by industry name, capability (e.g. 'FHIR', 'Fraud', 'ROAS', 'IoT'), or compliance..."
-                className="w-full h-12 pl-12 pr-4 rounded-xl bg-[#F8FAFC] border border-slate-200 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#083A5B] focus:bg-white transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
-              <span className="text-xs font-bold text-slate-500 mr-1 flex items-center gap-1">
-                <Filter className="w-3.5 h-3.5" /> Filter:
-              </span>
-              {FILTER_CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    selectedCategory === cat
-                      ? "bg-[#052B45] text-white shadow-xs"
-                      : "bg-[#F8FAFC] hover:bg-slate-100 text-slate-600 border border-slate-200"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+          {/* 4-Metric Trust Ribbon */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-[24px] glass-panel-card shadow-md text-left">
+            {TRUST_METRICS.map((metric, i) => (
+              <div key={metric.label} className={i !== 0 ? "border-l border-slate-200/60 pl-4" : "pl-2"}>
+                <div className="text-2xl sm:text-3xl font-black text-[#052B45] tracking-tight">
+                  {metric.value}
+                </div>
+                <div className="text-xs font-bold text-[#083A5B] mt-0.5">{metric.label}</div>
+                <div className="text-[11px] text-slate-500 mt-0.5">{metric.sub}</div>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* 16 Industries Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredIndustries.map((ind, idx) => {
-              const IndIcon = ind.icon;
-              return (
-                <motion.div
-                  key={ind.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-20px" }}
-                  transition={{ duration: 0.3, delay: idx * 0.02 }}
-                  className="rounded-[24px] bg-white border border-[#D9E6EF] p-6 shadow-2xs hover:shadow-xl hover:border-[#0D6E8A]/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
-                >
-                  <div className="space-y-4">
-                    {/* Header: Icon + Badge */}
-                    <div className="flex items-center justify-between">
-                      <div className="w-11 h-11 rounded-xl bg-[rgba(5,43,69,0.08)] text-[#052B45] flex items-center justify-center group-hover:bg-[#052B45] group-hover:text-white transition-colors shadow-2xs">
-                        <IndIcon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                        {ind.badge}
-                      </span>
-                    </div>
-
-                    {/* Title + Desc */}
-                    <div>
-                      <h3 className="text-base font-bold text-[#052B45] group-hover:text-[#0D6E8A] transition-colors">
-                        {ind.name}
-                      </h3>
-                      <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                        {ind.desc}
-                      </p>
-                    </div>
-
-                    {/* Solutions List */}
-                    <div className="space-y-1 pt-2 border-t border-slate-100">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Delivered Solutions:
-                      </span>
-                      <ul className="space-y-1">
-                        {ind.solutions.slice(0, 3).map((sol) => (
-                          <li key={sol} className="text-[11px] text-slate-700 flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0D6E8A]" />
-                            <span className="truncate">{sol}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-1 pt-1">
-                      {ind.tech.slice(0, 3).map((t) => (
-                        <span
-                          key={t}
-                          className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Card Bottom: Impact & Scope Button */}
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <div className="text-[9px] uppercase font-bold text-slate-400">Target Outcome</div>
-                      <div className="text-xs font-black text-emerald-600">{ind.impact}</div>
-                    </div>
-                    <Link
-                      href="/contact"
-                      className="px-3 py-1.5 rounded-lg bg-slate-100 group-hover:bg-[#052B45] text-slate-700 group-hover:text-white text-xs font-bold transition-all flex items-center gap-1"
-                    >
-                      <span>Scope</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {filteredIndustries.length === 0 && (
-            <div className="p-12 text-center rounded-2xl bg-white border border-slate-200">
-              <p className="text-slate-500 font-semibold text-sm">
-                No industries found matching &ldquo;{searchQuery}&rdquo;. Try another search term or clear the filter.
-              </p>
-            </div>
-          )}
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-white border-y border-[#D9E6EF]">
-          <div className="site-container">
-            <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
+      {/* ========================================================================= */}
+      {/* 2. FEATURED INDUSTRY SOLUTIONS CAROUSEL (Horizontal Slider) */}
+      {/* ========================================================================= */}
+      <section id="solutions-carousel" className="section-py border-b border-slate-200/60">
+        <div className="site-container">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="space-y-3">
               <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-                TECHNICAL BLUEPRINTS
+                FLAGSHIP SOLUTIONS
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
-                Industry Architecture Blueprints
+                Featured Industry Solutions
               </h2>
-              <p className="text-slate-600 text-base">
-                Inspect production-tested data flow diagrams from source ingestion to lakehouse, analytics marts, and AI copilots.
+              <p className="text-slate-600 text-base max-w-2xl">
+                Deep-dive into battle-tested architectures solving high-impact domain challenges with measurable client outcomes.
               </p>
             </div>
 
-            {/* Blueprint Selector Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-              {BLUEPRINTS.map((bp) => {
-                const isActive = activeBlueprintId === bp.id;
-                return (
-                  <button
-                    key={bp.id}
-                    onClick={() => setActiveBlueprintId(bp.id)}
-                    className={`px-5 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                      isActive
-                        ? "bg-[#052B45] text-white shadow-md shadow-[#052B45]/20"
-                        : "bg-[#F8FAFC] hover:bg-slate-100 text-slate-700 border border-[#D9E6EF]"
-                    }`}
-                  >
-                    <Workflow className="w-4 h-4" />
-                    <span>{bp.name}</span>
-                  </button>
-                );
-              })}
+            {/* Slider Controls */}
+            <div className="flex items-center gap-2 self-start md:self-auto">
+              <button
+                onClick={handlePrevSolution}
+                className="w-11 h-11 rounded-full border border-slate-200 hover:border-[#052B45] bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all shadow-xs"
+                aria-label="Previous solution"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={handleNextSolution}
+                className="w-11 h-11 rounded-full border border-slate-200 hover:border-[#052B45] bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all shadow-xs"
+                aria-label="Next solution"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
+          </div>
 
-            {/* Active Blueprint Visualization Box */}
-            <div className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-[#052B45] to-[#041E2A] text-white border border-slate-700 shadow-2xl space-y-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                    {activeBlueprint.domain} Architecture
+          {/* Carousel Active Card */}
+          <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white border border-slate-700 shadow-2xl p-8 sm:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left 7 Cols */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-300 bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
+                    {FEATURED_SOLUTIONS[solutionIndex].industry}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
-                    {activeBlueprint.name}
-                  </h3>
-                </div>
-                <div className="flex items-center gap-3">
                   <span className="text-xs font-bold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-500/30">
-                    {activeBlueprint.badge}
-                  </span>
-                  <span className="text-xs font-mono text-cyan-200 bg-white/10 px-3 py-1 rounded-full border border-white/15">
-                    {activeBlueprint.sla}
+                    {FEATURED_SOLUTIONS[solutionIndex].badge}
                   </span>
                 </div>
-              </div>
 
-              {/* 5-Step Pipeline Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-                {activeBlueprint.steps.map((step, idx) => (
-                  <div
-                    key={step.num}
-                    className="p-5 rounded-2xl bg-white/[0.06] border border-white/10 hover:border-cyan-400/40 transition-colors flex flex-col justify-between space-y-3 relative group"
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-black flex items-center justify-center">
-                          {step.num}
-                        </span>
-                        <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded">
-                          {step.tag}
-                        </span>
-                      </div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-200 transition-colors">
-                        {step.title}
-                      </h4>
-                      <p className="text-[11px] text-slate-300 leading-relaxed">
-                        {step.desc}
-                      </p>
-                    </div>
+                <h3 className="text-2xl sm:text-4xl font-black leading-tight text-white">
+                  {FEATURED_SOLUTIONS[solutionIndex].title}
+                </h3>
 
-                    <div className="pt-3 border-t border-white/10">
-                      <div className="text-[10px] font-mono text-cyan-300 truncate">
-                        {step.tech}
-                      </div>
-                    </div>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  {FEATURED_SOLUTIONS[solutionIndex].desc}
+                </p>
+
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <div className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+                    Proven Impact:
                   </div>
-                ))}
-              </div>
+                  <div className="text-sm font-semibold text-white">
+                    {FEATURED_SOLUTIONS[solutionIndex].highlight}
+                  </div>
+                </div>
 
-              {/* Bottom Actions in Blueprint */}
-              <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-                <span className="text-slate-300">
-                  Ready to deploy this exact architecture in your private cloud environment?
-                </span>
-                <Link
-                  href="/contact"
-                  className="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-[#052B45] font-bold text-xs shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap"
-                >
-                  <span>Request Full Architecture Spec</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+                {/* Architecture Data Flow String */}
+                <div className="text-xs text-slate-300 font-mono bg-black/30 p-3.5 rounded-xl border border-white/10 overflow-x-auto whitespace-nowrap">
+                  <span className="text-cyan-400 font-bold">Data Flow: </span>
+                  {FEATURED_SOLUTIONS[solutionIndex].architecture}
+                </div>
 
-        {/* ========================================================================= */}
-        {/* 5. INDUSTRY-SPECIFIC SERVICES MATRIX */}
-        {/* ========================================================================= */}
-        <section className="section-py site-container">
-          <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-              SERVICES MATRIX
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
-              Industry-Specific Capabilities & Tech Stacks
-            </h2>
-            <p className="text-slate-600 text-base">
-              A comprehensive breakdown of domain challenges, tailored solutions, specialized tech stacks, and quantified outcomes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {DETAILED_SERVICES.map((svc) => {
-              const SvcIcon = svc.icon;
-              return (
-                <div
-                  key={svc.id}
-                  className="p-8 rounded-[28px] bg-white border border-[#D9E6EF] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
-                >
-                  <div className="space-y-5">
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-[rgba(5,43,69,0.08)] text-[#052B45] flex items-center justify-center font-bold">
-                          <SvcIcon className="w-6 h-6" />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-black text-[#052B45]">{svc.name}</h3>
-                          <span className="text-[11px] font-bold text-[#0D6E8A]">Specialized Practice</span>
-                        </div>
-                      </div>
-                      <Link
-                        href="/contact"
-                        className="px-4 py-2 rounded-xl bg-[#052B45] hover:bg-[#083A5B] text-white text-xs font-bold transition-all shadow-xs"
+                {/* Tech Stack Pills */}
+                <div className="space-y-2">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Core Technology Stack:
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {FEATURED_SOLUTIONS[solutionIndex].tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-3 py-1 rounded-lg bg-white/10 border border-white/15 text-xs font-bold text-cyan-100"
                       >
-                        Engage Pod
-                      </Link>
-                    </div>
-
-                    {/* Challenge */}
-                    <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200 space-y-1">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
-                        The Domain Challenge:
+                        {t}
                       </span>
-                      <p className="text-xs text-slate-700 leading-relaxed">{svc.challenge}</p>
-                    </div>
-
-                    {/* Solutions */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#052B45]">
-                        Engineered Solutions:
-                      </span>
-                      <ul className="space-y-1.5">
-                        {svc.solutions.map((s) => (
-                          <li key={s} className="text-xs text-slate-700 flex items-start gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                            <span>{s}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Tech Stack */}
-                    <div className="space-y-2 pt-2 border-t border-slate-100">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Tech Stack:
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {svc.techStack.map((t) => (
-                          <span
-                            key={t}
-                            className="px-2.5 py-1 rounded-lg bg-[#ECFEFF] border border-[#083A5B]/15 text-xs font-bold text-[#083A5B]"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Outcomes Ribbon */}
-                  <div className="pt-4 border-t border-slate-100 bg-[#F8FAFC] -mx-8 -mb-8 p-6 rounded-b-[28px] flex flex-wrap items-center justify-between gap-2">
-                    {svc.outcomes.map((o) => (
-                      <div key={o} className="flex items-center gap-1.5 text-xs font-bold text-[#052B45]">
-                        <Check className="w-4 h-4 text-emerald-600" />
-                        <span>{o}</span>
-                      </div>
                     ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </section>
+              </div>
 
-        {/* ========================================================================= */}
-        {/* 6. CLIENT LOGO WALL & ECOSYSTEM */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-white border-y border-[#D9E6EF]">
-          <div className="site-container text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-              PROVEN ENTERPRISE ECOSYSTEM
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#052B45] tracking-tight mt-2 mb-10">
-              Trusted by Data-Driven Teams Across High-Stakes Industries
-            </h2>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-              {CLIENT_ECOSYSTEM.map((brand) => (
-                <div
-                  key={brand.name}
-                  className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#0D6E8A]/40 transition-colors text-center space-y-1 shadow-2xs"
-                >
-                  <div className="text-sm font-black text-[#052B45]">{brand.name}</div>
-                  <div className="text-[10px] text-slate-500 truncate">{brand.tag}</div>
+              {/* Right 5 Cols: Highlight Metric & Quick Action */}
+              <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-[24px] bg-white/10 border border-white/15 backdrop-blur-md space-y-6">
+                <div className="space-y-2 text-center sm:text-left">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300">
+                    Quantified Result
+                  </span>
+                  <div className="text-5xl sm:text-6xl font-black text-white tracking-tight">
+                    {FEATURED_SOLUTIONS[solutionIndex].metric}
+                  </div>
+                  <div className="text-sm font-bold text-slate-200">
+                    {FEATURED_SOLUTIONS[solutionIndex].metricLabel}
+                  </div>
                 </div>
+
+                <div className="space-y-3 pt-4 border-t border-white/10">
+                  <Link
+                    href="/contact"
+                    className="w-full h-12 rounded-xl bg-white hover:bg-slate-100 text-[#052B45] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
+                  >
+                    <span>Deploy Similar Architecture</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/case-studies"
+                    className="w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center justify-center border border-white/20 transition-all"
+                  >
+                    <span>Read Complete Case Study</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Dots */}
+            <div className="flex items-center justify-center gap-2 mt-8">
+              {FEATURED_SOLUTIONS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSolutionIndex(i)}
+                  className={`h-2 rounded-full transition-all ${solutionIndex === i ? "w-8 bg-cyan-400" : "w-2 bg-white/30 hover:bg-white/50"
+                    }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ========================================================================= */}
-        {/* 7. IMPACT METRICS SECTION (Dark Gradient) */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-gradient-to-r from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white">
-          <div className="site-container">
-            <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-cyan-300">
-                PROVEN RETURN ON INVESTMENT
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-                Enterprise Scale & Institutional Impact
-              </h2>
-              <p className="text-slate-300 text-base">
-                Our deployments are measured in compressed query latency, eliminated downtime, and measurable balance-sheet ROI.
-              </p>
-            </div>
+      {/* ========================================================================= */}
+      {/* 3. INDUSTRY EXPLORER GRID (16 Industries with Search + Filter) */}
+      {/* ========================================================================= */}
+      <section id="industries-explorer" className="section-py site-container">
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+            COMPLETE DOMAIN CATALOG
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+            Explore 16 Mission-Critical Industries
+          </h2>
+          <p className="text-slate-600 text-base">
+            Select your industry vertical to inspect specialized architecture patterns, compliance frameworks, and benchmark metrics.
+          </p>
+        </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-                <div className="text-4xl sm:text-5xl font-black text-white">100+</div>
-                <div className="text-sm font-bold text-cyan-200">Production Deployments</div>
-                <p className="text-xs text-slate-300">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
-              </div>
-
-              <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-                <div className="text-4xl sm:text-5xl font-black text-white">95%</div>
-                <div className="text-sm font-bold text-cyan-200">Client Retention</div>
-                <p className="text-xs text-slate-300">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
-              </div>
-
-              <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-                <div className="text-4xl sm:text-5xl font-black text-white">99.99%</div>
-                <div className="text-sm font-bold text-cyan-200">Verified SLA Guarantee</div>
-                <p className="text-xs text-slate-300">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
-              </div>
-
-              <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-                <div className="text-4xl sm:text-5xl font-black text-emerald-400">$140M+</div>
-                <div className="text-sm font-bold text-emerald-200">Client Value Unlocked</div>
-                <p className="text-xs text-slate-300">Combined cloud infrastructure savings and operational margin growth.</p>
-              </div>
-            </div>
+        {/* Search & Category Filter Bar */}
+        <div className="p-4 sm:p-6 rounded-[24px] glass-panel-card shadow-sm mb-10 space-y-4">
+          {/* Search Input */}
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by industry name, capability (e.g. 'FHIR', 'Fraud', 'ROAS', 'IoT'), or compliance..."
+              className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/80 border border-slate-200/80 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#083A5B] focus:bg-white transition-all"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700"
+              >
+                Clear
+              </button>
+            )}
           </div>
-        </section>
 
-        {/* ========================================================================= */}
-        {/* 8. RESEARCH & INDUSTRY INSIGHTS */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-white border-t border-[#D9E6EF]">
-          <div className="site-container">
-            <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-                ENGINEERING PLAYBOOKS
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
-                Industry Research & Architecture Guides
-              </h2>
-            </div>
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-200/40">
+            <span className="text-xs font-bold text-slate-500 mr-1 flex items-center gap-1">
+              <Filter className="w-3.5 h-3.5" /> Filter:
+            </span>
+            {FILTER_CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${selectedCategory === cat
+                    ? "bg-[#052B45] text-white shadow-xs"
+                    : "bg-white/70 hover:bg-white text-slate-600 border border-slate-200/70"
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {RESEARCH_PAPERS.map((paper) => (
-                <div
-                  key={paper.title}
-                  className="p-8 rounded-[24px] bg-[#F7FAFC] border border-[#D9E6EF] shadow-2xs hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-[#083A5B] bg-[#ECFEFF] px-2.5 py-0.5 rounded-full border border-[#083A5B]/20">
-                        {paper.category}
-                      </span>
-                      <span className="text-slate-400 font-semibold">{paper.readTime}</span>
+        {/* 16 Industries Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredIndustries.map((ind, idx) => {
+            const IndIcon = ind.icon;
+            return (
+              <motion.div
+                key={ind.id}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.3, delay: idx * 0.02 }}
+                className="rounded-[24px] glass-panel-card p-6 shadow-2xs hover:shadow-xl hover:border-[#0D6E8A]/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              >
+                <div className="space-y-4">
+                  {/* Header: Icon + Badge */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-11 h-11 rounded-xl bg-[rgba(5,43,69,0.08)] text-[#052B45] flex items-center justify-center group-hover:bg-[#052B45] group-hover:text-white transition-colors shadow-2xs">
+                      <IndIcon className="w-5 h-5" />
                     </div>
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      {ind.badge}
+                    </span>
+                  </div>
 
-                    <h3 className="text-base font-bold text-[#052B45] leading-snug">
-                      {paper.title}
+                  {/* Title + Desc */}
+                  <div>
+                    <h3 className="text-base font-bold text-[#052B45] group-hover:text-[#0D6E8A] transition-colors">
+                      {ind.name}
                     </h3>
-
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {paper.desc}
+                    <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                      {ind.desc}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-200">
-                    <Link
-                      href="/blog"
-                      className="text-xs font-bold text-[#083A5B] hover:text-[#13B5EA] inline-flex items-center gap-1.5"
-                    >
-                      <span>Read Whitepaper</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  {/* Solutions List */}
+                  <div className="space-y-1 pt-2 border-t border-slate-100">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      Delivered Solutions:
+                    </span>
+                    <ul className="space-y-1">
+                      {ind.solutions.slice(0, 3).map((sol) => (
+                        <li key={sol} className="text-[11px] text-slate-700 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#0D6E8A]" />
+                          <span className="truncate">{sol}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Tech Badges */}
+                  <div className="flex flex-wrap gap-1 pt-1">
+                    {ind.tech.slice(0, 3).map((t) => (
+                      <span
+                        key={t}
+                        className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Card Bottom: Impact & Scope Button */}
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <div>
+                    <div className="text-[9px] uppercase font-bold text-slate-400">Target Outcome</div>
+                    <div className="text-xs font-black text-emerald-600">{ind.impact}</div>
+                  </div>
+                  <Link
+                    href="/contact"
+                    className="px-3 py-1.5 rounded-lg bg-slate-100 group-hover:bg-[#052B45] text-slate-700 group-hover:text-white text-xs font-bold transition-all flex items-center gap-1"
+                  >
+                    <span>Scope</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {filteredIndustries.length === 0 && (
+          <div className="p-12 text-center rounded-2xl bg-white border border-slate-200">
+            <p className="text-slate-500 font-semibold text-sm">
+              No industries found matching &ldquo;{searchQuery}&rdquo;. Try another search term or clear the filter.
+            </p>
+          </div>
+        )}
+      </section>
+
+      {/* ========================================================================= */}
+      {/* ========================================================================= */}
+      {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS */}
+      {/* ========================================================================= */}
+      <section className="section-py border-y border-slate-200/60">
+        <div className="site-container">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+              TECHNICAL BLUEPRINTS
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+              Industry Architecture Blueprints
+            </h2>
+            <p className="text-slate-600 text-base">
+              Inspect production-tested data flow diagrams from source ingestion to lakehouse, analytics marts, and AI copilots.
+            </p>
+          </div>
+
+          {/* Blueprint Selector Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {BLUEPRINTS.map((bp) => {
+              const isActive = activeBlueprintId === bp.id;
+              return (
+                <button
+                  key={bp.id}
+                  onClick={() => setActiveBlueprintId(bp.id)}
+                  className={`px-5 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${isActive
+                      ? "bg-[#052B45] text-white shadow-md shadow-[#052B45]/20"
+                      : "bg-white/70 hover:bg-white text-slate-700 border border-slate-200/70"
+                    }`}
+                >
+                  <Workflow className="w-4 h-4" />
+                  <span>{bp.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Blueprint Visualization Box */}
+          <div className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-[#052B45] to-[#041E2A] text-white border border-slate-700 shadow-2xl space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+                  {activeBlueprint.domain} Architecture
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                  {activeBlueprint.name}
+                </h3>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-bold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-500/30">
+                  {activeBlueprint.badge}
+                </span>
+                <span className="text-xs font-mono text-cyan-200 bg-white/10 px-3 py-1 rounded-full border border-white/15">
+                  {activeBlueprint.sla}
+                </span>
+              </div>
+            </div>
+
+            {/* 5-Step Pipeline Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+              {activeBlueprint.steps.map((step, idx) => (
+                <div
+                  key={step.num}
+                  className="p-5 rounded-2xl bg-white/[0.06] border border-white/10 hover:border-cyan-400/40 transition-colors flex flex-col justify-between space-y-3 relative group"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-black flex items-center justify-center">
+                        {step.num}
+                      </span>
+                      <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded">
+                        {step.tag}
+                      </span>
+                    </div>
+                    <h4 className="text-sm font-bold text-white group-hover:text-cyan-200 transition-colors">
+                      {step.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-300 leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-white/10">
+                    <div className="text-[10px] font-mono text-cyan-300 truncate">
+                      {step.tech}
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* ========================================================================= */}
-        {/* 9. FINAL CTA */}
-        {/* ========================================================================= */}
-        <section className="bg-gradient-to-r from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white py-16 sm:py-20 text-center border-t border-slate-700">
-          <div className="site-container max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/15">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-300" /> Start Your 2–4 Week Industry Engagement
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black">
-              Ready to Engineer Mission-Critical Systems for Your Domain?
-            </h2>
-
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-              Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
-            </p>
-
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Bottom Actions in Blueprint */}
+            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+              <span className="text-slate-300">
+                Ready to deploy this exact architecture in your private cloud environment?
+              </span>
               <Link
                 href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#052B45] hover:bg-[#083A5B] text-white font-bold text-sm shadow-xl transition-all border border-[#13B5EA]/30"
+                className="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-[#052B45] font-bold text-xs shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap"
               >
-                <span>Book Architecture Call</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/case-studies"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
-              >
-                <span>Explore Case Studies</span>
+                <span>Request Full Architecture Spec</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. INDUSTRY-SPECIFIC SERVICES MATRIX */}
+      {/* ========================================================================= */}
+      <section className="section-py site-container">
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+            SERVICES MATRIX
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+            Industry-Specific Capabilities & Tech Stacks
+          </h2>
+          <p className="text-slate-600 text-base">
+            A comprehensive breakdown of domain challenges, tailored solutions, specialized tech stacks, and quantified outcomes.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {DETAILED_SERVICES.map((svc) => {
+            const SvcIcon = svc.icon;
+            return (
+              <div
+                key={svc.id}
+                className="p-8 rounded-[28px] glass-panel-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-6"
+              >
+                <div className="space-y-5">
+                  {/* Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-2xl bg-[rgba(5,43,69,0.08)] text-[#052B45] flex items-center justify-center font-bold">
+                        <SvcIcon className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-black text-[#052B45]">{svc.name}</h3>
+                        <span className="text-[11px] font-bold text-[#0D6E8A]">Specialized Practice</span>
+                      </div>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="px-4 py-2 rounded-xl bg-[#052B45] hover:bg-[#083A5B] text-white text-xs font-bold transition-all shadow-xs"
+                    >
+                      Engage Pod
+                    </Link>
+                  </div>
+
+                  {/* Challenge */}
+                  <div className="p-4 rounded-xl bg-white/60 backdrop-blur-xs border border-slate-200/60 space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
+                      The Domain Challenge:
+                    </span>
+                    <p className="text-xs text-slate-700 leading-relaxed">{svc.challenge}</p>
+                  </div>
+
+                  {/* Solutions */}
+                  <div className="space-y-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#052B45]">
+                      Engineered Solutions:
+                    </span>
+                    <ul className="space-y-1.5">
+                      {svc.solutions.map((s) => (
+                        <li key={s} className="text-xs text-slate-700 flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                          <span>{s}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Tech Stack */}
+                  <div className="space-y-2 pt-2 border-t border-slate-200/40">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      Tech Stack:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {svc.techStack.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2.5 py-1 rounded-lg bg-[#ECFEFF] border border-[#083A5B]/15 text-xs font-bold text-[#083A5B]"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Outcomes Ribbon */}
+                <div className="pt-4 border-t border-slate-200/40 bg-white/40 -mx-8 -mb-8 p-6 rounded-b-[28px] flex flex-wrap items-center justify-between gap-2">
+                  {svc.outcomes.map((o) => (
+                    <div key={o} className="flex items-center gap-1.5 text-xs font-bold text-[#052B45]">
+                      <Check className="w-4 h-4 text-emerald-600" />
+                      <span>{o}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 6. CLIENT LOGO WALL & ECOSYSTEM */}
+      {/* ========================================================================= */}
+      <section className="section-py border-y border-slate-200/60">
+        <div className="site-container text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+            PROVEN ENTERPRISE ECOSYSTEM
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-[#052B45] tracking-tight mt-2 mb-10">
+            Trusted by Data-Driven Teams Across High-Stakes Industries
+          </h2>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+            {CLIENT_ECOSYSTEM.map((brand) => (
+              <div
+                key={brand.name}
+                className="p-4 rounded-2xl glass-panel-card hover:border-[#0D6E8A]/40 transition-colors text-center space-y-1 shadow-2xs"
+              >
+                <div className="text-sm font-black text-[#052B45]">{brand.name}</div>
+                <div className="text-[10px] text-slate-500 truncate">{brand.tag}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 7. IMPACT METRICS SECTION (Dark Gradient) */}
+      {/* ========================================================================= */}
+      <section className="section-py bg-gradient-to-r from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white">
+        <div className="site-container">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-cyan-300">
+              PROVEN RETURN ON INVESTMENT
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+              Enterprise Scale & Institutional Impact
+            </h2>
+            <p className="text-slate-300 text-base">
+              Our deployments are measured in compressed query latency, eliminated downtime, and measurable balance-sheet ROI.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
+              <div className="text-4xl sm:text-5xl font-black text-white">100+</div>
+              <div className="text-sm font-bold text-cyan-200">Production Deployments</div>
+              <p className="text-xs text-slate-300">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
+            </div>
+
+            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
+              <div className="text-4xl sm:text-5xl font-black text-white">95%</div>
+              <div className="text-sm font-bold text-cyan-200">Client Retention</div>
+              <p className="text-xs text-slate-300">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
+            </div>
+
+            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
+              <div className="text-4xl sm:text-5xl font-black text-white">99.99%</div>
+              <div className="text-sm font-bold text-cyan-200">Verified SLA Guarantee</div>
+              <p className="text-xs text-slate-300">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
+            </div>
+
+            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
+              <div className="text-4xl sm:text-5xl font-black text-emerald-400">$140M+</div>
+              <div className="text-sm font-bold text-emerald-200">Client Value Unlocked</div>
+              <p className="text-xs text-slate-300">Combined cloud infrastructure savings and operational margin growth.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 8. RESEARCH & INDUSTRY INSIGHTS */}
+      {/* ========================================================================= */}
+      <section className="section-py border-t border-slate-200/60">
+        <div className="site-container">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+              ENGINEERING PLAYBOOKS
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+              Industry Research & Architecture Guides
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {RESEARCH_PAPERS.map((paper) => (
+              <div
+                key={paper.title}
+                className="p-8 rounded-[24px] glass-panel-card shadow-2xs hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-[#083A5B] bg-[#ECFEFF] px-2.5 py-0.5 rounded-full border border-[#083A5B]/20">
+                      {paper.category}
+                    </span>
+                    <span className="text-slate-400 font-semibold">{paper.readTime}</span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-[#052B45] leading-snug">
+                    {paper.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {paper.desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-200">
+                  <Link
+                    href="/blog"
+                    className="text-xs font-bold text-[#083A5B] hover:text-[#13B5EA] inline-flex items-center gap-1.5"
+                  >
+                    <span>Read Whitepaper</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 9. FINAL CTA */}
+      {/* ========================================================================= */}
+      <section className="bg-gradient-to-r from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white py-16 sm:py-20 text-center border-t border-slate-700">
+        <div className="site-container max-w-3xl mx-auto space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/15">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-300" /> Start Your 2–4 Week Industry Engagement
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black">
+            Ready to Engineer Mission-Critical Systems for Your Domain?
+          </h2>
+
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
+          </p>
+
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#052B45] hover:bg-[#083A5B] text-white font-bold text-sm shadow-xl transition-all border border-[#13B5EA]/30"
+            >
+              <span>Book Architecture Call</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/case-studies"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
+            >
+              <span>Explore Case Studies</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

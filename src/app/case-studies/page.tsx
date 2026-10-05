@@ -37,24 +37,15 @@ export default function CaseStudiesPage() {
     selectedIndustry === "All"
       ? CASE_STUDIES_DATA
       : CASE_STUDIES_DATA.filter((item) =>
-          item.industry.toLowerCase().includes(selectedIndustry.toLowerCase())
-        );
+        item.industry.toLowerCase().includes(selectedIndustry.toLowerCase())
+      );
 
   return (
-    <div
-      className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans min-h-screen relative"
-      style={{
-        background: `
-          radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.09), transparent 45%),
-          radial-gradient(circle at 85% 20%, rgba(15, 76, 129, 0.06), transparent 50%),
-          linear-gradient(180deg, #F4FBFD 0%, #EEF8FB 50%, #F7FBFC 100%)
-        `,
-      }}
-    >
+    <div className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans min-h-screen relative">
       {/* ========================================================================= */}
       {/* 1. HERO SECTION & PROVEN OUTCOME METRICS (Compact Spacing) */}
       {/* ========================================================================= */}
-      <section className="relative pt-20 pb-6 sm:pt-28 sm:pb-8 border-b border-[#E7EDF5]/70 overflow-hidden">
+      <section className="relative pt-20 pb-6 sm:pt-28 sm:pb-8 border-b border-white/40 overflow-hidden">
         {/* Soft Ambient Radial Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[550px] pointer-events-none -z-0">
           <div
@@ -173,11 +164,10 @@ export default function CaseStudiesPage() {
                 <button
                   key={ind}
                   onClick={() => setSelectedIndustry(ind)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-extrabold transition-all duration-300 cursor-pointer ${
-                    isSelected
+                  className={`px-4 py-1.5 rounded-full text-xs font-extrabold transition-all duration-300 cursor-pointer ${isSelected
                       ? "bg-[#082F49] text-white shadow-md shadow-[#082F49]/20 scale-105"
                       : "bg-white/80 hover:bg-white text-slate-600 hover:text-[#0f4c81] border border-slate-200/80 shadow-2xs"
-                  }`}
+                    }`}
                 >
                   {ind}
                 </button>
@@ -218,9 +208,8 @@ export default function CaseStudiesPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                     {/* Visual Container (70% on desktop: 7 cols) - Cinematic, No Border, Deep Ambient Shadow */}
                     <div
-                      className={`lg:col-span-7 relative ${
-                        isEven ? "order-1" : "order-1 lg:order-2"
-                      }`}
+                      className={`lg:col-span-7 relative ${isEven ? "order-1" : "order-1 lg:order-2"
+                        }`}
                     >
                       <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.10)] bg-slate-950 min-h-[400px] sm:min-h-[480px] lg:min-h-[540px]">
                         <img
@@ -258,9 +247,8 @@ export default function CaseStudiesPage() {
 
                     {/* Text Narrative Living Directly on Page (30% on desktop: 5 cols, Vertically Centered with Image) */}
                     <div
-                      className={`lg:col-span-5 flex flex-col justify-center space-y-6 ${
-                        isEven ? "order-2" : "order-2 lg:order-1"
-                      }`}
+                      className={`lg:col-span-5 flex flex-col justify-center space-y-6 ${isEven ? "order-2" : "order-2 lg:order-1"
+                        }`}
                     >
                       {/* Sub-label */}
                       <div className="flex items-center gap-2 text-xs font-bold text-[#0f4c81] uppercase tracking-wider">

@@ -227,26 +227,26 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#F8FBFD] to-[#F5F8FC] text-[#0F2940] selection:bg-[#0F4C81] selection:text-white font-sans overflow-x-hidden">
-      {/* Soft Ambient Blur Orbs (No visible grid squares) */}
+    <div className="relative min-h-screen text-[#0F2940] selection:bg-[#0F4C81] selection:text-white font-sans overflow-x-hidden">
+      {/* Soft Ambient Blur Orbs */}
       <div className="absolute w-[600px] h-[600px] bg-[rgba(0,180,255,0.06)] rounded-full blur-[130px] -top-[200px] -right-[150px] pointer-events-none -z-0" />
       <div className="absolute w-[500px] h-[500px] bg-[rgba(11,74,125,0.04)] rounded-full blur-[130px] top-[40%] -left-[150px] pointer-events-none -z-0" />
       <div className="absolute w-[550px] h-[550px] bg-[rgba(19,191,234,0.05)] rounded-full blur-[130px] top-[75%] -right-[100px] pointer-events-none -z-0" />
 
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (Clean, Focused, No Dashboard Clutter) */}
+      {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative pt-32 pb-14 sm:pt-36 lg:pt-42 lg:pb-16 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
+      <section className="relative pt-32 sm:pt-36 lg:pt-40 pb-8 px-4 sm:px-6 lg:px-8 text-center">
         {/* Soft Radial Center Glow */}
         <div className="absolute top-16 left-1/2 -translate-x-1/2 w-[800px] h-[360px] pointer-events-none -z-0 bg-radial from-[#06B6D4]/12 via-[#0F4C81]/6 to-transparent blur-3xl" />
 
-        <div className="max-w-[1020px] mx-auto relative z-10 space-y-7">
+        <div className="max-w-[1060px] mx-auto relative z-10 space-y-6">
           {/* Eyebrow Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASING }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0F4C81] border border-[#06B6D4]/30 shadow-[0_4px_16px_rgba(15,23,42,0.04)]"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/80 backdrop-blur-sm text-[#0F4C81] border border-[#06B6D4]/30 shadow-[0_4px_16px_rgba(15,23,42,0.04)]"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" />
             <span>Trusted Software, Data & AI Partner</span>
@@ -257,11 +257,11 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: EASING }}
-            className="text-[44px] sm:text-[62px] lg:text-[76px] font-[800] leading-[1.05] tracking-[-0.035em] text-[#0F2940] [text-wrap:balance]"
+            className="text-[44px] sm:text-[60px] lg:text-[72px] font-[800] leading-[1.12] sm:leading-[1.14] tracking-[-0.035em] text-[#0F2940] [text-wrap:balance]"
           >
             Building Scalable <br />
             <span
-              className="bg-clip-text text-transparent font-extrabold"
+              className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
               style={{
                 backgroundImage: "linear-gradient(90deg, #0B4A7D 0%, #13BFEA 100%)",
               }}
@@ -270,7 +270,7 @@ export default function HomePage() {
             </span>{" "}
             <br />
             <span
-              className="bg-clip-text text-transparent font-extrabold"
+              className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
               style={{
                 backgroundImage: "linear-gradient(90deg, #0F2940 0%, #13BFEA 100%)",
               }}
@@ -279,7 +279,7 @@ export default function HomePage() {
             </span>{" "}
             &{" "}
             <span
-              className="bg-clip-text text-transparent font-extrabold"
+              className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
               style={{
                 backgroundImage: "linear-gradient(90deg, #13BFEA 0%, #0B4A7D 100%)",
               }}
@@ -293,7 +293,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: EASING }}
-            className="text-base sm:text-lg lg:text-xl text-[#5B6B7A] leading-relaxed max-w-[740px] mx-auto font-normal"
+            className="text-base sm:text-lg text-[#5B6B7A] leading-relaxed max-w-[720px] mx-auto font-normal"
           >
             Custom software engineering, analytics platforms, AI automation, and growth solutions built for modern businesses.
           </motion.p>
@@ -307,7 +307,7 @@ export default function HomePage() {
           >
             <Link
               href="/contact"
-              className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA] hover:opacity-95 text-white font-extrabold text-[15px] shadow-[0_10px_30px_rgba(19,191,234,0.25)] flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+              className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA] hover:opacity-95 text-white font-extrabold text-[15px] shadow-[0_10px_30px_rgba(19,191,234,0.25)] flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
             >
               <span>Book Strategy Call</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -315,7 +315,7 @@ export default function HomePage() {
 
             <Link
               href="/services"
-              className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2940] font-bold text-[15px] border border-[#E7EDF5] shadow-[0_10px_30px_rgba(15,23,42,0.06)] flex items-center justify-center transition-all duration-300 hover:border-[#13BFEA]/40"
+              className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2940] font-bold text-[15px] border border-[#E7EDF5] shadow-[0_10px_30px_rgba(15,23,42,0.06)] flex items-center justify-center transition-all duration-300 hover:border-[#13BFEA]/40"
             >
               <span>Explore Services</span>
             </Link>
@@ -326,7 +326,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: EASING }}
-            className="pt-10 flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-10 gap-y-3 text-xs sm:text-sm font-semibold text-[#5B6B7A]"
+            className="pt-6 sm:pt-7 flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-9 gap-y-2.5 text-xs sm:text-sm font-semibold text-[#5B6B7A]"
           >
             {TRUST_METRICS.map((metric, idx) => {
               const IconComponent = metric.icon;
@@ -347,30 +347,30 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. CONTINUOUS INFINITE SCROLLING MARQUEE */}
+      {/* 2. CONTINUOUS INFINITE SCROLLING MARQUEE (Same Gradient, Subtle Dividers) */}
       {/* ========================================================================= */}
-      <section className="h-20 bg-white border-y border-[#E7EDF5] flex items-center overflow-hidden">
-        <div className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_80px,_black_calc(100%-80px),transparent_100%)] select-none">
-          <div className="animate-marquee">
+      <div className="w-full py-4 border-y border-[#0F3D5E]/10 overflow-hidden relative select-none">
+        <div className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_60px,_black_calc(100%-60px),transparent_100%)]">
+          <div className="animate-marquee hover:[animation-play-state:paused] flex items-center">
             {marqueeLogos.map((logo, idx) => (
               <div
                 key={idx}
-                className="flex items-center gap-3 px-6 sm:px-8 text-[#5B6B7A] hover:text-[#0F2940] transition-colors shrink-0"
+                className="flex items-center gap-4 px-6 sm:px-8 text-[#36546F]/80 hover:text-[#0F2940] transition-all duration-200 shrink-0 group cursor-default"
               >
-                <span className="text-sm sm:text-base font-bold tracking-tight text-slate-600 hover:text-[#0F2940]">
+                <span className="text-sm sm:text-[15px] font-semibold tracking-[-0.02em] group-hover:text-[#0F2940] transition-colors">
                   {logo}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#13BFEA]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#13BFEA]/60 group-hover:bg-[#13BFEA] transition-colors" />
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* ========================================================================= */}
-      {/* 3. FULL STACK SERVICES GRID (Smooth Directional Stagger, once: false) */}
+      {/* 3. FULL STACK SERVICES GRID */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 border-b border-[#E7EDF5] relative overflow-hidden">
+      <section className="pt-14 pb-20 sm:pt-16 sm:pb-24 border-b border-slate-200/60 relative overflow-hidden">
         {/* Subtle Top-Right Ambient Orb */}
         <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-[#13BFEA]/8 to-transparent blur-3xl pointer-events-none -z-0" />
 
@@ -393,7 +393,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          {/* Row 1 (Card 1: x: -35, Card 2: y: 35, Card 3: x: 35) */}
+          {/* Row 1 */}
           <motion.div
             variants={containerStagger}
             initial="hidden"
@@ -430,7 +430,7 @@ export default function HomePage() {
                 <motion.div
                   key={svc.id}
                   variants={cardVariant}
-                  className="rounded-3xl bg-gradient-to-b from-white to-[#F8FCFF] border border-[#E7EDF5] p-7 sm:p-8 shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
+                  className="rounded-3xl glass-service-card p-7 sm:p-8 shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -451,7 +451,7 @@ export default function HomePage() {
                       </p>
                     </div>
 
-                    <div className="space-y-2 pt-2 border-t border-slate-100">
+                    <div className="space-y-2 pt-2 border-t border-slate-200/40">
                       {svc.features.map((feat, fIdx) => (
                         <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
                           <Check className="w-3.5 h-3.5 text-[#13BFEA] shrink-0" />
@@ -475,7 +475,7 @@ export default function HomePage() {
             })}
           </motion.div>
 
-          {/* Row 2 (Card 4: x: -35, Card 5: y: 35, Card 6: x: 35) */}
+          {/* Row 2 */}
           <motion.div
             variants={containerStagger}
             initial="hidden"
@@ -512,7 +512,7 @@ export default function HomePage() {
                 <motion.div
                   key={svc.id}
                   variants={cardVariant}
-                  className="rounded-3xl bg-gradient-to-b from-white to-[#F8FCFF] border border-[#E7EDF5] p-7 sm:p-8 shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
+                  className="rounded-3xl glass-service-card p-7 sm:p-8 shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -533,7 +533,7 @@ export default function HomePage() {
                       </p>
                     </div>
 
-                    <div className="space-y-2 pt-2 border-t border-slate-100">
+                    <div className="space-y-2 pt-2 border-t border-slate-200/40">
                       {svc.features.map((feat, fIdx) => (
                         <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
                           <Check className="w-3.5 h-3.5 text-[#13BFEA] shrink-0" />
@@ -560,9 +560,9 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. WHY CHOOSE CODEPLACED (Directional Stagger, once: false) */}
+      {/* 4. WHY CHOOSE CODEPLACED */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 border-b border-[#E7EDF5] bg-white">
+      <section className="py-20 sm:py-24 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -582,7 +582,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          {/* Row 1: Fast MVP (x: -35) | Full Stack (y: 35) | Data-Driven (x: 35) */}
+          {/* Row 1 */}
           <motion.div
             variants={containerStagger}
             initial="hidden"
@@ -619,7 +619,7 @@ export default function HomePage() {
                 <motion.div
                   key={idx}
                   variants={cardVariant}
-                  className="p-7 sm:p-8 rounded-3xl bg-white border border-[#E7EDF5] shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
+                  className="p-7 sm:p-8 rounded-3xl glass-panel-card shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
                 >
                   <div className="flex items-center justify-between">
                     <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-colors shadow-xs">
@@ -641,7 +641,7 @@ export default function HomePage() {
             })}
           </motion.div>
 
-          {/* Row 2: Cloud Native (x: -35) | Dedicated Support (y: 35) | Business Focused (x: 35) */}
+          {/* Row 2 */}
           <motion.div
             variants={containerStagger}
             initial="hidden"
@@ -678,7 +678,7 @@ export default function HomePage() {
                 <motion.div
                   key={idx}
                   variants={cardVariant}
-                  className="p-7 sm:p-8 rounded-3xl bg-white border border-[#E7EDF5] shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
+                  className="p-7 sm:p-8 rounded-3xl glass-panel-card shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
                 >
                   <div className="flex items-center justify-between">
                     <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-colors shadow-xs">
@@ -703,9 +703,9 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. CASE STUDIES (Visual Stagger + Scale, once: false) */}
+      {/* 5. CASE STUDIES */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 border-b border-[#E7EDF5] relative overflow-hidden">
+      <section className="py-20 sm:py-24 border-b border-slate-200/60 relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-14 gap-4">
             <motion.div
@@ -735,7 +735,6 @@ export default function HomePage() {
           {/* 6-Card Staggered Masonry Portfolio Showcase */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
             {CASE_STUDIES_DATA.map((study, idx) => {
-              // Asymmetric masonry layout: Row 1 (7/5), Row 2 (6/6), Row 3 (7/5)
               const isLarge = idx === 0 || idx === 4;
               const colSpanClass = isLarge ? "lg:col-span-7" : idx === 2 || idx === 3 ? "lg:col-span-6" : "lg:col-span-5";
               const imageHeightClass = isLarge ? "h-[300px] sm:h-[340px] lg:h-[360px]" : "h-[240px] sm:h-[280px] lg:h-[290px]";
@@ -747,7 +746,7 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: false, amount: 0.15 }}
                   transition={{ duration: 0.95, delay: (idx % 2) * 0.12, ease: EASING }}
-                  className={`${colSpanClass} rounded-[24px] bg-white border border-[#E7EDF5] card-shadow-subtle overflow-hidden flex flex-col justify-between hover:-translate-y-2 hover:border-[#13BFEA]/50 hover:shadow-[0_20px_50px_rgba(15,23,42,0.10),0_30px_70px_rgba(15,23,42,0.08)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group`}
+                  className={`${colSpanClass} rounded-[24px] glass-panel-card card-shadow-subtle overflow-hidden flex flex-col justify-between hover:-translate-y-2 hover:border-[#13BFEA]/50 hover:shadow-[0_20px_50px_rgba(15,23,42,0.10),0_30px_70px_rgba(15,23,42,0.08)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group`}
                 >
                   <Link
                     href={`/case-studies/${study.slug}`}
@@ -764,7 +763,7 @@ export default function HomePage() {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-95"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0F2940]/85 via-[#0F2940]/20 to-transparent" />
-                        
+
                         {/* Top-Left: Industry Badge */}
                         <div className="absolute top-4 left-4">
                           <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/95 text-[#0B4A7D] shadow-sm backdrop-blur-md border border-white/80">
@@ -804,7 +803,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Bottom Action Footer with Metric & CTA */}
-                    <div className="px-6 sm:px-8 pb-6 sm:pb-7 pt-4 border-t border-slate-100/90 flex items-center justify-between mt-auto">
+                    <div className="px-6 sm:px-8 pb-6 sm:pb-7 pt-4 border-t border-slate-200/40 flex items-center justify-between mt-auto">
                       <div className="space-y-0.5">
                         <span className="text-[10px] uppercase font-bold tracking-wider text-[#5B6B7A] block">
                           {study.metrics[0].label}
@@ -828,9 +827,9 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. STATS BANNER (once: false) */}
+      {/* 6. STATS BANNER */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 border-b border-[#E7EDF5] bg-white">
+      <section className="py-16 sm:py-20 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
             {STATS_DATA.map((m, idx) => (
@@ -844,7 +843,7 @@ export default function HomePage() {
                   delay: idx * 0.08,
                   ease: EASING,
                 }}
-                className="p-5 sm:p-6 rounded-3xl bg-white border border-[#E7EDF5] border-t-4 border-t-[#13BFEA] shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[4px] text-center space-y-1 transition-all duration-400 ease-out"
+                className="p-5 sm:p-6 rounded-3xl glass-panel-card border-t-4 border-t-[#13BFEA] shadow-xs hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[4px] text-center space-y-1 transition-all duration-400 ease-out"
               >
                 <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA]">
                   {m.value}
@@ -858,9 +857,9 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. INDUSTRIES (once: false) */}
+      {/* 7. INDUSTRIES */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 border-b border-[#E7EDF5]">
+      <section className="py-16 sm:py-20 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -891,7 +890,7 @@ export default function HomePage() {
                     delay: idx * 0.05,
                     ease: EASING,
                   }}
-                  className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white border border-[#E7EDF5] shadow-[0_4px_16px_rgba(15,23,42,0.04)] hover:border-[#13BFEA] hover:shadow-[0_10px_25px_rgba(19,191,234,0.12)] hover:-translate-y-0.5 transition-all duration-300 group cursor-default"
+                  className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full glass-panel-card shadow-xs hover:border-[#13BFEA] hover:shadow-[0_10px_25px_rgba(19,191,234,0.12)] hover:-translate-y-0.5 transition-all duration-300 group cursor-default"
                 >
                   <IconComponent className="w-4 h-4 text-[#0B4A7D] group-hover:text-[#13BFEA] group-hover:rotate-12 transition-all duration-300" />
                   <span className="text-sm font-bold text-[#0F2940]">{ind.name}</span>

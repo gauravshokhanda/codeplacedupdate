@@ -427,16 +427,11 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="bg-white text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans">
+    <div className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans relative">
       {/* ========================================================================= */}
-      {/* SECTION 1 — HERO SECTION (Gentle Fade-Up & Soft Slide from Right) */}
+      {/* SECTION 1 — HERO SECTION (Continuous Flow) */}
       {/* ========================================================================= */}
-      <div
-        className="relative overflow-hidden border-b border-slate-200/80"
-        style={{
-          background: "linear-gradient(180deg, #F4FBFD 0%, #EDF8FB 60%, #FFFFFF 100%)",
-        }}
-      >
+      <div className="relative overflow-hidden border-b border-slate-200/60">
         {/* Soft Radial Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] pointer-events-none -z-0">
           <div
@@ -529,7 +524,7 @@ export default function AboutPage() {
               </motion.div>
             </div>
 
-            {/* Integrated Stats Bar at Bottom of Hero (Staggered 140ms, translateY(-4px) hover) */}
+            {/* Integrated Stats Bar at Bottom of Hero */}
             <motion.div
               variants={statsContainerVariants}
               initial="hidden"
@@ -541,7 +536,7 @@ export default function AboutPage() {
                 <motion.div
                   key={idx}
                   variants={statCardVariant}
-                  className="p-6 rounded-[22px] text-center card-shadow-subtle bg-white/90 backdrop-blur-md border border-cyan-500/15 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  className="p-6 rounded-[22px] text-center card-shadow-subtle glass-panel-card hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 >
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f4c81] tracking-tight mb-1">
                     {stat.value}
@@ -560,12 +555,12 @@ export default function AboutPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* SECTION 2 — ENGINEERING TEAMS THAT BUILD FOR SCALE (Image Left, Content Right) */}
+      {/* SECTION 2 — ENGINEERING TEAMS THAT BUILD FOR SCALE */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
+      <section className="py-20 lg:py-28 border-b border-slate-200/60 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left: Professional Engineering Image (Slides in softly from Left x: -30 -> 0, duration: 1.05s) */}
+            {/* Left: Professional Engineering Image */}
             <motion.div
               initial={{ opacity: 0, x: -30, scale: 0.99 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -573,7 +568,7 @@ export default function AboutPage() {
               transition={{ duration: 1.05, ease: EASING }}
               className="lg:col-span-5 relative"
             >
-              <div className="rounded-[32px] overflow-hidden card-shadow-subtle border-4 border-white bg-slate-100 relative min-h-[380px] sm:min-h-[480px]">
+              <div className="rounded-[32px] overflow-hidden card-shadow-subtle border-4 border-white/80 bg-slate-100 relative min-h-[380px] sm:min-h-[480px]">
                 <img
                   src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80"
                   alt="CodePlaced Engineering Pod"
@@ -590,7 +585,7 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* Right: Content (Slides in softly from Right x: 30 -> 0, Feature cards staggered) */}
+            {/* Right: Content */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -598,7 +593,7 @@ export default function AboutPage() {
               transition={{ duration: 1.05, ease: EASING }}
               className="lg:col-span-7 space-y-6"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
                 <Compass className="w-3.5 h-3.5 text-[#00b7c2]" />
                 <span>OUR CAPABILITIES & SCOPE</span>
               </div>
@@ -628,9 +623,9 @@ export default function AboutPage() {
                     <motion.div
                       key={cIdx}
                       variants={capabilityItemVariant}
-                      className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 flex items-start gap-4 card-shadow-subtle hover:-translate-y-1 hover:border-[#00b7c2]/40 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                      className="p-4 rounded-2xl glass-panel-card flex items-start gap-4 card-shadow-subtle hover:-translate-y-1 hover:border-[#00b7c2]/40 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-10 h-10 rounded-xl bg-[#ECFEFF]/80 text-[#0f4c81] flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CapIcon className="w-5 h-5" />
                       </div>
                       <div>
@@ -651,9 +646,9 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 3 — WHY BUSINESSES CHOOSE CODEPLACED (Floating Into Position) */}
+      {/* SECTION 3 — WHY BUSINESSES CHOOSE CODEPLACED */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-slate-200/80 overflow-hidden">
+      <section className="py-20 lg:py-28 border-b border-slate-200/60 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -663,7 +658,7 @@ export default function AboutPage() {
             transition={{ duration: 0.95, ease: EASING }}
             className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE CODEPLACED ADVANTAGE</span>
             </div>
@@ -676,11 +671,10 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          {/* 6 Feature Cards: Row 1 (Left, Center, Right), Row 2 (Left, Center, Right) */}
+          {/* 6 Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {WHY_WORK_WITH_US.map((item, idx) => {
               const ItemIcon = item.icon;
-              // Direction pattern: 0 -> left, 1 -> center, 2 -> right, 3 -> left, 4 -> center, 5 -> right
               const direction = (idx % 3 === 0 ? "left" : idx % 3 === 1 ? "center" : "right") as "left" | "center" | "right";
               const cardVariants = getWhyChooseVariant(direction);
               const delay = (idx % 3) * 0.14;
@@ -693,15 +687,15 @@ export default function AboutPage() {
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.2 }}
                   transition={{ duration: 1.0, delay, ease: EASING }}
-                  className="rounded-[24px] bg-white border border-slate-200/90 p-8 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between group"
+                  className="rounded-[24px] glass-panel-card p-8 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between group"
                 >
                   <div>
                     {/* Top Row */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]">
+                      <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF]/80 text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]">
                         <ItemIcon className="w-6 h-6" />
                       </div>
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/80 text-slate-700 border border-slate-200/50">
                         {item.badge}
                       </span>
                     </div>
@@ -717,7 +711,7 @@ export default function AboutPage() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-slate-700">
+                  <div className="mt-6 pt-4 border-t border-slate-200/40 flex items-center gap-2 text-xs font-bold text-slate-700">
                     <CheckCircle2 className="w-4 h-4 text-[#00b7c2]" />
                     <span>Guaranteed Standard</span>
                   </div>
@@ -729,9 +723,9 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 4 — LEADERSHIP SECTION (Opposite Slow Slide, 400ms Hover Lift) */}
+      {/* SECTION 4 — LEADERSHIP SECTION */}
       {/* ========================================================================= */}
-      <section id="leadership-team" className="py-24 lg:py-32 bg-white border-b border-slate-200/80 overflow-hidden">
+      <section id="leadership-team" className="py-24 lg:py-32 border-b border-slate-200/60 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -741,7 +735,7 @@ export default function AboutPage() {
             transition={{ duration: 0.95, ease: EASING }}
             className="max-w-[850px] mx-auto text-center mb-16 space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>TRUSTED LEADERSHIP</span>
             </div>
@@ -753,7 +747,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          {/* 2 Large 50/50 Founder Cards: Maanya (x: -30 -> 0), Gaurav (x: 30 -> 0), hover: translateY(-4px) */}
+          {/* 2 Large 50/50 Founder Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
             {LEADERSHIP_TEAM.map((founder, fIdx) => {
               const isFirst = fIdx === 0;
@@ -764,9 +758,9 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: false, amount: 0.2 }}
                   transition={{ duration: 1.05, ease: EASING }}
-                  className="group rounded-[28px] overflow-hidden bg-white border border-[rgba(15,61,94,0.08)] card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col"
+                  className="group rounded-[28px] overflow-hidden glass-panel-card card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col"
                 >
-                  {/* Large Founder Image (3:4 portrait aspect ratio ready) */}
+                  {/* Large Founder Image */}
                   <div className="relative h-[360px] sm:h-[440px] w-full overflow-hidden bg-slate-900">
                     <img
                       src={founder.image}
@@ -806,11 +800,11 @@ export default function AboutPage() {
                       {founder.bio}
                     </p>
 
-                    <div className="pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                    <div className="pt-6 border-t border-slate-200/40 flex flex-wrap gap-2">
                       {founder.skills.map((skill, sIdx) => (
                         <span
                           key={sIdx}
-                          className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#F0FDFA] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs"
+                          className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/80 text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs"
                         >
                           {skill}
                         </span>
@@ -825,9 +819,9 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 5 — MEET OUR ENGINEERING TEAM (Sequential 1 -> 6 Stagger) */}
+      {/* SECTION 5 — MEET OUR ENGINEERING TEAM */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -837,7 +831,7 @@ export default function AboutPage() {
             transition={{ duration: 0.95, ease: EASING }}
             className="max-w-[850px] mx-auto text-center mb-14 space-y-3"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>CORE SPECIALISTS</span>
             </div>
@@ -861,7 +855,7 @@ export default function AboutPage() {
               <motion.div
                 key={idx}
                 variants={teamMemberVariant}
-                className="group rounded-[22px] bg-white border border-slate-200/80 p-6 text-center card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col items-center justify-between"
+                className="group rounded-[22px] glass-panel-card p-6 text-center card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col items-center justify-between"
               >
                 <div className="flex flex-col items-center">
                   {/* Circular Avatar */}
@@ -882,7 +876,7 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 w-full flex items-center justify-center">
+                <div className="mt-4 pt-3 border-t border-slate-200/40 w-full flex items-center justify-center">
                   <a
                     href={member.linkedin}
                     target="_blank"
@@ -903,9 +897,9 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 6 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS (Guided Flow) */}
+      {/* SECTION 6 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -915,7 +909,7 @@ export default function AboutPage() {
             transition={{ duration: 0.95, ease: EASING }}
             className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Zap className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE ENGINEERING BLUEPRINT</span>
             </div>
@@ -927,7 +921,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          {/* 6-Step Timeline Grid (Reveals sequentially) */}
+          {/* 6-Step Timeline Grid */}
           <motion.div
             variants={methodologyContainerVariants}
             initial="hidden"
@@ -941,14 +935,14 @@ export default function AboutPage() {
                 <motion.div
                   key={step.step}
                   variants={methodologyStepVariant}
-                  className="rounded-[22px] bg-white border border-slate-200/90 p-5 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between"
+                  className="rounded-[22px] glass-panel-card p-5 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-xs font-black text-[#00b7c2] tracking-wider">
                         {step.step}
                       </span>
-                      <div className="w-8 h-8 rounded-xl bg-[#ECFEFF] flex items-center justify-center text-[#0f4c81]">
+                      <div className="w-8 h-8 rounded-xl bg-[#ECFEFF]/80 flex items-center justify-center text-[#0f4c81]">
                         <StepIcon className="w-4 h-4" />
                       </div>
                     </div>
@@ -962,7 +956,7 @@ export default function AboutPage() {
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
+                  <div className="mt-4 pt-3 border-t border-slate-200/40 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                     <span>Verified Gate</span>
                   </div>
@@ -974,13 +968,13 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 7 — INDUSTRIES WE SUPPORT (Domain Expertise — Subtle / Mostly Static) */}
+      {/* SECTION 7 — INDUSTRIES WE SUPPORT */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Building2 className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>DOMAIN EXPERTISE</span>
             </div>
@@ -999,9 +993,9 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  className="rounded-[22px] bg-[#F8FAFC] border border-slate-200/90 p-7 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-start gap-4"
+                  className="rounded-[22px] glass-panel-card p-7 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-start gap-4"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF]/80 text-[#0f4c81] flex items-center justify-center flex-shrink-0">
                     <IndIcon className="w-6 h-6" />
                   </div>
                   <div>
@@ -1020,12 +1014,12 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 8 — TECHNOLOGIES & PARTNERSHIPS (Compact Ecosystem Grid — Subtle) */}
+      {/* SECTION 8 — TECHNOLOGIES & PARTNERSHIPS */}
       {/* ========================================================================= */}
-      <section className="py-18 lg:py-22 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-18 lg:py-22 border-b border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[850px] mx-auto text-center mb-10 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Award className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>TECHNOLOGY ECOSYSTEM & COMPLIANCE</span>
             </div>
@@ -1042,12 +1036,12 @@ export default function AboutPage() {
             {TECH_PARTNERSHIPS.map((partner, pIdx) => (
               <div
                 key={pIdx}
-                className="p-3.5 rounded-xl bg-white border border-slate-200/80 card-shadow-subtle text-center flex flex-col items-center justify-center hover:border-[#00b7c2]/40 transition-colors duration-300"
+                className="p-3.5 rounded-xl glass-panel-card card-shadow-subtle text-center flex flex-col items-center justify-center hover:border-[#00b7c2]/40 transition-colors duration-300"
               >
                 <span className="text-sm font-extrabold text-[#082F49]">
                   {partner.name}
                 </span>
-                <span className="text-[10px] text-slate-400 font-medium mt-0.5">
+                <span className="text-[10px] text-slate-500 font-medium mt-0.5">
                   {partner.category}
                 </span>
               </div>
@@ -1059,7 +1053,7 @@ export default function AboutPage() {
             {CERTIFICATIONS.map((cert, cIdx) => (
               <div
                 key={cIdx}
-                className="p-3.5 rounded-xl bg-white border border-slate-200 text-center flex items-center justify-center gap-2 text-xs font-bold text-slate-700 card-shadow-subtle"
+                className="p-3.5 rounded-xl glass-panel-card text-center flex items-center justify-center gap-2 text-xs font-bold text-slate-700 card-shadow-subtle"
               >
                 <ShieldCheck className="w-4 h-4 text-[#00b7c2]" />
                 <span>{cert}</span>
