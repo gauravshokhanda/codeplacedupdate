@@ -28,9 +28,9 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
   };
 
   return (
-    <footer className="bg-[#041E2A] text-slate-300 pt-10 sm:pt-12 pb-12 border-t border-cyan-950/80 relative overflow-hidden">
+    <footer className="bg-[#0F2940] text-slate-300 pt-10 sm:pt-12 pb-12 border-t border-[#1E3A5F] relative overflow-hidden">
       {/* Background ambient radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#0B4F6C]/20 rounded-full blur-[140px] pointer-events-none -z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#06B6D4]/10 rounded-full blur-[140px] pointer-events-none -z-0" />
 
       <div className="site-container relative z-10">
         {/* ========================================================================= */}

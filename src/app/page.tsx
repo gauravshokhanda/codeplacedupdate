@@ -1,108 +1,110 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CaseStudy } from "@/types";
 import {
   Sparkles,
   ArrowRight,
-  ShieldCheck,
-  Check,
-  Clock,
-  Smartphone,
-  AppWindow,
-  Share2,
+  Code2,
   BarChart3,
-  Cpu,
-  Cloud,
-  Wrench,
-  Building2,
-  HeartPulse,
-  Landmark,
-  MonitorSmartphone,
-  Truck,
-  ShoppingBag,
-  GraduationCap,
-  Factory,
-  Home as HomeIcon,
-  Zap,
-  Layers,
   TrendingUp,
-  Users,
-  Database,
-  Briefcase,
+  HeartPulse,
+  ShoppingBag,
+  Landmark,
+  Factory,
+  Truck,
+  GraduationCap,
+  Home as HomeIcon,
+  Layers,
   CheckCircle2,
+  Activity,
+  Zap,
+  Cloud,
+  Headphones,
+  Target,
+  Check,
+  ShieldCheck,
+  Briefcase,
+  Globe2,
 } from "lucide-react";
 
 // =========================================================================
-// DATA FOR HOMEPAGE SECTIONS
+// DATA STRUCTURES
 // =========================================================================
 
 const PARTNER_LOGOS = [
-  { name: "AWS", tag: "Cloud Infrastructure" },
-  { name: "Google Cloud", tag: "Vertex AI & Data" },
-  { name: "Microsoft Azure", tag: "Enterprise Cloud" },
-  { name: "OpenAI", tag: "GPT-4o Partner" },
-  { name: "Snowflake", tag: "Data Lakehouse" },
-  { name: "Databricks", tag: "AI & Analytics" },
+  "AWS",
+  "Microsoft Azure",
+  "Google Cloud",
+  "OpenAI",
+  "Snowflake",
+  "Databricks",
+  "HubSpot",
+  "Meta",
+  "Shopify",
 ];
 
-const CORE_SERVICES = [
+const TRUST_METRICS = [
+  { icon: Briefcase, label: "250+ Projects Delivered" },
+  { icon: CheckCircle2, label: "150+ Clients Served" },
+  { icon: Globe2, label: "20+ Industries Served" },
+  { icon: ShieldCheck, label: "99.9% System Reliability" },
+];
+
+const SERVICES_GRID = [
   {
-    id: "app-dev",
-    title: "App Development",
-    icon: Smartphone,
-    bullets: ["Basic App MVP", "Custom Mobile Apps", "iOS & Android (Flutter/Swift)"],
+    id: "software-dev",
+    icon: Code2,
+    title: "Custom Software & Web Apps",
+    tag: "Next.js • React • Node.js",
+    desc: "Elastic full-stack platforms, mobile apps, and microservices engineered for high concurrency, zero single points of failure, and clean maintainability.",
+    features: ["Next.js & React Frontends", "Python / Node.js Backends", "Zero-Downtime CI/CD"],
     href: "/services",
   },
   {
-    id: "web-dev",
-    title: "Web Development",
-    icon: AppWindow,
-    bullets: ["Business Websites", "Custom Web Applications", "Next.js & Modern SaaS"],
-    href: "/services",
-  },
-  {
-    id: "social-media",
-    title: "Social Media & Growth",
-    icon: Share2,
-    bullets: ["Content Strategy", "Paid Campaign Management", "Multi-Channel Attribution"],
-    href: "/services",
-  },
-  {
-    id: "data-analytics",
-    title: "Data Analytics",
+    id: "data-platforms",
     icon: BarChart3,
-    bullets: ["Executive Dashboards", "KPI Reporting", "Sub-Second BI Queries"],
+    title: "Data Platforms & Lakehouses",
+    tag: "Snowflake • BigQuery • dbt",
+    desc: "Unified cloud data warehouses, real-time ingestion, and automated ETL/ELT pipelines that eliminate fragmented business silos.",
+    features: ["Automated Data Ingestion", "dbt Modeling & Governance", "Sub-Second Query Speeds"],
     href: "/services/data-platforms",
   },
   {
-    id: "ai-automation",
-    title: "AI & Automation",
-    icon: Cpu,
-    bullets: ["AI Assistants & Copilots", "Workflow Automation", "Enterprise RAG & Search"],
+    id: "executive-dashboards",
+    icon: Activity,
+    title: "Executive Dashboards & BI",
+    tag: "Power BI • Looker Studio",
+    desc: "Intuitive command centers and embedded dashboards translating complex multi-cloud datasets into real-time executive decisions.",
+    features: ["Live Telemetry Streaming", "Executive KPI Scorecards", "Multi-Tenant Embedding"],
+    href: "/services/executive-dashboards",
+  },
+  {
+    id: "ai-copilots",
+    icon: Zap,
+    title: "AI Copilots & Automation",
+    tag: "LLMs • RAG • Agents",
+    desc: "Domain-specific AI copilots and automated workflow pipelines that augment operational teams and reduce cycle times from hours to seconds.",
+    features: ["Custom RAG Architectures", "Intelligent Document Parsing", "Private Enterprise LLMs"],
     href: "/services/ai-copilots",
   },
   {
-    id: "cloud-devops",
-    title: "Cloud & DevOps",
+    id: "cloud-infra",
     icon: Cloud,
-    bullets: ["AWS & Azure Architecture", "Infrastructure Automation", "28%+ FinOps Savings"],
+    title: "Cloud Architecture & DevOps",
+    tag: "AWS • GCP • Kubernetes",
+    desc: "High-availability, cost-optimized cloud infrastructure with automated autoscaling, zero-trust security, and 99.99% uptime SLAs.",
+    features: ["AWS / GCP Well-Architected", "Terraform Infrastructure as Code", "24/7 Production Monitoring"],
     href: "/services/cloud-infrastructure",
   },
   {
-    id: "web-maintenance",
-    title: "Website Maintenance",
-    icon: Wrench,
-    bullets: ["Security Updates", "24/7 Uptime Monitoring", "Automated Backups & SLAs"],
-    href: "/services",
-  },
-  {
-    id: "enterprise-solutions",
-    title: "Enterprise Solutions",
-    icon: Building2,
-    bullets: ["CRM & ERP Integrations", "Internal Portals", "Java & Spring Boot Core"],
+    id: "digital-growth",
+    icon: TrendingUp,
+    title: "Digital Growth & Attribution",
+    tag: "SEO • Paid Media • CRO",
+    desc: "Engineered growth systems combining algorithmic performance advertising, technical SEO, and multi-touch CAC attribution to scale revenue predictably.",
+    features: ["Multi-Touch Attribution", "Conversion Rate Optimization", "Automated Lead Ingestion"],
     href: "/services",
   },
 ];
@@ -110,717 +112,845 @@ const CORE_SERVICES = [
 const WHY_CHOOSE_CARDS = [
   {
     title: "Fast MVP Delivery",
-    desc: "Rapid 2–4 week deployment sprints backed by battle-tested architecture patterns.",
+    desc: "Agile 2-week production sprints that deploy working, audited software and analytics platforms in weeks rather than months.",
     icon: Zap,
+    tag: "⚡ Fast Delivery",
   },
   {
     title: "Full Stack Expertise",
-    desc: "End-to-end capabilities spanning frontend, backend, native mobile, AI, and cloud.",
-    icon: Layers,
+    desc: "Senior engineering specialists proficient in Next.js, React, Python, Power BI, distributed cloud, and production AI workflows.",
+    icon: Code2,
+    tag: "100% Senior Pods",
   },
   {
-    title: "Data Driven Decisions",
-    desc: "Systems rooted in rigorous telemetry, observability, and verifiable business KPIs.",
-    icon: TrendingUp,
+    title: "Data-Driven Decisions",
+    desc: "Every architectural choice, schema design, and marketing campaign is validated with sub-second telemetry and verified metrics.",
+    icon: BarChart3,
+    tag: "Live Telemetry",
   },
   {
     title: "Cloud Native Architecture",
-    desc: "Scalable, resilient multi-cloud foundations engineered for high concurrency.",
+    desc: "Zero-single-point-of-failure infrastructures engineered on AWS and GCP with automated autoscaling and 99.99% uptime.",
     icon: Cloud,
+    tag: "99.99% SLA",
   },
   {
     title: "Dedicated Support",
-    desc: "Direct access to senior engineers and Principal Architects throughout the engagement.",
-    icon: Users,
+    desc: "Direct Slack channel collaboration with Principal Architects and Lead Engineers. Zero junior account handoffs or layers.",
+    icon: Headphones,
+    tag: "Direct Access",
   },
   {
-    title: "Business Focused Approach",
-    desc: "Measurable ROI, transparent milestones, bilateral NDAs, and zero agency fluff.",
-    icon: ShieldCheck,
+    title: "Business-Focused Approach",
+    desc: "We focus obsessively on commercial outcomes: reducing operational overhead, increasing conversion velocity, and proving clear ROI.",
+    icon: Target,
+    tag: "ROI Driven",
   },
 ];
 
-const FEATURED_CASE_STUDIES: CaseStudy[] = [
-  {
-    id: "medhealth-triage",
-    title: "Clinical Triage & Patient Intelligence Lakehouse",
-    client: "MedHealth Digital Health",
-    industry: "Healthcare",
-    tagline: "AI-Powered Patient Engagement & Clinical Triage Platform",
-    description: "Built an agentic clinical workflow that ingests voice, scans, and EHR records, extracting vital metrics into an encrypted vector lakehouse.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
-    metrics: [
-      { label: "Intake Velocity", value: "4.8x Faster" },
-      { label: "Hours Saved", value: "18,000 hrs/yr" },
-    ],
-    technologies: ["FastAPI", "OpenAI GPT-4o", "PostgreSQL", "FHIR / HL7"],
-    challenge: "Fragmented EHR silos and manual intake forms led to 45-minute average patient wait times.",
-    solution: "Constructed an automated triage assistant with clinician sign-off and direct EHR sync.",
-    impact: [
-      "Reduced triage wait times from 45 mins to 7.2 mins",
-      "Zero compliance incidents across 1.2M secure patient interactions",
-    ],
-  },
-  {
-    id: "apex-ledger",
-    title: "Real-Time Ledger & Financial Analytics Engine",
-    client: "Apex Financial Core",
-    industry: "FinTech",
-    tagline: "Ultra-Reliable Multi-Entity Reconciliation & Treasury Platform",
-    description: "Architected a dual-entry distributed ledger and real-time reconciliation engine processing millions of transactions with mathematical determinism.",
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
-    metrics: [
-      { label: "Ledger Accuracy", value: "99.99%" },
-      { label: "Daily Volume", value: "$420M+" },
-    ],
-    technologies: ["PostgreSQL", "Kafka", "Node.js", "Redis"],
-    challenge: "Disparate payment gateways created end-of-month reconciliation discrepancies.",
-    solution: "Engineered an immutable, event-sourced ledger lakehouse with automated anomaly detection.",
-    impact: [
-      "Achieved 99.99% automated ledger accuracy across 18 banking partners",
-      "Eliminated 95% of manual monthly reconciliation overhead",
-    ],
-  },
-  {
-    id: "veloce-telemetry",
-    title: "Global Fleet Telemetry & Predictive Maintenance",
-    client: "Veloce Mobility",
-    industry: "Logistics",
-    tagline: "High-Throughput IoT Stream Processing & Fleet Telemetry",
-    description: "Re-architected real-time fleet sensor stream processing to detect thermal and mechanical faults before breakdowns occur.",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
-    metrics: [
-      { label: "Downtime Reduction", value: "24% Saved" },
-      { label: "Cost Savings", value: "$3.2M/yr" },
-    ],
-    technologies: ["Apache Kafka", "ClickHouse", "React", "TypeScript"],
-    challenge: "Legacy databases collapsed during peak hours from 80,000 IoT commercial vehicles.",
-    solution: "Migrated to ClickHouse columnar storage with real-time Kafka event streaming.",
-    impact: [
-      "24% fleet downtime reduction within 90 days of deployment",
-      "Saved $3.2M in preventable drivetrain towing and repair costs",
-    ],
-  },
+import { CASE_STUDIES_DATA } from "@/lib/caseStudiesData";
+
+const STATS_DATA = [
+  { value: "250+", label: "Projects Delivered", detail: "Software, BI & Growth Systems" },
+  { value: "150+", label: "Clients Served", detail: "Startups to Global Enterprises" },
+  { value: "1200+", label: "Automated Workflows", detail: "Pipelines & Production APIs" },
+  { value: "18+", label: "Industries Supported", detail: "Domain-Specific Blueprints" },
+  { value: "$250M+", label: "Revenue Processed", detail: "Tracked via Real-Time Telemetry" },
 ];
 
-const RESULTS_METRICS = [
-  { value: "250+", label: "Projects Delivered" },
-  { value: "150+", label: "Clients Served" },
-  { value: "1,200+", label: "Automated Workflows" },
-  { value: "18+", label: "Industries Served" },
-  { value: "250M+", label: "Records Processed Monthly" },
+const INDUSTRIES_PILLS = [
+  { name: "Healthcare", icon: HeartPulse },
+  { name: "Finance", icon: Landmark },
+  { name: "Retail", icon: ShoppingBag },
+  { name: "SaaS", icon: Layers },
+  { name: "Logistics", icon: Truck },
+  { name: "Manufacturing", icon: Factory },
+  { name: "Education", icon: GraduationCap },
+  { name: "Real Estate", icon: HomeIcon },
 ];
 
-const INDUSTRIES_LIST = [
-  { name: "Healthcare", icon: HeartPulse, href: "/industries" },
-  { name: "Finance", icon: Landmark, href: "/industries" },
-  { name: "SaaS", icon: MonitorSmartphone, href: "/industries" },
-  { name: "Logistics", icon: Truck, href: "/industries" },
-  { name: "Retail", icon: ShoppingBag, href: "/industries" },
-  { name: "Education", icon: GraduationCap, href: "/industries" },
-  { name: "Real Estate", icon: HomeIcon, href: "/industries" },
-  { name: "Manufacturing", icon: Factory, href: "/industries" },
-];
+// =========================================================================
+// REUSABLE ANIMATION VARIANTS (Viewport re-triggering, once: false)
+// =========================================================================
 
-export default function Home() {
-  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
+const EASING = [0.22, 1, 0.36, 1] as const;
 
-  const marqueeLogos = [...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS];
+const containerStagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.14,
+    },
+  },
+};
+
+const caseStudiesContainer = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.14,
+    },
+  },
+};
+
+const caseStudyCard = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+    scale: 0.98,
+    transition: {
+      duration: 0.7,
+      ease: EASING,
+    },
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 1.0,
+      ease: EASING,
+    },
+  },
+};
+
+// =========================================================================
+// MAIN HOMEPAGE COMPONENT
+// =========================================================================
+
+export default function HomePage() {
+  const marqueeLogos = [
+    ...PARTNER_LOGOS,
+    ...PARTNER_LOGOS,
+    ...PARTNER_LOGOS,
+    ...PARTNER_LOGOS,
+  ];
 
   return (
-    <div className="relative min-h-screen bg-white text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans">
-      {/* Unified Top Hero & Navigation Wrapper (Seamless Gradient Background) */}
-      <div
-        className="relative overflow-hidden border-b border-slate-200/80"
-        style={{
-          background: "linear-gradient(180deg, #F4FBFD 0%, #EDF8FB 60%, #FFFFFF 100%)",
-        }}
-      >
-        {/* Soft Concentric Circles Behind Heading (TechAhead Style) */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] pointer-events-none -z-0">
-          <div className="absolute inset-0 rounded-full border border-[#00b7c2]/10" />
-          <div className="absolute inset-[150px] rounded-full border border-[#00b7c2]/10" />
-          <div className="absolute inset-[300px] rounded-full border border-[#00b7c2]/15" />
-          <div className="absolute inset-[450px] rounded-full border border-[#00b7c2]/20" />
-          <div
-            className="absolute inset-[350px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(20,184,197,0.12), rgba(11,107,136,0.05), transparent 70%)",
-            }}
-          />
-        </div>
+    <div className="relative min-h-screen bg-gradient-to-b from-[#F8FBFD] to-[#F5F8FC] text-[#0F2940] selection:bg-[#0F4C81] selection:text-white font-sans overflow-x-hidden">
+      {/* Soft Ambient Blur Orbs (No visible grid squares) */}
+      <div className="absolute w-[600px] h-[600px] bg-[rgba(0,180,255,0.06)] rounded-full blur-[130px] -top-[200px] -right-[150px] pointer-events-none -z-0" />
+      <div className="absolute w-[500px] h-[500px] bg-[rgba(11,74,125,0.04)] rounded-full blur-[130px] top-[40%] -left-[150px] pointer-events-none -z-0" />
+      <div className="absolute w-[550px] h-[550px] bg-[rgba(19,191,234,0.05)] rounded-full blur-[130px] top-[75%] -right-[100px] pointer-events-none -z-0" />
 
-        {/* HERO SECTION (TechAhead-Inspired Centered Enterprise Hero) */}
-        <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-20 min-h-[850px] flex flex-col justify-center">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            {/* Pill Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex justify-center mb-6"
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION (Clean, Focused, No Dashboard Clutter) */}
+      {/* ========================================================================= */}
+      <section className="relative pt-32 pb-14 sm:pt-36 lg:pt-42 lg:pb-16 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
+        {/* Soft Radial Center Glow */}
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-[800px] h-[360px] pointer-events-none -z-0 bg-radial from-[#06B6D4]/12 via-[#0F4C81]/6 to-transparent blur-3xl" />
+
+        <div className="max-w-[1020px] mx-auto relative z-10 space-y-7">
+          {/* Eyebrow Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASING }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0F4C81] border border-[#06B6D4]/30 shadow-[0_4px_16px_rgba(15,23,42,0.04)]"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" />
+            <span>Trusted Software, Data & AI Partner</span>
+          </motion.div>
+
+          {/* Large Hero Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: EASING }}
+            className="text-[44px] sm:text-[62px] lg:text-[76px] font-[800] leading-[1.05] tracking-[-0.035em] text-[#0F2940] [text-wrap:balance]"
+          >
+            Building Scalable <br />
+            <span
+              className="bg-clip-text text-transparent font-extrabold"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #0B4A7D 0%, #13BFEA 100%)",
+              }}
             >
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>TRUSTED SOFTWARE, DATA & AI PARTNER</span>
+              Software Products,
+            </span>{" "}
+            <br />
+            <span
+              className="bg-clip-text text-transparent font-extrabold"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #0F2940 0%, #13BFEA 100%)",
+              }}
+            >
+              Data Platforms
+            </span>{" "}
+            &{" "}
+            <span
+              className="bg-clip-text text-transparent font-extrabold"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #13BFEA 0%, #0B4A7D 100%)",
+              }}
+            >
+              Growth Systems
+            </span>
+          </motion.h1>
+
+          {/* Subheadline */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: EASING }}
+            className="text-base sm:text-lg lg:text-xl text-[#5B6B7A] leading-relaxed max-w-[740px] mx-auto font-normal"
+          >
+            Custom software engineering, analytics platforms, AI automation, and growth solutions built for modern businesses.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: EASING }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-1"
+          >
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA] hover:opacity-95 text-white font-extrabold text-[15px] shadow-[0_10px_30px_rgba(19,191,234,0.25)] flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+            >
+              <span>Book Strategy Call</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <Link
+              href="/services"
+              className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2940] font-bold text-[15px] border border-[#E7EDF5] shadow-[0_10px_30px_rgba(15,23,42,0.06)] flex items-center justify-center transition-all duration-300 hover:border-[#13BFEA]/40"
+            >
+              <span>Explore Services</span>
+            </Link>
+          </motion.div>
+
+          {/* Inline Trust Metrics Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: EASING }}
+            className="pt-10 flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-10 gap-y-3 text-xs sm:text-sm font-semibold text-[#5B6B7A]"
+          >
+            {TRUST_METRICS.map((metric, idx) => {
+              const IconComponent = metric.icon;
+              return (
+                <React.Fragment key={idx}>
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <IconComponent className="w-4 h-4 text-[#13BFEA] shrink-0" />
+                    <span>{metric.label}</span>
+                  </div>
+                  {idx < TRUST_METRICS.length - 1 && (
+                    <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-slate-300" />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2. CONTINUOUS INFINITE SCROLLING MARQUEE */}
+      {/* ========================================================================= */}
+      <section className="h-20 bg-white border-y border-[#E7EDF5] flex items-center overflow-hidden">
+        <div className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_80px,_black_calc(100%-80px),transparent_100%)] select-none">
+          <div className="animate-marquee">
+            {marqueeLogos.map((logo, idx) => (
+              <div
+                key={idx}
+                className="flex items-center gap-3 px-6 sm:px-8 text-[#5B6B7A] hover:text-[#0F2940] transition-colors shrink-0"
+              >
+                <span className="text-sm sm:text-base font-bold tracking-tight text-slate-600 hover:text-[#0F2940]">
+                  {logo}
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#13BFEA]" />
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. FULL STACK SERVICES GRID (Smooth Directional Stagger, once: false) */}
+      {/* ========================================================================= */}
+      <section className="py-20 sm:py-24 border-b border-[#E7EDF5] relative overflow-hidden">
+        {/* Subtle Top-Right Ambient Orb */}
+        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-[#13BFEA]/8 to-transparent blur-3xl pointer-events-none -z-0" />
+
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.9, ease: EASING }}
+            className="text-center max-w-[720px] mx-auto mb-14 space-y-2.5"
+          >
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
+              INTEGRATED CAPABILITIES
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0F2940]">
+              Full-Stack Digital Services
+            </h2>
+            <p className="text-[#5B6B7A] text-sm sm:text-base">
+              End-to-end software engineering, lakehouses, real-time dashboards, and algorithmic growth systems.
+            </p>
+          </motion.div>
+
+          {/* Row 1 (Card 1: x: -35, Card 2: y: 35, Card 3: x: 35) */}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7"
+          >
+            {SERVICES_GRID.slice(0, 3).map((svc, idx) => {
+              const IconComp = svc.icon;
+              const cardVariant = {
+                hidden: {
+                  opacity: 0,
+                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
+                  y: idx === 1 ? 35 : 12,
+                  scale: 0.98,
+                  transition: {
+                    duration: 0.7,
+                    ease: EASING,
+                  },
+                },
+                show: {
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 1.0,
+                    ease: EASING,
+                  },
+                },
+              };
+
+              return (
+                <motion.div
+                  key={svc.id}
+                  variants={cardVariant}
+                  className="rounded-3xl bg-gradient-to-b from-white to-[#F8FCFF] border border-[#E7EDF5] p-7 sm:p-8 shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-all shadow-xs">
+                        <IconComp className="w-6 h-6" />
+                      </div>
+                      <span className="text-[11px] font-bold text-[#0B4A7D] bg-[#ECFEFF] px-2.5 py-1 rounded-full border border-[#13BFEA]/30">
+                        {svc.tag}
+                      </span>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <h3 className="text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
+                        {svc.title}
+                      </h3>
+                      <p className="text-[#5B6B7A] text-sm leading-relaxed">
+                        {svc.desc}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2 pt-2 border-t border-slate-100">
+                      {svc.features.map((feat, fIdx) => (
+                        <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                          <Check className="w-3.5 h-3.5 text-[#13BFEA] shrink-0" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-6">
+                    <Link
+                      href={svc.href}
+                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0B4A7D] group-hover:text-[#13BFEA] transition-colors"
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Row 2 (Card 4: x: -35, Card 5: y: 35, Card 6: x: 35) */}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mt-6 sm:mt-7"
+          >
+            {SERVICES_GRID.slice(3, 6).map((svc, idx) => {
+              const IconComp = svc.icon;
+              const cardVariant = {
+                hidden: {
+                  opacity: 0,
+                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
+                  y: idx === 1 ? 35 : 12,
+                  scale: 0.98,
+                  transition: {
+                    duration: 0.7,
+                    ease: EASING,
+                  },
+                },
+                show: {
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 1.0,
+                    ease: EASING,
+                  },
+                },
+              };
+
+              return (
+                <motion.div
+                  key={svc.id}
+                  variants={cardVariant}
+                  className="rounded-3xl bg-gradient-to-b from-white to-[#F8FCFF] border border-[#E7EDF5] p-7 sm:p-8 shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-all shadow-xs">
+                        <IconComp className="w-6 h-6" />
+                      </div>
+                      <span className="text-[11px] font-bold text-[#0B4A7D] bg-[#ECFEFF] px-2.5 py-1 rounded-full border border-[#13BFEA]/30">
+                        {svc.tag}
+                      </span>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <h3 className="text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
+                        {svc.title}
+                      </h3>
+                      <p className="text-[#5B6B7A] text-sm leading-relaxed">
+                        {svc.desc}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2 pt-2 border-t border-slate-100">
+                      {svc.features.map((feat, fIdx) => (
+                        <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                          <Check className="w-3.5 h-3.5 text-[#13BFEA] shrink-0" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-6">
+                    <Link
+                      href={svc.href}
+                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0B4A7D] group-hover:text-[#13BFEA] transition-colors"
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. WHY CHOOSE CODEPLACED (Directional Stagger, once: false) */}
+      {/* ========================================================================= */}
+      <section className="py-20 sm:py-24 border-b border-[#E7EDF5] bg-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.9, ease: EASING }}
+            className="text-center max-w-[740px] mx-auto mb-14 space-y-2.5"
+          >
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
+              THE CODEPLACED ADVANTAGE
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0F2940]">
+              Why Companies Choose CodePlaced
+            </h2>
+            <p className="text-[#5B6B7A] text-sm sm:text-base">
+              Senior engineering squads, transparent sprint cadences, and an unwavering focus on commercial ROI.
+            </p>
+          </motion.div>
+
+          {/* Row 1: Fast MVP (x: -35) | Full Stack (y: 35) | Data-Driven (x: 35) */}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7"
+          >
+            {WHY_CHOOSE_CARDS.slice(0, 3).map((card, idx) => {
+              const IconComp = card.icon;
+              const cardVariant = {
+                hidden: {
+                  opacity: 0,
+                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
+                  y: idx === 1 ? 35 : 12,
+                  scale: 0.98,
+                  transition: {
+                    duration: 0.7,
+                    ease: EASING,
+                  },
+                },
+                show: {
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 1.0,
+                    ease: EASING,
+                  },
+                },
+              };
+
+              return (
+                <motion.div
+                  key={idx}
+                  variants={cardVariant}
+                  className="p-7 sm:p-8 rounded-3xl bg-white border border-[#E7EDF5] shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-colors shadow-xs">
+                      <IconComp className="w-6 h-6" />
+                    </div>
+                    <span className="text-[11px] font-extrabold text-[#0B4A7D] bg-[#ECFEFF] px-3 py-1 rounded-full border border-[#13BFEA]/30">
+                      {card.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
+                    {card.title}
+                  </h3>
+                  <p className="text-[#5B6B7A] text-sm leading-relaxed">
+                    {card.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Row 2: Cloud Native (x: -35) | Dedicated Support (y: 35) | Business Focused (x: 35) */}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mt-6 sm:mt-7"
+          >
+            {WHY_CHOOSE_CARDS.slice(3, 6).map((card, idx) => {
+              const IconComp = card.icon;
+              const cardVariant = {
+                hidden: {
+                  opacity: 0,
+                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
+                  y: idx === 1 ? 35 : 12,
+                  scale: 0.98,
+                  transition: {
+                    duration: 0.7,
+                    ease: EASING,
+                  },
+                },
+                show: {
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 1.0,
+                    ease: EASING,
+                  },
+                },
+              };
+
+              return (
+                <motion.div
+                  key={idx}
+                  variants={cardVariant}
+                  className="p-7 sm:p-8 rounded-3xl bg-white border border-[#E7EDF5] shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-colors shadow-xs">
+                      <IconComp className="w-6 h-6" />
+                    </div>
+                    <span className="text-[11px] font-extrabold text-[#0B4A7D] bg-[#ECFEFF] px-3 py-1 rounded-full border border-[#13BFEA]/30">
+                      {card.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
+                    {card.title}
+                  </h3>
+                  <p className="text-[#5B6B7A] text-sm leading-relaxed">
+                    {card.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. CASE STUDIES (Visual Stagger + Scale, once: false) */}
+      {/* ========================================================================= */}
+      <section className="py-20 sm:py-24 border-b border-[#E7EDF5] relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-14 gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.9, ease: EASING }}
+              className="space-y-2"
+            >
+              <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
+                PROVEN DELIVERIES
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F2940] tracking-tight">
+                Featured Case Studies
+              </h2>
             </motion.div>
 
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[40px] sm:text-[58px] lg:text-[76px] font-[800] leading-[1.05] tracking-[-0.04em] text-[#082F49] mb-6 max-w-[1100px] mx-auto [text-wrap:balance]"
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B4A7D] hover:text-[#13BFEA] transition-colors group"
             >
-              Building Scalable{" "}
-              <span
-                className="bg-clip-text text-transparent font-extrabold inline-block"
-                style={{
-                  backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                }}
-              >
-                Digital Products,
-              </span>{" "}
-              <span
-                className="bg-clip-text text-transparent font-extrabold inline-block"
-                style={{
-                  backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                }}
-              >
-                Data Platforms
-              </span>{" "}
-              &{" "}
-              <span
-                className="bg-clip-text text-transparent font-extrabold inline-block"
-                style={{
-                  backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                }}
-              >
-                Growth Systems
-              </span>
-            </motion.h1>
+              <span>View All Case Studies</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
 
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-[700px] mx-auto mb-8 font-normal"
-            >
-              CodePlaced helps businesses build websites, mobile applications, analytics
-              dashboards, automation systems, and digital growth engines that scale with
-              confidence.
-            </motion.p>
+          {/* 6-Card Staggered Masonry Portfolio Showcase */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
+            {CASE_STUDIES_DATA.map((study, idx) => {
+              // Asymmetric masonry layout: Row 1 (7/5), Row 2 (6/6), Row 3 (7/5)
+              const isLarge = idx === 0 || idx === 4;
+              const colSpanClass = isLarge ? "lg:col-span-7" : idx === 2 || idx === 3 ? "lg:col-span-6" : "lg:col-span-5";
+              const imageHeightClass = isLarge ? "h-[300px] sm:h-[340px] lg:h-[360px]" : "h-[240px] sm:h-[280px] lg:h-[290px]";
 
-            {/* CTA Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-7"
-            >
+              return (
+                <motion.div
+                  key={study.slug}
+                  initial={{ opacity: 0, y: 40, scale: 0.985 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ duration: 0.95, delay: (idx % 2) * 0.12, ease: EASING }}
+                  className={`${colSpanClass} rounded-[24px] bg-white border border-[#E7EDF5] card-shadow-subtle overflow-hidden flex flex-col justify-between hover:-translate-y-2 hover:border-[#13BFEA]/50 hover:shadow-[0_20px_50px_rgba(15,23,42,0.10),0_30px_70px_rgba(15,23,42,0.08)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group`}
+                >
+                  <Link
+                    href={`/case-studies/${study.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block flex-1 flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Visual Portfolio Hero */}
+                      <div className={`relative ${imageHeightClass} w-full overflow-hidden bg-slate-900`}>
+                        <img
+                          src={study.heroImage}
+                          alt={study.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-95"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0F2940]/85 via-[#0F2940]/20 to-transparent" />
+                        
+                        {/* Top-Left: Industry Badge */}
+                        <div className="absolute top-4 left-4">
+                          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/95 text-[#0B4A7D] shadow-sm backdrop-blur-md border border-white/80">
+                            {study.industry}
+                          </span>
+                        </div>
+
+                        {/* Bottom Floating Primary Metric on Visual */}
+                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-extrabold shadow-sm">
+                            <span className="w-2 h-2 rounded-full bg-[#13BFEA] animate-pulse" />
+                            <span>{study.metrics[0].value}</span>
+                          </div>
+
+                          <div className="hidden sm:flex items-center gap-1.5">
+                            {study.technologies.slice(0, 2).map((tech, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/20 backdrop-blur-md text-white border border-white/20"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Card Narrative Content */}
+                      <div className="p-6 sm:p-8 space-y-3">
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors leading-snug">
+                          {study.title}
+                        </h3>
+                        <p className="text-sm sm:text-base text-[#5B6B7A] leading-relaxed line-clamp-2">
+                          {study.shortDescription}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Bottom Action Footer with Metric & CTA */}
+                    <div className="px-6 sm:px-8 pb-6 sm:pb-7 pt-4 border-t border-slate-100/90 flex items-center justify-between mt-auto">
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#5B6B7A] block">
+                          {study.metrics[0].label}
+                        </span>
+                        <p className="text-base sm:text-lg font-black text-[#0B4A7D] tracking-tight">
+                          {study.metrics[0].value}
+                        </p>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 text-sm font-extrabold text-[#0B4A7D] group-hover:text-[#13BFEA] transition-colors">
+                        <span>Read Case Study</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 6. STATS BANNER (once: false) */}
+      {/* ========================================================================= */}
+      <section className="py-16 sm:py-20 border-b border-[#E7EDF5] bg-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+            {STATS_DATA.map((m, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 25, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{
+                  duration: 0.9,
+                  delay: idx * 0.08,
+                  ease: EASING,
+                }}
+                className="p-5 sm:p-6 rounded-3xl bg-white border border-[#E7EDF5] border-t-4 border-t-[#13BFEA] shadow-[0_18px_50px_rgba(15,23,42,0.07)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[4px] text-center space-y-1 transition-all duration-400 ease-out"
+              >
+                <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA]">
+                  {m.value}
+                </span>
+                <p className="text-sm font-bold text-[#0F2940]">{m.label}</p>
+                <p className="text-[11px] text-[#5B6B7A] leading-tight">{m.detail}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 7. INDUSTRIES (once: false) */}
+      {/* ========================================================================= */}
+      <section className="py-16 sm:py-20 border-b border-[#E7EDF5]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: EASING }}
+            className="space-y-1.5"
+          >
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
+              DOMAIN SPECIALIZATION
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F2940] tracking-tight">
+              Industries We Power
+            </h2>
+          </motion.div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3.5 max-w-[960px] mx-auto">
+            {INDUSTRIES_PILLS.map((ind, idx) => {
+              const IconComponent = ind.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: idx * 0.05,
+                    ease: EASING,
+                  }}
+                  className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white border border-[#E7EDF5] shadow-[0_4px_16px_rgba(15,23,42,0.04)] hover:border-[#13BFEA] hover:shadow-[0_10px_25px_rgba(19,191,234,0.12)] hover:-translate-y-0.5 transition-all duration-300 group cursor-default"
+                >
+                  <IconComponent className="w-4 h-4 text-[#0B4A7D] group-hover:text-[#13BFEA] group-hover:rotate-12 transition-all duration-300" />
+                  <span className="text-sm font-bold text-[#0F2940]">{ind.name}</span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 8. FINAL CTA (once: false) */}
+      {/* ========================================================================= */}
+      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 35, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 1.0, ease: EASING }}
+          className="max-w-[1100px] mx-auto rounded-[32px] p-10 sm:p-14 lg:p-16 text-center text-white relative overflow-hidden shadow-2xl"
+          style={{
+            background: "linear-gradient(135deg, #0B4A7D 0%, #13BFEA 100%)",
+          }}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent pointer-events-none" />
+
+          <div className="max-w-[780px] mx-auto relative z-10 space-y-7">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-white/15 text-white border border-white/25">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+              <span>START YOUR NEXT SPRINT</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] [text-wrap:balance]">
+              Ready To Build Something Intelligent?
+            </h2>
+
+            <p className="text-base sm:text-lg text-white/90 max-w-[660px] mx-auto leading-relaxed font-normal">
+              From custom software to analytics platforms and growth systems, let&apos;s build something that scales. Schedule a 30-minute architecture session with our Principal Specialists.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-1">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
+                className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2940] font-black text-[15px] shadow-xl shadow-black/10 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
               >
-                <span>Schedule Strategy Call</span>
+                <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
-                href="/services"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
-              >
-                <span>View Services</span>
-              </Link>
-            </motion.div>
-
-            {/* Trust Bullet Items */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm font-semibold text-slate-700 mb-14"
-            >
-              <div className="flex items-center gap-1.5 text-slate-700">
-                <span className="text-[#00b7c2] font-black">✓</span>
-                <span>30-Min Consultation</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-slate-700">
-                <span className="text-[#00b7c2] font-black">✓</span>
-                <span>NDA Signed Upfront</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-slate-700">
-                <span className="text-[#00b7c2] font-black">✓</span>
-                <span>2–4 Week Delivery</span>
-              </div>
-            </motion.div>
-
-            {/* Bottom Visual Gallery (Horizontal 5-Image Collage - TechAhead Style) */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.45 }}
-              className="pt-2"
-            >
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5 max-w-[1240px] mx-auto items-center">
-                {/* Image 1: Team collaboration */}
-                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-100">
-                  <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
-                    alt="Team Collaboration"
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
-                    Cross-Functional Pods
-                  </span>
-                </div>
-
-                {/* Image 2: Software development (center emphasized) */}
-                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-lg group h-[220px] sm:h-[270px] lg:h-[300px] border-2 border-white bg-slate-900">
-                  <img
-                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
-                    alt="Software Engineering"
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/80 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 right-4 text-left text-white text-xs sm:text-sm font-extrabold leading-tight">
-                    Production Engineering
-                  </span>
-                </div>
-
-                {/* Image 3: Analytics dashboard */}
-                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-900 col-span-2 sm:col-span-1">
-                  <img
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80"
-                    alt="Analytics Command Center"
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
-                    Real-Time Intelligence
-                  </span>
-                </div>
-
-                {/* Image 4: Client workshop */}
-                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-100">
-                  <img
-                    src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
-                    alt="Architecture Workshop"
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
-                    Strategic Scoping
-                  </span>
-                </div>
-
-                {/* Image 5: Office/team culture */}
-                <div className="relative rounded-[24px] sm:rounded-[30px] overflow-hidden shadow-md group h-[200px] sm:h-[240px] lg:h-[260px] border border-white/80 bg-slate-100">
-                  <img
-                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80"
-                    alt="Team & Culture"
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-3.5 left-3.5 right-3.5 text-left text-white text-[11px] sm:text-xs font-bold leading-tight">
-                    Velocity & Craft
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      </div>
-
-      <main className="overflow-hidden">
-        {/* ========================================================================= */}
-        {/* 2. PARTNER LOGOS (Simple Horizontal Infinite Marquee ~100px) */}
-        {/* ========================================================================= */}
-        <section className="py-6 sm:py-8 bg-white border-b border-slate-200/60 overflow-hidden">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div
-              className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_80px,_black_calc(100%-80px),transparent_100%)] select-none"
-              onMouseEnter={() => setIsMarqueePaused(true)}
-              onMouseLeave={() => setIsMarqueePaused(false)}
-            >
-              <motion.div
-                animate={{ x: isMarqueePaused ? undefined : ["0%", "-50%"] }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 20,
-                    ease: "linear",
-                  },
-                }}
-                className="flex items-center gap-10 sm:gap-14 w-max cursor-pointer py-1"
-              >
-                {marqueeLogos.map((brand, idx) => (
-                  <div
-                    key={`${brand.name}-${idx}`}
-                    className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#F8FAFC] border border-slate-200/80 shadow-2xs hover:border-[#00b7c2]/40 hover:bg-white transition-all flex-shrink-0 group"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-[#00b7c2] group-hover:scale-125 transition-transform" />
-                    <span className="font-extrabold text-sm sm:text-base text-[#082F49] tracking-tight group-hover:text-[#0f4c81] transition-colors">
-                      {brand.name}
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-medium">
-                      ({brand.tag})
-                    </span>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 3. CORE SERVICES OVERVIEW (8 Clean Cards) */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-[#F8FAFC] border-b border-slate-200/80">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
-                <Layers className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>Full Stack Capabilities</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
-                Full Stack Digital Services
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 font-normal">
-                End-to-end technology solutions designed to help businesses build, scale, automate, and
-                grow.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {CORE_SERVICES.map((service) => {
-                const IconComponent = service.icon;
-                return (
-                  <div
-                    key={service.id}
-                    className="p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00b7c2]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
-                  >
-                    <div>
-                      <div className="w-12 h-12 rounded-xl bg-[rgba(15,76,129,0.06)] group-hover:bg-[#0f4c81] text-[#0f4c81] group-hover:text-white flex items-center justify-center mb-4 transition-colors">
-                        <IconComponent className="w-6 h-6" />
-                      </div>
-
-                      <h3 className="text-lg font-black text-[#082F49] group-hover:text-[#0f4c81] transition-colors mb-3">
-                        {service.title}
-                      </h3>
-
-                      <ul className="space-y-2 text-xs text-slate-600 mb-6">
-                        {service.bullets.map((b, i) => (
-                          <li key={i} className="flex items-center gap-2 font-medium">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#00b7c2] flex-shrink-0" />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <Link
-                      href={service.href}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0f4c81] group-hover:text-[#00b7c2] transition-colors pt-3 border-t border-slate-100"
-                    >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 4. WHY BUSINESSES CHOOSE CODEPLACED (6 Cards Only) */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-white border-b border-slate-200/80">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>Enterprise Delivery Standard</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
-                Why Businesses Choose CodePlaced
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 font-normal">
-                Enterprise engineering rigor combined with fast milestone velocity.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {WHY_CHOOSE_CARDS.map((item, idx) => {
-                const IconComp = item.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="p-7 rounded-2xl bg-[#F8FAFC] border border-slate-200/90 hover:border-[#00b7c2]/40 hover:bg-white shadow-2xs hover:shadow-md transition-all duration-200 group"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200/80 text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white flex items-center justify-center mb-4 shadow-2xs transition-colors">
-                      <IconComp className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-black text-[#082F49] mb-2 group-hover:text-[#0f4c81] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      {item.desc}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 5. FEATURED CASE STUDIES PREVIEW (3 Cards + View All Button) */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-[#F8FAFC] border-b border-slate-200/80">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>Client Impact</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
-                Real Solutions. Measurable Impact.
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 font-normal">
-                Explore how we helped fast-growing companies and enterprises launch production-grade
-                systems.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              {FEATURED_CASE_STUDIES.map((study) => (
-                <div
-                  key={study.id}
-                  className="rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl hover:border-[#00b7c2]/40 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    {/* Image & Industry Badge */}
-                    <div className="relative h-48 w-full overflow-hidden bg-slate-100">
-                      <img
-                        src={study.image}
-                        alt={study.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-white/90 backdrop-blur-md text-[#082F49]">
-                        {study.industry}
-                      </span>
-                      <div className="absolute bottom-3 left-3 text-white text-xs font-semibold text-cyan-300">
-                        {study.client}
-                      </div>
-                    </div>
-
-                    {/* Challenge & Solution */}
-                    <div className="p-6 space-y-3.5">
-                      <h3 className="text-base font-black text-[#082F49] group-hover:text-[#0f4c81] transition-colors line-clamp-2">
-                        {study.title}
-                      </h3>
-
-                      <div className="space-y-2 text-xs text-slate-600">
-                        <div>
-                          <strong className="text-slate-800 font-bold block">Challenge:</strong>
-                          <p className="line-clamp-2 text-slate-500">{study.challenge}</p>
-                        </div>
-                        <div>
-                          <strong className="text-slate-800 font-bold block">Solution:</strong>
-                          <p className="line-clamp-2 text-slate-500">{study.solution}</p>
-                        </div>
-                      </div>
-
-                      {/* Results Metric */}
-                      <div className="pt-2">
-                        <div className="grid grid-cols-2 gap-2">
-                          {study.metrics?.map((m: { label: string; value: string }, i: number) => (
-                            <div key={i} className="p-2.5 rounded-xl bg-[#F8FAFC] border border-slate-100">
-                              <div className="text-[11px] text-slate-400 font-medium">{m.label}</div>
-                              <div className="text-sm font-extrabold text-[#0f4c81]">{m.value}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 pt-0">
-                    <Link
-                      href="/case-studies"
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAFC] group-hover:bg-[#0f4c81] group-hover:text-white text-[#0f4c81] text-xs font-bold border border-slate-200 transition-all flex items-center justify-center gap-1.5"
-                    >
-                      <span>View Case Study Details</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <Link
-                href="/case-studies"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-[#0f4c81] hover:bg-[#082F49] text-white font-extrabold text-sm shadow-md transition-all active:scale-95"
-              >
-                <span>View All Case Studies</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 6. RESULTS SECTION (Dark Gradient Section) */}
-        {/* ========================================================================= */}
-        <section className="py-20 bg-gradient-to-b from-[#082F49] via-[#083344] to-[#041d27] text-white relative overflow-hidden">
-          {/* Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#00b7c2]/10 rounded-full blur-[140px] pointer-events-none" />
-
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div className="max-w-2xl mx-auto mb-14 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-white/10 text-cyan-300 border border-white/15">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Empirical Track Record</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-                Proven Results. Delivered at Scale.
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6">
-              {RESULTS_METRICS.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`${
-                    idx === 4 ? "col-span-2 md:col-span-1" : ""
-                  } p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xs text-center`}
-                >
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#38BDF8] to-[#14B8A6] mb-2 tracking-tight">
-                    {item.value}
-                  </div>
-                  <div className="text-xs sm:text-sm font-semibold text-slate-300">
-                    {item.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 7. INDUSTRIES PREVIEW (8 Clean Industry Cards + Explore Button) */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-white border-b border-slate-200/80">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
-                <Building2 className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>Domain Specialization</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
-                Industries We Transform
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 font-normal">
-                Specialized technology engineering tailored to mission-critical regulatory and scale
-                requirements.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-              {INDUSTRIES_LIST.map((ind, idx) => {
-                const IndIcon = ind.icon;
-                return (
-                  <Link
-                    key={idx}
-                    href={ind.href}
-                    className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#00b7c2]/50 hover:bg-white hover:shadow-md transition-all duration-200 flex flex-col items-center text-center group"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white flex items-center justify-center mb-3 transition-colors shadow-2xs">
-                      <IndIcon className="w-6 h-6" />
-                    </div>
-                    <span className="font-extrabold text-sm sm:text-base text-[#082F49] group-hover:text-[#0f4c81] transition-colors">
-                      {ind.name}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="text-center">
-              <Link
-                href="/industries"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-extrabold text-sm border border-slate-200 shadow-xs transition-all hover:border-[#00b7c2]/40"
-              >
-                <span>Explore Industries</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 8. FINAL CTA (Dark Premium Section) */}
-        {/* ========================================================================= */}
-        <section className="section-py bg-gradient-to-r from-[#0B4F6C] via-[#082F49] to-[#041D27] text-white relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#00b7c2]/10 rounded-full blur-[120px] pointer-events-none" />
-
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-cyan-300 border border-white/15">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Start Your Next Sprint</span>
-            </div>
-
-            <h2 className="text-[32px] sm:text-[46px] lg:text-[56px] font-black tracking-tight text-white leading-tight">
-              Ready to Build Something Intelligent?
-            </h2>
-
-            <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto">
-              Let&apos;s discuss your next web, mobile, analytics, AI, or cloud initiative.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <Link
                 href="/contact"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-sm transition-all shadow-lg shadow-[#38BDF8]/20 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white/15 hover:bg-white/25 text-white font-bold text-[15px] border border-white/30 shadow-xs flex items-center justify-center transition-all duration-300"
               >
-                <span>Book Strategy Call</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Contact Us</span>
               </Link>
-
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-sm border border-white/20 transition-all flex items-center justify-center gap-2"
-              >
-                <span>Schedule Consultation</span>
-              </Link>
-            </div>
-
-            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm font-semibold text-slate-300">
-              <div className="flex items-center gap-2 text-cyan-200">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>30-Min Principal Review</span>
-              </div>
-              <div className="flex items-center gap-2 text-cyan-200">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>NDA Signed Upfront</span>
-              </div>
-              <div className="flex items-center gap-2 text-cyan-200">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Production Delivery in 2–4 Weeks</span>
-              </div>
             </div>
           </div>
-        </section>
-      </main>
+        </motion.div>
+      </section>
     </div>
   );
 }
