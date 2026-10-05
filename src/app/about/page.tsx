@@ -114,17 +114,17 @@ const WHY_WORK_WITH_US = [
 const LEADERSHIP_TEAM = [
   {
     name: "Maanya Tyagi",
-    role: "Founder & Analytics Lead",
+    role: "Founder & CEO",
     bio: "Maanya leads analytics, AI initiatives, and business intelligence solutions at CodePlaced. She specializes in transforming complex datasets into actionable insights that help organizations make better decisions.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80",
+    image: "/team/Manya.png",
     skills: ["Data Analytics", "Power BI", "AI Solutions", "Business Intelligence"],
     linkedin: "https://linkedin.com",
   },
   {
     name: "Gaurav Shokhanda",
-    role: "Co-Founder & Technology Lead",
+    role: "Co-Founder & CTO",
     bio: "Gaurav oversees technology strategy, software architecture, cloud infrastructure, and product engineering. He helps businesses build scalable systems that support long-term growth and operational excellence.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80",
+    image: "/team/gaurav.jpg",
     skills: ["Software Architecture", "Cloud Engineering", "Product Development", "AI Automation"],
     linkedin: "https://linkedin.com",
   },
@@ -291,6 +291,131 @@ const FAQ_ITEMS = [
 ];
 
 // =========================================================================
+// EASING & MOTION CONFIGURATION (Linear / Vercel / Stripe Grade)
+// =========================================================================
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+// Stagger container for stats cards
+const statsContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const statCardVariant = {
+  hidden: { opacity: 0, y: 20, scale: 0.985 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 1.0,
+      ease: EASING,
+    },
+  },
+};
+
+// Capabilities list stagger
+const capabilitiesContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const capabilityItemVariant = {
+  hidden: { opacity: 0, y: 18, scale: 0.99 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.9,
+      ease: EASING,
+    },
+  },
+};
+
+// Directional subtle floating variants for Why Choose cards
+const getWhyChooseVariant = (direction: "left" | "center" | "right") => ({
+  hidden: {
+    opacity: 0,
+    x: direction === "left" ? -28 : direction === "right" ? 28 : 0,
+    y: direction === "center" ? 24 : 0,
+    scale: 0.985,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 1.0,
+      ease: EASING,
+    },
+  },
+});
+
+// Team sequential reveal container
+const teamGridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.06,
+    },
+  },
+};
+
+const teamMemberVariant = {
+  hidden: { opacity: 0, y: 22, scale: 0.985 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.95,
+      ease: EASING,
+    },
+  },
+};
+
+// Methodology timeline sequence
+const methodologyContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const methodologyStepVariant = {
+  hidden: { opacity: 0, y: 20, scale: 0.99 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.95,
+      ease: EASING,
+    },
+  },
+};
+
+// =========================================================================
 // MAIN ABOUT PAGE COMPONENT
 // =========================================================================
 
@@ -304,7 +429,7 @@ export default function AboutPage() {
   return (
     <div className="bg-white text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans">
       {/* ========================================================================= */}
-      {/* SECTION 1 — HERO SECTION (With Integrated 4-Card Stats Bar) */}
+      {/* SECTION 1 — HERO SECTION (Gentle Fade-Up & Soft Slide from Right) */}
       {/* ========================================================================= */}
       <div
         className="relative overflow-hidden border-b border-slate-200/80"
@@ -327,26 +452,21 @@ export default function AboutPage() {
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Two-Column Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-              {/* Left Column: Headline & CTAs */}
-              <div className="lg:col-span-7 space-y-6 text-left">
+              {/* Left Column: Headline & CTAs (Gently settles with y: 24 -> 0, scale: 0.99 -> 1, duration: 1.0s) */}
+              <motion.div
+                initial={{ opacity: 0, y: 24, scale: 0.99 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 1.0, ease: EASING }}
+                className="lg:col-span-7 space-y-6 text-left"
+              >
                 {/* Pill Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs"
-                >
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
                   <span>ABOUT CODEPLACED</span>
-                </motion.div>
+                </div>
 
                 {/* Main Headline */}
-                <motion.h1
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: 0.1 }}
-                  className="text-[38px] sm:text-[50px] lg:text-[60px] xl:text-[64px] font-[800] leading-[1.08] tracking-[-0.035em] text-[#082F49] [text-wrap:balance]"
-                >
+                <h1 className="text-[38px] sm:text-[50px] lg:text-[60px] xl:text-[64px] font-[800] leading-[1.08] tracking-[-0.035em] text-[#082F49] [text-wrap:balance]">
                   The Team Behind <br className="hidden sm:inline" />
                   Scalable{" "}
                   <span
@@ -357,56 +477,46 @@ export default function AboutPage() {
                   >
                     Data, AI & Digital Products
                   </span>
-                </motion.h1>
+                </h1>
 
                 {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: 0.2 }}
-                  className="text-base sm:text-lg text-slate-600 max-w-[620px] leading-relaxed font-normal"
-                >
+                <p className="text-base sm:text-lg text-slate-600 max-w-[620px] leading-relaxed font-normal">
                   CodePlaced partners with startups and enterprises to build modern data platforms,
                   AI-powered applications, cloud infrastructure, and analytics systems that drive
                   measurable business growth.
-                </motion.p>
+                </p>
 
                 {/* Action Buttons */}
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: 0.3 }}
-                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1"
-                >
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
                   <a
                     href="#leadership-team"
-                    className="h-[52px] px-8 rounded-full bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-lg shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
+                    className="h-[52px] px-8 rounded-full bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-lg shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
                   >
                     <span>Meet Our Leadership</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </a>
 
                   <Link
                     href="/services"
-                    className="h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
+                    className="h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#00b7c2]/40"
                   >
                     <span>View Our Services</span>
                   </Link>
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
 
-              {/* Right Column: Large Rounded Visual Card */}
+              {/* Right Column: Hero Visual Card (Soft slide from right x: 30 -> 0, duration: 1.1s) */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={{ opacity: 0, x: 30, scale: 0.99 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 1.1, ease: EASING }}
                 className="lg:col-span-5 relative"
               >
-                <div className="relative rounded-[32px] overflow-hidden shadow-2xl border-4 border-white bg-slate-900 h-[380px] sm:h-[460px] group">
+                <div className="relative rounded-[32px] overflow-hidden shadow-2xl border-4 border-white bg-slate-900 h-[380px] sm:h-[460px] group card-shadow-subtle">
                   <img
                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
                     alt="CodePlaced Engineering Collective"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/85 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
@@ -419,23 +529,19 @@ export default function AboutPage() {
               </motion.div>
             </div>
 
-            {/* Integrated Stats Bar at Bottom of Hero */}
+            {/* Integrated Stats Bar at Bottom of Hero (Staggered 140ms, translateY(-4px) hover) */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
+              variants={statsContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
               className="mt-14 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             >
               {COMPANY_STATS.map((stat, idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className="p-6 rounded-[22px] text-center transition-all hover:scale-102 hover:shadow-md"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.85)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(0, 188, 212, 0.16)",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
-                  }}
+                  variants={statCardVariant}
+                  className="p-6 rounded-[22px] text-center card-shadow-subtle bg-white/90 backdrop-blur-md border border-cyan-500/15 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 >
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f4c81] tracking-tight mb-1">
                     {stat.value}
@@ -446,7 +552,7 @@ export default function AboutPage() {
                   <div className="text-xs text-slate-500 font-medium">
                     {stat.sub}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
@@ -454,14 +560,20 @@ export default function AboutPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* SECTION 2 — ENGINEERING TEAMS THAT BUILD FOR SCALE (Capabilities) */}
+      {/* SECTION 2 — ENGINEERING TEAMS THAT BUILD FOR SCALE (Image Left, Content Right) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left: Professional Engineering Image */}
-            <div className="lg:col-span-5 relative">
-              <div className="rounded-[32px] overflow-hidden shadow-2xl border-4 border-white bg-slate-100 relative min-h-[380px] sm:min-h-[480px]">
+            {/* Left: Professional Engineering Image (Slides in softly from Left x: -30 -> 0, duration: 1.05s) */}
+            <motion.div
+              initial={{ opacity: 0, x: -30, scale: 0.99 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 1.05, ease: EASING }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="rounded-[32px] overflow-hidden card-shadow-subtle border-4 border-white bg-slate-100 relative min-h-[380px] sm:min-h-[480px]">
                 <img
                   src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80"
                   alt="CodePlaced Engineering Pod"
@@ -476,10 +588,16 @@ export default function AboutPage() {
                   <p className="text-xs text-slate-300">Dedicated architecture, sprint execution, and DevOps</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right: Who We Are Content & Capabilities */}
-            <div className="lg:col-span-7 space-y-6">
+            {/* Right: Content (Slides in softly from Right x: 30 -> 0, Feature cards staggered) */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 1.05, ease: EASING }}
+              className="lg:col-span-7 space-y-6"
+            >
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
                 <Compass className="w-3.5 h-3.5 text-[#00b7c2]" />
                 <span>OUR CAPABILITIES & SCOPE</span>
@@ -496,14 +614,21 @@ export default function AboutPage() {
                 analytics engines that eliminate operational waste and prove measurable ROI.
               </p>
 
-              {/* 5 Capabilities List */}
-              <div className="space-y-3 pt-1">
+              {/* 5 Capabilities List (Staggered Flow) */}
+              <motion.div
+                variants={capabilitiesContainerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.2 }}
+                className="space-y-3 pt-1"
+              >
                 {CAPABILITIES.map((cap, cIdx) => {
                   const CapIcon = cap.icon;
                   return (
-                    <div
+                    <motion.div
                       key={cIdx}
-                      className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 flex items-start gap-4 hover:border-[#00b7c2]/40 transition-colors"
+                      variants={capabilityItemVariant}
+                      className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 flex items-start gap-4 card-shadow-subtle hover:-translate-y-1 hover:border-[#00b7c2]/40 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
                     >
                       <div className="w-10 h-10 rounded-xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CapIcon className="w-5 h-5" />
@@ -516,22 +641,28 @@ export default function AboutPage() {
                           {cap.desc}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 3 — WHY BUSINESSES CHOOSE CODEPLACED */}
+      {/* SECTION 3 — WHY BUSINESSES CHOOSE CODEPLACED (Floating Into Position) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-slate-200/80 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.95, ease: EASING }}
+            className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4"
+          >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE CODEPLACED ADVANTAGE</span>
@@ -543,21 +674,31 @@ export default function AboutPage() {
               We replace bureaucratic, junior-heavy agency models with senior engineering velocity,
               transparent communication, and guaranteed delivery.
             </p>
-          </div>
+          </motion.div>
 
-          {/* 6 Feature Cards */}
+          {/* 6 Feature Cards: Row 1 (Left, Center, Right), Row 2 (Left, Center, Right) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {WHY_WORK_WITH_US.map((item, idx) => {
               const ItemIcon = item.icon;
+              // Direction pattern: 0 -> left, 1 -> center, 2 -> right, 3 -> left, 4 -> center, 5 -> right
+              const direction = (idx % 3 === 0 ? "left" : idx % 3 === 1 ? "center" : "right") as "left" | "center" | "right";
+              const cardVariants = getWhyChooseVariant(direction);
+              const delay = (idx % 3) * 0.14;
+
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="rounded-[24px] bg-white border border-slate-200/90 p-8 shadow-2xs hover:shadow-lg hover:border-[#00b7c2]/40 transition-all duration-300 flex flex-col justify-between group"
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 1.0, delay, ease: EASING }}
+                  className="rounded-[24px] bg-white border border-slate-200/90 p-8 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between group"
                 >
                   <div>
                     {/* Top Row */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300">
+                      <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]">
                         <ItemIcon className="w-6 h-6" />
                       </div>
                       <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
@@ -566,7 +707,7 @@ export default function AboutPage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-[#082F49] mb-3 group-hover:text-[#0f4c81] transition-colors">
+                    <h3 className="text-xl font-bold text-[#082F49] mb-3 group-hover:text-[#0f4c81] transition-colors duration-300">
                       {item.title}
                     </h3>
 
@@ -580,7 +721,7 @@ export default function AboutPage() {
                     <CheckCircle2 className="w-4 h-4 text-[#00b7c2]" />
                     <span>Guaranteed Standard</span>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -588,12 +729,18 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 4 — LEADERSHIP TEAM (50/50 Founder Presentation) */}
+      {/* SECTION 4 — LEADERSHIP SECTION (Opposite Slow Slide, 400ms Hover Lift) */}
       {/* ========================================================================= */}
-      <section id="leadership-team" className="py-24 lg:py-32 bg-white border-b border-slate-200/80">
+      <section id="leadership-team" className="py-24 lg:py-32 bg-white border-b border-slate-200/80 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="max-w-[850px] mx-auto text-center mb-16 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.95, ease: EASING }}
+            className="max-w-[850px] mx-auto text-center mb-16 space-y-4"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>TRUSTED LEADERSHIP</span>
@@ -604,79 +751,92 @@ export default function AboutPage() {
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[760px] mx-auto font-normal">
               CodePlaced is led by experienced builders, data specialists, and technology strategists focused on creating scalable digital products, AI-powered solutions, and business growth systems.
             </p>
-          </div>
+          </motion.div>
 
-          {/* 2 Large 50/50 Founder Cards */}
+          {/* 2 Large 50/50 Founder Cards: Maanya (x: -30 -> 0), Gaurav (x: 30 -> 0), hover: translateY(-4px) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
-            {LEADERSHIP_TEAM.map((founder, fIdx) => (
-              <div
-                key={fIdx}
-                className="group rounded-[28px] overflow-hidden bg-white border border-[rgba(15,61,94,0.08)] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col"
-              >
-                {/* Large Founder Image with Rounded Top Corners */}
-                <div className="relative h-[340px] sm:h-[420px] w-full overflow-hidden bg-slate-900">
-                  <img
-                    src={founder.image}
-                    alt={founder.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-                  
-                  {/* Floating Role Badge on Image */}
-                  <div className="absolute bottom-5 left-6 right-6 flex items-center justify-between text-white">
-                    <div>
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-[#00b7c2] drop-shadow-xs">
-                        {founder.role}
-                      </span>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white drop-shadow-sm">
-                        {founder.name}
-                      </h3>
-                    </div>
+            {LEADERSHIP_TEAM.map((founder, fIdx) => {
+              const isFirst = fIdx === 0;
+              return (
+                <motion.div
+                  key={fIdx}
+                  initial={{ opacity: 0, x: isFirst ? -30 : 30, scale: 0.985 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 1.05, ease: EASING }}
+                  className="group rounded-[28px] overflow-hidden bg-white border border-[rgba(15,61,94,0.08)] card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col"
+                >
+                  {/* Large Founder Image (3:4 portrait aspect ratio ready) */}
+                  <div className="relative h-[360px] sm:h-[440px] w-full overflow-hidden bg-slate-900">
+                    <img
+                      src={founder.image}
+                      alt={founder.name}
+                      className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/85 via-transparent to-transparent opacity-85 group-hover:opacity-75 transition-opacity duration-400" />
 
-                    <a
-                      href={founder.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md hover:bg-white text-white hover:text-[#0f4c81] flex items-center justify-center transition-all shadow-md"
-                      aria-label={`LinkedIn profile of ${founder.name}`}
-                    >
-                      <svg className="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.54a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
+                    {/* Floating Role Badge on Image */}
+                    <div className="absolute bottom-5 left-6 right-6 flex items-center justify-between text-white">
+                      <div>
+                        <span className="text-xs font-extrabold uppercase tracking-wider text-[#00b7c2] drop-shadow-xs">
+                          {founder.role}
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-black text-white drop-shadow-sm">
+                          {founder.name}
+                        </h3>
+                      </div>
 
-                {/* Content Below */}
-                <div className="p-8 sm:p-10 flex-1 flex flex-col justify-between space-y-6">
-                  <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                    {founder.bio}
-                  </p>
-
-                  <div className="pt-6 border-t border-slate-100 flex flex-wrap gap-2">
-                    {founder.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#F0FDFA] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs"
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md hover:bg-white text-white hover:text-[#0f4c81] flex items-center justify-center transition-all duration-300 shadow-md"
+                        aria-label={`LinkedIn profile of ${founder.name}`}
                       >
-                        {skill}
-                      </span>
-                    ))}
+                        <svg className="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
+                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.54a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+
+                  {/* Content Below */}
+                  <div className="p-8 sm:p-10 flex-1 flex flex-col justify-between space-y-6">
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                      {founder.bio}
+                    </p>
+
+                    <div className="pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                      {founder.skills.map((skill, sIdx) => (
+                        <span
+                          key={sIdx}
+                          className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#F0FDFA] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 5 — MEET OUR ENGINEERING TEAM (Purposeful 6-Card Grid) */}
+      {/* SECTION 5 — MEET OUR ENGINEERING TEAM (Sequential 1 -> 6 Stagger) */}
       {/* ========================================================================= */}
       <section className="py-20 lg:py-24 bg-[#F8FAFC] border-b border-slate-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="max-w-[850px] mx-auto text-center mb-14 space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.95, ease: EASING }}
+            className="max-w-[850px] mx-auto text-center mb-14 space-y-3"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>CORE SPECIALISTS</span>
@@ -687,14 +847,21 @@ export default function AboutPage() {
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-[700px] mx-auto font-normal">
               A multidisciplinary team of software engineers, AI specialists, cloud architects, designers, and product strategists helping businesses build scalable digital solutions.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Compact 6-Card Grid (3 Columns) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+          {/* Sequential Stagger Grid (1 -> 6) */}
+          <motion.div
+            variants={teamGridContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.15 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto"
+          >
             {ENGINEERING_TEAM.map((member, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="group rounded-[22px] bg-white border border-slate-200/80 p-6 text-center shadow-2xs hover:shadow-lg hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-200 flex flex-col items-center justify-between"
+                variants={teamMemberVariant}
+                className="group rounded-[22px] bg-white border border-slate-200/80 p-6 text-center card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col items-center justify-between"
               >
                 <div className="flex flex-col items-center">
                   {/* Circular Avatar */}
@@ -702,12 +869,12 @@ export default function AboutPage() {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-full h-full rounded-full object-cover border-3 border-white shadow-md group-hover:scale-105 transition-transform duration-200"
+                      className="w-full h-full rounded-full object-cover border-3 border-white shadow-md group-hover:scale-104 transition-transform duration-400 ease-out"
                     />
                   </div>
 
                   {/* Name & Role */}
-                  <h3 className="text-base font-extrabold text-[#082F49] group-hover:text-[#0f4c81] transition-colors">
+                  <h3 className="text-base font-extrabold text-[#082F49] group-hover:text-[#0f4c81] transition-colors duration-300">
                     {member.name}
                   </h3>
                   <p className="text-xs font-bold text-[#00b7c2] mt-0.5 tracking-tight">
@@ -720,7 +887,7 @@ export default function AboutPage() {
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-500 hover:text-[#0f4c81] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-500 hover:text-[#0f4c81] transition-colors duration-300"
                     aria-label={`LinkedIn profile of ${member.name}`}
                   >
                     <svg className="w-3.5 h-3.5 fill-currentColor" viewBox="0 0 24 24">
@@ -729,19 +896,25 @@ export default function AboutPage() {
                     <span>LinkedIn</span>
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 6 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS (Timeline) */}
+      {/* SECTION 6 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS (Guided Flow) */}
       {/* ========================================================================= */}
       <section className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-slate-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.95, ease: EASING }}
+            className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4"
+          >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Zap className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE ENGINEERING BLUEPRINT</span>
@@ -752,16 +925,23 @@ export default function AboutPage() {
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
               A disciplined, milestone-driven 6-step engineering methodology that guarantees reliable code and fixed timelines.
             </p>
-          </div>
+          </motion.div>
 
-          {/* 6-Step Timeline Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          {/* 6-Step Timeline Grid (Reveals sequentially) */}
+          <motion.div
+            variants={methodologyContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4"
+          >
             {DELIVERY_METHODOLOGY.map((step, idx) => {
               const StepIcon = step.icon;
               return (
-                <div
+                <motion.div
                   key={step.step}
-                  className="rounded-[22px] bg-white border border-slate-200/90 p-5 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/40 transition-all flex flex-col justify-between"
+                  variants={methodologyStepVariant}
+                  className="rounded-[22px] bg-white border border-slate-200/90 p-5 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
@@ -786,15 +966,15 @@ export default function AboutPage() {
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                     <span>Verified Gate</span>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 6 — INDUSTRIES WE SUPPORT (Domain Expertise) */}
+      {/* SECTION 7 — INDUSTRIES WE SUPPORT (Domain Expertise — Subtle / Mostly Static) */}
       {/* ========================================================================= */}
       <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -819,7 +999,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  className="rounded-[22px] bg-[#F8FAFC] border border-slate-200/90 p-7 shadow-2xs hover:shadow-lg hover:border-[#00b7c2]/40 transition-all flex items-start gap-4"
+                  className="rounded-[22px] bg-[#F8FAFC] border border-slate-200/90 p-7 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-start gap-4"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center flex-shrink-0">
                     <IndIcon className="w-6 h-6" />
@@ -840,7 +1020,7 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 7 — TECHNOLOGIES & PARTNERSHIPS (Compact Ecosystem Grid) */}
+      {/* SECTION 8 — TECHNOLOGIES & PARTNERSHIPS (Compact Ecosystem Grid — Subtle) */}
       {/* ========================================================================= */}
       <section className="py-18 lg:py-22 bg-[#F8FAFC] border-b border-slate-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -862,7 +1042,7 @@ export default function AboutPage() {
             {TECH_PARTNERSHIPS.map((partner, pIdx) => (
               <div
                 key={pIdx}
-                className="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-2xs text-center flex flex-col items-center justify-center hover:border-[#00b7c2]/40 transition-colors"
+                className="p-3.5 rounded-xl bg-white border border-slate-200/80 card-shadow-subtle text-center flex flex-col items-center justify-center hover:border-[#00b7c2]/40 transition-colors duration-300"
               >
                 <span className="text-sm font-extrabold text-[#082F49]">
                   {partner.name}
@@ -879,7 +1059,7 @@ export default function AboutPage() {
             {CERTIFICATIONS.map((cert, cIdx) => (
               <div
                 key={cIdx}
-                className="p-3.5 rounded-xl bg-white border border-slate-200 text-center flex items-center justify-center gap-2 text-xs font-bold text-slate-700 shadow-2xs"
+                className="p-3.5 rounded-xl bg-white border border-slate-200 text-center flex items-center justify-center gap-2 text-xs font-bold text-slate-700 card-shadow-subtle"
               >
                 <ShieldCheck className="w-4 h-4 text-[#00b7c2]" />
                 <span>{cert}</span>
@@ -890,12 +1070,18 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 8 — ENTERPRISE FAQ */}
+      {/* SECTION 9 — ENTERPRISE FAQ (Smooth 0.45s Accordion Animation) */}
       {/* ========================================================================= */}
       <section className="py-20 lg:py-28 bg-[#082F49] text-white">
         <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-14 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.95, ease: EASING }}
+            className="text-center mb-14 space-y-4"
+          >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
               <HelpCircle className="w-3.5 h-3.5 text-cyan-300" />
               <span>FREQUENTLY ASKED QUESTIONS</span>
@@ -906,7 +1092,7 @@ export default function AboutPage() {
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-[650px] mx-auto font-normal">
               Clear answers on how we partner, scope, build, and support enterprise systems.
             </p>
-          </div>
+          </motion.div>
 
           {/* Accordion List */}
           <div className="space-y-4">
@@ -915,7 +1101,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  className="rounded-[20px] bg-white/[0.04] border border-white/10 overflow-hidden transition-colors hover:bg-white/[0.06]"
+                  className="rounded-[20px] bg-white/[0.04] border border-white/10 overflow-hidden transition-colors duration-300 hover:bg-white/[0.06]"
                 >
                   <button
                     onClick={() => toggleFaq(idx)}
@@ -926,21 +1112,21 @@ export default function AboutPage() {
                       {item.q}
                     </span>
                     <div
-                      className={`w-8 h-8 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 bg-[#00b7c2] text-[#082F49]" : "text-white"
-                      }`}
+                      className={`w-8 h-8 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "rotate-180 bg-[#00b7c2] text-[#082F49]" : "text-white"
+                        }`}
                     >
                       <ChevronDown className="w-4 h-4" />
                     </div>
                   </button>
 
-                  <AnimatePresence>
+                  <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        transition={{ duration: 0.45, ease: EASING }}
+                        className="overflow-hidden"
                       >
                         <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-white/5">
                           {item.a}
@@ -956,7 +1142,7 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 9 — FINAL CTA (Enterprise Dark Gradient Section) */}
+      {/* SECTION 10 — FINAL CTA (Gentle Fade-Up & Micro-Scale 0.985 -> 1) */}
       {/* ========================================================================= */}
       <section className="py-20 lg:py-24 bg-gradient-to-b from-[#082F49] to-[#041E2A] text-white text-center relative overflow-hidden border-t border-white/10">
         {/* Ambient Glow */}
@@ -968,7 +1154,13 @@ export default function AboutPage() {
           }}
         />
 
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-7">
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.985 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 1.0, ease: EASING }}
+          className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-7"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
             <span>START A CONVERSATION</span>
@@ -985,15 +1177,15 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-[15px] transition-all shadow-xl shadow-[#38BDF8]/20 flex items-center justify-center gap-2.5 active:scale-95 group"
+              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-[15px] transition-all duration-300 shadow-xl shadow-[#38BDF8]/20 flex items-center justify-center gap-2.5 active:scale-95 group"
             >
               <span>Schedule Consultation</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
 
             <Link
               href="/case-studies"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-[15px] border border-white/20 transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-[15px] border border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <span>Explore Case Studies</span>
             </Link>
@@ -1013,7 +1205,7 @@ export default function AboutPage() {
               <span>Direct Senior Engineers</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
