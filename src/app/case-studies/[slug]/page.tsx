@@ -48,20 +48,11 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
   const relatedStudies = CASE_STUDIES_DATA.filter((item) => item.slug !== study.slug).slice(0, 3);
 
   return (
-    <div
-      className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans min-h-screen relative"
-      style={{
-        background: `
-          radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.08), transparent 45%),
-          radial-gradient(circle at 80% 25%, rgba(15, 76, 129, 0.05), transparent 50%),
-          linear-gradient(180deg, #F4FBFD 0%, #EEF8FB 50%, #F7FBFC 100%)
-        `,
-      }}
-    >
+    <div className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans min-h-screen relative">
       {/* ========================================================================= */}
       {/* 1. HERO BANNER */}
       {/* ========================================================================= */}
-      <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 border-b border-[#E7EDF5]/80 overflow-hidden">
+      <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 border-b border-white/40 overflow-hidden">
         {/* Soft Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] pointer-events-none -z-0">
           <div
@@ -103,7 +94,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             {study.metrics.map((m, idx) => (
               <div
                 key={idx}
-                className="p-5 sm:p-6 rounded-[22px] bg-white border border-[#E7EDF5] card-shadow-subtle"
+                className="p-5 sm:p-6 rounded-[22px] glass-panel-card shadow-xs"
               >
                 <div className="text-2xl sm:text-3xl font-black text-[#0f4c81] tracking-tight mb-1">
                   {m.value}
@@ -146,7 +137,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {/* ========================================================================= */}
       {/* 2. PROJECT OVERVIEW, SCOPE & CHALLENGES */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-white border-b border-[#E7EDF5]">
+      <section className="py-20 sm:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Left: Problem Statement & Goals */}
@@ -169,7 +160,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 <h3 className="text-xl font-bold text-[#082F49]">Core Business Goals</h3>
                 <div className="space-y-3">
                   {study.businessGoals.map((goal, gIdx) => (
-                    <div key={gIdx} className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80">
+                    <div key={gIdx} className="flex items-start gap-3.5 p-4 rounded-2xl glass-panel-card shadow-xs">
                       <div className="w-6 h-6 rounded-full bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center flex-shrink-0 mt-0.5 font-bold text-xs">
                         ✓
                       </div>
@@ -186,7 +177,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 <h3 className="text-xl font-bold text-[#082F49]">Project Scope & Deliverables</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {study.projectScope.map((scope, sIdx) => (
-                    <div key={sIdx} className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 text-sm text-slate-700 font-medium flex items-start gap-2.5">
+                    <div key={sIdx} className="p-4 rounded-2xl glass-panel-card shadow-xs text-sm text-slate-700 font-medium flex items-start gap-2.5">
                       <span className="w-2 h-2 rounded-full bg-[#00b7c2] mt-1.5 flex-shrink-0" />
                       <span>{scope}</span>
                     </div>
@@ -197,7 +188,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
             {/* Right: Key Challenges Box */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-8 sm:p-10 rounded-[28px] bg-gradient-to-br from-[#082F49] to-[#041E2A] text-white space-y-6 card-shadow-subtle">
+              <div className="p-8 sm:p-10 rounded-[28px] bg-gradient-to-br from-[#082F49] to-[#041E2A] text-white space-y-6 shadow-xl border border-white/10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20">
                   <ShieldCheck className="w-3.5 h-3.5 text-cyan-300" />
                   <span>CRITICAL CHALLENGES</span>
@@ -231,7 +222,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {/* ========================================================================= */}
       {/* 3. SOLUTION & ARCHITECTURE */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-b border-[#E7EDF5]">
+      <section className="py-20 sm:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
@@ -251,7 +242,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             {study.solutionHighlights.map((highlight, hIdx) => (
               <div
                 key={hIdx}
-                className="p-8 rounded-[24px] bg-white border border-[#E7EDF5] card-shadow-subtle flex flex-col justify-between space-y-4"
+                className="p-8 rounded-[24px] glass-panel-card shadow-xs flex flex-col justify-between space-y-4"
               >
                 <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center font-black text-lg">
                   0{hIdx + 1}
@@ -259,7 +250,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 <h4 className="text-lg font-bold text-[#082F49] leading-snug">
                   {highlight}
                 </h4>
-                <div className="pt-3 border-t border-slate-100 text-xs font-bold text-[#00b7c2] flex items-center gap-1.5">
+                <div className="pt-3 border-t border-slate-200/60 text-xs font-bold text-[#00b7c2] flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Production Validated</span>
                 </div>
@@ -268,7 +259,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           </div>
 
           {/* Technology Stack Grid */}
-          <div className="p-8 sm:p-10 rounded-[28px] bg-white border border-[#E7EDF5] card-shadow-subtle space-y-6">
+          <div className="p-8 sm:p-10 rounded-[28px] glass-panel-card shadow-xs space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <span className="text-xs font-extrabold uppercase tracking-wider text-[#0f4c81] block mb-1">
@@ -278,7 +269,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                   Technologies & Frameworks Deployed
                 </h3>
               </div>
-              <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit">
+              <span className="text-xs font-bold text-[#0f4c81] bg-[#ECFEFF] border border-[#00b7c2]/20 px-3 py-1 rounded-full w-fit">
                 Enterprise Certified Stack
               </span>
             </div>
@@ -287,7 +278,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
               {study.technologies.map((tech, tIdx) => (
                 <div
                   key={tIdx}
-                  className="px-5 py-3 rounded-xl bg-[#F8FAFC] border border-slate-200/90 text-sm font-extrabold text-[#082F49] hover:border-[#00b7c2]/40 transition-colors shadow-2xs"
+                  className="px-5 py-3 rounded-xl bg-white/70 border border-slate-200/90 text-sm font-extrabold text-[#082F49] hover:border-[#00b7c2]/40 transition-colors shadow-2xs"
                 >
                   {tech}
                 </div>
@@ -300,7 +291,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {/* ========================================================================= */}
       {/* 4. DELIVERY PROCESS (6-Step Roadmap) */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-white border-b border-[#E7EDF5]">
+      <section className="py-20 sm:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
@@ -319,7 +310,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             {study.process.map((step, idx) => (
               <div
                 key={step.step}
-                className="p-6 rounded-[22px] bg-[#F8FAFC] border border-slate-200/90 card-shadow-subtle flex flex-col justify-between space-y-4"
+                className="p-6 rounded-[22px] glass-panel-card shadow-xs flex flex-col justify-between space-y-4"
               >
                 <div>
                   <span className="text-xs font-black text-[#00b7c2] tracking-wider block mb-2">
@@ -346,7 +337,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {/* ========================================================================= */}
       {/* 5. VISUAL GALLERY & SYSTEM SCREENSHOTS */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-b border-[#E7EDF5]">
+      <section className="py-20 sm:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
@@ -365,7 +356,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             {study.galleryImages.map((imgUrl, gIdx) => (
               <div
                 key={gIdx}
-                className="rounded-[24px] overflow-hidden card-shadow-subtle border-4 border-white bg-slate-900 h-[280px] sm:h-[340px] relative group"
+                className="rounded-[24px] overflow-hidden shadow-lg border-2 border-white/80 bg-slate-900 h-[280px] sm:h-[340px] relative group"
               >
                 <img
                   src={imgUrl}
@@ -385,7 +376,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {/* ========================================================================= */}
       {/* 6. OUTCOME RESULTS & BUSINESS IMPACT */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-white border-b border-[#E7EDF5]">
+      <section className="py-20 sm:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
@@ -405,7 +396,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             {study.results.map((res, rIdx) => (
               <div
                 key={rIdx}
-                className="p-7 sm:p-8 rounded-[24px] bg-[#F8FAFC] border border-slate-200/90 card-shadow-subtle flex flex-col justify-between space-y-4"
+                className="p-7 sm:p-8 rounded-[24px] glass-panel-card shadow-xs flex flex-col justify-between space-y-4"
               >
                 <div>
                   <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400 block mb-1">
@@ -424,7 +415,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
           {/* Executive Testimonial Block */}
           {study.testimonial && (
-            <div className="p-8 sm:p-12 rounded-[28px] bg-gradient-to-r from-[#ECFEFF] via-[#F0FDFA] to-[#FFFFFF] border border-[#00b7c2]/25 card-shadow-subtle relative overflow-hidden">
+            <div className="p-8 sm:p-12 rounded-[28px] glass-panel-card border border-[#00b7c2]/30 shadow-md relative overflow-hidden">
               <Quote className="w-16 h-16 text-[#00b7c2]/15 absolute top-6 right-6 pointer-events-none" />
               <div className="max-w-3xl space-y-6 relative z-10">
                 <p className="text-lg sm:text-2xl text-[#082F49] font-extrabold leading-relaxed italic">
@@ -447,7 +438,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {/* ========================================================================= */}
       {/* 7. MORE CASE STUDIES (Explore More Success Stories) */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-b border-[#E7EDF5]">
+      <section className="py-20 sm:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-2">
@@ -474,7 +465,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
               <Link
                 key={rel.slug}
                 href={`/case-studies/${rel.slug}`}
-                className="rounded-[24px] bg-white border border-[#E7EDF5] card-shadow-subtle overflow-hidden hover:-translate-y-2 hover:border-[#13BFEA]/50 hover:shadow-[0_20px_50px_rgba(15,23,42,0.10),0_30px_70px_rgba(15,23,42,0.08)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group flex flex-col justify-between"
+                className="rounded-[24px] glass-panel-card shadow-xs overflow-hidden hover:-translate-y-2 hover:border-[#13BFEA]/50 hover:shadow-[0_20px_50px_rgba(15,23,42,0.10),0_30px_70px_rgba(15,23,42,0.08)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group flex flex-col justify-between"
               >
                 <div>
                   <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-900">

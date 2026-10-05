@@ -262,27 +262,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-white text-[#0F172A] selection:bg-[#0F4C81] selection:text-white font-sans">
+    <div className="text-[#0F172A] selection:bg-[#0F4C81] selection:text-white font-sans min-h-screen relative">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (One Full-Width Seamless Gradient + Subtle Tech Pattern) */}
+      {/* 1. HERO SECTION (Continuous Canvas + Floating Form Card) */}
       {/* ========================================================================= */}
       <section
         ref={formRef}
-        className="relative pt-28 pb-20 sm:pt-32 lg:pt-36 lg:pb-28 overflow-hidden border-b border-slate-200/60"
-        style={{
-          background:
-            "radial-gradient(circle at 85% 15%, rgba(20,184,196,0.14), transparent 45%), radial-gradient(circle at 10% 20%, rgba(15,76,129,0.08), transparent 40%), linear-gradient(135deg, #f8fcff 0%, #edf8fb 38%, #f5fcff 100%)",
-        }}
+        className="relative pt-28 pb-20 sm:pt-32 lg:pt-36 lg:pb-28 overflow-hidden border-b border-white/40"
       >
-        {/* Subtle Tech Dot Pattern Overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-40 -z-0"
-          style={{
-            backgroundImage: "radial-gradient(rgba(20, 184, 196, 0.15) 1px, transparent 1px)",
-            backgroundSize: "36px 36px",
-          }}
-        />
-
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
             {/* LEFT SIDE: Heading & 4 Glass Cards (Sits directly on canvas, no enclosing box) */}
@@ -340,13 +327,7 @@ export default function ContactPage() {
                   return (
                     <div
                       key={idx}
-                      className="p-5 rounded-[22px] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between group"
-                      style={{
-                        background: "rgba(255, 255, 255, 0.82)",
-                        backdropFilter: "blur(16px)",
-                        border: "1px solid rgba(20, 184, 196, 0.22)",
-                        boxShadow: "0 8px 24px rgba(15, 76, 129, 0.04)",
-                      }}
+                      className="p-5 rounded-[22px] glass-panel-card shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between group"
                     >
                       <div className="w-10 h-10 rounded-xl bg-[#ECFEFF] text-[#0F4C81] group-hover:bg-[#0F4C81] group-hover:text-white transition-colors flex items-center justify-center mb-3">
                         <Icon className="w-5 h-5" />
@@ -618,16 +599,16 @@ export default function ContactPage() {
       {/* ========================================================================= */}
       {/* 2. TRUSTED BY SECTION (Continuous Technology Ecosystem Marquee) */}
       {/* ========================================================================= */}
-      <section className="py-12 bg-white border-b border-slate-200/80">
+      <section className="py-12 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-bold uppercase tracking-wider text-slate-400 mb-6">
+          <p className="text-center text-xs font-bold uppercase tracking-wider text-slate-500 mb-6">
             Engineered Across Leading Enterprise Platforms
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4 items-center">
             {TRUSTED_LOGOS.map((tech, idx) => (
               <div
                 key={idx}
-                className="py-3 px-4 rounded-xl bg-slate-50 border border-slate-200/70 hover:border-[#14B8C4]/40 transition-colors text-center shadow-2xs group"
+                className="py-3 px-4 rounded-xl bg-white/70 backdrop-blur-sm border border-slate-200/70 hover:border-[#14B8C4]/40 transition-colors text-center shadow-2xs group"
               >
                 <span className="block text-sm font-extrabold text-slate-700 group-hover:text-[#0F4C81] transition-colors">
                   {tech.name}
@@ -644,7 +625,7 @@ export default function ContactPage() {
       {/* ========================================================================= */}
       {/* 3. WHY COMPANIES CONTACT CODEPLACED (4 Enterprise Cards) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[850px] mx-auto text-center mb-14 space-y-3">
@@ -668,14 +649,14 @@ export default function ContactPage() {
               return (
                 <div
                   key={idx}
-                  className="rounded-[24px] bg-white border border-slate-200/90 p-7 shadow-2xs hover:shadow-lg hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="rounded-[24px] glass-panel-card p-7 shadow-xs hover:shadow-lg hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-5">
                       <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0F4C81] group-hover:bg-[#0F4C81] group-hover:text-white transition-colors duration-300 flex items-center justify-center">
                         <Icon className="w-6 h-6" />
                       </div>
-                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-600">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
                         {item.tag}
                       </span>
                     </div>
@@ -687,7 +668,7 @@ export default function ContactPage() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-1.5 text-xs font-bold text-[#0F4C81]">
+                  <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-1.5 text-xs font-bold text-[#0F4C81]">
                     <CheckCircle2 className="w-4 h-4 text-[#14B8C4]" />
                     <span>Production Standard</span>
                   </div>
@@ -701,7 +682,7 @@ export default function ContactPage() {
       {/* ========================================================================= */}
       {/* 4. CLIENT SUCCESS STORIES (3 Glassmorphism Testimonial Cards) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[850px] mx-auto text-center mb-14 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 shadow-xs">
@@ -721,12 +702,7 @@ export default function ContactPage() {
             {TESTIMONIALS.map((t, idx) => (
               <div
                 key={idx}
-                className="rounded-[26px] p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl relative overflow-hidden"
-                style={{
-                  background: "linear-gradient(180deg, #FFFFFF 0%, #F8FCFD 100%)",
-                  border: "1px solid rgba(20, 184, 196, 0.22)",
-                  boxShadow: "0 10px 30px rgba(8, 47, 73, 0.04)",
-                }}
+                className="rounded-[26px] p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl glass-panel-card shadow-xs relative overflow-hidden"
               >
                 <div>
                   {/* Rating Stars */}
@@ -743,7 +719,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Client Profile */}
-                <div className="pt-4 border-t border-slate-100 flex items-center gap-3.5">
+                <div className="pt-4 border-t border-slate-200/60 flex items-center gap-3.5">
                   <img
                     src={t.avatar}
                     alt={t.name}
@@ -829,11 +805,11 @@ export default function ContactPage() {
       {/* ========================================================================= */}
       {/* 6. CONTACT INFORMATION SECTION (Two-Column Layout) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-white border-b border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
             {/* Left Column: Direct Office Contact */}
-            <div className="lg:col-span-6 rounded-[28px] bg-[#F8FAFC] border border-slate-200/90 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+            <div className="lg:col-span-6 rounded-[28px] glass-panel-card p-8 sm:p-10 flex flex-col justify-between space-y-6 shadow-xs">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/20 mb-4">
                   <Mail className="w-3.5 h-3.5 text-[#14B8C4]" />
@@ -847,7 +823,7 @@ export default function ContactPage() {
                 </p>
 
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl bg-white/80 border border-slate-200/80 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-xl bg-[#ECFEFF] text-[#0F4C81] flex items-center justify-center">
                         <Mail className="w-4 h-4" />
@@ -867,7 +843,7 @@ export default function ContactPage() {
                     <span className="text-xs text-slate-400 font-medium">Primary</span>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl bg-white/80 border border-slate-200/80 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-xl bg-[#ECFEFF] text-[#0F4C81] flex items-center justify-center">
                         <Briefcase className="w-4 h-4" />
@@ -887,7 +863,7 @@ export default function ContactPage() {
                     <span className="text-xs text-slate-400 font-medium">Sales</span>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl bg-white/80 border border-slate-200/80 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-xl bg-[#ECFEFF] text-[#0F4C81] flex items-center justify-center">
                         <Sparkles className="w-4 h-4" />
@@ -1025,9 +1001,8 @@ export default function ContactPage() {
                       {item.q}
                     </span>
                     <div
-                      className={`w-8 h-8 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 bg-[#14B8C4] text-[#082F49]" : "text-white"
-                      }`}
+                      className={`w-8 h-8 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 bg-[#14B8C4] text-[#082F49]" : "text-white"
+                        }`}
                     >
                       <ChevronDown className="w-4 h-4" />
                     </div>

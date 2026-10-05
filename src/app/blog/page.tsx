@@ -368,26 +368,11 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="bg-white text-[#0F172A] selection:bg-[#0F4C81] selection:text-white font-sans">
+    <div className="text-[#0F172A] selection:bg-[#0F4C81] selection:text-white font-sans min-h-screen relative">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (Full-Width Mesh Gradient + Search + Quick Filters) */}
+      {/* 1. HERO SECTION (Continuous Canvas + Search + Quick Filters) */}
       {/* ========================================================================= */}
-      <section
-        className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-22 overflow-hidden border-b border-slate-200/80"
-        style={{
-          background:
-            "radial-gradient(circle at 85% 15%, rgba(20,184,196,0.14), transparent 45%), radial-gradient(circle at 10% 20%, rgba(15,76,129,0.08), transparent 40%), linear-gradient(135deg, #f8fcff 0%, #edf8fb 38%, #f5fcff 100%)",
-        }}
-      >
-        {/* Subtle Tech Dot Pattern */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-40 -z-0"
-          style={{
-            backgroundImage: "radial-gradient(rgba(20, 184, 196, 0.15) 1px, transparent 1px)",
-            backgroundSize: "36px 36px",
-          }}
-        />
-
+      <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-22 overflow-hidden border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           {/* Eyebrow Badge */}
           <motion.div
@@ -437,7 +422,7 @@ export default function BlogPage() {
             className="max-w-xl mx-auto mt-8 relative"
           >
             <div
-              className="rounded-full p-1.5 flex items-center bg-white/90 backdrop-blur-xl border border-[#14B8C4]/30 shadow-lg shadow-[#0F4C81]/5"
+              className="rounded-full p-1.5 flex items-center bg-white/80 backdrop-blur-xl border border-[#14B8C4]/30 shadow-lg shadow-[#0F4C81]/5"
             >
               <div className="pl-4 pr-2 text-slate-400">
                 <Search className="w-5 h-5 text-[#0F4C81]" />
@@ -473,11 +458,10 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${
-                    isActive
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${isActive
                       ? "bg-[#0F4C81] text-white shadow-md shadow-[#0F4C81]/20 scale-102"
-                      : "bg-white/80 text-slate-600 hover:text-[#0F4C81] hover:bg-white border border-slate-200/80"
-                  }`}
+                      : "bg-white/70 text-slate-600 hover:text-[#0F4C81] hover:bg-white border border-slate-200/80"
+                    }`}
                 >
                   {cat}
                 </button>
@@ -490,7 +474,7 @@ export default function BlogPage() {
       {/* ========================================================================= */}
       {/* 2. FEATURED INSIGHT SECTION (Large 50/50 Premium Card) */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 bg-white border-b border-slate-200/80">
+      <section className="py-16 sm:py-20 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0F4C81]">
@@ -500,14 +484,7 @@ export default function BlogPage() {
             <span className="text-xs font-semibold text-slate-400">Quarterly Flagship</span>
           </div>
 
-          <div
-            className="rounded-[32px] overflow-hidden border transition-all duration-300 hover:shadow-2xl grid grid-cols-1 lg:grid-cols-12 relative"
-            style={{
-              background: "linear-gradient(180deg, #FFFFFF 0%, #F8FCFD 100%)",
-              borderColor: "rgba(20, 184, 196, 0.25)",
-              boxShadow: "0 20px 60px rgba(15, 76, 129, 0.06)",
-            }}
-          >
+          <div className="rounded-[32px] overflow-hidden glass-panel-card shadow-xl grid grid-cols-1 lg:grid-cols-12 relative">
             {/* Left 50%: Visual Image with Gradient Overlay */}
             <div className="lg:col-span-6 relative h-[320px] sm:h-[420px] lg:h-auto overflow-hidden bg-slate-900 group">
               <img
@@ -612,7 +589,7 @@ export default function BlogPage() {
       {/* ========================================================================= */}
       {/* 3. LATEST INSIGHTS GRID (3-Column Architecture Articles) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
@@ -631,7 +608,7 @@ export default function BlogPage() {
           </div>
 
           {filteredInsights.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 p-8">
+            <div className="text-center py-16 glass-panel-card rounded-3xl p-8">
               <p className="text-slate-500 text-base">
                 No insights found matching &quot;{searchQuery}&quot; in category &quot;{selectedCategory}&quot;.
               </p>
@@ -651,7 +628,7 @@ export default function BlogPage() {
                 <div
                   key={post.id}
                   onClick={() => setSelectedArticle(post)}
-                  className="group cursor-pointer rounded-[26px] bg-white border border-slate-200/90 shadow-2xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                  className="group cursor-pointer rounded-[26px] glass-panel-card shadow-xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 overflow-hidden flex flex-col justify-between"
                 >
                   <div>
                     {/* Cover Image */}
@@ -692,7 +669,7 @@ export default function BlogPage() {
                   </div>
 
                   {/* Author / Read CTA */}
-                  <div className="p-7 pt-0 border-t border-slate-100 flex items-center justify-between mt-4">
+                  <div className="p-7 pt-0 border-t border-slate-200/60 flex items-center justify-between mt-4">
                     <div className="flex items-center gap-2.5">
                       <img
                         src={post.author.avatar}
@@ -793,7 +770,7 @@ export default function BlogPage() {
       {/* ========================================================================= */}
       {/* 5. PLAYBOOKS & GUIDES (Large Horizontal Cards) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[850px] mx-auto text-center mb-14 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 shadow-xs">
@@ -814,7 +791,7 @@ export default function BlogPage() {
               return (
                 <div
                   key={idx}
-                  className="rounded-[28px] bg-gradient-to-br from-[#F8FCFD] to-white border border-slate-200/90 p-8 shadow-2xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="rounded-[28px] glass-panel-card p-8 shadow-xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -847,7 +824,7 @@ export default function BlogPage() {
                     </div>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <div className="mt-8 pt-4 border-t border-slate-200/60 flex items-center justify-between">
                     <span className="text-xs font-medium text-slate-500">
                       Format: PDF + Architecture Diagrams
                     </span>
@@ -870,7 +847,7 @@ export default function BlogPage() {
       {/* ========================================================================= */}
       {/* 6. FEATURED CASE STUDIES (Real Results, Real Impact) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-[#F8FAFC] border-b border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
@@ -895,7 +872,7 @@ export default function BlogPage() {
             {FEATURED_CASE_STUDIES.map((cs, idx) => (
               <div
                 key={idx}
-                className="rounded-[24px] bg-white border border-slate-200/90 p-7 shadow-2xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
+                className="rounded-[24px] glass-panel-card p-7 shadow-xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -909,7 +886,7 @@ export default function BlogPage() {
                     {cs.title}
                   </h3>
 
-                  <div className="py-2.5 px-3.5 rounded-xl bg-emerald-50 text-emerald-800 text-xs font-extrabold mb-3 flex items-center gap-2">
+                  <div className="py-2.5 px-3.5 rounded-xl bg-emerald-50 text-emerald-800 text-xs font-extrabold mb-3 flex items-center gap-2 border border-emerald-200/50">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     <span>{cs.impact}</span>
                   </div>
@@ -919,7 +896,7 @@ export default function BlogPage() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center justify-between">
                   <div className="text-2xl font-black text-[#0F4C81]">{cs.metric}</div>
                   <Link
                     href="/case-studies"
@@ -938,9 +915,9 @@ export default function BlogPage() {
       {/* ========================================================================= */}
       {/* 7. TRENDING TOPICS (Interactive Tag Cloud) */}
       {/* ========================================================================= */}
-      <section className="py-16 bg-white border-b border-slate-200/80">
+      <section className="py-16 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-6">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-6">
             Trending Engineering & Analytics Topics
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 max-w-4xl mx-auto">
@@ -948,7 +925,7 @@ export default function BlogPage() {
               <button
                 key={tag}
                 onClick={() => setSearchQuery(tag)}
-                className="px-4 py-2 rounded-xl bg-slate-50 hover:bg-[#ECFEFF] text-slate-700 hover:text-[#0F4C81] border border-slate-200 hover:border-[#14B8C4]/40 text-xs sm:text-sm font-bold transition-all active:scale-95 cursor-pointer shadow-2xs"
+                className="px-4 py-2 rounded-xl bg-white/70 hover:bg-[#ECFEFF] text-slate-700 hover:text-[#0F4C81] border border-slate-200/80 hover:border-[#14B8C4]/40 text-xs sm:text-sm font-bold transition-all active:scale-95 cursor-pointer shadow-2xs backdrop-blur-sm"
               >
                 #{tag}
               </button>
@@ -1014,7 +991,7 @@ export default function BlogPage() {
       {/* ========================================================================= */}
       {/* 9. RESOURCES LIBRARY (Filterable Catalog) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-white border-b border-slate-200/80">
+      <section className="py-20 lg:py-24 border-b border-white/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[850px] mx-auto text-center mb-12 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 shadow-xs">
@@ -1036,11 +1013,10 @@ export default function BlogPage() {
                   <button
                     key={type}
                     onClick={() => setSelectedResourceType(type)}
-                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                      isActive
+                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${isActive
                         ? "bg-[#082F49] text-white shadow-sm"
-                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                    }`}
+                        : "bg-white/70 text-slate-600 hover:bg-white border border-slate-200/80"
+                      }`}
                   >
                     {type}
                   </button>
@@ -1050,7 +1026,7 @@ export default function BlogPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200 flex flex-col justify-between">
+            <div className="p-6 rounded-2xl glass-panel-card shadow-xs flex flex-col justify-between">
               <div>
                 <span className="text-[11px] font-bold text-[#14B8C4] uppercase tracking-wider">
                   Whitepaper
@@ -1071,7 +1047,7 @@ export default function BlogPage() {
               </button>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200 flex flex-col justify-between">
+            <div className="p-6 rounded-2xl glass-panel-card shadow-xs flex flex-col justify-between">
               <div>
                 <span className="text-[11px] font-bold text-[#14B8C4] uppercase tracking-wider">
                   Checklist
@@ -1092,7 +1068,7 @@ export default function BlogPage() {
               </button>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200 flex flex-col justify-between">
+            <div className="p-6 rounded-2xl glass-panel-card shadow-xs flex flex-col justify-between">
               <div>
                 <span className="text-[11px] font-bold text-[#14B8C4] uppercase tracking-wider">
                   Webinar Series
