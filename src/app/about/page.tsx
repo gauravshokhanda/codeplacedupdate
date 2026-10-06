@@ -10,27 +10,16 @@ import {
   Zap,
   TrendingUp,
   Users,
-  Layers,
   Database,
-  BarChart3,
-  Workflow,
   CheckCircle2,
   Cpu,
-  Code2,
-  Server,
   Cloud,
   ChevronDown,
-  Building2,
-  HeartPulse,
-  GraduationCap,
-  ShoppingBag,
-  Factory,
-  Landmark,
   Compass,
   HelpCircle,
   Search,
-  SlidersHorizontal,
-  Award,
+  Palette,
+  Rocket,
 } from "lucide-react";
 
 // =========================================================================
@@ -38,56 +27,28 @@ import {
 // =========================================================================
 
 const COMPANY_STATS = [
-  { value: "250+", label: "Projects Delivered", sub: "Web, Mobile, BI & AI Solutions" },
-  { value: "20+", label: "Industries Served", sub: "Healthcare, Fintech, Retail & SaaS" },
-  { value: "99.9%", label: "Platform Reliability", sub: "Enterprise SLA & Uptime Standards" },
-  { value: "Global", label: "Delivery Model", sub: "Direct Senior Engineering Pods" },
-];
-
-const CAPABILITIES = [
-  {
-    title: "Data Engineering",
-    desc: "Scalable data lakehouses, event streaming pipelines, automated ETL/ELT, and dbt transformation layers.",
-    icon: Database,
-  },
-  {
-    title: "AI & Automation",
-    desc: "Private RAG architectures, domain-tuned LLMs, autonomous agentic workflows, and predictive ML systems.",
-    icon: Cpu,
-  },
-  {
-    title: "Cloud Architecture",
-    desc: "Cloud-native infrastructure (AWS, Azure, GCP), Kubernetes orchestration, and FinOps cost optimization.",
-    icon: Cloud,
-  },
-  {
-    title: "Analytics Platforms",
-    desc: "Executive command centers, embedded customer dashboards (Power BI, Looker), and real-time OLAP queries.",
-    icon: BarChart3,
-  },
-  {
-    title: "Custom Software",
-    desc: "High-concurrency web applications, microservices, mobile apps, and secure enterprise workflow portals.",
-    icon: Code2,
-  },
+  { value: "250+", label: "Projects Delivered" },
+  { value: "20+", label: "Industries Served" },
+  { value: "99.9%", label: "Platform Reliability" },
+  { value: "Global", label: "Delivery Team" },
 ];
 
 const WHY_WORK_WITH_US = [
   {
     title: "Data & AI Expertise",
-    desc: "Specialized architects who turn complex, unstructured enterprise data into deterministic intelligence and real-time decision engines.",
+    desc: "Specialized architects who turn complex unstructured data into deterministic intelligence and real-time decision engines.",
     icon: Database,
     badge: "Specialized Pods",
   },
   {
-    title: "Cloud-Native Architecture",
-    desc: "Engineered on AWS, Azure, and GCP with automated autoscaling, infrastructure as code (Terraform), and zero single points of failure.",
+    title: "Cloud Native Architecture",
+    desc: "Engineered on AWS, Azure, and GCP with automated autoscaling, infrastructure as code, and zero single points of failure.",
     icon: Cloud,
     badge: "99.99% Uptime",
   },
   {
     title: "Fast Delivery Cycles",
-    desc: "Agile sprints and pre-tested blueprints that deploy working, audited production systems in 2–4 weeks rather than months.",
+    desc: "Agile sprints and battle-tested blueprints that deploy working, audited production systems in 2–4 weeks rather than months.",
     icon: Zap,
     badge: "2–4 Weeks",
   },
@@ -98,7 +59,7 @@ const WHY_WORK_WITH_US = [
     badge: "SOC2 & HIPAA",
   },
   {
-    title: "Business-Focused Solutions",
+    title: "Business Focused Solutions",
     desc: "Every line of code and dashboard metric is engineered to unlock measurable revenue, eliminate manual waste, and prove ROI.",
     icon: TrendingUp,
     badge: "Outcome Driven",
@@ -115,57 +76,65 @@ const LEADERSHIP_TEAM = [
   {
     name: "Maanya Tyagi",
     role: "Founder & CEO",
-    bio: "Maanya leads analytics, AI initiatives, and business intelligence solutions at CodePlaced. She specializes in transforming complex datasets into actionable insights that help organizations make better decisions.",
+    bio: "Maanya leads analytics, AI initiatives, and business intelligence solutions at CodePlaced. She specializes in transforming complex datasets into actionable insights that help organizations make better decisions, streamline operations, and unlock scalable revenue growth.",
     image: "/team/Manya.png",
-    skills: ["Data Analytics", "Power BI", "AI Solutions", "Business Intelligence"],
-    linkedin: "https://linkedin.com",
+    imagePosition: "object-top sm:object-center",
+    expertise: [
+      "AI Strategy",
+      "Product Innovation",
+      "Business Growth",
+      "Digital Transformation",
+    ],
+    ctaText: "Connect With Maanya",
+    linkedin: "https://www.linkedin.com/in/manya-tyagi-626a421b2/",
   },
   {
     name: "Gaurav Shokhanda",
     role: "Co-Founder & CTO",
-    bio: "Gaurav oversees technology strategy, software architecture, cloud infrastructure, and product engineering. He helps businesses build scalable systems that support long-term growth and operational excellence.",
+    bio: "Gaurav oversees technology strategy, software architecture, cloud infrastructure, and product engineering at CodePlaced. He helps businesses build scalable, cloud-native systems and AI automation workflows that support long-term enterprise growth.",
     image: "/team/gaurav.jpg",
-    skills: ["Software Architecture", "Cloud Engineering", "Product Development", "AI Automation"],
-    linkedin: "https://linkedin.com",
+    imagePosition: "object-[center_20%] sm:object-[center_25%] md:object-center scale-105 sm:scale-100",
+    expertise: [
+      "Cloud Architecture",
+      "Full-Stack Engineering",
+      "Enterprise Systems",
+      "Technical Leadership",
+    ],
+    ctaText: "Connect With Gaurav",
+    linkedin: "https://www.linkedin.com/in/gaurav-shokhanda-b5ba12194/",
   },
 ];
 
 const ENGINEERING_TEAM = [
   {
     name: "Ankit",
-    role: "AI & Machine Learning Engineer",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-    linkedin: "https://linkedin.com",
+    role: "Data Analyst Manager",
+    image: "/team/team-2.jpg",
   },
   {
     name: "Prajjwal Kumar Rathi",
-    role: "Data & Analytics Engineer",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
-    linkedin: "https://linkedin.com",
+    role: "Data Analyst Intern",
+    image: "/team/team-7.jpg",
   },
   {
     name: "Naman",
-    role: "Full Stack Software Developer",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    name: "Anubhav",
-    role: "Cloud & DevOps Architect",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
-    linkedin: "https://linkedin.com",
+    role: "Data Analyst Intern",
+    image: "/team/team-5.jpg",
   },
   {
     name: "Kashish",
-    role: "UI/UX & Product Designer",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    linkedin: "https://linkedin.com",
+    role: "Data Analyst Intern",
+    image: "/team/team-4.jpg",
+  },
+  {
+    name: "Jivika",
+    role: "Content & Growth",
+    image: "/team/team-3.jpg",
   },
   {
     name: "Sadiya Ansari",
-    role: "QA & Solutions Engineer",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80",
-    linkedin: "https://linkedin.com",
+    role: "Growth & Editing Specialist",
+    image: "/team/team-6.jpg",
   },
 ];
 
@@ -173,100 +142,45 @@ const DELIVERY_METHODOLOGY = [
   {
     step: "01",
     title: "Discovery",
-    desc: "Technical requirements gathering, data audits, system dependency mapping, and milestone roadmap alignment.",
+    desc: "Technical requirements gathering, data audits, system mapping & milestone roadmap alignment.",
     icon: Search,
   },
   {
     step: "02",
-    title: "Architecture",
-    desc: "System blueprints, data schemas, cloud infrastructure sizing, security protocols, and SLA definitions.",
-    icon: Layers,
+    title: "Strategy",
+    desc: "System blueprints, data schemas, cloud sizing, security protocols & SLA definitions.",
+    icon: Compass,
   },
   {
     step: "03",
-    title: "Development",
-    desc: "Rapid agile sprints led by senior developers with clean code commits, weekly demos, and transparent Slack updates.",
-    icon: Cpu,
+    title: "Design",
+    desc: "Interactive UI/UX prototypes, data visual flows & customer journey validation.",
+    icon: Palette,
   },
   {
     step: "04",
-    title: "Testing",
-    desc: "Automated QA validation, security penetration testing, load testing, and deterministic evaluation gates.",
-    icon: ShieldCheck,
+    title: "Development",
+    desc: "Rapid agile sprints led by senior developers with clean code commits & weekly live demos.",
+    icon: Cpu,
   },
   {
     step: "05",
-    title: "Deployment",
-    desc: "Zero-downtime production deployment, private repository transfer, and complete infrastructure handoff.",
-    icon: Server,
+    title: "Testing",
+    desc: "Automated QA validation, security penetration testing, load benchmarks & evaluation gates.",
+    icon: ShieldCheck,
   },
   {
     step: "06",
-    title: "Optimization",
-    desc: "Continuous telemetry monitoring, performance fine-tuning, cloud cost governance, and feature scaling.",
-    icon: SlidersHorizontal,
+    title: "Launch",
+    desc: "Zero-downtime production deployment, private repo transfer & continuous telemetry.",
+    icon: Rocket,
   },
-];
-
-const INDUSTRIES_SUPPORTED = [
-  {
-    name: "Healthcare",
-    desc: "Clinical data pipelines, HIPAA-compliant patient portals & real-time telemetry.",
-    icon: HeartPulse,
-  },
-  {
-    name: "Finance & Fintech",
-    desc: "Real-time portfolio command centers, risk analytics & automated fraud audits.",
-    icon: Landmark,
-  },
-  {
-    name: "SaaS & Tech",
-    desc: "Embedded customer analytics, multi-tenant RBAC & microservices at scale.",
-    icon: Building2,
-  },
-  {
-    name: "Retail & E-Commerce",
-    desc: "Inventory forecasting, customer lifetime value analytics & omni-channel sync.",
-    icon: ShoppingBag,
-  },
-  {
-    name: "Education",
-    desc: "Admissions CRM workflows, student engagement portals & LMS analytics.",
-    icon: GraduationCap,
-  },
-  {
-    name: "Manufacturing",
-    desc: "IoT sensor data ingestion, predictive maintenance & supply chain automation.",
-    icon: Factory,
-  },
-];
-
-const TECH_PARTNERSHIPS = [
-  { name: "AWS", category: "Cloud & Compute" },
-  { name: "Azure", category: "Enterprise Partner" },
-  { name: "Google Cloud", category: "BigQuery & Vertex AI" },
-  { name: "OpenAI", category: "Enterprise LLMs" },
-  { name: "Snowflake", category: "Data Warehouse" },
-  { name: "Power BI", category: "Executive Analytics" },
-  { name: "Databricks", category: "Lakehouse Platform" },
-  { name: "Docker & K8s", category: "Containerization" },
-  { name: "React / Next.js", category: "Modern Frontend" },
-  { name: "Node.js", category: "Backend Services" },
-  { name: "Python / PyTorch", category: "AI & ML Models" },
-  { name: "Java Spring", category: "Enterprise Systems" },
-];
-
-const CERTIFICATIONS = [
-  "SOC2 Type II Aligned",
-  "HIPAA Compliant Blueprints",
-  "ISO 27001 Security Standard",
-  "100% Client Code & IP Ownership",
 ];
 
 const FAQ_ITEMS = [
   {
     q: "What industries does CodePlaced work with?",
-    a: "We partner with Healthcare, Financial Services, SaaS, Retail, Education, and Manufacturing enterprises. Our engineering pods tailor each architecture to industry-specific compliance requirements like HIPAA, SOC2, and GDPR.",
+    a: "We partner with Healthcare, Financial Services, SaaS, Retail, Education, Logistics, and Manufacturing enterprises. Our engineering pods tailor each architecture to industry-specific compliance requirements like HIPAA, SOC2, and GDPR.",
   },
   {
     q: "How long do projects typically take to deliver?",
@@ -280,136 +194,32 @@ const FAQ_ITEMS = [
     q: "Can you modernize our existing legacy systems and databases?",
     a: "Absolutely. We specialize in zero-downtime database migrations, monolith-to-microservices re-architectures, legacy CRM integrations, and cloud cost optimizations without causing downtime to live business operations.",
   },
-  {
-    q: "What cloud platforms do you support?",
-    a: "We are cloud-agnostic with deep, certified specialization across Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP), as well as hybrid on-premises and containerized Kubernetes environments.",
-  },
-  {
-    q: "How do you handle security, confidentiality, and IP ownership?",
-    a: "We execute strict bilateral NDAs before discussing any architecture. All code, dbt models, and infrastructure scripts are committed directly to your private GitHub or GitLab repositories. You retain 100% intellectual property ownership from day one.",
-  },
 ];
 
 // =========================================================================
-// EASING & MOTION CONFIGURATION (Linear / Vercel / Stripe Grade)
+// EASING & MOTION CONFIGURATION
 // =========================================================================
 const EASING = [0.22, 1, 0.36, 1] as const;
 
-// Stagger container for stats cards
-const statsContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.14,
-      delayChildren: 0.08,
-    },
-  },
-};
-
-const statCardVariant = {
-  hidden: { opacity: 0, y: 20, scale: 0.985 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 1.0,
-      ease: EASING,
-    },
-  },
-};
-
-// Capabilities list stagger
-const capabilitiesContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const capabilityItemVariant = {
-  hidden: { opacity: 0, y: 18, scale: 0.99 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.9,
-      ease: EASING,
-    },
-  },
-};
-
-// Directional subtle floating variants for Why Choose cards
-const getWhyChooseVariant = (direction: "left" | "center" | "right") => ({
-  hidden: {
-    opacity: 0,
-    x: direction === "left" ? -28 : direction === "right" ? 28 : 0,
-    y: direction === "center" ? 24 : 0,
-    scale: 0.985,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 1.0,
-      ease: EASING,
-    },
-  },
-});
-
-// Team sequential reveal container
 const teamGridContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.06,
+      staggerChildren: 0.08,
+      delayChildren: 0.04,
     },
   },
 };
 
 const teamMemberVariant = {
-  hidden: { opacity: 0, y: 22, scale: 0.985 },
+  hidden: { opacity: 0, y: 16, scale: 0.985 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.95,
-      ease: EASING,
-    },
-  },
-};
-
-// Methodology timeline sequence
-const methodologyContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08,
-    },
-  },
-};
-
-const methodologyStepVariant = {
-  hidden: { opacity: 0, y: 20, scale: 0.99 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.95,
+      duration: 0.8,
       ease: EASING,
     },
   },
@@ -427,295 +237,225 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans relative">
+    <div
+      style={{
+        background: `
+          radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 45%),
+          radial-gradient(circle at 90% 35%, rgba(16, 185, 129, 0.07) 0%, transparent 35%),
+          radial-gradient(circle at 10% 65%, rgba(14, 165, 233, 0.09) 0%, transparent 40%),
+          radial-gradient(circle at 50% 95%, rgba(15, 76, 129, 0.06) 0%, transparent 40%),
+          linear-gradient(180deg, #f8fcff 0%, #f2f9fd 30%, #edf7fb 70%, #f5fbff 100%)
+        `,
+      }}
+      className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans relative min-h-screen"
+    >
       {/* ========================================================================= */}
-      {/* SECTION 1 — HERO SECTION (Continuous Flow) */}
+      {/* SECTION 1 — HERO SECTION (Clean, Minimal & Animated AI Constellation) */}
       {/* ========================================================================= */}
-      <div className="relative overflow-hidden border-b border-slate-200/60">
-        {/* Soft Radial Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] pointer-events-none -z-0">
-          <div
-            className="absolute inset-[300px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(20,184,197,0.12), rgba(11,107,136,0.05), transparent 70%)",
-            }}
-          />
+      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24">
+        {/* Large Blurred Radial Glass Orb Behind Headline */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0"
+          style={{
+            width: "650px",
+            height: "650px",
+            background: "radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, rgba(0, 183, 194, 0.08) 45%, transparent 70%)",
+            filter: "blur(50px)",
+          }}
+        />
+
+        {/* Dynamic Animated AI Constellation & Neural Network Graph */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <svg className="absolute inset-0 w-full h-full opacity-65" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aiConstellationGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#00b7c2" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#0284c7" stopOpacity="0.15" />
+              </linearGradient>
+              <linearGradient id="aiConstellationGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.65" />
+                <stop offset="100%" stopColor="#0f4c81" stopOpacity="0.15" />
+              </linearGradient>
+            </defs>
+
+            {/* Neural Graph Network Links */}
+            <line x1="50%" y1="42%" x2="32%" y2="28%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.4" strokeDasharray="6 4" />
+            <line x1="50%" y1="42%" x2="68%" y2="28%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.4" strokeDasharray="6 4" />
+            <line x1="50%" y1="42%" x2="25%" y2="55%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.4" />
+            <line x1="50%" y1="42%" x2="75%" y2="55%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.4" />
+            <line x1="50%" y1="42%" x2="50%" y2="68%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.5" strokeDasharray="4 4" />
+
+            {/* Cross Outer Links */}
+            <line x1="32%" y1="28%" x2="18%" y2="35%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.2" strokeDasharray="4 4" />
+            <line x1="68%" y1="28%" x2="82%" y2="35%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.2" strokeDasharray="4 4" />
+            <line x1="25%" y1="55%" x2="35%" y2="75%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.2" strokeDasharray="6 4" />
+            <line x1="75%" y1="55%" x2="65%" y2="75%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.2" strokeDasharray="6 4" />
+            <line x1="35%" y1="75%" x2="50%" y2="68%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.2" />
+            <line x1="65%" y1="75%" x2="50%" y2="68%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.2" />
+
+            {/* Neural Nodes (SVG Circles with Glowing Halo) */}
+            <circle cx="50%" cy="42%" r="6" fill="#00b7c2" fillOpacity="0.85" />
+            <circle cx="50%" cy="42%" r="14" fill="#00b7c2" fillOpacity="0.15" />
+
+            <circle cx="32%" cy="28%" r="4.5" fill="#0284c7" fillOpacity="0.8" />
+            <circle cx="68%" cy="28%" r="4.5" fill="#00b7c2" fillOpacity="0.8" />
+            <circle cx="25%" cy="55%" r="4" fill="#38bdf8" fillOpacity="0.75" />
+            <circle cx="75%" cy="55%" r="4" fill="#0f4c81" fillOpacity="0.75" />
+            <circle cx="50%" cy="68%" r="5" fill="#00b7c2" fillOpacity="0.8" />
+            <circle cx="18%" cy="35%" r="3.5" fill="#0284c7" fillOpacity="0.6" />
+            <circle cx="82%" cy="35%" r="3.5" fill="#38bdf8" fillOpacity="0.6" />
+            <circle cx="35%" cy="75%" r="3.5" fill="#00b7c2" fillOpacity="0.6" />
+            <circle cx="65%" cy="75%" r="3.5" fill="#0f4c81" fillOpacity="0.6" />
+          </svg>
         </div>
 
-        <section className="relative pt-28 pb-14 sm:pt-32 lg:pt-36 lg:pb-18">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Two-Column Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-              {/* Left Column: Headline & CTAs (Gently settles with y: 24 -> 0, scale: 0.99 -> 1, duration: 1.0s) */}
-              <motion.div
-                initial={{ opacity: 0, y: 24, scale: 0.99 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 1.0, ease: EASING }}
-                className="lg:col-span-7 space-y-6 text-left"
-              >
-                {/* Pill Badge */}
-                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-                  <span>ABOUT CODEPLACED</span>
-                </div>
+        {/* Centered Hero Content */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6 sm:space-y-8">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: EASING }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#0f4c81] border border-[#00b7c2]/30 shadow-xs"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <span>AI • DATA • DIGITAL ENGINEERING</span>
+          </motion.div>
 
-                {/* Main Headline */}
-                <h1 className="text-[38px] sm:text-[50px] lg:text-[60px] xl:text-[64px] font-[800] leading-[1.08] tracking-[-0.035em] text-[#082F49] [text-wrap:balance]">
-                  The Team Behind <br className="hidden sm:inline" />
-                  Scalable{" "}
-                  <span
-                    className="bg-clip-text text-transparent font-extrabold inline-block"
-                    style={{
-                      backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                    }}
-                  >
-                    Data, AI & Digital Products
-                  </span>
-                </h1>
-
-                {/* Description */}
-                <p className="text-base sm:text-lg text-slate-600 max-w-[620px] leading-relaxed font-normal">
-                  CodePlaced partners with startups and enterprises to build modern data platforms,
-                  AI-powered applications, cloud infrastructure, and analytics systems that drive
-                  measurable business growth.
-                </p>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
-                  <a
-                    href="#leadership-team"
-                    className="h-[52px] px-8 rounded-full bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-lg shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
-                  >
-                    <span>Meet Our Leadership</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </a>
-
-                  <Link
-                    href="/services"
-                    className="h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#00b7c2]/40"
-                  >
-                    <span>View Our Services</span>
-                  </Link>
-                </div>
-              </motion.div>
-
-              {/* Right Column: Hero Visual Card (Soft slide from right x: 30 -> 0, duration: 1.1s) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, scale: 0.99 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ duration: 1.1, ease: EASING }}
-                className="lg:col-span-5 relative"
-              >
-                <div className="relative rounded-[32px] overflow-hidden shadow-2xl border-4 border-white bg-slate-900 h-[380px] sm:h-[460px] group card-shadow-subtle">
-                  <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
-                    alt="CodePlaced Engineering Collective"
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/85 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#00b7c2]">
-                      ENGINEERING COLLECTIVE
-                    </span>
-                    <h4 className="text-lg font-bold">Data • AI • Cloud Teams</h4>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Integrated Stats Bar at Bottom of Hero */}
-            <motion.div
-              variants={statsContainerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
-              className="mt-14 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: EASING }}
+            className="text-[38px] sm:text-[54px] lg:text-[66px] font-black leading-[1.06] tracking-[-0.035em] text-[#082F49] [text-wrap:balance]"
+          >
+            The Team Behind Scalable{" "}
+            <span
+              className="bg-clip-text text-transparent font-black inline-block"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #0f4c81 0%, #00b7c2 50%, #0284c7 100%)",
+              }}
             >
-              {COMPANY_STATS.map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={statCardVariant}
-                  className="p-6 rounded-[22px] text-center card-shadow-subtle glass-panel-card hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                >
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f4c81] tracking-tight mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm sm:text-base font-extrabold text-[#082F49] mb-1">
-                    {stat.label}
-                  </div>
-                  <div className="text-xs text-slate-500 font-medium">
-                    {stat.sub}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-      </div>
+              Data, AI & Digital Products
+            </span>
+          </motion.h1>
 
-      {/* ========================================================================= */}
-      {/* SECTION 2 — ENGINEERING TEAMS THAT BUILD FOR SCALE */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 border-b border-slate-200/60 overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left: Professional Engineering Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -30, scale: 0.99 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 1.05, ease: EASING }}
-              className="lg:col-span-5 relative"
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: EASING }}
+            className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal"
+          >
+            CodePlaced brings together engineers, architects, AI specialists and product leaders who build secure, scalable digital ecosystems that drive measurable business impact.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: EASING }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-1"
+          >
+            <a
+              href="#leadership-team"
+              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-extrabold text-[14px] sm:text-[15px] shadow-lg shadow-[#082F49]/15 flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group"
             >
-              <div className="rounded-[32px] overflow-hidden card-shadow-subtle border-4 border-white/80 bg-slate-100 relative min-h-[380px] sm:min-h-[480px]">
-                <img
-                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80"
-                  alt="CodePlaced Engineering Pod"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300">
-                    Engineering Pods
-                  </span>
-                  <h4 className="text-lg font-bold">Autonomous Senior Squads</h4>
-                  <p className="text-xs text-slate-300">Dedicated architecture, sprint execution, and DevOps</p>
+              <span>Meet Our Leaders</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
+
+            <a
+              href="#why-choose-us"
+              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-white/90 hover:bg-white text-[#082F49] font-bold text-[14px] sm:text-[15px] border border-sky-200/80 shadow-xs flex items-center justify-center transition-all duration-300"
+            >
+              <span>Explore Our Story</span>
+            </a>
+          </motion.div>
+
+          {/* Centered Trust Metrics Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: EASING }}
+            className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto text-center"
+          >
+            {COMPANY_STATS.map((stat, sIdx) => (
+              <div key={sIdx} className="space-y-0.5">
+                <div className="text-2xl sm:text-3xl font-black text-[#0f4c81] tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-xs font-semibold text-slate-500">
+                  {stat.label}
                 </div>
               </div>
-            </motion.div>
-
-            {/* Right: Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 1.05, ease: EASING }}
-              className="lg:col-span-7 space-y-6"
-            >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-                <Compass className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>OUR CAPABILITIES & SCOPE</span>
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49] leading-[1.12]">
-                Engineering Teams That Build For Scale
-              </h2>
-
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
-                Founded to help businesses unlock value from data, AI, and modern engineering, CodePlaced
-                bridges the gap between complex enterprise data and high-velocity digital execution. We partner
-                with fast-moving teams to engineer scalable platforms, automated cloud systems, and real-time
-                analytics engines that eliminate operational waste and prove measurable ROI.
-              </p>
-
-              {/* 5 Capabilities List (Staggered Flow) */}
-              <motion.div
-                variants={capabilitiesContainerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.2 }}
-                className="space-y-3 pt-1"
-              >
-                {CAPABILITIES.map((cap, cIdx) => {
-                  const CapIcon = cap.icon;
-                  return (
-                    <motion.div
-                      key={cIdx}
-                      variants={capabilityItemVariant}
-                      className="p-4 rounded-2xl glass-panel-card flex items-start gap-4 card-shadow-subtle hover:-translate-y-1 hover:border-[#00b7c2]/40 hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-[#ECFEFF]/80 text-[#0f4c81] flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <CapIcon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm sm:text-base font-bold text-[#082F49]">
-                          {cap.title}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-slate-600 mt-0.5 leading-relaxed">
-                          {cap.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </motion.div>
-          </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 3 — WHY BUSINESSES CHOOSE CODEPLACED */}
+      {/* SECTION 2 — WHY BUSINESSES CHOOSE CODEPLACED (2-Cols Mobile & Tablet, 3-Cols Desktop) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 border-b border-slate-200/60 overflow-hidden">
+      <section id="why-choose-us" className="py-14 sm:py-16 lg:py-24 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.95, ease: EASING }}
-            className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4"
+            transition={{ duration: 0.9, ease: EASING }}
+            className="max-w-[800px] mx-auto text-center mb-10 sm:mb-12 space-y-2.5"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE CODEPLACED ADVANTAGE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
               Why Businesses Choose CodePlaced
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
-              We replace bureaucratic, junior-heavy agency models with senior engineering velocity,
-              transparent communication, and guaranteed delivery.
+            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
+              We replace junior-heavy agency models with senior engineering velocity, transparent communication, and guaranteed delivery.
             </p>
           </motion.div>
 
-          {/* 6 Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* 6 Feature Cards: 2 cols mobile, 2 cols tablet, 3 cols desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             {WHY_WORK_WITH_US.map((item, idx) => {
               const ItemIcon = item.icon;
-              const direction = (idx % 3 === 0 ? "left" : idx % 3 === 1 ? "center" : "right") as "left" | "center" | "right";
-              const cardVariants = getWhyChooseVariant(direction);
-              const delay = (idx % 3) * 0.14;
-
               return (
-                <motion.div
+                <div
                   key={idx}
-                  variants={cardVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 1.0, delay, ease: EASING }}
-                  className="rounded-[24px] glass-panel-card p-8 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between group"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 251, 255, 0.85))",
+                    boxShadow: "0 12px 36px rgba(2, 132, 199, 0.05)",
+                  }}
+                  className="rounded-[18px] sm:rounded-[24px] p-3.5 sm:p-5 lg:p-6 border border-sky-100 hover:border-[#00b7c2]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-                    {/* Top Row */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF]/80 text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]">
-                        <ItemIcon className="w-6 h-6" />
+                    <div className="flex items-center justify-between mb-2.5 sm:mb-4">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-xl sm:rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300 shadow-xs flex-shrink-0">
+                        <ItemIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/80 text-slate-700 border border-slate-200/50">
+                      <span className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-bold bg-white text-slate-700 border border-sky-100 shadow-2xs">
                         {item.badge}
                       </span>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-[#082F49] mb-3 group-hover:text-[#0f4c81] transition-colors duration-300">
+                    <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#082F49] mb-1 sm:mb-2 group-hover:text-[#0f4c81] transition-colors duration-300 line-clamp-1 sm:line-clamp-none">
                       {item.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs lg:text-sm text-slate-600 leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-200/40 flex items-center gap-2 text-xs font-bold text-slate-700">
-                    <CheckCircle2 className="w-4 h-4 text-[#00b7c2]" />
-                    <span>Guaranteed Standard</span>
+                  <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-3.5 border-t border-sky-100/70 flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-slate-700">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00b7c2] flex-shrink-0" />
+                    <span className="truncate">Guaranteed Standard</span>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -723,172 +463,176 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 4 — LEADERSHIP SECTION */}
+      {/* SECTION 3 — LEADERSHIP SECTION (Executive Profiles — Premium Glass Gradient) */}
       {/* ========================================================================= */}
-      <section id="leadership-team" className="py-24 lg:py-32 border-b border-slate-200/60 overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="leadership-team" className="py-14 sm:py-16 lg:py-24 overflow-hidden relative">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.95, ease: EASING }}
-            className="max-w-[850px] mx-auto text-center mb-16 space-y-4"
+            transition={{ duration: 0.9, ease: EASING }}
+            className="max-w-[850px] mx-auto text-center mb-10 sm:mb-14 space-y-2.5 sm:space-y-3"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>TRUSTED LEADERSHIP</span>
+              <span>EXECUTIVE LEADERSHIP</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
-              Meet The Leadership Team
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#082F49]">
+              Meet The Leaders Behind CodePlaced
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[760px] mx-auto font-normal">
-              CodePlaced is led by experienced builders, data specialists, and technology strategists focused on creating scalable digital products, AI-powered solutions, and business growth systems.
+            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[740px] mx-auto font-normal">
+              Built by experienced technology leaders focused on scalable software, AI innovation, and business growth.
             </p>
           </motion.div>
 
-          {/* 2 Large 50/50 Founder Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
-            {LEADERSHIP_TEAM.map((founder, fIdx) => {
-              const isFirst = fIdx === 0;
-              return (
-                <motion.div
-                  key={fIdx}
-                  initial={{ opacity: 0, x: isFirst ? -30 : 30, scale: 0.985 }}
-                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 1.05, ease: EASING }}
-                  className="group rounded-[28px] overflow-hidden glass-panel-card card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col"
-                >
-                  {/* Large Founder Image */}
-                  <div className="relative h-[360px] sm:h-[440px] w-full overflow-hidden bg-slate-900">
+          {/* 2-Column Executive Profile Panels (Stacked on Mobile, 2 Cols on Tablet & Desktop) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 lg:gap-10 max-w-6xl mx-auto items-stretch">
+            {LEADERSHIP_TEAM.map((founder, fIdx) => (
+              <motion.div
+                key={fIdx}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.95, delay: fIdx * 0.12, ease: EASING }}
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(235, 248, 255, 0.85) 100%)",
+                  border: "1px solid rgba(14, 165, 233, 0.2)",
+                  boxShadow: "0 20px 60px rgba(2, 132, 199, 0.08)",
+                }}
+                className="rounded-[24px] sm:rounded-[32px] p-4 sm:p-6 lg:p-8 hover:shadow-[0_30px_80px_rgba(2,132,199,0.16)] hover:border-[#00b7c2]/60 hover:-translate-y-2 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between group"
+              >
+                <div className="space-y-4 sm:space-y-5">
+                  {/* Full Color Portrait (Responsive height: 230px mobile, 320px tablet, 420px desktop) */}
+                  <div className="relative h-[230px] sm:h-[320px] lg:h-[420px] w-full rounded-[18px] sm:rounded-[24px] overflow-hidden bg-slate-900 shadow-md">
                     <img
                       src={founder.image}
                       alt={founder.name}
-                      className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-700 ease-out"
+                      style={{ filter: "none" }}
+                      className={`w-full h-full object-cover ${founder.imagePosition || "object-top sm:object-center"} group-hover:scale-[1.03] transition-transform duration-700 ease-out`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/85 via-transparent to-transparent opacity-85 group-hover:opacity-75 transition-opacity duration-400" />
-
-                    {/* Floating Role Badge on Image */}
-                    <div className="absolute bottom-5 left-6 right-6 flex items-center justify-between text-white">
-                      <div>
-                        <span className="text-xs font-extrabold uppercase tracking-wider text-[#00b7c2] drop-shadow-xs">
-                          {founder.role}
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl font-black text-white drop-shadow-sm">
-                          {founder.name}
-                        </h3>
-                      </div>
-
-                      <a
-                        href={founder.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md hover:bg-white text-white hover:text-[#0f4c81] flex items-center justify-center transition-all duration-300 shadow-md"
-                        aria-label={`LinkedIn profile of ${founder.name}`}
-                      >
-                        <svg className="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
-                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.54a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
-                        </svg>
-                      </a>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#042841]/95 via-[#042841]/50 to-transparent" />
+                    
+                    {/* Floating Info on Bottom of Image */}
+                    <div className="absolute bottom-2.5 left-3.5 right-3.5 sm:bottom-4 sm:left-5 sm:right-5 text-white space-y-0.5 sm:space-y-1">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-[#00b7c2]/35 backdrop-blur-md text-cyan-200 border border-[#00b7c2]/40">
+                        {founder.role}
+                      </span>
+                      <h3 className="text-lg sm:text-2xl lg:text-3xl font-black text-white tracking-tight drop-shadow-sm">
+                        {founder.name}
+                      </h3>
                     </div>
                   </div>
 
-                  {/* Content Below */}
-                  <div className="p-8 sm:p-10 flex-1 flex flex-col justify-between space-y-6">
-                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                      {founder.bio}
-                    </p>
+                  {/* Leadership Summary Bio */}
+                  <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed font-normal">
+                    {founder.bio}
+                  </p>
 
-                    <div className="pt-6 border-t border-slate-200/40 flex flex-wrap gap-2">
-                      {founder.skills.map((skill, sIdx) => (
-                        <span
-                          key={sIdx}
-                          className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/80 text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs"
+                  {/* Strategic Focus Tags */}
+                  <div className="space-y-1.5 sm:space-y-2 pt-0.5">
+                    <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500">
+                      Strategic Focus
+                    </span>
+                    <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                      {founder.expertise.map((exp, eIdx) => (
+                        <div
+                          key={eIdx}
+                          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-white/90 backdrop-blur-xs border border-sky-100 shadow-2xs"
                         >
-                          {skill}
-                        </span>
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#00b7c2] flex-shrink-0" />
+                          <span className="text-[11px] sm:text-xs font-bold text-[#082F49] tracking-tight truncate">
+                            {exp}
+                          </span>
+                        </div>
                       ))}
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+
+                {/* Bottom LinkedIn CTA Action (Opens in new tab) */}
+                <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-sky-100">
+                  <a
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-[44px] sm:h-[48px] w-full rounded-xl sm:rounded-2xl bg-[#082F49] hover:bg-[#0f4c81] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-[#082F49]/10 transition-all duration-300 active:scale-98 group/btn"
+                    aria-label={`${founder.ctaText} on LinkedIn (opens in new tab)`}
+                  >
+                    <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.54a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
+                    </svg>
+                    <span>{founder.ctaText}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 5 — MEET OUR ENGINEERING TEAM */}
+      {/* SECTION 4 — ENGINEERING TEAM SECTION (3 Cols Desktop, 2 Cols Tablet & Mobile) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-slate-200/60">
+      <section className="py-14 lg:py-20 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.95, ease: EASING }}
-            className="max-w-[850px] mx-auto text-center mb-14 space-y-3"
+            transition={{ duration: 0.9, ease: EASING }}
+            className="max-w-[800px] mx-auto text-center mb-10 space-y-2.5"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>CORE SPECIALISTS</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
               Meet Our Engineering Team
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-[700px] mx-auto font-normal">
-              A multidisciplinary team of software engineers, AI specialists, cloud architects, designers, and product strategists helping businesses build scalable digital solutions.
+            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
+              A multidisciplinary squad of analysts, growth specialists, and engineers powering enterprise execution.
             </p>
           </motion.div>
 
-          {/* Sequential Stagger Grid (1 -> 6) */}
+          {/* Grid Layout: 3 cards per row on Desktop (lg:grid-cols-3) / 2 cards on Tablet & Mobile (grid-cols-2) */}
           <motion.div
             variants={teamGridContainerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.15 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto"
+            className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mt-6"
           >
             {ENGINEERING_TEAM.map((member, idx) => (
               <motion.div
                 key={idx}
                 variants={teamMemberVariant}
-                className="group rounded-[22px] glass-panel-card p-6 text-center card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col items-center justify-between"
+                style={{
+                  background: "linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(240, 249, 255, 0.85))",
+                  boxShadow: "0 10px 30px rgba(2, 132, 199, 0.05)",
+                }}
+                className="group rounded-[24px] p-5 sm:p-6 text-center hover:shadow-[0_20px_45px_rgba(2,132,199,0.12)] hover:border-[#00b7c2]/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center justify-center border border-sky-200/70"
               >
-                <div className="flex flex-col items-center">
-                  {/* Circular Avatar */}
-                  <div className="relative w-[84px] h-[84px] mb-3.5">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full rounded-full object-cover border-3 border-white shadow-md group-hover:scale-104 transition-transform duration-400 ease-out"
-                    />
-                  </div>
-
-                  {/* Name & Role */}
-                  <h3 className="text-base font-extrabold text-[#082F49] group-hover:text-[#0f4c81] transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <p className="text-xs font-bold text-[#00b7c2] mt-0.5 tracking-tight">
-                    {member.role}
-                  </p>
+                {/* Circular Profile Image */}
+                <div className="w-[100px] h-[100px] sm:w-[115px] sm:h-[115px] rounded-full overflow-hidden ring-4 ring-[#00b7c2]/25 group-hover:ring-[#00b7c2]/60 shadow-md transition-all duration-300 bg-slate-900 mx-auto flex-shrink-0 relative mb-3.5">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top sm:object-center group-hover:scale-106 transition-transform duration-500 ease-out"
+                  />
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-200/40 w-full flex items-center justify-center">
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-500 hover:text-[#0f4c81] transition-colors duration-300"
-                    aria-label={`LinkedIn profile of ${member.name}`}
-                  >
-                    <svg className="w-3.5 h-3.5 fill-currentColor" viewBox="0 0 24 24">
-                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.54a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
-                    </svg>
-                    <span>LinkedIn</span>
-                  </a>
+                {/* Name & Role (Only) */}
+                <div className="space-y-1 w-full">
+                  <h3 className="text-sm sm:text-base font-black text-[#082F49] group-hover:text-[#0f4c81] transition-colors duration-300 leading-snug">
+                    {member.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm font-semibold text-[#00b7c2] leading-snug">
+                    {member.role}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -897,114 +641,59 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 6 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS */}
+      {/* SECTION 5 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS (6-Step Timeline) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 border-b border-slate-200/60">
+      <section id="delivery-process" className="py-14 lg:py-20 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.95, ease: EASING }}
-            className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4"
-          >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
+          <div className="max-w-[800px] mx-auto text-center mb-12 space-y-2.5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
               <Zap className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>THE ENGINEERING BLUEPRINT</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
               How We Deliver Successful Digital Products
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
+            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
               A disciplined, milestone-driven 6-step engineering methodology that guarantees reliable code and fixed timelines.
             </p>
-          </motion.div>
+          </div>
 
-          {/* 6-Step Timeline Grid */}
-          <motion.div
-            variants={methodologyContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4"
-          >
-            {DELIVERY_METHODOLOGY.map((step, idx) => {
+          {/* 6-Step Compact Horizontal Timeline Grid (Single row on desktop) */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+            {DELIVERY_METHODOLOGY.map((step) => {
               const StepIcon = step.icon;
               return (
-                <motion.div
+                <div
                   key={step.step}
-                  variants={methodologyStepVariant}
-                  className="rounded-[22px] glass-panel-card p-5 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 251, 255, 0.8))",
+                    boxShadow: "0 8px 24px rgba(2, 132, 199, 0.04)",
+                  }}
+                  className="rounded-[22px] p-4 sm:p-5 border border-sky-100 hover:border-[#00b7c2]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-black text-[#00b7c2] tracking-wider">
                         {step.step}
                       </span>
-                      <div className="w-8 h-8 rounded-xl bg-[#ECFEFF]/80 flex items-center justify-center text-[#0f4c81]">
-                        <StepIcon className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-lg bg-[#ECFEFF] flex items-center justify-center text-[#0f4c81]">
+                        <StepIcon className="w-3.5 h-3.5" />
                       </div>
                     </div>
 
-                    <h3 className="text-base font-extrabold text-[#082F49] mb-2">
+                    <h3 className="text-sm font-extrabold text-[#082F49] mb-1">
                       {step.title}
                     </h3>
 
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                    <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed font-normal">
                       {step.desc}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-200/40 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <div className="mt-3 pt-2.5 border-t border-sky-100 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-emerald-600">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                     <span>Verified Gate</span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 7 — INDUSTRIES WE SUPPORT */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 border-b border-slate-200/60">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <Building2 className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>DOMAIN EXPERTISE</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
-              Industries We Support
-            </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
-              Delivering customized architectures and data platforms tailored to specific enterprise sectors.
-            </p>
-          </div>
-
-          {/* 6 Industry Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {INDUSTRIES_SUPPORTED.map((ind, idx) => {
-              const IndIcon = ind.icon;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-[22px] glass-panel-card p-7 card-shadow-subtle hover:shadow-[0_14px_32px_rgba(15,23,42,0.07),0_24px_60px_rgba(15,23,42,0.09)] hover:-translate-y-1 hover:border-[#00b7c2]/40 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-start gap-4"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF]/80 text-[#0f4c81] flex items-center justify-center flex-shrink-0">
-                    <IndIcon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-[#082F49] mb-1">
-                      {ind.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {ind.desc}
-                    </p>
                   </div>
                 </div>
               );
@@ -1014,102 +703,56 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 8 — TECHNOLOGIES & PARTNERSHIPS */}
+      {/* SECTION 6 — ENTERPRISE FAQ (Transparent Background, White Cards) */}
       {/* ========================================================================= */}
-      <section className="py-18 lg:py-22 border-b border-slate-200/60">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-[850px] mx-auto text-center mb-10 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <Award className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>TECHNOLOGY ECOSYSTEM & COMPLIANCE</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
-              Technologies & Partnerships We Build On
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
-              Certified cloud providers, modern data warehousing engines, and enterprise frameworks.
-            </p>
-          </div>
-
-          {/* Compact Logo / Technology Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10">
-            {TECH_PARTNERSHIPS.map((partner, pIdx) => (
-              <div
-                key={pIdx}
-                className="p-3.5 rounded-xl glass-panel-card card-shadow-subtle text-center flex flex-col items-center justify-center hover:border-[#00b7c2]/40 transition-colors duration-300"
-              >
-                <span className="text-sm font-extrabold text-[#082F49]">
-                  {partner.name}
-                </span>
-                <span className="text-[10px] text-slate-500 font-medium mt-0.5">
-                  {partner.category}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* 4 Security / IP Badges */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
-            {CERTIFICATIONS.map((cert, cIdx) => (
-              <div
-                key={cIdx}
-                className="p-3.5 rounded-xl glass-panel-card text-center flex items-center justify-center gap-2 text-xs font-bold text-slate-700 card-shadow-subtle"
-              >
-                <ShieldCheck className="w-4 h-4 text-[#00b7c2]" />
-                <span>{cert}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 9 — ENTERPRISE FAQ (Smooth 0.45s Accordion Animation) */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-[#082F49] text-white">
-        <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-14 lg:py-20 bg-transparent">
+        <div className="max-w-[850px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.95, ease: EASING }}
-            className="text-center mb-14 space-y-4"
+            transition={{ duration: 0.8, ease: EASING }}
+            className="text-center mb-10 space-y-2.5"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
-              <HelpCircle className="w-3.5 h-3.5 text-cyan-300" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-sky-200 shadow-2xs">
+              <HelpCircle className="w-3 h-3 text-[#00b7c2]" />
               <span>FREQUENTLY ASKED QUESTIONS</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
               Questions About Working With Us
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-[650px] mx-auto font-normal">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-[540px] mx-auto font-normal">
               Clear answers on how we partner, scope, build, and support enterprise systems.
             </p>
           </motion.div>
 
-          {/* Accordion List */}
-          <div className="space-y-4">
+          {/* Accordion List (White Cards, Sky Border, Subtle Shadow) */}
+          <div className="space-y-3.5">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openFaq === idx;
               return (
                 <div
                   key={idx}
-                  className="rounded-[20px] bg-white/[0.04] border border-white/10 overflow-hidden transition-colors duration-300 hover:bg-white/[0.06]"
+                  style={{
+                    boxShadow: "0 10px 30px rgba(2, 132, 199, 0.04)",
+                  }}
+                  className="rounded-[20px] bg-white border border-sky-200/70 overflow-hidden transition-all duration-300 hover:border-[#00b7c2]/50"
                 >
                   <button
                     onClick={() => toggleFaq(idx)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-base sm:text-lg font-bold text-white">
+                    <span className="text-xs sm:text-sm font-bold text-[#082F49]">
                       {item.q}
                     </span>
                     <div
-                      className={`w-8 h-8 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "rotate-180 bg-[#00b7c2] text-[#082F49]" : "text-white"
-                        }`}
+                      className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
+                        isOpen ? "rotate-180 bg-[#00b7c2] text-white" : "bg-sky-50 text-slate-600"
+                      }`}
                     >
-                      <ChevronDown className="w-4 h-4" />
+                      <ChevronDown className="w-3.5 h-3.5" />
                     </div>
                   </button>
 
@@ -1119,10 +762,10 @@ export default function AboutPage() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.45, ease: EASING }}
+                        transition={{ duration: 0.3, ease: EASING }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-white/5">
+                        <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-sky-50">
                           {item.a}
                         </div>
                       </motion.div>
@@ -1136,70 +779,33 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 10 — FINAL CTA (Gentle Fade-Up & Micro-Scale 0.985 -> 1) */}
+      {/* SECTION 7 — COMPACT CTA STRIP (Clean & Streamlined, Seamless) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-gradient-to-b from-[#082F49] to-[#041E2A] text-white text-center relative overflow-hidden border-t border-white/10">
-        {/* Ambient Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] pointer-events-none -z-0"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(0,183,194,0.18), transparent 70%)",
-          }}
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.985 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 1.0, ease: EASING }}
-          className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-7"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>START A CONVERSATION</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Let&apos;s Build Your Next Data, AI or Digital Product
-          </h2>
-
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Speak directly with our technical leadership to scope your next initiative with fixed milestones.
+      <section className="py-12 sm:py-16 bg-transparent">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+          <h3 className="text-xl sm:text-2xl font-black text-[#082F49] tracking-tight">
+            Ready to build with CodePlaced?
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+            Explore our engineering capabilities or connect directly with our technical leadership.
           </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-[15px] transition-all duration-300 shadow-xl shadow-[#38BDF8]/20 flex items-center justify-center gap-2.5 active:scale-95 group"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <a
+              href="#leadership-team"
+              className="w-full sm:w-auto h-[44px] px-6 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-bold text-xs sm:text-sm transition-all duration-300 shadow-md shadow-[#082F49]/15 flex items-center justify-center gap-2 active:scale-95"
             >
-              <span>Schedule Consultation</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
+              <span>Meet Our Team</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
 
             <Link
-              href="/case-studies"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-[15px] border border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+              href="/services"
+              className="w-full sm:w-auto h-[44px] px-6 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-xs sm:text-sm border border-sky-200 transition-all duration-300 flex items-center justify-center shadow-xs"
             >
-              <span>Explore Case Studies</span>
+              <span>View Services</span>
             </Link>
           </div>
-
-          <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm font-semibold text-slate-300">
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>30-Min Strategy Call</span>
-            </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Bilateral NDA Upfront</span>
-            </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Direct Senior Engineers</span>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );
