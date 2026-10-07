@@ -23,7 +23,7 @@ const NAV_ITEMS_LIST = [
   { label: "Services", href: "/services", hasDropdown: "services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Industries", href: "/industries", hasDropdown: "industries" },
-  { label: "Insights", href: "/blog" },
+  { label: "Blogs", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -101,7 +101,9 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             ? pathname.startsWith("/services")
             : isIndustries
             ? pathname.startsWith("/industries")
-            : pathname === item.href || pathname.startsWith(item.href);
+            : item.href === "/blog"
+            ? pathname.startsWith("/blog") || pathname.startsWith("/blogs")
+            : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
 
         if (isServices) {
           return (
@@ -518,7 +520,12 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                   );
                 }
 
-                const isActive = pathname === item.href;
+                const isActive =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : item.href === "/blog"
+                    ? pathname.startsWith("/blog") || pathname.startsWith("/blogs")
+                    : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
 
                 return (
                   <Link

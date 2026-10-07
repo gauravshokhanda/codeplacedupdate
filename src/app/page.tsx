@@ -6,28 +6,23 @@ import { motion } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
-  Code2,
-  BarChart3,
-  TrendingUp,
-  HeartPulse,
-  ShoppingBag,
-  Landmark,
-  Factory,
-  Truck,
-  GraduationCap,
-  Home as HomeIcon,
-  Layers,
-  CheckCircle2,
-  Activity,
-  Zap,
-  Cloud,
-  Headphones,
-  Target,
-  Check,
   ShieldCheck,
   Briefcase,
   Globe2,
+  CheckCircle2,
+  Zap,
+  HeartPulse,
+  Landmark,
+  ShoppingBag,
+  Truck,
+  Layers,
+  Factory,
 } from "lucide-react";
+import { HeroSystemNetwork } from "@/components/HeroSystemNetwork";
+import { CoreCapabilitiesShowcase } from "@/components/CoreCapabilitiesShowcase";
+import { TechStackRadar } from "@/components/TechStackRadar";
+import { DeliveryProcessTimeline } from "@/components/DeliveryProcessTimeline";
+import { CASE_STUDIES_DATA } from "@/lib/caseStudiesData";
 
 // =========================================================================
 // DATA STRUCTURES
@@ -35,188 +30,131 @@ import {
 
 const PARTNER_LOGOS = [
   "AWS",
-  "Microsoft Azure",
+  "Azure",
   "Google Cloud",
   "OpenAI",
-  "Snowflake",
   "Databricks",
+  "Snowflake",
+  "Shopify",
   "HubSpot",
   "Meta",
-  "Shopify",
+];
+
+const SUCCESS_STORIES = [
+  {
+    slug: "real-time-inventory-sync",
+    title: "Retail Inventory Platform",
+    industry: "Retail & Omnichannel",
+    image:
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+    outcome: "Zero stockout errors across 12 channels (<50ms sync).",
+    metricValue: "3.2M/s",
+    metricLabel: "Sync Throughput",
+  },
+  {
+    slug: "ai-workflow-financial-ledger",
+    title: "AI Workflow Platform",
+    industry: "Fintech & Banking",
+    image:
+      "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
+    outcome: "85% reduction in manual audit cycles, saving $2.4M/yr.",
+    metricValue: "85%",
+    metricLabel: "Audit Reduction",
+  },
+  {
+    slug: "fleet-dispatch-optimization",
+    title: "Fleet Dispatch System",
+    industry: "Logistics & Fleet",
+    image:
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    outcome: "31% reduction in deadhead miles and dynamic driver dispatch.",
+    metricValue: "31%",
+    metricLabel: "Cost Reduction",
+  },
+];
+
+const STATS_CARDS = [
+  {
+    value: "250+",
+    label: "Projects Delivered",
+    detail: "Custom software, lakehouses & enterprise systems.",
+  },
+  {
+    value: "150+",
+    label: "Clients Served",
+    detail: "From VC-funded startups to global enterprises.",
+  },
+  {
+    value: "1,200+",
+    label: "Automated Workflows",
+    detail: "Continuous ETL, ML agents & backend pipelines.",
+  },
+  {
+    value: "99.9%",
+    label: "System Reliability",
+    detail: "Zero-downtime deployments and multi-region failovers.",
+  },
+];
+
+const INDUSTRIES_DATA = [
+  {
+    id: "healthcare",
+    name: "Healthcare",
+    icon: HeartPulse,
+    badge: "12+ Solutions Delivered",
+    points: ["AI Triage", "Patient Analytics", "Clinical Dashboards"],
+    href: "/industries",
+  },
+  {
+    id: "finance",
+    name: "Finance",
+    icon: Landmark,
+    badge: "15+ Ledgers Deployed",
+    points: ["Algorithmic Ledgers", "Risk Telemetry", "Real-Time Audits"],
+    href: "/industries",
+  },
+  {
+    id: "retail",
+    name: "Retail",
+    icon: ShoppingBag,
+    badge: "25+ Stores Synced",
+    points: ["Omnichannel Sync", "Shopify Plus", "Recommendation ML"],
+    href: "/industries",
+  },
+  {
+    id: "logistics",
+    name: "Logistics",
+    icon: Truck,
+    badge: "10k+ Vehicles Tracked",
+    points: ["IoT Telematics", "Route Optimization", "Fleet Dispatch"],
+    href: "/industries",
+  },
+  {
+    id: "saas",
+    name: "SaaS",
+    icon: Layers,
+    badge: "40+ Platforms Launched",
+    points: ["Multi-Tenant Next.js", "Edge Gateways", "Microservices"],
+    href: "/industries",
+  },
+  {
+    id: "manufacturing",
+    name: "Manufacturing",
+    icon: Factory,
+    badge: "18+ Plants Automated",
+    points: ["Predictive Maintenance", "Vision Defect AI", "Industrial IoT"],
+    href: "/industries",
+  },
 ];
 
 const TRUST_METRICS = [
   { icon: Briefcase, label: "250+ Projects Delivered" },
   { icon: CheckCircle2, label: "150+ Clients Served" },
-  { icon: Globe2, label: "20+ Industries Served" },
-  { icon: ShieldCheck, label: "99.9% System Reliability" },
+  { icon: Globe2, label: "15+ Industries" },
+  { icon: ShieldCheck, label: "99.9% Reliability" },
 ];
-
-const SERVICES_GRID = [
-  {
-    id: "software-dev",
-    icon: Code2,
-    title: "Custom Software & Web Apps",
-    tag: "Next.js • React • Node.js",
-    desc: "Elastic full-stack platforms, mobile apps, and microservices engineered for high concurrency, zero single points of failure, and clean maintainability.",
-    features: ["Next.js & React Frontends", "Python / Node.js Backends", "Zero-Downtime CI/CD"],
-    href: "/services",
-  },
-  {
-    id: "data-platforms",
-    icon: BarChart3,
-    title: "Data Platforms & Lakehouses",
-    tag: "Snowflake • BigQuery • dbt",
-    desc: "Unified cloud data warehouses, real-time ingestion, and automated ETL/ELT pipelines that eliminate fragmented business silos.",
-    features: ["Automated Data Ingestion", "dbt Modeling & Governance", "Sub-Second Query Speeds"],
-    href: "/services/data-platforms",
-  },
-  {
-    id: "executive-dashboards",
-    icon: Activity,
-    title: "Executive Dashboards & BI",
-    tag: "Power BI • Looker Studio",
-    desc: "Intuitive command centers and embedded dashboards translating complex multi-cloud datasets into real-time executive decisions.",
-    features: ["Live Telemetry Streaming", "Executive KPI Scorecards", "Multi-Tenant Embedding"],
-    href: "/services/executive-dashboards",
-  },
-  {
-    id: "ai-copilots",
-    icon: Zap,
-    title: "AI Copilots & Automation",
-    tag: "LLMs • RAG • Agents",
-    desc: "Domain-specific AI copilots and automated workflow pipelines that augment operational teams and reduce cycle times from hours to seconds.",
-    features: ["Custom RAG Architectures", "Intelligent Document Parsing", "Private Enterprise LLMs"],
-    href: "/services/ai-copilots",
-  },
-  {
-    id: "cloud-infra",
-    icon: Cloud,
-    title: "Cloud Architecture & DevOps",
-    tag: "AWS • GCP • Kubernetes",
-    desc: "High-availability, cost-optimized cloud infrastructure with automated autoscaling, zero-trust security, and 99.99% uptime SLAs.",
-    features: ["AWS / GCP Well-Architected", "Terraform Infrastructure as Code", "24/7 Production Monitoring"],
-    href: "/services/cloud-infrastructure",
-  },
-  {
-    id: "digital-growth",
-    icon: TrendingUp,
-    title: "Digital Growth & Attribution",
-    tag: "SEO • Paid Media • CRO",
-    desc: "Engineered growth systems combining algorithmic performance advertising, technical SEO, and multi-touch CAC attribution to scale revenue predictably.",
-    features: ["Multi-Touch Attribution", "Conversion Rate Optimization", "Automated Lead Ingestion"],
-    href: "/services",
-  },
-];
-
-const WHY_CHOOSE_CARDS = [
-  {
-    title: "Fast MVP Delivery",
-    desc: "Agile 2-week production sprints that deploy working, audited software and analytics platforms in weeks rather than months.",
-    icon: Zap,
-    tag: "⚡ Fast Delivery",
-  },
-  {
-    title: "Full Stack Expertise",
-    desc: "Senior engineering specialists proficient in Next.js, React, Python, Power BI, distributed cloud, and production AI workflows.",
-    icon: Code2,
-    tag: "100% Senior Pods",
-  },
-  {
-    title: "Data-Driven Decisions",
-    desc: "Every architectural choice, schema design, and marketing campaign is validated with sub-second telemetry and verified metrics.",
-    icon: BarChart3,
-    tag: "Live Telemetry",
-  },
-  {
-    title: "Cloud Native Architecture",
-    desc: "Zero-single-point-of-failure infrastructures engineered on AWS and GCP with automated autoscaling and 99.99% uptime.",
-    icon: Cloud,
-    tag: "99.99% SLA",
-  },
-  {
-    title: "Dedicated Support",
-    desc: "Direct Slack channel collaboration with Principal Architects and Lead Engineers. Zero junior account handoffs or layers.",
-    icon: Headphones,
-    tag: "Direct Access",
-  },
-  {
-    title: "Business-Focused Approach",
-    desc: "We focus obsessively on commercial outcomes: reducing operational overhead, increasing conversion velocity, and proving clear ROI.",
-    icon: Target,
-    tag: "ROI Driven",
-  },
-];
-
-import { CASE_STUDIES_DATA } from "@/lib/caseStudiesData";
-
-const STATS_DATA = [
-  { value: "250+", label: "Projects Delivered", detail: "Software, BI & Growth Systems" },
-  { value: "150+", label: "Clients Served", detail: "Startups to Global Enterprises" },
-  { value: "1200+", label: "Automated Workflows", detail: "Pipelines & Production APIs" },
-  { value: "18+", label: "Industries Supported", detail: "Domain-Specific Blueprints" },
-  { value: "$250M+", label: "Revenue Processed", detail: "Tracked via Real-Time Telemetry" },
-];
-
-const INDUSTRIES_PILLS = [
-  { name: "Healthcare", icon: HeartPulse },
-  { name: "Finance", icon: Landmark },
-  { name: "Retail", icon: ShoppingBag },
-  { name: "SaaS", icon: Layers },
-  { name: "Logistics", icon: Truck },
-  { name: "Manufacturing", icon: Factory },
-  { name: "Education", icon: GraduationCap },
-  { name: "Real Estate", icon: HomeIcon },
-];
-
-// =========================================================================
-// REUSABLE ANIMATION VARIANTS (Viewport re-triggering, once: false)
-// =========================================================================
 
 const EASING = [0.22, 1, 0.36, 1] as const;
-
-const containerStagger = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.14,
-    },
-  },
-};
-
-const caseStudiesContainer = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.14,
-    },
-  },
-};
-
-const caseStudyCard = {
-  hidden: {
-    opacity: 0,
-    y: 35,
-    scale: 0.98,
-    transition: {
-      duration: 0.7,
-      ease: EASING,
-    },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 1.0,
-      ease: EASING,
-    },
-  },
-};
-
-// =========================================================================
-// MAIN HOMEPAGE COMPONENT
-// =========================================================================
 
 export default function HomePage() {
   const marqueeLogos = [
@@ -226,65 +164,51 @@ export default function HomePage() {
     ...PARTNER_LOGOS,
   ];
 
+  const flagshipStudy = CASE_STUDIES_DATA[0];
+
   return (
-    <div className="relative min-h-screen text-[#0F2940] selection:bg-[#0F4C81] selection:text-white font-sans overflow-x-hidden">
-      {/* Soft Ambient Blur Orbs */}
-      <div className="absolute w-[600px] h-[600px] bg-[rgba(0,180,255,0.06)] rounded-full blur-[130px] -top-[200px] -right-[150px] pointer-events-none -z-0" />
-      <div className="absolute w-[500px] h-[500px] bg-[rgba(11,74,125,0.04)] rounded-full blur-[130px] top-[40%] -left-[150px] pointer-events-none -z-0" />
-      <div className="absolute w-[550px] h-[550px] bg-[rgba(19,191,234,0.05)] rounded-full blur-[130px] top-[75%] -right-[100px] pointer-events-none -z-0" />
+    <div
+      style={{
+        background: "#F7FBFF",
+      }}
+      className="relative min-h-screen text-[#0F2B46] selection:bg-[#0D3B66] selection:text-white font-sans"
+    >
+      {/* Ambient Glow Orbs */}
+      <div className="absolute w-[650px] h-[650px] bg-[rgba(6,182,212,0.06)] rounded-full blur-[140px] -top-[200px] -right-[150px] pointer-events-none -z-0" />
+      <div className="absolute w-[550px] h-[550px] bg-[rgba(15,41,66,0.04)] rounded-full blur-[140px] top-[30%] -left-[150px] pointer-events-none -z-0" />
 
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION */}
+      {/* SECTION 1 — HERO */}
       {/* ========================================================================= */}
-      <section className="relative pt-32 sm:pt-36 lg:pt-40 pb-8 px-4 sm:px-6 lg:px-8 text-center">
-        {/* Soft Radial Center Glow */}
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-[800px] h-[360px] pointer-events-none -z-0 bg-radial from-[#06B6D4]/12 via-[#0F4C81]/6 to-transparent blur-3xl" />
-
-        <div className="max-w-[1060px] mx-auto relative z-10 space-y-6">
+      <section className="relative pt-32 sm:pt-36 lg:pt-40 pb-12 px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-[1040px] mx-auto space-y-6">
           {/* Eyebrow Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASING }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/80 backdrop-blur-sm text-[#0F4C81] border border-[#06B6D4]/30 shadow-[0_4px_16px_rgba(15,23,42,0.04)]"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-[#0D3B66] border border-[#06B6D4]/35 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" />
-            <span>Trusted Software, Data & AI Partner</span>
+            <span>MODERN TECHNOLOGY PARTNER</span>
           </motion.div>
 
-          {/* Large Hero Headline */}
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: EASING }}
-            className="text-[44px] sm:text-[60px] lg:text-[72px] font-[800] leading-[1.12] sm:leading-[1.14] tracking-[-0.035em] text-[#0F2940] [text-wrap:balance]"
+            className="text-4xl sm:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight text-[#0F2942] [text-wrap:balance]"
           >
-            Building Scalable <br />
+            Technology That <br />
             <span
-              className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
+              className="bg-clip-text text-transparent font-black inline-block py-0.5"
               style={{
-                backgroundImage: "linear-gradient(90deg, #0B4A7D 0%, #13BFEA 100%)",
+                backgroundImage:
+                  "linear-gradient(90deg, #0F2942 0%, #06B6D4 50%, #0D3B66 100%)",
               }}
             >
-              Software Products,
-            </span>{" "}
-            <br />
-            <span
-              className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
-              style={{
-                backgroundImage: "linear-gradient(90deg, #0F2940 0%, #13BFEA 100%)",
-              }}
-            >
-              Data Platforms
-            </span>{" "}
-            &{" "}
-            <span
-              className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
-              style={{
-                backgroundImage: "linear-gradient(90deg, #13BFEA 0%, #0B4A7D 100%)",
-              }}
-            >
-              Growth Systems
+              Turns Ideas Into Impact.
             </span>
           </motion.h1>
 
@@ -293,9 +217,9 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: EASING }}
-            className="text-base sm:text-lg text-[#5B6B7A] leading-relaxed max-w-[720px] mx-auto font-normal"
+            className="text-base sm:text-lg lg:text-xl text-[#5B6B7C] leading-relaxed max-w-[780px] mx-auto font-normal"
           >
-            Custom software engineering, analytics platforms, AI automation, and growth solutions built for modern businesses.
+            From AI-powered applications and enterprise platforms to analytics ecosystems and growth systems, we help organizations build, scale, and transform with confidence.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -303,598 +227,367 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: EASING }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-1"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
           >
             <Link
               href="/contact"
-              className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA] hover:opacity-95 text-white font-extrabold text-[15px] shadow-[0_10px_30px_rgba(19,191,234,0.25)] flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+              className="w-full sm:w-auto h-[52px] px-8 rounded-full text-white font-bold text-sm shadow-md hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+              style={{
+                background: "linear-gradient(90deg, #0F2942, #06B6D4)",
+              }}
             >
               <span>Book Strategy Call</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <Link
-              href="/services"
-              className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2940] font-bold text-[15px] border border-[#E7EDF5] shadow-[0_10px_30px_rgba(15,23,42,0.06)] flex items-center justify-center transition-all duration-300 hover:border-[#13BFEA]/40"
+              href="/case-studies"
+              className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2942] font-bold text-sm border border-slate-200 shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#06B6D4]/50"
             >
-              <span>Explore Services</span>
+              <span>View Case Studies</span>
             </Link>
           </motion.div>
 
-          {/* Inline Trust Metrics Row */}
+          {/* Client Trust Layer Under CTA */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: EASING }}
-            className="pt-6 sm:pt-7 flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-9 gap-y-2.5 text-xs sm:text-sm font-semibold text-[#5B6B7A]"
+            className="pt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2.5 text-xs sm:text-sm font-semibold text-[#5B6B7C]"
           >
             {TRUST_METRICS.map((metric, idx) => {
-              const IconComponent = metric.icon;
+              const Icon = metric.icon;
               return (
-                <React.Fragment key={idx}>
-                  <div className="flex items-center gap-2 text-slate-700">
-                    <IconComponent className="w-4 h-4 text-[#13BFEA] shrink-0" />
-                    <span>{metric.label}</span>
-                  </div>
-                  {idx < TRUST_METRICS.length - 1 && (
-                    <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-slate-300" />
-                  )}
-                </React.Fragment>
+                <div key={idx} className="flex items-center gap-2 text-[#0F2942]">
+                  <Icon className="w-4 h-4 text-[#06B6D4] shrink-0" />
+                  <span>{metric.label}</span>
+                </div>
               );
             })}
           </motion.div>
         </div>
-      </section>
 
-      {/* ========================================================================= */}
-      {/* 2. CONTINUOUS INFINITE SCROLLING MARQUEE (Same Gradient, Subtle Dividers) */}
-      {/* ========================================================================= */}
-      <div className="w-full py-4 border-y border-[#0F3D5E]/10 overflow-hidden relative select-none">
-        <div className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_60px,_black_calc(100%-60px),transparent_100%)]">
-          <div className="animate-marquee hover:[animation-play-state:paused] flex items-center">
-            {marqueeLogos.map((logo, idx) => (
-              <div
-                key={idx}
-                className="flex items-center gap-4 px-6 sm:px-8 text-[#36546F]/80 hover:text-[#0F2940] transition-all duration-200 shrink-0 group cursor-default"
-              >
-                <span className="text-sm sm:text-[15px] font-semibold tracking-[-0.02em] group-hover:text-[#0F2940] transition-colors">
-                  {logo}
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#13BFEA]/60 group-hover:bg-[#13BFEA] transition-colors" />
-              </div>
-            ))}
+        {/* Partner Logo Marquee Strip — Full Width & Transparent */}
+        <div className="w-full max-w-full mt-12 py-4 border-t border-b border-[#0D9488]/12 bg-transparent">
+          <div className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_60px,_black_calc(100%-60px),transparent_100%)]">
+            <div className="animate-marquee hover:[animation-play-state:paused] flex items-center">
+              {marqueeLogos.map((logo, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-4 px-6 sm:px-8 text-[#5B6B7C] hover:text-[#0F2942] transition-all duration-200 shrink-0 group cursor-default"
+                >
+                  <span className="text-sm sm:text-[15px] font-semibold tracking-tight group-hover:text-[#0F2942] transition-colors">
+                    {logo}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]/60 group-hover:bg-[#06B6D4] transition-colors" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ========================================================================= */}
-      {/* 3. FULL STACK SERVICES GRID */}
+      {/* SECTION 2 — DIGITAL ECOSYSTEM (Light Section + 700px Dark Canvas Showcase) */}
       {/* ========================================================================= */}
-      <section className="pt-14 pb-20 sm:pt-16 sm:pb-24 border-b border-slate-200/60 relative overflow-hidden">
-        {/* Subtle Top-Right Ambient Orb */}
-        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-[#13BFEA]/8 to-transparent blur-3xl pointer-events-none -z-0" />
+      <HeroSystemNetwork />
 
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.9, ease: EASING }}
-            className="text-center max-w-[720px] mx-auto mb-14 space-y-2.5"
-          >
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
-              INTEGRATED CAPABILITIES
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0F2940]">
-              Full-Stack Digital Services
-            </h2>
-            <p className="text-[#5B6B7A] text-sm sm:text-base">
-              End-to-end software engineering, lakehouses, real-time dashboards, and algorithmic growth systems.
-            </p>
-          </motion.div>
+      {/* ========================================================================= */}
+      {/* SECTION 3 — FOUR CORE CAPABILITIES (Light Premium Showcase) */}
+      {/* ========================================================================= */}
+      <CoreCapabilitiesShowcase />
 
-          {/* Row 1 */}
-          <motion.div
-            variants={containerStagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7"
-          >
-            {SERVICES_GRID.slice(0, 3).map((svc, idx) => {
-              const IconComp = svc.icon;
-              const cardVariant = {
-                hidden: {
-                  opacity: 0,
-                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
-                  y: idx === 1 ? 35 : 12,
-                  scale: 0.98,
-                  transition: {
-                    duration: 0.7,
-                    ease: EASING,
-                  },
-                },
-                show: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    duration: 1.0,
-                    ease: EASING,
-                  },
-                },
-              };
+      {/* ========================================================================= */}
+      {/* SECTION 4 — FEATURED CASE STUDY (60% IMAGE / 40% CONTENT - Light Surface) */}
+      {/* ========================================================================= */}
+      {/* ========================================================================= */}
+      {/* SECTION 4 — FEATURED CASE STUDY */}
+      {/* ========================================================================= */}
+      <section className="py-24 lg:py-32 bg-[#F7FBFF]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#06B6D4]/30 shadow-xs">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#06B6D4]" />
+            <span>FEATURED FLAGSHIP CASE STUDY</span>
+          </div>
 
-              return (
-                <motion.div
-                  key={svc.id}
-                  variants={cardVariant}
-                  className="rounded-3xl glass-service-card p-7 sm:p-8 shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
-                >
+          {flagshipStudy && (
+            <div className="rounded-[36px] bg-white text-[#0F2942] border border-[#0F172A]/[0.08] shadow-2xl shadow-sky-950/5 overflow-hidden group">
+              <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                {/* 60% Image (7 Cols) */}
+                <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[460px] lg:min-h-[520px] overflow-hidden bg-slate-900">
+                  <img
+                    src={flagshipStudy.heroImage}
+                    alt={flagshipStudy.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F2942]/80 via-[#0F2942]/20 to-transparent" />
+
+                  <div className="absolute top-6 left-6 flex items-center gap-2">
+                    <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-[#0D3B66] shadow-md">
+                      {flagshipStudy.industry}
+                    </span>
+                    <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#0F2942]/80 backdrop-blur-md text-white border border-white/20">
+                      {flagshipStudy.clientType}
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
+                      Flagship Engineering Deployment
+                    </span>
+                    <h4 className="text-xl sm:text-2xl font-black mt-1">
+                      {flagshipStudy.title}
+                    </h4>
+                  </div>
+                </div>
+
+                {/* 40% Crisp Editorial Content Panel (5 Cols) */}
+                <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 flex flex-col justify-between space-y-6">
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-all shadow-xs">
-                        <IconComp className="w-6 h-6" />
-                      </div>
-                      <span className="text-[11px] font-bold text-[#0B4A7D] bg-[#ECFEFF] px-2.5 py-1 rounded-full border border-[#13BFEA]/30">
-                        {svc.tag}
-                      </span>
-                    </div>
+                    <span className="text-xs font-mono font-bold text-[#06B6D4] uppercase tracking-wider">
+                      PROVEN CLIENT IMPACT
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-[#0F2942] tracking-tight leading-tight">
+                      Healthcare Analytics Platform & AI Triage Engine
+                    </h3>
+                    <p className="text-sm sm:text-base text-[#5B6B7C] leading-relaxed font-normal">
+                      HIPAA-compliant data lakehouse and autonomous clinical triage assistant that reduced emergency wait times, eliminated manual charting waste, and delivered sub-second telemetry.
+                    </p>
 
-                    <div className="space-y-1.5">
-                      <h3 className="text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
-                        {svc.title}
-                      </h3>
-                      <p className="text-[#5B6B7A] text-sm leading-relaxed">
-                        {svc.desc}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2 pt-2 border-t border-slate-200/40">
-                      {svc.features.map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                          <Check className="w-3.5 h-3.5 text-[#13BFEA] shrink-0" />
-                          <span>{feat}</span>
+                    {/* Results Metrics */}
+                    <div className="grid grid-cols-3 gap-3 pt-2">
+                      <div className="p-3.5 rounded-2xl bg-[#F7FBFF] border border-[#0F172A]/[0.08] text-center">
+                        <div className="text-lg sm:text-xl font-black text-[#0F2942] font-mono">
+                          18,000 hrs
                         </div>
-                      ))}
+                        <div className="text-[10px] font-bold text-slate-500 mt-0.5">
+                          Hours Saved
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-[#F7FBFF] border border-[#0F172A]/[0.08] text-center">
+                        <div className="text-lg sm:text-xl font-black text-emerald-600 font-mono">
+                          99.9%
+                        </div>
+                        <div className="text-[10px] font-bold text-slate-500 mt-0.5">
+                          Platform Uptime
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-[#F7FBFF] border border-[#0F172A]/[0.08] text-center">
+                        <div className="text-lg sm:text-xl font-black text-[#0F2942] font-mono">
+                          42%
+                        </div>
+                        <div className="text-[10px] font-bold text-slate-500 mt-0.5">
+                          Faster Operations
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="pt-6">
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <Link
-                      href={svc.href}
-                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0B4A7D] group-hover:text-[#13BFEA] transition-colors"
+                      href={`/case-studies/${flagshipStudy.slug}`}
+                      className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-[#0F2942] hover:bg-[#0D3B66] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all group/btn"
                     >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <span>Read Full Case Study</span>
+                      <ArrowRight className="w-4 h-4 text-cyan-300 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* Row 2 */}
-          <motion.div
-            variants={containerStagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mt-6 sm:mt-7"
-          >
-            {SERVICES_GRID.slice(3, 6).map((svc, idx) => {
-              const IconComp = svc.icon;
-              const cardVariant = {
-                hidden: {
-                  opacity: 0,
-                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
-                  y: idx === 1 ? 35 : 12,
-                  scale: 0.98,
-                  transition: {
-                    duration: 0.7,
-                    ease: EASING,
-                  },
-                },
-                show: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    duration: 1.0,
-                    ease: EASING,
-                  },
-                },
-              };
-
-              return (
-                <motion.div
-                  key={svc.id}
-                  variants={cardVariant}
-                  className="rounded-3xl glass-service-card p-7 sm:p-8 shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out flex flex-col justify-between group"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-all shadow-xs">
-                        <IconComp className="w-6 h-6" />
-                      </div>
-                      <span className="text-[11px] font-bold text-[#0B4A7D] bg-[#ECFEFF] px-2.5 py-1 rounded-full border border-[#13BFEA]/30">
-                        {svc.tag}
-                      </span>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <h3 className="text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
-                        {svc.title}
-                      </h3>
-                      <p className="text-[#5B6B7A] text-sm leading-relaxed">
-                        {svc.desc}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2 pt-2 border-t border-slate-200/40">
-                      {svc.features.map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                          <Check className="w-3.5 h-3.5 text-[#13BFEA] shrink-0" />
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-6">
-                    <Link
-                      href={svc.href}
-                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0B4A7D] group-hover:text-[#13BFEA] transition-colors"
-                    >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. WHY CHOOSE CODEPLACED */}
+      {/* SECTION 5 — MORE SUCCESS STORIES */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 border-b border-slate-200/60">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.9, ease: EASING }}
-            className="text-center max-w-[740px] mx-auto mb-14 space-y-2.5"
-          >
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
-              THE CODEPLACED ADVANTAGE
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0F2940]">
-              Why Companies Choose CodePlaced
-            </h2>
-            <p className="text-[#5B6B7A] text-sm sm:text-base">
-              Senior engineering squads, transparent sprint cadences, and an unwavering focus on commercial ROI.
-            </p>
-          </motion.div>
-
-          {/* Row 1 */}
-          <motion.div
-            variants={containerStagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7"
-          >
-            {WHY_CHOOSE_CARDS.slice(0, 3).map((card, idx) => {
-              const IconComp = card.icon;
-              const cardVariant = {
-                hidden: {
-                  opacity: 0,
-                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
-                  y: idx === 1 ? 35 : 12,
-                  scale: 0.98,
-                  transition: {
-                    duration: 0.7,
-                    ease: EASING,
-                  },
-                },
-                show: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    duration: 1.0,
-                    ease: EASING,
-                  },
-                },
-              };
-
-              return (
-                <motion.div
-                  key={idx}
-                  variants={cardVariant}
-                  className="p-7 sm:p-8 rounded-3xl glass-panel-card shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-colors shadow-xs">
-                      <IconComp className="w-6 h-6" />
-                    </div>
-                    <span className="text-[11px] font-extrabold text-[#0B4A7D] bg-[#ECFEFF] px-3 py-1 rounded-full border border-[#13BFEA]/30">
-                      {card.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg sm:text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#5B6B7A] text-sm leading-relaxed">
-                    {card.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* Row 2 */}
-          <motion.div
-            variants={containerStagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mt-6 sm:mt-7"
-          >
-            {WHY_CHOOSE_CARDS.slice(3, 6).map((card, idx) => {
-              const IconComp = card.icon;
-              const cardVariant = {
-                hidden: {
-                  opacity: 0,
-                  x: idx === 0 ? -35 : idx === 2 ? 35 : 0,
-                  y: idx === 1 ? 35 : 12,
-                  scale: 0.98,
-                  transition: {
-                    duration: 0.7,
-                    ease: EASING,
-                  },
-                },
-                show: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    duration: 1.0,
-                    ease: EASING,
-                  },
-                },
-              };
-
-              return (
-                <motion.div
-                  key={idx}
-                  variants={cardVariant}
-                  className="p-7 sm:p-8 rounded-3xl glass-panel-card shadow-xs hover:border-[#13BFEA]/50 hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[5px] transition-all duration-400 ease-out space-y-3.5 group"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-[rgba(0,176,255,0.08)] border border-[#13BFEA]/20 flex items-center justify-center text-[#0B4A7D] group-hover:bg-[#0B4A7D] group-hover:text-white transition-colors shadow-xs">
-                      <IconComp className="w-6 h-6" />
-                    </div>
-                    <span className="text-[11px] font-extrabold text-[#0B4A7D] bg-[#ECFEFF] px-3 py-1 rounded-full border border-[#13BFEA]/30">
-                      {card.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg sm:text-xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#5B6B7A] text-sm leading-relaxed">
-                    {card.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 5. CASE STUDIES */}
-      {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 border-b border-slate-200/60 relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-14 gap-4">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 0.9, ease: EASING }}
-              className="space-y-2"
-            >
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
-                PROVEN DELIVERIES
+      <section className="py-20 lg:py-24 bg-[#F7FBFF]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#06B6D4]">
+                REAL SYSTEMS. REAL BUSINESS OUTCOMES.
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F2940] tracking-tight">
-                Featured Case Studies
+              <h2 className="text-3xl sm:text-4xl font-black text-[#0F2942] tracking-tight">
+                Production Case Studies
               </h2>
-            </motion.div>
+            </div>
 
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B4A7D] hover:text-[#13BFEA] transition-colors group"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#0D3B66] hover:text-[#06B6D4] transition-colors group"
             >
-              <span>View All Case Studies</span>
+              <span>View All 6 Case Studies</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          {/* 6-Card Staggered Masonry Portfolio Showcase */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
-            {CASE_STUDIES_DATA.map((study, idx) => {
-              const isLarge = idx === 0 || idx === 4;
-              const colSpanClass = isLarge ? "lg:col-span-7" : idx === 2 || idx === 3 ? "lg:col-span-6" : "lg:col-span-5";
-              const imageHeightClass = isLarge ? "h-[300px] sm:h-[340px] lg:h-[360px]" : "h-[240px] sm:h-[280px] lg:h-[290px]";
-
-              return (
-                <motion.div
-                  key={study.slug}
-                  initial={{ opacity: 0, y: 40, scale: 0.985 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{ duration: 0.95, delay: (idx % 2) * 0.12, ease: EASING }}
-                  className={`${colSpanClass} rounded-[24px] glass-panel-card card-shadow-subtle overflow-hidden flex flex-col justify-between hover:-translate-y-2 hover:border-[#13BFEA]/50 hover:shadow-[0_20px_50px_rgba(15,23,42,0.10),0_30px_70px_rgba(15,23,42,0.08)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group`}
-                >
-                  <Link
-                    href={`/case-studies/${study.slug}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block flex-1 flex flex-col justify-between"
-                  >
-                    <div>
-                      {/* Top Visual Portfolio Hero */}
-                      <div className={`relative ${imageHeightClass} w-full overflow-hidden bg-slate-900`}>
-                        <img
-                          src={study.heroImage}
-                          alt={study.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-95"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0F2940]/85 via-[#0F2940]/20 to-transparent" />
-
-                        {/* Top-Left: Industry Badge */}
-                        <div className="absolute top-4 left-4">
-                          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/95 text-[#0B4A7D] shadow-sm backdrop-blur-md border border-white/80">
-                            {study.industry}
-                          </span>
-                        </div>
-
-                        {/* Bottom Floating Primary Metric on Visual */}
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-extrabold shadow-sm">
-                            <span className="w-2 h-2 rounded-full bg-[#13BFEA] animate-pulse" />
-                            <span>{study.metrics[0].value}</span>
-                          </div>
-
-                          <div className="hidden sm:flex items-center gap-1.5">
-                            {study.technologies.slice(0, 2).map((tech, tIdx) => (
-                              <span
-                                key={tIdx}
-                                className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/20 backdrop-blur-md text-white border border-white/20"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Card Narrative Content */}
-                      <div className="p-6 sm:p-8 space-y-3">
-                        <h3 className="text-xl sm:text-2xl font-bold text-[#0F2940] group-hover:text-[#0B4A7D] transition-colors leading-snug">
-                          {study.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-[#5B6B7A] leading-relaxed line-clamp-2">
-                          {study.shortDescription}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Bottom Action Footer with Metric & CTA */}
-                    <div className="px-6 sm:px-8 pb-6 sm:pb-7 pt-4 border-t border-slate-200/40 flex items-center justify-between mt-auto">
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#5B6B7A] block">
-                          {study.metrics[0].label}
-                        </span>
-                        <p className="text-base sm:text-lg font-black text-[#0B4A7D] tracking-tight">
-                          {study.metrics[0].value}
-                        </p>
-                      </div>
-
-                      <div className="inline-flex items-center gap-2 text-sm font-extrabold text-[#0B4A7D] group-hover:text-[#13BFEA] transition-colors">
-                        <span>Read Case Study</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 6. STATS BANNER */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 border-b border-slate-200/60">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-            {STATS_DATA.map((m, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{
-                  duration: 0.9,
-                  delay: idx * 0.08,
-                  ease: EASING,
-                }}
-                className="p-5 sm:p-6 rounded-3xl glass-panel-card border-t-4 border-t-[#13BFEA] shadow-xs hover:shadow-[0_24px_65px_rgba(15,23,42,0.10)] hover:-translate-y-[4px] text-center space-y-1 transition-all duration-400 ease-out"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {SUCCESS_STORIES.map((story) => (
+              <Link
+                key={story.slug}
+                href={`/case-studies/${story.slug}`}
+                className="rounded-[32px] bg-white border border-[#0F172A]/[0.08] p-6 shadow-sm hover:shadow-xl hover:shadow-sky-950/8 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group"
               >
-                <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0B4A7D] to-[#13BFEA]">
-                  {m.value}
-                </span>
-                <p className="text-sm font-bold text-[#0F2940]">{m.label}</p>
-                <p className="text-[11px] text-[#5B6B7A] leading-tight">{m.detail}</p>
-              </motion.div>
+                <div className="space-y-4">
+                  <div className="relative h-48 w-full rounded-2xl overflow-hidden bg-slate-900">
+                    <img
+                      src={story.image}
+                      alt={story.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F2942]/80 via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-[#0D3B66] shadow-xs">
+                        {story.industry}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold text-cyan-300">
+                        {story.metricValue}
+                      </span>
+                      <span className="text-[10px] text-slate-300">
+                        {story.metricLabel}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-black text-[#0F2942] group-hover:text-[#06B6D4] transition-colors leading-snug">
+                      {story.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-[#5B6B7C] mt-1.5 leading-relaxed">
+                      {story.outcome}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0D3B66] group-hover:text-[#06B6D4] transition-colors">
+                  <span>Explore Case Study</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. INDUSTRIES */}
+      {/* SECTION 6 — IMPACT STATS */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 border-b border-slate-200/60">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: EASING }}
-            className="space-y-1.5"
-          >
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0B4A7D]">
-              DOMAIN SPECIALIZATION
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F2940] tracking-tight">
-              Industries We Power
+      <section className="py-24 lg:py-28 bg-[#F7FBFF]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#06B6D4]/30 shadow-xs">
+              <Zap className="w-3.5 h-3.5 text-[#06B6D4]" />
+              <span>MEASURABLE IMPACT</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2942]">
+              Engineered For Scale. <br className="hidden sm:inline" />
+              Proven Across Enterprises.
             </h2>
-          </motion.div>
+            <p className="text-[#5B6B7C] text-base sm:text-lg leading-relaxed">
+              We deliver mission-critical software, high-throughput lakehouses, and autonomous workflows that power global business operations.
+            </p>
+          </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3.5 max-w-[960px] mx-auto">
-            {INDUSTRIES_PILLS.map((ind, idx) => {
-              const IconComponent = ind.icon;
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {STATS_CARDS.map((stat, sIdx) => (
+              <div
+                key={sIdx}
+                className="p-8 rounded-[30px] bg-white border border-[#0F172A]/[0.08] shadow-lg shadow-sky-950/5 hover:shadow-xl hover:shadow-sky-950/10 hover:-translate-y-1.5 transition-all duration-300 space-y-3"
+              >
+                <div className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0F2942] to-[#06B6D4] font-mono tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-lg font-black text-[#0F2942]">
+                  {stat.label}
+                </div>
+                <p className="text-xs sm:text-sm text-[#5B6B7C] leading-relaxed">
+                  {stat.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* SECTION 7 — INDUSTRIES */}
+      {/* ========================================================================= */}
+      <section className="py-24 lg:py-32 bg-[#F7FBFF] relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#06B6D4]/30 shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" />
+                <span>DOMAIN SPECIALIZATION</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2942]">
+                Industries We Power
+              </h2>
+              <p className="text-[#5B6B7C] text-base sm:text-lg">
+                Domain-specific blueprints, regulatory compliance expertise, and battle-tested data pipelines.
+              </p>
+            </div>
+
+            <Link
+              href="/industries"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#0D3B66] hover:text-[#06B6D4] transition-colors group self-start md:self-auto"
+            >
+              <span>Explore All Industries</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {INDUSTRIES_DATA.map((ind) => {
+              const Icon = ind.icon;
+
               return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: idx * 0.05,
-                    ease: EASING,
-                  }}
-                  className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full glass-panel-card shadow-xs hover:border-[#13BFEA] hover:shadow-[0_10px_25px_rgba(19,191,234,0.12)] hover:-translate-y-0.5 transition-all duration-300 group cursor-default"
+                <div
+                  key={ind.id}
+                  className="p-8 rounded-[30px] bg-white border border-[#0F172A]/[0.08] hover:border-[#06B6D4] hover:shadow-xl hover:shadow-sky-950/8 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
                 >
-                  <IconComponent className="w-4 h-4 text-[#0B4A7D] group-hover:text-[#13BFEA] group-hover:rotate-12 transition-all duration-300" />
-                  <span className="text-sm font-bold text-[#0F2940]">{ind.name}</span>
-                </motion.div>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-2xl bg-[#F0F7FC] border border-slate-100 flex items-center justify-center text-[#0D3B66] shadow-xs group-hover:bg-[#0F2942] group-hover:text-[#06B6D4] transition-colors">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className="text-[11px] font-mono font-bold text-[#06B6D4] bg-[#F0F7FC] px-3 py-1 rounded-full border border-slate-100">
+                        {ind.badge}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-black text-[#0F2942] group-hover:text-[#06B6D4] transition-colors">
+                        {ind.name}
+                      </h3>
+                    </div>
+
+                    <div className="space-y-2 pt-1">
+                      {ind.points.map((pt, pIdx) => (
+                        <div key={pIdx} className="flex items-center gap-2 text-xs text-[#5B6B7C]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shrink-0" />
+                          <span>{pt}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-5 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <Link
+                      href={ind.href}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D3B66] group-hover:text-[#06B6D4] transition-colors"
+                    >
+                      <span>View Industry</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -902,39 +595,57 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 8. FINAL CTA (once: false) */}
+      {/* SECTION 8 — MODERN ENGINEERING ECOSYSTEM */}
       {/* ========================================================================= */}
-      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 35, scale: 0.98 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 1.0, ease: EASING }}
-          className="max-w-[1100px] mx-auto rounded-[32px] p-10 sm:p-14 lg:p-16 text-center text-white relative overflow-hidden shadow-2xl"
+      <TechStackRadar />
+
+      {/* ========================================================================= */}
+      {/* SECTION 9 — DELIVERY PROCESS */}
+      {/* ========================================================================= */}
+      <DeliveryProcessTimeline />
+
+      {/* ========================================================================= */}
+      {/* SECTION 10 — CTA */}
+      {/* ========================================================================= */}
+      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#F7FBFF]">
+        <div
+          className="max-w-[1200px] mx-auto rounded-[36px] p-10 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-2xl"
           style={{
-            background: "linear-gradient(135deg, #0B4A7D 0%, #13BFEA 100%)",
+            background:
+              "linear-gradient(135deg, #071524 0%, #0D3B66 50%, #1CC8E5 100%)",
+            border: "1px solid rgba(0, 212, 255, 0.25)",
           }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent pointer-events-none" />
+          {/* Cyber Grid */}
+          <div
+            className="absolute inset-0 opacity-10 pointer-events-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px)
+              `,
+              backgroundSize: "40px 40px",
+            }}
+          />
 
-          <div className="max-w-[780px] mx-auto relative z-10 space-y-7">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-white/15 text-white border border-white/25">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="max-w-[820px] mx-auto relative z-10 space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold uppercase tracking-wider bg-white/15 text-white border border-white/25">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
               <span>START YOUR NEXT SPRINT</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] [text-wrap:balance]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
               Ready To Build Something Intelligent?
             </h2>
 
-            <p className="text-base sm:text-lg text-white/90 max-w-[660px] mx-auto leading-relaxed font-normal">
-              From custom software to analytics platforms and growth systems, let&apos;s build something that scales. Schedule a 30-minute architecture session with our Principal Specialists.
+            <p className="text-base sm:text-lg text-white/90 max-w-[680px] mx-auto leading-relaxed font-normal">
+              From custom software to analytics platforms and growth systems, let&apos;s build something that scales.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-1">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2940] font-black text-[15px] shadow-xl shadow-black/10 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+                className="w-full sm:w-auto h-[54px] px-9 rounded-full bg-white hover:bg-slate-50 text-[#0F2B46] font-extrabold text-sm shadow-xl flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -942,13 +653,13 @@ export default function HomePage() {
 
               <Link
                 href="/contact"
-                className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white/15 hover:bg-white/25 text-white font-bold text-[15px] border border-white/30 shadow-xs flex items-center justify-center transition-all duration-300"
+                className="w-full sm:w-auto h-[54px] px-9 rounded-full bg-white/15 hover:bg-white/25 text-white font-bold text-sm border border-white/30 shadow-xs flex items-center justify-center transition-all duration-300"
               >
                 <span>Contact Us</span>
               </Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

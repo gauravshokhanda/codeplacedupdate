@@ -7,28 +7,20 @@ import {
   Sparkles,
   ArrowRight,
   Smartphone,
-  AppWindow,
   Share2,
-  BarChart3,
   Database,
-  Wrench,
-  Cloud,
   Building2,
   CheckCircle2,
   ShieldCheck,
   Zap,
-  TrendingUp,
-  Users,
   Layers,
-  Clock,
   Check,
   Search,
   FileCode2,
   Cpu,
-  Lock,
   Rocket,
   Headphones,
-  Settings2,
+  Cloud,
 } from "lucide-react";
 
 const PARTNER_LOGOS = [
@@ -42,133 +34,65 @@ const PARTNER_LOGOS = [
   { name: "Snowflake", category: "Cloud Data Warehouse" },
 ];
 
-const SERVICES_GRID = [
+const SERVICES_CATEGORIES_DATA = [
   {
-    id: "app-development",
-    title: "App Development",
+    id: "app-web-development",
+    number: "01",
+    title: "App & Web Development",
     icon: Smartphone,
-    gradient: "from-[#0f4c81] to-[#00b7c2]",
-    bgLight: "bg-[#F0F9FF]",
-    borderColor: "border-[#00b7c2]/20",
-    description:
-      "Native and cross-platform mobile apps engineered for speed, high user retention, and intuitive usability.",
-    features: [
-      "Basic App MVP",
-      "Custom Mobile Apps",
-      "Android & iOS",
-      "Admin Panels",
+    shortDesc: "Build powerful digital products and platforms tailored to your business.",
+    fullDesc:
+      "Build digital products that are designed to scale. From MVPs to enterprise-grade platforms, CodePlaced develops secure, high-performance applications that help businesses launch faster, operate efficiently, and grow confidently.",
+    positioning:
+      "From MVPs to fully customized digital platforms, we design and build reliable digital products around your business needs.",
+    services: [
+      "Mobile App Development (iOS & Android)",
+      "Web Development & Responsive Portals",
+      "Custom SaaS & Multi-Tenant Platforms",
+      "Shopify & E-Commerce Engineering",
+      "API Architecture & Microservices",
+      "Custom Backends & Admin Command Panels",
+      "Proactive Maintenance & SLA Support",
     ],
   },
   {
-    id: "web-development",
-    title: "Web Development",
-    icon: AppWindow,
-    gradient: "from-[#082F49] to-[#0EA5E9]",
-    bgLight: "bg-[#F8FAFC]",
-    borderColor: "border-slate-200",
-    description:
-      "Modern, ultra-fast web applications and responsive business websites optimized for search rankings and conversion.",
-    features: [
-      "Business Websites",
-      "Custom Web Applications",
-      "CMS Development",
-      "SEO Ready",
-    ],
-  },
-  {
-    id: "social-media",
-    title: "Social Media",
-    icon: Share2,
-    gradient: "from-[#0f4c81] to-[#14B8A6]",
-    bgLight: "bg-[#ECFDF5]",
-    borderColor: "border-[#14B8A6]/20",
-    description:
-      "End-to-end social media growth, visual creative production, scheduling automation, and performance analytics.",
-    features: [
-      "Monthly Content",
-      "Reels & Creatives",
-      "Posting & Scheduling",
-      "Growth Analytics",
-    ],
-  },
-  {
-    id: "data-analytics",
-    title: "Data Analytics",
-    icon: BarChart3,
-    gradient: "from-[#0369A1] to-[#06B6D4]",
-    bgLight: "bg-[#F0FDF4]",
-    borderColor: "border-cyan-200",
-    description:
-      "Transform disparate data streams into live, executive-ready dashboards and operational KPI tracking.",
-    features: [
-      "Power BI Dashboards",
-      "Looker Studio",
-      "KPI Reporting",
-      "Executive Dashboards",
-    ],
-  },
-  {
-    id: "custom-analytics",
-    title: "Custom Analytics",
+    id: "data-engineering-analytics",
+    number: "02",
+    title: "Data Engineering & Analytics",
     icon: Database,
-    gradient: "from-[#0B4F6C] to-[#22C55E]",
-    bgLight: "bg-[#F0F9FF]",
-    borderColor: "border-emerald-200",
-    description:
-      "Scalable data lakehouses, automated ETL/ELT pipelines, warehousing architectures, and predictive machine learning.",
-    features: [
-      "Data Warehousing",
-      "ETL Pipelines",
-      "Data Automation",
-      "Predictive Models",
+    shortDesc: "Transform complex data into connected, actionable insights.",
+    fullDesc:
+      "Turn your data into a commercial advantage. We help organizations collect, clean, transform, visualize, and operationalize data through modern analytics platforms and business intelligence solutions.",
+    positioning:
+      "We connect, clean, transform, and visualize your data so you can make faster, smarter decisions.",
+    services: [
+      "Data Lakehouses & Medallion Pipeline Architecture",
+      "Automated ETL/ELT with dbt & Python",
+      "Enterprise Data Warehousing (Snowflake, BigQuery)",
+      "Executive Command Dashboards (Power BI, Looker)",
+      "Predictive Analytics & KPI Modeling",
+      "Real-Time Telemetry & Data Quality Assurance",
+      "Row-Level Security & Governance Enforcement",
     ],
   },
   {
-    id: "website-maintenance",
-    title: "Website Maintenance",
-    icon: Wrench,
-    gradient: "from-[#0F172A] to-[#0284C7]",
-    bgLight: "bg-[#F8FAFC]",
-    borderColor: "border-slate-200",
-    description:
-      "Proactive security patching, zero-downtime backups, continuous performance monitoring, and 24/7 technical support.",
-    features: [
-      "Security Updates",
-      "Backups",
-      "Performance Monitoring",
-      "Technical Support",
-    ],
-  },
-  {
-    id: "cloud-infrastructure",
-    title: "Cloud & Infrastructure",
-    icon: Cloud,
-    gradient: "from-[#0284C7] to-[#38BDF8]",
-    bgLight: "bg-[#F0F9FF]",
-    borderColor: "border-sky-200",
-    description:
-      "Reliable cloud architecture, automated CI/CD deployment gates, containerization, and FinOps cost optimization.",
-    features: [
-      "AWS",
-      "Azure",
-      "Deployment",
-      "Monitoring",
-    ],
-  },
-  {
-    id: "enterprise-solutions",
-    title: "Enterprise Solutions",
-    icon: Building2,
-    gradient: "from-[#082F49] to-[#0B4F6C]",
-    bgLight: "bg-[#F8FAFC]",
-    borderColor: "border-slate-200",
-    description:
-      "Custom internal workflow software, secure employee portals, CRM architectures, and multi-system API integrations.",
-    features: [
-      "CRM Systems",
-      "Internal Portals",
-      "Automation",
-      "Integrations",
+    id: "digital-social-marketing",
+    number: "03",
+    title: "Digital & Social Marketing",
+    icon: Share2,
+    shortDesc: "Turn your digital presence into a channel for meaningful growth.",
+    fullDesc:
+      "Build your brand. Reach your audience. Drive growth. From content creation and social media management to paid advertising and analytics, CodePlaced helps businesses create a stronger digital presence and measurable marketing outcomes.",
+    positioning:
+      "From strategy and content to paid campaigns and analytics, we help businesses build a stronger digital presence and generate measurable growth.",
+    services: [
+      "Technical SEO & Content Growth Strategy",
+      "Omnichannel Social Media Management",
+      "High-Impact Creative Production & Copywriting",
+      "Paid Acquisition (Google Ads, Meta, LinkedIn)",
+      "Conversion Rate Optimization (CRO) & Funnels",
+      "Multi-Touch Attribution & Campaign Tracking",
+      "Full-Funnel Analytics Reporting",
     ],
   },
 ];
@@ -176,92 +100,74 @@ const SERVICES_GRID = [
 const DELIVERY_STEPS = [
   {
     step: "01",
-    title: "Discovery",
-    desc: "Technical requirements, architecture scoping & business goal alignment.",
+    title: "Discover",
+    desc: "Understand business goals, user needs, and technical constraints to architect the optimal delivery roadmap.",
     icon: Search,
   },
   {
     step: "02",
-    title: "Planning",
-    desc: "System blueprints, sprint timeline, milestone roadmap & SLA definition.",
-    icon: Layers,
-  },
-  {
-    step: "03",
     title: "Design",
-    desc: "UI/UX wireframes, user journeys & high-fidelity interactive prototypes.",
+    desc: "Plan scalable solutions, system architecture diagrams, and intuitive user experiences with clear milestones.",
     icon: FileCode2,
   },
   {
-    step: "04",
-    title: "Development",
-    desc: "Agile sprints by senior engineers with weekly demos and clean code.",
+    step: "03",
+    title: "Build",
+    desc: "Develop robust products, platforms, and automated data pipelines with 2-week agile sprints.",
     icon: Cpu,
   },
   {
-    step: "05",
-    title: "Testing",
-    desc: "Rigorous QA testing, security audits & automated regression validation.",
-    icon: ShieldCheck,
-  },
-  {
-    step: "06",
-    title: "Launch",
-    desc: "Zero-downtime deployment, infrastructure handoff & production verify.",
+    step: "04",
+    title: "Optimize",
+    desc: "Monitor runtime performance, fine-tune query latencies, and scale systems continuously post-launch.",
     icon: Rocket,
-  },
-  {
-    step: "07",
-    title: "Support",
-    desc: "Continuous SLA maintenance, performance monitoring & proactive updates.",
-    icon: Headphones,
   },
 ];
 
-const WHY_CHOOSE_ITEMS = [
+const SERVICE_DIFFERENTIATORS = [
   {
-    title: "Fast Delivery",
-    desc: "Production-ready systems deployed in 2–4 weeks using pre-tested blueprints.",
+    title: "End-to-End Delivery",
+    desc: "From initial scoping and system architecture to launch and ongoing maintenance, we manage the entire project lifecycle.",
     icon: Zap,
-    badge: "2–4 Weeks",
+    badge: "Full Lifecycle",
   },
   {
-    title: "Business Focused",
-    desc: "Every line of code and dashboard is built around measurable outcomes and revenue ROI.",
-    icon: TrendingUp,
-    badge: "Outcome Driven",
+    title: "Industry Expertise",
+    desc: "Deep domain knowledge across fintech, healthcare, retail, SaaS, logistics, and digital commerce.",
+    icon: Building2,
+    badge: "Domain Depth",
   },
   {
-    title: "Senior Engineers",
-    desc: "Work directly with experienced developers and architects with zero junior handoffs.",
-    icon: Users,
-    badge: "100% Senior",
-  },
-  {
-    title: "Transparent Communication",
-    desc: "Weekly sprint demos, real-time Slack communication, and transparent Git commits.",
-    icon: Clock,
-    badge: "Weekly Demos",
+    title: "Modern Technologies",
+    desc: "Built on resilient cloud stacks, modern frontend frameworks, and robust data engineering tools.",
+    icon: Cloud,
+    badge: "Modern Stack",
   },
   {
     title: "Scalable Architecture",
-    desc: "Engineered from day one to handle high traffic, secure multi-tenancy, and growth.",
+    desc: "Engineering systems designed to effortlessly handle increasing workloads, users, and data volumes.",
     icon: Layers,
-    badge: "Cloud Ready",
+    badge: "High Performance",
   },
   {
-    title: "Long-Term Support",
-    desc: "Reliable maintenance packages, 99.9% uptime SLAs, and dedicated technical support.",
-    icon: ShieldCheck,
-    badge: "24/7 SLA",
+    title: "Data-Driven Execution",
+    desc: "Every technical and marketing decision is backed by analytics, user telemetry, and measurable KPIs.",
+    icon: Database,
+    badge: "Actionable BI",
+  },
+  {
+    title: "Continuous Support",
+    desc: "Proactive monitoring, SLA maintenance, and continuous optimization to ensure sustained long-term success.",
+    icon: Headphones,
+    badge: "Sustained ROI",
   },
 ];
 
 const STATS_DATA = [
-  { value: "250+", label: "Projects Delivered", sub: "Web, Mobile & AI" },
-  { value: "150+", label: "Clients Served", sub: "Global Enterprises & Startups" },
-  { value: "1200+", label: "Automated Workflows", sub: "ETL, AI & Analytics" },
-  { value: "15+", label: "Industries Supported", sub: "Fintech, Health, Retail & SaaS" },
+  { value: "250+", label: "Projects Delivered", detail: "Software, BI & Growth Systems" },
+  { value: "150+", label: "Clients Served", detail: "Startups to Global Enterprises" },
+  { value: "1200+", label: "Automated Workflows", detail: "Pipelines & Production APIs" },
+  { value: "15+", label: "Industries Supported", detail: "Domain-Specific Blueprints" },
 ];
 
 const TECH_CATEGORIES = [
@@ -295,7 +201,7 @@ const TECH_CATEGORIES = [
   {
     category: "Cloud & DevOps",
     technologies: [
-      { name: "AWS", tag: "Amazon Web Services" },
+      { name: "AWS", tag: "Cloud Infrastructure" },
       { name: "Microsoft Azure", tag: "Enterprise Cloud" },
       { name: "Docker", tag: "Containerization" },
       { name: "Kubernetes", tag: "Orchestration" },
@@ -308,218 +214,209 @@ export default function ServicesPage() {
   const marqueeLogos = [...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS];
 
   return (
-    <div className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans relative">
+    <div
+      style={{
+        background: "linear-gradient(180deg, #f8fcff 0%, #edf7fb 40%, #eaf5f9 100%)",
+      }}
+      className="text-[#0F2B46] selection:bg-[#0D3B66] selection:text-white font-sans relative min-h-screen"
+    >
       {/* ========================================================================= */}
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <div className="relative overflow-hidden border-b border-slate-200/60">
-        {/* Ambient Soft Glow Behind Content */}
+      <section className="relative pt-32 pb-12 sm:pt-36 sm:pb-16 lg:pt-40 lg:pb-20 text-center">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-[#0D3B66] border border-[#1CC8E5]/30 shadow-xs"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#1CC8E5]" />
+            <span>MODERN TECHNOLOGY PARTNER</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight text-[#0F2B46] [text-wrap:balance]"
+          >
+            Solutions Designed Around{" "}
+            <span
+              className="bg-clip-text text-transparent font-black inline-block py-0.5"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #0F2B46 0%, #1CC8E5 50%, #0D3B66 100%)",
+              }}
+            >
+              Your Business Goals
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg lg:text-xl text-[#5B6B7C] max-w-[800px] mx-auto leading-relaxed font-normal"
+          >
+            From application development and data engineering to digital marketing, we deliver solutions built for measurable commercial impact.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
+          >
+            <a
+              href="#services-grid"
+              className="w-full sm:w-auto h-[50px] px-8 rounded-full text-white font-bold text-sm shadow-md hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+              style={{
+                background: "linear-gradient(90deg, #0F2B46, #1CC8E5)",
+              }}
+            >
+              <span>Explore Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            <Link
+              href="/case-studies"
+              className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2B46] font-bold text-sm border border-slate-200 shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#1CC8E5]/50"
+            >
+              <span>View Our Work</span>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Marquee */}
+      <div className="w-full py-4 border-y border-[#0F2B46]/10 overflow-hidden relative select-none">
         <div
-          className="absolute top-16 left-1/2 -translate-x-1/2 w-[850px] h-[450px] pointer-events-none -z-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(20,184,197,0.14), rgba(11,107,136,0.06), transparent 70%)",
-          }}
-        />
-
-        <section className="relative pt-32 pb-8 sm:pt-36 sm:pb-9 lg:pt-40 lg:pb-10">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            {/* Pill Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex justify-center mb-5"
-            >
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-                <span>FULL STACK SOFTWARE & AI ENGINEERING</span>
-              </div>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[38px] sm:text-[54px] lg:text-[68px] font-[800] leading-[1.12] sm:leading-[1.14] tracking-[-0.03em] text-[#082F49] mb-5 max-w-[1050px] mx-auto [text-wrap:balance]"
-            >
-              Custom Software, Data Analytics &{" "}
-              <span
-                className="bg-clip-text text-transparent font-extrabold inline-block py-0.5"
-                style={{
-                  backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                }}
+          className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_60px,_black_calc(100%-60px),transparent_100%)] select-none"
+          onMouseEnter={() => setIsMarqueePaused(true)}
+          onMouseLeave={() => setIsMarqueePaused(false)}
+        >
+          <motion.div
+            animate={{ x: isMarqueePaused ? undefined : ["0%", "-50%"] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 24,
+                ease: "linear",
+              },
+            }}
+            className="flex items-center gap-8 sm:gap-12 w-max"
+          >
+            {marqueeLogos.map((logo, idx) => (
+              <div
+                key={`${logo.name}-${idx}`}
+                className="flex items-center gap-2.5 text-[#5B6B7C] hover:text-[#0F2B46] transition-colors shrink-0 cursor-default"
               >
-                Digital Growth Services
-              </span>
-            </motion.h1>
-
-            {/* Description Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-600 max-w-[800px] mx-auto mb-7 leading-relaxed font-normal"
-            >
-              From websites and mobile apps to analytics dashboards, social media growth, and
-              ongoing maintenance, CodePlaced helps businesses build, launch, and scale faster.
-            </motion.p>
-
-            {/* Primary Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
-            >
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto h-[50px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
-              >
-                <span>Book Strategy Call</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <a
-                href="#services-grid"
-                className="w-full sm:w-auto h-[50px] px-8 rounded-2xl bg-white/80 backdrop-blur-sm hover:bg-white text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
-              >
-                <span>Explore Services</span>
-              </a>
-            </motion.div>
-
-            {/* Trust Bullet Items Below Buttons */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.55, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm font-semibold text-slate-600"
-            >
-              <div className="flex items-center gap-1.5 text-slate-700">
-                <span className="text-[#00b7c2] font-black">✓</span>
-                <span>30-Min Consultation</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1CC8E5]" />
+                <span className="text-sm sm:text-[15px] font-semibold tracking-tight">{logo.name}</span>
+                <span className="text-xs text-slate-400">({logo.category})</span>
               </div>
-              <div className="flex items-center gap-1.5 text-slate-700">
-                <span className="text-[#00b7c2] font-black">✓</span>
-                <span>NDA Signed</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-slate-700">
-                <span className="text-[#00b7c2] font-black">✓</span>
-                <span>Delivery Focused</span>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Partner Tech Marquee (Continuous Gradient, Subtle Divider, Monochrome) */}
-        <div className="py-4 border-t border-[#0F3D5E]/10 overflow-hidden relative select-none">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div
-              className="w-full overflow-hidden relative [mask-image:linear-gradient(to_right,transparent_0,_black_60px,_black_calc(100%-60px),transparent_100%)] select-none"
-              onMouseEnter={() => setIsMarqueePaused(true)}
-              onMouseLeave={() => setIsMarqueePaused(false)}
-            >
-              <motion.div
-                animate={{ x: isMarqueePaused ? undefined : ["0%", "-50%"] }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 24,
-                    ease: "linear",
-                  },
-                }}
-                className="flex items-center gap-8 sm:gap-12 w-max"
-              >
-                {marqueeLogos.map((logo, idx) => (
-                  <div
-                    key={`${logo.name}-${idx}`}
-                    className="flex items-center gap-2.5 text-[#36546F]/80 hover:text-[#082F49] transition-colors shrink-0 cursor-default"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00b7c2]" />
-                    <span className="text-sm sm:text-[15px] font-semibold tracking-[-0.02em]">{logo.name}</span>
-                    <span className="text-[11px] text-slate-400 font-medium">({logo.category})</span>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
+            ))}
+          </motion.div>
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. SERVICES GRID (8 Glassmorphic Cards) */}
+      {/* 2. CORE SERVICE OFFERINGS */}
       {/* ========================================================================= */}
-      <section id="services-grid" className="pt-14 pb-20 sm:pt-16 sm:pb-24 border-b border-slate-200/60">
+      <section id="services-grid" className="py-20 lg:py-28">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
+          <div className="max-w-[900px] mx-auto text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#1CC8E5]/30 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#1CC8E5]" />
               <span>CORE SERVICE OFFERINGS</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2B46]">
               Comprehensive Technology & Growth Services
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
-              Engineered for velocity, scalability, and measurable business impact. Everything your
-              organization needs from MVP to enterprise scale.
+            <p className="text-base sm:text-lg text-[#5B6B7C] leading-relaxed max-w-[750px] mx-auto font-normal">
+              From MVPs to enterprise-grade platforms, analytics lakehouses, and high-impact digital marketing.
             </p>
           </div>
 
-          {/* 8 Service Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SERVICES_GRID.map((svc) => {
-              const IconComponent = svc.icon;
+          {/* 3 Large Service Pillar Cards */}
+          <div className="space-y-8 lg:space-y-10">
+            {SERVICES_CATEGORIES_DATA.map((cat) => {
+              const IconComponent = cat.icon;
               return (
                 <div
-                  key={svc.id}
-                  className="rounded-[20px] glass-service-card p-7 shadow-xs hover:shadow-xl hover:border-[#00b7c2]/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[280px]"
+                  key={cat.id}
+                  className="rounded-3xl bg-white p-7 sm:p-9 lg:p-10 shadow-xs hover:shadow-xl hover:shadow-sky-950/8 hover:border-[#1CC8E5]/40 transition-all duration-300 border border-sky-100 group"
                 >
-                  <div>
-                    {/* Icon Header */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#ECFEFF] to-[#E0F2FE] border border-[#00b7c2]/25 flex items-center justify-center text-[#0f4c81] group-hover:scale-105 transition-transform duration-300">
-                        <IconComponent className="w-6 h-6 text-[#0f4c81]" />
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    {/* Left Column: Category Info */}
+                    <div className="lg:col-span-5 space-y-5 flex flex-col justify-between">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-[#0D3B66] shadow-2xs group-hover:bg-[#0F2B46] group-hover:text-white transition-colors duration-300">
+                            <IconComponent className="w-6 h-6" />
+                          </div>
+                          <span className="px-3 py-1 rounded-full text-xs font-black bg-[#F4FAFC] text-[#0D3B66] border border-sky-100">
+                            {cat.number}
+                          </span>
+                        </div>
+
+                        <h3 className="text-2xl sm:text-3xl font-black text-[#0F2B46] tracking-tight group-hover:text-[#0D3B66] transition-colors">
+                          {cat.title}
+                        </h3>
+
+                        <p className="text-xs font-bold text-[#18B6D8] uppercase tracking-wide">
+                          {cat.shortDesc}
+                        </p>
+
+                        <p className="text-sm text-[#5B6B7C] leading-relaxed font-normal">
+                          {cat.fullDesc}
+                        </p>
                       </div>
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                        Production Ready
-                      </span>
+
+                      <div className="p-4 rounded-2xl bg-[#F4FAFC] border border-sky-100 text-xs sm:text-sm text-[#0F2B46] font-medium leading-relaxed">
+                        <span className="font-bold text-[#0D3B66] block mb-1">Our Approach:</span>
+                        {cat.positioning}
+                      </div>
                     </div>
 
-                    {/* Title & Description */}
-                    <h3 className="text-xl font-bold text-[#082F49] group-hover:text-[#0f4c81] transition-colors mb-2.5">
-                      {svc.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
-                      {svc.description}
-                    </p>
+                    {/* Right Column: Services List */}
+                    <div className="lg:col-span-7 flex flex-col justify-between pt-4 lg:pt-0 lg:border-l lg:border-slate-100 lg:pl-10">
+                      <div>
+                        <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-4">
+                          Specialized Deliverables
+                        </div>
 
-                    {/* Features List */}
-                    <ul className="space-y-2.5 mb-6 pt-4 border-t border-slate-200/40">
-                      {svc.features.map((feature, fIdx) => (
-                        <li
-                          key={fIdx}
-                          className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700"
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                          {cat.services.map((svcName, sIdx) => (
+                            <div
+                              key={sIdx}
+                              className="p-3.5 rounded-xl bg-[#F4FAFC] hover:bg-white border border-sky-100 hover:border-[#1CC8E5]/40 transition-all flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#0F2B46] shadow-2xs"
+                            >
+                              <div className="w-5 h-5 rounded-full bg-white text-[#1CC8E5] border border-sky-100 shadow-2xs flex items-center justify-center flex-shrink-0">
+                                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                              </div>
+                              <span className="truncate">{svcName}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="pt-6 mt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <span className="text-xs font-semibold text-[#5B6B7C]">
+                          Need custom scoping for this capability?
+                        </span>
+
+                        <Link
+                          href="/contact"
+                          className="inline-flex items-center gap-2 px-6 h-10 rounded-full bg-[#0F2B46] hover:bg-[#0D3B66] text-white text-xs font-bold shadow-md transition-all active:scale-95"
                         >
-                          <div className="w-4 h-4 rounded-full bg-[#ECFEFF] text-[#00b7c2] flex items-center justify-center flex-shrink-0">
-                            <Check className="w-3 h-3 stroke-[3]" />
-                          </div>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                          <span>Get In Touch</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Card Bottom Link */}
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center justify-between w-full pt-4 border-t border-slate-200/40 text-xs font-bold text-[#0f4c81] group-hover:text-[#00b7c2] transition-colors"
-                  >
-                    <span>Request Scoping</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
                 </div>
               );
             })}
@@ -528,59 +425,52 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. DELIVERY PROCESS */}
+      {/* 3. OUR DELIVERY APPROACH */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-slate-200/60">
+      <section className="py-20 lg:py-28 bg-[#F4FAFC]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <Zap className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>THE CODEPLACED BLUEPRINT</span>
+          <div className="max-w-[900px] mx-auto text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#1CC8E5]/30 shadow-xs">
+              <Zap className="w-3.5 h-3.5 text-[#1CC8E5]" />
+              <span>OUR DELIVERY APPROACH</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
-              How We Deliver Production Systems
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2B46]">
+              From Strategy To Execution
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
-              A transparent, agile, 7-step engineering methodology that guarantees reliable code and
-              fixed milestones from day one.
+            <p className="text-base sm:text-lg text-[#5B6B7C] leading-relaxed max-w-[750px] mx-auto font-normal">
+              A structured 4-stage delivery lifecycle designed to take projects seamlessly from initial concept to scalable production systems.
             </p>
           </div>
 
-          {/* 7-Step Delivery Process Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 relative">
-            {DELIVERY_STEPS.map((step, idx) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {DELIVERY_STEPS.map((step) => {
               const StepIcon = step.icon;
               return (
                 <div
                   key={step.step}
-                  className="rounded-[20px] glass-panel-card p-5 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/40 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between relative group"
+                  className="rounded-3xl bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-sky-950/5 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between border border-sky-100 group"
                 >
                   <div>
-                    {/* Step Number Badge */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-black text-[#00b7c2] tracking-wider">
-                        {step.step}
+                    <div className="flex items-center justify-between mb-5">
+                      <span className="text-xs font-black text-[#18B6D8] tracking-wider px-2.5 py-1 rounded-full bg-[#F4FAFC] border border-sky-100">
+                        STAGE {step.step}
                       </span>
-                      <div className="w-8 h-8 rounded-xl bg-[#ECFEFF]/80 flex items-center justify-center text-[#0f4c81]">
-                        <StepIcon className="w-4 h-4" />
+                      <div className="w-10 h-10 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-[#0D3B66] group-hover:bg-[#0F2B46] group-hover:text-white transition-colors">
+                        <StepIcon className="w-5 h-5" />
                       </div>
                     </div>
 
-                    {/* Step Title */}
-                    <h3 className="text-base font-extrabold text-[#082F49] mb-2 group-hover:text-[#0f4c81] transition-colors">
+                    <h3 className="text-xl font-bold text-[#0F2B46] mb-2 group-hover:text-[#0D3B66] transition-colors">
                       {step.title}
                     </h3>
 
-                    {/* Step Description */}
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-[#5B6B7C] leading-relaxed font-normal">
                       {step.desc}
                     </p>
                   </div>
 
-                  {/* Status Indicator */}
-                  <div className="mt-4 pt-3 border-t border-slate-200/40 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                     <span>Milestone Gate</span>
                   </div>
                 </div>
@@ -591,59 +481,52 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. WHY BUSINESSES CHOOSE CODEPLACED */}
+      {/* 4. DIFFERENTIATORS */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-slate-200/60">
+      <section className="py-20 lg:py-28">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>THE CODEPLACED ADVANTAGE</span>
+          <div className="max-w-[900px] mx-auto text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#1CC8E5]/30 shadow-xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#1CC8E5]" />
+              <span>WHAT SETS OUR SERVICES APART</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
-              Why Businesses Choose CodePlaced
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2B46]">
+              Built For Scale. Designed For Results.
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
-              We replace bloated traditional agencies with elite senior engineering velocity,
-              transparent communication, and guaranteed delivery.
+            <p className="text-base sm:text-lg text-[#5B6B7C] leading-relaxed max-w-[750px] mx-auto font-normal">
+              We combine technical engineering excellence, domain specialization, and agile execution to deliver reliable, enterprise-grade digital solutions.
             </p>
           </div>
 
-          {/* 6 Advantage Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {WHY_CHOOSE_ITEMS.map((item, idx) => {
+            {SERVICE_DIFFERENTIATORS.map((item, idx) => {
               const ItemIcon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="rounded-[20px] glass-panel-card p-8 shadow-2xs hover:shadow-lg hover:border-[#00b7c2]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                  className="rounded-3xl bg-white p-7 sm:p-8 shadow-xs hover:shadow-xl hover:shadow-sky-950/5 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between border border-sky-100 group"
                 >
                   <div>
-                    {/* Top Row: Icon & Tag */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs flex items-center justify-center text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300">
+                      <div className="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-[#0D3B66] group-hover:bg-[#0F2B46] group-hover:text-white transition-colors duration-300">
                         <ItemIcon className="w-6 h-6" />
                       </div>
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/20">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#F4FAFC] text-[#0D3B66] border border-sky-100">
                         {item.badge}
                       </span>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-[#082F49] mb-3 group-hover:text-[#0f4c81] transition-colors">
+                    <h3 className="text-xl font-bold text-[#0F2B46] mb-2 group-hover:text-[#0D3B66] transition-colors">
                       {item.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-sm text-[#5B6B7C] leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
 
-                  {/* Checked Guarantee */}
-                  <div className="mt-6 pt-4 border-t border-slate-200/40 flex items-center gap-2 text-xs font-bold text-slate-700">
-                    <CheckCircle2 className="w-4 h-4 text-[#00b7c2]" />
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-[#0F2B46]">
+                    <CheckCircle2 className="w-4 h-4 text-[#1CC8E5]" />
                     <span>CodePlaced Commitment</span>
                   </div>
                 </div>
@@ -654,24 +537,24 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. SIMPLE STATS BLOCK (Dark Gradient Section) */}
+      {/* 5. STATS BLOCK (Consistent Theme) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#082F49] via-[#0B4F6C] to-[#041E2A] text-white">
+      <section className="py-16 sm:py-20 bg-[#F4FAFC]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
             {STATS_DATA.map((stat, sIdx) => (
               <div
                 key={sIdx}
-                className="p-6 sm:p-8 rounded-[20px] bg-white/[0.05] border border-white/10 backdrop-blur-xs flex flex-col justify-center"
+                className="p-6 sm:p-8 rounded-3xl bg-white border border-sky-100 shadow-xs hover:shadow-xl hover:shadow-sky-950/8 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#38BDF8] tracking-tight mb-2">
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0F2B46] to-[#1CC8E5] tracking-tight mb-2">
                   {stat.value}
                 </div>
-                <div className="text-base sm:text-lg font-extrabold text-white mb-1">
+                <div className="text-sm font-bold text-[#0F2B46] mb-1">
                   {stat.label}
                 </div>
-                <div className="text-xs text-slate-300 font-medium">
-                  {stat.sub}
+                <div className="text-xs text-[#5B6B7C]">
+                  {stat.detail}
                 </div>
               </div>
             ))}
@@ -682,20 +565,18 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 6. TECHNOLOGY STACK */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-slate-200/60">
+      <section className="py-20 lg:py-28">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-[900px] mx-auto text-center mb-14 lg:mb-18 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <Cpu className="w-3.5 h-3.5 text-[#00b7c2]" />
+          <div className="max-w-[900px] mx-auto text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#1CC8E5]/30 shadow-xs">
+              <Cpu className="w-3.5 h-3.5 text-[#1CC8E5]" />
               <span>MODERN TECH STACK</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2B46]">
               Enterprise-Grade Technologies
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[750px] mx-auto font-normal">
-              We build with modern, production-proven languages and cloud ecosystems that maximize
-              runtime speed, maintainability, and developer velocity.
+            <p className="text-base sm:text-lg text-[#5B6B7C] leading-relaxed max-w-[750px] mx-auto font-normal">
+              We build with modern, production-proven languages and cloud ecosystems that maximize runtime speed, maintainability, and developer velocity.
             </p>
           </div>
 
@@ -704,29 +585,27 @@ export default function ServicesPage() {
             {TECH_CATEGORIES.map((cat, cIdx) => (
               <div
                 key={cIdx}
-                className="rounded-[20px] glass-panel-card p-6 shadow-2xs hover:shadow-md hover:border-[#00b7c2]/30 hover:-translate-y-1 transition-all duration-200"
+                className="rounded-3xl bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-sky-950/5 hover:-translate-y-1 transition-all duration-300 border border-sky-100"
               >
-                {/* Category Header */}
-                <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200/40">
-                  <h3 className="text-lg font-bold text-[#082F49]">
+                <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-100">
+                  <h3 className="text-lg font-bold text-[#0F2B46]">
                     {cat.category}
                   </h3>
-                  <span className="text-xs font-extrabold text-[#00b7c2]">
+                  <span className="text-xs font-extrabold text-[#18B6D8]">
                     0{cIdx + 1}
                   </span>
                 </div>
 
-                {/* Technologies List */}
                 <div className="space-y-3">
                   {cat.technologies.map((tech, tIdx) => (
                     <div
                       key={tIdx}
-                      className="p-3 rounded-xl bg-white/70 backdrop-blur-xs border border-slate-200/60 flex items-center justify-between hover:border-[#00b7c2]/40 transition-colors"
+                      className="p-3.5 rounded-xl bg-[#F4FAFC] border border-sky-100 flex items-center justify-between hover:border-[#1CC8E5]/40 transition-colors"
                     >
-                      <span className="text-sm font-bold text-[#082F49]">
+                      <span className="text-sm font-bold text-[#0F2B46]">
                         {tech.name}
                       </span>
-                      <span className="text-[11px] font-semibold text-slate-600 bg-white/80 px-2 py-0.5 rounded-md border border-slate-200/50">
+                      <span className="text-[11px] font-semibold text-[#5B6B7C] bg-white px-2 py-0.5 rounded-md border border-slate-100">
                         {tech.tag}
                       </span>
                     </div>
@@ -739,61 +618,44 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. FINAL CTA (Dark Gradient like TechAhead) */}
+      {/* 7. FINAL CTA */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-gradient-to-b from-[#082F49] to-[#041E2A] text-white text-center relative overflow-hidden">
-        {/* Ambient Glow */}
+      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] pointer-events-none -z-0"
+          className="max-w-[1100px] mx-auto rounded-[32px] p-10 sm:p-14 lg:p-16 text-center text-white relative overflow-hidden shadow-2xl"
           style={{
-            background:
-              "radial-gradient(circle at center, rgba(0,183,194,0.18), transparent 70%)",
+            background: "linear-gradient(135deg, #0F2B46 0%, #0D3B66 50%, #1CC8E5 100%)",
           }}
-        />
-
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-7">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>START YOUR PROJECT TODAY</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Ready to Build Your Next Product?
-          </h2>
-
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Let&apos;s discuss your website, app, analytics dashboard, or growth strategy.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-[15px] transition-all shadow-xl shadow-[#38BDF8]/20 flex items-center justify-center gap-2.5 active:scale-95 group"
-            >
-              <span>Schedule Call</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-[15px] border border-white/20 transition-all flex items-center justify-center gap-2"
-            >
-              <span>Contact Us</span>
-            </Link>
-          </div>
-
-          <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm font-semibold text-slate-300">
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>30-Min Strategy Call</span>
+        >
+          <div className="max-w-[780px] mx-auto relative z-10 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-white/15 text-white border border-white/25">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
+              <span>START YOUR PROJECT TODAY</span>
             </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Bilateral NDA Upfront</span>
-            </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Delivery in 2–4 Weeks</span>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+              Technology That Turns Ideas Into Impact
+            </h2>
+
+            <p className="text-base sm:text-lg text-white/90 max-w-[660px] mx-auto leading-relaxed font-normal">
+              Let&apos;s build scalable digital products, unlock value from your data, and accelerate meaningful business growth.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#0F2B46] font-extrabold text-sm shadow-xl flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group"
+              >
+                <span>Book Strategy Call</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <Link
+                href="/case-studies"
+                className="w-full sm:w-auto h-[50px] px-8 rounded-full bg-white/15 hover:bg-white/25 text-white font-bold text-sm border border-white/30 shadow-xs flex items-center justify-center transition-all duration-300"
+              >
+                <span>View Case Studies</span>
+              </Link>
             </div>
           </div>
         </div>

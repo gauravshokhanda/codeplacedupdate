@@ -62,13 +62,13 @@ export function ServicesGrid({ onOpenBookAudit }: ServicesGridProps) {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#0E7490]" /> Full-Spectrum Solutions
+            <Sparkles className="w-3.5 h-3.5 text-[#0E7490]" /> Core Service Pillars
           </div>
           <h2 className="text-[28px] sm:text-[36px] lg:text-[48px] font-black text-[#082F49] tracking-tight leading-[1.15]">
-            Comprehensive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B4F6C] via-[#0E7490] to-[#14B8A6]">Data & AI Services</span>
+            Comprehensive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B4F6C] via-[#0E7490] to-[#14B8A6]">Technology & Growth Services</span>
           </h2>
           <p className="text-[18px] text-slate-600 leading-[1.6]">
-            Click any service card to expand its complete architecture, technical guardrails, and delivery roadmap directly inside the page.
+            Click any service pillar to expand its complete architecture, specialized capabilities, and delivery methodology.
           </p>
         </div>
 

@@ -66,6 +66,60 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://codeplaced.com/#organization",
+      name: "CodePlaced",
+      url: "https://codeplaced.com",
+      logo: "https://codeplaced.com/logo.png",
+      description:
+        "Modern technology partner specializing in application development, cloud data engineering, business intelligence, and growth systems.",
+      founder: [
+        {
+          "@type": "Person",
+          name: "Manya Tyagi",
+          jobTitle: "Founder & CEO",
+          sameAs: "https://www.linkedin.com/in/manya-tyagi-626a421b2/",
+        },
+        {
+          "@type": "Person",
+          name: "Gaurav Shokhanda",
+          jobTitle: "Co-Founder & CTO",
+          sameAs: "https://www.linkedin.com/in/gaurav-shokhanda-b5ba12194/",
+        },
+      ],
+      sameAs: [
+        "https://www.linkedin.com/company/codeplaced",
+        "https://twitter.com/codeplaced",
+        "https://github.com/codeplaced",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "Customer Support & Sales",
+        url: "https://codeplaced.com/contact",
+        email: "info@codeplaced.com",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://codeplaced.com/#website",
+      url: "https://codeplaced.com",
+      name: "CodePlaced",
+      publisher: {
+        "@id": "https://codeplaced.com/#organization",
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://codeplaced.com/blog?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -73,6 +127,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth font-sans`}>
+      <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body className="min-h-screen page-background text-[#0F172A] antialiased selection:bg-[#0B4F6C] selection:text-white">
         <AppShell>{children}</AppShell>
       </body>

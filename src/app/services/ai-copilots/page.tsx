@@ -421,8 +421,8 @@ export default function AiCopilotsPage() {
         <section className="section-py site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
-              Why Businesses Choose{" "}
-              <span className="text-[#14B8A6]">CodePlaced</span>
+              Why Enterprises Choose Our{" "}
+              <span className="text-[#14B8A6]">AI Copilots</span>
             </h2>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
               We bridge the gap between bleeding-edge AI research and enterprise reliability, ensuring your copilots deliver measurable ROI with zero hallucinations.
