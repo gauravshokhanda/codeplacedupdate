@@ -12,6 +12,9 @@ import {
   Sparkles,
   ArrowUpRight,
   CheckCircle2,
+  Zap,
+  TrendingUp,
+  ShieldCheck,
 } from "lucide-react";
 import { WHY_CHOOSE_US } from "@/lib/data";
 
@@ -26,6 +29,9 @@ const iconMap: Record<string, React.ReactNode> = {
   Cloud: <Cloud className="w-6 h-6 text-[#0B4F6C]" />,
   Bot: <Bot className="w-6 h-6 text-[#0B4F6C]" />,
   Users: <Users className="w-6 h-6 text-[#0B4F6C]" />,
+  Zap: <Zap className="w-6 h-6 text-[#0B4F6C]" />,
+  TrendingUp: <TrendingUp className="w-6 h-6 text-[#0B4F6C]" />,
+  ShieldCheck: <ShieldCheck className="w-6 h-6 text-[#0B4F6C]" />,
 };
 
 export function WhyChooseUs({ onOpenBookAudit }: WhyChooseUsProps) {
@@ -43,11 +49,11 @@ export function WhyChooseUs({ onOpenBookAudit }: WhyChooseUsProps) {
           </div>
 
           <h2 className="text-[28px] sm:text-[36px] lg:text-[48px] font-black text-[#0F172A] tracking-tight leading-[1.15]">
-            Transforming <span className="bg-gradient-to-r from-[#0B4F6C] via-[#0284C7] to-[#06B6D4] bg-clip-text text-transparent">Bold Ideas</span> Into Intelligent Systems
+            Why Businesses Choose <span className="bg-gradient-to-r from-[#0B4F6C] via-[#0284C7] to-[#06B6D4] bg-clip-text text-transparent">CodePlaced</span>
           </h2>
 
           <p className="text-[18px] text-[#475569] leading-[1.6]">
-            Enterprise-grade reliability meets startup delivery speed. Build AI-native architectures that compound in value.
+            From strategy and planning to scalable technology, actionable data intelligence, and measurable business growth.
           </p>
         </div>
 

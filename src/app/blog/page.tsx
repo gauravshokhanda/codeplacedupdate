@@ -1,666 +1,386 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
   Search,
   BookOpen,
-  FileText,
-  Download,
   Calendar,
   Clock,
   CheckCircle2,
-  TrendingUp,
-  Cpu,
-  Database,
-  Cloud,
-  Layers,
-  BarChart3,
-  ShieldCheck,
-  Zap,
-  ArrowUpRight,
-  ChevronRight,
+  Mail,
   Filter,
-  Check,
-  Star,
-  Users,
 } from "lucide-react";
-import { ArticleModal } from "@/components/ArticleModal";
-import { BlogPost } from "@/types";
-
-// =========================================================================
-// DATA STRUCTURES
-// =========================================================================
-
-const CATEGORIES = [
-  "All",
-  "AI & Automation",
-  "Data Engineering",
-  "Analytics",
-  "Cloud",
-  "Product Engineering",
-  "Case Studies",
-  "Reports",
-];
-
-const FEATURED_REPORT: BlogPost = {
-  id: "state-of-enterprise-ai-2026",
-  title: "The State of Enterprise AI Adoption in 2026",
-  excerpt:
-    "How organizations are moving from AI experimentation to production-ready AI systems and measurable business outcomes.",
-  category: "AI & Automation",
-  author: {
-    name: "Siddharth Verma",
-    role: "Lead AI Architect",
-    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
-  },
-  date: "Oct 2026",
-  readTime: "12 min read",
-  coverGradient: "from-[#082F49] via-[#0F4C81] to-[#14B8C4]",
-  content: [
-    "In 2026, enterprise leaders are no longer asking if generative AI and LLMs have utility; they are asking how to operationalize multi-agent systems with deterministic reliability, sub-200ms response latencies, and rigorous data privacy boundaries.",
-    "Our research examines over 100 enterprise implementations across Healthcare, FinTech, and Logistics. We analyze the architectural shifts from naive vector lookups to hybrid retrieval (RRF + BM25), domain fine-tuning on proprietary data lakehouses, and the rise of autonomous agent swarms with self-healing reflection loops.",
-    "This benchmark report details executive decision frameworks, security guardrails against prompt injection, and how engineering teams achieve positive ROI within the first 60 days of deployment.",
-  ],
-};
-
-const LATEST_INSIGHTS: (BlogPost & { image: string })[] = [
-  {
-    id: "building-data-platforms-snowflake",
-    title: "Building Modern Data Platforms with Snowflake",
-    excerpt:
-      "A deep dive into architecting zero-maintenance data pipelines with zero-copy cloning, automated dbt transforms, and row-level governance.",
-    category: "Data Engineering",
-    author: {
-      name: "Prajjwal Rathi",
-      role: "Principal Data Engineer",
-      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80",
-    },
-    date: "Sep 28, 2026",
-    readTime: "8 min read",
-    coverGradient: "from-[#0F4C81] to-[#14B8C4]",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
-    content: [
-      "Modern enterprises generate petabytes of telemetry and transactional records. Storing raw data without a structured lakehouse topology leads to query latency spikes and skyrocketing compute costs.",
-      "In this article, we outline our reference architecture for Snowflake data platforms: medallion data design (Bronze/Silver/Gold), incremental dbt modeling, and automated data quality assertions.",
-      "Learn how to structure multi-cluster virtual warehouses to scale concurrent queries across hundreds of analysts while cutting monthly cloud spend by 35%.",
-    ],
-  },
-  {
-    id: "power-bi-vs-looker-studio",
-    title: "Power BI vs Looker Studio: Which Fits Your Business?",
-    excerpt:
-      "An executive decision matrix evaluating licensing models, semantic modeling, real-time caching, and enterprise scalability.",
-    category: "Analytics",
-    author: {
-      name: "Maanya Tyagi",
-      role: "Analytics Lead",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
-    },
-    date: "Sep 20, 2026",
-    readTime: "6 min read",
-    coverGradient: "from-[#082F49] to-[#0E7490]",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    content: [
-      "Choosing between Microsoft Power BI and Google Looker Studio is rarely just about chart styles—it is an architectural commitment to your organizational data stack.",
-      "We compare DAX vs LookML, row-level security (RLS) enforcement, embedded analytics licensing, and refresh latency benchmarks for high-density executive command centers.",
-      "Discover which tool fits your ecosystem whether you are deeply invested in Microsoft 365 / Azure or leveraging Google Cloud / BigQuery.",
-    ],
-  },
-  {
-    id: "data-lake-vs-data-warehouse",
-    title: "Data Lake vs Data Warehouse Explained",
-    excerpt:
-      "When to use raw parquet object storage, ClickHouse columnar databases, or structured enterprise relational data warehouses.",
-    category: "Data Engineering",
-    author: {
-      name: "Gaurav Shokhanda",
-      role: "Technology Lead",
-      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80",
-    },
-    date: "Sep 12, 2026",
-    readTime: "7 min read",
-    coverGradient: "from-[#0B4F6C] to-[#14B8C4]",
-    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80",
-    content: [
-      "The terminology around data lakes, lakehouses, and warehouses often confuses engineering teams. This guide unpacks the trade-offs between structured ACID guarantees and raw object lake flexibility.",
-      "We explain the role of Apache Iceberg and Delta Lake in bridging the gap, allowing companies to query petabyte-scale data lakes with sub-second SQL performance.",
-      "Includes a simple decision framework to help you choose the right storage engine for IoT telemetry, financial ledgers, or customer analytics.",
-    ],
-  },
-  {
-    id: "ai-agents-for-enterprise-automation",
-    title: "AI Agents for Enterprise Automation",
-    excerpt:
-      "Deploying multi-agent cyclic state machines with LangGraph to orchestrate cross-platform ERP, CRM, and document reconciliation workflows.",
-    category: "AI & Automation",
-    author: {
-      name: "Ankit",
-      role: "Lead ML Engineer",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-    },
-    date: "Aug 30, 2026",
-    readTime: "10 min read",
-    coverGradient: "from-[#082F49] to-[#14B8C4]",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-    content: [
-      "Single-turn LLM prompts are insufficient for multi-step enterprise operations. Production AI requires stateful agents that reason, plan, invoke tools, and verify outputs.",
-      "We walk through our battle-tested LangGraph architectures for automated invoice auditing, customer support escalation, and real-time database schema migrations.",
-      "Learn how to construct human-in-the-loop verification gates and audit logs that pass strict enterprise compliance requirements.",
-    ],
-  },
-  {
-    id: "reduce-cloud-infrastructure-costs",
-    title: "How to Reduce Cloud Infrastructure Costs",
-    excerpt:
-      "A tactical FinOps playbook for cloud-native teams: container rightsizing, Karpenter autoscaling, and query compression.",
-    category: "Cloud",
-    author: {
-      name: "Anubhav",
-      role: "Cloud Architect",
-      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80",
-    },
-    date: "Aug 18, 2026",
-    readTime: "5 min read",
-    coverGradient: "from-[#0E7490] to-[#082F49]",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-    content: [
-      "Cloud waste is one of the fastest drains on engineering budgets. Unused compute nodes, unindexed database scans, and over-provisioned Kubernetes clusters compound rapidly.",
-      "We outline 5 concrete tactics we use to reduce client AWS, GCP, and Azure invoices by 35% to 50% without degrading application performance.",
-      "Explore real-world case studies in spot instance orchestration, ZSTD storage compression, and serverless compute scaling.",
-    ],
-  },
-  {
-    id: "spring-boot-microservices-at-scale",
-    title: "Spring Boot Microservices at Scale",
-    excerpt:
-      "Architecting high-concurrency enterprise services with Kafka event-sourcing, gRPC communication, and resilience patterns.",
-    category: "Product Engineering",
-    author: {
-      name: "Naman",
-      role: "Full Stack Engineer",
-      avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80",
-    },
-    date: "Aug 05, 2026",
-    readTime: "9 min read",
-    coverGradient: "from-[#082F49] to-[#0F4C81]",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
-    content: [
-      "Scaling Java Spring Boot microservices to handle millions of transactions requires meticulous thread pool tuning, reactive programming, and asynchronous messaging.",
-      "We discuss domain-driven design (DDD), transactional outbox patterns with Kafka, and circuit breakers using Resilience4j to prevent cascading failures.",
-      "Includes production Docker containerization configs and Kubernetes helm chart blueprints for zero-downtime rolling deployments.",
-    ],
-  },
-];
-
-const INDUSTRY_REPORTS = [
-  {
-    title: "2026 Data Engineering Trends Report",
-    desc: "Comprehensive analysis of lakehouse architectures, dbt transformations, and petabyte-scale streaming pipelines.",
-    pages: "48 Pages",
-    date: "Feb 2026",
-    badge: "Lakehouse Focus",
-  },
-  {
-    title: "Enterprise AI Benchmark Report",
-    desc: "Deterministic evaluations of frontier LLMs, domain-specific RAG latency, and private model serving architectures.",
-    pages: "64 Pages",
-    date: "Jan 2026",
-    badge: "AI & LLM Evals",
-  },
-  {
-    title: "Modern Analytics Stack Report",
-    desc: "How high-growth organizations structure unified executive dashboards, semantic layers, and real-time telemetry.",
-    pages: "36 Pages",
-    date: "Dec 2025",
-    badge: "BI & Telemetry",
-  },
-  {
-    title: "Cloud Transformation Playbook",
-    desc: "A proven guide for zero-downtime database migrations, Kubernetes orchestration, and FinOps cost containment.",
-    pages: "52 Pages",
-    date: "Nov 2025",
-    badge: "Cloud & FinOps",
-  },
-];
-
-const PLAYBOOKS = [
-  {
-    title: "Complete Data Engineering Playbook",
-    subtitle: "Modern Data Stack • Lakehouses • dbt Pipelines",
-    desc: "Everything you need to architect zero-maintenance data pipelines with end-to-end testing, lineage tracing, and CI/CD validation.",
-    outcomes: [
-      "Production-ready lakehouse schemas in 2 weeks",
-      "Automated dbt transformations with zero loss",
-      "Sub-second executive reporting queries",
-    ],
-    icon: Database,
-  },
-  {
-    title: "Enterprise AI Implementation Guide",
-    subtitle: "RAG Systems • Agents • Model Governance",
-    desc: "A practical blueprint for deploying enterprise-ready AI copilots with strict hallucination guardrails and sub-200ms vector search.",
-    outcomes: [
-      "Private RAG architectures with citation auditing",
-      "Multi-agent cyclic workflows with LangGraph",
-      "100% HIPAA and SOC2 compliance alignment",
-    ],
-    icon: Cpu,
-  },
-  {
-    title: "Analytics Modernization Roadmap",
-    subtitle: "Executive Dashboards • Looker • Power BI",
-    desc: "Transition fragmented spreadsheet silos into unified, high-density real-time command centers tailored for C-suite decision-makers.",
-    outcomes: [
-      "Single source of truth across all revenue data",
-      "Role-based row-level security (RLS)",
-      "Sub-100ms dashboard load times",
-    ],
-    icon: BarChart3,
-  },
-  {
-    title: "Cloud Migration Strategy Framework",
-    subtitle: "AWS • Azure • GCP • Kubernetes FinOps",
-    desc: "Migrate legacy monoliths to modern cloud-native architectures with automated Terraform IaC and 35%+ cloud cost savings.",
-    outcomes: [
-      "Zero-downtime database and system cutovers",
-      "Kubernetes autoscaling with Karpenter",
-      "99.99% high-availability SLA resilience",
-    ],
-    icon: Cloud,
-  },
-];
-
-const FEATURED_CASE_STUDIES = [
-  {
-    title: "Retail Analytics Platform",
-    client: "OmniRetail Direct",
-    impact: "Reduced reporting time by 40%",
-    desc: "Unified online e-commerce platforms, retail POS registers, and ad platform attribution into a sub-second executive intelligence command center.",
-    metric: "40% Faster",
-    tag: "E-Commerce",
-  },
-  {
-    title: "AI Automation System",
-    client: "OmniJuris Corp",
-    impact: "Saved 70% manual effort",
-    desc: "Built a multi-agent contract analysis engine that extracts critical clauses, flags legal liabilities, and drafts citation-backed redlines automatically.",
-    metric: "70% Saved",
-    tag: "Enterprise AI",
-  },
-  {
-    title: "Healthcare Dashboard Platform",
-    client: "MedHealth Digital Health",
-    impact: "Improved operational visibility by 60%",
-    desc: "Constructed an automated triage lakehouse and executive clinical telemetry dashboard handling over 450k active patient interactions monthly.",
-    metric: "60% Visibility Lift",
-    tag: "Healthcare",
-  },
-];
-
-const TRENDING_TOPICS = [
-  "Artificial Intelligence",
-  "Machine Learning",
-  "Data Engineering",
-  "Cloud Architecture",
-  "Power BI",
-  "Looker Studio",
-  "Snowflake",
-  "Databricks",
-  "AWS",
-  "Azure",
-  "Spring Boot",
-  "Next.js",
-  "Analytics",
-  "Data Warehousing",
-  "Automation",
-];
-
-const RESOURCE_TYPES = ["All", "Articles", "Reports", "Case Studies", "Playbooks", "Webinars"];
-
-// =========================================================================
-// MAIN INSIGHTS & RESOURCES PAGE COMPONENT
-// =========================================================================
+import {
+  BLOG_POSTS,
+  BLOG_CATEGORIES,
+  BlogPostItem,
+} from "@/lib/blogData";
 
 export default function BlogPage() {
-  const [selectedArticle, setSelectedArticle] = useState<BlogPost | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedResourceType, setSelectedResourceType] = useState("All");
-  const [downloadToast, setDownloadToast] = useState<string | null>(null);
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [newsletterEmail, setNewsletterEmail] = useState<string>("");
+  const [subscribed, setSubscribed] = useState<boolean>(false);
 
-  // Filter latest insights
-  const filteredInsights = LATEST_INSIGHTS.filter((post) => {
-    const matchesCategory =
-      selectedCategory === "All" ||
-      post.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-      (selectedCategory === "AI & Automation" && post.category.includes("AI")) ||
-      (selectedCategory === "Data Engineering" && post.category.includes("Data"));
+  // Identify featured article (either explicitly marked or first post)
+  const featuredArticle: BlogPostItem = useMemo(() => {
+    return BLOG_POSTS.find((p) => p.featured) || BLOG_POSTS[0];
+  }, []);
 
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.category.toLowerCase().includes(searchQuery.toLowerCase());
+  // Filter remaining articles
+  const filteredArticles = useMemo(() => {
+    return BLOG_POSTS.filter((post) => {
+      const matchesCategory =
+        selectedCategory === "All" || post.category === selectedCategory;
+      const matchesSearch =
+        searchQuery.trim() === "" ||
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        post.author.name.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
 
-    return matchesCategory && matchesSearch;
-  });
-
-  const handleDownload = (reportTitle: string) => {
-    setDownloadToast(reportTitle);
-    setTimeout(() => {
-      setDownloadToast(null);
-    }, 3500);
-  };
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsletterEmail) return;
-    setNewsletterSubscribed(true);
-    setTimeout(() => {
-      setNewsletterEmail("");
-      setNewsletterSubscribed(false);
-    }, 4000);
+    if (newsletterEmail.trim()) {
+      setSubscribed(true);
+      setTimeout(() => {
+        setNewsletterEmail("");
+      }, 3000);
+    }
   };
 
   return (
-    <div className="text-[#0F172A] selection:bg-[#0F4C81] selection:text-white font-sans min-h-screen relative">
+    <div
+      style={{
+        background: "linear-gradient(180deg, #f8fcff 0%, #edf7fb 40%, #eaf5f9 100%)",
+      }}
+      className="text-[#0F172A] selection:bg-[#0f4c81] selection:text-white font-sans min-h-screen relative"
+    >
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (Continuous Canvas + Search + Quick Filters) */}
+      {/* SECTION 1 — EDITORIAL HERO (Centered, Clean, Appinventiv Style) */}
       {/* ========================================================================= */}
-      <section className="relative pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-22 overflow-hidden border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          {/* Eyebrow Badge */}
+      <section className="relative pt-28 pb-14 sm:pt-36 sm:pb-20 overflow-hidden text-center">
+        {/* Soft Radial Ambient Glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0"
+          style={{
+            width: "700px",
+            height: "700px",
+            background:
+              "radial-gradient(circle, rgba(18, 207, 208, 0.15) 0%, rgba(15, 79, 108, 0.07) 50%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+          {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/85 backdrop-blur-md text-[#0F4C81] border border-[#14B8C4]/30 shadow-xs mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#0f4c81] border border-[#00b7c2]/30 shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#14B8C4]" />
-            <span>INSIGHTS • RESEARCH • RESOURCES</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <span>BLOGS & INSIGHTS</span>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* Centered Main Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            className="text-[36px] sm:text-[50px] lg:text-[62px] font-[800] leading-[1.08] tracking-[-0.035em] text-[#082F49] max-w-4xl mx-auto [text-wrap:balance]"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#082F49] leading-[1.1]"
           >
-            Ideas, Insights & Engineering Expertise For{" "}
+            Engineering. Data.{" "}
             <span
-              className="bg-clip-text text-transparent font-extrabold"
+              className="bg-clip-text text-transparent inline-block"
               style={{
-                backgroundImage: "linear-gradient(90deg, #0F4C81, #14B8C4)",
+                backgroundImage:
+                  "linear-gradient(90deg, #0f4c81 0%, #00b7c2 50%, #0284c7 100%)",
               }}
             >
-              Modern Businesses
+              Growth.
             </span>
           </motion.h1>
 
-          {/* Description */}
+          {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mt-5 leading-relaxed font-normal"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal"
           >
-            Explore practical guidance on Data Engineering, AI, Analytics, Cloud Architecture, and
-            Digital Product Development from the team behind CodePlaced.
+            Thoughts, case studies, engineering learnings, AI implementation
+            guides, and industry insights from the CodePlaced team.
           </motion.p>
 
-          {/* Search Bar */}
+          {/* Action Button & Search */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.3 }}
-            className="max-w-xl mx-auto mt-8 relative"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2 max-w-lg mx-auto"
           >
-            <div
-              className="rounded-full p-1.5 flex items-center bg-white/80 backdrop-blur-xl border border-[#14B8C4]/30 shadow-lg shadow-[#0F4C81]/5"
+            <a
+              href="#articles-feed"
+              className="w-full sm:w-auto h-[46px] px-7 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-bold text-sm shadow-md shadow-[#082F49]/15 flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group flex-shrink-0"
             >
-              <div className="pl-4 pr-2 text-slate-400">
-                <Search className="w-5 h-5 text-[#0F4C81]" />
-              </div>
+              <span>Browse Articles</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            <div className="relative w-full">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by topic, architecture, technology (RAG, Snowflake, FinOps)..."
-                className="w-full py-2.5 pr-4 bg-transparent text-sm text-[#082F49] placeholder-slate-400 focus:outline-none"
+                placeholder="Search topics..."
+                className="w-full h-[46px] pl-10 pr-4 rounded-full bg-white border border-slate-200 shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#00b7c2] text-xs sm:text-sm text-[#082F49]"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="px-3 text-xs font-bold text-slate-400 hover:text-slate-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-600"
                 >
                   Clear
                 </button>
               )}
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Category Quick Filter Pills */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.35 }}
-            className="flex flex-wrap items-center justify-center gap-2 mt-7 max-w-4xl mx-auto"
-          >
-            {CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat;
+      {/* ========================================================================= */}
+      {/* SECTION 4 — CATEGORY FILTER TABS (Sticky Top Bar) */}
+      {/* ========================================================================= */}
+      <section className="sticky top-[72px] sm:top-[76px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-3 shadow-xs">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider pr-2 flex-shrink-0">
+              <Filter className="w-3.5 h-3.5 text-[#00b7c2]" />
+              Topic:
+            </span>
+            {BLOG_CATEGORIES.map((category) => {
+              const isActive = selectedCategory === category;
               return (
                 <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${isActive
-                      ? "bg-[#0F4C81] text-white shadow-md shadow-[#0F4C81]/20 scale-102"
-                      : "bg-white/70 text-slate-600 hover:text-[#0F4C81] hover:bg-white border border-slate-200/80"
-                    }`}
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer flex-shrink-0 ${
+                    isActive
+                      ? "bg-[#082F49] text-white shadow-xs"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-[#082F49]"
+                  }`}
                 >
-                  {cat}
+                  {category}
                 </button>
               );
             })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 2. FEATURED INSIGHT SECTION (Large 50/50 Premium Card) */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0F4C81]">
-              <Sparkles className="w-4 h-4 text-[#14B8C4]" />
-              <span>FEATURED RESEARCH</span>
-            </div>
-            <span className="text-xs font-semibold text-slate-400">Quarterly Flagship</span>
-          </div>
-
-          <div className="rounded-[32px] overflow-hidden glass-panel-card shadow-xl grid grid-cols-1 lg:grid-cols-12 relative">
-            {/* Left 50%: Visual Image with Gradient Overlay */}
-            <div className="lg:col-span-6 relative h-[320px] sm:h-[420px] lg:h-auto overflow-hidden bg-slate-900 group">
-              <img
-                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
-                alt={FEATURED_REPORT.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/90 via-[#082F49]/40 to-transparent" />
-
-              {/* Floating Badges */}
-              <div className="absolute top-6 left-6 flex items-center gap-2">
-                <span className="px-3.5 py-1 rounded-full text-xs font-black bg-[#14B8C4] text-[#082F49] uppercase tracking-wider shadow-md">
-                  Featured
-                </span>
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/20 backdrop-blur-md text-white border border-white/30">
-                  Research Report
-                </span>
-              </div>
-
-              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                  CodePlaced Enterprise Labs
-                </span>
-                <h4 className="text-lg font-bold">100+ Enterprise Systems Analyzed</h4>
-              </div>
-            </div>
-
-            {/* Right 50%: Content & CTAs */}
-            <div className="lg:col-span-6 p-8 sm:p-10 lg:p-12 flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 text-xs font-semibold text-slate-500">
-                  <span className="flex items-center gap-1.5 text-[#0F4C81] font-bold">
-                    <Clock className="w-4 h-4 text-[#14B8C4]" />
-                    {FEATURED_REPORT.readTime}
-                  </span>
-                  <span>•</span>
-                  <span>{FEATURED_REPORT.date}</span>
-                  <span>•</span>
-                  <span className="text-emerald-600 font-bold">PDF Available</span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#082F49] tracking-tight leading-snug">
-                  {FEATURED_REPORT.title}
-                </h2>
-
-                <p className="text-base text-slate-600 leading-relaxed font-normal">
-                  {FEATURED_REPORT.excerpt}
-                </p>
-
-                {/* Key Takeaways Preview */}
-                <div className="pt-2 space-y-2 text-xs sm:text-sm text-slate-700">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#14B8C4] flex-shrink-0 mt-0.5" />
-                    <span>From single-turn prompts to multi-agent production orchestration</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#14B8C4] flex-shrink-0 mt-0.5" />
-                    <span>Real-world latency evaluations and prompt injection security guardrails</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Author & Action Buttons */}
-              <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={FEATURED_REPORT.author.avatar}
-                    alt={FEATURED_REPORT.author.name}
-                    className="w-11 h-11 rounded-full object-cover border-2 border-slate-200"
-                  />
-                  <div>
-                    <div className="text-sm font-extrabold text-[#082F49]">
-                      {FEATURED_REPORT.author.name}
-                    </div>
-                    <div className="text-xs text-slate-500">{FEATURED_REPORT.author.role}</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setSelectedArticle(FEATURED_REPORT)}
-                    className="px-5 py-2.5 rounded-full bg-[#0F4C81] hover:bg-[#082F49] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
-                  >
-                    <span>Read Report</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-
-                  <button
-                    onClick={() => handleDownload(FEATURED_REPORT.title)}
-                    className="px-4 py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#0F4C81] font-bold text-xs border border-slate-200 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    <span>PDF</span>
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. LATEST INSIGHTS GRID (3-Column Architecture Articles) */}
+      {/* SECTION 2 — FEATURED ARTICLE (Horizontal Card) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 mb-3">
-                <BookOpen className="w-3.5 h-3.5 text-[#14B8C4]" />
-                <span>TECHNICAL FIELD NOTES</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#082F49] tracking-tight">
-                Latest Insights & Analysis
+      {selectedCategory === "All" && searchQuery === "" && (
+        <section className="py-12 sm:py-16">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles className="w-4 h-4 text-[#00b7c2]" />
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-[#0f4c81]">
+                Featured Story
               </h2>
             </div>
-            <p className="text-sm text-slate-500 max-w-md">
-              Field reports, benchmarks, and production lakehouse post-mortems authored by our
-              Principal Engineers.
+
+            <div className="rounded-3xl bg-white border border-sky-100 shadow-xl shadow-sky-950/5 hover:shadow-2xl hover:shadow-sky-900/10 transition-all duration-300 overflow-hidden group hover:-translate-y-1">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                {/* Cover Image */}
+                <div className="lg:col-span-7 relative h-[260px] sm:h-[340px] lg:h-full min-h-[300px] overflow-hidden bg-slate-900">
+                  <Image
+                    src={featuredArticle.coverImage}
+                    alt={featuredArticle.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-white/40 text-xs font-bold text-[#0f4c81] shadow-md">
+                      {featuredArticle.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Article Info */}
+                <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 text-xs font-semibold text-slate-500">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-[#00b7c2]" />
+                        {featuredArticle.publishedAt}
+                      </span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-[#00b7c2]" />
+                        {featuredArticle.readTime}
+                      </span>
+                    </div>
+
+                    <Link
+                      href={`/blog/${featuredArticle.slug}`}
+                      className="block group/link"
+                    >
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-[#082F49] tracking-tight leading-snug group-hover/link:text-[#0f4c81] transition-colors">
+                        {featuredArticle.title}
+                      </h3>
+                    </Link>
+
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed line-clamp-3 sm:line-clamp-4">
+                      {featuredArticle.excerpt}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {featuredArticle.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 rounded-md bg-slate-100 text-[11px] font-medium text-slate-600"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Author and CTA */}
+                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full overflow-hidden bg-sky-100 border border-sky-200 flex-shrink-0 relative">
+                        <Image
+                          src={featuredArticle.author.avatar}
+                          alt={featuredArticle.author.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-xs sm:text-sm font-bold text-[#082F49]">
+                          {featuredArticle.author.name}
+                        </p>
+                        <p className="text-[11px] text-slate-500">
+                          {featuredArticle.author.role}
+                        </p>
+                      </div>
+                    </div>
+
+                    <Link
+                      href={`/blog/${featuredArticle.slug}`}
+                      className="inline-flex items-center justify-center px-5 h-10 rounded-full text-white font-bold text-xs tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-0.5"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                      }}
+                    >
+                      <span>Read More</span>
+                      <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ========================================================================= */}
+      {/* SECTION 3 — LATEST ARTICLES (3 Columns Desktop, 2 Tablet, 1 Mobile) */}
+      {/* ========================================================================= */}
+      <section id="articles-feed" className="py-12 sm:py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#00b7c2] mb-1">
+                Resource Center
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#082F49] tracking-tight">
+                {selectedCategory === "All"
+                  ? "Latest Articles & Engineering Guides"
+                  : `${selectedCategory} Articles`}
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm font-medium text-slate-500">
+              Showing {filteredArticles.length} publication
+              {filteredArticles.length === 1 ? "" : "s"}
             </p>
           </div>
 
-          {filteredInsights.length === 0 ? (
-            <div className="text-center py-16 glass-panel-card rounded-3xl p-8">
-              <p className="text-slate-500 text-base">
-                No insights found matching &quot;{searchQuery}&quot; in category &quot;{selectedCategory}&quot;.
+          {filteredArticles.length === 0 ? (
+            <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 p-8">
+              <BookOpen className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+              <h3 className="text-lg font-bold text-[#082F49] mb-1">
+                No articles found
+              </h3>
+              <p className="text-sm text-slate-500 max-w-md mx-auto mb-4">
+                We couldn&apos;t find any posts matching &ldquo;{searchQuery}&rdquo; in category &ldquo;{selectedCategory}&rdquo;.
               </p>
               <button
                 onClick={() => {
-                  setSearchQuery("");
                   setSelectedCategory("All");
+                  setSearchQuery("");
                 }}
-                className="mt-4 px-5 py-2 rounded-full bg-[#0F4C81] text-white text-xs font-bold"
+                className="px-4 py-2 rounded-full bg-[#082F49] text-white text-xs font-bold shadow-xs hover:bg-[#0f4c81] transition-colors"
               >
                 Reset Filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredInsights.map((post) => (
-                <div
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {filteredArticles.map((post) => (
+                <article
                   key={post.id}
-                  onClick={() => setSelectedArticle(post)}
-                  className="group cursor-pointer rounded-[26px] glass-panel-card shadow-xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                  className="rounded-2xl bg-white border border-sky-100 shadow-xs hover:shadow-xl hover:shadow-sky-950/8 transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
                 >
                   <div>
-                    {/* Cover Image */}
-                    <div className="relative h-48 w-full overflow-hidden bg-slate-900">
-                      <img
-                        src={post.image}
+                    {/* Card Cover Image */}
+                    <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+                      <Image
+                        src={post.coverImage}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#082F49]/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-
-                      <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                        <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#082F49] shadow-xs">
+                      <div className="absolute top-3 left-3 z-10">
+                        <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-white/50 text-[11px] font-bold text-[#0f4c81] shadow-xs">
                           {post.category}
                         </span>
-                        <span className="flex items-center gap-1 text-xs text-white font-medium drop-shadow-xs">
-                          <Clock className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="absolute bottom-3 right-3 z-10">
+                        <span className="px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-[11px] font-semibold text-white flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-[#00b7c2]" />
                           {post.readTime}
                         </span>
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <div className="p-7 space-y-3">
-                      <div className="flex items-center gap-2 text-xs text-slate-400">
-                        <Calendar className="w-3.5 h-3.5 text-[#14B8C4]" />
-                        <span>{post.date}</span>
+                    {/* Content Section */}
+                    <div className="p-5 sm:p-6 space-y-3">
+                      <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
+                        <Calendar className="w-3 h-3 text-[#00b7c2]" />
+                        <span>{post.publishedAt}</span>
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-bold text-[#082F49] group-hover:text-[#0F4C81] transition-colors leading-snug">
-                        {post.title}
-                      </h3>
+                      <Link href={`/blog/${post.slug}`} className="block">
+                        <h3 className="text-lg font-bold text-[#082F49] tracking-tight group-hover:text-[#0f4c81] transition-colors line-clamp-2 leading-snug">
+                          {post.title}
+                        </h3>
+                      </Link>
 
                       <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
                         {post.excerpt}
@@ -668,28 +388,31 @@ export default function BlogPage() {
                     </div>
                   </div>
 
-                  {/* Author / Read CTA */}
-                  <div className="p-7 pt-0 border-t border-slate-200/60 flex items-center justify-between mt-4">
-                    <div className="flex items-center gap-2.5">
-                      <img
-                        src={post.author.avatar}
-                        alt={post.author.name}
-                        className="w-8 h-8 rounded-full object-cover border border-slate-200"
-                      />
-                      <div>
-                        <div className="text-xs font-bold text-[#082F49]">
-                          {post.author.name}
-                        </div>
-                        <div className="text-[10px] text-slate-400">{post.author.role}</div>
+                  {/* Card Footer with Author & Read More */}
+                  <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-7 h-7 rounded-full overflow-hidden bg-sky-100 border border-sky-200 flex-shrink-0 relative">
+                        <Image
+                          src={post.author.avatar}
+                          alt={post.author.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
+                      <span className="text-xs font-bold text-[#082F49] truncate">
+                        {post.author.name}
+                      </span>
                     </div>
 
-                    <span className="text-xs font-bold text-[#0F4C81] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#0f4c81] hover:text-[#00b7c2] transition-colors group/btn flex-shrink-0"
+                    >
                       <span>Read</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#14B8C4]" />
-                    </span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
+                    </Link>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           )}
@@ -697,495 +420,60 @@ export default function BlogPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. INDUSTRY REPORTS SECTION (Dark Background Cards) */}
+      {/* SECTION 5 — NEWSLETTER (Compact) */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-[#082F49] text-white relative overflow-hidden border-b border-white/10">
-        {/* Radial Ambient Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] pointer-events-none -z-0"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(20,184,196,0.15), transparent 70%)",
-          }}
-        />
-
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-[850px] mx-auto text-center mb-16 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
-              <FileText className="w-3.5 h-3.5 text-cyan-300" />
-              <span>EXECUTIVE RESEARCH</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-              Research & Industry Reports
-            </h2>
-            <p className="text-base text-slate-300 max-w-[650px] mx-auto leading-relaxed">
-              Data-backed insights to help leaders make smarter technology decisions.
-            </p>
+      <section className="py-14 sm:py-20 border-t border-sky-100/70">
+        <div className="max-w-[760px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200/80 text-xs font-bold text-[#0f4c81]">
+            <Mail className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <span>Weekly Technology Briefing</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {INDUSTRY_REPORTS.map((report, idx) => (
-              <div
-                key={idx}
-                className="rounded-[24px] bg-white/[0.05] border border-white/10 p-7 backdrop-blur-md hover:bg-white/[0.09] hover:border-cyan-400/40 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-400/30 text-cyan-300 flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <FileText className="w-6 h-6" />
-                    </div>
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/10 text-cyan-200">
-                      {report.badge}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors leading-snug">
-                    {report.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                    {report.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <div className="text-[11px] text-slate-400">
-                    <span>{report.pages}</span> • <span>{report.date}</span>
-                  </div>
-
-                  <button
-                    onClick={() => handleDownload(report.title)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-[#082F49] text-xs font-bold transition-all active:scale-95 cursor-pointer"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    <span>Download</span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 5. PLAYBOOKS & GUIDES (Large Horizontal Cards) */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-28 border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-[850px] mx-auto text-center mb-14 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 shadow-xs">
-              <Zap className="w-3.5 h-3.5 text-[#14B8C4]" />
-              <span>STEP-BY-STEP IMPLEMENTATION</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#082F49]">
-              Playbooks & Frameworks
-            </h2>
-            <p className="text-base text-slate-600 max-w-[650px] mx-auto leading-relaxed">
-              Battle-tested architectural blueprints, schema checklists, and execution roadmaps.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {PLAYBOOKS.map((pb, idx) => {
-              const Icon = pb.icon;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-[28px] glass-panel-card p-8 shadow-xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#ECFEFF] text-[#0F4C81] group-hover:bg-[#0F4C81] group-hover:text-white transition-colors duration-300 flex items-center justify-center">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-xs font-bold text-[#14B8C4] uppercase tracking-wider">
-                        {pb.subtitle}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-black text-[#082F49] group-hover:text-[#0F4C81] transition-colors">
-                      {pb.title}
-                    </h3>
-
-                    <p className="text-sm text-slate-600 leading-relaxed">
-                      {pb.desc}
-                    </p>
-
-                    <div className="pt-2 space-y-2">
-                      <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                        Key Outcomes:
-                      </div>
-                      {pb.outcomes.map((out, oIdx) => (
-                        <div key={oIdx} className="flex items-start gap-2 text-xs text-slate-700">
-                          <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                          <span>{out}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-8 pt-4 border-t border-slate-200/60 flex items-center justify-between">
-                    <span className="text-xs font-medium text-slate-500">
-                      Format: PDF + Architecture Diagrams
-                    </span>
-
-                    <button
-                      onClick={() => handleDownload(pb.title)}
-                      className="px-5 py-2.5 rounded-full bg-[#0F4C81] hover:bg-[#082F49] text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>Download Guide</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 6. FEATURED CASE STUDIES (Real Results, Real Impact) */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 mb-3">
-                <TrendingUp className="w-3.5 h-3.5 text-[#14B8C4]" />
-                <span>CLIENT SUCCESS STORIES</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#082F49] tracking-tight">
-                Real Results, Real Impact
-              </h2>
-            </div>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0F4C81] hover:text-[#14B8C4] transition-colors"
-            >
-              <span>View All Case Studies</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {FEATURED_CASE_STUDIES.map((cs, idx) => (
-              <div
-                key={idx}
-                className="rounded-[24px] glass-panel-card p-7 shadow-xs hover:shadow-xl hover:border-[#14B8C4]/40 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#ECFEFF] text-[#0F4C81]">
-                      {cs.tag}
-                    </span>
-                    <span className="text-xs font-bold text-slate-400">{cs.client}</span>
-                  </div>
-
-                  <h3 className="text-xl font-black text-[#082F49] mb-2 group-hover:text-[#0F4C81] transition-colors">
-                    {cs.title}
-                  </h3>
-
-                  <div className="py-2.5 px-3.5 rounded-xl bg-emerald-50 text-emerald-800 text-xs font-extrabold mb-3 flex items-center gap-2 border border-emerald-200/50">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>{cs.impact}</span>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {cs.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center justify-between">
-                  <div className="text-2xl font-black text-[#0F4C81]">{cs.metric}</div>
-                  <Link
-                    href="/case-studies"
-                    className="text-xs font-bold text-slate-600 group-hover:text-[#0F4C81] inline-flex items-center gap-1"
-                  >
-                    <span>Details</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. TRENDING TOPICS (Interactive Tag Cloud) */}
-      {/* ========================================================================= */}
-      <section className="py-16 border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-6">
-            Trending Engineering & Analytics Topics
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 max-w-4xl mx-auto">
-            {TRENDING_TOPICS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setSearchQuery(tag)}
-                className="px-4 py-2 rounded-xl bg-white/70 hover:bg-[#ECFEFF] text-slate-700 hover:text-[#0F4C81] border border-slate-200/80 hover:border-[#14B8C4]/40 text-xs sm:text-sm font-bold transition-all active:scale-95 cursor-pointer shadow-2xs backdrop-blur-sm"
-              >
-                #{tag}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 8. NEWSLETTER SECTION (Full-Width Gradient Banner) */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-[#082F49] via-[#0F4C81] to-[#041E2A] text-white relative overflow-hidden">
-        {/* Ambient Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] pointer-events-none -z-0"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(20,184,196,0.22), transparent 70%)",
-          }}
-        />
-
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>ENGINEERING DISPATCH</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Stay Ahead of Data & AI Trends
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#082F49] tracking-tight">
+            Get engineering, AI and growth insights.
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Get practical insights, engineering strategies, and technology trends delivered directly
-            to your inbox.
+          <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
+            Join engineering leaders and tech executives who receive our latest
+            architectural blueprints, data frameworks, and product strategies
+            weekly.
           </p>
 
-          <form
-            onSubmit={handleNewsletterSubmit}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2"
-          >
-            <input
-              type="email"
-              required
-              value={newsletterEmail}
-              onChange={(e) => setNewsletterEmail(e.target.value)}
-              placeholder="Enter your work email..."
-              className="w-full sm:w-[280px] h-[50px] px-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
-            />
-            <button
-              type="submit"
-              className="w-full sm:w-auto h-[50px] px-6 rounded-xl bg-[#14B8C4] hover:bg-[#00b7c2] text-[#082F49] font-extrabold text-sm transition-all shadow-md active:scale-95 whitespace-nowrap cursor-pointer"
+          {subscribed ? (
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-sm font-bold shadow-xs">
+              <CheckCircle2 className="w-4 h-4 text-teal-600" />
+              <span>Thank you for subscribing! Check your inbox shortly.</span>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubscribe}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2"
             >
-              {newsletterSubscribed ? "Subscribed!" : "Subscribe"}
-            </button>
-          </form>
-
-          <p className="text-xs text-slate-400">
-            No spam. One high-value engineering digest per month. Unsubscribe anytime.
-          </p>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 9. RESOURCES LIBRARY (Filterable Catalog) */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 border-b border-white/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-[850px] mx-auto text-center mb-12 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0F4C81] border border-[#14B8C4]/25 shadow-xs">
-              <Filter className="w-3.5 h-3.5 text-[#14B8C4]" />
-              <span>CONTENT ARCHIVE</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#082F49]">
-              Resources Library
-            </h2>
-            <p className="text-base text-slate-600 max-w-[600px] mx-auto">
-              Explore our full collection of research papers, architectural playbooks, and case studies.
-            </p>
-
-            {/* Resource Type Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
-              {RESOURCE_TYPES.map((type) => {
-                const isActive = selectedResourceType === type;
-                return (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedResourceType(type)}
-                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${isActive
-                        ? "bg-[#082F49] text-white shadow-sm"
-                        : "bg-white/70 text-slate-600 hover:bg-white border border-slate-200/80"
-                      }`}
-                  >
-                    {type}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl glass-panel-card shadow-xs flex flex-col justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-[#14B8C4] uppercase tracking-wider">
-                  Whitepaper
-                </span>
-                <h4 className="text-base font-bold text-[#082F49] mt-1 mb-2">
-                  Building Sub-10ms Vector Search on Kubernetes
-                </h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Benchmarks evaluating Qdrant, Milvus, and pgvector performance at 50M embedding scale.
-                </p>
-              </div>
+              <input
+                type="email"
+                required
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                placeholder="Enter your work email"
+                className="w-full sm:w-72 h-11 px-4 rounded-full bg-white border border-slate-300 text-sm text-[#082F49] placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#00b7c2] focus:border-transparent shadow-xs"
+              />
               <button
-                onClick={() => handleDownload("Vector Search Benchmark")}
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#0F4C81] hover:text-[#14B8C4]"
+                type="submit"
+                className="w-full sm:w-auto px-6 h-11 rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-0.5 cursor-pointer flex-shrink-0"
+                style={{
+                  background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                }}
               >
-                <Download className="w-3.5 h-3.5" />
-                <span>Download Whitepaper</span>
+                Subscribe
               </button>
-            </div>
+            </form>
+          )}
 
-            <div className="p-6 rounded-2xl glass-panel-card shadow-xs flex flex-col justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-[#14B8C4] uppercase tracking-wider">
-                  Checklist
-                </span>
-                <h4 className="text-base font-bold text-[#082F49] mt-1 mb-2">
-                  Enterprise SOC2 & HIPAA Readiness Checklist
-                </h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  A 32-point technical audit checklist for cloud storage encryption, IAM roles, and logging.
-                </p>
-              </div>
-              <button
-                onClick={() => handleDownload("Security Readiness Checklist")}
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#0F4C81] hover:text-[#14B8C4]"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>Download Checklist</span>
-              </button>
-            </div>
-
-            <div className="p-6 rounded-2xl glass-panel-card shadow-xs flex flex-col justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-[#14B8C4] uppercase tracking-wider">
-                  Webinar Series
-                </span>
-                <h4 className="text-base font-bold text-[#082F49] mt-1 mb-2">
-                  Modern Lakehouse Migration: From Legacy SQL to Snowflake
-                </h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Watch our Principal Engineers demonstrate zero-downtime ETL cutovers step by step.
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#0F4C81] hover:text-[#14B8C4]"
-              >
-                <span>Request Recording</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 10. FINAL CTA SECTION (Large Dark Blue Gradient) */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-gradient-to-b from-[#082F49] to-[#041E2A] text-white text-center relative overflow-hidden">
-        {/* Ambient Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] pointer-events-none -z-0"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(20,184,196,0.18), transparent 70%)",
-          }}
-        />
-
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-7">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/20 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>TRANSFORM YOUR TECH STACK</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Ready To Build Your Next Data, AI or Digital Product?
-          </h2>
-
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Talk to our engineering experts and discover the right strategy, architecture, and
-            technology stack for your business.
+          <p className="text-[11px] text-slate-400">
+            Zero spam. Unsubscribe with 1-click anytime.
           </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] hover:text-white font-extrabold text-[15px] transition-all shadow-xl shadow-[#38BDF8]/20 flex items-center justify-center gap-2.5 active:scale-95 group"
-            >
-              <span>Schedule Strategy Call</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <Link
-              href="/case-studies"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-[15px] border border-white/20 transition-all flex items-center justify-center gap-2"
-            >
-              <span>View Our Work</span>
-            </Link>
-          </div>
-
-          <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm font-semibold text-slate-300">
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Data Engineering Specialists</span>
-            </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>AI & Automation Experts</span>
-            </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Enterprise Delivery Teams</span>
-            </div>
-            <div className="flex items-center gap-2 text-cyan-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Global Support</span>
-            </div>
-          </div>
         </div>
       </section>
-
-      {/* ========================================================================= */}
-      {/* READING MODAL */}
-      {/* ========================================================================= */}
-      <ArticleModal
-        article={selectedArticle}
-        onClose={() => setSelectedArticle(null)}
-        onBookCall={() => setSelectedArticle(null)}
-      />
-
-      {/* Download Toast */}
-      <AnimatePresence>
-        {downloadToast && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-6 right-6 z-50 p-4 rounded-2xl bg-[#082F49] text-white border border-cyan-400/40 shadow-2xl flex items-center gap-3 max-w-sm"
-          >
-            <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
-              <Check className="w-4 h-4 stroke-[3]" />
-            </div>
-            <div className="text-xs">
-              <div className="font-bold text-white">Download Started</div>
-              <div className="text-slate-300 truncate">{downloadToast}</div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

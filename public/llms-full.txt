@@ -1,0 +1,48 @@
+# CodePlaced Full Technical Documentation — LLMS-FULL.txt
+
+## Organization Information
+- Name: CodePlaced
+- Official URL: https://codeplaced.com
+- Description: Modern technology partner building scalable digital products, cloud data platforms, and growth systems.
+- Founders: Manya Tyagi (Founder & CEO) and Gaurav Shokhanda (Co-Founder & CTO).
+
+## Services Breakdown
+
+### 1. App & Web Development
+- Cross-Platform Mobile Apps (iOS & Android) in React Native and Flutter.
+- Web Applications in Next.js 15+ (App Router, Server Components, Turbopack) and React 19.
+- Custom Backend Systems: High-concurrency Node.js, Python FastAPI, Java Spring Boot.
+- Enterprise Multi-Tenancy SaaS architectures with billing, auth (OAuth2/SAML), and multi-region deployment.
+- E-Commerce Engineering: Headless Shopify Storefronts, custom WordPress/WooCommerce solutions.
+- API Design & Third-Party Integrations: REST, GraphQL, WebSockets, payment gateways (Stripe, Razorpay).
+
+### 2. Data Engineering & Analytics
+- Automated ETL/ELT Pipelines: Python, dbt, Apache Airflow, Mage, Prefect.
+- Cloud Warehouses & Lakehouses: Snowflake, Google BigQuery, Databricks, AWS Redshift.
+- Medallion Architecture: Bronze (raw immutable ingestion), Silver (conformed & validated), Gold (dimensional star schemas).
+- Business Intelligence: Microsoft Power BI (DAX, incremental refresh, enterprise RLS) and Google Looker Studio.
+- Real-Time Telemetry & Event Streams: Kafka, ClickHouse, Redis Streams.
+
+### 3. Digital & Social Marketing
+- Generative Engine Optimization (GEO) & Search Engine Optimization (SEO).
+- Paid Acquisition: Meta Ads Manager, Google Search & Performance Max, LinkedIn Campaign Manager.
+- High-Impact Content Creation: Copywriting, technical thought leadership, graphic design, and video production.
+- Attribution & Analytics: GA4, Server-side Google Tag Manager (sGTM), Meta Conversion API (CAPI).
+
+## Delivery Lifecycle: From Strategy To Execution
+1. 01 Discover: Technical requirements gathering, user persona definition, and business KPI alignment.
+2. 02 Design: System architecture blueprints, data schemas, interactive UI/UX wireframes, and prototypes.
+3. 03 Build: High-velocity agile 2-week sprints with clean version-controlled commits and weekly demo validation.
+4. 04 Optimize: Automated QA validation, load testing, zero-downtime deployment, continuous telemetry, and SLA maintenance.
+
+## Blog Index & Articles
+- The State of Enterprise AI Adoption in 2026: https://codeplaced.com/blog/state-of-enterprise-ai-2026
+- Flutter vs React Native in 2026: https://codeplaced.com/blog/flutter-vs-react-native-2026
+- Building Scalable Cloud Data Platforms with Snowflake: https://codeplaced.com/blog/building-data-platforms-snowflake
+- Power BI vs Looker Studio: The Executive Decision Matrix: https://codeplaced.com/blog/power-bi-vs-looker-studio
+- 2026 B2B SEO Trends for High-Growth Tech Brands: https://codeplaced.com/blog/seo-trends-b2b-tech-2026
+- Orchestrating Autonomous AI Agents with LangGraph: https://codeplaced.com/blog/autonomous-ai-agents-langgraph
+
+## Contact & Scoping
+- Consultation URL: https://codeplaced.com/contact
+- Direct Inquiries: info@codeplaced.com

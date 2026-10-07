@@ -71,7 +71,7 @@ export function Hero({ onOpenBookAudit }: HeroProps) {
         >
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-            <span>FULL STACK TECHNOLOGY PARTNER</span>
+            <span>MODERN TECHNOLOGY PARTNER</span>
           </div>
         </motion.div>
 
@@ -84,15 +84,14 @@ export function Hero({ onOpenBookAudit }: HeroProps) {
           transition={{ duration: 0.55, delay: 0.1 }}
           className="text-[38px] sm:text-[56px] lg:text-[72px] font-[800] leading-[1.05] tracking-[-0.03em] text-[#082F49] mb-6 max-w-[1050px] mx-auto [text-wrap:balance]"
         >
-          We Build Scalable Digital Products, <br className="hidden sm:inline" />
-          Powered by{" "}
+          Technology That Turns{" "}
           <span
             className="bg-clip-text text-transparent font-extrabold inline-block"
             style={{
               backgroundImage: "linear-gradient(90deg, #0f4c81, #00b7c2)",
             }}
           >
-            Data, AI & Cloud
+            Ideas Into Impact
           </span>
         </motion.h1>
 
@@ -103,11 +102,10 @@ export function Hero({ onOpenBookAudit }: HeroProps) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.2 }}
-          className="text-base sm:text-[18px] text-slate-600 leading-[1.65] max-w-[700px] mx-auto mb-9 font-normal"
+          className="text-base sm:text-[18px] text-slate-600 leading-[1.65] max-w-[760px] mx-auto mb-9 font-normal"
         >
-          CodePlaced helps businesses design, develop, and scale modern software solutions—from web
-          and mobile applications to enterprise platforms, AI systems, cloud infrastructure,
-          analytics, and digital growth services.
+          CodePlaced helps businesses build scalable digital products, transform data into actionable
+          insights, and accelerate growth through modern digital marketing.
         </motion.p>
 
         {/* ========================================================================= */}
@@ -119,29 +117,19 @@ export function Hero({ onOpenBookAudit }: HeroProps) {
           transition={{ duration: 0.55, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-7"
         >
-          {onOpenBookAudit ? (
-            <button
-              onClick={() => onOpenBookAudit("Enterprise Architecture")}
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
-            >
-              <span>Book Strategy Call</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          ) : (
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
-            >
-              <span>Book Strategy Call</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          )}
-
           <Link
             href="/services"
-            className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
+            className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-gradient-to-r from-[#0f4c81] to-[#00b7c2] hover:from-[#082F49] hover:to-[#0f4c81] text-white font-extrabold text-[15px] shadow-xl shadow-[#00b7c2]/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-95 group"
           >
             <span>Explore Services</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+
+          <Link
+            href="/case-studies"
+            className="w-full sm:w-auto h-[54px] px-8 rounded-2xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-[15px] border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-200 hover:border-[#00b7c2]/40"
+          >
+            <span>View Our Work</span>
           </Link>
         </motion.div>
 

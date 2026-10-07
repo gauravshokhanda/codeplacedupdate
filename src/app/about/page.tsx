@@ -17,9 +17,6 @@ import {
   ChevronDown,
   Compass,
   HelpCircle,
-  Search,
-  Palette,
-  Rocket,
 } from "lucide-react";
 
 // =========================================================================
@@ -33,59 +30,59 @@ const COMPANY_STATS = [
   { value: "Global", label: "Delivery Team" },
 ];
 
-const WHY_WORK_WITH_US = [
+const COMPANY_PRINCIPLES = [
   {
-    title: "Data & AI Expertise",
-    desc: "Specialized architects who turn complex unstructured data into deterministic intelligence and real-time decision engines.",
-    icon: Database,
-    badge: "Specialized Pods",
-  },
-  {
-    title: "Cloud Native Architecture",
-    desc: "Engineered on AWS, Azure, and GCP with automated autoscaling, infrastructure as code, and zero single points of failure.",
-    icon: Cloud,
-    badge: "99.99% Uptime",
-  },
-  {
-    title: "Fast Delivery Cycles",
-    desc: "Agile sprints and battle-tested blueprints that deploy working, audited production systems in 2–4 weeks rather than months.",
-    icon: Zap,
-    badge: "2–4 Weeks",
-  },
-  {
-    title: "Enterprise Security",
-    desc: "Bilateral NDAs upfront, SOC2 Type II alignment, HIPAA compliance, row-level security, and cryptographic audit logging.",
+    title: "Ownership",
+    desc: "We take complete end-to-end accountability for project success, treating every system as if it were our own business.",
     icon: ShieldCheck,
-    badge: "SOC2 & HIPAA",
+    badge: "Accountability",
   },
   {
-    title: "Business Focused Solutions",
-    desc: "Every line of code and dashboard metric is engineered to unlock measurable revenue, eliminate manual waste, and prove ROI.",
-    icon: TrendingUp,
-    badge: "Outcome Driven",
-  },
-  {
-    title: "Long-Term Partnership",
-    desc: "We build enduring relationships with flexible SLA maintenance, dedicated support pods, and continuous feature scaling.",
+    title: "Transparency",
+    desc: "Clear sprint milestones, open progress visibility, and honest communication with no hidden surprises.",
     icon: Users,
-    badge: "24/7 SLA Options",
+    badge: "Open Comms",
+  },
+  {
+    title: "Innovation",
+    desc: "Engineering modern, future-proof architectures and AI solutions that create a genuine competitive moat.",
+    icon: Zap,
+    badge: "Forward Thinking",
+  },
+  {
+    title: "Quality",
+    desc: "Enterprise-grade code quality, robust security testing, and reliable performance across every release.",
+    icon: Cpu,
+    badge: "High Standard",
+  },
+  {
+    title: "Collaboration",
+    desc: "Partnering directly with your leadership and engineering pods as a cohesive, high-velocity team.",
+    icon: Compass,
+    badge: "True Extension",
+  },
+  {
+    title: "Long-Term Partnerships",
+    desc: "We focus on sustainable architectures, continuous improvements, and compounding long-term value.",
+    icon: TrendingUp,
+    badge: "Sustainable ROI",
   },
 ];
 
 const LEADERSHIP_TEAM = [
   {
-    name: "Maanya Tyagi",
+    name: "Manya Tyagi",
     role: "Founder & CEO",
-    bio: "Maanya leads analytics, AI initiatives, and business intelligence solutions at CodePlaced. She specializes in transforming complex datasets into actionable insights that help organizations make better decisions, streamline operations, and unlock scalable revenue growth.",
+    bio: "Manya leads business intelligence, analytics, AI initiatives, and growth strategies at CodePlaced. She specializes in turning complex datasets into actionable insights that help organizations make smarter decisions, streamline operations, and unlock scalable revenue growth.",
     image: "/team/Manya.png",
     imagePosition: "object-top sm:object-center",
     expertise: [
       "AI Strategy",
+      "Business Intelligence",
+      "Analytics",
       "Product Innovation",
-      "Business Growth",
-      "Digital Transformation",
     ],
-    ctaText: "Connect With Maanya",
+    ctaText: "Connect With Manya",
     linkedin: "https://www.linkedin.com/in/manya-tyagi-626a421b2/",
   },
   {
@@ -113,17 +110,17 @@ const ENGINEERING_TEAM = [
   },
   {
     name: "Prajjwal Kumar Rathi",
-    role: "Data Analyst Intern",
+    role: "Data Analyst",
     image: "/team/team-7.jpg",
   },
   {
     name: "Naman",
-    role: "Data Analyst Intern",
+    role: "Data Analyst",
     image: "/team/team-5.jpg",
   },
   {
     name: "Kashish",
-    role: "Data Analyst Intern",
+    role: "Data Analyst",
     image: "/team/team-4.jpg",
   },
   {
@@ -135,45 +132,6 @@ const ENGINEERING_TEAM = [
     name: "Sadiya Ansari",
     role: "Growth & Editing Specialist",
     image: "/team/team-6.jpg",
-  },
-];
-
-const DELIVERY_METHODOLOGY = [
-  {
-    step: "01",
-    title: "Discovery",
-    desc: "Technical requirements gathering, data audits, system mapping & milestone roadmap alignment.",
-    icon: Search,
-  },
-  {
-    step: "02",
-    title: "Strategy",
-    desc: "System blueprints, data schemas, cloud sizing, security protocols & SLA definitions.",
-    icon: Compass,
-  },
-  {
-    step: "03",
-    title: "Design",
-    desc: "Interactive UI/UX prototypes, data visual flows & customer journey validation.",
-    icon: Palette,
-  },
-  {
-    step: "04",
-    title: "Development",
-    desc: "Rapid agile sprints led by senior developers with clean code commits & weekly live demos.",
-    icon: Cpu,
-  },
-  {
-    step: "05",
-    title: "Testing",
-    desc: "Automated QA validation, security penetration testing, load benchmarks & evaluation gates.",
-    icon: ShieldCheck,
-  },
-  {
-    step: "06",
-    title: "Launch",
-    desc: "Zero-downtime production deployment, private repo transfer & continuous telemetry.",
-    icon: Rocket,
   },
 ];
 
@@ -196,38 +154,7 @@ const FAQ_ITEMS = [
   },
 ];
 
-// =========================================================================
-// EASING & MOTION CONFIGURATION
-// =========================================================================
 const EASING = [0.22, 1, 0.36, 1] as const;
-
-const teamGridContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.04,
-    },
-  },
-};
-
-const teamMemberVariant = {
-  hidden: { opacity: 0, y: 16, scale: 0.985 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      ease: EASING,
-    },
-  },
-};
-
-// =========================================================================
-// MAIN ABOUT PAGE COMPONENT
-// =========================================================================
 
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -239,99 +166,55 @@ export default function AboutPage() {
   return (
     <div
       style={{
-        background: `
-          radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 45%),
-          radial-gradient(circle at 90% 35%, rgba(16, 185, 129, 0.07) 0%, transparent 35%),
-          radial-gradient(circle at 10% 65%, rgba(14, 165, 233, 0.09) 0%, transparent 40%),
-          radial-gradient(circle at 50% 95%, rgba(15, 76, 129, 0.06) 0%, transparent 40%),
-          linear-gradient(180deg, #f8fcff 0%, #f2f9fd 30%, #edf7fb 70%, #f5fbff 100%)
-        `,
+        background: "linear-gradient(180deg, #f8fcff 0%, #edf7fb 40%, #eaf5f9 100%)",
       }}
-      className="text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white font-sans relative min-h-screen"
+      className="text-[#0F172A] selection:bg-[#0f4c81] selection:text-white font-sans relative min-h-screen"
     >
       {/* ========================================================================= */}
-      {/* SECTION 1 — HERO SECTION (Clean, Minimal & Animated AI Constellation) */}
+      {/* SECTION 1 — HERO SECTION (Clean, Minimal & Editorial) */}
       {/* ========================================================================= */}
-      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24">
-        {/* Large Blurred Radial Glass Orb Behind Headline */}
+      <section className="relative min-h-[82vh] lg:min-h-[88vh] flex flex-col justify-center items-center overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-20">
+        {/* Soft Radial Ambient Glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0"
           style={{
-            width: "650px",
-            height: "650px",
-            background: "radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, rgba(0, 183, 194, 0.08) 45%, transparent 70%)",
-            filter: "blur(50px)",
+            width: "700px",
+            height: "700px",
+            background: "radial-gradient(circle, rgba(18, 207, 208, 0.16) 0%, rgba(15, 79, 108, 0.08) 50%, transparent 70%)",
+            filter: "blur(60px)",
           }}
         />
 
-        {/* Dynamic Animated AI Constellation & Neural Network Graph */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-          <svg className="absolute inset-0 w-full h-full opacity-65" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="aiConstellationGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#00b7c2" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#0284c7" stopOpacity="0.15" />
-              </linearGradient>
-              <linearGradient id="aiConstellationGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.65" />
-                <stop offset="100%" stopColor="#0f4c81" stopOpacity="0.15" />
-              </linearGradient>
-            </defs>
-
-            {/* Neural Graph Network Links */}
-            <line x1="50%" y1="42%" x2="32%" y2="28%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.4" strokeDasharray="6 4" />
-            <line x1="50%" y1="42%" x2="68%" y2="28%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.4" strokeDasharray="6 4" />
-            <line x1="50%" y1="42%" x2="25%" y2="55%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.4" />
-            <line x1="50%" y1="42%" x2="75%" y2="55%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.4" />
-            <line x1="50%" y1="42%" x2="50%" y2="68%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.5" strokeDasharray="4 4" />
-
-            {/* Cross Outer Links */}
-            <line x1="32%" y1="28%" x2="18%" y2="35%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.2" strokeDasharray="4 4" />
-            <line x1="68%" y1="28%" x2="82%" y2="35%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.2" strokeDasharray="4 4" />
-            <line x1="25%" y1="55%" x2="35%" y2="75%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.2" strokeDasharray="6 4" />
-            <line x1="75%" y1="55%" x2="65%" y2="75%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.2" strokeDasharray="6 4" />
-            <line x1="35%" y1="75%" x2="50%" y2="68%" stroke="url(#aiConstellationGrad1)" strokeWidth="1.2" />
-            <line x1="65%" y1="75%" x2="50%" y2="68%" stroke="url(#aiConstellationGrad2)" strokeWidth="1.2" />
-
-            {/* Neural Nodes (SVG Circles with Glowing Halo) */}
-            <circle cx="50%" cy="42%" r="6" fill="#00b7c2" fillOpacity="0.85" />
-            <circle cx="50%" cy="42%" r="14" fill="#00b7c2" fillOpacity="0.15" />
-
-            <circle cx="32%" cy="28%" r="4.5" fill="#0284c7" fillOpacity="0.8" />
-            <circle cx="68%" cy="28%" r="4.5" fill="#00b7c2" fillOpacity="0.8" />
-            <circle cx="25%" cy="55%" r="4" fill="#38bdf8" fillOpacity="0.75" />
-            <circle cx="75%" cy="55%" r="4" fill="#0f4c81" fillOpacity="0.75" />
-            <circle cx="50%" cy="68%" r="5" fill="#00b7c2" fillOpacity="0.8" />
-            <circle cx="18%" cy="35%" r="3.5" fill="#0284c7" fillOpacity="0.6" />
-            <circle cx="82%" cy="35%" r="3.5" fill="#38bdf8" fillOpacity="0.6" />
-            <circle cx="35%" cy="75%" r="3.5" fill="#00b7c2" fillOpacity="0.6" />
-            <circle cx="65%" cy="75%" r="3.5" fill="#0f4c81" fillOpacity="0.6" />
-          </svg>
+        {/* Subtle Light Moving Particles */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 select-none">
+          <div className="absolute top-1/4 left-1/5 w-2 h-2 rounded-full bg-[#00b7c2] animate-ping" />
+          <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 rounded-full bg-[#0f4c81] animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/5 w-2 h-2 rounded-full bg-[#38bdf8] animate-bounce" />
         </div>
 
         {/* Centered Hero Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6 sm:space-y-8">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASING }}
+            transition={{ duration: 0.6, ease: EASING }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#0f4c81] border border-[#00b7c2]/30 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
-            <span>AI • DATA • DIGITAL ENGINEERING</span>
+            <span>THE CODEPLACED TEAM</span>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1, ease: EASING }}
-            className="text-[38px] sm:text-[54px] lg:text-[66px] font-black leading-[1.06] tracking-[-0.035em] text-[#082F49] [text-wrap:balance]"
+            transition={{ duration: 0.7, delay: 0.1, ease: EASING }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight text-[#082F49] [text-wrap:balance]"
           >
             The Team Behind Scalable{" "}
             <span
-              className="bg-clip-text text-transparent font-black inline-block"
+              className="bg-clip-text text-transparent inline-block"
               style={{
                 backgroundImage: "linear-gradient(90deg, #0f4c81 0%, #00b7c2 50%, #0284c7 100%)",
               }}
@@ -342,24 +225,24 @@ export default function AboutPage() {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: EASING }}
+            transition={{ duration: 0.7, delay: 0.2, ease: EASING }}
             className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal"
           >
-            CodePlaced brings together engineers, architects, AI specialists and product leaders who build secure, scalable digital ecosystems that drive measurable business impact.
+            A multidisciplinary team of developers, analysts, marketers, and business leaders helping organizations build, optimize, and scale through technology.
           </motion.p>
 
           {/* Action Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: EASING }}
+            transition={{ duration: 0.7, delay: 0.3, ease: EASING }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-1"
           >
             <a
               href="#leadership-team"
-              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-extrabold text-[14px] sm:text-[15px] shadow-lg shadow-[#082F49]/15 flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group"
+              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-extrabold text-sm shadow-lg shadow-[#082F49]/15 flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group"
             >
               <span>Meet Our Leaders</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -367,17 +250,17 @@ export default function AboutPage() {
 
             <a
               href="#why-choose-us"
-              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-white/90 hover:bg-white text-[#082F49] font-bold text-[14px] sm:text-[15px] border border-sky-200/80 shadow-xs flex items-center justify-center transition-all duration-300"
+              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-sm border border-sky-200/80 shadow-xs flex items-center justify-center transition-all duration-300"
             >
-              <span>Explore Our Story</span>
+              <span>Explore Our Principles</span>
             </a>
           </motion.div>
 
-          {/* Centered Trust Metrics Bar */}
+          {/* Trust Metrics Bar */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4, ease: EASING }}
+            transition={{ duration: 0.7, delay: 0.4, ease: EASING }}
             className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto text-center"
           >
             {COMPANY_STATS.map((stat, sIdx) => (
@@ -395,33 +278,27 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2 — WHY BUSINESSES CHOOSE CODEPLACED (2-Cols Mobile & Tablet, 3-Cols Desktop) */}
+      {/* SECTION 2 — PRINCIPLES (No Divider Lines, Natural Spacing) */}
       {/* ========================================================================= */}
-      <section id="why-choose-us" className="py-14 sm:py-16 lg:py-24 overflow-hidden">
+      <section id="why-choose-us" className="py-16 sm:py-20 lg:py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.9, ease: EASING }}
-            className="max-w-[800px] mx-auto text-center mb-10 sm:mb-12 space-y-2.5"
-          >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
+          <div className="max-w-[800px] mx-auto text-center mb-10 sm:mb-12 space-y-2.5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>THE CODEPLACED ADVANTAGE</span>
+              <span>CORE PRINCIPLES</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
-              Why Businesses Choose CodePlaced
+              The Principles Behind Every Project
             </h2>
             <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
-              We replace junior-heavy agency models with senior engineering velocity, transparent communication, and guaranteed delivery.
+              The standards, values, and engineering discipline that guide our client partnerships and ensure long-term success.
             </p>
-          </motion.div>
+          </div>
 
-          {/* 6 Feature Cards: 2 cols mobile, 2 cols tablet, 3 cols desktop */}
+          {/* 6 Feature Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
-            {WHY_WORK_WITH_US.map((item, idx) => {
+            {COMPANY_PRINCIPLES.map((item, idx) => {
               const ItemIcon = item.icon;
               return (
                 <div
@@ -453,7 +330,7 @@ export default function AboutPage() {
 
                   <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-3.5 border-t border-sky-100/70 flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-slate-700">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00b7c2] flex-shrink-0" />
-                    <span className="truncate">Guaranteed Standard</span>
+                    <span className="truncate">CodePlaced Standard</span>
                   </div>
                 </div>
               );
@@ -463,18 +340,12 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 3 — LEADERSHIP SECTION (Executive Profiles — Premium Glass Gradient) */}
+      {/* SECTION 3 — LEADERSHIP SECTION */}
       {/* ========================================================================= */}
-      <section id="leadership-team" className="py-14 sm:py-16 lg:py-24 overflow-hidden relative">
+      <section id="leadership-team" className="py-16 sm:py-20 lg:py-24 relative">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.9, ease: EASING }}
-            className="max-w-[850px] mx-auto text-center mb-10 sm:mb-14 space-y-2.5 sm:space-y-3"
-          >
+          <div className="max-w-[850px] mx-auto text-center mb-10 sm:mb-14 space-y-2.5 sm:space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
               <span>EXECUTIVE LEADERSHIP</span>
@@ -483,38 +354,32 @@ export default function AboutPage() {
               Meet The Leaders Behind CodePlaced
             </h2>
             <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[740px] mx-auto font-normal">
-              Built by experienced technology leaders focused on scalable software, AI innovation, and business growth.
+              Built by experienced professionals focused on technology, analytics, innovation, and business growth.
             </p>
-          </motion.div>
+          </div>
 
-          {/* 2-Column Executive Profile Panels (Stacked on Mobile, 2 Cols on Tablet & Desktop) */}
+          {/* 2-Column Executive Profile Panels */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 lg:gap-10 max-w-6xl mx-auto items-stretch">
             {LEADERSHIP_TEAM.map((founder, fIdx) => (
-              <motion.div
+              <div
                 key={fIdx}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ duration: 0.95, delay: fIdx * 0.12, ease: EASING }}
                 style={{
                   background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(235, 248, 255, 0.85) 100%)",
                   border: "1px solid rgba(14, 165, 233, 0.2)",
                   boxShadow: "0 20px 60px rgba(2, 132, 199, 0.08)",
                 }}
-                className="rounded-[24px] sm:rounded-[32px] p-4 sm:p-6 lg:p-8 hover:shadow-[0_30px_80px_rgba(2,132,199,0.16)] hover:border-[#00b7c2]/60 hover:-translate-y-2 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between group"
+                className="rounded-[24px] sm:rounded-[32px] p-4 sm:p-6 lg:p-8 hover:shadow-[0_30px_80px_rgba(2,132,199,0.16)] hover:border-[#00b7c2]/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div className="space-y-4 sm:space-y-5">
-                  {/* Full Color Portrait (Responsive height: 230px mobile, 320px tablet, 420px desktop) */}
+                  {/* Portrait */}
                   <div className="relative h-[230px] sm:h-[320px] lg:h-[420px] w-full rounded-[18px] sm:rounded-[24px] overflow-hidden bg-slate-900 shadow-md">
                     <img
                       src={founder.image}
                       alt={founder.name}
-                      style={{ filter: "none" }}
                       className={`w-full h-full object-cover ${founder.imagePosition || "object-top sm:object-center"} group-hover:scale-[1.03] transition-transform duration-700 ease-out`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#042841]/95 via-[#042841]/50 to-transparent" />
                     
-                    {/* Floating Info on Bottom of Image */}
                     <div className="absolute bottom-2.5 left-3.5 right-3.5 sm:bottom-4 sm:left-5 sm:right-5 text-white space-y-0.5 sm:space-y-1">
                       <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-[#00b7c2]/35 backdrop-blur-md text-cyan-200 border border-[#00b7c2]/40">
                         {founder.role}
@@ -525,12 +390,12 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  {/* Leadership Summary Bio */}
+                  {/* Summary Bio */}
                   <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed font-normal">
                     {founder.bio}
                   </p>
 
-                  {/* Strategic Focus Tags */}
+                  {/* Strategic Focus */}
                   <div className="space-y-1.5 sm:space-y-2 pt-0.5">
                     <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500">
                       Strategic Focus
@@ -551,7 +416,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Bottom LinkedIn CTA Action (Opens in new tab) */}
+                {/* LinkedIn Action */}
                 <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-sky-100">
                   <a
                     href={founder.linkedin}
@@ -567,49 +432,36 @@ export default function AboutPage() {
                     <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-300" />
                   </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 4 — ENGINEERING TEAM SECTION (3 Cols Desktop, 2 Cols Tablet & Mobile) */}
+      {/* SECTION 4 — TEAM PROFILES */}
       {/* ========================================================================= */}
-      <section className="py-14 lg:py-20 overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.9, ease: EASING }}
-            className="max-w-[800px] mx-auto text-center mb-10 space-y-2.5"
-          >
+          <div className="max-w-[800px] mx-auto text-center mb-10 space-y-2.5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>CORE SPECIALISTS</span>
+              <span>THE TEAM</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
-              Meet Our Engineering Team
+              Meet Our Team
             </h2>
             <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
               A multidisciplinary squad of analysts, growth specialists, and engineers powering enterprise execution.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Grid Layout: 3 cards per row on Desktop (lg:grid-cols-3) / 2 cards on Tablet & Mobile (grid-cols-2) */}
-          <motion.div
-            variants={teamGridContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.15 }}
-            className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mt-6"
-          >
+          {/* Grid Layout: 3 cards Desktop / 2 cards Tablet & Mobile */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mt-6">
             {ENGINEERING_TEAM.map((member, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                variants={teamMemberVariant}
                 style={{
                   background: "linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(240, 249, 255, 0.85))",
                   boxShadow: "0 10px 30px rgba(2, 132, 199, 0.05)",
@@ -625,7 +477,7 @@ export default function AboutPage() {
                   />
                 </div>
 
-                {/* Name & Role (Only) */}
+                {/* Name & Role (Professional roles only) */}
                 <div className="space-y-1 w-full">
                   <h3 className="text-sm sm:text-base font-black text-[#082F49] group-hover:text-[#0f4c81] transition-colors duration-300 leading-snug">
                     {member.name}
@@ -634,87 +486,19 @@ export default function AboutPage() {
                     {member.role}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 5 — HOW WE DELIVER SUCCESSFUL DIGITAL PRODUCTS (6-Step Timeline) */}
-      {/* ========================================================================= */}
-      <section id="delivery-process" className="py-14 lg:py-20 overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-[800px] mx-auto text-center mb-12 space-y-2.5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/20 shadow-2xs">
-              <Zap className="w-3.5 h-3.5 text-[#00b7c2]" />
-              <span>THE ENGINEERING BLUEPRINT</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
-              How We Deliver Successful Digital Products
-            </h2>
-            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
-              A disciplined, milestone-driven 6-step engineering methodology that guarantees reliable code and fixed timelines.
-            </p>
-          </div>
-
-          {/* 6-Step Compact Horizontal Timeline Grid (Single row on desktop) */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
-            {DELIVERY_METHODOLOGY.map((step) => {
-              const StepIcon = step.icon;
-              return (
-                <div
-                  key={step.step}
-                  style={{
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 251, 255, 0.8))",
-                    boxShadow: "0 8px 24px rgba(2, 132, 199, 0.04)",
-                  }}
-                  className="rounded-[22px] p-4 sm:p-5 border border-sky-100 hover:border-[#00b7c2]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-black text-[#00b7c2] tracking-wider">
-                        {step.step}
-                      </span>
-                      <div className="w-7 h-7 rounded-lg bg-[#ECFEFF] flex items-center justify-center text-[#0f4c81]">
-                        <StepIcon className="w-3.5 h-3.5" />
-                      </div>
-                    </div>
-
-                    <h3 className="text-sm font-extrabold text-[#082F49] mb-1">
-                      {step.title}
-                    </h3>
-
-                    <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed font-normal">
-                      {step.desc}
-                    </p>
-                  </div>
-
-                  <div className="mt-3 pt-2.5 border-t border-sky-100 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-emerald-600">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-                    <span>Verified Gate</span>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 6 — ENTERPRISE FAQ (Transparent Background, White Cards) */}
+      {/* SECTION 5 — FAQ (Directly Above Footer, No Extraneous CTA) */}
       {/* ========================================================================= */}
-      <section className="py-14 lg:py-20 bg-transparent">
+      <section className="py-16 sm:py-20 lg:py-24">
         <div className="max-w-[850px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: EASING }}
-            className="text-center mb-10 space-y-2.5"
-          >
+          <div className="text-center mb-10 space-y-2.5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-sky-200 shadow-2xs">
               <HelpCircle className="w-3 h-3 text-[#00b7c2]" />
               <span>FREQUENTLY ASKED QUESTIONS</span>
@@ -725,9 +509,9 @@ export default function AboutPage() {
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-[540px] mx-auto font-normal">
               Clear answers on how we partner, scope, build, and support enterprise systems.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Accordion List (White Cards, Sky Border, Subtle Shadow) */}
+          {/* Accordion List */}
           <div className="space-y-3.5">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openFaq === idx;
@@ -741,7 +525,7 @@ export default function AboutPage() {
                 >
                   <button
                     onClick={() => toggleFaq(idx)}
-                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-hidden"
                     aria-expanded={isOpen}
                   >
                     <span className="text-xs sm:text-sm font-bold text-[#082F49]">
@@ -774,36 +558,6 @@ export default function AboutPage() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 7 — COMPACT CTA STRIP (Clean & Streamlined, Seamless) */}
-      {/* ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-transparent">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <h3 className="text-xl sm:text-2xl font-black text-[#082F49] tracking-tight">
-            Ready to build with CodePlaced?
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
-            Explore our engineering capabilities or connect directly with our technical leadership.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <a
-              href="#leadership-team"
-              className="w-full sm:w-auto h-[44px] px-6 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-bold text-xs sm:text-sm transition-all duration-300 shadow-md shadow-[#082F49]/15 flex items-center justify-center gap-2 active:scale-95"
-            >
-              <span>Meet Our Team</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-
-            <Link
-              href="/services"
-              className="w-full sm:w-auto h-[44px] px-6 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-xs sm:text-sm border border-sky-200 transition-all duration-300 flex items-center justify-center shadow-xs"
-            >
-              <span>View Services</span>
-            </Link>
           </div>
         </div>
       </section>

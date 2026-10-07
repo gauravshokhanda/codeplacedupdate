@@ -739,39 +739,39 @@ export default function IndustriesPage() {
           </div>
 
           {/* Carousel Active Card */}
-          <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white border border-slate-700 shadow-2xl p-8 sm:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="relative overflow-hidden rounded-3xl bg-white border border-sky-100 shadow-xl shadow-sky-950/5 p-8 sm:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left 7 Cols */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-300 bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#0D3B66] bg-[#F4FAFC] px-3.5 py-1 rounded-full border border-sky-100">
                     {FEATURED_SOLUTIONS[solutionIndex].industry}
                   </span>
-                  <span className="text-xs font-bold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-500/30">
+                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                     {FEATURED_SOLUTIONS[solutionIndex].badge}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-4xl font-black leading-tight text-white">
+                <h3 className="text-2xl sm:text-4xl font-black leading-tight text-[#0F2B46]">
                   {FEATURED_SOLUTIONS[solutionIndex].title}
                 </h3>
 
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p className="text-[#5B6B7C] text-sm sm:text-base leading-relaxed">
                   {FEATURED_SOLUTIONS[solutionIndex].desc}
                 </p>
 
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                  <div className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+                <div className="p-4 rounded-2xl bg-[#F4FAFC] border border-sky-100 space-y-1.5">
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#18B6D8]">
                     Proven Impact:
                   </div>
-                  <div className="text-sm font-semibold text-white">
+                  <div className="text-sm font-semibold text-[#0F2B46]">
                     {FEATURED_SOLUTIONS[solutionIndex].highlight}
                   </div>
                 </div>
 
                 {/* Architecture Data Flow String */}
-                <div className="text-xs text-slate-300 font-mono bg-black/30 p-3.5 rounded-xl border border-white/10 overflow-x-auto whitespace-nowrap">
-                  <span className="text-cyan-400 font-bold">Data Flow: </span>
+                <div className="text-xs text-[#0F2B46] font-mono bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 overflow-x-auto whitespace-nowrap">
+                  <span className="text-[#18B6D8] font-bold">Data Flow: </span>
                   {FEATURED_SOLUTIONS[solutionIndex].architecture}
                 </div>
 
@@ -784,7 +784,7 @@ export default function IndustriesPage() {
                     {FEATURED_SOLUTIONS[solutionIndex].tech.map((t) => (
                       <span
                         key={t}
-                        className="px-3 py-1 rounded-lg bg-white/10 border border-white/15 text-xs font-bold text-cyan-100"
+                        className="px-3 py-1 rounded-lg bg-[#F4FAFC] border border-sky-100 text-xs font-bold text-[#0F2B46]"
                       >
                         {t}
                       </span>
@@ -794,7 +794,7 @@ export default function IndustriesPage() {
               </div>
 
               {/* Right 5 Cols: Highlight Metric & Quick Action */}
-              <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-[24px] bg-white/10 border border-white/15 backdrop-blur-md space-y-6">
+              <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0F2B46] to-[#0D3B66] text-white shadow-lg space-y-6">
                 <div className="space-y-2 text-center sm:text-left">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300">
                     Quantified Result
@@ -810,7 +810,7 @@ export default function IndustriesPage() {
                 <div className="space-y-3 pt-4 border-t border-white/10">
                   <Link
                     href="/contact"
-                    className="w-full h-12 rounded-xl bg-white hover:bg-slate-100 text-[#052B45] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
+                    className="w-full h-12 rounded-xl bg-white hover:bg-slate-100 text-[#0F2B46] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
                   >
                     <span>Deploy Similar Architecture</span>
                     <ArrowRight className="w-4 h-4" />
@@ -831,8 +831,9 @@ export default function IndustriesPage() {
                 <button
                   key={i}
                   onClick={() => setSolutionIndex(i)}
-                  className={`h-2 rounded-full transition-all ${solutionIndex === i ? "w-8 bg-cyan-400" : "w-2 bg-white/30 hover:bg-white/50"
-                    }`}
+                  className={`h-2 rounded-full transition-all ${
+                    solutionIndex === i ? "w-8 bg-[#1CC8E5]" : "w-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
@@ -996,13 +997,13 @@ export default function IndustriesPage() {
       <section className="section-py border-y border-slate-200/60">
         <div className="site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
               TECHNICAL BLUEPRINTS
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
               Industry Architecture Blueprints
             </h2>
-            <p className="text-slate-600 text-base">
+            <p className="text-[#5B6B7C] text-base">
               Inspect production-tested data flow diagrams from source ingestion to lakehouse, analytics marts, and AI copilots.
             </p>
           </div>
@@ -1015,12 +1016,12 @@ export default function IndustriesPage() {
                 <button
                   key={bp.id}
                   onClick={() => setActiveBlueprintId(bp.id)}
-                  className={`px-5 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${isActive
-                      ? "bg-[#052B45] text-white shadow-md shadow-[#052B45]/20"
-                      : "bg-white/70 hover:bg-white text-slate-700 border border-slate-200/70"
+                  className={`px-5 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${isActive
+                      ? "bg-[#0F2B46] text-white shadow-md shadow-[#0F2B46]/20"
+                      : "bg-white/80 hover:bg-white text-[#0F2B46] border border-sky-100 shadow-xs"
                     }`}
                 >
-                  <Workflow className="w-4 h-4" />
+                  <Workflow className="w-4 h-4 text-[#1CC8E5]" />
                   <span>{bp.name}</span>
                 </button>
               );
@@ -1028,21 +1029,21 @@ export default function IndustriesPage() {
           </div>
 
           {/* Active Blueprint Visualization Box */}
-          <div className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-[#052B45] to-[#041E2A] text-white border border-slate-700 shadow-2xl space-y-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div className="p-8 sm:p-10 rounded-[32px] bg-white border border-sky-100 shadow-xl shadow-sky-950/5 space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#18B6D8]">
                   {activeBlueprint.domain} Architecture
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                <h3 className="text-2xl sm:text-3xl font-black text-[#0F2B46] mt-1">
                   {activeBlueprint.name}
                 </h3>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-500/30">
+                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                   {activeBlueprint.badge}
                 </span>
-                <span className="text-xs font-mono text-cyan-200 bg-white/10 px-3 py-1 rounded-full border border-white/15">
+                <span className="text-xs font-mono text-[#0F2B46] bg-[#F4FAFC] px-3 py-1 rounded-full border border-sky-100 font-bold">
                   {activeBlueprint.sla}
                 </span>
               </div>
@@ -1050,30 +1051,30 @@ export default function IndustriesPage() {
 
             {/* 5-Step Pipeline Grid */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-              {activeBlueprint.steps.map((step, idx) => (
+              {activeBlueprint.steps.map((step) => (
                 <div
                   key={step.num}
-                  className="p-5 rounded-2xl bg-white/[0.06] border border-white/10 hover:border-cyan-400/40 transition-colors flex flex-col justify-between space-y-3 relative group"
+                  className="p-5 rounded-2xl bg-[#F4FAFC] border border-sky-100 hover:border-[#1CC8E5]/50 hover:bg-white transition-all flex flex-col justify-between space-y-3 relative group shadow-2xs hover:shadow-md"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-black flex items-center justify-center">
+                      <span className="w-7 h-7 rounded-lg bg-[#0F2B46] text-[#1CC8E5] font-mono text-xs font-black flex items-center justify-center">
                         {step.num}
                       </span>
-                      <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60">
                         {step.tag}
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-white group-hover:text-cyan-200 transition-colors">
+                    <h4 className="text-sm font-bold text-[#0F2B46] group-hover:text-[#18B6D8] transition-colors">
                       {step.title}
                     </h4>
-                    <p className="text-[11px] text-slate-300 leading-relaxed">
+                    <p className="text-[11px] text-[#5B6B7C] leading-relaxed">
                       {step.desc}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10">
-                    <div className="text-[10px] font-mono text-cyan-300 truncate">
+                  <div className="pt-3 border-t border-slate-200/60">
+                    <div className="text-[10px] font-mono text-[#0D3B66] font-semibold truncate">
                       {step.tech}
                     </div>
                   </div>
@@ -1082,16 +1083,16 @@ export default function IndustriesPage() {
             </div>
 
             {/* Bottom Actions in Blueprint */}
-            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-              <span className="text-slate-300">
+            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+              <span className="text-[#5B6B7C]">
                 Ready to deploy this exact architecture in your private cloud environment?
               </span>
               <Link
                 href="/contact"
-                className="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-[#052B45] font-bold text-xs shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap"
+                className="px-6 py-3 rounded-xl bg-[#0F2B46] hover:bg-[#0D3B66] text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap"
               >
                 <span>Request Full Architecture Spec</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#1CC8E5]" />
               </Link>
             </div>
           </div>
@@ -1103,13 +1104,13 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       <section className="section-py site-container">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
             SERVICES MATRIX
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
             Industry-Specific Capabilities & Tech Stacks
           </h2>
-          <p className="text-slate-600 text-base">
+          <p className="text-[#5B6B7C] text-base">
             A comprehensive breakdown of domain challenges, tailored solutions, specialized tech stacks, and quantified outcomes.
           </p>
         </div>
@@ -1120,45 +1121,45 @@ export default function IndustriesPage() {
             return (
               <div
                 key={svc.id}
-                className="p-8 rounded-[28px] glass-panel-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-6"
+                className="p-8 rounded-[28px] bg-white border border-sky-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-6"
               >
                 <div className="space-y-5">
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-[rgba(5,43,69,0.08)] text-[#052B45] flex items-center justify-center font-bold">
-                        <SvcIcon className="w-6 h-6" />
+                      <div className="w-12 h-12 rounded-2xl bg-[#F4FAFC] text-[#0F2B46] border border-sky-100 flex items-center justify-center font-bold">
+                        <SvcIcon className="w-6 h-6 text-[#18B6D8]" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-black text-[#052B45]">{svc.name}</h3>
-                        <span className="text-[11px] font-bold text-[#0D6E8A]">Specialized Practice</span>
+                        <h3 className="text-xl font-black text-[#0F2B46]">{svc.name}</h3>
+                        <span className="text-[11px] font-bold text-[#18B6D8]">Specialized Practice</span>
                       </div>
                     </div>
                     <Link
                       href="/contact"
-                      className="px-4 py-2 rounded-xl bg-[#052B45] hover:bg-[#083A5B] text-white text-xs font-bold transition-all shadow-xs"
+                      className="px-4 py-2 rounded-xl bg-[#0F2B46] hover:bg-[#0D3B66] text-white text-xs font-bold transition-all shadow-xs"
                     >
                       Engage Pod
                     </Link>
                   </div>
 
                   {/* Challenge */}
-                  <div className="p-4 rounded-xl bg-white/60 backdrop-blur-xs border border-slate-200/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-[#F4FAFC] border border-sky-100 space-y-1">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
                       The Domain Challenge:
                     </span>
-                    <p className="text-xs text-slate-700 leading-relaxed">{svc.challenge}</p>
+                    <p className="text-xs text-[#5B6B7C] leading-relaxed">{svc.challenge}</p>
                   </div>
 
                   {/* Solutions */}
                   <div className="space-y-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#052B45]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#0F2B46]">
                       Engineered Solutions:
                     </span>
                     <ul className="space-y-1.5">
                       {svc.solutions.map((s) => (
-                        <li key={s} className="text-xs text-slate-700 flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                        <li key={s} className="text-xs text-[#0F2B46] flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-[#18B6D8] flex-shrink-0 mt-0.5" />
                           <span>{s}</span>
                         </li>
                       ))}
@@ -1166,7 +1167,7 @@ export default function IndustriesPage() {
                   </div>
 
                   {/* Tech Stack */}
-                  <div className="space-y-2 pt-2 border-t border-slate-200/40">
+                  <div className="space-y-2 pt-2 border-t border-slate-100">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       Tech Stack:
                     </span>
@@ -1174,7 +1175,7 @@ export default function IndustriesPage() {
                       {svc.techStack.map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 rounded-lg bg-[#ECFEFF] border border-[#083A5B]/15 text-xs font-bold text-[#083A5B]"
+                          className="px-2.5 py-1 rounded-lg bg-[#F4FAFC] border border-sky-100 text-xs font-bold text-[#0F2B46]"
                         >
                           {t}
                         </span>
@@ -1184,9 +1185,9 @@ export default function IndustriesPage() {
                 </div>
 
                 {/* Outcomes Ribbon */}
-                <div className="pt-4 border-t border-slate-200/40 bg-white/40 -mx-8 -mb-8 p-6 rounded-b-[28px] flex flex-wrap items-center justify-between gap-2">
+                <div className="pt-4 border-t border-slate-100 bg-[#F4FAFC] -mx-8 -mb-8 p-6 rounded-b-[28px] flex flex-wrap items-center justify-between gap-2">
                   {svc.outcomes.map((o) => (
-                    <div key={o} className="flex items-center gap-1.5 text-xs font-bold text-[#052B45]">
+                    <div key={o} className="flex items-center gap-1.5 text-xs font-bold text-[#0F2B46]">
                       <Check className="w-4 h-4 text-emerald-600" />
                       <span>{o}</span>
                     </div>
@@ -1203,10 +1204,10 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       <section className="section-py border-y border-slate-200/60">
         <div className="site-container text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
             PROVEN ENTERPRISE ECOSYSTEM
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#052B45] tracking-tight mt-2 mb-10">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#0F2B46] tracking-tight mt-2 mb-10">
             Trusted by Data-Driven Teams Across High-Stakes Industries
           </h2>
 
@@ -1214,10 +1215,10 @@ export default function IndustriesPage() {
             {CLIENT_ECOSYSTEM.map((brand) => (
               <div
                 key={brand.name}
-                className="p-4 rounded-2xl glass-panel-card hover:border-[#0D6E8A]/40 transition-colors text-center space-y-1 shadow-2xs"
+                className="p-4 rounded-2xl bg-white border border-sky-100 hover:border-[#1CC8E5]/50 transition-colors text-center space-y-1 shadow-2xs"
               >
-                <div className="text-sm font-black text-[#052B45]">{brand.name}</div>
-                <div className="text-[10px] text-slate-500 truncate">{brand.tag}</div>
+                <div className="text-sm font-black text-[#0F2B46]">{brand.name}</div>
+                <div className="text-[10px] text-[#5B6B7C] truncate">{brand.tag}</div>
               </div>
             ))}
           </div>
@@ -1225,46 +1226,44 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. IMPACT METRICS SECTION (Dark Gradient) */}
+      {/* 7. IMPACT METRICS SECTION */}
       {/* ========================================================================= */}
-      <section className="section-py bg-gradient-to-r from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white">
-        <div className="site-container">
-          <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-cyan-300">
-              PROVEN RETURN ON INVESTMENT
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-              Enterprise Scale & Institutional Impact
-            </h2>
-            <p className="text-slate-300 text-base">
-              Our deployments are measured in compressed query latency, eliminated downtime, and measurable balance-sheet ROI.
-            </p>
+      <section className="section-py site-container">
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
+            PROVEN RETURN ON INVESTMENT
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
+            Enterprise Scale & Institutional Impact
+          </h2>
+          <p className="text-[#5B6B7C] text-base">
+            Our deployments are measured in compressed query latency, eliminated downtime, and measurable balance-sheet ROI.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
+            <div className="text-4xl sm:text-5xl font-black text-[#0F2B46]">100+</div>
+            <div className="text-sm font-bold text-[#18B6D8]">Production Deployments</div>
+            <p className="text-xs text-[#5B6B7C]">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-              <div className="text-4xl sm:text-5xl font-black text-white">100+</div>
-              <div className="text-sm font-bold text-cyan-200">Production Deployments</div>
-              <p className="text-xs text-slate-300">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
-            </div>
+          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
+            <div className="text-4xl sm:text-5xl font-black text-[#0F2B46]">95%</div>
+            <div className="text-sm font-bold text-[#18B6D8]">Client Retention</div>
+            <p className="text-xs text-[#5B6B7C]">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
+          </div>
 
-            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-              <div className="text-4xl sm:text-5xl font-black text-white">95%</div>
-              <div className="text-sm font-bold text-cyan-200">Client Retention</div>
-              <p className="text-xs text-slate-300">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
-            </div>
+          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
+            <div className="text-4xl sm:text-5xl font-black text-[#0F2B46]">99.99%</div>
+            <div className="text-sm font-bold text-[#18B6D8]">Verified SLA Guarantee</div>
+            <p className="text-xs text-[#5B6B7C]">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
+          </div>
 
-            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-              <div className="text-4xl sm:text-5xl font-black text-white">99.99%</div>
-              <div className="text-sm font-bold text-cyan-200">Verified SLA Guarantee</div>
-              <p className="text-xs text-slate-300">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
-            </div>
-
-            <div className="p-8 rounded-[24px] bg-white/[0.06] border border-white/10 backdrop-blur-md text-center space-y-2">
-              <div className="text-4xl sm:text-5xl font-black text-emerald-400">$140M+</div>
-              <div className="text-sm font-bold text-emerald-200">Client Value Unlocked</div>
-              <p className="text-xs text-slate-300">Combined cloud infrastructure savings and operational margin growth.</p>
-            </div>
+          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
+            <div className="text-4xl sm:text-5xl font-black text-emerald-600">$140M+</div>
+            <div className="text-sm font-bold text-emerald-700">Client Value Unlocked</div>
+            <p className="text-xs text-[#5B6B7C]">Combined cloud infrastructure savings and operational margin growth.</p>
           </div>
         </div>
       </section>
@@ -1275,10 +1274,10 @@ export default function IndustriesPage() {
       <section className="section-py border-t border-slate-200/60">
         <div className="site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
               ENGINEERING PLAYBOOKS
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
               Industry Research & Architecture Guides
             </h2>
           </div>
@@ -1287,32 +1286,32 @@ export default function IndustriesPage() {
             {RESEARCH_PAPERS.map((paper) => (
               <div
                 key={paper.title}
-                className="p-8 rounded-[24px] glass-panel-card shadow-2xs hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4"
+                className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-2xs hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-[#083A5B] bg-[#ECFEFF] px-2.5 py-0.5 rounded-full border border-[#083A5B]/20">
+                    <span className="font-bold text-[#0F2B46] bg-[#F4FAFC] px-2.5 py-0.5 rounded-full border border-sky-100">
                       {paper.category}
                     </span>
                     <span className="text-slate-400 font-semibold">{paper.readTime}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#052B45] leading-snug">
+                  <h3 className="text-base font-bold text-[#0F2B46] leading-snug">
                     {paper.title}
                   </h3>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-[#5B6B7C] leading-relaxed">
                     {paper.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-200">
+                <div className="pt-4 border-t border-slate-100">
                   <Link
                     href="/blog"
-                    className="text-xs font-bold text-[#083A5B] hover:text-[#13B5EA] inline-flex items-center gap-1.5"
+                    className="text-xs font-bold text-[#0F2B46] hover:text-[#18B6D8] inline-flex items-center gap-1.5"
                   >
                     <span>Read Whitepaper</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#1CC8E5]" />
                   </Link>
                 </div>
               </div>
@@ -1324,34 +1323,36 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 9. FINAL CTA */}
       {/* ========================================================================= */}
-      <section className="bg-gradient-to-r from-[#052B45] via-[#083A5B] to-[#0D6E8A] text-white py-16 sm:py-20 text-center border-t border-slate-700">
-        <div className="site-container max-w-3xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/15">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" /> Start Your 2–4 Week Industry Engagement
-          </div>
+      <section className="py-20 lg:py-24">
+        <div className="site-container">
+          <div className="relative rounded-[32px] p-8 sm:p-14 text-center overflow-hidden bg-gradient-to-r from-[#0F2B46] via-[#0D3B66] to-[#1CC8E5] text-white shadow-2xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-200 border border-white/15">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-200" /> Start Your 2–4 Week Industry Engagement
+            </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black">
-            Ready to Engineer Mission-Critical Systems for Your Domain?
-          </h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black max-w-2xl mx-auto">
+              Ready to Engineer Mission-Critical Systems for Your Domain?
+            </h2>
 
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-            Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
-          </p>
+            <p className="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
+            </p>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#052B45] hover:bg-[#083A5B] text-white font-bold text-sm shadow-xl transition-all border border-[#13B5EA]/30"
-            >
-              <span>Book Architecture Call</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/case-studies"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
-            >
-              <span>Explore Case Studies</span>
-            </Link>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-50 text-[#0F2B46] font-bold text-sm shadow-xl transition-all"
+              >
+                <span>Book Architecture Call</span>
+                <ArrowRight className="w-4 h-4 text-[#18B6D8]" />
+              </Link>
+              <Link
+                href="/case-studies"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
+              >
+                <span>Explore Case Studies</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
