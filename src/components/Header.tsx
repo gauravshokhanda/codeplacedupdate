@@ -88,6 +88,8 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     setIndustriesMenuOpen(false);
   }, [pathname]);
 
+  const isDarkTheme = Boolean(pathname && pathname.startsWith("/case-studies"));
+
   // Shared Navigation Links component (Centered)
   const renderNavLinks = () => (
     <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
@@ -105,6 +107,24 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             ? pathname.startsWith("/blog") || pathname.startsWith("/blogs")
             : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
 
+        const linkColorClass = isDarkTheme
+          ? isActive
+            ? "text-[#00C7E8] font-bold"
+            : "text-[#E2E8F0] hover:text-[#00C7E8]"
+          : megaMenuOpen || isActive
+          ? "text-[#0B6B88] font-bold"
+          : "text-[#12344A] hover:text-[#14B8C5]";
+
+        const chevronColorClass = isDarkTheme
+          ? megaMenuOpen
+            ? "rotate-180 text-[#00C7E8]"
+            : "text-[#E2E8F0]/70 group-hover:text-[#00C7E8]"
+          : megaMenuOpen
+          ? "rotate-180 text-[#14B8C5]"
+          : "text-[#12344A]/60 group-hover:text-[#14B8C5]";
+
+        const underlineBg = isDarkTheme ? "bg-[#00C7E8]" : "bg-[#14B8C5]";
+
         if (isServices) {
           return (
             <div
@@ -115,22 +135,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             >
               <Link
                 href="/services"
-                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${
-                  megaMenuOpen || isActive
-                    ? "text-[#0B6B88] font-bold"
-                    : "text-[#12344A] hover:text-[#14B8C5]"
-                }`}
+                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
               >
                 <span>{item.label}</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    megaMenuOpen
-                      ? "rotate-180 text-[#14B8C5]"
-                      : "text-[#12344A]/60 group-hover:text-[#14B8C5]"
-                  }`}
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${chevronColorClass}`}
                 />
                 <span
-                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#14B8C5] transition-transform duration-300 origin-center ${
+                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                     isActive && !megaMenuOpen
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -151,22 +163,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             >
               <Link
                 href="/industries"
-                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${
-                  industriesMenuOpen || isActive
-                    ? "text-[#0B6B88] font-bold"
-                    : "text-[#12344A] hover:text-[#14B8C5]"
-                }`}
+                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
               >
                 <span>{item.label}</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    industriesMenuOpen
-                      ? "rotate-180 text-[#14B8C5]"
-                      : "text-[#12344A]/60 group-hover:text-[#14B8C5]"
-                  }`}
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${chevronColorClass}`}
                 />
                 <span
-                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#14B8C5] transition-transform duration-300 origin-center ${
+                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                     isActive && !industriesMenuOpen
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -181,15 +185,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           <Link
             key={item.label}
             href={item.href}
-            className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${
-              isActive
-                ? "text-[#0B6B88] font-bold"
-                : "text-[#12344A] hover:text-[#14B8C5]"
-            }`}
+            className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${linkColorClass}`}
           >
             <span>{item.label}</span>
             <span
-              className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#14B8C5] transition-transform duration-300 origin-center ${
+              className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`}
             />
@@ -205,22 +205,28 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
       {onOpenBookAudit ? (
         <button
           onClick={() => onOpenBookAudit("Schedule Strategy Call")}
-          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#14B8C5]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C7E8]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
           style={{
-            background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+            background: isDarkTheme
+              ? "linear-gradient(90deg, #087FA5, #00C7E8)"
+              : "linear-gradient(90deg, #0f4c81, #00b7c2)",
           }}
         >
           <span>Book Strategy Call</span>
+          <ArrowRight className="w-4 h-4 ml-0.5" />
         </button>
       ) : (
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#14B8C5]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C7E8]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
           style={{
-            background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+            background: isDarkTheme
+              ? "linear-gradient(90deg, #087FA5, #00C7E8)"
+              : "linear-gradient(90deg, #0f4c81, #00b7c2)",
           }}
         >
           <span>Book Strategy Call</span>
+          <ArrowRight className="w-4 h-4 ml-0.5" />
         </Link>
       )}
     </div>
@@ -235,7 +241,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-            <CodePlacedLogo size="md" variant="dark" />
+            <CodePlacedLogo size="md" variant={isDarkTheme ? "light" : "dark"} />
           </Link>
 
           {/* Navigation Links (Centered) */}
@@ -252,14 +258,20 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               href="/contact"
               className="sm:hidden px-4 h-[36px] rounded-full text-white text-xs font-bold shadow-xs flex items-center justify-center"
               style={{
-                background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                background: isDarkTheme
+                  ? "linear-gradient(90deg, #0D5D7A, #12C8F7)"
+                  : "linear-gradient(90deg, #0f4c81, #00b7c2)",
               }}
             >
               Call
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100 transition-colors"
+              className={`p-2 rounded-xl transition-colors ${
+                isDarkTheme
+                  ? "text-white hover:text-[#12C8F7] hover:bg-white/10"
+                  : "text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100"
+              }`}
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -305,12 +317,16 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -8, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed top-0 left-0 right-0 w-full h-[72px] sm:h-[76px] z-[999] bg-white/95 backdrop-blur-[12px] border-b border-slate-200/80 shadow-xs"
+            className={`fixed top-0 left-0 right-0 w-full h-[72px] sm:h-[76px] z-[999] backdrop-blur-[12px] transition-colors duration-200 ${
+              isDarkTheme
+                ? "bg-[#050505]/92 border-b border-white/[0.08] shadow-lg shadow-black/40"
+                : "bg-white/95 border-b border-slate-200/80 shadow-xs"
+            }`}
           >
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
               {/* Logo on Left */}
               <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-                <CodePlacedLogo size="md" variant="dark" />
+                <CodePlacedLogo size="md" variant={isDarkTheme ? "light" : "dark"} />
               </Link>
 
               {/* Navigation Links (Centered) */}
@@ -327,14 +343,20 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                   href="/contact"
                   className="sm:hidden px-4 h-[36px] rounded-full text-white text-xs font-bold shadow-xs flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
+                    background: isDarkTheme
+                      ? "linear-gradient(90deg, #0D5D7A, #12C8F7)"
+                      : "linear-gradient(90deg, #0f4c81, #00b7c2)",
                   }}
                 >
                   Call
                 </Link>
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="p-2 rounded-xl text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100 transition-colors"
+                  className={`p-2 rounded-xl transition-colors ${
+                    isDarkTheme
+                      ? "text-white hover:text-[#12C8F7] hover:bg-white/10"
+                      : "text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100"
+                  }`}
                   aria-label="Toggle navigation menu"
                 >
                   {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -378,7 +400,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-0 top-[72px] z-[998] bg-white/98 backdrop-blur-2xl border-b border-slate-200/90 shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto"
+            className={`fixed inset-x-0 top-[72px] z-[998] backdrop-blur-2xl border-b shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto ${
+              isDarkTheme
+                ? "bg-[#0A0B0E]/98 border-white/10 text-white"
+                : "bg-white/98 border-slate-200/90 text-[#062B38]"
+            }`}
           >
             <nav className="flex flex-col space-y-1.5">
               {NAV_ITEMS_LIST.map((item) => {
