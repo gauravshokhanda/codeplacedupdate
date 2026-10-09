@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { BookAuditModal } from "./BookAuditModal";
@@ -12,6 +13,10 @@ interface AppShellProps {
 }
 
 export function AppShell({ children }: AppShellProps) {
+  const pathname = usePathname();
+  const isCaseStudyDetail =
+    Boolean(pathname && pathname.startsWith("/case-studies/") && pathname !== "/case-studies");
+
   const [isBookAuditOpen, setIsBookAuditOpen] = useState(false);
   const [auditScope, setAuditScope] = useState<string | undefined>(undefined);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);

@@ -1,13 +1,21 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { CASE_STUDIES_DATA } from "@/lib/caseStudiesData";
+import {
+  CASE_STUDIES_DATA,
+  CASE_STUDY_SLUG_ALIASES,
+  getCaseStudyBySlug,
+} from "@/lib/caseStudiesData";
 import { CaseStudyDetailClient } from "./CaseStudyDetailClient";
 
 export async function generateStaticParams() {
-  return CASE_STUDIES_DATA.map((study) => ({
+  const canonicalSlugs = CASE_STUDIES_DATA.map((study) => ({
     slug: study.slug,
   }));
+  const aliasSlugs = Object.keys(CASE_STUDY_SLUG_ALIASES).map((alias) => ({
+    slug: alias,
+  }));
+  return [...canonicalSlugs, ...aliasSlugs];
 }
 
 export async function generateMetadata({
@@ -16,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const study = CASE_STUDIES_DATA.find((item) => item.slug === slug);
+  const study = getCaseStudyBySlug(slug);
 
   if (!study) {
     return {
@@ -26,10 +34,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${study.title} | CodePlaced Case Study`,
+    title: `${study.title} | CodePlaced Engineering Case Study`,
     description: study.shortDescription,
     openGraph: {
-      title: `${study.title} | CodePlaced Case Study`,
+      title: `${study.title} | CodePlaced Engineering Case Study`,
       description: study.shortDescription,
       images: [study.heroImage],
     },
@@ -42,13 +50,13 @@ interface PageProps {
 
 export default async function CaseStudyDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const currentIndex = CASE_STUDIES_DATA.findIndex((item) => item.slug === slug);
+  const study = getCaseStudyBySlug(slug);
 
-  if (currentIndex === -1) {
+  if (!study) {
     notFound();
   }
 
-  const study = CASE_STUDIES_DATA[currentIndex];
+  const currentIndex = CASE_STUDIES_DATA.findIndex((item) => item.slug === study.slug);
 
   // Previous and Next navigation
   const prevStudy = currentIndex > 0 ? CASE_STUDIES_DATA[currentIndex - 1] : null;

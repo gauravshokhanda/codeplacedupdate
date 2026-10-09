@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { TuitionstimeCaseStudy } from "@/components/case-studies/TuitionstimeCaseStudy";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -41,6 +42,7 @@ import {
   CheckCircle,
   Play,
   ArrowUpRight,
+  Share2,
 } from "lucide-react";
 import { CaseStudyItem } from "@/lib/caseStudiesData";
 
@@ -57,7 +59,38 @@ export function CaseStudyDetailClient({
   nextStudy,
   relatedStudies,
 }: CaseStudyDetailClientProps) {
+  if (study.slug === "tuitionstime") {
+    return <TuitionstimeCaseStudy />;
+  }
+
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight <= 0) return;
+      const progress = Math.min(100, Math.max(0, Math.round((window.scrollY / totalHeight) * 100)));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleShare = async () => {
+    try {
+      if (typeof window !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(window.location.href);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+      }
+    } catch {
+      // fallback
+    }
+  };
 
   const allImages = [study.heroImage, ...(study.galleryImages || [])];
 
@@ -68,6 +101,56 @@ export function CaseStudyDetailClient({
       }}
       className="relative min-h-screen text-[#072C4C] selection:bg-[#072C4C] selection:text-white font-sans overflow-x-hidden"
     >
+      {/* 1. Thin Reading Progress Indicator at Top */}
+      <div
+        className="fixed top-0 left-0 h-[3px] bg-[#16D3F5] z-50 transition-all duration-75"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      {/* 2. Floating Utility Bar (Stripe / Linear / Vercel Showcase style) */}
+      <div className="fixed top-5 left-4 sm:left-8 z-50 flex items-center gap-2 sm:gap-3 bg-white/95 backdrop-blur-md border border-[#072C4C]/[0.12] rounded-full px-4 py-2 shadow-xl text-xs font-mono">
+        <Link
+          href="/case-studies"
+          className="inline-flex items-center gap-1.5 text-[#072C4C] hover:text-[#16D3F5] transition-colors pr-2.5 border-r border-slate-200 group"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+          <span className="font-bold">Back to Case Studies</span>
+        </Link>
+
+        {/* Reading Progress */}
+        <div className="flex items-center gap-2 px-1 text-slate-500">
+          <span>Progress:</span>
+          <span className="text-[#072C4C] font-bold">{scrollProgress}%</span>
+          <div className="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden hidden sm:block">
+            <div
+              className="h-full bg-[#16D3F5] transition-all duration-150"
+              style={{ width: `${scrollProgress}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="h-3 w-[1px] bg-slate-200" />
+
+        {/* Share Button */}
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-1 text-[#072C4C] hover:text-[#16D3F5] transition-colors px-1 cursor-pointer"
+          title="Copy link to clipboard"
+        >
+          {isCopied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-emerald-600 font-bold hidden sm:inline">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Share2 className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Share</span>
+            </>
+          )}
+        </button>
+      </div>
+
       {/* Dynamic Background Mesh */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[750px] pointer-events-none opacity-70 -z-0"
@@ -80,31 +163,16 @@ export function CaseStudyDetailClient({
       {/* ========================================================================= */}
       {/* 1. IMMERSIVE HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative pt-32 pb-16 lg:pt-36 lg:pb-24 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06]">
+      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06]">
         <div className="max-w-[1280px] mx-auto space-y-10">
           
-          {/* Back to Case Studies Breadcrumb */}
-          <div className="flex items-center justify-between">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#072C4C] hover:text-[#16D3F5] transition-colors group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span>Back to Case Studies</span>
-            </Link>
-
-            <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              {study.industry} &bull; {study.clientType}
-            </span>
-          </div>
-
           {/* Split Hero Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Side: Title, Summary, Team Metadata, Action CTAs */}
             <div className="lg:col-span-6 space-y-6 text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#16D3F5] border border-cyan-100">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>PRODUCTION CASE STUDY</span>
+                <span>CASE STUDY &bull; {study.industry.toUpperCase()}</span>
               </div>
 
               <motion.h1
