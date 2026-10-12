@@ -235,9 +235,13 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. INITIAL STATIC NAVBAR (Sits naturally on page background) */}
+      {/* 1. INITIAL STATIC NAVBAR (Sits naturally on page background, solid black on case studies) */}
       {/* ========================================================================= */}
-      <header className="absolute top-0 left-0 w-full h-[74px] sm:h-[80px] bg-transparent z-40">
+      <header
+        className={`absolute top-0 left-0 w-full h-[74px] sm:h-[80px] z-40 transition-colors ${
+          isDarkTheme ? "bg-[#000000] border-b border-white/10" : "bg-transparent"
+        }`}
+      >
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">

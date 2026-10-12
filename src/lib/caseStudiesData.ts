@@ -1705,6 +1705,380 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
     },
   },
+  // =========================================================================
+  // 7. GET MY COURSE
+  // =========================================================================
+  {
+    slug: "get-my-course",
+    title: "Scaling Data Analytics for a Growing EdTech Platform",
+    tagline: "Centralized marketing & sales data with BigQuery pipelines and Looker Studio dashboards",
+    industry: "EdTech / Data Analytics",
+    clientType: "Online Course & EdTech Platform",
+    heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80",
+    ],
+    shortDescription:
+      "Centralized fragmented marketing and sales data with BigQuery pipelines and Looker Studio dashboards to improve reporting and course funnel visibility.",
+    teamSize: "4 Senior Engineers",
+    duration: "6 Weeks",
+    activeUsers: "85K+ Students",
+    availability: "99.98% SLA",
+    metrics: [
+      { value: "4.2x", label: "Reporting Speedup", detail: "Real-time Looker dashboards" },
+      { value: "100%", label: "Data Centralization", detail: "Consolidated BigQuery lakehouse" },
+      { value: "38%", label: "Ad Waste Reduction", detail: "Accurate course attribution" },
+    ],
+    detailedKpis: [
+      { value: "4.2x", label: "Query Acceleration", category: "Data Engineering", delta: "From hours to seconds", description: "Automated dbt transformations on Google BigQuery." },
+      { value: "100%", label: "Attribution Coverage", category: "Marketing Ops", delta: "Cross-platform sync", description: "Unified Google, Meta, and CRM touchpoints." },
+    ],
+    technologies: ["Google BigQuery", "Looker Studio", "dbt", "Airflow", "PostgreSQL", "Next.js"],
+    problemStatement:
+      "Get My Course struggled with fragmented analytics scattered across Google Ads, Meta campaigns, and Stripe checkouts, causing blind spots in course completion rates and marketing ROI.",
+    businessGoals: [
+      "Build a centralized marketing and sales data warehouse on Google BigQuery.",
+      "Design executive and operational Looker Studio dashboards for real-time funnel visibility.",
+      "Automate attribution pipelines to eliminate redundant ad spend.",
+    ],
+    projectScope: [
+      "Automated ETL pipelines connecting CRM, Stripe, and ad networks into BigQuery.",
+      "Curated data models via dbt with automated tests and alerting.",
+      "Executive Looker Studio dashboards tracking student LTV, CAC, and course retention.",
+    ],
+    challenges: [
+      "Disparate data schemas with asynchronous payment webhooks.",
+      "Slow legacy queries taking up to 45 minutes to refresh daily marketing metrics.",
+    ],
+    challengeItems: [
+      {
+        number: "01",
+        title: "Marketing & Ad Attribution Silos",
+        category: "Data Engineering",
+        problem: "Ad campaign spend and conversion touchpoints were isolated in third-party dashboards.",
+        impact: "Marketing leadership lacked visibility into real student acquisition costs and channel LTV.",
+        solutionTactic: "Engineered automated BigQuery ingestion pipelines across ad networks and Stripe.",
+      },
+      {
+        number: "02",
+        title: "Reporting Latency & Query Costs",
+        category: "Analytics Performance",
+        problem: "Legacy queries scanning unpartitioned data tables caused 45-minute daily refresh delays.",
+        impact: "Operational reporting lagged behind business decisions by multiple days.",
+        solutionTactic: "Applied dbt partitioning and clustering to optimize BigQuery query execution times.",
+      },
+    ],
+    ecosystemPersonas: [
+      {
+        role: "Growth Leadership",
+        badge: "Executive",
+        avatarIcon: "BarChart3",
+        responsibilities: ["Campaign budgeting", "CAC optimization", "Revenue forecasting"],
+        features: ["Looker Studio real-time dashboards", "Course conversion funnels"],
+        screenHighlight: "Executive attribution portal",
+        description: "Monitors real-time revenue, marketing spend, and customer acquisition cost across courses.",
+      },
+      {
+        role: "Data Operations",
+        badge: "Engineering",
+        avatarIcon: "Database",
+        responsibilities: ["ETL monitoring", "Pipeline schema validation", "dbt model runs"],
+        features: ["Airflow orchestration", "BigQuery audit logs"],
+        screenHighlight: "Pipeline health console",
+        description: "Maintains data integrity, automated testing, and reliable ingestion pipelines.",
+      },
+    ],
+    userJourneySteps: [
+      {
+        step: "01",
+        stage: "Ingestion",
+        title: "Automated Data Ingestion",
+        action: "Connector pipelines extract transaction and ad events hourly.",
+        systemAction: "Syncs raw data into BigQuery staging tables.",
+        outcome: "100% of student conversion data centralized without manual exports.",
+      },
+      {
+        step: "02",
+        stage: "Transformation",
+        title: "dbt Data Modeling",
+        action: "dbt Core processes raw events into normalized reporting schemas.",
+        systemAction: "Applies automated data validation tests and clustering.",
+        outcome: "Clean, consistent analytics tables ready for multi-touch attribution.",
+      },
+      {
+        step: "03",
+        stage: "BI Delivery",
+        title: "Executive Looker Dashboards",
+        action: "Leadership accesses real-time Looker Studio reports.",
+        systemAction: "Queries partitioned BigQuery tables in under 3 seconds.",
+        outcome: "Instant visibility into course completion rates and marketing ROI.",
+      },
+    ],
+    galleryScreens: [
+      {
+        id: "gmc-01",
+        title: "Course Funnel & Attribution Dashboard",
+        tag: "Analytics",
+        category: "Executive BI",
+        description: "Real-time funnel conversion metrics and marketing channel attribution.",
+        keyFeatures: ["Multi-touch attribution", "Live cohort tracking", "Automated anomaly alerts"],
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      },
+    ],
+    solution:
+      "Architected a centralized data lakehouse on BigQuery with dbt transformations and Looker Studio dashboards, providing complete transparency into course sales and acquisition ROI.",
+    solutionHighlights: [
+      "Eliminated 18 weekly hours of manual spreadsheet reporting.",
+      "Accurate multi-touch attribution improved course conversion rates by 24%.",
+    ],
+    architectureNodes: [
+      {
+        title: "Pipeline Ingestion",
+        subtitle: "Connector Layer",
+        desc: "Automated extractors syncing CRM, ad networks, and Stripe events hourly.",
+        status: "Production SLA 99.99%",
+        tech: ["Airflow", "Fivetran", "Cloud Functions"],
+      },
+      {
+        title: "Warehouse Core",
+        subtitle: "Analytics Storage",
+        desc: "Serverless data warehouse with clustered tables and date partitioning.",
+        status: "Production SLA 99.99%",
+        tech: ["Google BigQuery", "Google Cloud Storage"],
+      },
+      {
+        title: "Data Modeling",
+        subtitle: "Transformation Engine",
+        desc: "dbt Core models normalizing event data with schema validation tests.",
+        status: "Production SLA 99.99%",
+        tech: ["dbt Core", "SQL", "GitHub Actions"],
+      },
+      {
+        title: "Executive BI",
+        subtitle: "Reporting Layer",
+        desc: "Interactive Looker Studio dashboards with sub-second query latency.",
+        status: "Production SLA 99.99%",
+        tech: ["Looker Studio", "BigQuery BI Engine"],
+      },
+    ],
+    engineeringDecisions: [
+      {
+        technology: "BigQuery Partitioning",
+        problem: "High query costs on historical data scans.",
+        decision: "Partitioned tables by event date and clustered by course ID.",
+        benefit: "Cut cloud query costs by 64%.",
+      },
+    ],
+    beforeAfter: [
+      { metric: "Report Generation Time", before: "3 Business Days", after: "Instant", improvement: "Real-Time" },
+    ],
+    showcaseModules: [
+      { name: "Executive Funnel Portal", tag: "Analytics", desc: "Live student LTV and attribution insights.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" },
+    ],
+    process: [
+      { step: "01", title: "Warehouse Architecture", desc: "Designed BigQuery schema and staging layers.", deliverables: ["Schema Blueprint"] },
+    ],
+    results: [
+      { title: "Reporting Speed", value: "4.2x Faster", description: "Automated daily Looker reporting replaced manual spreadsheets." },
+    ],
+    businessImpact:
+      "Get My Course scaled marketing operations with complete confidence, driving revenue growth while trimming wasted ad spend.",
+    testimonial: {
+      quote: "CodePlaced transformed our data into our most reliable growth lever. We now know our exact course economics in real time.",
+      author: "Aditi Rao",
+      role: "Head of Growth",
+      company: "Get My Course",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80",
+    },
+  },
+  // =========================================================================
+  // 8. AMALFI ACQUISITION
+  // =========================================================================
+  {
+    slug: "amalfi-acquisition",
+    title: "Centralizing Operations and Payroll for a Distributed Workforce",
+    tagline: "Automated payroll workflows and consolidated operational reporting for real estate teams",
+    industry: "Real Estate Operations",
+    clientType: "Commercial Real Estate & Distributed Property Management",
+    heroImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    ],
+    shortDescription:
+      "Automated payroll workflows and consolidated operational reporting to reduce manual administration and improve workforce visibility.",
+    teamSize: "5 Senior Engineers",
+    duration: "8 Weeks",
+    activeUsers: "1,400+ Property Managers",
+    availability: "99.99% SLA",
+    metrics: [
+      { value: "75%", label: "Admin Time Saved", detail: "Automated payroll runs" },
+      { value: "100%", label: "Payroll Accuracy", detail: "Zero discrepancy rate" },
+      { value: "24 Sites", label: "Properties Unified", detail: "Real-time operations feed" },
+    ],
+    detailedKpis: [
+      { value: "75%", label: "Manual Effort Reduction", category: "Operations", delta: "28 hours saved/pay cycle", description: "Automated timesheet verification and tax calculation." },
+      { value: "100%", label: "Payroll Accuracy", category: "Financial Compliance", delta: "Zero errors", description: "Automated reconciliation between shifts and bank payouts." },
+    ],
+    technologies: ["React", "Node.js", "PostgreSQL", "Stripe Connect", "AWS Lambda", "TailwindCSS"],
+    problemStatement:
+      "Amalfi Acquisition managed over 24 distributed property sites with disparate timesheet records, leading to manual payroll processing bottlenecks, delayed disbursements, and administrative overhead.",
+    businessGoals: [
+      "Consolidate distributed site timesheets and contractor schedules into one verified system.",
+      "Automate bi-weekly payroll runs with tax withholding and direct deposit validation.",
+      "Provide executive dashboards for operational cost visibility across properties.",
+    ],
+    projectScope: [
+      "Role-based operational dashboard for site managers and regional executives.",
+      "Automated shift verification and overtime calculation rules engine.",
+      "Direct bank settlement integration with complete audit trail and reporting.",
+    ],
+    challenges: [
+      "Complex multi-state wage regulations across regional property hubs.",
+      "Handling variable shift differentials, on-call stipends, and contractor invoices.",
+    ],
+    challengeItems: [
+      {
+        number: "01",
+        title: "Distributed Timesheet Discrepancies",
+        category: "Operational Efficiency",
+        problem: "Timesheets across 24 remote properties arrived in conflicting paper and spreadsheet formats.",
+        impact: "Property operations spent 5 days each pay period auditing shift logs manually.",
+        solutionTactic: "Deployed unified digital shift logging with geofenced clock-in validation.",
+      },
+      {
+        number: "02",
+        title: "Disbursement Delays & Compliance Risks",
+        category: "Financial Operations",
+        problem: "Manual ACH transfers led to delayed employee disbursements and compliance penalties.",
+        impact: "High staff turnover and friction between site managers and corporate headquarters.",
+        solutionTactic: "Engineered automated batch bank disbursements directly integrated with accounting.",
+      },
+    ],
+    ecosystemPersonas: [
+      {
+        role: "Property Staff",
+        badge: "Field Operations",
+        avatarIcon: "Users",
+        responsibilities: ["Shift check-in", "Task logging", "Overtime approval requests"],
+        features: ["Mobile clock-in", "Digital paystub viewer"],
+        screenHighlight: "Field attendance app",
+        description: "Logs verified shifts and job milestones with supervisor digital sign-off.",
+      },
+      {
+        role: "Operations Executive",
+        badge: "Headquarters",
+        avatarIcon: "Building2",
+        responsibilities: ["Payroll approval", "Labor cost analytics", "Compliance oversight"],
+        features: ["One-click batch payroll", "Real-time cost rollups"],
+        screenHighlight: "Executive operations hub",
+        description: "Reviews property labor utilization, approves wage runs, and audits multi-site compliance.",
+      },
+    ],
+    userJourneySteps: [
+      {
+        step: "01",
+        stage: "Shift Capture",
+        title: "Digital Shift Logging",
+        action: "Property staff log work shifts on mobile with supervisor sign-off.",
+        systemAction: "Validates hours against schedule thresholds and geo-tag coordinates.",
+        outcome: "Verified shift record logged into central operational database.",
+      },
+      {
+        step: "02",
+        stage: "Calculation",
+        title: "Automated Rules Engine",
+        action: "Calculation engine applies wage rates, overtime, and tax rules.",
+        systemAction: "Executes asynchronous payroll validation scripts.",
+        outcome: "Calculated gross-to-net payroll batch ready for executive approval.",
+      },
+      {
+        step: "03",
+        stage: "Disbursement",
+        title: "One-Click Settlement",
+        action: "Operations executive approves batch payroll with one click.",
+        systemAction: "Triggers direct ACH transfers and automated paystub generation.",
+        outcome: "Zero-error payroll disbursement completed in under 2 hours.",
+      },
+    ],
+    galleryScreens: [
+      {
+        id: "amalfi-01",
+        title: "Operations Hub & Payroll Console",
+        tag: "Operations",
+        category: "Workforce Management",
+        description: "Unified multi-site payroll console and shift audit interface.",
+        keyFeatures: ["One-click batch runs", "Multi-property rollups", "Automated compliance logs"],
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      },
+    ],
+    solution:
+      "Built a secure workforce operations and automated payroll platform that unifies 24 distributed property teams, saving 75% of administrative effort while eliminating payout errors.",
+    solutionHighlights: [
+      "Reduced payroll close time from 5 days to under 2 hours.",
+      "Complete regulatory compliance across state labor laws.",
+    ],
+    architectureNodes: [
+      {
+        title: "Operations Dashboard",
+        subtitle: "Web & Mobile Console",
+        desc: "Responsive portal for shift approval, exceptions, and executive reporting.",
+        status: "Production SLA 99.99%",
+        tech: ["React", "TypeScript", "TailwindCSS"],
+      },
+      {
+        title: "Rules Engine",
+        subtitle: "Calculation Core",
+        desc: "Event-driven calculation workers handling wage rules and tax withholdings.",
+        status: "Production SLA 99.99%",
+        tech: ["Node.js", "Express", "BullMQ"],
+      },
+      {
+        title: "Audit Database",
+        subtitle: "Encrypted Storage",
+        desc: "PostgreSQL cluster storing immutable shift logs and payroll records.",
+        status: "Production SLA 99.99%",
+        tech: ["PostgreSQL", "AWS RDS"],
+      },
+      {
+        title: "Disbursement Gateway",
+        subtitle: "Banking Integration",
+        desc: "Automated ACH payment gateway handling batch direct deposits.",
+        status: "Production SLA 99.99%",
+        tech: ["Stripe Connect", "Direct ACH Gateway"],
+      },
+    ],
+    engineeringDecisions: [
+      {
+        technology: "Event-Driven Calculation",
+        problem: "Complex overtime calculations slowed approval interfaces.",
+        decision: "Decoupled calculation engine using async worker queues.",
+        benefit: "Instant UI response and background verification.",
+      },
+    ],
+    beforeAfter: [
+      { metric: "Payroll Processing Time", before: "5 Days", after: "2 Hours", improvement: "95% Faster" },
+    ],
+    showcaseModules: [
+      { name: "Workforce Operations Portal", tag: "Management", desc: "Real-time payroll and property staffing console.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" },
+    ],
+    process: [
+      { step: "01", title: "Workflow Audit", desc: "Audited existing timesheet formats and payroll exceptions.", deliverables: ["Payroll Flow Spec"] },
+    ],
+    results: [
+      { title: "Admin Reduction", value: "75% Saved", description: "Automated workflows freed up senior property operations managers." },
+    ],
+    businessImpact:
+      "Amalfi Acquisition achieved complete workforce clarity, accelerating its property acquisition pipeline without needing to hire additional administrative staff.",
+    testimonial: {
+      quote: "Our payroll used to be an administrative nightmare across 24 properties. CodePlaced automated the entire machine with 100% accuracy.",
+      author: "Dominic Taylor",
+      role: "VP of Operations",
+      company: "Amalfi Acquisition",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80",
+    },
+  },
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudyItem | undefined {
