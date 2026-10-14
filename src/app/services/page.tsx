@@ -235,14 +235,14 @@ function InteractiveServiceGatewayCard({ service, index }: { service: ServiceDet
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${isHovered ? "translateY(-8px)" : "translateY(0)"}`,
           transition: isHovered ? "transform 0.1s ease-out, box-shadow 0.3s ease" : "transform 0.5s ease-out, box-shadow 0.5s ease",
         }}
-        className="relative h-full rounded-[36px] bg-white border border-[#072C4C]/[0.08] shadow-xl hover:shadow-[0_25px_60px_rgba(22,211,245,0.18)] hover:border-[#16D3F5] transition-all duration-300 overflow-hidden flex flex-col justify-between group cursor-pointer"
+        className="relative h-full rounded-[36px] bg-[#07090D] border border-white/[0.08] shadow-xl hover:shadow-[0_25px_60px_rgba(0,199,232,0.18)] hover:border-[#00C7E8]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between group cursor-pointer"
       >
         {/* Dynamic Cursor Spotlight Radial Glow */}
         {isHovered && (
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0"
             style={{
-              background: `radial-gradient(circle 350px at ${glowPos.x}% ${glowPos.y}%, rgba(22,211,245,0.14), transparent 80%)`,
+              background: `radial-gradient(circle 350px at ${glowPos.x}% ${glowPos.y}%, rgba(0,199,232,0.12), transparent 80%)`,
             }}
           />
         )}
@@ -267,34 +267,34 @@ function InteractiveServiceGatewayCard({ service, index }: { service: ServiceDet
                 <ServiceIcon className="w-8 h-8" />
               </div>
 
-              <span className="text-base font-mono font-black text-[#16D3F5] px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-100">
+              <span className="text-base font-mono font-black text-[#00C7E8] px-3.5 py-1 rounded-full bg-[#050505] border border-white/[0.08]">
                 {service.num}
               </span>
             </div>
 
             {/* Title & Statement */}
             <div className="space-y-2">
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#16D3F5]">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#00C7E8]">
                 {service.tagline}
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#072C4C] tracking-tight group-hover:text-[#0B3A62] transition-colors">
+              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight group-hover:text-white transition-colors">
                 {service.title}
               </h3>
-              <p className="text-xs sm:text-sm text-[#5B738B] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
                 {service.positioning}
               </p>
             </div>
 
             {/* 4–6 Key Capabilities Chips */}
             <div className="space-y-2 pt-2">
-              <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+              <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400">
                 Key Engineered Capabilities
               </div>
               <div className="flex flex-wrap gap-2">
                 {service.capabilities.slice(0, 5).map((cap, cIdx) => (
                   <span
                     key={cIdx}
-                    className="px-3 py-1 rounded-xl text-xs font-mono bg-[#F8FCFE] border border-slate-200/80 text-slate-700 font-bold group-hover:border-[#16D3F5]/50 group-hover:bg-white transition-colors"
+                    className="px-3 py-1 rounded-xl text-xs font-mono bg-[#050505] border border-white/[0.08] text-zinc-300 font-bold group-hover:border-[#00C7E8]/40 group-hover:text-white transition-colors"
                   >
                     {cap.title}
                   </span>
@@ -304,19 +304,19 @@ function InteractiveServiceGatewayCard({ service, index }: { service: ServiceDet
           </div>
 
           {/* Outcome Metric + CTA Gateway */}
-          <div className="pt-6 border-t border-slate-200/70 flex items-center justify-between">
+          <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
             <div>
-              <div className="text-lg sm:text-xl font-black text-[#072C4C] font-mono tracking-tight">
+              <div className="text-lg sm:text-xl font-black text-white font-mono tracking-tight">
                 {service.heroMetrics[0]?.value}
               </div>
-              <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+              <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
                 {service.heroMetrics[0]?.label}
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-bold text-[#072C4C] group-hover:text-[#16D3F5] transition-colors">
+            <div className="flex items-center gap-2 text-xs font-bold text-white group-hover:text-[#00C7E8] transition-colors">
               <span>Explore Dedicated Page</span>
-              <div className="w-9 h-9 rounded-full bg-[#E8F7FC] flex items-center justify-center group-hover:bg-[#072C4C] group-hover:text-white transition-all shadow-xs">
+              <div className="w-9 h-9 rounded-full bg-[#050505] border border-white/[0.08] flex items-center justify-center text-[#00C7E8] group-hover:bg-[#00C7E8] group-hover:text-black transition-all shadow-xs">
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
@@ -336,16 +336,16 @@ export default function ServicesPage() {
   return (
     <div
       style={{
-        backgroundColor: "#F4FAFD",
+        backgroundColor: "#050505",
       }}
-      className="relative min-h-screen text-[#072C4C] selection:bg-[#072C4C] selection:text-white font-sans overflow-x-hidden"
+      className="relative min-h-screen bg-[#050505] text-[#FFFFFF] selection:bg-[#00C7E8] selection:text-black font-sans"
     >
       {/* Background Dynamic Mesh Glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] pointer-events-none opacity-70 -z-0"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] pointer-events-none opacity-40 -z-0"
         style={{
           background:
-            "radial-gradient(circle at 50% 15%, rgba(22,211,245,0.15) 0%, rgba(7,44,76,0.04) 50%, transparent 80%)",
+            "radial-gradient(circle at 50% 15%, rgba(0,199,232,0.14) 0%, rgba(8,127,165,0.04) 50%, transparent 80%)",
         }}
       />
 
@@ -362,7 +362,7 @@ export default function ServicesPage() {
               animation: `particleFloat ${p.duration}s ease-in-out infinite`,
               animationDelay: `${p.delay}s`,
             }}
-            className="absolute rounded-full bg-[#16D3F5]/60"
+            className="absolute rounded-full bg-[#00C7E8]/50"
           />
         ))}
       </div>
@@ -370,7 +370,7 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06]">
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08]">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Side: Headline, Copy, Buttons & Animated Trust Row */}
@@ -379,9 +379,9 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/40 shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-[#07090D] text-white border border-white/[0.08] shadow-xs"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#16D3F5]" />
+              <Sparkles className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>FULL-STACK DIGITAL PARTNER</span>
             </motion.div>
 
@@ -389,12 +389,12 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#072C4C] leading-[1.08]"
+              className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]"
             >
               Build. Scale.{" "}
               <span
                 style={{
-                  background: "linear-gradient(90deg, #072C4C 0%, #16D3F5 100%)",
+                  background: "linear-gradient(90deg, #FFFFFF 0%, #00C7E8 50%, #FFFFFF 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -402,7 +402,7 @@ export default function ServicesPage() {
                 Transform.
               </span>
               <br />
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#072C4C]/90">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#A1A1AA]">
                 Digital Products With Confidence.
               </span>
             </motion.h1>
@@ -411,7 +411,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="text-base sm:text-lg text-[#476077] max-w-xl leading-relaxed"
+              className="text-base sm:text-lg text-[#A1A1AA] max-w-xl leading-relaxed"
             >
               From custom applications and analytics platforms to AI-powered solutions and digital growth systems, we help organizations design, build, and scale technology that delivers measurable business impact.
             </motion.p>
@@ -425,9 +425,9 @@ export default function ServicesPage() {
             >
               <a
                 href="#four-pillars-gateway"
-                className="w-full sm:w-auto h-[52px] px-8 rounded-full text-white font-bold text-sm shadow-md hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+                className="w-full sm:w-auto h-[52px] px-8 rounded-full text-black font-extrabold text-sm shadow-md hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
                 style={{
-                  background: "linear-gradient(90deg, #072C4C 0%, #16D3F5 100%)",
+                  background: "linear-gradient(135deg, #087FA5 0%, #00C7E8 100%)",
                 }}
               >
                 <span>Explore Services</span>
@@ -436,7 +436,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#072C4C] font-bold text-sm border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#16D3F5]/50"
+                className="w-full sm:w-auto h-[52px] px-8 rounded-full bg-[#07090D] hover:bg-[#07090D]/80 text-white font-bold text-sm border border-white/[0.08] shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#00C7E8]/50"
               >
                 <span>Book Strategy Call</span>
               </Link>
@@ -447,13 +447,13 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="pt-6 border-t border-[#072C4C]/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-4"
+              className="pt-6 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-4"
             >
               {HERO_TRUST_STATS.map((stat, sIdx) => (
                 <div key={sIdx} className="space-y-0.5">
-                  <div className="text-2xl font-black text-[#072C4C] font-mono tracking-tight">{stat.value}</div>
-                  <div className="text-xs font-bold text-[#072C4C]/80">{stat.label}</div>
-                  <div className="text-[10px] text-[#5B738B] font-mono">{stat.detail}</div>
+                  <div className="text-2xl font-black text-white font-mono tracking-tight">{stat.value}</div>
+                  <div className="text-xs font-bold text-zinc-300">{stat.label}</div>
+                  <div className="text-[10px] text-[#A1A1AA] font-mono">{stat.detail}</div>
                 </div>
               ))}
             </motion.div>
@@ -465,16 +465,16 @@ export default function ServicesPage() {
             <motion.div
               animate={{ scale: [1, 1.35, 1], opacity: [0.35, 0.05, 0.35] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-72 h-72 rounded-full border-2 border-[#16D3F5]/40 pointer-events-none"
+              className="absolute w-72 h-72 rounded-full border-2 border-[#00C7E8]/30 pointer-events-none"
             />
             <motion.div
               animate={{ scale: [1.1, 1.6, 1.1], opacity: [0.2, 0.02, 0.2] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute w-72 h-72 rounded-full border border-[#072C4C]/20 pointer-events-none"
+              className="absolute w-72 h-72 rounded-full border border-white/10 pointer-events-none"
             />
 
             {/* Ambient Backlight */}
-            <div className="absolute w-80 h-80 bg-[#16D3F5]/18 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute w-80 h-80 bg-[#00C7E8]/12 rounded-full blur-[100px] pointer-events-none" />
 
             {/* Orbit SVG Rings */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
@@ -483,10 +483,10 @@ export default function ServicesPage() {
                 cy="50%"
                 r="155"
                 fill="none"
-                stroke="#16D3F5"
+                stroke="#00C7E8"
                 strokeWidth="1.5"
                 strokeDasharray="6 6"
-                className="opacity-35 animate-spin"
+                className="opacity-30 animate-spin"
                 style={{ animationDuration: "60s" }}
               />
               <circle
@@ -494,10 +494,10 @@ export default function ServicesPage() {
                 cy="50%"
                 r="225"
                 fill="none"
-                stroke="#072C4C"
+                stroke="#333A44"
                 strokeWidth="1"
                 strokeDasharray="8 8"
-                className="opacity-20 animate-spin"
+                className="opacity-30 animate-spin"
                 style={{ animationDuration: "90s", animationDirection: "reverse" }}
               />
             </svg>
@@ -506,13 +506,13 @@ export default function ServicesPage() {
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-20 w-36 h-36 rounded-3xl bg-gradient-to-br from-[#072C4C] via-[#0B3A62] to-[#041C33] text-white border-2 border-[#16D3F5]/70 shadow-[0_0_50px_rgba(22,211,245,0.35)] flex flex-col items-center justify-center text-center p-3.5 group cursor-default"
+              className="relative z-20 w-36 h-36 rounded-3xl bg-gradient-to-br from-[#07090D] via-[#050505] to-[#07090D] text-white border-2 border-[#00C7E8]/60 shadow-[0_0_50px_rgba(0,199,232,0.25)] flex flex-col items-center justify-center text-center p-3.5 group cursor-default"
             >
-              <div className="w-10 h-10 rounded-xl bg-cyan-400/20 text-[#16D3F5] flex items-center justify-center mb-1 shadow-inner">
+              <div className="w-10 h-10 rounded-xl bg-[#00C7E8]/15 text-[#00C7E8] flex items-center justify-center mb-1 shadow-inner">
                 <Sparkles className="w-5 h-5" />
               </div>
-              <span className="text-xs font-mono uppercase font-black tracking-wider text-cyan-300">CodePlaced</span>
-              <span className="text-[10px] font-mono text-slate-300">Service Core</span>
+              <span className="text-xs font-mono uppercase font-black tracking-wider text-[#00C7E8]">CodePlaced</span>
+              <span className="text-[10px] font-mono text-[#A1A1AA]">Service Core</span>
             </motion.div>
 
             {/* 4 Orbiting Badges */}
@@ -543,7 +543,7 @@ export default function ServicesPage() {
                     transform: `translate(${xPos}px, ${yPos}px)`,
                   }}
                 >
-                  <div className="p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#072C4C]/[0.08] shadow-lg shadow-sky-950/8 hover:border-[#16D3F5] hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300 flex items-center gap-2.5">
+                  <div className="p-3.5 rounded-2xl bg-[#07090D]/95 backdrop-blur-md border border-white/[0.08] shadow-lg hover:border-[#00C7E8] hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300 flex items-center gap-2.5">
                     <div
                       className="w-8 h-8 rounded-xl flex items-center justify-center text-white shadow-xs shrink-0"
                       style={{ background: node.color }}
@@ -551,10 +551,10 @@ export default function ServicesPage() {
                       <IconComp className="w-4 h-4" />
                     </div>
                     <div className="text-left pr-1">
-                      <div className="text-xs font-black text-[#072C4C] leading-tight">
+                      <div className="text-xs font-black text-white leading-tight">
                         {node.label}
                       </div>
-                      <div className="text-[9px] font-mono text-[#5B738B]">{node.category}</div>
+                      <div className="text-[9px] font-mono text-[#A1A1AA]">{node.category}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -568,18 +568,18 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 2. FOUR PILLARS GATEWAY (Large 2x2 Interactive 3D Magnetic Cards) */}
       {/* ========================================================================= */}
-      <section id="four-pillars-gateway" className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06] bg-white">
+      <section id="four-pillars-gateway" className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-[#050505]">
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              <Boxes className="w-3.5 h-3.5 text-[#16D3F5]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08]">
+              <Boxes className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>CORE DISCIPLINES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               Four Pillars Of Engineering Excellence
             </h2>
-            <p className="text-base sm:text-lg text-[#5B738B]">
+            <p className="text-base sm:text-lg text-[#A1A1AA]">
               Click any service gateway to explore its dedicated production architecture, capabilities, and delivery methodology.
             </p>
           </div>
@@ -597,18 +597,18 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 3. DELIVERY ROADMAP (6 Connected Steps) */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06] bg-[#F4FAFD]">
+      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-[#050505]">
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              <Workflow className="w-3.5 h-3.5 text-[#16D3F5]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08]">
+              <Workflow className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>PRODUCTION ROADMAP</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               How CodePlaced Delivers Production Results
             </h2>
-            <p className="text-base sm:text-lg text-[#5B738B]">
+            <p className="text-base sm:text-lg text-[#A1A1AA]">
               A disciplined, step-by-step engineering roadmap from initial discovery to continuous production scale.
             </p>
           </div>
@@ -623,17 +623,17 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: sIdx * 0.08, ease: "easeOut" }}
-                  className="p-6 rounded-3xl bg-white border border-[#072C4C]/[0.08] hover:border-[#16D3F5] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 space-y-3 flex flex-col justify-between group"
+                  className="p-6 rounded-3xl bg-[#07090D] border border-white/[0.08] hover:border-[#00C7E8]/50 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 space-y-3 flex flex-col justify-between group"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-[#E8F7FC] text-[#072C4C] font-mono font-black text-sm flex items-center justify-center shadow-xs group-hover:bg-[#072C4C] group-hover:text-white transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-[#050505] border border-white/[0.08] text-[#00C7E8] font-mono font-black text-sm flex items-center justify-center shadow-xs group-hover:bg-[#00C7E8] group-hover:text-black transition-colors">
                         {step.num}
                       </div>
-                      <StepIcon className="w-4 h-4 text-[#16D3F5]" />
+                      <StepIcon className="w-4 h-4 text-[#00C7E8]" />
                     </div>
-                    <h3 className="text-lg font-black text-[#072C4C]">{step.name}</h3>
-                    <p className="text-xs text-[#5B738B] leading-relaxed">{step.desc}</p>
+                    <h3 className="text-lg font-black text-white">{step.name}</h3>
+                    <p className="text-xs text-[#A1A1AA] leading-relaxed">{step.desc}</p>
                   </div>
                 </motion.div>
               );
@@ -646,18 +646,18 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 4. WHY CODEPLACED (Linear-Style Bento Grid) */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06] bg-white">
+      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-[#050505]">
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#16D3F5]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>THE CODEPLACED ADVANTAGE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               Why Leading Companies Choose CodePlaced
             </h2>
-            <p className="text-base sm:text-lg text-[#5B738B]">
+            <p className="text-base sm:text-lg text-[#A1A1AA]">
               Engineered for velocity, reliability, and measurable business growth.
             </p>
           </div>
@@ -672,24 +672,24 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: cIdx * 0.08, ease: "easeOut" }}
-                  className={`p-8 sm:p-9 rounded-[32px] bg-[#F8FCFE] border border-[#072C4C]/[0.08] hover:border-[#16D3F5] hover:bg-white hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 space-y-4 flex flex-col justify-between group ${card.span}`}
+                  className={`p-8 sm:p-9 rounded-[32px] bg-[#07090D] border border-white/[0.08] hover:border-[#00C7E8]/40 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 space-y-4 flex flex-col justify-between group ${card.span}`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-[#072C4C] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-                        <CardIcon className="w-6 h-6 text-[#16D3F5]" />
+                      <div className="w-12 h-12 rounded-2xl bg-[#050505] border border-white/[0.08] text-[#00C7E8] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
+                        <CardIcon className="w-6 h-6 text-[#00C7E8]" />
                       </div>
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-700">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#050505] text-[#00C7E8] border border-white/[0.08]">
                         {card.badge}
                       </span>
                     </div>
 
                     <div>
-                      <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                      <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400">
                         {card.tag}
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-black text-[#072C4C] mt-1">{card.title}</h3>
-                      <p className="text-xs sm:text-sm text-[#5B738B] mt-2 leading-relaxed">{card.desc}</p>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mt-1">{card.title}</h3>
+                      <p className="text-xs sm:text-sm text-[#A1A1AA] mt-2 leading-relaxed">{card.desc}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -703,18 +703,18 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 5. TECHNOLOGY ECOSYSTEM */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-[#072C4C]/[0.06] bg-[#F4FAFD]">
+      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-[#050505]">
         <div className="max-w-[1280px] mx-auto space-y-12">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              <Cpu className="w-3.5 h-3.5 text-[#16D3F5]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08]">
+              <Cpu className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>MODERN TOOLS</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               Production-Proven Tools & Frameworks
             </h2>
-            <p className="text-base sm:text-lg text-[#5B738B]">
+            <p className="text-base sm:text-lg text-[#A1A1AA]">
               Battle-tested frameworks, modern languages, and high-throughput cloud infrastructure.
             </p>
           </div>
@@ -727,8 +727,8 @@ export default function ServicesPage() {
                 onClick={() => setActiveTechTab(cat)}
                 className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-200 cursor-pointer ${
                   activeTechTab === cat
-                    ? "bg-[#072C4C] text-white shadow-md scale-105"
-                    : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+                    ? "bg-[#00C7E8] text-black font-extrabold shadow-md scale-105"
+                    : "bg-[#07090D] text-[#A1A1AA] hover:text-white hover:bg-[#07090D]/80 border border-white/[0.08]"
                 }`}
               >
                 {cat}
@@ -744,18 +744,18 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: tIdx * 0.05 }}
-                className="p-6 rounded-2xl bg-white border border-[#072C4C]/[0.08] hover:border-[#16D3F5] hover:shadow-lg transition-all space-y-3"
+                className="p-6 rounded-2xl bg-[#07090D] border border-white/[0.08] hover:border-[#00C7E8]/50 hover:shadow-lg transition-all space-y-3"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-base">{tool.icon}</span>
-                    <div className="text-sm font-black text-[#072C4C]">{tool.name}</div>
+                    <div className="text-sm font-black text-white">{tool.name}</div>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-50 text-[#072C4C] border border-cyan-100 font-bold">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#050505] text-[#00C7E8] border border-white/[0.08] font-bold">
                     {tool.tag}
                   </span>
                 </div>
-                <p className="text-xs text-[#5B738B] leading-relaxed">{tool.desc}</p>
+                <p className="text-xs text-[#A1A1AA] leading-relaxed">{tool.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -766,48 +766,64 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 6. FINAL CTA SECTION */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#072C4C] via-[#05223C] to-[#041A2E] text-white relative overflow-hidden">
-        {/* Glow Behind Headline */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#16D3F5]/14 rounded-full blur-[130px] pointer-events-none" />
+      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#050505]">
+        <div
+          className="max-w-[1200px] mx-auto rounded-[36px] p-10 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-2xl bg-[#07090D]"
+          style={{
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+          }}
+        >
+          {/* Cyber Grid */}
+          <div
+            className="absolute inset-0 opacity-15 pointer-events-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(0, 199, 232, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 199, 232, 0.15) 1px, transparent 1px)
+              `,
+              backgroundSize: "40px 40px",
+            }}
+          />
 
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/10 text-cyan-300 border border-white/15">
-            <Sparkles className="w-3.5 h-3.5 text-[#16D3F5]" />
-            <span>START YOUR PROJECT</span>
-          </div>
+          <div className="max-w-[820px] mx-auto relative z-10 space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold uppercase tracking-wider bg-white/10 text-white border border-white/20">
+              <Sparkles className="w-3.5 h-3.5 text-[#00C7E8]" />
+              <span>START YOUR NEXT SPRINT</span>
+            </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
-            Technology That Turns{" "}
-            <span
-              style={{
-                background: "linear-gradient(90deg, #16D3F5 0%, #67E8F9 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Ideas Into Impact.
-            </span>
-          </h2>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+              Technology That Turns{" "}
+              <span
+                style={{
+                  background: "linear-gradient(90deg, #FFFFFF 0%, #00C7E8 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Ideas Into Impact.
+              </span>
+            </h2>
 
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            From product engineering and AI systems to analytics and growth platforms, we build digital experiences that scale.
-          </p>
+            <p className="text-base sm:text-lg text-[#A1A1AA] max-w-[680px] mx-auto leading-relaxed font-normal">
+              From product engineering and AI systems to analytics and growth platforms, we build digital experiences that scale.
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto h-[54px] px-9 rounded-full text-[#072C4C] bg-[#16D3F5] hover:bg-cyan-300 font-bold text-sm shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95"
-            >
-              <span>Book Strategy Call</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto h-[54px] px-9 rounded-full bg-gradient-to-r from-[#087FA5] to-[#00C7E8] hover:brightness-110 text-black font-extrabold text-sm shadow-xl flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95 group"
+              >
+                <span>Book Strategy Call</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
 
-            <Link
-              href="/case-studies"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 flex items-center justify-center transition-all duration-300"
-            >
-              <span>View Case Studies</span>
-            </Link>
+              <Link
+                href="/case-studies"
+                className="w-full sm:w-auto h-[54px] px-9 rounded-full bg-[#050505] hover:bg-white/10 text-white font-bold text-sm border border-white/20 shadow-xs flex items-center justify-center transition-all duration-300"
+              >
+                <span>View Case Studies</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

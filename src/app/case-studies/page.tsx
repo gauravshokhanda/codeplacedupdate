@@ -59,7 +59,7 @@ const FEATURED_CASE_STUDY = {
   highlightWord: "EdTech Marketplace",
   description:
     "From tutor discovery to demos, classes, meetings, payments, learning resources and analytics.",
-  image: "/images/case-studies/tuitionstime-hero.webp",
+  image: "/images/case-studies/tuitionstime-featured-flagship.webp",
   metrics: [
     { value: "10K+", label: "Active Students" },
     { value: "2K+", label: "Expert Tutors" },
@@ -213,7 +213,7 @@ export default function CaseStudiesPage() {
         {/* 3. FEATURED CASE STUDY CARD (APPINVENTIV KFC-STYLE SHOWCASE CARD) */}
         {/* ~90% Viewport Width, 380-450px Height, Left HTML Content, Right Product Artwork */}
         {/* ========================================================================= */}
-        <section className="pt-2 px-4 sm:px-6">
+        <section id="featured-case-study" className="pt-2 px-4 sm:px-6 scroll-mt-20">
           <AnimatePresence mode="wait">
             {isMatch ? (
               <motion.div
@@ -231,26 +231,26 @@ export default function CaseStudiesPage() {
                   aria-label={`View case study: ${FEATURED_CASE_STUDY.title}`}
                   className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[420px] lg:h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                 >
-                  {/* Generated Product Imagery (Right-Aligned, Seamlessly Blended into Dark Background) */}
-                  <div className="absolute inset-0 z-0 overflow-hidden">
-                    <Image
-                      src={FEATURED_CASE_STUDY.image}
-                      alt="Tuitionstime EdTech Marketplace Platform"
-                      fill
-                      priority
-                      className="object-cover object-right md:object-[75%_center] lg:object-right transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                      sizes="(max-width: 1400px) 92vw, 1400px"
-                    />
+                    {/* Product Imagery (Right-Aligned, Completely Static, Seamlessly Blended into Dark Card) */}
+                    <div className="absolute inset-0 z-0 overflow-hidden">
+                      <Image
+                        src={FEATURED_CASE_STUDY.image}
+                        alt="Tuitionstime EdTech Marketplace Platform"
+                        fill
+                        priority
+                        className="object-cover object-right md:object-[80%_center] lg:object-right"
+                        sizes="(max-width: 1400px) 92vw, 1400px"
+                      />
 
-                    {/* Dark Vignette Overlay on Left (Guarantees Razor-Sharp Readability of HTML Text) */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-transparent w-full md:w-[65%] lg:w-[58%] pointer-events-none" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent md:hidden pointer-events-none" />
-                  </div>
+                      {/* Dark Vignette Overlay on Left (Guarantees Razor-Sharp Readability of HTML Text on all devices) */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/95 md:via-[#050505]/90 to-transparent w-full md:w-[68%] lg:w-[52%] xl:w-[46%] pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent md:hidden pointer-events-none" />
+                    </div>
 
                   {/* Real HTML Content Layer (Left-Aligned Content + Bottom Metrics) */}
                   <div className="relative z-10 h-full p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                     {/* Upper Left: Badge, Brand, Title, Description, and CTA */}
-                    <div className="space-y-4 max-w-xl text-left">
+                    <div className="space-y-4 max-w-md xl:max-w-[480px] text-left">
                       {/* Eyebrow Tag */}
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00C7E8]/10 border border-[#00C7E8]/30 text-[#00C7E8] w-fit">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8] animate-pulse" />
@@ -268,13 +268,13 @@ export default function CaseStudiesPage() {
                       </div>
 
                       {/* Title with Cyan Highlight */}
-                      <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white tracking-tight leading-[1.15]">
+                      <h2 className="text-2xl sm:text-3xl lg:text-[32px] xl:text-[34px] font-extrabold text-white tracking-tight leading-[1.18] max-w-[420px]">
                         Engineering a Complete{" "}
                         <span className="text-[#00C7E8]">EdTech Marketplace</span>
                       </h2>
 
                       {/* Short Description */}
-                      <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-md pt-0.5">
+                      <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-sm sm:max-w-md pt-0.5">
                         {FEATURED_CASE_STUDY.description}
                       </p>
 

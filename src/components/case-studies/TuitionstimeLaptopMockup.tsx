@@ -17,9 +17,9 @@ export function TuitionstimeLaptopMockup({
     <div
       className={`relative w-full max-w-[720px] lg:max-w-[880px] xl:max-w-[950px] 2xl:max-w-[990px] select-none ${className}`}
     >
-      {/* Studio Atmosphere: Restrained, Warm Tuitionstime Yellow Ambient Glow (#FFC928) Behind Display */}
+      {/* Studio Atmosphere: CodePlaced Cyan Ambient Glow Behind Display */}
       <div
-        className="absolute top-[28%] left-[56%] -translate-x-1/2 -translate-y-1/2 w-[82%] h-[82%] bg-[radial-gradient(ellipse_at_center,rgba(255,201,40,0.20)_0%,rgba(255,201,40,0.06)_45%,transparent_70%)] blur-3xl -z-10 pointer-events-none"
+        className="absolute top-[28%] left-[56%] -translate-x-1/2 -translate-y-1/2 w-[82%] h-[82%] bg-[radial-gradient(ellipse_at_center,rgba(0,199,232,0.18)_0%,rgba(8,127,165,0.05)_45%,transparent_70%)] blur-3xl -z-10 pointer-events-none"
         aria-hidden="true"
       />
 

@@ -1,244 +1,695 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  ArrowUpRight,
   ExternalLink,
-  BarChart3,
-  Building2,
+  Play,
+  Check,
+  Search,
+  Calendar,
+  CreditCard,
+  Video,
+  Star,
+  Users,
+  Smartphone,
+  Globe,
+  ChevronLeft,
+  ChevronRight,
+  Shield,
+  Briefcase,
+  X,
+  Laptop,
+  CheckCircle2,
+  Clock,
+  Sparkles,
 } from "lucide-react";
 
-import { TuitionstimeLaptopMockup } from "./TuitionstimeLaptopMockup";
+import { TuitionstimeThreePhonesShowcase } from "./TuitionstimePhoneScreens";
+
+// =============================================================================
+// DATA DEFINITIONS (PRESERVING AUTHENTIC TUITIONSTIME DATA & VERIFIED METRICS)
+// =============================================================================
+
+const HERO_METRICS = [
+  { value: "10K+", label: "Active Students" },
+  { value: "2K+", label: "Expert Tutors" },
+  { value: "50K+", label: "Classes Completed" },
+];
+
+const OVERVIEW_METADATA = [
+  { label: "Client", value: "Tuitionstime" },
+  { label: "Industry", value: "Education Technology" },
+  { label: "Our Role", value: "Web App, Mobile App, Backend, Integrations" },
+];
+
+const THREE_SIDED_ECOSYSTEM = [
+  {
+    role: "Students",
+    action: "Find, Demo, Learn",
+    description:
+      "Discover suitable tutors, book demonstrations, attend classes, and access learning resources.",
+  },
+  {
+    role: "Tutors",
+    action: "Teach, Earn, Grow",
+    description:
+      "Connect with students, manage classes, share educational content, and track earnings.",
+  },
+  {
+    role: "Platform",
+    action: "Match, Operate, Verify",
+    description:
+      "Coordinate users, verify tutors, oversee learning workflows, and manage platform operations.",
+  },
+];
+
+const CHALLENGES = [
+  {
+    step: "01",
+    title: "Tutor Matching",
+    description:
+      "Helping students discover relevant tutors based on subject, location, availability, learning preferences, and budget.",
+    cardBg: "bg-[#FFF1F2]", // Soft pastel rose
+    cardBorder: "border-[#FFE4E6]",
+    badgeBg: "bg-[#FFE4E6]",
+    badgeText: "text-[#E11D48]",
+    icon: (
+      <svg className="w-5 h-5 text-[#E11D48]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+        <path d="M11 8v6M8 11h6" />
+      </svg>
+    ),
+  },
+  {
+    step: "02",
+    title: "Manual Operations",
+    description:
+      "Reducing repetitive coordination across demo requests, classes, schedules, and online meetings.",
+    cardBg: "bg-[#FEFCE8]", // Soft pastel cream-yellow
+    cardBorder: "border-[#FEF08A]",
+    badgeBg: "bg-[#FEF08A]",
+    badgeText: "text-[#D97706]",
+    icon: (
+      <svg className="w-5 h-5 text-[#D97706]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="2" y="7" width="20" height="14" rx="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      </svg>
+    ),
+  },
+  {
+    step: "03",
+    title: "Trust & Verification",
+    description:
+      "Supporting tutor verification, payout ownership checks, and reliable financial workflows.",
+    cardBg: "bg-[#F0FDF4]", // Soft pastel mint-green
+    cardBorder: "border-[#DCFCE7]",
+    badgeBg: "bg-[#DCFCE7]",
+    badgeText: "text-[#16A34A]",
+    icon: (
+      <svg className="w-5 h-5 text-[#16A34A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    step: "04",
+    title: "Platform Growth",
+    description:
+      "Supporting multiple learning and revenue models while improving organic discoverability.",
+    cardBg: "bg-[#F0F9FF]", // Soft pastel sky blue
+    cardBorder: "border-[#BAE6FD]",
+    badgeBg: "bg-[#BAE6FD]",
+    badgeText: "text-[#0284C7]",
+    icon: (
+      <svg className="w-5 h-5 text-[#0284C7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="m22 7-8.5 8.5-5-5L2 17" />
+        <path d="M16 7h6v6" />
+      </svg>
+    ),
+  },
+];
+
+const SOLUTION_FEATURES = [
+  {
+    icon: Search,
+    label: "Tutor Discovery",
+    desc: "Search and filter tutors using structured preferences.",
+  },
+  {
+    icon: Calendar,
+    label: "Demo & Class Scheduling",
+    desc: "Coordinate trial sessions and regular learning.",
+  },
+  {
+    icon: Video,
+    label: "Meeting Automation",
+    desc: "Support online class meeting workflows.",
+  },
+  {
+    icon: CreditCard,
+    label: "Secure Payments",
+    desc: "Manage transactions, tutor wallets, and payouts.",
+  },
+  {
+    icon: Laptop,
+    label: "Learning Resources",
+    desc: "Support group batches and digital notes.",
+  },
+  {
+    icon: Users,
+    label: "Analytics & Administration",
+    desc: "Track activity and manage platform operations.",
+  },
+];
+
+const PLATFORM_WORKFLOW_STEPS = [
+  {
+    step: "01",
+    title: "Student Requirement",
+    desc: "Learners define their specific academic needs, subject, and learning preferences.",
+  },
+  {
+    step: "02",
+    title: "Tutor Matching",
+    desc: "Smart matching surfaces suitable verified tutors based on expertise, location, and budget.",
+  },
+  {
+    step: "03",
+    title: "Demo Request",
+    desc: "Students book trial sessions with shortlisted educators to assess learning fit.",
+  },
+  {
+    step: "04",
+    title: "Meeting & Scheduling",
+    desc: "Structured coordination schedules sessions and automated online classroom links.",
+  },
+  {
+    step: "05",
+    title: "Regular Classes",
+    desc: "Continuous learning sessions, progress tracking, and structured ongoing class management.",
+  },
+];
+
+const PLATFORM_ROLES = [
+  {
+    id: "student",
+    name: "Student App",
+    heading: "Tailored Experience for Curious Learners",
+    points: [
+      "Find and connect with verified tutors",
+      "Book online or in-person classes",
+      "Track upcoming and past classes",
+      "Make secure payments",
+      "Rate and review tutors",
+    ],
+  },
+  {
+    id: "tutor",
+    name: "Tutor App",
+    heading: "Complete Teaching Business Hub",
+    points: [
+      "Receive real-time student requirement leads",
+      "Set custom hourly and monthly batch rates",
+      "Automate classroom links and schedule sync",
+      "Monitor multi-state wallet and payouts",
+      "Publish revision notes for digital sales",
+    ],
+  },
+  {
+    id: "parent",
+    name: "Parent App",
+    heading: "Transparency and Safety for Families",
+    points: [
+      "Monitor academic progression and session logs",
+      "Direct verified messaging with mentors",
+      "Review transparent billing and receipts",
+      "Verify tutor background check documents",
+      "Timely schedule notifications and reminders",
+    ],
+  },
+  {
+    id: "web",
+    name: "Web Platform",
+    heading: "Central Command Center & Operations",
+    points: [
+      "Administrative oversight and dispute management",
+      "Programmatic SEO landing architecture",
+      "Lead routing algorithms and analytics",
+      "Browser video classroom with whiteboard",
+      "Escrow settlements and commission tracking",
+    ],
+  },
+];
+
+const ROLE_MOCKUPS: Record<
+  string,
+  {
+    screen1: { src: string; alt: string };
+    screen2: { src: string; alt: string };
+    screen3: { src: string; alt: string };
+  }
+> = {
+  student: {
+    screen1: {
+      src: "/images/case-studies/tuitionstime/phone-find-tutor.png",
+      alt: "Tuitionstime Student App — Find a Tutor Screen",
+    },
+    screen2: {
+      src: "/images/case-studies/tuitionstime/phone-my-classes.png",
+      alt: "Tuitionstime Student App — Class Management & Schedule",
+    },
+    screen3: {
+      src: "/images/case-studies/tuitionstime/phone-live-class.png",
+      alt: "Tuitionstime Live Online Video Tutoring Classroom",
+    },
+  },
+  tutor: {
+    screen1: {
+      src: "/images/case-studies/tuitionstime/find-students-ui.png",
+      alt: "Tuitionstime Tutor App — Student Requirement Leads",
+    },
+    screen2: {
+      src: "/images/case-studies/tuitionstime/group-batches-hd.png",
+      alt: "Tuitionstime Tutor App — Group Batches & Scheduling",
+    },
+    screen3: {
+      src: "/images/case-studies/tuitionstime/phone-live-class.png",
+      alt: "Tuitionstime Tutor App — Live Classroom Session",
+    },
+  },
+  parent: {
+    screen1: {
+      src: "/images/case-studies/tuitionstime/matching-preferences-clean.png",
+      alt: "Tuitionstime Parent App — Tutor Matching & Background Verification",
+    },
+    screen2: {
+      src: "/images/case-studies/tuitionstime/phone-my-classes.png",
+      alt: "Tuitionstime Parent App — Schedule & Attendance Logs",
+    },
+    screen3: {
+      src: "/images/case-studies/tuitionstime/phone-live-class.png",
+      alt: "Tuitionstime Parent App — Live Session Transparency",
+    },
+  },
+  web: {
+    screen1: {
+      src: "/images/case-studies/tuitionstime/phone-find-tutor.png",
+      alt: "Tuitionstime Web Platform — Marketplace Discovery",
+    },
+    screen2: {
+      src: "/images/case-studies/tuitionstime/phone-my-classes.png",
+      alt: "Tuitionstime Web Platform — Class Operations",
+    },
+    screen3: {
+      src: "/images/case-studies/tuitionstime/phone-live-class.png",
+      alt: "Tuitionstime Web Platform — Video Classroom",
+    },
+  },
+};
+
+const PROCESS_STEPS = [
+  {
+    step: "01",
+    title: "Business Discovery",
+    desc: "Understanding student acquisition, tutor onboarding, and tuition operations.",
+  },
+  {
+    step: "02",
+    title: "Marketplace Architecture",
+    desc: "Designing connected experiences for students, tutors, and administrators.",
+  },
+  {
+    step: "03",
+    title: "Full-Stack Development",
+    desc: "Building discovery, demos, classes, learning resources, and commerce workflows.",
+  },
+  {
+    step: "04",
+    title: "Automation",
+    desc: "Reducing repetitive coordination across meetings and class operations.",
+  },
+  {
+    step: "05",
+    title: "Trust & Analytics",
+    desc: "Supporting verification, payouts, and performance visibility.",
+  },
+  {
+    step: "06",
+    title: "SEO & Optimization",
+    desc: "Improving organic discovery, performance, and the evolving product experience.",
+  },
+];
+
+const TECH_STACK = [
+  {
+    name: "React.js",
+    role: "Web App",
+    svg: (
+      <svg className="w-8 h-8" viewBox="-11.5 -10.23174 23 20.46348">
+        <circle cx="0" cy="0" r="2.05" fill="#00C8E8" />
+        <g stroke="#00C8E8" strokeWidth="1" fill="none">
+          <ellipse rx="11" ry="4.2" />
+          <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+          <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+        </g>
+      </svg>
+    ),
+  },
+  {
+    name: "React Native",
+    role: "Mobile App",
+    svg: (
+      <svg className="w-8 h-8" viewBox="-11.5 -10.23174 23 20.46348">
+        <circle cx="0" cy="0" r="2.05" fill="#38BDF8" />
+        <g stroke="#38BDF8" strokeWidth="1.2" fill="none">
+          <ellipse rx="11" ry="4.2" />
+          <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+          <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+        </g>
+      </svg>
+    ),
+  },
+  {
+    name: "Node.js",
+    role: "Backend",
+    svg: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M12 2L3.5 6.9V17.1L12 22L20.5 17.1V6.9L12 2Z"
+          stroke="#16A34A"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M12 6.5V17.5M7.5 9.2L12 11.8L16.5 9.2M7.5 14.8L12 17.5L16.5 14.8"
+          stroke="#16A34A"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "MongoDB",
+    role: "Database",
+    svg: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M12 2C12 2 6 7.5 6 13.5C6 17.1 8.7 20 12 20.5C15.3 20 18 17.1 18 13.5C18 7.5 12 2 12 2Z"
+          stroke="#059669"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M12 2V22"
+          stroke="#059669"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "Firebase",
+    role: "Database",
+    svg: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M4.5 18L10 3.5L13.5 10.5L4.5 18Z"
+          fill="#F59E0B"
+          fillOpacity="0.4"
+        />
+        <path
+          d="M4.5 18L17.5 6.5L19.5 10.5L13 21.5L4.5 18Z"
+          stroke="#F59E0B"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13 21.5L10 3.5L4.5 18L13 21.5Z"
+          stroke="#D97706"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "Stripe",
+    role: "Notifications",
+    svg: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <rect
+          x="3"
+          y="4"
+          width="18"
+          height="16"
+          rx="4"
+          stroke="#6366F1"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M9 14.5C9.5 15.2 10.5 15.8 11.8 15.8C13.5 15.8 14.5 14.8 14.5 13.5C14.5 10.8 9.5 11.2 9.5 9.2C9.5 8.2 10.4 7.5 11.7 7.5C12.8 7.5 13.6 8 14 8.7"
+          stroke="#6366F1"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "Twilio",
+    role: "Communication",
+    svg: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="#E11D48" strokeWidth="1.8" />
+        <circle cx="9" cy="9.5" r="1.5" fill="#E11D48" />
+        <circle cx="15" cy="9.5" r="1.5" fill="#E11D48" />
+        <circle cx="9" cy="14.5" r="1.5" fill="#E11D48" />
+        <circle cx="15" cy="14.5" r="1.5" fill="#E11D48" />
+      </svg>
+    ),
+  },
+  {
+    name: "Zoom",
+    role: "Video Classes",
+    svg: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <rect
+          x="3"
+          y="6"
+          width="12"
+          height="12"
+          rx="3"
+          stroke="#0284C7"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M15 10L21 6.5V17.5L15 14V10Z"
+          stroke="#0284C7"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+];
+
+const RESULTS_METRICS = [
+  { value: "10K+", label: "Active Students" },
+  { value: "2K+", label: "Expert Tutors" },
+  { value: "50K+", label: "Classes Completed" },
+  { value: "4.8/5", label: "Average Rating" },
+];
+
+const TESTIMONIALS = [
+  {
+    id: 1,
+    quote:
+      "Tuitionstime has made it so easy to find the right tutor for my daughter. The platform is intuitive, and the support team is excellent!",
+    author: "Neha Verma",
+    role: "Parent",
+    avatar:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=240&h=240&q=80",
+  },
+  {
+    id: 2,
+    quote:
+      "Finding serious students in my local neighborhood used to take weeks of word-of-mouth. Now, student demo requests are organized directly on my phone.",
+    author: "Rajesh Sharma",
+    role: "Senior Mathematics Tutor",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&h=240&q=80",
+  },
+  {
+    id: 3,
+    quote:
+      "The trial class gave us complete confidence before paying. The classroom video call and schedule reminders work like clockwork.",
+    author: "Pooja Malhotra",
+    role: "Parent",
+    avatar:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=240&h=240&q=80",
+  },
+];
+
+const RELATED_CASE_STUDIES = [
+  {
+    id: "kfc",
+    title: "KFC Mobile App",
+    description:
+      "Expanded KFC's digital presence with 7 mobile apps across global markets.",
+    image:
+      "https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&w=800&q=80",
+    href: "/case-studies",
+  },
+  {
+    id: "amalfi",
+    title: "Property Management Platform",
+    description:
+      "A complete solution for property planning, 3D design, and cost estimation.",
+    image:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    href: "/case-studies/amalfi-acquisition",
+  },
+  {
+    id: "receivables",
+    title: "Receivables Marketplace",
+    description:
+      "A platform connecting buyers and sellers for distressed receivables.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    href: "/case-studies",
+  },
+];
+
+// =============================================================================
+// MAIN COMPONENT (ALTERNATING DARK & CLEAN WHITE CONTRAST SECTIONS)
+// =============================================================================
 
 export function TuitionstimeCaseStudy() {
-  return (
-    <div className="min-h-screen bg-[#08090B] text-slate-100 selection:bg-[#FACC15] selection:text-[#08090B] font-sans antialiased overflow-x-hidden">
-      {/* ========================================================================= */}
-      {/* HERO — CINEMATIC DARK 2-COLUMN LAYOUT WITH TILTED LAPTOP ON RIGHT        */}
-      {/* ========================================================================= */}
-      <section className="relative w-full pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 bg-[#08090B] text-white overflow-hidden">
-        {/* Studio-Lit Atmosphere: Restrained Yellow Glow Behind Right Laptop Area */}
-        <div className="absolute top-1/4 right-[2%] w-[840px] h-[650px] bg-[radial-gradient(ellipse_at_center,rgba(255,201,40,0.18)_0%,rgba(217,119,6,0.04)_45%,transparent_70%)] pointer-events-none -z-0" />
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] pointer-events-none" />
+  const [activeRoleTab, setActiveRoleTab] = useState<string>("student");
+  const [testimonialIndex, setTestimonialIndex] = useState<number>(0);
+  const [videoModalOpen, setVideoModalOpen] = useState<boolean>(false);
 
-        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-6 xl:gap-8">
-            {/* Left Column — Prominent Case Study Content (~43% width on desktop, generous breathing room) */}
-            <div className="w-full lg:w-[44%] xl:w-[42%] space-y-6 sm:space-y-8 text-left z-10 lg:pr-2">
-              {/* Outlined Pill Above Heading */}
-              <div>
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#111317] border border-[#2A2E38] text-xs font-mono font-bold tracking-wider uppercase text-slate-300 shadow-sm">
-                  <Image
-                    src="/images/case-studies/tuitionstime/tuitionstime-logo.png"
-                    alt="Tuitionstime Logo"
-                    width={16}
-                    height={16}
-                    className="rounded-full object-contain"
-                  />
-                  <span className="text-white">CODEPLACED</span>
-                  <span className="text-[#FFC928]">×</span>
-                  <span className="text-[#FFC928]">TUITIONSTIME</span>
-                </div>
+  const activeRole =
+    PLATFORM_ROLES.find((r) => r.id === activeRoleTab) || PLATFORM_ROLES[0];
+  const currentScreens =
+    ROLE_MOCKUPS[activeRoleTab] || ROLE_MOCKUPS.student;
+  const activeTestimonial = TESTIMONIALS[testimonialIndex];
+
+  const handlePrevTestimonial = () => {
+    setTestimonialIndex((prev) =>
+      prev === 0 ? TESTIMONIALS.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextTestimonial = () => {
+    setTestimonialIndex((prev) =>
+      prev === TESTIMONIALS.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-[#050505] selection:bg-[#00C8E8] selection:text-black font-sans antialiased overflow-x-hidden">
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION (SOLID BLACK #050505 WITH ENLARGED STATIC LAPTOP MOCKUP)  */}
+      {/* ========================================================================= */}
+      <section id="hero" className="relative w-full pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 lg:pb-24 bg-[#050505] text-white overflow-hidden scroll-mt-20">
+        <div className="relative max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Left Column: Heading, Subtitle, Stats & Dual CTAs (~42% width) */}
+            <div className="lg:col-span-5 space-y-6 sm:space-y-7 text-left z-10">
+              {/* Outlined Case Study Pill */}
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#0A0A0A] border border-white/[0.12] text-xs font-mono font-bold tracking-wider uppercase text-slate-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00C8E8] animate-pulse" />
+                  <span>CASE STUDY</span>
+                  <span className="text-white/30">•</span>
+                  <span className="text-white">Tuitionstime</span>
+                </span>
               </div>
 
-              {/* Main Heading: Large, Bold, Left-Aligned */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[52px] xl:text-[60px] font-black tracking-tight text-white leading-[1.08]">
-                Engineering a Complete{" "}
-                <span className="text-[#FFC928] block sm:inline">
-                  EdTech Marketplace
-                </span>
+              {/* Large Bold Headline with Cyan Emphasis */}
+              <h1 className="text-4xl sm:text-5xl lg:text-[56px] xl:text-[60px] font-black tracking-tight text-white leading-[1.06]">
+                Tuitionstime <br />
+                A Complete{" "}
+                <span className="text-[#00C8E8]">EdTech</span> <br />
+                Marketplace
               </h1>
 
-              {/* Supporting Description */}
-              <p className="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed font-normal max-w-xl">
-                From tutor discovery and trial classes to scheduling, payments, and learning progress, we built a connected platform for students, tutors, and parents.
+              {/* Supporting Summary */}
+              <p className="text-base sm:text-[17px] text-[#94A3B8] leading-relaxed font-normal max-w-xl">
+                An end-to-end EdTech marketplace connecting students, tutors, and
+                administrators through intelligent discovery, structured
+                matching, class management, payments, and learning experiences.
               </p>
 
-              {/* Three Metrics in One Clean Horizontal Row */}
+              {/* Compact Metrics Row */}
               <div className="pt-1">
-                <div className="flex flex-row items-center gap-4 sm:gap-6 lg:gap-8 py-3.5 sm:py-4 px-4 sm:px-6 rounded-2xl bg-[#111317] border border-[#22262F]">
-                  <div className="flex-1 sm:flex-initial">
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#FFC928] tracking-tight">
-                      10K+
+                <div className="grid grid-cols-3 gap-3 sm:gap-4 py-3.5 px-4 sm:px-6 rounded-2xl bg-[#0A0A0A] border border-white/[0.08] max-w-lg">
+                  {HERO_METRICS.map((m, idx) => (
+                    <div
+                      key={idx}
+                      className={`text-left ${
+                        idx > 0 ? "border-l border-white/[0.08] pl-3 sm:pl-4" : ""
+                      }`}
+                    >
+                      <div className="text-2xl sm:text-3xl font-black text-[#00C8E8] tracking-tight font-mono">
+                        {m.value}
+                      </div>
+                      <div className="text-xs text-white/90 mt-0.5 font-medium whitespace-nowrap">
+                        {m.label}
+                      </div>
                     </div>
-                    <div className="text-[11px] sm:text-xs text-white/90 mt-0.5 font-medium whitespace-nowrap">
-                      Active Students
-                    </div>
-                  </div>
-                  <div className="h-10 w-[1px] bg-[#22262F]" />
-                  <div className="flex-1 sm:flex-initial">
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#FFC928] tracking-tight">
-                      2K+
-                    </div>
-                    <div className="text-[11px] sm:text-xs text-white/90 mt-0.5 font-medium whitespace-nowrap">
-                      Expert Tutors
-                    </div>
-                  </div>
-                  <div className="h-10 w-[1px] bg-[#22262F]" />
-                  <div className="flex-1 sm:flex-initial">
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#FFC928] tracking-tight">
-                      50K+
-                    </div>
-                    <div className="text-[11px] sm:text-xs text-white/90 mt-0.5 font-medium whitespace-nowrap">
-                      Classes Completed
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              {/* CTA Action Buttons */}
-              <div className="pt-1 flex flex-wrap items-center gap-3">
-                <a
-                  href="#ecosystem-architecture"
-                  className="px-7 py-3.5 rounded-full bg-[#FFC928] hover:bg-[#FBBF24] text-[#08090B] font-mono text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-amber-400/20 flex items-center gap-2 group"
-                >
-                  <span>Explore Architecture</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </a>
+              {/* Dual CTAs: View Live Project + Read Case Study */}
+              <div className="pt-2 flex flex-wrap items-center gap-3.5">
                 <a
                   href="https://www.tuitionstime.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-7 py-3.5 rounded-full bg-[#111317] hover:bg-[#181B22] text-white border border-[#262B35] font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-xs flex items-center gap-2"
+                  className="px-7 py-3.5 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-mono text-xs sm:text-[13px] font-black uppercase tracking-wider transition-all duration-300 shadow-md hover:-translate-y-0.5 flex items-center gap-2 group cursor-pointer"
                 >
-                  <span>Visit Tuitionstime</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                  <span>View Live Project</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-black" />
+                </a>
+
+                <a
+                  href="#about-project"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.getElementById("about-project");
+                    if (target) {
+                      target.scrollIntoView({ behavior: "smooth" });
+                      window.history.pushState(null, "", "#about-project");
+                    }
+                  }}
+                  className="px-7 py-3.5 rounded-full bg-transparent hover:bg-white/[0.05] text-white border border-[#00C8E8] font-mono text-xs sm:text-[13px] font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:-translate-y-0.5 flex items-center gap-2 group cursor-pointer"
+                >
+                  <span>Read Case Study</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#00C8E8] group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             </div>
 
-            {/* Right Column — 15–20% Larger Photorealistic Laptop Shifted to Right (~57% width on desktop) */}
-            <div className="w-full lg:w-[56%] xl:w-[58%] flex items-center justify-center lg:justify-end pt-8 lg:pt-0 lg:translate-x-2 xl:translate-x-5">
-              <TuitionstimeLaptopMockup priority />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 1: ABOUT THE PRODUCT                                              */}
-      {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          {/* Two-Column Editorial Introduction */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            {/* Left: Strong Headline & Narrative */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <span className="text-xs font-mono font-bold tracking-widest text-[#00C7E8] uppercase">
-                ABOUT THE PRODUCT
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-                A three-sided learning ecosystem.
-              </h2>
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-                Tuitionstime is built as an end-to-end operating system for education in India,
-                connecting students, expert tutors, and platform administrators. Rather than acting as a
-                static classifieds directory, the platform coordinates discovery, structured matching,
-                demo trials, live classroom meetings, group cohort batches, study material commerce,
-                and automated financial settlements.
-              </p>
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-                By removing friction across discovery and billing, Tuitionstime empowers verified
-                educators to build sustainable teaching businesses while giving parents and students
-                guaranteed quality, verified credentials, and predictable scheduling.
-              </p>
-
-              {/* Stakeholder Pillars with Yellow and Cyan Accents */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-left">
-                <div className="p-4 rounded-2xl bg-[#111317] border border-[#FACC15]/25 shadow-md">
-                  <div className="text-xs font-mono font-black text-[#FACC15] uppercase">STUDENTS</div>
-                  <div className="text-sm font-bold text-white mt-1">Find • Demo • Learn</div>
-                  <div className="text-xs text-slate-400 mt-1">Home &amp; online tutoring</div>
-                </div>
-                <div className="p-4 rounded-2xl bg-[#111317] border border-[#22262F] shadow-md">
-                  <div className="text-xs font-mono font-black text-[#00C7E8] uppercase">TUTORS</div>
-                  <div className="text-sm font-bold text-white mt-1">Teach • Earn • Grow</div>
-                  <div className="text-xs text-slate-400 mt-1">Automated wallet payouts</div>
-                </div>
-                <div className="p-4 rounded-2xl bg-[#111317] border border-[#22262F] shadow-md">
-                  <div className="text-xs font-mono font-black text-amber-400 uppercase">PLATFORM</div>
-                  <div className="text-sm font-bold text-white mt-1">Match • Verify • Scale</div>
-                  <div className="text-xs text-slate-400 mt-1">Central admin control</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Project Specifications Table */}
-            <div className="lg:col-span-5 bg-[#111317] rounded-3xl p-6 sm:p-8 border border-[#22262F] text-left space-y-4 shadow-xl">
-              <div className="text-xs font-mono font-bold tracking-wider text-slate-400 uppercase">
-                PROJECT SPECIFICATIONS
-              </div>
-
-              <div className="divide-y divide-[#1F232B] text-sm">
-                <div className="py-3.5 flex justify-between items-center">
-                  <span className="text-slate-400 font-medium">Industry</span>
-                  <span className="font-bold text-white">Education Technology (EdTech)</span>
-                </div>
-                <div className="py-3.5 flex justify-between items-center">
-                  <span className="text-slate-400 font-medium">Product</span>
-                  <span className="font-bold text-white">Two-Sided Marketplace &amp; Learning OS</span>
-                </div>
-                <div className="py-3.5 flex justify-between items-center">
-                  <span className="text-slate-400 font-medium">Engineering Scope</span>
-                  <span className="font-bold text-white">Full-Stack Architecture &amp; APIs</span>
-                </div>
-                <div className="py-3.5 flex justify-between items-center">
-                  <span className="text-slate-400 font-medium">Core Integrations</span>
-                  <span className="font-bold text-white">Meeting Automation, Wallet &amp; Payouts</span>
-                </div>
-                <div className="py-3.5 flex justify-between items-center">
-                  <span className="text-slate-400 font-medium">Platform Delivery</span>
-                  <span className="font-bold text-white">Next.js, Node.js, Cloud Workflows</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 2: THE THREE-SIDED LEARNING ECOSYSTEM                             */}
-      {/* ========================================================================= */}
-      <section id="ecosystem-architecture" className="py-14 sm:py-20 bg-[#08090B] scroll-mt-24">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Section Label, Heading, and Explanatory Narrative (~50%) */}
-            <div className="lg:col-span-6 space-y-5 text-left">
-              <div className="space-y-3">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#FACC15] uppercase">
-                  THREE-SIDED ECOSYSTEM ARCHITECTURE
-                </span>
-                <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-white tracking-tight leading-[1.15]">
-                  Connecting students, tutors, and parents through one unified platform.
-                </h2>
-              </div>
-
-              <div className="space-y-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-                <p>
-                  A tutoring marketplace must solve multiple operational bottlenecks at once: how students
-                  discover qualified mentors, how parents monitor academic progress and billing, and how
-                  educators receive scheduled sessions and guaranteed payouts.
-                </p>
-                <p>
-                  CodePlaced engineered a connected architecture where student preferences match qualified
-                  tutors, trial workflows convert into recurring classes, and payouts settle securely.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Column: Three-Sided Marketplace Diagram (Enlarged, Standalone & Transparent) */}
-            <div className="lg:col-span-6 flex justify-center items-center">
-              <div className="relative w-full max-w-[480px] sm:max-w-[500px] aspect-[745/648] flex items-center justify-center">
+            {/* Right Column: Prominent Completely Static Laptop & Mobile Product Composition (~58% width) */}
+            <div className="lg:col-span-7 relative flex items-center justify-center lg:justify-start lg:-ml-2 pt-6 lg:pt-0">
+              <div className="relative w-full max-w-[850px] aspect-[2040/1380] drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
                 <Image
-                  src="/images/case-studies/tuitionstime/three-sided-ecosystem.png"
-                  alt="Tuitionstime Three-Sided Learning Ecosystem Architecture connecting Students, Tutors, and Parents"
+                  src="/images/case-studies/tuitionstime/tuitionstime-hero-laptop-phone.webp"
+                  alt="Tuitionstime Official Web Platform and Mobile Showcase"
                   fill
-                  className="object-contain"
-                  sizes="(max-width: 1024px) 100vw, 500px"
                   priority
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 58vw, 850px"
+                  className="object-contain"
                 />
               </div>
             </div>
@@ -247,710 +698,733 @@ export function TuitionstimeCaseStudy() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 3: PRODUCT SHOWCASE (2 LARGE CLEAR VISUALS SIDE BY SIDE)          */}
+      {/* 2. ABOUT THE PROJECT (CLEAN WHITE #FFFFFF SECTION - NO PARTITION BORDER)  */}
       {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
-          <div className="max-w-3xl mx-auto space-y-3 text-center">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C7E8] uppercase">
-              PRODUCT SHOWCASE
+      <section id="about-project" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12">
+          {/* Header & Narrative */}
+          <div className="max-w-3xl space-y-4 text-left">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+              ABOUT THE PROJECT
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-              One marketplace. Every step of the learning journey.
+
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+              Building a Smarter Way <br />
+              to <span className="text-[#00C8E8]">Learn and Teach</span>
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-              Two core operational pillars of Tuitionstime: matching verified tutor leads in real time,
-              and unlocking multi-student group cohorts for scalable learning.
-            </p>
-          </div>
 
-          {/* Two Substantial, Sharp Visuals Side by Side */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start text-left">
-            {/* Visual 1: Tutors Find Students (Live Requirement Board) */}
-            <div className="bg-[#111317] rounded-3xl border border-[#22262F] overflow-hidden shadow-xl p-4 sm:p-6 space-y-4">
-              <div className="flex items-center justify-between border-b border-[#1F232B] pb-3">
-                <div>
-                  <span className="text-[11px] font-mono font-black text-[#FACC15] uppercase">
-                    01 / REQUIREMENT BOARD
-                  </span>
-                  <h3 className="text-lg font-bold text-white">Tutors Find Students</h3>
-                </div>
-                <span className="text-xs font-mono text-slate-400">Real-Time Leads</span>
-              </div>
-              <div className="relative w-full aspect-[4/3] bg-[#0D0E11] rounded-2xl border border-[#1F232B] overflow-hidden">
-                <Image
-                  src="/images/case-studies/tuitionstime/find-students-ui.png"
-                  alt="Tutors Find Students Requirement Board"
-                  fill
-                  className="object-contain p-2"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Tutors discover active student requirements filtered by class, subject, location,
-                preferred time slots, and hourly budget.
+            <div className="space-y-3.5 text-base sm:text-[17px] text-[#555C68] leading-relaxed font-normal">
+              <p>
+                Tuitionstime is a multi-sided EdTech marketplace designed to
+                simplify how students find tutors, how educators manage their
+                teaching, and how administrators operate the platform.
               </p>
-            </div>
-
-            {/* Visual 2: Group Batches & Cohort Learning */}
-            <div className="bg-[#111317] rounded-3xl border border-[#22262F] overflow-hidden shadow-xl p-4 sm:p-6 space-y-4">
-              <div className="flex items-center justify-between border-b border-[#1F232B] pb-3">
-                <div>
-                  <span className="text-[11px] font-mono font-black text-[#00C7E8] uppercase">
-                    02 / SCALED LEARNING
-                  </span>
-                  <h3 className="text-lg font-bold text-white">Group Cohort Batches</h3>
-                </div>
-                <span className="text-xs font-mono text-slate-400">Batch Scheduling</span>
-              </div>
-              <div className="relative w-full aspect-[4/3] bg-[#0D0E11] rounded-2xl border border-[#1F232B] overflow-hidden">
-                <Image
-                  src="/images/case-studies/tuitionstime/group-batches-hd.png"
-                  alt="Group Batches Learning Management Interface"
-                  fill
-                  className="object-contain p-2"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Tutors organize structured group classes with defined seat limits, syllabus milestones,
-                and cohort pricing for expanded earning capacity.
+              <p>
+                Rather than functioning as a basic tutor directory, it brings
+                tutor discovery, demo bookings, class scheduling, learning
+                resources, payments, and platform operations into one connected
+                ecosystem.
               </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ========================================================================= */}
-      {/* SECTION 4: STRUCTURED TUTOR MATCHING (LARGE SCREENSHOT + 7 CRITERIA)      */}
-      {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Left: Large Genuine Preferences Form Screenshot */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl border border-[#22262F] bg-[#111317] overflow-hidden shadow-xl p-3 sm:p-4">
-                <div className="relative w-full aspect-[4/5] max-h-[620px]">
-                  <Image
-                    src="/images/case-studies/tuitionstime/matching-preferences-clean.png"
-                    alt="Tuitionstime Structured Matching Preferences Form"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Right: 7 Matching Criteria Explained Concisely */}
-            <div className="lg:col-span-6 space-y-6 text-left">
-              <div className="space-y-3">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#FACC15] uppercase">
-                  MATCHING DATA
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Structured preferences improve matching.
-                </h2>
-                <p className="text-base text-slate-300 leading-relaxed">
-                  Student requirements are structured into actionable data points rather than free-form
-                  text, enabling accurate algorithmic matching and high demo conversion rates.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                {[
-                  { id: "01", text: "Location & learning mode (Home Tuition or Live Online)", highlighted: true },
-                  { id: "02", text: "School / college / competitive exam track", highlighted: false },
-                  { id: "03", text: "Preferred subjects & specific board syllabus", highlighted: false },
-                  { id: "04", text: "Tutor gender preference & language comfort", highlighted: false },
-                  { id: "05", text: "Subject-wise weekly time slots & availability", highlighted: false },
-                  { id: "06", text: "Subject-wise hourly & monthly budgets", highlighted: true },
-                  { id: "07", text: "Target academic learning goals & timeline", highlighted: false },
-                ].map((item) => (
-                  <div
-                    key={item.id}
-                    className={`flex items-center gap-3.5 p-3 rounded-2xl border shadow-sm transition-colors ${
-                      item.highlighted
-                        ? "bg-[#161920] border-[#FACC15]/30"
-                        : "bg-[#111317] border-[#22262F]"
-                    }`}
-                  >
-                    <span
-                      className={`text-xs font-mono font-bold shrink-0 ${
-                        item.highlighted
-                          ? "text-[#FACC15] bg-[#FACC15]/15 px-2 py-0.5 rounded-md"
-                          : "text-slate-400 px-1"
-                      }`}
-                    >
-                      {item.id}
-                    </span>
-                    <span className="text-sm font-semibold text-slate-200">
-                      {item.text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#161920] border-l-4 border-[#FACC15] text-xs font-bold text-amber-300">
-                The user profile becomes useful marketplace intelligence—not just static account information.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 5: DEMO-TO-CLASS WORKFLOW (5-STEP HORIZONTAL PROCESS)             */}
-      {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C7E8] uppercase">
-              CONVERSION LIFECYCLE
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-              From free demo to regular learning.
-            </h2>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              Demo requests are treated as a measurable conversion funnel with automated meeting
-              generation, status synchronizations, and frictionless transition into regular classes.
-            </p>
-          </div>
-
-          {/* 5-Step Process with Unified Dark Charcoal Cards and Yellow/Cyan Accents */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {[
-              {
-                step: "01",
-                title: "Student Need",
-                desc: "Requirements, subjects, syllabus, budget and preferred slots submitted.",
-                highlighted: false,
-              },
-              {
-                step: "02",
-                title: "Tutor Match",
-                desc: "Algorithmic matching routes the request to verified local & online tutors.",
-                highlighted: false,
-              },
-              {
-                step: "03",
-                title: "Demo Request",
-                desc: "Free 1-on-1 trial booked with confirmed mutual slot availability.",
-                highlighted: true,
-                badge: "KEY TRIAL",
-              },
-              {
-                step: "04",
-                title: "Meeting Sync",
-                desc: "Automated video meeting generated with instant calendar & SMS links.",
-                highlighted: false,
-              },
-              {
-                step: "05",
-                title: "Regular Class",
-                desc: "Successful demo converts directly into recurring paid learning schedule.",
-                highlighted: true,
-                badge: "CONVERSION",
-              },
-            ].map((item, idx) => (
+          {/* Compact Three-Part Horizontal Explanation with Comfortable Padding */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-1">
+            {THREE_SIDED_ECOSYSTEM.map((eco, idx) => (
               <div
-                key={item.step}
-                className={`p-6 rounded-3xl border shadow-md flex flex-col justify-between space-y-4 hover:border-[#FACC15]/60 transition-colors ${
-                  item.highlighted
-                    ? "bg-[#161920] border-[#FACC15]/35"
-                    : "bg-[#111317] border-[#22262F]"
-                }`}
+                key={idx}
+                className="p-7 sm:p-8 rounded-2xl bg-[#F7F7F7] border border-[#E5E7EB] space-y-3 text-left shadow-xs flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center font-mono font-black text-sm ${
-                        item.highlighted
-                          ? "bg-[#FACC15]/15 text-[#FACC15]"
-                          : "bg-white/5 text-slate-300"
-                      }`}
-                    >
-                      {item.step}
-                    </span>
-                    {item.badge && (
-                      <span className="text-[9px] font-mono font-bold tracking-wider uppercase bg-[#FACC15]/15 text-[#FACC15] border border-[#FACC15]/30 px-1.5 py-0.5 rounded">
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-                  {idx < 4 && (
-                    <ArrowRight className="w-4 h-4 text-slate-600 hidden md:block" />
-                  )}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono font-bold text-[#00C8E8] uppercase tracking-wider">
+                    {eco.role}
+                  </span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-sm sm:text-base font-bold text-[#111111]">
+                    {eco.action}
+                  </span>
                 </div>
-                <div className="space-y-1">
-                  <h3 className="text-base font-bold text-white">{item.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-                </div>
+                <p className="text-sm sm:text-[15px] text-[#555C68] leading-relaxed">
+                  {eco.description}
+                </p>
               </div>
             ))}
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#111317] border border-[#22262F] shadow-sm text-xs font-medium text-slate-300 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-            <span>Built with cost-efficient meeting room generation and bidirectional calendar reminders to eliminate student no-shows.</span>
+          {/* Metadata 3-Column Strip */}
+          <div className="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-slate-200 text-left">
+            {OVERVIEW_METADATA.map((item, idx) => (
+              <div key={idx} className="space-y-1">
+                <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider block">
+                  {item.label}
+                </span>
+                <span className="text-base font-bold text-[#111111] block">
+                  {item.value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 6: TRUST, VERIFICATION & WALLETS (LARGE PROMINENT SCREENSHOT)     */}
+      {/* 3. THE CHALLENGE (SOLID WHITE #FFFFFF - FLOWS SEAMLESSLY FROM ABOUT)      */}
       {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Left: One Prominent, Readable Wallet & Payouts Screenshot */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl border border-[#22262F] bg-[#111317] overflow-hidden shadow-xl p-3 sm:p-5">
-                <div className="px-3 py-2 bg-[#0D0E11] rounded-t-xl border-b border-[#1F232B] flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono font-bold text-slate-400">TUTOR WALLET &amp; PAYOUT AUDIT</span>
-                  <span className="text-xs font-mono text-[#10B981] font-bold">VERIFIED ESCROW</span>
+      <section id="challenges" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
+          {/* Header */}
+          <div className="max-w-2xl space-y-3">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+              THE CHALLENGE
+            </span>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+              Solving Key Challenges <br />
+              in <span className="text-[#00C8E8]">Education</span>
+            </h2>
+
+            <p className="text-base sm:text-[17px] text-[#555555] leading-relaxed">
+              Building a tutoring marketplace involves more than connecting
+              students with teachers. The platform must coordinate discovery,
+              trust, scheduling, payments, and ongoing learning while supporting
+              different user needs.
+            </p>
+          </div>
+
+          {/* 4 Compact Pastel Cards: 1 Row Desktop, 2 Columns Tablet, Stacked Mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CHALLENGES.map((ch) => (
+              <div
+                key={ch.step}
+                className={`p-7 sm:p-8 rounded-2xl ${ch.cardBg} border ${ch.cardBorder} flex flex-col justify-between space-y-6 transition-transform duration-300 hover:-translate-y-1 min-h-[260px]`}
+              >
+                <div className="flex items-center justify-between">
+                  <div
+                    className={`w-12 h-12 rounded-xl ${ch.badgeBg} flex items-center justify-center shrink-0`}
+                  >
+                    {ch.icon}
+                  </div>
+                  <span className={`text-xs font-mono font-black ${ch.badgeText}`}>
+                    {ch.step}
+                  </span>
                 </div>
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#0D0E11]">
-                  <Image
-                    src="/images/case-studies/tuitionstime/wallet-payouts.jpg"
-                    alt="Tutor Wallet Balances and Payouts History Interface"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
+
+                <div className="space-y-2">
+                  <h3 className="text-base sm:text-lg font-bold text-[#111111] tracking-tight">
+                    {ch.title}
+                  </h3>
+                  <p className="text-sm sm:text-[14.5px] text-[#475569] leading-relaxed">
+                    {ch.description}
+                  </p>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Right: Trust, KYC & Multi-Stream Monetization Narrative */}
-            <div className="lg:col-span-6 space-y-6 text-left">
-              <div className="space-y-3">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#FACC15] uppercase">
-                  TRUST &amp; COMMERCE
+      {/* ========================================================================= */}
+      {/* 4. THE SOLUTION (SOLID BLACK #050505 WITH CENTERED DASHBOARD LAPTOP)      */}
+      {/* ========================================================================= */}
+      <section id="solution" className="py-20 lg:py-24 bg-[#050505] text-white scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            {/* Left Column: Heading, Narrative & 6 Compact Feature Cards */}
+            <div className="lg:col-span-6 space-y-7 text-left">
+              <div className="space-y-4">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+                  THE SOLUTION
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Verification, wallets and multi-stream earnings.
+
+                <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-white tracking-tight leading-[1.14]">
+                  A Unified Learning <br />
+                  <span className="text-[#00C8E8]">Ecosystem</span>
                 </h2>
-                <p className="text-base text-slate-300 leading-relaxed">
-                  Educator identity and payout ownership are audited through document and bank
-                  verification. Earnings then flow through multi-state wallets (available, locked, and completed).
+
+                <p className="text-base sm:text-[17px] text-[#94A3B8] leading-relaxed max-w-xl">
+                  CodePlaced engineered a connected marketplace experience
+                  covering tutor discovery, student requirements,
+                  demo-to-class conversion, scheduling, learning resources,
+                  verification, payments, and analytics. The platform brings
+                  multiple user journeys and operational workflows together
+                  instead of relying on disconnected tools.
                 </p>
               </div>
 
-              <div className="space-y-3 pt-1">
-                <div className="p-4 rounded-2xl bg-[#161920] border border-[#FACC15]/30 space-y-1.5 shadow-sm">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-bold text-white">KYC &amp; Bank Account Verification</div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#FACC15] bg-[#FACC15]/15 px-2 py-0.5 rounded-full border border-[#FACC15]/30">
-                      VERIFIED ESCROW
+              {/* 6 Capability Cards with Explanatory Lines */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                {SOLUTION_FEATURES.map((feat, idx) => {
+                  const IconComp = feat.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-xl bg-[#0A0A0A] border border-white/[0.08] hover:border-[#00C8E8]/40 transition-colors flex items-start gap-3.5 group"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-[#00C8E8]/10 text-[#00C8E8] flex items-center justify-center shrink-0 mt-0.5">
+                        <IconComp className="w-4 h-4" />
+                      </div>
+                      <div className="space-y-0.5 text-left">
+                        <div className="text-sm sm:text-[15px] font-bold text-slate-100 group-hover:text-white transition-colors">
+                          {feat.label}
+                        </div>
+                        <div className="text-xs sm:text-[13px] text-[#94A3B8] leading-snug">
+                          {feat.desc}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Column: 20% Enlarged Dashboard Laptop Mockup */}
+            <div className="lg:col-span-6 relative flex items-center justify-center pt-8 lg:pt-0">
+              <div className="relative w-full max-w-[700px] lg:max-w-[740px]">
+                {/* Modern Laptop Mockup Chassis */}
+                <div className="relative w-full">
+                  {/* Screen Lid */}
+                  <div className="relative w-full aspect-[16/10] rounded-t-2xl bg-[#14161B] border-[3px] border-[#2C3038] p-2.5 shadow-[0_30px_60px_rgba(0,0,0,0.85)]">
+                    {/* Web Camera Dot */}
+                    <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black/90 flex items-center justify-center">
+                      <div className="w-0.5 h-0.5 rounded-full bg-[#00C8E8]/50" />
+                    </div>
+                    {/* Dashboard Screen */}
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#0A0A0A]">
+                      <Image
+                        src="/images/case-studies/tuitionstime/hero-tutor-listing-clean.png"
+                        alt="Tuitionstime Student Dashboard Interface"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 1024px) 95vw, 740px"
+                      />
+                    </div>
+                  </div>
+                  {/* Laptop Base Notch */}
+                  <div className="relative w-[106%] -left-[3%] h-3.5 bg-[#1F232B] rounded-b-lg border-t border-white/10 shadow-lg flex items-center justify-center">
+                    <div className="w-16 h-1 bg-[#14161B] rounded-b" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. HOW THE PLATFORM WORKS (CLEAN WHITE #FFFFFF MINIMAL WORKFLOW TIMELINE) */}
+      {/* ========================================================================= */}
+      <section id="discovery-workflow" className="py-16 sm:py-20 lg:py-22 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
+          {/* Header */}
+          <div className="max-w-3xl space-y-3">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+              HOW THE PLATFORM WORKS
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+              From Tutor Discovery to <span className="text-[#00C8E8]">Regular Learning</span>
+            </h2>
+            <p className="text-base sm:text-[17px] text-[#555C68] leading-relaxed">
+              Tuitionstime connects the complete student journey, from
+              identifying a learning requirement to finding a suitable tutor,
+              attending a demo, and continuing with regular classes.
+            </p>
+          </div>
+
+          {/* Minimal 5-Step Connected Timeline */}
+          <div className="relative">
+            {/* Desktop Connector Line */}
+            <div className="hidden lg:block absolute top-[22px] left-[5%] right-[5%] h-[2px] bg-[#E2E8F0] -z-0" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-4 relative z-10">
+              {PLATFORM_WORKFLOW_STEPS.map((step, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-start lg:items-center text-left lg:text-center space-y-3.5"
+                >
+                  {/* Small Cyan Numbered Circle */}
+                  <div className="w-11 h-11 rounded-full bg-[#00C8E8] text-black font-mono font-black text-sm flex items-center justify-center shrink-0 shadow-xs ring-4 ring-white">
+                    {idx + 1}
+                  </div>
+
+                  <div className="space-y-1">
+                    <h3 className="text-base font-bold text-[#111111] tracking-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#555C68] leading-relaxed max-w-[220px]">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Supporting Sentence */}
+          <p className="text-sm text-[#64748B] pt-3 text-left lg:text-center font-medium">
+            Structured workflows help reduce repetitive coordination while
+            making each stage of the learning journey easier to manage.
+          </p>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 6. PLATFORM OVERVIEW (SOLID WHITE #FFFFFF SECTION - NO PARTITION BORDER)  */}
+      {/* ========================================================================= */}
+      <section id="platform-overview" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: Heading, Role Tabs & Role-Specific Checklist */}
+            <div className="lg:col-span-5 space-y-7 text-left">
+              <div className="space-y-4">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+                  PLATFORM OVERVIEW
+                </span>
+
+                <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+                  Three Experiences, <br />
+                  One <span className="text-[#00C8E8]">Connected Platform</span>
+                </h2>
+
+                <p className="text-base sm:text-[17px] text-[#555C68] leading-relaxed max-w-xl">
+                  Tuitionstime provides dedicated experiences for students, tutors,
+                  and parents, supported by a connected web platform and
+                  centralized operations.
+                </p>
+              </div>
+
+              {/* 4 Interactive Persona Tabs */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                {PLATFORM_ROLES.map((role) => {
+                  const isActive = activeRoleTab === role.id;
+                  return (
+                    <button
+                      key={role.id}
+                      type="button"
+                      onClick={() => setActiveRoleTab(role.id)}
+                      className={`px-5 py-2.5 rounded-full text-xs sm:text-[13px] font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                        isActive
+                          ? "bg-[#00C8E8] text-black shadow-xs"
+                          : "bg-[#F1F5F9] text-[#334155] hover:text-[#111111] border border-slate-200"
+                      }`}
+                    >
+                      {role.name}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active Tab Checklist */}
+              <div className="space-y-3.5 pt-2">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                  {activeRole.heading}
+                </div>
+                {activeRole.points.map((pt, idx) => (
+                  <div key={idx} className="flex items-center gap-3.5">
+                    <div className="w-5 h-5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] flex items-center justify-center text-[#00C8E8] shrink-0">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <span className="text-sm sm:text-[15px] font-semibold text-[#111111]">
+                      {pt}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300">
-                    Government ID checks, degree validation, and UPI/bank settlement audit before any withdrawal request can be submitted.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#111317] border border-[#22262F] space-y-1">
-                  <div className="text-sm font-bold text-white">Group Cohort Batches</div>
-                  <p className="text-xs text-slate-400">
-                    Tutors run group classes with defined seat capacities and batch pricing, unlocking higher hourly earnings.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#111317] border border-[#22262F] space-y-1">
-                  <div className="text-sm font-bold text-white">Digital Notes Marketplace</div>
-                  <p className="text-xs text-slate-400">
-                    Educators upload revision notes and study guides for passive digital sales with instant chapter previews.
-                  </p>
-                </div>
+                ))}
               </div>
+            </div>
+
+            {/* Right Column: 3 Mobile Phone Screens in Clean Horizontal Row */}
+            <div className="lg:col-span-7 relative flex items-center justify-center pt-8 lg:pt-0">
+              <TuitionstimeThreePhonesShowcase />
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 7: PROGRAMMATIC SEO & ACQUISITION (CLEAN TEXT-LED EDITORIAL)     */}
+      {/* 7. OUR PROCESS (SOLID WHITE #FFFFFF SECTION - NO PARTITION BORDER)        */}
       {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C7E8] uppercase">
-              SEO &amp; GROWTH
+      <section id="process" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
+          {/* Header */}
+          <div className="max-w-2xl space-y-3">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+              OUR PROCESS
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-              Building an organic acquisition engine.
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+              From Idea to <span className="text-[#00C8E8]">Impact</span>
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              We engineered a scalable programmatic SEO architecture to capture high-intent local and
-              subject-specific tuition searches across India without ad spend dependency.
+            <p className="text-base sm:text-[17px] text-[#555C68] leading-relaxed">
+              We followed a structured development process to ensure a scalable,
+              secure, and user-friendly platform.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-3xl bg-[#111317] border border-[#FACC15]/25 shadow-xl space-y-3">
-              <span className="text-xs font-mono font-bold text-[#FACC15] uppercase">01 / PROGRAMMATIC TAXONOMY</span>
-              <h3 className="text-lg font-bold text-white">Combinatorial Landing Architecture</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Dynamic combinations across Subject × Class × Board (CBSE/ICSE) × City generate
-                thousands of search-targeted indexable landing pages with clean metadata.
-              </p>
-            </div>
+          {/* 6-Step Connected Timeline */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-5 relative">
+            {/* Horizontal Line behind nodes on desktop */}
+            <div className="hidden lg:block absolute top-6 left-[5%] right-[5%] h-[2px] bg-slate-200 -z-0" />
 
-            <div className="p-6 rounded-3xl bg-[#111317] border border-[#22262F] shadow-xl space-y-3">
-              <span className="text-xs font-mono font-bold text-[#00C7E8] uppercase">02 / TECHNICAL PERFORMANCE</span>
-              <h3 className="text-lg font-bold text-white">Sub-Second Page Experience</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Static server generation with ISR ensures instantaneous page loads, perfect Core Web Vitals,
-                and high search ranking across mobile and desktop devices.
-              </p>
-            </div>
+            {PROCESS_STEPS.map((step) => (
+              <div
+                key={step.step}
+                className="relative z-10 flex flex-col items-start lg:items-center text-left lg:text-center space-y-3.5"
+              >
+                {/* Numbered Circular Node filled with Solid Cyan */}
+                <div className="w-12 h-12 rounded-full bg-[#00C8E8] text-black font-mono font-black text-sm flex items-center justify-center shadow-xs ring-4 ring-white">
+                  {step.step}
+                </div>
 
-            <div className="p-6 rounded-3xl bg-[#111317] border border-[#22262F] shadow-xl space-y-3">
-              <span className="text-xs font-mono font-bold text-amber-400 uppercase">03 / SCHEMA &amp; LOCAL INTENT</span>
-              <h3 className="text-lg font-bold text-white">Structured Academic Data</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Automated JSON-LD schemas for verified tutors, reviews, subjects, and local coordinates
-                render rich snippets directly within Google search results.
-              </p>
-            </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm sm:text-base font-bold text-[#111111] tracking-tight">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs sm:text-[13px] text-[#555C68] leading-relaxed max-w-[200px]">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 8: RESULTS & IMPACT                                               */}
+      {/* 8. TECHNOLOGY STACK (SOLID WHITE #FFFFFF SECTION - NO PARTITION BORDER)   */}
       {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left Column: Headline, Numbered Outcomes & Partnership */}
-            <div className="lg:col-span-6 space-y-8 text-left">
+      <section id="tech-stack" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
+          {/* Header */}
+          <div className="max-w-3xl space-y-3">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+              TECHNOLOGY STACK
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+              Modern Technologies <br className="hidden sm:inline" />
+              for a <span className="text-[#00C8E8]">Scalable Platform</span>
+            </h2>
+            <p className="text-base sm:text-[17px] text-[#555C68] leading-relaxed">
+              The platform combines modern web and mobile development, backend
+              services, data management, payment integrations, and communication
+              tools to support a connected learning marketplace.
+            </p>
+          </div>
+
+          {/* 8 Tech Cards Grid on Light Neutral #F7F7F7 Background */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+            {TECH_STACK.map((tech) => (
+              <div
+                key={tech.name}
+                className="p-4 sm:p-5 rounded-2xl bg-[#F7F7F7] border border-[#E5E7EB] hover:border-[#00C8E8] transition-all duration-300 flex flex-col items-center text-center justify-between min-h-[145px] shadow-xs group hover:-translate-y-1"
+              >
+                <div className="w-12 h-12 flex items-center justify-center">
+                  {tech.svg}
+                </div>
+                <div className="space-y-0.5 mt-2">
+                  <div className="text-xs sm:text-sm font-bold text-[#111111] group-hover:text-[#00C8E8] transition-colors leading-tight">
+                    {tech.name}
+                  </div>
+                  <div className="text-[11px] text-[#64748B] font-mono">
+                    {tech.role}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 9. RESULTS AND OUTCOMES (SOLID BLACK #050505 SECTION + WHITE TESTIMONIAL) */}
+      {/* ========================================================================= */}
+      <section id="results" className="py-20 lg:py-24 bg-[#050505] text-white scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* Left Column: Eyebrow, Heading, Description, 4 Stats Cards & Ongoing Partnership */}
+            <div className="lg:col-span-7 space-y-8 text-left">
               <div className="space-y-4">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#FACC15] uppercase">
-                  RESULTS &amp; IMPACT
+                <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+                  THE RESULTS
                 </span>
-                <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-                  Building a connected EdTech marketplace from discovery to learning.
+
+                <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-white tracking-tight leading-[1.14]">
+                  Making a Real Impact <br />
+                  in <span className="text-[#00C8E8]">Education</span>
                 </h2>
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                  Tuitionstime transitioned from an uncoordinated local directory into a robust,
-                  three-sided educational platform powering tens of thousands of learning sessions
-                  across India.
+
+                <p className="text-base sm:text-[17px] text-[#94A3B8] leading-relaxed max-w-xl">
+                  Tuitionstime has evolved into a connected EdTech marketplace
+                  bringing together tutor discovery, structured matching,
+                  demonstrations, classes, meeting workflows, learning
+                  resources, payments, analytics, and administrative oversight.
                 </p>
               </div>
 
-              {/* Numbered List with Dark Surfaces and Yellow Badges */}
-              <div className="divide-y divide-[#1F232B] border-y border-[#1F232B]">
-                <div className="py-6 flex items-start gap-5 sm:gap-6">
-                  <div className="w-12 h-12 rounded-2xl bg-[#FACC15]/15 border border-[#FACC15]/30 flex items-center justify-center text-xl font-black text-[#FACC15] font-mono shrink-0 shadow-md">
-                    01
-                  </div>
-                  <div>
-                    <div className="text-2xl sm:text-3xl font-black text-white">
-                      10K+ Active Students*
+              {/* 4 Stats Cards in a 4-Column Strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+                {RESULTS_METRICS.map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-[#0A0A0A] border border-white/[0.08] min-h-[105px] flex flex-col justify-between shadow-sm"
+                  >
+                    <div className="text-3xl sm:text-[34px] font-black text-[#00C8E8] font-mono tracking-tight">
+                      {stat.value}
                     </div>
-                    <p className="text-sm text-slate-400 mt-1 leading-relaxed">
-                      Learners actively finding home and online tutors across primary, secondary,
-                      and competitive exam tracks.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="py-6 flex items-start gap-5 sm:gap-6">
-                  <div className="w-12 h-12 rounded-2xl bg-[#FACC15]/15 border border-[#FACC15]/30 flex items-center justify-center text-xl font-black text-[#FACC15] font-mono shrink-0 shadow-md">
-                    02
-                  </div>
-                  <div>
-                    <div className="text-2xl sm:text-3xl font-black text-white">
-                      2K+ Expert Tutors*
+                    <div className="text-xs sm:text-[13px] text-white/90 font-medium">
+                      {stat.label}
                     </div>
-                    <p className="text-sm text-slate-400 mt-1 leading-relaxed">
-                      Verified educators teaching, scheduling sessions, and earning predictable
-                      livelihoods with automated payouts.
-                    </p>
                   </div>
-                </div>
-
-                <div className="py-6 flex items-start gap-5 sm:gap-6">
-                  <div className="w-12 h-12 rounded-2xl bg-[#FACC15]/15 border border-[#FACC15]/30 flex items-center justify-center text-xl font-black text-[#FACC15] font-mono shrink-0 shadow-md">
-                    03
-                  </div>
-                  <div>
-                    <div className="text-2xl sm:text-3xl font-black text-white">
-                      50K+ Classes Completed*
-                    </div>
-                    <p className="text-sm text-slate-400 mt-1 leading-relaxed">
-                      Live sessions successfully scheduled, conducted, and logged through the platform
-                      without operational bottlenecks.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
 
-              <div className="text-xs font-mono text-slate-500">
-                *Platform figures displayed by Tuitionstime.
-              </div>
-
-              {/* Ongoing Client Partnership Callout */}
-              <div className="p-6 rounded-2xl bg-[#111317] border border-[#22262F] space-y-2">
-                <div className="text-xs font-mono font-bold text-[#00C7E8] uppercase tracking-wider">
-                  CONTINUOUS PRODUCT PARTNERSHIP
-                </div>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-                  CodePlaced continues to support Tuitionstime across full-stack product engineering,
-                  meeting automation, platform performance, and programmatic SEO.
+              {/* Ongoing Product Partnership Strip */}
+              <div className="pt-5 border-t border-white/[0.08] space-y-1.5">
+                <span className="text-xs font-mono font-bold text-[#00C8E8] uppercase tracking-wider block">
+                  Ongoing Product Partnership
+                </span>
+                <p className="text-sm text-[#94A3B8] leading-relaxed max-w-xl">
+                  CodePlaced continues supporting platform development,
+                  automation, optimization, and SEO as Tuitionstime evolves.
                 </p>
               </div>
             </div>
 
-            {/* Right Column: Polished Tuitionstime Product Display */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl border border-[#22262F] bg-[#111317] overflow-hidden shadow-xl p-3 sm:p-5">
-                <div className="relative w-full aspect-[16/12] rounded-2xl overflow-hidden bg-[#0D0E11] border border-[#1F232B]">
-                  <Image
-                    src="/images/case-studies/tuitionstime/hero-tutor-listing-clean.png"
-                    alt="Tuitionstime Marketplace Platform Interface"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 9: DARK PREMIUM CONVERSION CARD                                   */}
-      {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-3xl bg-[#111317] p-8 sm:p-14 lg:p-16 text-white shadow-2xl overflow-hidden border border-[#262B35]">
-            {/* Ambient Lighting Accents */}
-            <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#FACC15]/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#00C7E8]/8 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.02] pointer-events-none" />
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              {/* Left Column: Heading, Supporting Copy, Action Buttons */}
-              <div className="lg:col-span-7 space-y-6 text-left">
-                <div className="inline-flex items-center gap-2.5 text-xs font-mono font-bold tracking-widest uppercase bg-[#08090B] text-[#FACC15] border border-[#FACC15]/30 px-4 py-2 rounded-full shadow-md">
-                  <Image
-                    src="/images/case-studies/tuitionstime/tuitionstime-logo.png"
-                    alt="Tuitionstime"
-                    width={18}
-                    height={18}
-                    className="rounded-full object-contain"
-                  />
-                  <span>CODEPLACED × TUITIONSTIME</span>
-                </div>
-
-                <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-                  Have a marketplace or SaaS idea that needs more than a frontend?
-                </h2>
-
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl font-normal">
-                  Let’s build a connected digital product that brings your users, workflows,
-                  and business operations together.
-                </p>
-
-                <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
-                  <Link
-                    href="/contact"
-                    className="w-full sm:w-auto px-9 py-4 rounded-full bg-[#FACC15] hover:bg-[#FBBF24] text-[#08090B] font-mono font-black text-sm uppercase tracking-wider transition-all shadow-xl hover:shadow-amber-400/20 flex items-center justify-center gap-2"
-                  >
-                    <span>BUILD WITH CODEPLACED</span>
-                    <ArrowRight className="w-4 h-4 text-[#08090B]" />
-                  </Link>
-                  <Link
-                    href="/services"
-                    className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#161920] hover:bg-[#1D212A] text-white border border-[#2D3340] font-mono text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2"
-                  >
-                    <span>EXPLORE OUR SERVICES</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-300" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Column: Platform Display in Sleek Dark Frame */}
-              <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-[480px] rounded-2xl bg-[#0D0E11] border border-[#22262F] shadow-xl overflow-hidden p-2 sm:p-3">
-                  <div className="relative w-full aspect-[16/10]">
+            {/* Right Column: Clean White Testimonial Card with Carousel Controls */}
+            <div className="lg:col-span-5 flex flex-col justify-center">
+              <div className="p-8 sm:p-9 rounded-3xl bg-white text-[#111111] border border-slate-200/80 shadow-lg space-y-6 text-left relative">
+                <div className="flex items-center gap-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#00C8E8] shrink-0">
                     <Image
-                      src="/images/case-studies/tuitionstime/find-tutors-ui.png"
-                      alt="Tuitionstime Marketplace Platform Interface"
+                      src={activeTestimonial.avatar}
+                      alt={activeTestimonial.author}
                       fill
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                      sizes="48px"
                     />
                   </div>
+                  <div>
+                    <h3 className="text-base font-bold text-[#111111]">
+                      {activeTestimonial.author}
+                    </h3>
+                    <p className="text-xs font-mono font-bold text-[#00C8E8]">
+                      {activeTestimonial.role}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-base sm:text-[17px] text-[#222222] italic leading-relaxed font-normal">
+                  &ldquo;{activeTestimonial.quote}&rdquo;
+                </p>
+
+                {/* Carousel Pagination Indicator & Controls */}
+                <div className="pt-3 flex items-center justify-between border-t border-slate-100">
+                  <div className="flex items-center gap-1.5">
+                    {TESTIMONIALS.map((_, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setTestimonialIndex(idx)}
+                        className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                          testimonialIndex === idx
+                            ? "w-6 bg-[#00C8E8]"
+                            : "w-2 bg-slate-200"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handlePrevTestimonial}
+                      className="w-8 h-8 rounded-full bg-[#F7F7F7] hover:bg-slate-200 text-[#111111] flex items-center justify-center transition-colors cursor-pointer"
+                      aria-label="Previous testimonial"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextTestimonial}
+                      className="w-8 h-8 rounded-full bg-[#F7F7F7] hover:bg-slate-200 text-[#111111] flex items-center justify-center transition-colors cursor-pointer"
+                      aria-label="Next testimonial"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="relative z-10 pt-10 mt-10 border-t border-[#1F232B] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-400 font-medium gap-3">
-              <span>Case Study • Tuitionstime EdTech Marketplace</span>
-              <span>Full-Stack Engineering &amp; Architecture by CodePlaced</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 10: EXPLORE MORE CASE STUDIES                                     */}
+      {/* 10. MORE CASE STUDIES (SOLID WHITE #FFFFFF SECTION + 3 CLIENT CARDS)       */}
       {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-[#08090B]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C7E8] uppercase">
-              RELATED CLIENT WORK
+      <section id="more-case-studies" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-10 text-left">
+          {/* Header Row with 'View All Case Studies' CTA */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="max-w-2xl space-y-3">
+              <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+                MORE CASE STUDIES
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
+                Explore More Success Stories
+              </h2>
+              <p className="text-base sm:text-[17px] text-[#555C68] leading-relaxed">
+                Discover how we&apos;ve helped businesses across different
+                industries build powerful digital solutions.
+              </p>
+            </div>
+
+            <div>
+              <Link
+                href="/case-studies"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 hover:border-[#00C8E8] text-[#111111] hover:text-[#00C8E8] font-mono text-xs font-bold transition-all shadow-xs"
+              >
+                <span>View All Case Studies</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 3 Related Case Study Cards on White Surfaces */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {RELATED_CASE_STUDIES.map((cs) => (
+              <Link
+                key={cs.id}
+                href={cs.href}
+                className="group rounded-3xl bg-white border border-slate-200/80 hover:border-[#00C8E8] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 cursor-pointer"
+              >
+                <div>
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+                    <Image
+                      src={cs.image}
+                      alt={cs.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+
+                  <div className="p-6 sm:p-7 space-y-2.5">
+                    <h3 className="text-lg font-bold text-[#111111] group-hover:text-[#00C8E8] transition-colors tracking-tight">
+                      {cs.title}
+                    </h3>
+                    <p className="text-sm text-[#555C68] leading-relaxed">
+                      {cs.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-6 sm:px-7 pb-6 pt-0">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#00C8E8] group-hover:translate-x-1 transition-transform">
+                    <span>View Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 11. FINAL CTA SECTION (SOLID BLACK #050505 WITH NO GRADIENT OR GLOW)      */}
+      {/* ========================================================================= */}
+      <section id="final-cta" className="relative py-20 sm:py-24 lg:py-28 bg-[#050505] text-white overflow-hidden scroll-mt-20">
+        <div className="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 text-center">
+          <div className="max-w-3xl mx-auto space-y-6">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
+              Have a project in mind?
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.12]">
-              Explore More Case Studies
+
+            <h2 className="text-3xl sm:text-5xl lg:text-[50px] font-black text-white tracking-tight leading-[1.12]">
+              Let&apos;s Build Something{" "}
+              <span className="text-[#00C8E8]">Amazing Together</span>
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              See how CodePlaced solves real business challenges through thoughtful engineering,
-              automation, and data-driven systems.
+
+            <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed font-normal max-w-2xl mx-auto">
+              We help businesses turn ideas into powerful digital products.
+              Whether it&apos;s a web app, mobile app, or AI-powered solution,
+              we&apos;re here to make it happen.
+            </p>
+
+            {/* Dual CTA Buttons (Solid Colors, No Gradients) */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-mono font-black text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 shadow-md hover:-translate-y-0.5 flex items-center justify-center gap-2"
+              >
+                <span>Start Your Project</span>
+                <ArrowRight className="w-4 h-4 text-black" />
+              </Link>
+
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0A0A0A] hover:bg-white/[0.05] text-white border border-white/[0.12] hover:border-[#00C8E8] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <span>Schedule a Call</span>
+                <Calendar className="w-4 h-4 text-[#00C8E8]" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* VIDEO DEMO MODAL                                                          */}
+      {/* ========================================================================= */}
+      {videoModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="relative w-full max-w-4xl bg-[#0A0A0A] border border-white/[0.12] rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 space-y-4 text-left text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xs font-mono font-bold text-[#00C8E8] uppercase">
+                  TUITIONSTIME DEMO WALKTHROUGH
+                </span>
+                <h3 className="text-xl font-bold text-white">
+                  EdTech Marketplace Architecture &amp; Live Walkthrough
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setVideoModalOpen(false)}
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Close modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-black border border-white/[0.08] flex items-center justify-center">
+              <Image
+                src="/images/case-studies/tuitionstime/hero-tutor-discovery-showcase.png"
+                alt="Tuitionstime Interactive Platform Demo"
+                fill
+                className="object-contain"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <a
+                  href="https://www.tuitionstime.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-mono font-bold text-xs uppercase flex items-center gap-2 shadow-xl"
+                >
+                  <span>Explore Live Platform on Tuitionstime</span>
+                  <ExternalLink className="w-4 h-4 text-black" />
+                </a>
+              </div>
+            </div>
+
+            <p className="text-xs text-[#94A3B8]">
+              Platform walkthrough showcases live student requirement matching,
+              tutor schedule management, demo class conversions, and wallet
+              escrow settlement.
             </p>
           </div>
-
-          {/* Responsive Case Study Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {/* Card 1 — Get My Course */}
-            <Link
-              href="/case-studies/get-my-course"
-              className="group rounded-3xl bg-[#111317] border border-[#22262F] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#FACC15]/60 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                {/* Image Header */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#0D0E11]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-                    alt="Get My Course Data Analytics Dashboard"
-                    fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#111317]/90 text-amber-300 border border-[#FACC15]/30 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-sm shadow-xs">
-                    <BarChart3 className="w-3.5 h-3.5 text-amber-400" />
-                    <span>EdTech / Data Analytics</span>
-                  </div>
-                </div>
-
-                {/* Card Content */}
-                <div className="p-6 sm:p-8 space-y-4">
-                  <div className="space-y-2">
-                    <div className="text-xs font-mono font-bold text-[#FACC15] uppercase tracking-wider">
-                      GET MY COURSE
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#FACC15] transition-colors leading-snug">
-                      Scaling Data Analytics for a Growing EdTech Platform
-                    </h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">
-                      Centralized fragmented marketing and sales data with BigQuery pipelines and Looker
-                      Studio dashboards to improve reporting and course funnel visibility.
-                    </p>
-                  </div>
-
-                  {/* Impact Metrics Strip */}
-                  <div className="pt-3 border-t border-[#1F232B] flex items-center gap-4 text-xs font-mono font-bold text-white">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[#FACC15]">4.2x</span>
-                      <span className="text-slate-400 font-medium font-sans">Faster Reporting</span>
-                    </div>
-                    <span className="w-1 h-1 rounded-full bg-slate-700" />
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[#FACC15]">100%</span>
-                      <span className="text-slate-400 font-medium font-sans">Lakehouse Sync</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Footer with CTA */}
-              <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
-                <span className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-[#FACC15] transition-colors">
-                  <span>View Case Study</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-                </span>
-              </div>
-            </Link>
-
-            {/* Card 2 — Amalfi Acquisition */}
-            <Link
-              href="/case-studies/amalfi-acquisition"
-              className="group rounded-3xl bg-[#111317] border border-[#22262F] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#FACC15]/60 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                {/* Image Header */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#0D0E11]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
-                    alt="Amalfi Acquisition Commercial Real Estate Property Management"
-                    fill
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#111317]/90 text-amber-300 border border-[#FACC15]/30 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-sm shadow-xs">
-                    <Building2 className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Real Estate Operations</span>
-                  </div>
-                </div>
-
-                {/* Card Content */}
-                <div className="p-6 sm:p-8 space-y-4">
-                  <div className="space-y-2">
-                    <div className="text-xs font-mono font-bold text-[#FACC15] uppercase tracking-wider">
-                      AMALFI ACQUISITION
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#FACC15] transition-colors leading-snug">
-                      Centralizing Operations and Payroll for a Distributed Workforce
-                    </h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">
-                      Automated payroll workflows and consolidated operational reporting to reduce manual
-                      administration and improve workforce visibility across 24 properties.
-                    </p>
-                  </div>
-
-                  {/* Impact Metrics Strip */}
-                  <div className="pt-3 border-t border-[#1F232B] flex items-center gap-4 text-xs font-mono font-bold text-white">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[#FACC15]">75%</span>
-                      <span className="text-slate-400 font-medium font-sans">Admin Time Saved</span>
-                    </div>
-                    <span className="w-1 h-1 rounded-full bg-slate-700" />
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[#FACC15]">24 Sites</span>
-                      <span className="text-slate-400 font-medium font-sans">Unified Operations</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Footer with CTA */}
-              <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
-                <span className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-[#FACC15] transition-colors">
-                  <span>View Case Study</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Direct Link to Portfolio Index */}
-          <div className="pt-2 flex justify-center">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#262B35] hover:border-[#FACC15] text-slate-200 hover:text-[#FACC15] bg-[#111317] hover:bg-[#181B22] font-mono text-xs font-bold transition-all shadow-sm"
-            >
-              <span>Explore All Case Studies &amp; Blueprints</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
         </div>
-      </section>
+      )}
     </div>
   );
 }

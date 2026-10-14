@@ -143,39 +143,36 @@ export function CoreCapabilitiesShowcase() {
   const current = CAPABILITY_PRACTICES[activeIdx];
 
   return (
-    <section className="py-24 lg:py-32 bg-[#F7FBFF] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#050505] relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#06B6D4]/30 shadow-xs">
-              <Cpu className="w-3.5 h-3.5 text-[#06B6D4]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] text-[#00C7E8] border border-[#00C7E8]/40 shadow-xs">
+              <Cpu className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>CORE CAPABILITIES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2942] leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
               Four Core Capabilities. <br className="hidden sm:inline" />
               One Engineering Partner.
             </h2>
-            <p className="text-base sm:text-lg text-[#5B6B7C]">
+            <p className="text-base sm:text-lg text-[#A1A1AA]">
               Everything required to design, build, automate, analyze, and grow modern businesses.
             </p>
           </div>
 
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-bold text-[#0D3B66] hover:text-[#06B6D4] transition-colors group self-start md:self-auto"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#00C7E8] hover:text-white transition-colors group self-start md:self-auto"
           >
             <span>Explore All Capabilities</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {/* Large Premium Light Showcase Container */}
+        {/* Large Premium Dark Showcase Container */}
         <div
-          className="rounded-[36px] p-6 sm:p-10 lg:p-12 relative overflow-hidden border border-[#0F172A]/[0.08] shadow-xl bg-white"
-          style={{
-            boxShadow: "0 20px 60px rgba(15, 23, 42, 0.05)",
-          }}
+          className="rounded-[36px] p-6 sm:p-10 lg:p-12 relative overflow-hidden border border-white/[0.08] shadow-2xl bg-[#07090D]"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch relative z-10">
             {/* Left Navigation: 4 Large Vertical Practice Selectors (5 Cols) */}
@@ -191,31 +188,27 @@ export function CoreCapabilitiesShowcase() {
                     onMouseEnter={() => setActiveIdx(idx)}
                     className={`text-left p-5 sm:p-6 rounded-[24px] transition-all duration-300 cursor-pointer border ${
                       isSelected
-                        ? "bg-[#0F2942] text-white border-[#0F2942] shadow-xl shadow-slate-950/15 scale-[1.02]"
-                        : "bg-[#F7FBFF] hover:bg-white text-[#0F2942] border-[#0F172A]/[0.08] hover:border-[#06B6D4]/50 hover:shadow-md"
+                        ? "bg-[#050505] text-white border-[#00C7E8] shadow-[0_0_30px_rgba(0,199,232,0.18)] scale-[1.02] ring-1 ring-[#00C7E8]/30"
+                        : "bg-[#07090D] hover:bg-[#0A0E16] text-[#A1A1AA] hover:text-white border-white/[0.06] hover:border-[#00C7E8]/40 hover:shadow-md"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="space-y-1.5">
                         <div
-                          className={`text-xs font-mono font-black uppercase tracking-wider ${
-                            isSelected ? "text-cyan-300" : "text-[#06B6D4]"
-                          }`}
+                          className="text-xs font-mono font-black uppercase tracking-wider text-[#00C7E8]"
                         >
                           {practice.num}
                         </div>
 
                         <h3
-                          className={`text-lg sm:text-xl font-black tracking-tight ${
-                            isSelected ? "text-white" : "text-[#0F2942]"
-                          }`}
+                          className="text-lg sm:text-xl font-black tracking-tight text-white"
                         >
                           {practice.title}
                         </h3>
 
                         <div
                           className={`text-xs font-mono ${
-                            isSelected ? "text-slate-300 font-semibold" : "text-slate-500"
+                            isSelected ? "text-slate-300 font-semibold" : "text-[#71717A]"
                           }`}
                         >
                           {practice.subtitle}
@@ -225,8 +218,8 @@ export function CoreCapabilitiesShowcase() {
                       <div
                         className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all shrink-0 ${
                           isSelected
-                            ? "bg-cyan-400 text-[#0F2B46] shadow-md shadow-cyan-900/30"
-                            : "bg-white text-[#0D3B66] border border-sky-100 shadow-xs"
+                            ? "bg-[#00C7E8] text-black shadow-md shadow-[#00C7E8]/30"
+                            : "bg-[#050505] text-[#00C7E8] border border-white/[0.08]"
                         }`}
                       >
                         <IconComp className="w-5 h-5" />
@@ -237,7 +230,7 @@ export function CoreCapabilitiesShowcase() {
               })}
             </div>
 
-            {/* Right Large Showcase Panel: Crisp Light Surface (7 Cols) */}
+            {/* Right Large Showcase Panel: Crisp Dark Surface (7 Cols) */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -246,27 +239,27 @@ export function CoreCapabilitiesShowcase() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-full rounded-[28px] bg-white border border-[#E7EEF5] p-6 sm:p-8 lg:p-10 shadow-sm flex flex-col justify-between space-y-6"
+                  className="h-full rounded-[28px] bg-[#050505] border border-white/[0.08] p-6 sm:p-8 lg:p-10 shadow-sm flex flex-col justify-between space-y-6"
                 >
                   {/* Headline & Description */}
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-ping" />
-                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#0D3B66]">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#00C7E8] animate-ping" />
+                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-white">
                           {current.num} / 04 • {current.subtitle}
                         </span>
                       </div>
-                      <span className="text-xs font-mono text-cyan-700 font-bold bg-[#F4FAFC] px-3 py-1 rounded-full border border-sky-100">
+                      <span className="text-xs font-mono text-[#00C7E8] font-bold bg-[#07090D] px-3 py-1 rounded-full border border-white/[0.08]">
                         {current.metricHeadline}
                       </span>
                     </div>
 
                     <div>
-                      <h3 className="text-2xl sm:text-3xl font-black text-[#0F2B46] tracking-tight leading-tight">
+                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
                         {current.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-[#5B6B7C] mt-2 leading-relaxed font-normal">
+                      <p className="text-sm sm:text-base text-[#A1A1AA] mt-2 leading-relaxed font-normal">
                         {current.tagline}
                       </p>
                     </div>
@@ -274,7 +267,7 @@ export function CoreCapabilitiesShowcase() {
 
                   {/* Visual Architecture Preview (Mini Connected Graph) */}
                   <div className="space-y-3">
-                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#71717A]">
                       System Architecture Flow
                     </div>
 
@@ -284,16 +277,16 @@ export function CoreCapabilitiesShowcase() {
                         return (
                           <div
                             key={nIdx}
-                            className="p-3.5 rounded-2xl bg-[#F8FBFD] border border-sky-100 hover:border-cyan-400 hover:bg-white hover:shadow-md transition-all space-y-1.5 group"
+                            className="p-3.5 rounded-2xl bg-[#07090D] border border-white/[0.06] hover:border-[#00C7E8]/40 hover:bg-[#0A0E16] hover:shadow-md transition-all space-y-1.5 group"
                           >
-                            <div className="w-8 h-8 rounded-xl bg-white border border-sky-100 flex items-center justify-center text-[#0D3B66] shadow-xs group-hover:text-[#18B6D8] transition-colors">
+                            <div className="w-8 h-8 rounded-xl bg-[#050505] border border-white/[0.08] flex items-center justify-center text-[#00C7E8] shadow-xs group-hover:text-white transition-colors">
                               <NodeIcon className="w-4 h-4" />
                             </div>
                             <div>
-                              <div className="text-xs font-bold text-[#0F2B46] group-hover:text-[#0D3B66] transition-colors">
+                              <div className="text-xs font-bold text-white group-hover:text-[#00C7E8] transition-colors">
                                 {node.label}
                               </div>
-                              <div className="text-[10px] font-mono text-cyan-600 font-semibold mt-0.5">
+                              <div className="text-[10px] font-mono text-[#00C7E8] font-semibold mt-0.5">
                                 {node.tag}
                               </div>
                             </div>
@@ -305,16 +298,16 @@ export function CoreCapabilitiesShowcase() {
 
                   {/* Capabilities List */}
                   <div className="space-y-3 pt-1">
-                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#71717A]">
                       Deliverables & Capabilities
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {current.capabilities.map((cap, cIdx) => (
                         <div
                           key={cIdx}
-                          className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#0F2B46]"
+                          className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-200"
                         >
-                          <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                          <div className="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
                             <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                           </div>
                           <span>{cap}</span>
@@ -324,13 +317,13 @@ export function CoreCapabilitiesShowcase() {
                   </div>
 
                   {/* Clean Bottom Action CTA */}
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                     <Link
                       href={current.href}
-                      className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-[#0F2B46] hover:bg-[#0D3B66] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all group/btn active:scale-95 cursor-pointer ml-auto sm:ml-0"
+                      className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-[#087FA5] to-[#00C7E8] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-[#00C7E8]/20 transition-all group/btn active:scale-95 cursor-pointer ml-auto sm:ml-0"
                     >
                       <span>Explore Service</span>
-                      <ArrowRight className="w-4 h-4 text-cyan-300 group-hover/btn:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </motion.div>
