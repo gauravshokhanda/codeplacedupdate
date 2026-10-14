@@ -94,26 +94,26 @@ export function DeliveryProcessTimeline() {
   const progressPercent = (activeStep / (PROCESS_PHASES.length - 1)) * 100;
 
   return (
-    <section className="py-24 lg:py-32 bg-[#F7FBFF] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#050505] relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#0D3B66] border border-[#06B6D4]/30 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08] shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>THE CODEPLACED LIFECYCLE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F2942]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               How We Deliver Production Systems
             </h2>
-            <p className="text-[#5B6B7C] text-base sm:text-lg">
+            <p className="text-[#A1A1AA] text-base sm:text-lg">
               Hover over each phase to explore our disciplined, transparent engineering methodology.
             </p>
           </div>
 
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-bold text-[#0D3B66] hover:text-[#06B6D4] transition-colors group self-start md:self-auto"
+            className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-[#00C7E8] transition-colors group self-start md:self-auto"
           >
             <span>Learn About Our Methodology</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -123,15 +123,15 @@ export function DeliveryProcessTimeline() {
         {/* Visual Connected Timeline */}
         <div className="relative">
           {/* Base Horizontal Desktop Connection Line */}
-          <div className="hidden lg:block absolute top-9 left-12 right-12 h-1 bg-slate-200/80 -z-0 rounded-full" />
+          <div className="hidden lg:block absolute top-9 left-12 right-12 h-1 bg-white/10 -z-0 rounded-full" />
 
           {/* Dynamic Active Segment Glowing Connector Line */}
           <div
             className="hidden lg:block absolute top-9 left-12 h-1 transition-all duration-500 ease-out -z-0 rounded-full"
             style={{
               width: `calc(${progressPercent}% * 0.85)`,
-              background: "linear-gradient(90deg, #22D3EE, #0891B2)",
-              boxShadow: "0 0 12px rgba(34, 211, 238, 0.6)",
+              background: "linear-gradient(90deg, #087FA5, #00C7E8)",
+              boxShadow: "0 0 12px rgba(0, 199, 232, 0.6)",
             }}
           />
 
@@ -148,8 +148,8 @@ export function DeliveryProcessTimeline() {
                   onClick={() => setActiveStep(idx)}
                   className={`p-6 rounded-[28px] transition-all duration-300 ease-out cursor-pointer flex flex-col justify-between border ${
                     isActive
-                      ? "bg-gradient-to-b from-[#08213B] to-[#0C2E52] text-white border-cyan-400/40 shadow-[0_20px_50px_rgba(6,182,212,0.22)] -translate-y-2 scale-[1.02]"
-                      : "bg-white border-slate-200/90 text-slate-700 hover:border-cyan-400/40 hover:-translate-y-1 hover:shadow-lg shadow-xs"
+                      ? "bg-[#07090D] text-white border-[#00C7E8] shadow-[0_12px_40px_rgba(0,199,232,0.18)] -translate-y-2 scale-[1.02]"
+                      : "bg-[#07090D]/80 border-white/[0.08] text-[#A1A1AA] hover:border-white/20 hover:-translate-y-1 hover:shadow-lg shadow-xs"
                   }`}
                 >
                   <div className="space-y-4">
@@ -157,15 +157,15 @@ export function DeliveryProcessTimeline() {
                       <div
                         className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ${
                           isActive
-                            ? "bg-cyan-400 text-[#08213B] shadow-lg shadow-cyan-400/30 scale-105 ring-2 ring-cyan-300/50"
-                            : "bg-[#F4FAFC] text-[#0D3B66] border border-sky-100"
+                            ? "bg-[#00C7E8] text-black shadow-lg shadow-[#00C7E8]/30 scale-105 ring-2 ring-[#00C7E8]/50"
+                            : "bg-[#050505] text-[#00C7E8] border border-white/[0.08]"
                         }`}
                       >
                         <Icon className="w-5 h-5" />
                       </div>
                       <span
                         className={`text-xs font-mono font-black transition-colors ${
-                          isActive ? "text-cyan-300" : "text-slate-400"
+                          isActive ? "text-[#00C7E8]" : "text-zinc-500"
                         }`}
                       >
                         {phase.step}
@@ -175,14 +175,14 @@ export function DeliveryProcessTimeline() {
                     <div>
                       <span
                         className={`text-[10px] font-mono font-bold uppercase tracking-wider block transition-colors ${
-                          isActive ? "text-cyan-300" : "text-[#18B6D8]"
+                          isActive ? "text-[#00C7E8]" : "text-[#00C7E8]"
                         }`}
                       >
                         {phase.timeline}
                       </span>
                       <h3
                         className={`text-base font-black mt-1 leading-snug transition-colors ${
-                          isActive ? "text-white" : "text-[#0F2B46]"
+                          isActive ? "text-white" : "text-white"
                         }`}
                       >
                         {phase.title}
@@ -191,7 +191,7 @@ export function DeliveryProcessTimeline() {
 
                     <p
                       className={`text-xs leading-relaxed line-clamp-3 transition-colors ${
-                        isActive ? "text-slate-200" : "text-[#5B6B7C]"
+                        isActive ? "text-zinc-300" : "text-[#A1A1AA]"
                       }`}
                     >
                       {phase.description}
@@ -200,19 +200,19 @@ export function DeliveryProcessTimeline() {
 
                   <div
                     className={`pt-4 mt-4 border-t space-y-1.5 text-[11px] transition-colors ${
-                      isActive ? "border-white/15" : "border-slate-100"
+                      isActive ? "border-white/15" : "border-white/[0.08]"
                     }`}
                   >
                     {phase.deliverables.map((d, dIdx) => (
                       <div
                         key={dIdx}
                         className={`flex items-center gap-1.5 transition-colors ${
-                          isActive ? "text-slate-200" : "text-slate-600"
+                          isActive ? "text-zinc-200" : "text-[#A1A1AA]"
                         }`}
                       >
                         <CheckCircle2
                           className={`w-3.5 h-3.5 shrink-0 transition-colors ${
-                            isActive ? "text-cyan-400" : "text-emerald-500"
+                            isActive ? "text-[#00C7E8]" : "text-emerald-400"
                           }`}
                         />
                         <span className="truncate">{d}</span>

@@ -88,7 +88,12 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     setIndustriesMenuOpen(false);
   }, [pathname]);
 
-  const isDarkTheme = Boolean(pathname && pathname.startsWith("/case-studies"));
+  const isDarkTheme = Boolean(
+    pathname &&
+      (pathname === "/" ||
+        pathname.startsWith("/case-studies") ||
+        pathname.startsWith("/services"))
+  );
 
   // Shared Navigation Links component (Centered)
   const renderNavLinks = () => (
@@ -235,9 +240,13 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. INITIAL STATIC NAVBAR (Sits naturally on page background) */}
+      {/* 1. INITIAL STATIC NAVBAR (Sits naturally on page background, solid dark on dark theme) */}
       {/* ========================================================================= */}
-      <header className="absolute top-0 left-0 w-full h-[74px] sm:h-[80px] bg-transparent z-40">
+      <header
+        className={`absolute top-0 left-0 w-full h-[74px] sm:h-[80px] z-40 transition-colors ${
+          isDarkTheme ? "bg-[#050505]/80 backdrop-blur-md border-b border-white/[0.08]" : "bg-transparent"
+        }`}
+      >
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
@@ -290,6 +299,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 isOpen={megaMenuOpen}
                 onClose={() => setMegaMenuOpen(false)}
                 onOpenBookAudit={onOpenBookAudit}
+                isDarkTheme={isDarkTheme}
               />
             </div>
 
@@ -373,6 +383,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 isOpen={megaMenuOpen}
                 onClose={() => setMegaMenuOpen(false)}
                 onOpenBookAudit={onOpenBookAudit}
+                isDarkTheme={isDarkTheme}
               />
             </div>
 
@@ -410,19 +421,36 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               {NAV_ITEMS_LIST.map((item) => {
                 if (item.label === "Services") {
                   return (
-                    <div key="Services" className="border-b border-slate-100 pb-2">
-                      <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold text-[#062B38] hover:bg-slate-50 transition-colors">
+                    <div
+                      key="Services"
+                      className={`border-b ${
+                        isDarkTheme ? "border-white/[0.08]" : "border-slate-100"
+                      } pb-2`}
+                    >
+                      <div
+                        className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold transition-colors ${
+                          isDarkTheme
+                            ? "text-white hover:bg-white/[0.05]"
+                            : "text-[#062B38] hover:bg-slate-50"
+                        }`}
+                      >
                         <Link
                           href="/services"
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2"
                         >
-                          <span className="w-2 h-2 rounded-full bg-[#14B8C5]" />
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              isDarkTheme ? "bg-emerald-400" : "bg-[#14B8C5]"
+                            }`}
+                          />
                           <span>Services Overview</span>
                         </Link>
                         <button
                           onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                          className="p-1.5 rounded-md text-[#0B6B88]"
+                          className={`p-1.5 rounded-md ${
+                            isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                          }`}
                           aria-label="Toggle Services"
                         >
                           <ChevronDown
@@ -440,36 +468,155 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.25 }}
-                            className="overflow-hidden pl-4 space-y-2 pt-1"
+                            className="overflow-hidden pl-3 pr-1 space-y-3 pt-2"
                           >
-                            <Link
-                              href="/services/data-platforms"
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
-                            >
-                              • Data Platforms & Lakehouses
-                            </Link>
-                            <Link
-                              href="/services/ai-copilots"
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
-                            >
-                              • AI Copilots & Enterprise RAG
-                            </Link>
-                            <Link
-                              href="/services/executive-dashboards"
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
-                            >
-                              • Executive & Growth Dashboards
-                            </Link>
-                            <Link
-                              href="/services/cloud-infrastructure"
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
-                            >
-                              • Cloud Modernization & FinOps
-                            </Link>
+                            {/* 1. App & Web Development */}
+                            <div className="space-y-1">
+                              <Link
+                                href="/services/app-web-development"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className={`block text-xs font-bold uppercase tracking-wider ${
+                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                }`}
+                              >
+                                01. App & Web Development
+                              </Link>
+                              <div className="pl-2 space-y-1">
+                                <Link
+                                  href="/services/app-web-development"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Mobile & Web Applications
+                                </Link>
+                                <Link
+                                  href="/services/cloud-infrastructure"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Cloud Modernization & FinOps
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* 2. Data Engineering & Analytics */}
+                            <div className="space-y-1">
+                              <Link
+                                href="/services/data-engineering-analytics"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className={`block text-xs font-bold uppercase tracking-wider ${
+                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                }`}
+                              >
+                                02. Data Engineering & Analytics
+                              </Link>
+                              <div className="pl-2 space-y-1">
+                                <Link
+                                  href="/services/data-platforms"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Data Platforms & Lakehouses
+                                </Link>
+                                <Link
+                                  href="/services/executive-dashboards"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Executive BI & Power BI Cockpits
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* 3. AI Services & Agents */}
+                            <div className="space-y-1">
+                              <Link
+                                href="/services/ai-services"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className={`block text-xs font-bold uppercase tracking-wider ${
+                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                }`}
+                              >
+                                03. AI Services & Agents
+                              </Link>
+                              <div className="pl-2 space-y-1">
+                                <Link
+                                  href="/services/ai-copilots"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • AI Copilots & Enterprise RAG
+                                </Link>
+                                <Link
+                                  href="/services/ai-services"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Autonomous Multi-Agent Swarms
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* 4. Digital & Social Marketing */}
+                            <div className="space-y-1">
+                              <Link
+                                href="/services/digital-social-marketing"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className={`block text-xs font-bold uppercase tracking-wider ${
+                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                }`}
+                              >
+                                04. Digital & Social Marketing
+                              </Link>
+                              <div className="pl-2 space-y-1">
+                                <Link
+                                  href="/services/digital-social-marketing"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Paid Ads & Programmatic SEO
+                                </Link>
+                                <Link
+                                  href="/services/digital-social-marketing"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={`block py-1 text-sm ${
+                                    isDarkTheme
+                                      ? "text-[#A1A1AA] hover:text-white"
+                                      : "text-slate-600 hover:text-[#0B6B88]"
+                                  }`}
+                                >
+                                  • Marketing Analytics & Attribution
+                                </Link>
+                              </div>
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>

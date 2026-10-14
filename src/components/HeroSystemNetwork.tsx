@@ -230,7 +230,7 @@ export function HeroSystemNetwork() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[500vh] bg-[#F7FBFF]"
+      className="relative w-full h-[500vh] bg-[#050505]"
     >
       {/* ========================================================================= */}
       {/* 100VH STICKY VIEWPORT CONTAINER WITH AUTO-EXPANSION ANIMATION */}
@@ -269,36 +269,36 @@ export function HeroSystemNetwork() {
                 >
                   {/* Active Stage Heading */}
                   <div>
-                    <span className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] font-bold block mb-1">
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#00C7E8] font-bold block mb-1">
                       {activeStage.category}
                     </span>
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2942] tracking-tight leading-tight">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
                       {activeStage.name}
                     </h3>
                   </div>
 
                   {/* Story Description */}
-                  <p className="text-base sm:text-lg text-[#5B6B7C] leading-relaxed font-normal">
+                  <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed font-normal">
                     {activeStage.headline}
                   </p>
 
                   {/* Telemetry Card */}
-                  <div className="rounded-2xl bg-white border border-[#E6EDF5] p-5 sm:p-6 shadow-xl shadow-sky-950/5 space-y-4">
+                  <div className="rounded-2xl bg-[#07090D] border border-white/[0.08] p-5 sm:p-6 shadow-xl space-y-4">
                     {/* Benchmarks Header */}
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                       <div>
-                        <span className="text-[10px] font-mono uppercase text-slate-400 block">
+                        <span className="text-[10px] font-mono uppercase text-[#71717A] block">
                           Throughput Benchmark
                         </span>
-                        <span className="text-lg sm:text-xl font-mono font-black text-[#0F2942]">
+                        <span className="text-lg sm:text-xl font-mono font-black text-white">
                           {activeStage.metric}
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] font-mono uppercase text-slate-400 block">
+                        <span className="text-[10px] font-mono uppercase text-[#71717A] block">
                           Reliability SLA
                         </span>
-                        <span className="text-sm sm:text-base font-mono font-bold text-[#06B6D4]">
+                        <span className="text-sm sm:text-base font-mono font-bold text-[#00C7E8]">
                           {activeStage.secondaryMetric}
                         </span>
                       </div>
@@ -307,20 +307,20 @@ export function HeroSystemNetwork() {
                     {/* Key Capabilities Checklist */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       {activeStage.bullets.map((bullet, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-slate-700">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#06B6D4] shrink-0" />
+                        <div key={idx} className="flex items-center gap-2 text-[#A1A1AA]">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#00C7E8] shrink-0" />
                           <span className="truncate">{bullet}</span>
                         </div>
                       ))}
                     </div>
 
                     {/* Tech Stack Pills & Action Link */}
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex flex-wrap gap-1.5">
                         {activeStage.techStack.map((tech, idx) => (
                           <span
                             key={idx}
-                            className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-[#F0F7FC] text-slate-700 font-semibold border border-[#E6EDF5]"
+                            className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-[#050505] text-[#A1A1AA] font-semibold border border-white/[0.08]"
                           >
                             {tech}
                           </span>
@@ -329,7 +329,7 @@ export function HeroSystemNetwork() {
 
                       <Link
                         href={activeStage.actionLink}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-[#0D3B66] hover:text-[#06B6D4] transition-colors shrink-0 group"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#00C7E8] hover:text-white transition-colors shrink-0 group"
                       >
                         <span>Explore</span>
                         <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -341,14 +341,14 @@ export function HeroSystemNetwork() {
             </div>
 
             {/* ----------------------------------------------------------------------- */}
-            {/* RIGHT COLUMN: Light Theme Ecosystem Network Canvas (7 Cols) */}
+            {/* RIGHT COLUMN: Dark Theme Ecosystem Network Canvas (7 Cols) */}
             {/* ----------------------------------------------------------------------- */}
             <div className="lg:col-span-7">
-              <div className="relative w-full h-[460px] sm:h-[500px] lg:h-[540px] rounded-[32px] bg-gradient-to-b from-[#FFFFFF] via-[#F4FAFD] to-[#EAF5FC] border border-[#E6EDF5] overflow-hidden shadow-2xl shadow-sky-950/5 select-none">
+              <div className="relative w-full h-[460px] sm:h-[500px] lg:h-[540px] rounded-[32px] bg-gradient-to-b from-[#07090D] via-[#050505] to-[#07090D] border border-white/[0.08] overflow-hidden shadow-2xl select-none">
                 
                 {/* Embedded Upper-Right Live Telemetry Status Pill */}
-                <div className="absolute top-4 right-4 z-20 flex items-center gap-2 text-xs font-mono text-emerald-700 bg-emerald-50/90 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-200/80 shadow-xs">
-                  <Radio className="w-3 h-3 text-emerald-500 animate-pulse" />
+                <div className="absolute top-4 right-4 z-20 flex items-center gap-2 text-xs font-mono text-emerald-400 bg-[#050505]/90 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30 shadow-xs">
+                  <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
                   <span className="font-bold">
                     {isUnifiedState ? "Full Ecosystem Connected" : "Live Telemetry ● Synchronized"}
                   </span>
@@ -356,11 +356,11 @@ export function HeroSystemNetwork() {
 
                 {/* Subtle Moving Ambient Blueprint Grid */}
                 <div
-                  className="absolute inset-0 opacity-40 pointer-events-none"
+                  className="absolute inset-0 opacity-20 pointer-events-none"
                   style={{
                     backgroundImage: `
-                      linear-gradient(to right, rgba(6, 182, 212, 0.15) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(6, 182, 212, 0.15) 1px, transparent 1px)
+                      linear-gradient(to right, rgba(0, 199, 232, 0.15) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 199, 232, 0.15) 1px, transparent 1px)
                     `,
                     backgroundSize: "36px 36px",
                     animation: "gridFloat 25s linear infinite",
@@ -368,15 +368,15 @@ export function HeroSystemNetwork() {
                 />
 
                 {/* Luminous Glow Behind Center */}
-                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-[#06B6D4]/12 rounded-full blur-[90px] pointer-events-none" />
+                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-[#00C7E8]/10 rounded-full blur-[90px] pointer-events-none" />
 
                 {/* SVG Interconnected Architecture Mesh with Flowing Dashed Lines */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none">
                   <defs>
                     <linearGradient id="active-line-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#06B6D4" stopOpacity="1" />
-                      <stop offset="50%" stopColor="#0284C7" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#06B6D4" stopOpacity="1" />
+                      <stop offset="0%" stopColor="#00C7E8" stopOpacity="1" />
+                      <stop offset="50%" stopColor="#087FA5" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#00C7E8" stopOpacity="1" />
                     </linearGradient>
                     <filter id="cyan-glow" x="-20%" y="-20%" width="140%" height="140%">
                       <feGaussianBlur stdDeviation="3.5" result="blur" />
@@ -400,7 +400,7 @@ export function HeroSystemNetwork() {
                           y1={`${fromNode.y}%`}
                           x2={`${toNode.x}%`}
                           y2={`${toNode.y}%`}
-                          stroke={isConnected ? "url(#active-line-cyan)" : "#DBE7F2"}
+                          stroke={isConnected ? "url(#active-line-cyan)" : "#222630"}
                           strokeWidth={isConnected ? 3 : 1.5}
                           strokeDasharray="8 6"
                           filter={isConnected ? "url(#cyan-glow)" : undefined}
@@ -409,7 +409,7 @@ export function HeroSystemNetwork() {
 
                         {/* Moving Signal Packet Along Active Line */}
                         {isConnected && (
-                          <circle r="4.5" fill="#06B6D4" className="filter drop-shadow-[0_0_10px_#06B6D4]">
+                          <circle r="4.5" fill="#00C7E8" className="filter drop-shadow-[0_0_10px_#00C7E8]">
                             <animateMotion
                               dur={isUnifiedState ? "1.4s" : "1.8s"}
                               repeatCount="indefinite"
@@ -444,37 +444,35 @@ export function HeroSystemNetwork() {
                     >
                       {/* Active Glowing Halo */}
                       {isActive && (
-                        <div className="absolute inset-0 -m-4 rounded-3xl bg-[#06B6D4]/35 animate-pulse blur-xl pointer-events-none" />
+                        <div className="absolute inset-0 -m-4 rounded-3xl bg-[#00C7E8]/30 animate-pulse blur-xl pointer-events-none" />
                       )}
 
                       {/* Node Card Container */}
                       <div
                         className={`flex items-center gap-2.5 sm:gap-3 px-4 py-2.5 sm:py-3 rounded-2xl border transition-all duration-800 ${
                           isActive
-                            ? "bg-white text-[#0F2942] border-2 border-[#06B6D4] shadow-[0_0_40px_rgba(6,182,212,0.4)] -translate-y-2 ring-4 ring-[#06B6D4]/20"
-                            : "bg-white/95 text-slate-700 border border-[#DBE7F2] shadow-sm"
+                            ? "bg-[#050505] text-white border-2 border-[#00C7E8] shadow-[0_0_35px_rgba(0,199,232,0.35)] -translate-y-2 ring-2 ring-[#00C7E8]/20"
+                            : "bg-[#07090D]/90 text-[#A1A1AA] border border-white/[0.08] shadow-sm"
                         }`}
                       >
                         <div
                           className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-800 ${
                             isActive
-                              ? "bg-[#0F2942] text-[#06B6D4] shadow-sm"
-                              : "bg-[#F0F7FC] text-[#0D3B66]"
+                              ? "bg-[#00C7E8] text-black shadow-sm"
+                              : "bg-[#050505] text-[#00C7E8] border border-white/[0.08]"
                           }`}
                         >
                           <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                         </div>
                         <div className="text-left">
                           <div
-                            className={`text-xs sm:text-sm font-black leading-tight ${
-                              isActive ? "text-[#0F2942]" : "text-slate-800"
-                            }`}
+                            className="text-xs sm:text-sm font-black leading-tight text-white"
                           >
                             {node.shortTitle}
                           </div>
                           <div
                             className={`text-[10px] font-mono mt-0.5 ${
-                              isActive ? "text-[#06B6D4] font-bold" : "text-slate-400"
+                              isActive ? "text-[#00C7E8] font-bold" : "text-[#71717A]"
                             }`}
                           >
                             {node.metric}
