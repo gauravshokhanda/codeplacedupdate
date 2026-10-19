@@ -23,6 +23,7 @@ interface IndustriesMegaMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenBookAudit?: (scope?: string) => void;
+  isDarkTheme?: boolean;
 }
 
 interface IndustryItem {
@@ -148,7 +149,7 @@ export function IndustriesMegaMenu({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.15, ease: "easeOut" }}
-          className="absolute top-full left-0 right-0 w-full z-[1000] bg-white border-t border-[rgba(14,165,233,0.12)] border-b border-x border-slate-200/80 rounded-b-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.12)] max-h-[calc(100vh-90px)] overflow-y-auto"
+          className="absolute top-full left-0 right-0 w-full z-[1000] border-t border-b border-x border-[#E5EAF0] bg-white rounded-b-[16px] max-h-[calc(100vh-90px)] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.12)] text-[#101820] transition-colors duration-200"
         >
           {/* Main 3-Column Categorized Grid */}
           <div className="max-w-[1280px] mx-auto px-6 sm:px-8 py-8">
@@ -156,8 +157,8 @@ export function IndustriesMegaMenu({
               {INDUSTRY_COLUMNS.map((col, cIdx) => (
                 <div key={cIdx} className="space-y-4">
                   {/* Column Header */}
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                    <h3 className="text-sm font-extrabold text-[#082F49] uppercase tracking-wider">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#E5EAF0]">
+                    <h3 className="text-sm font-extrabold uppercase tracking-wider text-[#101820]">
                       {col.title}
                     </h3>
                   </div>
@@ -171,17 +172,17 @@ export function IndustriesMegaMenu({
                           key={iIdx}
                           href={item.href}
                           onClick={onClose}
-                          className="group p-3 -mx-2.5 rounded-xl transition-all duration-150 flex items-start gap-3 hover:bg-gradient-to-r hover:from-[rgba(6,182,212,0.08)] hover:to-[rgba(14,165,233,0.08)] block"
+                          className="group p-3 -mx-2.5 rounded-xl transition-all duration-150 flex items-start gap-3 block border border-transparent hover:bg-[#EBF9FC] hover:border-[#00C8E8]/25"
                         >
-                          <div className="w-9 h-9 rounded-lg bg-slate-100 group-hover:bg-[#06b6d4] text-[#06b6d4] group-hover:text-white flex items-center justify-center flex-shrink-0 transition-colors text-base mt-0.5">
+                          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors text-base mt-0.5 bg-[#F7F9FB] border border-[#E5EAF0] text-[#007F9C] group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8]">
                             <span className="group-hover:hidden">{item.emoji}</span>
-                            <ItemIcon className="w-4 h-4 hidden group-hover:block text-white" />
+                            <ItemIcon className="w-4 h-4 hidden group-hover:block" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <span className="text-sm font-bold text-[#12344A] group-hover:text-[#0f4c81] transition-colors block leading-tight">
+                            <span className="text-sm font-bold block leading-tight text-[#101820] group-hover:text-[#007F9C] transition-colors">
                               {item.name}
                             </span>
-                            <span className="text-xs text-slate-400 group-hover:text-slate-600 transition-colors block truncate leading-normal mt-0.5">
+                            <span className="text-xs block truncate leading-normal mt-0.5 text-[#566171] group-hover:text-[#101820] transition-colors">
                               {item.desc}
                             </span>
                           </div>
@@ -195,19 +196,13 @@ export function IndustriesMegaMenu({
           </div>
 
           {/* Bottom CTA Bar */}
-          <div
-            className="border-t border-slate-200/80 px-6 sm:px-8 py-4 sm:py-5"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(6,182,212,0.06), rgba(14,165,233,0.06))",
-            }}
-          >
+          <div className="border-t border-[#E5EAF0] px-6 sm:px-8 py-4 sm:py-5 bg-[#F7F9FB]">
             <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
-                <h4 className="text-sm font-extrabold text-[#082F49]">
+                <h4 className="text-sm font-extrabold text-[#101820]">
                   Looking for industry-specific solutions?
                 </h4>
-                <p className="text-xs text-slate-600 font-medium mt-0.5">
+                <p className="text-xs font-medium text-[#566171] mt-0.5">
                   Our domain architects engineer custom platforms tailored to your regulatory and operational requirements.
                 </p>
               </div>
@@ -219,10 +214,7 @@ export function IndustriesMegaMenu({
                       onClose();
                       onOpenBookAudit("Industry Consultation");
                     }}
-                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
-                    style={{
-                      background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                    }}
+                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
                   >
                     <span>Schedule Strategy Call</span>
                     <ArrowRight className="w-4 h-4" />
@@ -231,10 +223,7 @@ export function IndustriesMegaMenu({
                   <Link
                     href="/contact"
                     onClick={onClose}
-                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-white font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
-                    style={{
-                      background: "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                    }}
+                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
                   >
                     <span>Schedule Strategy Call</span>
                     <ArrowRight className="w-4 h-4" />

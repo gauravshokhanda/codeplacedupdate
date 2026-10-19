@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -23,80 +24,25 @@ import { CoreCapabilitiesShowcase } from "@/components/CoreCapabilitiesShowcase"
 import { TechStackRadar } from "@/components/TechStackRadar";
 import { DeliveryProcessTimeline } from "@/components/DeliveryProcessTimeline";
 import { ServicesMarquee } from "@/components/ServicesMarquee";
-import { CASE_STUDIES_DATA } from "@/lib/caseStudiesData";
 
 // =========================================================================
 // DATA STRUCTURES
 // =========================================================================
 
-const FLAGSHIP_CASE_STUDIES = [
-  {
-    slug: "healthcare-ai-triage",
-    title: "Healthcare Analytics Platform & AI Triage Engine",
-    industry: "Healthcare",
-    clientType: "Hospital Network & Telehealth Provider",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80",
-    badge: "Flagship Engineering Deployment",
-    impactTag: "PROVEN CLIENT IMPACT",
-    description:
-      "HIPAA-compliant data lakehouse and autonomous clinical triage assistant that reduced emergency wait times, eliminated manual charting waste, and delivered sub-second telemetry.",
-    metrics: [
-      { value: "18,000 hrs", label: "Hours Saved", isEmerald: false },
-      { value: "99.9%", label: "Platform Uptime", isEmerald: true },
-      { value: "42%", label: "Faster Operations", isEmerald: false },
-    ],
-  },
-  {
-    slug: "tuitionstime",
-    title: "Engineering a Complete EdTech Marketplace",
-    industry: "EdTech · SaaS · Marketplace",
-    clientType: "Two-Sided Tutoring Marketplace & EdTech SaaS",
-    image: "/images/case-studies/tuitionstime-featured-flagship.webp",
-    badge: "Flagship Engineering Deployment",
-    impactTag: "PROVEN CLIENT IMPACT",
-    description:
-      "CodePlaced engineered Tuitionstime as a complete operating system for learning: connecting students, tutors, and platform administrators through bidirectional discovery, demo conversion, class scheduling, meeting automation, group batches, digital notes commerce, automated wallet payouts, and performance intelligence.",
-    metrics: [
-      { value: "10K+", label: "Active Students", isEmerald: false },
-      { value: "2K+", label: "Expert Tutors", isEmerald: true },
-      { value: "50K+", label: "Classes Completed", isEmerald: false },
-    ],
-  },
-];
-
-const SUCCESS_STORIES = [
-  {
-    slug: "real-time-inventory-sync",
-    title: "Retail Inventory Platform",
-    industry: "Retail & Omnichannel",
-    image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-    outcome: "Zero stockout errors across 12 channels (<50ms sync).",
-    metricValue: "3.2M/s",
-    metricLabel: "Sync Throughput",
-  },
-  {
-    slug: "ai-workflow-financial-ledger",
-    title: "AI Workflow Platform",
-    industry: "Fintech & Banking",
-    image:
-      "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
-    outcome: "85% reduction in manual audit cycles, saving $2.4M/yr.",
-    metricValue: "85%",
-    metricLabel: "Audit Reduction",
-  },
-  {
-    slug: "fleet-dispatch-optimization",
-    title: "Fleet Dispatch System",
-    industry: "Logistics & Fleet",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
-    outcome: "31% reduction in deadhead miles and dynamic driver dispatch.",
-    metricValue: "31%",
-    metricLabel: "Cost Reduction",
-  },
-];
+const TUITIONSTIME_FEATURED_CASE_STUDY = {
+  slug: "tuitionstime",
+  title: "A Complete EdTech Marketplace",
+  category: "EdTech / SaaS",
+  projectName: "Tuitionstime",
+  description:
+    "A unified learning platform connecting students, tutors, and parents through tutor discovery, online classes, scheduling, and learning management.",
+  image: "/images/case-studies/tuitionstime/tuitionstime-hero-laptop-phone.webp",
+  metrics: [
+    { value: "10K+", label: "Active Students", isEmerald: false },
+    { value: "2K+", label: "Expert Tutors", isEmerald: true },
+    { value: "50K+", label: "Classes Completed", isEmerald: false },
+  ],
+};
 
 const STATS_CARDS = [
   {
@@ -196,14 +142,15 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* SECTION 1 — HERO */}
       {/* ========================================================================= */}
-      <section className="relative pt-32 sm:pt-36 lg:pt-40 pb-12 px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-[1040px] mx-auto space-y-6">
+      <section className="relative min-h-screen flex flex-col justify-between pt-24 sm:pt-26 lg:pt-28 bg-[#050505] text-center overflow-hidden">
+        {/* Main Content Container */}
+        <div className="max-w-[1040px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 lg:space-y-6 flex-1 flex flex-col justify-center pb-4 sm:pb-6">
           {/* Eyebrow Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASING }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] backdrop-blur-sm text-white border border-white/[0.08] shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] backdrop-blur-sm text-white border border-white/[0.08] shadow-xs self-center"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#00C7E8]" />
             <span>MODERN TECHNOLOGY PARTNER</span>
@@ -214,7 +161,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: EASING }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight text-white [text-wrap:balance]"
+            className="text-4xl sm:text-5xl lg:text-[62px] xl:text-7xl font-black leading-[1.1] tracking-tight text-white [text-wrap:balance]"
           >
             Technology That <br />
             <span
@@ -233,7 +180,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: EASING }}
-            className="text-base sm:text-lg lg:text-xl text-[#A1A1AA] leading-relaxed max-w-[780px] mx-auto font-normal"
+            className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-[760px] mx-auto font-normal"
           >
             From AI-powered applications and enterprise platforms to analytics ecosystems and growth systems, we help organizations build, scale, and transform with confidence.
           </motion.p>
@@ -243,7 +190,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: EASING }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-1 sm:pt-2"
           >
             <Link
               href="/contact"
@@ -269,7 +216,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: EASING }}
-            className="pt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2.5 text-xs sm:text-sm font-semibold text-[#A1A1AA]"
+            className="pt-3 sm:pt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs sm:text-sm font-semibold text-[#A1A1AA]"
           >
             {TRUST_METRICS.map((metric, idx) => {
               const Icon = metric.icon;
@@ -298,172 +245,100 @@ export default function HomePage() {
       <CoreCapabilitiesShowcase />
 
       {/* ========================================================================= */}
-      {/* SECTION 4 — FEATURED FLAGSHIP CASE STUDIES */}
+      {/* SECTION 4 — PRODUCTION CASE STUDIES (Tuitionstime Flagship Showcase) */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 bg-[#050505]">
+      <section className="py-24 lg:py-32 bg-[#050505] text-white relative">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08] shadow-xs">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#00C7E8]" />
-            <span>FEATURED FLAGSHIP CASE STUDIES</span>
-          </div>
-
-          <div className="space-y-8 lg:space-y-10">
-            {FLAGSHIP_CASE_STUDIES.map((study) => (
-              <div
-                key={study.slug}
-                className="rounded-[36px] bg-[#07090D] text-white border border-white/[0.08] shadow-2xl overflow-hidden group hover:border-[#00C7E8]/30 transition-all duration-300"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-                  {/* 60% Image (7 Cols) */}
-                  <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[460px] lg:min-h-[520px] overflow-hidden bg-slate-900">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07090D]/90 via-[#07090D]/30 to-transparent" />
-
-                    <div className="absolute top-6 left-6 flex items-center gap-2 flex-wrap">
-                      <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#050505] text-[#00C7E8] border border-white/[0.08] shadow-md">
-                        {study.industry}
-                      </span>
-                      <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#050505]/80 backdrop-blur-md text-white border border-white/[0.08]">
-                        {study.clientType}
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-6 left-6 right-6 text-white">
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#00C7E8]">
-                        {study.badge}
-                      </span>
-                      <h4 className="text-xl sm:text-2xl font-black mt-1 text-white">
-                        {study.title}
-                      </h4>
-                    </div>
-                  </div>
-
-                  {/* 40% Crisp Editorial Content Panel (5 Cols) */}
-                  <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 flex flex-col justify-between space-y-6">
-                    <div className="space-y-4">
-                      <span className="text-xs font-mono font-bold text-[#00C7E8] uppercase tracking-wider">
-                        {study.impactTag}
-                      </span>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
-                        {study.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-[#A1A1AA] leading-relaxed font-normal">
-                        {study.description}
-                      </p>
-
-                      {/* Results Metrics */}
-                      <div className="grid grid-cols-3 gap-3 pt-2">
-                        {study.metrics.map((metric, mIdx) => (
-                          <div
-                            key={mIdx}
-                            className="p-3.5 rounded-2xl bg-[#050505] border border-white/[0.08] text-center"
-                          >
-                            <div
-                              className={`text-lg sm:text-xl font-black font-mono ${
-                                metric.isEmerald ? "text-emerald-400" : "text-white"
-                              }`}
-                            >
-                              {metric.value}
-                            </div>
-                            <div className="text-[10px] font-bold text-zinc-400 mt-0.5">
-                              {metric.label}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                      <Link
-                        href={`/case-studies/${study.slug}`}
-                        className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-[#087FA5] to-[#00C7E8] hover:brightness-110 text-black font-extrabold text-xs sm:text-sm shadow-md transition-all group/btn"
-                      >
-                        <span>Read Full Case Study</span>
-                        <ArrowRight className="w-4 h-4 text-black group-hover/btn:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-[#00C7E8] border border-white/[0.08] shadow-xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#00C7E8]" />
+                <span>PRODUCTION CASE STUDIES</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* SECTION 5 — MORE SUCCESS STORIES */}
-      {/* ========================================================================= */}
-      <section className="py-20 lg:py-24 bg-[#050505]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#00C7E8]">
-                REAL SYSTEMS. REAL BUSINESS OUTCOMES.
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Production Case Studies
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+                Real Systems. Measurable Outcomes.
               </h2>
             </div>
 
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-[#00C7E8] transition-colors group"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#00C7E8] hover:text-white transition-colors group self-start sm:self-auto"
             >
-              <span>View All 6 Case Studies</span>
+              <span>Explore Case Studies</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SUCCESS_STORIES.map((story) => (
-              <Link
-                key={story.slug}
-                href={`/case-studies/${story.slug}`}
-                className="rounded-[32px] bg-[#07090D] border border-white/[0.08] p-6 shadow-sm hover:border-white/20 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div className="space-y-4">
-                  <div className="relative h-48 w-full rounded-2xl overflow-hidden bg-slate-900">
-                    <img
-                      src={story.image}
-                      alt={story.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07090D]/90 via-transparent to-transparent" />
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#050505] text-[#00C7E8] border border-white/[0.08] shadow-xs">
-                        {story.industry}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-[#00C7E8]">
-                        {story.metricValue}
-                      </span>
-                      <span className="text-[10px] text-zinc-400">
-                        {story.metricLabel}
-                      </span>
-                    </div>
+          {/* Single Featured Horizontal Case Study Card */}
+          <div className="rounded-[36px] bg-[#101820] border border-[#00C7E8]/30 hover:border-[#00C7E8]/60 transition-all duration-300 shadow-2xl overflow-hidden group">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+              {/* Left Column (5 Cols): Editorial & Highlights */}
+              <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 flex flex-col justify-between space-y-8">
+                <div className="space-y-5">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-[#07090D] text-[#00C7E8] border border-white/[0.08]">
+                      {TUITIONSTIME_FEATURED_CASE_STUDY.category}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
+                      Project: {TUITIONSTIME_FEATURED_CASE_STUDY.projectName}
+                    </span>
                   </div>
 
-                  <div>
-                    <h4 className="text-lg font-black text-white group-hover:text-[#00C7E8] transition-colors leading-snug">
-                      {story.title}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-[#A1A1AA] mt-1.5 leading-relaxed">
-                      {story.outcome}
-                    </p>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+                    {TUITIONSTIME_FEATURED_CASE_STUDY.title}
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-[#A1A1AA] leading-relaxed font-normal">
+                    {TUITIONSTIME_FEATURED_CASE_STUDY.description}
+                  </p>
+
+                  {/* Impact Metrics */}
+                  <div className="grid grid-cols-3 gap-3 pt-2">
+                    {TUITIONSTIME_FEATURED_CASE_STUDY.metrics.map((metric, mIdx) => (
+                      <div
+                        key={mIdx}
+                        className="p-3.5 rounded-2xl bg-[#07090D] border border-white/[0.06] text-center"
+                      >
+                        <div
+                          className={`text-lg sm:text-xl font-black font-mono ${
+                            metric.isEmerald ? "text-emerald-400" : "text-white"
+                          }`}
+                        >
+                          {metric.value}
+                        </div>
+                        <div className="text-[10px] font-bold text-[#A1A1AA] mt-0.5">
+                          {metric.label}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-bold text-white group-hover:text-[#00C7E8] transition-colors">
-                  <span>Explore Case Study</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <div className="pt-6 border-t border-white/[0.08] flex items-center">
+                  <Link
+                    href={`/case-studies/${TUITIONSTIME_FEATURED_CASE_STUDY.slug}`}
+                    className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#087FA5] to-[#00C7E8] hover:brightness-110 text-black font-extrabold text-sm shadow-lg transition-all group/btn"
+                  >
+                    <span>View Case Study</span>
+                    <ArrowRight className="w-4 h-4 text-black group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
-              </Link>
-            ))}
+              </div>
+
+              {/* Right Column (7 Cols): Large Tuitionstime Laptop Mockup */}
+              <div className="lg:col-span-7 relative p-6 sm:p-10 lg:p-12 flex items-center justify-center">
+                <div className="relative w-full max-w-[760px] aspect-[2040/1380] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)] group-hover:scale-[1.02] transition-transform duration-500 ease-out">
+                  <Image
+                    src={TUITIONSTIME_FEATURED_CASE_STUDY.image}
+                    alt={`${TUITIONSTIME_FEATURED_CASE_STUDY.projectName} - ${TUITIONSTIME_FEATURED_CASE_STUDY.title}`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 760px"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -511,25 +386,25 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* SECTION 7 — INDUSTRIES */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 bg-[#050505] relative overflow-hidden">
+      <section className="py-24 lg:py-32 bg-[#F7F9FB] text-[#101820] relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08] shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#00C7E8]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#007F9C] border border-[#E5EAF0] shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#00C8E8]" />
                 <span>DOMAIN SPECIALIZATION</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#101820]">
                 Industries We Power
               </h2>
-              <p className="text-[#A1A1AA] text-base sm:text-lg">
+              <p className="text-[#566171] text-base sm:text-lg">
                 Domain-specific blueprints, regulatory compliance expertise, and battle-tested data pipelines.
               </p>
             </div>
 
             <Link
               href="/industries"
-              className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-[#00C7E8] transition-colors group self-start md:self-auto"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#007F9C] hover:text-[#101820] transition-colors group self-start md:self-auto"
             >
               <span>Explore All Industries</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -543,38 +418,38 @@ export default function HomePage() {
               return (
                 <div
                   key={ind.id}
-                  className="p-8 rounded-[30px] bg-[#07090D] border border-white/[0.08] hover:border-[#00C7E8]/50 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                  className="p-7 sm:p-8 rounded-[18px] bg-white border border-[#E5EAF0] hover:border-[#00C8E8]/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#050505] border border-white/[0.08] flex items-center justify-center text-[#00C7E8] shadow-xs group-hover:bg-[#00C7E8] group-hover:text-black transition-colors">
-                        <Icon className="w-6 h-6" />
+                      <div className="w-11 h-11 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] flex items-center justify-center text-[#007F9C] shadow-2xs group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8] transition-colors">
+                        <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-[11px] font-mono font-bold text-[#00C7E8] bg-[#050505] px-3 py-1 rounded-full border border-white/[0.08]">
+                      <span className="text-[11px] font-mono font-bold text-[#007F9C] bg-[#EBF9FC] px-3 py-1 rounded-full border border-[#00C8E8]/20">
                         {ind.badge}
                       </span>
                     </div>
 
                     <div>
-                      <h3 className="text-xl font-black text-white group-hover:text-[#00C7E8] transition-colors">
+                      <h3 className="text-xl font-black text-[#101820] group-hover:text-[#007F9C] transition-colors">
                         {ind.name}
                       </h3>
                     </div>
 
                     <div className="space-y-2 pt-1">
                       {ind.points.map((pt, pIdx) => (
-                        <div key={pIdx} className="flex items-center gap-2 text-xs text-[#A1A1AA]">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8] shrink-0" />
+                        <div key={pIdx} className="flex items-center gap-2 text-xs text-[#566171] font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00C8E8] shrink-0" />
                           <span>{pt}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-5 mt-6 border-t border-white/[0.08] flex items-center justify-between">
+                  <div className="pt-5 mt-6 border-t border-[#E5EAF0] flex items-center justify-between">
                     <Link
                       href={ind.href}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white group-hover:text-[#00C7E8] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#007F9C] group-hover:text-[#101820] transition-colors"
                     >
                       <span>View Industry</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

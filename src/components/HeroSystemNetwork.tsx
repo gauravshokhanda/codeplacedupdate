@@ -230,7 +230,7 @@ export function HeroSystemNetwork() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[500vh] bg-[#050505]"
+      className="relative w-full h-[180vh] bg-white text-[#101820]"
     >
       {/* ========================================================================= */}
       {/* 100VH STICKY VIEWPORT CONTAINER WITH AUTO-EXPANSION ANIMATION */}
@@ -269,58 +269,58 @@ export function HeroSystemNetwork() {
                 >
                   {/* Active Stage Heading */}
                   <div>
-                    <span className="text-xs font-mono uppercase tracking-wider text-[#00C7E8] font-bold block mb-1">
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#007F9C] font-bold block mb-1">
                       {activeStage.category}
                     </span>
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#101820] tracking-tight leading-tight">
                       {activeStage.name}
                     </h3>
                   </div>
 
                   {/* Story Description */}
-                  <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed font-normal">
+                  <p className="text-base sm:text-lg text-[#566171] leading-relaxed font-normal">
                     {activeStage.headline}
                   </p>
 
                   {/* Telemetry Card */}
-                  <div className="rounded-2xl bg-[#07090D] border border-white/[0.08] p-5 sm:p-6 shadow-xl space-y-4">
+                  <div className="rounded-2xl bg-white border border-[#E5EAF0] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] space-y-4">
                     {/* Benchmarks Header */}
-                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+                    <div className="flex items-center justify-between border-b border-[#E5EAF0] pb-3.5">
                       <div>
-                        <span className="text-[10px] font-mono uppercase text-[#71717A] block">
+                        <span className="text-[10px] font-mono uppercase text-[#566171] font-semibold block">
                           Throughput Benchmark
                         </span>
-                        <span className="text-lg sm:text-xl font-mono font-black text-white">
+                        <span className="text-lg sm:text-xl font-mono font-black text-[#101820]">
                           {activeStage.metric}
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] font-mono uppercase text-[#71717A] block">
+                        <span className="text-[10px] font-mono uppercase text-[#566171] font-semibold block">
                           Reliability SLA
                         </span>
-                        <span className="text-sm sm:text-base font-mono font-bold text-[#00C7E8]">
+                        <span className="text-sm sm:text-base font-mono font-bold text-[#007F9C]">
                           {activeStage.secondaryMetric}
                         </span>
                       </div>
                     </div>
 
                     {/* Key Capabilities Checklist */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                       {activeStage.bullets.map((bullet, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-[#A1A1AA]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#00C7E8] shrink-0" />
+                        <div key={idx} className="flex items-center gap-2 text-[#101820] font-medium">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#00C8E8] shrink-0" />
                           <span className="truncate">{bullet}</span>
                         </div>
                       ))}
                     </div>
 
                     {/* Tech Stack Pills & Action Link */}
-                    <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between gap-2">
+                    <div className="pt-2 border-t border-[#E5EAF0] flex items-center justify-between gap-2">
                       <div className="flex flex-wrap gap-1.5">
                         {activeStage.techStack.map((tech, idx) => (
                           <span
                             key={idx}
-                            className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-[#050505] text-[#A1A1AA] font-semibold border border-white/[0.08]"
+                            className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-[#F7F9FB] text-[#101820] font-semibold border border-[#E5EAF0]"
                           >
                             {tech}
                           </span>
@@ -329,7 +329,7 @@ export function HeroSystemNetwork() {
 
                       <Link
                         href={activeStage.actionLink}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-[#00C7E8] hover:text-white transition-colors shrink-0 group"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#007F9C] hover:text-[#101820] transition-colors shrink-0 group"
                       >
                         <span>Explore</span>
                         <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

@@ -313,47 +313,47 @@ export default function AiCopilotsPage() {
   };
 
   return (
-    <div className="bg-[#F6FBFA] text-[#0F172A] selection:bg-[#0B4F6C] selection:text-white">
+    <div className="bg-[#F6FBFA] text-[#0F172A] selection:bg-[#00C8E8] selection:text-black">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (Centered Layout, Breadcrumb, Soft Green-Blue Radial Glow) */}
+      {/* 1. HERO SECTION (Seamless Black Canvas #050505 matching Navbar) */}
       {/* ========================================================================= */}
-      <section className="relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-24 border-b border-slate-200/80">
-          {/* Soft radial glow matching CodePlaced green-blue gradient */}
+      <section className="relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-24 bg-[#050505] text-white">
+          {/* Subtle radial glow */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0 opacity-20"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(34,197,94,0.08), rgba(14,165,233,0.06), transparent 70%)",
+                "radial-gradient(circle at center, rgba(0,200,232,0.12), rgba(0,127,156,0.06), transparent 70%)",
             }}
           />
 
           <div className="site-container relative z-10 max-w-[900px] mx-auto text-center">
             {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-              <Link href="/" className="hover:text-[#0B4F6C] transition-colors">Home</Link>
+            <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#A1AAB7] mb-6">
+              <Link href="/" className="hover:text-[#00C8E8] transition-colors">Home</Link>
               <span>/</span>
-              <Link href="/services" className="hover:text-[#0B4F6C] transition-colors">Services</Link>
+              <Link href="/services" className="hover:text-[#00C8E8] transition-colors">Services</Link>
               <span>/</span>
-              <span className="text-[#0B4F6C] font-bold">AI Copilots</span>
+              <span className="text-[#00C8E8] font-bold">AI Copilots</span>
             </div>
 
             {/* Small Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[#14B8A6]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-[#00C8E8] border border-[#00C8E8]/40 shadow-xs mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-[#00C8E8]" />
               <span>ENTERPRISE AI SOLUTIONS</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-[38px] sm:text-[54px] lg:text-[66px] font-[900] leading-[1.02] tracking-tight text-[#082F49] mb-6 [text-wrap:balance]">
+            <h1 className="text-[38px] sm:text-[54px] lg:text-[66px] font-[900] leading-[1.02] tracking-tight text-white mb-6 [text-wrap:balance]">
               Build and Scale{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B4F6C] via-[#14B8A6] to-[#22C55E]">
+              <span className="text-[#00C8E8]">
                 Enterprise AI Copilots
               </span>{" "}
               with Confidence
             </h1>
 
             {/* Subheading */}
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-[780px] mx-auto mb-10 font-normal">
+            <p className="text-lg sm:text-xl text-[#A1AAB7] leading-relaxed max-w-[780px] mx-auto mb-10 font-normal">
               From Retrieval-Augmented Generation to autonomous AI agents, we build secure AI copilots that integrate with your business workflows and scale across your organization.
             </p>
 
@@ -361,7 +361,7 @@ export default function AiCopilotsPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-[#0B4F6C] hover:bg-[#0E7490] text-white font-bold text-sm shadow-xl shadow-[#0B4F6C]/20 flex items-center justify-center gap-2.5 transition-all border border-[#14B8A6]/30 active:scale-95"
+                className="w-full sm:w-auto h-[54px] px-8 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl shadow-[#00C8E8]/20 flex items-center justify-center gap-2.5 transition-all active:scale-95"
               >
                 <span>Book a Discovery Call</span>
                 <ArrowRight className="w-4 h-4" />
@@ -369,7 +369,7 @@ export default function AiCopilotsPage() {
 
               <a
                 href="#capabilities"
-                className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-white hover:bg-slate-50 text-[#082F49] font-bold text-sm border border-slate-200 shadow-xs flex items-center justify-center transition-all"
+                className="w-full sm:w-auto h-[54px] px-8 rounded-full bg-[#101820] hover:bg-white/10 text-white font-bold text-sm border border-[#1B242B] shadow-xs flex items-center justify-center transition-all"
               >
                 <span>Explore Capabilities</span>
               </a>
@@ -378,11 +378,11 @@ export default function AiCopilotsPage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* 2. TRUSTED BRANDS MARQUEE (35s Linear Infinite Loop, No Pauses) */}
+        {/* 2. TRUSTED BRANDS MARQUEE (Solid Black #050505, Seamless Loop) */}
         {/* ========================================================================= */}
-        <section className="py-8 bg-white border-b border-slate-200/80 overflow-hidden select-none">
+        <section className="py-8 bg-[#050505] border-y border-[#1B242B] overflow-hidden select-none">
           <div className="site-container">
-            <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400 text-center mb-4">
+            <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#A1AAB7] text-center mb-4">
               Supported Foundation Models & Vector Ecosystems
             </div>
 
@@ -391,7 +391,7 @@ export default function AiCopilotsPage() {
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{
                   repeat: Infinity,
-                  duration: 35,
+                  duration: 60,
                   ease: "linear",
                 }}
                 className="flex items-center gap-14 sm:gap-20 w-max"
@@ -401,11 +401,11 @@ export default function AiCopilotsPage() {
                     key={`${brand.name}-${idx}`}
                     className="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-200 flex-shrink-0"
                   >
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#14B8A6]" />
-                    <span className="font-bold text-base text-slate-800 tracking-tight">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#00C8E8]" />
+                    <span className="font-bold text-base text-white tracking-tight">
                       {brand.name}
                     </span>
-                    <span className="text-[10px] text-slate-400 font-medium">
+                    <span className="text-[10px] text-[#A1AAB7] font-medium font-mono">
                       ({brand.tag})
                     </span>
                   </div>
@@ -946,10 +946,10 @@ export default function AiCopilotsPage() {
         {/* ========================================================================= */}
         {/* 7. WHY CHOOSE CODEPLACED SECTION */}
         {/* ========================================================================= */}
-        <section className="section-py bg-[#082F49] text-white">
+        <section className="section-py bg-[#050505] text-white border-y border-[#1B242B]">
           <div className="site-container">
             <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-cyan-300">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.14em] text-[#00C8E8]">
                 The CodePlaced Advantage
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
@@ -976,12 +976,12 @@ export default function AiCopilotsPage() {
                   desc: "Deploy in your own private cloud or on-premise GPU clusters with SOC2 Type II compliance.",
                 },
               ].map((adv) => (
-                <div key={adv.title} className="p-6 rounded-[24px] bg-white/[0.04] border border-white/10 space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#0B4F6C] text-white flex items-center justify-center font-bold">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                <div key={adv.title} className="p-6 rounded-[24px] bg-[#101820] border border-[#1B242B] space-y-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#07090D] border border-[#00C8E8]/30 text-[#00C8E8] flex items-center justify-center font-bold">
+                    <CheckCircle2 className="w-5 h-5 text-[#00C8E8]" />
                   </div>
                   <h4 className="text-lg font-bold text-white">{adv.title}</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">{adv.desc}</p>
+                  <p className="text-xs text-[#A1AAB7] leading-relaxed">{adv.desc}</p>
                 </div>
               ))}
             </div>
@@ -1103,18 +1103,18 @@ export default function AiCopilotsPage() {
         {/* ========================================================================= */}
         {/* 10. CTA SECTION */}
         {/* ========================================================================= */}
-        <section className="bg-gradient-to-r from-[#082F49] via-[#083344] to-[#041E2A] text-white py-16 sm:py-20 text-center">
+        <section className="bg-[#050505] border-t border-[#1B242B] text-white py-16 sm:py-20 text-center">
           <div className="site-container max-w-2xl mx-auto space-y-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black">
               Ready to Deploy Production AI in 4 Weeks?
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-[#A1AAB7] text-sm sm:text-base leading-relaxed">
               Book a 30-minute discovery call with a Principal AI Architect. We sign NDAs upfront and map your technical milestone blueprint.
             </p>
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#0B4F6C] hover:bg-[#0E7490] text-white font-bold text-sm shadow-xl transition-all border border-[#14B8A6]/30"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl transition-all"
               >
                 <span>Book a Discovery Call</span>
                 <ArrowRight className="w-4 h-4" />

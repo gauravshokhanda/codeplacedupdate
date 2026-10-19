@@ -646,23 +646,23 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 4. WHY CODEPLACED (Linear-Style Bento Grid) */}
       {/* ========================================================================= */}
-      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-[#050505]">
+      <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-[#E5EAF0] bg-white">
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#00C7E8]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#F7F9FB] text-[#007F9C] border border-[#E5EAF0] shadow-2xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#007F9C]" />
               <span>THE CODEPLACED ADVANTAGE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#101820]">
               Why Leading Companies Choose CodePlaced
             </h2>
-            <p className="text-base sm:text-lg text-[#A1A1AA]">
+            <p className="text-base sm:text-lg text-[#566171]">
               Engineered for velocity, reliability, and measurable business growth.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {WHY_CODEPLACED.map((card, cIdx) => {
               const CardIcon = card.icon;
               return (
@@ -672,24 +672,24 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: cIdx * 0.08, ease: "easeOut" }}
-                  className={`p-8 sm:p-9 rounded-[32px] bg-[#07090D] border border-white/[0.08] hover:border-[#00C7E8]/40 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 space-y-4 flex flex-col justify-between group ${card.span}`}
+                  className={`p-7 sm:p-8 rounded-[18px] bg-white border border-[#E5EAF0] hover:border-[#00C8E8]/50 shadow-sm hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 space-y-4 flex flex-col justify-between group ${card.span}`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#050505] border border-white/[0.08] text-[#00C7E8] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-                        <CardIcon className="w-6 h-6 text-[#00C7E8]" />
+                      <div className="w-12 h-12 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] text-[#007F9C] flex items-center justify-center group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8] transition-colors shadow-2xs">
+                        <CardIcon className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#050505] text-[#00C7E8] border border-white/[0.08]">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
                         {card.badge}
                       </span>
                     </div>
 
                     <div>
-                      <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400">
+                      <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#007F9C]">
                         {card.tag}
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-black text-white mt-1">{card.title}</h3>
-                      <p className="text-xs sm:text-sm text-[#A1A1AA] mt-2 leading-relaxed">{card.desc}</p>
+                      <h3 className="text-xl sm:text-2xl font-black text-[#101820] mt-1 group-hover:text-[#007F9C] transition-colors">{card.title}</h3>
+                      <p className="text-sm text-[#566171] mt-2.5 leading-relaxed font-normal">{card.desc}</p>
                     </div>
                   </div>
                 </motion.div>

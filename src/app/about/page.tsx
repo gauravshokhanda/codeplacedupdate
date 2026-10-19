@@ -164,33 +164,21 @@ export default function AboutPage() {
   };
 
   return (
-    <div
-      style={{
-        background: "linear-gradient(180deg, #f8fcff 0%, #edf7fb 40%, #eaf5f9 100%)",
-      }}
-      className="text-[#0F172A] selection:bg-[#0f4c81] selection:text-white font-sans relative min-h-screen"
-    >
+    <div className="text-white selection:bg-[#00C8E8] selection:text-black font-sans relative min-h-screen bg-[#050505]">
       {/* ========================================================================= */}
-      {/* SECTION 1 — HERO SECTION (Clean, Minimal & Editorial) */}
+      {/* SECTION 1 — HERO SECTION (Seamless #050505 Black Canvas Full Viewport) */}
       {/* ========================================================================= */}
-      <section className="relative min-h-[82vh] lg:min-h-[88vh] flex flex-col justify-center items-center overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-20">
+      <section className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-16 bg-[#050505] text-center">
         {/* Soft Radial Ambient Glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0"
           style={{
             width: "700px",
             height: "700px",
-            background: "radial-gradient(circle, rgba(18, 207, 208, 0.16) 0%, rgba(15, 79, 108, 0.08) 50%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(0, 200, 232, 0.08) 0%, rgba(5, 5, 5, 0) 70%)",
             filter: "blur(60px)",
           }}
         />
-
-        {/* Subtle Light Moving Particles */}
-        <div className="absolute inset-0 pointer-events-none opacity-30 select-none">
-          <div className="absolute top-1/4 left-1/5 w-2 h-2 rounded-full bg-[#00b7c2] animate-ping" />
-          <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 rounded-full bg-[#0f4c81] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/5 w-2 h-2 rounded-full bg-[#38bdf8] animate-bounce" />
-        </div>
 
         {/* Centered Hero Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6 sm:space-y-8">
@@ -199,9 +187,9 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASING }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#0f4c81] border border-[#00b7c2]/30 shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08] shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#00C8E8]" />
             <span>THE CODEPLACED TEAM</span>
           </motion.div>
 
@@ -210,13 +198,13 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASING }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight text-[#082F49] [text-wrap:balance]"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight text-white [text-wrap:balance]"
           >
             The Team Behind Scalable{" "}
             <span
               className="bg-clip-text text-transparent inline-block"
               style={{
-                backgroundImage: "linear-gradient(90deg, #0f4c81 0%, #00b7c2 50%, #0284c7 100%)",
+                backgroundImage: "linear-gradient(90deg, #FFFFFF 0%, #00C8E8 50%, #FFFFFF 100%)",
               }}
             >
               Data, AI & Digital Products
@@ -228,7 +216,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: EASING }}
-            className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-[#A1AAB7] max-w-2xl mx-auto leading-relaxed font-normal"
           >
             A multidisciplinary team of developers, analysts, marketers, and business leaders helping organizations build, optimize, and scale through technology.
           </motion.p>
@@ -242,7 +230,10 @@ export default function AboutPage() {
           >
             <a
               href="#leadership-team"
-              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-[#082F49] hover:bg-[#0f4c81] text-white font-extrabold text-sm shadow-lg shadow-[#082F49]/15 flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group"
+              className="w-full sm:w-auto h-[48px] px-8 rounded-full text-black font-extrabold text-sm shadow-md hover:shadow-cyan-500/20 hover:-translate-y-0.5 flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 group"
+              style={{
+                background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
+              }}
             >
               <span>Meet Our Leaders</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -250,7 +241,7 @@ export default function AboutPage() {
 
             <a
               href="#why-choose-us"
-              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-white hover:bg-slate-50 text-[#082F49] font-bold text-sm border border-sky-200/80 shadow-xs flex items-center justify-center transition-all duration-300"
+              className="w-full sm:w-auto h-[48px] px-8 rounded-full bg-[#07090D] hover:bg-[#07090D]/80 text-white font-bold text-sm border border-white/[0.08] shadow-xs flex items-center justify-center transition-all duration-300 hover:border-[#00C8E8]/50"
             >
               <span>Explore Our Principles</span>
             </a>
@@ -265,10 +256,10 @@ export default function AboutPage() {
           >
             {COMPANY_STATS.map((stat, sIdx) => (
               <div key={sIdx} className="space-y-0.5">
-                <div className="text-2xl sm:text-3xl font-black text-[#0f4c81] tracking-tight">
+                <div className="text-2xl sm:text-3xl font-black text-[#00C8E8] tracking-tight font-mono">
                   {stat.value}
                 </div>
-                <div className="text-xs font-semibold text-slate-500">
+                <div className="text-xs font-semibold text-[#A1AAB7]">
                   {stat.label}
                 </div>
               </div>
@@ -278,58 +269,54 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2 — PRINCIPLES (No Divider Lines, Natural Spacing) */}
+      {/* SECTION 2 — PRINCIPLES (Clean White #FFFFFF Section) */}
       {/* ========================================================================= */}
-      <section id="why-choose-us" className="py-16 sm:py-20 lg:py-24">
+      <section id="why-choose-us" className="py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] text-[#101820]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[800px] mx-auto text-center mb-10 sm:mb-12 space-y-2.5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-2xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#F7F9FB] text-[#007F9C] border border-[#E5EAF0] shadow-2xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#007F9C]" />
               <span>CORE PRINCIPLES</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#101820]">
               The Principles Behind Every Project
             </h2>
-            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
+            <p className="text-xs sm:text-sm lg:text-base text-[#566171] leading-relaxed max-w-[680px] mx-auto font-normal">
               The standards, values, and engineering discipline that guide our client partnerships and ensure long-term success.
             </p>
           </div>
 
           {/* 6 Feature Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {COMPANY_PRINCIPLES.map((item, idx) => {
               const ItemIcon = item.icon;
               return (
                 <div
                   key={idx}
-                  style={{
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 251, 255, 0.85))",
-                    boxShadow: "0 12px 36px rgba(2, 132, 199, 0.05)",
-                  }}
-                  className="rounded-[18px] sm:rounded-[24px] p-3.5 sm:p-5 lg:p-6 border border-sky-100 hover:border-[#00b7c2]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                  className="rounded-[18px] p-5 sm:p-6 bg-white border border-[#E5EAF0] hover:border-[#00C8E8]/40 hover:-translate-y-1.5 transition-all duration-300 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-2.5 sm:mb-4">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-xl sm:rounded-2xl bg-[#ECFEFF] text-[#0f4c81] flex items-center justify-center group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300 shadow-xs flex-shrink-0">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] text-[#007F9C] flex items-center justify-center group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8] transition-colors duration-300 shadow-2xs flex-shrink-0">
                         <ItemIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-bold bg-white text-slate-700 border border-sky-100 shadow-2xs">
+                      <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
                         {item.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#082F49] mb-1 sm:mb-2 group-hover:text-[#0f4c81] transition-colors duration-300 line-clamp-1 sm:line-clamp-none">
+                    <h3 className="text-sm sm:text-base lg:text-lg font-bold text-[#101820] mb-1 sm:mb-2 group-hover:text-[#007F9C] transition-colors duration-300 line-clamp-1 sm:line-clamp-none">
                       {item.title}
                     </h3>
 
-                    <p className="text-[11px] sm:text-xs lg:text-sm text-slate-600 leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+                    <p className="text-xs sm:text-sm text-[#566171] leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-3.5 border-t border-sky-100/70 flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-slate-700">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00b7c2] flex-shrink-0" />
+                  <div className="mt-4 sm:mt-5 pt-3 sm:pt-3.5 border-t border-[#E5EAF0] flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-[#566171]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00C8E8] flex-shrink-0" />
                     <span className="truncate">CodePlaced Standard</span>
                   </div>
                 </div>
@@ -340,20 +327,20 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 3 — LEADERSHIP SECTION */}
+      {/* SECTION 3 — LEADERSHIP SECTION (Dark #050505 Section) */}
       {/* ========================================================================= */}
-      <section id="leadership-team" className="py-16 sm:py-20 lg:py-24 relative">
+      <section id="leadership-team" className="py-16 sm:py-20 lg:py-24 relative bg-[#050505] text-white">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
           <div className="max-w-[850px] mx-auto text-center mb-10 sm:mb-14 space-y-2.5 sm:space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
-              <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#101820] text-[#00C8E8] border border-[#1B242B] shadow-xs">
+              <Users className="w-3.5 h-3.5 text-[#00C8E8]" />
               <span>EXECUTIVE LEADERSHIP</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#082F49]">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               Meet The Leaders Behind CodePlaced
             </h2>
-            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[740px] mx-auto font-normal">
+            <p className="text-xs sm:text-sm lg:text-base text-[#A1AAB7] leading-relaxed max-w-[740px] mx-auto font-normal">
               Built by experienced professionals focused on technology, analytics, innovation, and business growth.
             </p>
           </div>
@@ -363,25 +350,20 @@ export default function AboutPage() {
             {LEADERSHIP_TEAM.map((founder, fIdx) => (
               <div
                 key={fIdx}
-                style={{
-                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(235, 248, 255, 0.85) 100%)",
-                  border: "1px solid rgba(14, 165, 233, 0.2)",
-                  boxShadow: "0 20px 60px rgba(2, 132, 199, 0.08)",
-                }}
-                className="rounded-[24px] sm:rounded-[32px] p-4 sm:p-6 lg:p-8 hover:shadow-[0_30px_80px_rgba(2,132,199,0.16)] hover:border-[#00b7c2]/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                className="rounded-[24px] sm:rounded-[32px] p-4 sm:p-6 lg:p-8 bg-[#101820] border border-[#1B242B] hover:border-[#00C8E8]/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group shadow-xl"
               >
                 <div className="space-y-4 sm:space-y-5">
                   {/* Portrait */}
-                  <div className="relative h-[230px] sm:h-[320px] lg:h-[420px] w-full rounded-[18px] sm:rounded-[24px] overflow-hidden bg-slate-900 shadow-md">
+                  <div className="relative h-[230px] sm:h-[320px] lg:h-[420px] w-full rounded-[18px] sm:rounded-[24px] overflow-hidden bg-slate-950 shadow-md">
                     <img
                       src={founder.image}
                       alt={founder.name}
                       className={`w-full h-full object-cover ${founder.imagePosition || "object-top sm:object-center"} group-hover:scale-[1.03] transition-transform duration-700 ease-out`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#042841]/95 via-[#042841]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/50 to-transparent" />
                     
                     <div className="absolute bottom-2.5 left-3.5 right-3.5 sm:bottom-4 sm:left-5 sm:right-5 text-white space-y-0.5 sm:space-y-1">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-[#00b7c2]/35 backdrop-blur-md text-cyan-200 border border-[#00b7c2]/40">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-[#00C8E8]/20 backdrop-blur-md text-[#00C8E8] border border-[#00C8E8]/40">
                         {founder.role}
                       </span>
                       <h3 className="text-lg sm:text-2xl lg:text-3xl font-black text-white tracking-tight drop-shadow-sm">
@@ -391,23 +373,23 @@ export default function AboutPage() {
                   </div>
 
                   {/* Summary Bio */}
-                  <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm lg:text-base text-[#A1AAB7] leading-relaxed font-normal">
                     {founder.bio}
                   </p>
 
                   {/* Strategic Focus */}
                   <div className="space-y-1.5 sm:space-y-2 pt-0.5">
-                    <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500">
+                    <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
                       Strategic Focus
                     </span>
                     <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                       {founder.expertise.map((exp, eIdx) => (
                         <div
                           key={eIdx}
-                          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-white/90 backdrop-blur-xs border border-sky-100 shadow-2xs"
+                          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-[#050505] border border-[#1B242B]"
                         >
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#00b7c2] flex-shrink-0" />
-                          <span className="text-[11px] sm:text-xs font-bold text-[#082F49] tracking-tight truncate">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#00C8E8] flex-shrink-0" />
+                          <span className="text-[11px] sm:text-xs font-bold text-white tracking-tight truncate">
                             {exp}
                           </span>
                         </div>
@@ -417,12 +399,12 @@ export default function AboutPage() {
                 </div>
 
                 {/* LinkedIn Action */}
-                <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-sky-100">
+                <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-[#1B242B]">
                   <a
                     href={founder.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h-[44px] sm:h-[48px] w-full rounded-xl sm:rounded-2xl bg-[#082F49] hover:bg-[#0f4c81] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-[#082F49]/10 transition-all duration-300 active:scale-98 group/btn"
+                    className="h-[44px] sm:h-[48px] w-full rounded-xl sm:rounded-2xl bg-[#050505] hover:bg-[#00C8E8] hover:text-black text-white font-bold text-xs sm:text-sm border border-white/[0.12] flex items-center justify-center gap-2 shadow-sm transition-all duration-300 active:scale-98 group/btn"
                     aria-label={`${founder.ctaText} on LinkedIn (opens in new tab)`}
                   >
                     <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
@@ -439,20 +421,21 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 4 — TEAM PROFILES */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 lg:py-24">
+      {/* SECTION 4 — TEAM PROFILES (Clean White #FFFFFF Section) */}
+      {/* ========================================================================= */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] text-[#101820]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-[800px] mx-auto text-center mb-10 space-y-2.5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-[#00b7c2]/25 shadow-xs">
-              <Users className="w-3.5 h-3.5 text-[#00b7c2]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#F7F9FB] text-[#007F9C] border border-[#E5EAF0] shadow-2xs">
+              <Users className="w-3.5 h-3.5 text-[#007F9C]" />
               <span>THE TEAM</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#101820]">
               Meet Our Team
             </h2>
-            <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed max-w-[680px] mx-auto font-normal">
+            <p className="text-xs sm:text-sm lg:text-base text-[#566171] leading-relaxed max-w-[680px] mx-auto font-normal">
               A multidisciplinary squad of analysts, growth specialists, and engineers powering enterprise execution.
             </p>
           </div>
@@ -462,14 +445,10 @@ export default function AboutPage() {
             {ENGINEERING_TEAM.map((member, idx) => (
               <div
                 key={idx}
-                style={{
-                  background: "linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(240, 249, 255, 0.85))",
-                  boxShadow: "0 10px 30px rgba(2, 132, 199, 0.05)",
-                }}
-                className="group rounded-[24px] p-5 sm:p-6 text-center hover:shadow-[0_20px_45px_rgba(2,132,199,0.12)] hover:border-[#00b7c2]/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center justify-center border border-sky-200/70"
+                className="group rounded-[18px] p-5 sm:p-6 text-center hover:border-[#00C8E8]/50 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center bg-white border border-[#E5EAF0] shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
               >
                 {/* Circular Profile Image */}
-                <div className="w-[100px] h-[100px] sm:w-[115px] sm:h-[115px] rounded-full overflow-hidden ring-4 ring-[#00b7c2]/25 group-hover:ring-[#00b7c2]/60 shadow-md transition-all duration-300 bg-slate-900 mx-auto flex-shrink-0 relative mb-3.5">
+                <div className="w-[100px] h-[100px] sm:w-[115px] sm:h-[115px] rounded-full overflow-hidden ring-4 ring-[#00C8E8]/20 group-hover:ring-[#00C8E8]/50 shadow-md transition-all duration-300 bg-slate-900 mx-auto flex-shrink-0 relative mb-3.5">
                   <img
                     src={member.image}
                     alt={member.name}
@@ -479,10 +458,10 @@ export default function AboutPage() {
 
                 {/* Name & Role (Professional roles only) */}
                 <div className="space-y-1 w-full">
-                  <h3 className="text-sm sm:text-base font-black text-[#082F49] group-hover:text-[#0f4c81] transition-colors duration-300 leading-snug">
+                  <h3 className="text-sm sm:text-base font-black text-[#101820] group-hover:text-[#007F9C] transition-colors duration-300 leading-snug">
                     {member.name}
                   </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-[#00b7c2] leading-snug">
+                  <p className="text-xs sm:text-sm font-semibold text-[#007F9C] leading-snug">
                     {member.role}
                   </p>
                 </div>
@@ -493,20 +472,20 @@ export default function AboutPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 5 — FAQ (Directly Above Footer, No Extraneous CTA) */}
+      {/* SECTION 5 — FAQ (Secondary Light #F7F9FB Section) */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 lg:py-24">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#F7F9FB] text-[#101820]">
         <div className="max-w-[850px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-10 space-y-2.5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-[#0f4c81] border border-sky-200 shadow-2xs">
-              <HelpCircle className="w-3 h-3 text-[#00b7c2]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-[#007F9C] border border-[#E5EAF0] shadow-2xs">
+              <HelpCircle className="w-3 h-3 text-[#007F9C]" />
               <span>FREQUENTLY ASKED QUESTIONS</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#082F49]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#101820]">
               Questions About Working With Us
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-[540px] mx-auto font-normal">
+            <p className="text-xs sm:text-sm text-[#566171] leading-relaxed max-w-[540px] mx-auto font-normal">
               Clear answers on how we partner, scope, build, and support enterprise systems.
             </p>
           </div>
@@ -518,22 +497,19 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  style={{
-                    boxShadow: "0 10px 30px rgba(2, 132, 199, 0.04)",
-                  }}
-                  className="rounded-[20px] bg-white border border-sky-200/70 overflow-hidden transition-all duration-300 hover:border-[#00b7c2]/50"
+                  className="rounded-[16px] bg-white border border-[#E5EAF0] overflow-hidden transition-all duration-300 hover:border-[#00C8E8]/40 shadow-2xs"
                 >
                   <button
                     onClick={() => toggleFaq(idx)}
                     className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-hidden"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-xs sm:text-sm font-bold text-[#082F49]">
+                    <span className="text-xs sm:text-sm font-bold text-[#101820]">
                       {item.q}
                     </span>
                     <div
                       className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 bg-[#00b7c2] text-white" : "bg-sky-50 text-slate-600"
+                        isOpen ? "rotate-180 bg-[#00C8E8] text-black" : "bg-[#F7F9FB] text-[#566171] border border-[#E5EAF0]"
                       }`}
                     >
                       <ChevronDown className="w-3.5 h-3.5" />
@@ -549,7 +525,7 @@ export default function AboutPage() {
                         transition={{ duration: 0.3, ease: EASING }}
                         className="overflow-hidden"
                       >
-                        <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-sky-50">
+                        <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-[#566171] leading-relaxed border-t border-[#E5EAF0]">
                           {item.a}
                         </div>
                       </motion.div>

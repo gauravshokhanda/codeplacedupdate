@@ -88,12 +88,8 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     setIndustriesMenuOpen(false);
   }, [pathname]);
 
-  const isDarkTheme = Boolean(
-    pathname &&
-      (pathname === "/" ||
-        pathname.startsWith("/case-studies") ||
-        pathname.startsWith("/services"))
-  );
+  // Global unified dark navbar across all routes with seamless #050505 canvas
+  const isDarkTheme = true;
 
   // Shared Navigation Links component (Centered)
   const renderNavLinks = () => (
@@ -244,7 +240,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
       {/* ========================================================================= */}
       <header
         className={`absolute top-0 left-0 w-full h-[74px] sm:h-[80px] z-40 transition-colors ${
-          isDarkTheme ? "bg-[#050505]/80 backdrop-blur-md border-b border-white/[0.08]" : "bg-transparent"
+          isDarkTheme ? "bg-[#050505]" : "bg-transparent"
         }`}
       >
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -311,6 +307,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 isOpen={industriesMenuOpen}
                 onClose={() => setIndustriesMenuOpen(false)}
                 onOpenBookAudit={onOpenBookAudit}
+                isDarkTheme={isDarkTheme}
               />
             </div>
           </>
@@ -395,6 +392,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 isOpen={industriesMenuOpen}
                 onClose={() => setIndustriesMenuOpen(false)}
                 onOpenBookAudit={onOpenBookAudit}
+                isDarkTheme={isDarkTheme}
               />
             </div>
           </motion.div>
@@ -441,7 +439,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                         >
                           <span
                             className={`w-2 h-2 rounded-full ${
-                              isDarkTheme ? "bg-emerald-400" : "bg-[#14B8C5]"
+                              isDarkTheme ? "bg-[#00C8E8]" : "bg-[#14B8C5]"
                             }`}
                           />
                           <span>Services Overview</span>
@@ -449,7 +447,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                         <button
                           onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                           className={`p-1.5 rounded-md ${
-                            isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                            isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
                           }`}
                           aria-label="Toggle Services"
                         >
@@ -476,7 +474,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 href="/services/app-web-development"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
                                 }`}
                               >
                                 01. App & Web Development
@@ -513,7 +511,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 href="/services/data-engineering-analytics"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
                                 }`}
                               >
                                 02. Data Engineering & Analytics
@@ -550,7 +548,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 href="/services/ai-services"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
                                 }`}
                               >
                                 03. AI Services & Agents
@@ -587,7 +585,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 href="/services/digital-social-marketing"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-emerald-400" : "text-[#0B6B88]"
+                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
                                 }`}
                               >
                                 04. Digital & Social Marketing

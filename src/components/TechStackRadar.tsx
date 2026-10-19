@@ -134,7 +134,7 @@ export function TechStackRadar() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] text-[#00C7E8] border border-[#00C7E8]/40 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] text-[#00C7E8] border border-white/[0.08] shadow-xs">
               <Terminal className="w-3.5 h-3.5 text-[#00C7E8]" />
               <span>PRODUCTION TECHNOLOGY STACK</span>
             </div>
@@ -168,8 +168,8 @@ export function TechStackRadar() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`inline-flex items-center gap-2.5 px-5 py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer border ${
                   isActive
-                    ? "bg-[#00C7E8] text-black border-[#00C7E8] shadow-[0_0_25px_rgba(0,199,232,0.3)] scale-105"
-                    : "bg-[#07090D] text-[#A1A1AA] hover:text-white border border-white/[0.08] hover:border-[#00C7E8]/40 hover:shadow-sm"
+                    ? "bg-[#00C7E8] text-black border-[#00C7E8] shadow-[0_0_25px_rgba(0,199,232,0.35)] scale-105"
+                    : "bg-[#07090D] text-[#A1A1AA] hover:text-white border border-white/[0.08] hover:border-[#00C7E8]/50"
                 }`}
               >
                 <CatIcon className={`w-4 h-4 ${isActive ? "text-black" : "text-[#00C7E8]"}`} />
@@ -187,12 +187,12 @@ export function TechStackRadar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="rounded-[36px] bg-[#07090D] border border-white/[0.08] p-8 sm:p-10 lg:p-12 shadow-2xl space-y-8"
+            className="rounded-[36px] bg-[#101820] border border-white/[0.08] p-8 sm:p-10 lg:p-12 shadow-2xl space-y-8"
           >
             {/* Category Banner */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-[#050505] border border-white/[0.08] flex items-center justify-center text-[#00C7E8] shadow-xs">
+                <div className="w-12 h-12 rounded-2xl bg-[#07090D] border border-white/[0.08] flex items-center justify-center text-[#00C7E8] shadow-xs">
                   <IconComponent className="w-6 h-6 text-[#00C7E8]" />
                 </div>
                 <div>
@@ -205,18 +205,18 @@ export function TechStackRadar() {
                 </div>
               </div>
 
-              <div className="px-4 py-2 rounded-xl bg-[#050505] border border-white/[0.08] text-xs font-mono font-bold text-[#A1A1AA] self-start lg:self-auto">
+              <div className="px-4 py-2 rounded-xl bg-[#07090D] border border-white/[0.08] text-xs font-mono font-bold text-[#A1A1AA] self-start lg:self-auto">
                 <span className="text-[#00C7E8] mr-1.5">Stack:</span>
                 {current.technologies.length} Technologies
               </div>
             </div>
 
-            {/* Technologies Grid (Elevated Dark Cards) */}
+            {/* Technologies Grid (Dark Cards) */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {current.technologies.map((tech, idx) => (
                 <div
                   key={idx}
-                  className="p-4 sm:p-5 rounded-2xl bg-[#050505] hover:bg-[#080B10] border border-white/[0.06] hover:border-[#00C7E8]/50 hover:shadow-[0_0_20px_rgba(0,199,232,0.1)] transition-all duration-300 group"
+                  className="p-4 sm:p-5 rounded-2xl bg-[#07090D] hover:bg-[#0d141c] border border-white/[0.06] hover:border-[#00C7E8]/50 hover:shadow-[0_4px_20px_rgba(0,199,232,0.15)] transition-all duration-300 group"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-semibold text-[#71717A]">
