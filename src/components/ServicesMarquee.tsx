@@ -17,7 +17,7 @@ const AwsLogo = () => (
   <svg className="w-full h-full object-contain shrink-0" viewBox="0 0 75 45" fill="none" aria-label="AWS">
     <path
       d="M18.3 14.5c-.3-1.8-1.5-3.3-3.9-3.3-3.1 0-4.6 2.4-4.6 5.8 0 4.1 2 5.9 4.7 5.9 2 0 3.2-1.3 3.7-2.7h3.4c-.6 3.1-2.9 5.5-7.1 5.5-4.9 0-8.2-3.4-8.2-8.7 0-5.1 3.4-8.7 8.1-8.7 4.1 0 6.6 2.5 7.1 6.2h-3.2zm11.3 10.9h-3.3l-5.6-16.8h3.5l3.8 12.3 3.7-12.3h3.5l-5.6 16.8zm17-1.1c-.8.8-2 1.4-3.5 1.4-2.8 0-4.5-1.7-4.5-4.3 0-3.1 2.4-4.4 5.7-4.4h2.2v-1.1c0-1.7-.9-2.7-2.7-2.7-1.4 0-2.4.6-2.8 1.8h-3.2c.5-2.8 2.8-4.4 6-4.4 3.7 0 5.8 1.9 5.8 5.2v9.6h-3.1v-1.1zm-4.7-2.3c1.5 0 2.6-.7 3.3-1.6v-2.1h-2c-1.8 0-3 .6-3 2.1 0 1.1.7 1.6 1.7 1.6z"
-      fill="#FFFFFF"
+      fill="#232F3E"
     />
     <path
       d="M60.1 31.6C48.6 37.8 33.3 38.6 18.2 34c-2.1-.6-4.1-1.5-6.2-2.5-.6-.3-.3-.9.3-.6 14.7 8 33.6 7.4 47.1.6 1-.5 1.7.5.7 1.1z"
@@ -171,7 +171,7 @@ const AndroidLogo = () => (
 );
 
 const AppleLogo = () => (
-  <svg className="w-full h-full object-contain shrink-0" viewBox="0 0 170 170" fill="#FFFFFF" aria-label="Apple iOS">
+  <svg className="w-full h-full object-contain shrink-0" viewBox="0 0 170 170" fill="#000000" aria-label="Apple iOS">
     <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.08-7.83-8.1-12.44-15.06-6.61-9.99-11.75-20.93-15.42-32.82-3.67-11.89-5.51-23.08-5.51-33.56 0-14.86 3.82-27.24 11.45-37.13 7.64-9.89 17.38-14.97 29.23-15.24 5.37 0 11.22 1.35 17.54 4.06 6.32 2.7 10.23 4.12 11.74 4.24 1.28-.12 5.33-1.6 12.16-4.43 6.83-2.83 12.66-4.06 17.5-3.69 13.58 1.05 24.36 6.29 32.33 15.72-11.89 7.23-17.72 17.1-17.49 29.62.24 9.89 4.06 18.23 11.45 25.02 7.39 6.79 16.32 10.74 26.79 11.86-2.11 6.53-4.7 12.98-7.76 19.34zM119.22 33.15c0-7.23 2.66-14.15 7.99-20.76 5.33-6.61 11.96-10.74 19.88-12.39.24 1.28.35 2.45.35 3.51 0 7.39-2.77 14.42-8.31 21.09-5.54 6.67-12.35 10.68-20.43 12.03-.35-1.16-.48-2.32-.48-3.48z" />
   </svg>
 );
@@ -206,7 +206,7 @@ const LookerStudioLogo = () => (
 
 // Full-Stack Development: Connected frontend and backend layers
 const FullStackIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polygon points="12 2 2 7 12 12 22 7 12 2" />
     <polyline points="2 17 12 22 22 17" />
     <polyline points="2 12 12 17 22 12" />
@@ -215,7 +215,7 @@ const FullStackIcon = () => (
 
 // AI & Machine Learning: Neural network nodes & synapses
 const AiMlIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="2.5" fill="#00C7E8" fillOpacity="0.3" />
     <circle cx="5" cy="6" r="2" />
     <circle cx="19" cy="6" r="2" />
@@ -230,7 +230,7 @@ const AiMlIcon = () => (
 
 // Mobile App Development: Smartphone with interactive app UI elements
 const MobileAppIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="5" y="2" width="14" height="20" rx="3" ry="3" />
     <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3" />
     <line x1="9" y1="6" x2="15" y2="6" strokeWidth="1.5" strokeOpacity="0.7" />
@@ -239,7 +239,7 @@ const MobileAppIcon = () => (
 
 // Web Development: Browser window with clean code brackets
 const WebDevIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="3" width="20" height="15" rx="2.5" />
     <line x1="2" y1="8" x2="22" y2="8" strokeOpacity="0.5" />
     <circle cx="5" cy="5.5" r="1" fill="currentColor" />
@@ -251,7 +251,7 @@ const WebDevIcon = () => (
 
 // Backend Development: Dual-tier server stack with active status lights
 const BackendIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="3" width="20" height="7" rx="2" />
     <rect x="2" y="14" width="20" height="7" rx="2" />
     <circle cx="6" cy="6.5" r="1.5" fill="#10B981" stroke="none" />
@@ -263,7 +263,7 @@ const BackendIcon = () => (
 
 // Data Analytics & Business Intelligence: Upward analytics chart
 const AnalyticsIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="18" y1="20" x2="18" y2="9" />
     <line x1="12" y1="20" x2="12" y2="5" />
     <line x1="6" y1="20" x2="6" y2="13" />
@@ -273,7 +273,7 @@ const AnalyticsIcon = () => (
 
 // Cloud & DevOps: Cloud with deployment arrows
 const CloudDevOpsIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
     <polyline points="12 11 12 7 14 9" stroke="#10B981" />
     <polyline points="12 17 12 21 10 19" stroke="#10B981" />
@@ -282,7 +282,7 @@ const CloudDevOpsIcon = () => (
 
 // Enterprise Software Development: Connected modular architecture blocks
 const EnterpriseIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="7" height="7" rx="1.5" />
     <rect x="14" y="3" width="7" height="7" rx="1.5" />
     <rect x="14" y="14" width="7" height="7" rx="1.5" />
@@ -304,7 +304,7 @@ const QaTestingIcon = () => (
 
 // UI/UX Design: Wireframe layout symbol
 const UiUxIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="2" />
     <path d="M3 9h18" />
     <path d="M9 21V9" />
@@ -313,7 +313,7 @@ const UiUxIcon = () => (
 
 // API Development & Integration: Connected nodes & linked system endpoints
 const ApiIntegrationIcon = () => (
-  <svg className="w-full h-full object-contain text-[#00C7E8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-full h-full object-contain text-[#00BCD4] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="18" cy="5" r="3" fill="#00C7E8" fillOpacity="0.2" />
     <circle cx="6" cy="12" r="3" fill="#00C7E8" fillOpacity="0.2" />
     <circle cx="18" cy="19" r="3" fill="#00C7E8" fillOpacity="0.2" />
@@ -382,36 +382,29 @@ export function ServicesMarquee() {
   const fullTrack = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
 
   return (
-    <div className="w-full max-w-full bg-[#050505] border-t border-b border-[#1B242B] h-[72px] lg:h-[90px] min-h-[72px] lg:min-h-[90px] flex items-center overflow-hidden select-none">
+    <div className="w-full max-w-full bg-[#FFFFFF] h-[88px] sm:h-[98px] lg:h-[110px] min-h-[88px] sm:min-h-[98px] lg:min-h-[110px] flex items-center overflow-hidden select-none">
       <div className="w-full overflow-hidden relative">
         <div
           className="animate-marquee hover:[animation-play-state:paused] flex items-center"
-          style={{ animationDuration: "60s" }}
+          style={{ animationDuration: "68s" }}
         >
           {fullTrack.map((item, idx) => (
             <div
               key={`${item.id}-${idx}`}
-              className="flex items-center gap-2.5 sm:gap-3 px-5 sm:px-6 lg:px-7 text-[#A1A1AA] hover:text-white transition-all duration-200 shrink-0 group cursor-default"
+              className="flex items-center gap-3.5 sm:gap-4 px-7 sm:px-9 lg:px-12 text-[#111827] hover:text-[#00BCD4] transition-all duration-200 shrink-0 group cursor-default"
             >
-              {/* Scaled Icon Container: 26px mobile -> 28px tablet -> 32px desktop */}
-              <div className="w-[26px] h-[26px] sm:w-[28px] sm:h-[28px] lg:w-[32px] lg:h-[32px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+              {/* Scaled Icon Container: 30px mobile -> 33px tablet -> 36px desktop */}
+              <div className="w-[30px] h-[30px] sm:w-[33px] sm:h-[33px] lg:w-[36px] lg:h-[36px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                 {item.icon}
               </div>
 
-              {/* Text Label: 13-14px mobile -> 14-15px tablet -> 15-17px desktop */}
-              <span className="text-[13px] sm:text-[14px] lg:text-[16px] font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors whitespace-nowrap">
+              {/* Text Label: 18px mobile -> 20px tablet -> 22px desktop, semibold */}
+              <span className="text-[18px] sm:text-[20px] lg:text-[22px] font-semibold tracking-tight text-[#111827] group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
                 {item.name}
               </span>
 
-              {/* Category Badge for Services: 11-12px */}
-              {item.type === "service" && (
-                <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-mono font-bold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 rounded-full bg-[#00C7E8]/10 text-[#00C7E8] border border-[#00C7E8]/30 shadow-xs shrink-0">
-                  Service
-                </span>
-              )}
-
-              {/* Cyan Accent Dot Separator */}
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8]/35 group-hover:bg-[#00C7E8] transition-colors ml-4 sm:ml-5 lg:ml-6 shrink-0" />
+              {/* Cyan Accent Dot Separator with Generous Spacing */}
+              <span className="w-2 h-2 rounded-full bg-[#00BCD4]/40 group-hover:bg-[#00BCD4] transition-colors ml-7 sm:ml-9 lg:ml-12 shrink-0" />
             </div>
           ))}
         </div>

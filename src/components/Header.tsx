@@ -9,6 +9,8 @@ import {
   X,
   ArrowRight,
   ChevronDown,
+  Mail,
+  MapPin,
 } from "lucide-react";
 import { CodePlacedLogo } from "./CodePlacedLogo";
 import { ServicesMegaMenu } from "./ServicesMegaMenu";
@@ -20,11 +22,11 @@ interface HeaderProps {
 
 const NAV_ITEMS_LIST = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services", hasDropdown: "services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Industries", href: "/industries", hasDropdown: "industries" },
-  { label: "Blogs", href: "/blog" },
   { label: "About", href: "/about" },
+  { label: "Services", href: "/services", hasDropdown: "services" },
+  { label: "Solutions", href: "/services" },
+  { label: "Industries", href: "/industries", hasDropdown: "industries" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -200,18 +202,13 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     </nav>
   );
 
-  // Shared CTA button (Height: 42px, Pill radius: 999px, Blue/Teal Gradient)
+  // Shared CTA button: bright cyan rounded pill (#00C8E8 with dark text #06151C)
   const renderCtaButton = () => (
     <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
       {onOpenBookAudit ? (
         <button
           onClick={() => onOpenBookAudit("Schedule Strategy Call")}
-          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C7E8]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
-          style={{
-            background: isDarkTheme
-              ? "linear-gradient(90deg, #087FA5, #00C7E8)"
-              : "linear-gradient(90deg, #0f4c81, #00b7c2)",
-          }}
+          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
         >
           <span>Book Strategy Call</span>
           <ArrowRight className="w-4 h-4 ml-0.5" />
@@ -219,12 +216,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
       ) : (
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-white font-bold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C7E8]/20 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
-          style={{
-            background: isDarkTheme
-              ? "linear-gradient(90deg, #087FA5, #00C7E8)"
-              : "linear-gradient(90deg, #0f4c81, #00b7c2)",
-          }}
+          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
         >
           <span>Book Strategy Call</span>
           <ArrowRight className="w-4 h-4 ml-0.5" />
@@ -236,14 +228,13 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. INITIAL STATIC NAVBAR (Sits naturally on page background, solid dark on dark theme) */}
+      {/* 1. INITIAL STATIC NAVBAR WITH TOP INFORMATION BAR */}
       {/* ========================================================================= */}
       <header
-        className={`absolute top-0 left-0 w-full h-[74px] sm:h-[80px] z-40 transition-colors ${
-          isDarkTheme ? "bg-[#050505]" : "bg-transparent"
-        }`}
+        className="absolute top-0 left-0 w-full z-40 transition-colors bg-transparent"
       >
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+        {/* Main Navbar */}
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-[76px] sm:h-[84px] flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
             <CodePlacedLogo size="md" variant={isDarkTheme ? "light" : "dark"} />
@@ -257,29 +248,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           {/* Right CTA */}
           {renderCtaButton()}
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <Link
-              href="/contact"
-              className="sm:hidden px-4 h-[36px] rounded-full text-white text-xs font-bold shadow-xs flex items-center justify-center"
-              style={{
-                background: isDarkTheme
-                  ? "linear-gradient(90deg, #0D5D7A, #12C8F7)"
-                  : "linear-gradient(90deg, #0f4c81, #00b7c2)",
-              }}
-            >
-              Call
-            </Link>
+          {/* Mobile Menu Toggle (Clean Hamburger on Right) */}
+          <div className="flex items-center lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-xl transition-colors ${
-                isDarkTheme
-                  ? "text-white hover:text-[#12C8F7] hover:bg-white/10"
-                  : "text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100"
-              }`}
+              className="p-2.5 rounded-xl transition-colors text-white hover:text-[#00C8E8] hover:bg-white/10 cursor-pointer"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -326,7 +302,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             transition={{ duration: 0.25, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 w-full h-[72px] sm:h-[76px] z-[999] backdrop-blur-[12px] transition-colors duration-200 ${
               isDarkTheme
-                ? "bg-[#050505]/92 border-b border-white/[0.08] shadow-lg shadow-black/40"
+                ? "bg-[#06151C]/95 border-b border-[#163340]/80 shadow-lg shadow-black/40"
                 : "bg-white/95 border-b border-slate-200/80 shadow-xs"
             }`}
           >
@@ -344,29 +320,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               {/* Right CTA */}
               {renderCtaButton()}
 
-              {/* Mobile Menu Toggle */}
-              <div className="flex items-center gap-2 lg:hidden">
-                <Link
-                  href="/contact"
-                  className="sm:hidden px-4 h-[36px] rounded-full text-white text-xs font-bold shadow-xs flex items-center justify-center"
-                  style={{
-                    background: isDarkTheme
-                      ? "linear-gradient(90deg, #0D5D7A, #12C8F7)"
-                      : "linear-gradient(90deg, #0f4c81, #00b7c2)",
-                  }}
-                >
-                  Call
-                </Link>
+              {/* Mobile Menu Toggle (Clean Hamburger on Right) */}
+              <div className="flex items-center lg:hidden">
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className={`p-2 rounded-xl transition-colors ${
-                    isDarkTheme
-                      ? "text-white hover:text-[#12C8F7] hover:bg-white/10"
-                      : "text-[#062B38] hover:text-[#0B6B88] hover:bg-slate-100"
-                  }`}
+                  className="p-2.5 rounded-xl transition-colors text-white hover:text-[#00C8E8] hover:bg-white/10 cursor-pointer"
                   aria-label="Toggle navigation menu"
                 >
-                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
               </div>
             </div>
@@ -400,7 +361,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
       </AnimatePresence>
 
       {/* ========================================================================= */}
-      {/* 3. MOBILE SLIDE-DOWN DRAWER */}
+      {/* 3. MOBILE SLIDE-DOWN DRAWER (Clean White Background, Dark Text, Cyan Accents) */}
       {/* ========================================================================= */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -409,11 +370,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed inset-x-0 top-[72px] z-[998] backdrop-blur-2xl border-b shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto ${
-              isDarkTheme
-                ? "bg-[#0A0B0E]/98 border-white/10 text-white"
-                : "bg-white/98 border-slate-200/90 text-[#062B38]"
-            }`}
+            className="fixed inset-x-0 top-[72px] sm:top-[76px] z-[998] backdrop-blur-2xl bg-white/98 border-b border-slate-200/90 text-[#111827] shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto"
           >
             <nav className="flex flex-col space-y-1.5">
               {NAV_ITEMS_LIST.map((item) => {
@@ -421,34 +378,20 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                   return (
                     <div
                       key="Services"
-                      className={`border-b ${
-                        isDarkTheme ? "border-white/[0.08]" : "border-slate-100"
-                      } pb-2`}
+                      className="border-b border-slate-100 pb-2"
                     >
-                      <div
-                        className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold transition-colors ${
-                          isDarkTheme
-                            ? "text-white hover:bg-white/[0.05]"
-                            : "text-[#062B38] hover:bg-slate-50"
-                        }`}
-                      >
+                      <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold text-[#111827] hover:bg-slate-50 transition-colors">
                         <Link
                           href="/services"
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2"
                         >
-                          <span
-                            className={`w-2 h-2 rounded-full ${
-                              isDarkTheme ? "bg-[#00C8E8]" : "bg-[#14B8C5]"
-                            }`}
-                          />
+                          <span className="w-2 h-2 rounded-full bg-[#00BCD4]" />
                           <span>Services Overview</span>
                         </Link>
                         <button
                           onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                          className={`p-1.5 rounded-md ${
-                            isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
-                          }`}
+                          className="p-1.5 rounded-md text-[#00BCD4] hover:bg-[#00BCD4]/10 transition-colors"
                           aria-label="Toggle Services"
                         >
                           <ChevronDown
@@ -473,9 +416,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                               <Link
                                 href="/services/app-web-development"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
-                                }`}
+                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
                               >
                                 01. App & Web Development
                               </Link>
@@ -483,22 +424,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 <Link
                                   href="/services/app-web-development"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Mobile & Web Applications
                                 </Link>
                                 <Link
                                   href="/services/cloud-infrastructure"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Cloud Modernization & FinOps
                                 </Link>
@@ -510,9 +443,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                               <Link
                                 href="/services/data-engineering-analytics"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
-                                }`}
+                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
                               >
                                 02. Data Engineering & Analytics
                               </Link>
@@ -520,22 +451,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 <Link
                                   href="/services/data-platforms"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Data Platforms & Lakehouses
                                 </Link>
                                 <Link
                                   href="/services/executive-dashboards"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Executive BI & Power BI Cockpits
                                 </Link>
@@ -547,9 +470,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                               <Link
                                 href="/services/ai-services"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
-                                }`}
+                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
                               >
                                 03. AI Services & Agents
                               </Link>
@@ -557,22 +478,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 <Link
                                   href="/services/ai-copilots"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • AI Copilots & Enterprise RAG
                                 </Link>
                                 <Link
                                   href="/services/ai-services"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Autonomous Multi-Agent Swarms
                                 </Link>
@@ -584,9 +497,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                               <Link
                                 href="/services/digital-social-marketing"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className={`block text-xs font-bold uppercase tracking-wider ${
-                                  isDarkTheme ? "text-[#00C8E8]" : "text-[#0B6B88]"
-                                }`}
+                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
                               >
                                 04. Digital & Social Marketing
                               </Link>
@@ -594,22 +505,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                 <Link
                                   href="/services/digital-social-marketing"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Paid Ads & Programmatic SEO
                                 </Link>
                                 <Link
                                   href="/services/digital-social-marketing"
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className={`block py-1 text-sm ${
-                                    isDarkTheme
-                                      ? "text-[#A1A1AA] hover:text-white"
-                                      : "text-slate-600 hover:text-[#0B6B88]"
-                                  }`}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
                                   • Marketing Analytics & Attribution
                                 </Link>
@@ -625,18 +528,18 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 if (item.label === "Industries") {
                   return (
                     <div key="Industries" className="border-b border-slate-100 pb-2">
-                      <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold text-[#062B38] hover:bg-slate-50 transition-colors">
+                      <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-bold text-[#111827] hover:bg-slate-50 transition-colors">
                         <Link
                           href="/industries"
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2"
                         >
-                          <span className="w-2 h-2 rounded-full bg-[#14B8C5]" />
+                          <span className="w-2 h-2 rounded-full bg-[#00BCD4]" />
                           <span>Industries Overview</span>
                         </Link>
                         <button
                           onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
-                          className="p-1.5 rounded-md text-[#0B6B88]"
+                          className="p-1.5 rounded-md text-[#00BCD4] hover:bg-[#00BCD4]/10 transition-colors"
                           aria-label="Toggle Industries"
                         >
                           <ChevronDown
@@ -659,28 +562,28 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                             <Link
                               href="/industries"
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
                               • Healthcare & Life Sciences
                             </Link>
                             <Link
                               href="/industries"
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
                               • FinTech & Banking
                             </Link>
                             <Link
                               href="/industries"
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
                               • Logistics & Fleet Telematics
                             </Link>
                             <Link
                               href="/industries"
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#0B6B88]"
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
                               • SaaS & High-Concurrency
                             </Link>
@@ -705,8 +608,8 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-3 py-2.5 rounded-xl text-base font-bold transition-colors ${
                       isActive
-                        ? "text-[#0B6B88] bg-[rgba(20,184,197,0.08)]"
-                        : "text-[#12344A] hover:bg-slate-50 hover:text-[#0B6B88]"
+                        ? "text-[#00BCD4] bg-[#00BCD4]/10 font-bold"
+                        : "text-[#111827] hover:bg-slate-50 hover:text-[#00BCD4]"
                     }`}
                   >
                     {item.label}
@@ -719,12 +622,9 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-full text-white font-bold text-sm tracking-wide shadow-md flex items-center justify-center gap-2"
-                style={{
-                  background: "linear-gradient(90deg, #0B6B88, #14B8C5)",
-                }}
+                className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
               >
-                <span>Schedule Architecture Call</span>
+                <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
