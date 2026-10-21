@@ -626,46 +626,51 @@ export default function IndustriesPage() {
   };
 
   return (
-    <div className="text-[#0B2035] selection:bg-[#083A5B] selection:text-white font-sans relative">
+    <div className="text-white selection:bg-[#00C8E8] selection:text-black font-sans relative bg-[#050505]">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION (Seamless #050505 Black Canvas) */}
       {/* ========================================================================= */}
-      <section className="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24 border-b border-slate-200/60">
+      <section className="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24 border-b border-white/[0.08] bg-[#050505] text-center">
         {/* Ambient Glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0"
           style={{
             background:
-              "radial-gradient(circle at center, rgba(13,110,138,0.1), rgba(19,181,234,0.05), transparent 70%)",
+              "radial-gradient(circle at center, rgba(0, 200, 232, 0.08), rgba(5, 5, 5, 0) 70%)",
           }}
         />
 
         <div className="site-container relative z-10 max-w-5xl mx-auto text-center">
           {/* Breadcrumb */}
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-            <Link href="/" className="hover:text-[#083A5B] transition-colors">
+          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-400 mb-6">
+            <Link href="/" className="hover:text-[#00C8E8] transition-colors">
               Home
             </Link>
             <span>/</span>
-            <span className="text-[#083A5B] font-bold">Industries Discovery Hub</span>
+            <span className="text-[#00C8E8] font-bold">Industries Discovery Hub</span>
           </div>
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#083A5B] border border-[#083A5B]/20 shadow-2xs mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-[#13B5EA]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-white border border-white/[0.08] shadow-xs mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-[#00C8E8]" />
             <span>ENTERPRISE DOMAIN INTELLIGENCE</span>
           </div>
 
           {/* Outcome-focused Headline */}
-          <h1 className="text-[38px] sm:text-[54px] lg:text-[68px] font-[900] leading-[1.03] tracking-tight text-[#052B45] mb-6 [text-wrap:balance]">
+          <h1 className="text-[38px] sm:text-[54px] lg:text-[68px] font-[900] leading-[1.03] tracking-tight text-white mb-6 [text-wrap:balance]">
             Digital Transformation Fuelled Growth Across{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#052B45] via-[#0D6E8A] to-[#13B5EA]">
+            <span
+              className="bg-clip-text text-transparent inline-block"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #FFFFFF 0%, #00C8E8 50%, #FFFFFF 100%)",
+              }}
+            >
               Critical Industries
             </span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10 font-normal">
+          <p className="text-lg sm:text-xl text-[#A1AAB7] leading-relaxed max-w-3xl mx-auto mb-10 font-normal">
             We engineer production lakehouses, sub-second OLAP marts, deterministic AI copilots, and C-suite analytics cockpits tailored to your industry’s compliance guardrails and latency SLAs.
           </p>
 
@@ -673,28 +678,31 @@ export default function IndustriesPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <a
               href="#solutions-carousel"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-[#052B45] hover:bg-[#083A5B] text-white font-bold text-sm shadow-xl shadow-[#052B45]/20 flex items-center justify-center gap-2.5 transition-all border border-[#13B5EA]/30 active:scale-95"
+              className="w-full sm:w-auto h-[54px] px-8 rounded-full text-black font-extrabold text-sm shadow-md hover:shadow-cyan-500/20 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-95"
+              style={{
+                background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
+              }}
             >
               <span>Explore Featured Solutions</span>
               <ArrowRight className="w-4 h-4" />
             </a>
             <Link
               href="/contact"
-              className="w-full sm:w-auto h-[54px] px-8 rounded-[16px] bg-white hover:bg-slate-50 text-[#052B45] font-bold text-sm border border-[#D9E6EF] shadow-xs flex items-center justify-center transition-all"
+              className="w-full sm:w-auto h-[54px] px-8 rounded-full bg-[#07090D] hover:bg-[#07090D]/80 text-white font-bold text-sm border border-white/[0.08] shadow-xs flex items-center justify-center transition-all hover:border-[#00C8E8]/50"
             >
               <span>Schedule Domain Review</span>
             </Link>
           </div>
 
           {/* 4-Metric Trust Ribbon */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-[24px] glass-panel-card shadow-md text-left">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-[24px] bg-[#101820] border border-[#1B242B] shadow-md text-left">
             {TRUST_METRICS.map((metric, i) => (
-              <div key={metric.label} className={i !== 0 ? "border-l border-slate-200/60 pl-4" : "pl-2"}>
-                <div className="text-2xl sm:text-3xl font-black text-[#052B45] tracking-tight">
+              <div key={metric.label} className={i !== 0 ? "border-l border-[#1B242B] pl-4" : "pl-2"}>
+                <div className="text-2xl sm:text-3xl font-black text-[#00C8E8] tracking-tight font-mono">
                   {metric.value}
                 </div>
-                <div className="text-xs font-bold text-[#083A5B] mt-0.5">{metric.label}</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">{metric.sub}</div>
+                <div className="text-xs font-bold text-white mt-0.5">{metric.label}</div>
+                <div className="text-[11px] text-[#A1AAB7] mt-0.5">{metric.sub}</div>
               </div>
             ))}
           </div>
@@ -702,19 +710,19 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. FEATURED INDUSTRY SOLUTIONS CAROUSEL (Horizontal Slider) */}
+      {/* 2. FEATURED INDUSTRY SOLUTIONS CAROUSEL (Black Showcase Section) */}
       {/* ========================================================================= */}
-      <section id="solutions-carousel" className="section-py border-b border-slate-200/60">
+      <section id="solutions-carousel" className="section-py border-b border-white/[0.08] bg-[#050505] text-white">
         <div className="site-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.14em] text-[#00C8E8]">
                 FLAGSHIP SOLUTIONS
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
                 Featured Industry Solutions
               </h2>
-              <p className="text-slate-600 text-base max-w-2xl">
+              <p className="text-[#A1AAB7] text-base max-w-2xl">
                 Deep-dive into battle-tested architectures solving high-impact domain challenges with measurable client outcomes.
               </p>
             </div>
@@ -723,14 +731,14 @@ export default function IndustriesPage() {
             <div className="flex items-center gap-2 self-start md:self-auto">
               <button
                 onClick={handlePrevSolution}
-                className="w-11 h-11 rounded-full border border-slate-200 hover:border-[#052B45] bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all shadow-xs"
+                className="w-11 h-11 rounded-full border border-[#1B242B] hover:border-[#00C8E8] bg-[#101820] hover:bg-[#101820]/80 text-white flex items-center justify-center transition-all shadow-xs"
                 aria-label="Previous solution"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={handleNextSolution}
-                className="w-11 h-11 rounded-full border border-slate-200 hover:border-[#052B45] bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all shadow-xs"
+                className="w-11 h-11 rounded-full border border-[#1B242B] hover:border-[#00C8E8] bg-[#101820] hover:bg-[#101820]/80 text-white flex items-center justify-center transition-all shadow-xs"
                 aria-label="Next solution"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -739,39 +747,39 @@ export default function IndustriesPage() {
           </div>
 
           {/* Carousel Active Card */}
-          <div className="relative overflow-hidden rounded-3xl bg-white border border-sky-100 shadow-xl shadow-sky-950/5 p-8 sm:p-12">
+          <div className="relative overflow-hidden rounded-3xl bg-[#101820] border border-[#1B242B] shadow-xl p-8 sm:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left 7 Cols */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#0D3B66] bg-[#F4FAFC] px-3.5 py-1 rounded-full border border-sky-100">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#00C8E8] bg-[#050505] px-3.5 py-1 rounded-full border border-[#1B242B]">
                     {FEATURED_SOLUTIONS[solutionIndex].industry}
                   </span>
-                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-500/30">
                     {FEATURED_SOLUTIONS[solutionIndex].badge}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-4xl font-black leading-tight text-[#0F2B46]">
+                <h3 className="text-2xl sm:text-4xl font-black leading-tight text-white">
                   {FEATURED_SOLUTIONS[solutionIndex].title}
                 </h3>
 
-                <p className="text-[#5B6B7C] text-sm sm:text-base leading-relaxed">
+                <p className="text-[#A1AAB7] text-sm sm:text-base leading-relaxed">
                   {FEATURED_SOLUTIONS[solutionIndex].desc}
                 </p>
 
-                <div className="p-4 rounded-2xl bg-[#F4FAFC] border border-sky-100 space-y-1.5">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#18B6D8]">
+                <div className="p-4 rounded-2xl bg-[#050505] border border-[#1B242B] space-y-1.5">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#00C8E8]">
                     Proven Impact:
                   </div>
-                  <div className="text-sm font-semibold text-[#0F2B46]">
+                  <div className="text-sm font-semibold text-white">
                     {FEATURED_SOLUTIONS[solutionIndex].highlight}
                   </div>
                 </div>
 
                 {/* Architecture Data Flow String */}
-                <div className="text-xs text-[#0F2B46] font-mono bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 overflow-x-auto whitespace-nowrap">
-                  <span className="text-[#18B6D8] font-bold">Data Flow: </span>
+                <div className="text-xs text-white font-mono bg-[#050505] p-3.5 rounded-xl border border-[#1B242B] overflow-x-auto whitespace-nowrap">
+                  <span className="text-[#00C8E8] font-bold">Data Flow: </span>
                   {FEATURED_SOLUTIONS[solutionIndex].architecture}
                 </div>
 
@@ -784,7 +792,7 @@ export default function IndustriesPage() {
                     {FEATURED_SOLUTIONS[solutionIndex].tech.map((t) => (
                       <span
                         key={t}
-                        className="px-3 py-1 rounded-lg bg-[#F4FAFC] border border-sky-100 text-xs font-bold text-[#0F2B46]"
+                        className="px-3 py-1 rounded-lg bg-[#050505] border border-[#1B242B] text-xs font-bold text-white"
                       >
                         {t}
                       </span>
@@ -794,12 +802,12 @@ export default function IndustriesPage() {
               </div>
 
               {/* Right 5 Cols: Highlight Metric & Quick Action */}
-              <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0F2B46] to-[#0D3B66] text-white shadow-lg space-y-6">
+              <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#050505] border border-[#1B242B] text-white shadow-lg space-y-6">
                 <div className="space-y-2 text-center sm:text-left">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00C8E8]">
                     Quantified Result
                   </span>
-                  <div className="text-5xl sm:text-6xl font-black text-white tracking-tight">
+                  <div className="text-5xl sm:text-6xl font-black text-[#00C8E8] tracking-tight font-mono">
                     {FEATURED_SOLUTIONS[solutionIndex].metric}
                   </div>
                   <div className="text-sm font-bold text-slate-200">
@@ -807,17 +815,20 @@ export default function IndustriesPage() {
                   </div>
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-white/10">
+                <div className="space-y-3 pt-4 border-t border-[#1B242B]">
                   <Link
                     href="/contact"
-                    className="w-full h-12 rounded-xl bg-white hover:bg-slate-100 text-[#0F2B46] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
+                    className="w-full h-12 rounded-xl text-black font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
+                    style={{
+                      background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
+                    }}
                   >
                     <span>Deploy Similar Architecture</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
                     href="/case-studies"
-                    className="w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center justify-center border border-white/20 transition-all"
+                    className="w-full h-12 rounded-xl bg-[#101820] hover:bg-[#101820]/80 text-white font-bold text-xs flex items-center justify-center border border-[#1B242B] hover:border-[#00C8E8]/40 transition-all"
                   >
                     <span>Read Complete Case Study</span>
                   </Link>
@@ -832,7 +843,7 @@ export default function IndustriesPage() {
                   key={i}
                   onClick={() => setSolutionIndex(i)}
                   className={`h-2 rounded-full transition-all ${
-                    solutionIndex === i ? "w-8 bg-[#1CC8E5]" : "w-2 bg-slate-300 hover:bg-slate-400"
+                    solutionIndex === i ? "w-8 bg-[#00C8E8]" : "w-2 bg-slate-700 hover:bg-slate-500"
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
@@ -843,167 +854,169 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. INDUSTRY EXPLORER GRID (16 Industries with Search + Filter) */}
+      {/* 3. INDUSTRY EXPLORER GRID (16 Industries with Search + Filter) (Clean White Section) */}
       {/* ========================================================================= */}
-      <section id="industries-explorer" className="section-py site-container">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0D6E8A]">
-            COMPLETE DOMAIN CATALOG
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#052B45] tracking-tight">
-            Explore 16 Mission-Critical Industries
-          </h2>
-          <p className="text-slate-600 text-base">
-            Select your industry vertical to inspect specialized architecture patterns, compliance frameworks, and benchmark metrics.
-          </p>
-        </div>
-
-        {/* Search & Category Filter Bar */}
-        <div className="p-4 sm:p-6 rounded-[24px] glass-panel-card shadow-sm mb-10 space-y-4">
-          {/* Search Input */}
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by industry name, capability (e.g. 'FHIR', 'Fraud', 'ROAS', 'IoT'), or compliance..."
-              className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/80 border border-slate-200/80 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#083A5B] focus:bg-white transition-all"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700"
-              >
-                Clear
-              </button>
-            )}
-          </div>
-
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-200/40">
-            <span className="text-xs font-bold text-slate-500 mr-1 flex items-center gap-1">
-              <Filter className="w-3.5 h-3.5" /> Filter:
+      <section id="industries-explorer" className="section-py bg-[#FFFFFF] text-[#101820]">
+        <div className="site-container">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.14em] text-[#007F9C]">
+              COMPLETE DOMAIN CATALOG
             </span>
-            {FILTER_CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${selectedCategory === cat
-                    ? "bg-[#052B45] text-white shadow-xs"
-                    : "bg-white/70 hover:bg-white text-slate-600 border border-slate-200/70"
-                  }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 16 Industries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredIndustries.map((ind, idx) => {
-            const IndIcon = ind.icon;
-            return (
-              <motion.div
-                key={ind.id}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.3, delay: idx * 0.02 }}
-                className="rounded-[24px] glass-panel-card p-6 shadow-2xs hover:shadow-xl hover:border-[#0D6E8A]/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
-              >
-                <div className="space-y-4">
-                  {/* Header: Icon + Badge */}
-                  <div className="flex items-center justify-between">
-                    <div className="w-11 h-11 rounded-xl bg-[rgba(5,43,69,0.08)] text-[#052B45] flex items-center justify-center group-hover:bg-[#052B45] group-hover:text-white transition-colors shadow-2xs">
-                      <IndIcon className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      {ind.badge}
-                    </span>
-                  </div>
-
-                  {/* Title + Desc */}
-                  <div>
-                    <h3 className="text-base font-bold text-[#052B45] group-hover:text-[#0D6E8A] transition-colors">
-                      {ind.name}
-                    </h3>
-                    <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                      {ind.desc}
-                    </p>
-                  </div>
-
-                  {/* Solutions List */}
-                  <div className="space-y-1 pt-2 border-t border-slate-100">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                      Delivered Solutions:
-                    </span>
-                    <ul className="space-y-1">
-                      {ind.solutions.slice(0, 3).map((sol) => (
-                        <li key={sol} className="text-[11px] text-slate-700 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#0D6E8A]" />
-                          <span className="truncate">{sol}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Tech Badges */}
-                  <div className="flex flex-wrap gap-1 pt-1">
-                    {ind.tech.slice(0, 3).map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Card Bottom: Impact & Scope Button */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <div>
-                    <div className="text-[9px] uppercase font-bold text-slate-400">Target Outcome</div>
-                    <div className="text-xs font-black text-emerald-600">{ind.impact}</div>
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="px-3 py-1.5 rounded-lg bg-slate-100 group-hover:bg-[#052B45] text-slate-700 group-hover:text-white text-xs font-bold transition-all flex items-center gap-1"
-                  >
-                    <span>Scope</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </Link>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {filteredIndustries.length === 0 && (
-          <div className="p-12 text-center rounded-2xl bg-white border border-slate-200">
-            <p className="text-slate-500 font-semibold text-sm">
-              No industries found matching &ldquo;{searchQuery}&rdquo;. Try another search term or clear the filter.
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#101820] tracking-tight">
+              Explore 16 Mission-Critical Industries
+            </h2>
+            <p className="text-[#566171] text-base">
+              Select your industry vertical to inspect specialized architecture patterns, compliance frameworks, and benchmark metrics.
             </p>
           </div>
-        )}
+
+          {/* Search & Category Filter Bar */}
+          <div className="p-4 sm:p-6 rounded-[18px] bg-[#F7F9FB] border border-[#E5EAF0] shadow-xs mb-10 space-y-4">
+            {/* Search Input */}
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#566171]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by industry name, capability (e.g. 'FHIR', 'Fraud', 'ROAS', 'IoT'), or compliance..."
+                className="w-full h-12 pl-12 pr-4 rounded-xl bg-white border border-[#E5EAF0] text-sm font-medium text-[#101820] placeholder:text-[#566171]/70 focus:outline-none focus:border-[#007F9C] transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[#566171] hover:text-[#101820]"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#E5EAF0]">
+              <span className="text-xs font-bold text-[#566171] mr-1 flex items-center gap-1">
+                <Filter className="w-3.5 h-3.5" /> Filter:
+              </span>
+              {FILTER_CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                    selectedCategory === cat
+                      ? "bg-[#101820] text-white shadow-xs"
+                      : "bg-white hover:bg-[#F7F9FB] text-[#566171] border border-[#E5EAF0]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 16 Industries Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredIndustries.map((ind, idx) => {
+              const IndIcon = ind.icon;
+              return (
+                <motion.div
+                  key={ind.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-20px" }}
+                  transition={{ duration: 0.3, delay: idx * 0.02 }}
+                  className="rounded-[18px] bg-white border border-[#E5EAF0] p-6 shadow-xs hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#00C8E8] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                >
+                  <div className="space-y-4">
+                    {/* Header: Icon + Badge */}
+                    <div className="flex items-center justify-between">
+                      <div className="w-11 h-11 rounded-xl bg-[#F7F9FB] text-[#007F9C] border border-[#E5EAF0] flex items-center justify-center group-hover:bg-[#007F9C] group-hover:text-white transition-colors shadow-2xs">
+                        <IndIcon className="w-5 h-5" />
+                      </div>
+                      <span className="text-[10px] font-bold text-[#007F9C] bg-[#EBF9FC] px-2.5 py-0.5 rounded-full border border-[#00C8E8]/20">
+                        {ind.badge}
+                      </span>
+                    </div>
+
+                    {/* Title + Desc */}
+                    <div>
+                      <h3 className="text-base font-extrabold text-[#101820] group-hover:text-[#007F9C] transition-colors">
+                        {ind.name}
+                      </h3>
+                      <p className="text-xs text-[#566171] mt-1.5 leading-relaxed">
+                        {ind.desc}
+                      </p>
+                    </div>
+
+                    {/* Solutions List */}
+                    <div className="space-y-1 pt-2 border-t border-[#E5EAF0]">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
+                        Delivered Solutions:
+                      </span>
+                      <ul className="space-y-1">
+                        {ind.solutions.slice(0, 3).map((sol) => (
+                          <li key={sol} className="text-[11px] text-[#566171] flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#007F9C]" />
+                            <span className="truncate">{sol}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-1 pt-1">
+                      {ind.tech.slice(0, 3).map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#F7F9FB] text-[#566171] border border-[#E5EAF0]"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Card Bottom: Impact & Scope Button */}
+                  <div className="mt-6 pt-4 border-t border-[#E5EAF0] flex items-center justify-between">
+                    <div>
+                      <div className="text-[9px] uppercase font-bold text-[#566171]">Target Outcome</div>
+                      <div className="text-xs font-black text-emerald-600">{ind.impact}</div>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="px-3 py-1.5 rounded-lg bg-[#F7F9FB] group-hover:bg-[#101820] text-[#101820] group-hover:text-white text-xs font-bold transition-all flex items-center gap-1 border border-[#E5EAF0]"
+                    >
+                      <span>Scope</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {filteredIndustries.length === 0 && (
+            <div className="p-12 text-center rounded-2xl bg-[#F7F9FB] border border-[#E5EAF0]">
+              <p className="text-[#566171] font-semibold text-sm">
+                No industries found matching &ldquo;{searchQuery}&rdquo;. Try another search term or clear the filter.
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
       {/* ========================================================================= */}
+      {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS (Black Engineering Showcase) */}
       {/* ========================================================================= */}
-      {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS */}
-      {/* ========================================================================= */}
-      <section className="section-py border-y border-slate-200/60">
+      <section className="section-py border-y border-white/[0.08] bg-[#050505] text-white">
         <div className="site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.14em] text-[#00C8E8]">
               TECHNICAL BLUEPRINTS
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
               Industry Architecture Blueprints
             </h2>
-            <p className="text-[#5B6B7C] text-base">
+            <p className="text-[#A1AAB7] text-base">
               Inspect production-tested data flow diagrams from source ingestion to lakehouse, analytics marts, and AI copilots.
             </p>
           </div>
@@ -1016,12 +1029,13 @@ export default function IndustriesPage() {
                 <button
                   key={bp.id}
                   onClick={() => setActiveBlueprintId(bp.id)}
-                  className={`px-5 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${isActive
-                      ? "bg-[#0F2B46] text-white shadow-md shadow-[#0F2B46]/20"
-                      : "bg-white/80 hover:bg-white text-[#0F2B46] border border-sky-100 shadow-xs"
-                    }`}
+                  className={`px-5 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                    isActive
+                      ? "bg-[#101820] text-[#00C8E8] border border-[#00C8E8] shadow-md shadow-[#00C8E8]/10"
+                      : "bg-[#07090D] hover:bg-[#101820] text-slate-300 border border-white/[0.08]"
+                  }`}
                 >
-                  <Workflow className="w-4 h-4 text-[#1CC8E5]" />
+                  <Workflow className="w-4 h-4 text-[#00C8E8]" />
                   <span>{bp.name}</span>
                 </button>
               );
@@ -1029,21 +1043,21 @@ export default function IndustriesPage() {
           </div>
 
           {/* Active Blueprint Visualization Box */}
-          <div className="p-8 sm:p-10 rounded-[32px] bg-white border border-sky-100 shadow-xl shadow-sky-950/5 space-y-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div className="p-8 sm:p-10 rounded-[32px] bg-[#101820] border border-[#1B242B] shadow-xl space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1B242B]">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#18B6D8]">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#00C8E8]">
                   {activeBlueprint.domain} Architecture
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#0F2B46] mt-1">
+                <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
                   {activeBlueprint.name}
                 </h3>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-500/30">
                   {activeBlueprint.badge}
                 </span>
-                <span className="text-xs font-mono text-[#0F2B46] bg-[#F4FAFC] px-3 py-1 rounded-full border border-sky-100 font-bold">
+                <span className="text-xs font-mono text-white bg-[#050505] px-3 py-1 rounded-full border border-[#1B242B] font-bold">
                   {activeBlueprint.sla}
                 </span>
               </div>
@@ -1054,27 +1068,27 @@ export default function IndustriesPage() {
               {activeBlueprint.steps.map((step) => (
                 <div
                   key={step.num}
-                  className="p-5 rounded-2xl bg-[#F4FAFC] border border-sky-100 hover:border-[#1CC8E5]/50 hover:bg-white transition-all flex flex-col justify-between space-y-3 relative group shadow-2xs hover:shadow-md"
+                  className="p-5 rounded-2xl bg-[#050505] border border-[#1B242B] hover:border-[#00C8E8]/50 transition-all flex flex-col justify-between space-y-3 relative group shadow-xs"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="w-7 h-7 rounded-lg bg-[#0F2B46] text-[#1CC8E5] font-mono text-xs font-black flex items-center justify-center">
+                      <span className="w-7 h-7 rounded-lg bg-[#101820] text-[#00C8E8] font-mono text-xs font-black flex items-center justify-center border border-[#1B242B]">
                         {step.num}
                       </span>
-                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60">
+                      <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
                         {step.tag}
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-[#0F2B46] group-hover:text-[#18B6D8] transition-colors">
+                    <h4 className="text-sm font-bold text-white group-hover:text-[#00C8E8] transition-colors">
                       {step.title}
                     </h4>
-                    <p className="text-[11px] text-[#5B6B7C] leading-relaxed">
+                    <p className="text-[11px] text-[#A1AAB7] leading-relaxed">
                       {step.desc}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-200/60">
-                    <div className="text-[10px] font-mono text-[#0D3B66] font-semibold truncate">
+                  <div className="pt-3 border-t border-[#1B242B]">
+                    <div className="text-[10px] font-mono text-[#00C8E8] font-semibold truncate">
                       {step.tech}
                     </div>
                   </div>
@@ -1083,16 +1097,19 @@ export default function IndustriesPage() {
             </div>
 
             {/* Bottom Actions in Blueprint */}
-            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-              <span className="text-[#5B6B7C]">
+            <div className="pt-6 border-t border-[#1B242B] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+              <span className="text-[#A1AAB7]">
                 Ready to deploy this exact architecture in your private cloud environment?
               </span>
               <Link
                 href="/contact"
-                className="px-6 py-3 rounded-xl bg-[#0F2B46] hover:bg-[#0D3B66] text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap"
+                className="px-6 py-3 rounded-full text-black font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap"
+                style={{
+                  background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
+                }}
               >
                 <span>Request Full Architecture Spec</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#1CC8E5]" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -1102,112 +1119,114 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 5. INDUSTRY-SPECIFIC SERVICES MATRIX */}
       {/* ========================================================================= */}
-      <section className="section-py site-container">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
-            SERVICES MATRIX
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
-            Industry-Specific Capabilities & Tech Stacks
-          </h2>
-          <p className="text-[#5B6B7C] text-base">
-            A comprehensive breakdown of domain challenges, tailored solutions, specialized tech stacks, and quantified outcomes.
-          </p>
-        </div>
+      <section className="section-py bg-white">
+        <div className="site-container">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#007F9C]">
+              SERVICES MATRIX
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#101820] tracking-tight">
+              Industry-Specific Capabilities & Tech Stacks
+            </h2>
+            <p className="text-[#566171] text-base">
+              A comprehensive breakdown of domain challenges, tailored solutions, specialized tech stacks, and quantified outcomes.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {DETAILED_SERVICES.map((svc) => {
-            const SvcIcon = svc.icon;
-            return (
-              <div
-                key={svc.id}
-                className="p-8 rounded-[28px] bg-white border border-sky-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-6"
-              >
-                <div className="space-y-5">
-                  {/* Header */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-[#F4FAFC] text-[#0F2B46] border border-sky-100 flex items-center justify-center font-bold">
-                        <SvcIcon className="w-6 h-6 text-[#18B6D8]" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {DETAILED_SERVICES.map((svc) => {
+              const SvcIcon = svc.icon;
+              return (
+                <div
+                  key={svc.id}
+                  className="p-8 rounded-[18px] bg-white border border-[#E5EAF0] shadow-xs hover:border-[#00C8E8] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between space-y-6"
+                >
+                  <div className="space-y-5">
+                    {/* Header */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-[#F7F9FB] text-[#101820] border border-[#E5EAF0] flex items-center justify-center font-bold">
+                          <SvcIcon className="w-6 h-6 text-[#007F9C]" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-black text-[#101820]">{svc.name}</h3>
+                          <span className="text-[11px] font-bold text-[#007F9C]">Specialized Practice</span>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl font-black text-[#0F2B46]">{svc.name}</h3>
-                        <span className="text-[11px] font-bold text-[#18B6D8]">Specialized Practice</span>
+                      <Link
+                        href="/contact"
+                        className="px-4 py-2 rounded-xl bg-[#101820] hover:bg-black text-white text-xs font-bold transition-all shadow-xs"
+                      >
+                        Engage Pod
+                      </Link>
+                    </div>
+
+                    {/* Challenge */}
+                    <div className="p-4 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
+                        The Domain Challenge:
+                      </span>
+                      <p className="text-xs text-[#566171] leading-relaxed">{svc.challenge}</p>
+                    </div>
+
+                    {/* Solutions */}
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#101820]">
+                        Engineered Solutions:
+                      </span>
+                      <ul className="space-y-1.5">
+                        {svc.solutions.map((s) => (
+                          <li key={s} className="text-xs text-[#101820] flex items-start gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-[#007F9C] flex-shrink-0 mt-0.5" />
+                            <span>{s}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="space-y-2 pt-2 border-t border-[#E5EAF0]">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
+                        Tech Stack:
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {svc.techStack.map((t) => (
+                          <span
+                            key={t}
+                            className="px-2.5 py-1 rounded-lg bg-[#F7F9FB] border border-[#E5EAF0] text-xs font-bold text-[#101820]"
+                          >
+                            {t}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                    <Link
-                      href="/contact"
-                      className="px-4 py-2 rounded-xl bg-[#0F2B46] hover:bg-[#0D3B66] text-white text-xs font-bold transition-all shadow-xs"
-                    >
-                      Engage Pod
-                    </Link>
                   </div>
 
-                  {/* Challenge */}
-                  <div className="p-4 rounded-xl bg-[#F4FAFC] border border-sky-100 space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
-                      The Domain Challenge:
-                    </span>
-                    <p className="text-xs text-[#5B6B7C] leading-relaxed">{svc.challenge}</p>
-                  </div>
-
-                  {/* Solutions */}
-                  <div className="space-y-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#0F2B46]">
-                      Engineered Solutions:
-                    </span>
-                    <ul className="space-y-1.5">
-                      {svc.solutions.map((s) => (
-                        <li key={s} className="text-xs text-[#0F2B46] flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-[#18B6D8] flex-shrink-0 mt-0.5" />
-                          <span>{s}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="space-y-2 pt-2 border-t border-slate-100">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                      Tech Stack:
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {svc.techStack.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2.5 py-1 rounded-lg bg-[#F4FAFC] border border-sky-100 text-xs font-bold text-[#0F2B46]"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Outcomes Ribbon */}
+                  <div className="pt-4 border-t border-[#E5EAF0] bg-[#F7F9FB] -mx-8 -mb-8 p-6 rounded-b-[18px] flex flex-wrap items-center justify-between gap-2">
+                    {svc.outcomes.map((o) => (
+                      <div key={o} className="flex items-center gap-1.5 text-xs font-bold text-[#101820]">
+                        <Check className="w-4 h-4 text-emerald-600" />
+                        <span>{o}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-
-                {/* Outcomes Ribbon */}
-                <div className="pt-4 border-t border-slate-100 bg-[#F4FAFC] -mx-8 -mb-8 p-6 rounded-b-[28px] flex flex-wrap items-center justify-between gap-2">
-                  {svc.outcomes.map((o) => (
-                    <div key={o} className="flex items-center gap-1.5 text-xs font-bold text-[#0F2B46]">
-                      <Check className="w-4 h-4 text-emerald-600" />
-                      <span>{o}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
       {/* 6. CLIENT LOGO WALL & ECOSYSTEM */}
       {/* ========================================================================= */}
-      <section className="section-py border-y border-slate-200/60">
+      <section className="section-py bg-[#F7F9FB] border-y border-[#E5EAF0]">
         <div className="site-container text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#007F9C]">
             PROVEN ENTERPRISE ECOSYSTEM
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#0F2B46] tracking-tight mt-2 mb-10">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#101820] tracking-tight mt-2 mb-10">
             Trusted by Data-Driven Teams Across High-Stakes Industries
           </h2>
 
@@ -1215,10 +1234,10 @@ export default function IndustriesPage() {
             {CLIENT_ECOSYSTEM.map((brand) => (
               <div
                 key={brand.name}
-                className="p-4 rounded-2xl bg-white border border-sky-100 hover:border-[#1CC8E5]/50 transition-colors text-center space-y-1 shadow-2xs"
+                className="p-4 rounded-xl bg-white border border-[#E5EAF0] hover:border-[#00C8E8] transition-colors text-center space-y-1 shadow-2xs"
               >
-                <div className="text-sm font-black text-[#0F2B46]">{brand.name}</div>
-                <div className="text-[10px] text-[#5B6B7C] truncate">{brand.tag}</div>
+                <div className="text-sm font-black text-[#101820]">{brand.name}</div>
+                <div className="text-[10px] text-[#566171] truncate">{brand.tag}</div>
               </div>
             ))}
           </div>
@@ -1228,42 +1247,44 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 7. IMPACT METRICS SECTION */}
       {/* ========================================================================= */}
-      <section className="section-py site-container">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
-            PROVEN RETURN ON INVESTMENT
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
-            Enterprise Scale & Institutional Impact
-          </h2>
-          <p className="text-[#5B6B7C] text-base">
-            Our deployments are measured in compressed query latency, eliminated downtime, and measurable balance-sheet ROI.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
-            <div className="text-4xl sm:text-5xl font-black text-[#0F2B46]">100+</div>
-            <div className="text-sm font-bold text-[#18B6D8]">Production Deployments</div>
-            <p className="text-xs text-[#5B6B7C]">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
+      <section className="section-py bg-white">
+        <div className="site-container">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#007F9C]">
+              PROVEN RETURN ON INVESTMENT
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#101820] tracking-tight">
+              Enterprise Scale & Institutional Impact
+            </h2>
+            <p className="text-[#566171] text-base">
+              Our deployments are measured in compressed query latency, eliminated downtime, and measurable balance-sheet ROI.
+            </p>
           </div>
 
-          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
-            <div className="text-4xl sm:text-5xl font-black text-[#0F2B46]">95%</div>
-            <div className="text-sm font-bold text-[#18B6D8]">Client Retention</div>
-            <p className="text-xs text-[#5B6B7C]">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-8 rounded-[18px] bg-[#F7F9FB] border border-[#E5EAF0] text-center space-y-2 shadow-xs hover:border-[#00C8E8] transition-colors">
+              <div className="text-4xl sm:text-5xl font-black text-[#101820]">100+</div>
+              <div className="text-sm font-bold text-[#007F9C]">Production Deployments</div>
+              <p className="text-xs text-[#566171]">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
+            </div>
 
-          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
-            <div className="text-4xl sm:text-5xl font-black text-[#0F2B46]">99.99%</div>
-            <div className="text-sm font-bold text-[#18B6D8]">Verified SLA Guarantee</div>
-            <p className="text-xs text-[#5B6B7C]">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
-          </div>
+            <div className="p-8 rounded-[18px] bg-[#F7F9FB] border border-[#E5EAF0] text-center space-y-2 shadow-xs hover:border-[#00C8E8] transition-colors">
+              <div className="text-4xl sm:text-5xl font-black text-[#101820]">95%</div>
+              <div className="text-sm font-bold text-[#007F9C]">Client Retention</div>
+              <p className="text-xs text-[#566171]">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
+            </div>
 
-          <div className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-sm text-center space-y-2">
-            <div className="text-4xl sm:text-5xl font-black text-emerald-600">$140M+</div>
-            <div className="text-sm font-bold text-emerald-700">Client Value Unlocked</div>
-            <p className="text-xs text-[#5B6B7C]">Combined cloud infrastructure savings and operational margin growth.</p>
+            <div className="p-8 rounded-[18px] bg-[#F7F9FB] border border-[#E5EAF0] text-center space-y-2 shadow-xs hover:border-[#00C8E8] transition-colors">
+              <div className="text-4xl sm:text-5xl font-black text-[#101820]">99.99%</div>
+              <div className="text-sm font-bold text-[#007F9C]">Verified SLA Guarantee</div>
+              <p className="text-xs text-[#566171]">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
+            </div>
+
+            <div className="p-8 rounded-[18px] bg-[#F7F9FB] border border-[#E5EAF0] text-center space-y-2 shadow-xs hover:border-[#00C8E8] transition-colors">
+              <div className="text-4xl sm:text-5xl font-black text-emerald-600">$140M+</div>
+              <div className="text-sm font-bold text-emerald-700">Client Value Unlocked</div>
+              <p className="text-xs text-[#566171]">Combined cloud infrastructure savings and operational margin growth.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -1271,13 +1292,13 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 8. RESEARCH & INDUSTRY INSIGHTS */}
       {/* ========================================================================= */}
-      <section className="section-py border-t border-slate-200/60">
+      <section className="section-py bg-[#F7F9FB] border-t border-[#E5EAF0]">
         <div className="site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#18B6D8]">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#007F9C]">
               ENGINEERING PLAYBOOKS
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F2B46] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#101820] tracking-tight">
               Industry Research & Architecture Guides
             </h2>
           </div>
@@ -1286,32 +1307,32 @@ export default function IndustriesPage() {
             {RESEARCH_PAPERS.map((paper) => (
               <div
                 key={paper.title}
-                className="p-8 rounded-[24px] bg-white border border-sky-100 shadow-2xs hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4"
+                className="p-8 rounded-[18px] bg-white border border-[#E5EAF0] shadow-xs hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#00C8E8] hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-[#0F2B46] bg-[#F4FAFC] px-2.5 py-0.5 rounded-full border border-sky-100">
+                    <span className="font-bold text-[#007F9C] bg-[#EBF9FC] px-2.5 py-0.5 rounded-full border border-[#00C8E8]/20">
                       {paper.category}
                     </span>
-                    <span className="text-slate-400 font-semibold">{paper.readTime}</span>
+                    <span className="text-[#566171] font-semibold">{paper.readTime}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#0F2B46] leading-snug">
+                  <h3 className="text-base font-bold text-[#101820] leading-snug">
                     {paper.title}
                   </h3>
 
-                  <p className="text-xs text-[#5B6B7C] leading-relaxed">
+                  <p className="text-xs text-[#566171] leading-relaxed">
                     {paper.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100">
+                <div className="pt-4 border-t border-[#E5EAF0]">
                   <Link
                     href="/blog"
-                    className="text-xs font-bold text-[#0F2B46] hover:text-[#18B6D8] inline-flex items-center gap-1.5"
+                    className="text-xs font-bold text-[#101820] hover:text-[#00C8E8] inline-flex items-center gap-1.5"
                   >
                     <span>Read Whitepaper</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#1CC8E5]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#00C8E8]" />
                   </Link>
                 </div>
               </div>
@@ -1323,32 +1344,35 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 9. FINAL CTA */}
       {/* ========================================================================= */}
-      <section className="py-20 lg:py-24">
+      <section className="py-20 lg:py-24 bg-[#050505] border-t border-[#1B242B]">
         <div className="site-container">
-          <div className="relative rounded-[32px] p-8 sm:p-14 text-center overflow-hidden bg-gradient-to-r from-[#0F2B46] via-[#0D3B66] to-[#1CC8E5] text-white shadow-2xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-cyan-200 border border-white/15">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-200" /> Start Your 2–4 Week Industry Engagement
+          <div className="relative rounded-[32px] p-8 sm:p-14 text-center overflow-hidden bg-[#101820] border border-[#1B242B] text-white shadow-2xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#00C8E8]/10 text-[#00C8E8] border border-[#00C8E8]/30">
+              <Sparkles className="w-3.5 h-3.5 text-[#00C8E8]" /> Start Your 2–4 Week Industry Engagement
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black max-w-2xl mx-auto text-white">
               Ready to Engineer Mission-Critical Systems for Your Domain?
             </h2>
 
-            <p className="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#A1AAB7] text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-50 text-[#0F2B46] font-bold text-sm shadow-xl transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-black font-extrabold text-sm shadow-xl transition-all"
+                style={{
+                  background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
+                }}
               >
                 <span>Book Architecture Call</span>
-                <ArrowRight className="w-4 h-4 text-[#18B6D8]" />
+                <ArrowRight className="w-4 h-4 text-black" />
               </Link>
               <Link
                 href="/case-studies"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm border border-[#1B242B] transition-all"
               >
                 <span>Explore Case Studies</span>
               </Link>

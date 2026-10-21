@@ -23,34 +23,43 @@ export default function DataPlatformsPage() {
   return (
     <div className="bg-white">
       {/* 1. Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#ECFEFF]/25 to-white pt-28 pb-20 lg:pt-36 lg:pb-28 border-b border-slate-200/80">
+      <section className="relative overflow-hidden bg-[#050505] text-white pt-28 pb-20 lg:pt-36 lg:pb-28">
+          {/* Subtle radial glow */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] pointer-events-none -z-0 opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(0,200,232,0.12), rgba(0,127,156,0.06), transparent 70%)",
+            }}
+          />
+
           <div className="site-container relative z-10 max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs mb-6">
-              <Database className="w-3.5 h-3.5 text-[#0E7490]" /> Modern Data Platforms & Lakehouses
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#07090D] text-[#00C8E8] border border-[#00C8E8]/40 shadow-xs mb-6">
+              <Database className="w-3.5 h-3.5 text-[#00C8E8]" /> Modern Data Platforms & Lakehouses
             </div>
 
-            <h1 className="text-[36px] sm:text-[52px] lg:text-[64px] font-black tracking-tight text-[#082F49] leading-[1.1] mb-6">
+            <h1 className="text-[36px] sm:text-[52px] lg:text-[64px] font-black tracking-tight text-white leading-[1.1] mb-6">
               Data Platforms <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B4F6C] via-[#0E7490] to-[#14B8A6]">
+              <span className="text-[#00C8E8]">
                 Built For Petabyte Scale
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10">
+            <p className="text-lg sm:text-xl text-[#A1AAB7] leading-relaxed max-w-2xl mx-auto mb-10">
               Stop fighting silent pipeline crashes and stale warehouse models. We engineer automated streaming ingestion, dbt transformations, and zero-loss lakehouse architectures in 2–4 weeks.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#082F49] hover:bg-[#0B4F6C] text-white font-bold text-sm shadow-xl shadow-[#082F49]/15 flex items-center justify-center gap-2 transition-all"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl shadow-[#00C8E8]/20 flex items-center justify-center gap-2 transition-all"
               >
                 <span>Scope Your Data Platform</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/case-studies"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-slate-50 text-[#082F49] font-bold text-sm border border-slate-200 shadow-2xs flex items-center justify-center transition-all"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#101820] hover:bg-white/10 text-white font-bold text-sm border border-[#1B242B] shadow-2xs flex items-center justify-center transition-all"
               >
                 <span>View Lakehouse Case Studies</span>
               </Link>
@@ -284,17 +293,17 @@ export default function DataPlatformsPage() {
         </section>
 
         {/* 7. Bottom CTA */}
-        <section className="bg-gradient-to-r from-[#082F49] via-[#083344] to-[#041E2A] text-white py-16 text-center">
+        <section className="bg-[#050505] border-t border-[#1B242B] text-white py-16 text-center">
           <div className="site-container max-w-2xl mx-auto space-y-6">
             <h2 className="text-3xl sm:text-4xl font-black">
               Ready to Upgrade Your Data Platform?
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[#A1AAB7] text-sm sm:text-base">
               Book a 30-minute scoping call with a Principal Data Architect.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#0B4F6C] hover:bg-[#0E7490] text-white font-bold text-sm shadow-xl transition-all border border-[#14B8A6]/30"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl transition-all"
             >
               <span>Schedule Scoping Session</span>
               <ArrowRight className="w-4 h-4" />
