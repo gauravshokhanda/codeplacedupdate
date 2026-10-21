@@ -110,23 +110,15 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             ? pathname.startsWith("/blog") || pathname.startsWith("/blogs")
             : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
 
-        const linkColorClass = isDarkTheme
-          ? isActive
-            ? "text-[#00C7E8] font-bold"
-            : "text-[#E2E8F0] hover:text-[#00C7E8]"
-          : megaMenuOpen || isActive
-          ? "text-[#0B6B88] font-bold"
-          : "text-[#12344A] hover:text-[#14B8C5]";
+        const linkColorClass = isActive
+          ? "text-[#00BCD4] font-bold"
+          : "text-white hover:text-[#00BCD4] transition-colors";
 
-        const chevronColorClass = isDarkTheme
-          ? megaMenuOpen
-            ? "rotate-180 text-[#00C7E8]"
-            : "text-[#E2E8F0]/70 group-hover:text-[#00C7E8]"
-          : megaMenuOpen
-          ? "rotate-180 text-[#14B8C5]"
-          : "text-[#12344A]/60 group-hover:text-[#14B8C5]";
+        const chevronColorClass = megaMenuOpen
+          ? "rotate-180 text-[#00BCD4]"
+          : "text-white/80 group-hover:text-[#00BCD4] transition-colors";
 
-        const underlineBg = isDarkTheme ? "bg-[#00C7E8]" : "bg-[#14B8C5]";
+        const underlineBg = "bg-[#00BCD4]";
 
         if (isServices) {
           return (
@@ -170,7 +162,9 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               >
                 <span>{item.label}</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${chevronColorClass}`}
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    industriesMenuOpen ? "rotate-180 text-[#00BCD4]" : "text-white/80 group-hover:text-[#00BCD4] transition-colors"
+                  }`}
                 />
                 <span
                   className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
@@ -228,16 +222,18 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. INITIAL STATIC NAVBAR WITH TOP INFORMATION BAR */}
+      {/* 1. UNIFIED FIXED NAVBAR — PURE BLACK #000000 AT ALL SCROLL POSITIONS */}
       {/* ========================================================================= */}
       <header
-        className="absolute top-0 left-0 w-full z-40 transition-colors bg-transparent"
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-200 bg-[#000000] border-b border-[#292929] ${
+          showSticky ? "shadow-md shadow-black/80" : ""
+        }`}
       >
         {/* Main Navbar */}
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-[76px] sm:h-[84px] flex items-center justify-between">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-[76px] sm:h-[80px] flex items-center justify-between">
           {/* Logo on Left */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-            <CodePlacedLogo size="md" variant={isDarkTheme ? "light" : "dark"} />
+            <CodePlacedLogo size="md" variant="light" />
           </Link>
 
           {/* Navigation Links (Centered) */}
@@ -260,105 +256,31 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           </div>
         </div>
 
-        {/* Mega Menu Dropdowns (Attached to initial navbar) */}
-        {!showSticky && (
-          <>
-            <div
-              onMouseEnter={handleMouseEnterServices}
-              onMouseLeave={handleMouseLeaveServices}
-            >
-              <ServicesMegaMenu
-                isOpen={megaMenuOpen}
-                onClose={() => setMegaMenuOpen(false)}
-                onOpenBookAudit={onOpenBookAudit}
-                isDarkTheme={isDarkTheme}
-              />
-            </div>
+        {/* Mega Menu Dropdowns (Attached directly to navbar) */}
+        <div
+          onMouseEnter={handleMouseEnterServices}
+          onMouseLeave={handleMouseLeaveServices}
+        >
+          <ServicesMegaMenu
+            isOpen={megaMenuOpen}
+            onClose={() => setMegaMenuOpen(false)}
+            onOpenBookAudit={onOpenBookAudit}
+            isDarkTheme={true}
+          />
+        </div>
 
-            <div
-              onMouseEnter={handleMouseEnterIndustries}
-              onMouseLeave={handleMouseLeaveIndustries}
-            >
-              <IndustriesMegaMenu
-                isOpen={industriesMenuOpen}
-                onClose={() => setIndustriesMenuOpen(false)}
-                onOpenBookAudit={onOpenBookAudit}
-                isDarkTheme={isDarkTheme}
-              />
-            </div>
-          </>
-        )}
+        <div
+          onMouseEnter={handleMouseEnterIndustries}
+          onMouseLeave={handleMouseLeaveIndustries}
+        >
+          <IndustriesMegaMenu
+            isOpen={industriesMenuOpen}
+            onClose={() => setIndustriesMenuOpen(false)}
+            onOpenBookAudit={onOpenBookAudit}
+            isDarkTheme={true}
+          />
+        </div>
       </header>
-
-      {/* ========================================================================= */}
-      {/* 2. STICKY NAVBAR (Full width, Clean TechAhead Style) */}
-      {/* ========================================================================= */}
-      <AnimatePresence>
-        {showSticky && (
-          <motion.div
-            initial={{ y: -8, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -8, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className={`fixed top-0 left-0 right-0 w-full h-[72px] sm:h-[76px] z-[999] backdrop-blur-[12px] transition-colors duration-200 ${
-              isDarkTheme
-                ? "bg-[#06151C]/95 border-b border-[#163340]/80 shadow-lg shadow-black/40"
-                : "bg-white/95 border-b border-slate-200/80 shadow-xs"
-            }`}
-          >
-            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-              {/* Logo on Left */}
-              <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-                <CodePlacedLogo size="md" variant={isDarkTheme ? "light" : "dark"} />
-              </Link>
-
-              {/* Navigation Links (Centered) */}
-              <div className="flex-1 flex justify-center">
-                {renderNavLinks()}
-              </div>
-
-              {/* Right CTA */}
-              {renderCtaButton()}
-
-              {/* Mobile Menu Toggle (Clean Hamburger on Right) */}
-              <div className="flex items-center lg:hidden">
-                <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="p-2.5 rounded-xl transition-colors text-white hover:text-[#00C8E8] hover:bg-white/10 cursor-pointer"
-                  aria-label="Toggle navigation menu"
-                >
-                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                </button>
-              </div>
-            </div>
-
-            {/* Mega Menu Dropdowns (Attached to sticky navbar) */}
-            <div
-              onMouseEnter={handleMouseEnterServices}
-              onMouseLeave={handleMouseLeaveServices}
-            >
-              <ServicesMegaMenu
-                isOpen={megaMenuOpen}
-                onClose={() => setMegaMenuOpen(false)}
-                onOpenBookAudit={onOpenBookAudit}
-                isDarkTheme={isDarkTheme}
-              />
-            </div>
-
-            <div
-              onMouseEnter={handleMouseEnterIndustries}
-              onMouseLeave={handleMouseLeaveIndustries}
-            >
-              <IndustriesMegaMenu
-                isOpen={industriesMenuOpen}
-                onClose={() => setIndustriesMenuOpen(false)}
-                onOpenBookAudit={onOpenBookAudit}
-                isDarkTheme={isDarkTheme}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ========================================================================= */}
       {/* 3. MOBILE SLIDE-DOWN DRAWER (Clean White Background, Dark Text, Cyan Accents) */}
