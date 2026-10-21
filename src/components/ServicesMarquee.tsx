@@ -17,7 +17,7 @@ const AwsLogo = () => (
   <svg className="w-full h-full object-contain shrink-0" viewBox="0 0 75 45" fill="none" aria-label="AWS">
     <path
       d="M18.3 14.5c-.3-1.8-1.5-3.3-3.9-3.3-3.1 0-4.6 2.4-4.6 5.8 0 4.1 2 5.9 4.7 5.9 2 0 3.2-1.3 3.7-2.7h3.4c-.6 3.1-2.9 5.5-7.1 5.5-4.9 0-8.2-3.4-8.2-8.7 0-5.1 3.4-8.7 8.1-8.7 4.1 0 6.6 2.5 7.1 6.2h-3.2zm11.3 10.9h-3.3l-5.6-16.8h3.5l3.8 12.3 3.7-12.3h3.5l-5.6 16.8zm17-1.1c-.8.8-2 1.4-3.5 1.4-2.8 0-4.5-1.7-4.5-4.3 0-3.1 2.4-4.4 5.7-4.4h2.2v-1.1c0-1.7-.9-2.7-2.7-2.7-1.4 0-2.4.6-2.8 1.8h-3.2c.5-2.8 2.8-4.4 6-4.4 3.7 0 5.8 1.9 5.8 5.2v9.6h-3.1v-1.1zm-4.7-2.3c1.5 0 2.6-.7 3.3-1.6v-2.1h-2c-1.8 0-3 .6-3 2.1 0 1.1.7 1.6 1.7 1.6z"
-      fill="#232F3E"
+      fill="#FFFFFF"
     />
     <path
       d="M60.1 31.6C48.6 37.8 33.3 38.6 18.2 34c-2.1-.6-4.1-1.5-6.2-2.5-.6-.3-.3-.9.3-.6 14.7 8 33.6 7.4 47.1.6 1-.5 1.7.5.7 1.1z"
@@ -171,7 +171,7 @@ const AndroidLogo = () => (
 );
 
 const AppleLogo = () => (
-  <svg className="w-full h-full object-contain shrink-0" viewBox="0 0 170 170" fill="#000000" aria-label="Apple iOS">
+  <svg className="w-full h-full object-contain shrink-0" viewBox="0 0 170 170" fill="#FFFFFF" aria-label="Apple iOS">
     <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.08-7.83-8.1-12.44-15.06-6.61-9.99-11.75-20.93-15.42-32.82-3.67-11.89-5.51-23.08-5.51-33.56 0-14.86 3.82-27.24 11.45-37.13 7.64-9.89 17.38-14.97 29.23-15.24 5.37 0 11.22 1.35 17.54 4.06 6.32 2.7 10.23 4.12 11.74 4.24 1.28-.12 5.33-1.6 12.16-4.43 6.83-2.83 12.66-4.06 17.5-3.69 13.58 1.05 24.36 6.29 32.33 15.72-11.89 7.23-17.72 17.1-17.49 29.62.24 9.89 4.06 18.23 11.45 25.02 7.39 6.79 16.32 10.74 26.79 11.86-2.11 6.53-4.7 12.98-7.76 19.34zM119.22 33.15c0-7.23 2.66-14.15 7.99-20.76 5.33-6.61 11.96-10.74 19.88-12.39.24 1.28.35 2.45.35 3.51 0 7.39-2.77 14.42-8.31 21.09-5.54 6.67-12.35 10.68-20.43 12.03-.35-1.16-.48-2.32-.48-3.48z" />
   </svg>
 );
@@ -378,37 +378,55 @@ const MARQUEE_ITEMS: MarqueeItem[] = [
 ];
 
 export function ServicesMarquee() {
-  // Seamless loop by duplicating items array
-  const fullTrack = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
-
   return (
-    <div className="w-full max-w-full bg-[#FFFFFF] h-[88px] sm:h-[98px] lg:h-[110px] min-h-[88px] sm:min-h-[98px] lg:min-h-[110px] flex items-center overflow-hidden select-none">
+    <div className="w-full max-w-full bg-[#000000] py-5 sm:py-6 flex items-center overflow-hidden select-none relative z-10">
       <div className="w-full overflow-hidden relative">
         <div
-          className="animate-marquee hover:[animation-play-state:paused] flex items-center"
-          style={{ animationDuration: "68s" }}
+          className="animate-marquee flex items-center"
+          style={{ animationDuration: "135s" }}
         >
-          {fullTrack.map((item, idx) => (
-            <div
-              key={`${item.id}-${idx}`}
-              className="flex items-center gap-3.5 sm:gap-4 px-7 sm:px-9 lg:px-12 text-[#111827] hover:text-[#00BCD4] transition-all duration-200 shrink-0 group cursor-default"
-            >
-              {/* Scaled Icon Container: 30px mobile -> 33px tablet -> 36px desktop */}
-              <div className="w-[30px] h-[30px] sm:w-[33px] sm:h-[33px] lg:w-[36px] lg:h-[36px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
-                {item.icon}
+          {/* Sequence 1 */}
+          <div className="flex items-center shrink-0">
+            {MARQUEE_ITEMS.map((item) => (
+              <div
+                key={`seq1-${item.id}`}
+                className="flex items-center gap-3.5 sm:gap-4 pr-11 sm:pr-12 text-white hover:text-[#00BCD4] transition-colors duration-200 shrink-0 group cursor-default"
+              >
+                {/* Scaled Icon Container: 32px - 36px */}
+                <div className="w-[32px] h-[32px] sm:w-[34px] sm:h-[34px] lg:w-[36px] lg:h-[36px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                  {item.icon}
+                </div>
+
+                {/* Text Label: 18px - 20px font */}
+                <span className="text-[18px] sm:text-[19px] lg:text-[20px] font-bold tracking-tight text-white group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
+                  {item.name}
+                </span>
               </div>
+            ))}
+          </div>
 
-              {/* Text Label: 18px mobile -> 20px tablet -> 22px desktop, semibold */}
-              <span className="text-[18px] sm:text-[20px] lg:text-[22px] font-semibold tracking-tight text-[#111827] group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
-                {item.name}
-              </span>
+          {/* Sequence 2 (Identical duplicate for seamless infinite loop) */}
+          <div className="flex items-center shrink-0" aria-hidden="true">
+            {MARQUEE_ITEMS.map((item) => (
+              <div
+                key={`seq2-${item.id}`}
+                className="flex items-center gap-3.5 sm:gap-4 pr-11 sm:pr-12 text-white hover:text-[#00BCD4] transition-colors duration-200 shrink-0 group cursor-default"
+              >
+                {/* Scaled Icon Container: 32px - 36px */}
+                <div className="w-[32px] h-[32px] sm:w-[34px] sm:h-[34px] lg:w-[36px] lg:h-[36px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                  {item.icon}
+                </div>
 
-              {/* Cyan Accent Dot Separator with Generous Spacing */}
-              <span className="w-2 h-2 rounded-full bg-[#00BCD4]/40 group-hover:bg-[#00BCD4] transition-colors ml-7 sm:ml-9 lg:ml-12 shrink-0" />
-            </div>
-          ))}
+                {/* Text Label: 18px - 20px font */}
+                <span className="text-[18px] sm:text-[19px] lg:text-[20px] font-bold tracking-tight text-white group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
+                  {item.name}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

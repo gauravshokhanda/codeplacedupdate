@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -14,9 +14,7 @@ import {
   Minus,
   Bot,
   Code2,
-  Smartphone,
   Database,
-  Cloud,
   BarChart3,
   HeartPulse,
   Landmark,
@@ -32,61 +30,82 @@ import {
   Search,
   Calendar,
   Clock,
+  Layers,
   Sparkles,
-  Video,
+  TrendingUp,
 } from "lucide-react";
 import { ServicesMarquee } from "@/components/ServicesMarquee";
 
 // =========================================================================
-// 1. DATA: SERVICES (6 EQUAL CARDS - PREMIUM BLACK THEME #05090C)
+// HERO BACKGROUND IMAGE CONFIGURATION
+// Easily replace the static hero background image by changing this path:
+// =========================================================================
+export const HERO_BACKGROUND_IMAGE = "/images/hero-team-consulting-v2.jpg";
+
+// =========================================================================
+// 1. DATA: EXACTLY FOUR CORE SERVICES (APPINVENTIV 4-COLUMN STAGGERED SHOWCASE)
 // =========================================================================
 const SERVICES_DATA = [
   {
-    title: "AI Solutions & Automation",
+    num: "01",
+    title: "Software Development",
     description:
-      "Custom LLM copilots, private enterprise RAG pipelines, and autonomous agent swarms engineered to eliminate manual operational workflows.",
-    icon: Bot,
-    href: "/services/ai-copilots",
-  },
-  {
-    title: "Web Development",
-    description:
-      "High-performance Next.js and React enterprise applications engineered for sub-second speeds, flawless responsiveness, and global scale.",
+      "Build scalable digital products, web applications, mobile applications, and custom business software.",
+    capabilities: [
+      "Web & Mobile Applications",
+      "SaaS Development",
+      "Custom Software",
+      "API Integrations",
+    ],
     icon: Code2,
-    href: "/services",
+    href: "/services/app-web-development",
   },
   {
-    title: "Mobile App Development",
-    description:
-      "Native iOS & Android apps alongside high-performance cross-platform Flutter solutions built for engagement, retention, and speed.",
-    icon: Smartphone,
-    href: "/services",
-  },
-  {
+    num: "02",
     title: "Data Engineering",
     description:
-      "Modern lakehouse architectures, automated real-time ETL pipelines, and scalable Snowflake & Databricks data platforms.",
+      "Build reliable data infrastructure that connects systems, automates pipelines, and makes information accessible.",
+    capabilities: [
+      "Data Pipelines & ETL/ELT",
+      "Data Warehousing",
+      "Data Integration",
+      "Data Architecture",
+    ],
     icon: Database,
-    href: "/services/data-platforms",
+    href: "/services/data-engineering-analytics",
   },
   {
-    title: "Cloud & DevOps",
+    num: "03",
+    title: "Data Analytics & Business Intelligence",
     description:
-      "Multi-cloud architectures on AWS, Azure, and GCP with automated CI/CD pipelines, Kubernetes orchestration, and 99.99% uptime.",
-    icon: Cloud,
-    href: "/services/cloud-infrastructure",
-  },
-  {
-    title: "Analytics & Business Intelligence",
-    description:
-      "Executive Power BI, Tableau, and embedded telemetry dashboards transforming messy raw data into actionable decision intelligence.",
+      "Turn business data into actionable insights through dashboards, reporting, and performance measurement.",
+    capabilities: [
+      "Executive Dashboards",
+      "Power BI & Tableau",
+      "Business Reporting",
+      "Data Visualization",
+    ],
     icon: BarChart3,
     href: "/services/executive-dashboards",
+  },
+  {
+    num: "04",
+    title: "AI & Automation",
+    description:
+      "Build intelligent applications and automate business workflows with practical AI solutions.",
+    capabilities: [
+      "AI Agents & RAG",
+      "Workflow Automation",
+      "AI Integrations",
+      "Intelligent Applications",
+    ],
+    icon: Bot,
+    href: "/services/ai-copilots",
   },
 ];
 
 // =========================================================================
-// 2. DATA: INDUSTRIES (8 REFINED CARDS - LIGHT BACKGROUND)
+// 2. DATA: INDUSTRIES WE SERVE (8 STRUCTURED ENTERPRISE CATEGORIES)
 // =========================================================================
 const INDUSTRIES_DATA = [
   {
@@ -148,7 +167,7 @@ const INDUSTRIES_DATA = [
 ];
 
 // =========================================================================
-// 3. DATA: OUR PROCESS (4 CONNECTED STEPS - DARK NAVY)
+// 3. DATA: OUR DELIVERY PROCESS (4 CLEAR CONNECTED PHASES)
 // =========================================================================
 const PROCESS_STEPS = [
   {
@@ -178,7 +197,7 @@ const PROCESS_STEPS = [
 ];
 
 // =========================================================================
-// 4. DATA: TESTIMONIALS (3 REFINED CARDS - WHITE BACKGROUND)
+// 4. DATA: CLIENT TESTIMONIALS (VERIFIED ENTERPRISE QUOTES)
 // =========================================================================
 const TESTIMONIALS_DATA = [
   {
@@ -208,13 +227,13 @@ const TESTIMONIALS_DATA = [
 ];
 
 // =========================================================================
-// 5. DATA: FAQS (5 ACCORDION ITEMS - DARK NAVY)
+// 5. DATA: FREQUENTLY ASKED QUESTIONS
 // =========================================================================
 const FAQ_ITEMS = [
   {
     question: "What services does CodePlaced provide?",
     answer:
-      "CodePlaced specializes in end-to-end technology engineering: custom full-stack web and mobile application development, enterprise AI copilots & autonomous agents, modern cloud data engineering, business intelligence dashboards, and scalable cloud DevOps infrastructure.",
+      "CodePlaced specializes in end-to-end technology engineering: custom full-stack software development, modern data engineering, business intelligence dashboards, and production enterprise AI & automation workflows.",
   },
   {
     question: "How long does a typical project take?",
@@ -238,16 +257,104 @@ const FAQ_ITEMS = [
   },
 ];
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
+  const servicesSectionRef = useRef<HTMLDivElement>(null);
+  const col1Ref = useRef<HTMLDivElement>(null);
+  const col2Ref = useRef<HTMLDivElement>(null);
+  const col3Ref = useRef<HTMLDivElement>(null);
+  const col4Ref = useRef<HTMLDivElement>(null);
+
+  // =========================================================================
+  // GSAP SCROLLTRIGGER: 3-PHASE PINNED SERVICES SCROLL ANIMATION
+  // Phase 1 (0.00 -> 0.70): Progressive column rising toward Column 1
+  // Phase 2 (0.70 -> 0.90): Stationary hold of fully aligned layout
+  // Phase 3 (0.90 -> 1.00): Natural release into About CodePlaced
+  // =========================================================================
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handleChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+
+    const ctx = gsap.context(() => {
+      const section = servicesSectionRef.current;
+      if (!section) return;
+
+      if (mediaQuery.matches) {
+        return;
+      }
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1024px)", () => {
+        const col2 = col2Ref.current;
+        const col3 = col3Ref.current;
+        const col4 = col4Ref.current;
+        if (!col2 || !col3 || !col4) return;
+
+        // Viewport height safety check: If viewport height is too small to fit the pinned section,
+        // disable pinning to avoid cutting off columns or buttons
+        const navbarHeight = 80;
+        const availableHeight = window.innerHeight - navbarHeight;
+        if (availableHeight < 560) {
+          gsap.set([col2, col3, col4], { y: 0 });
+          return;
+        }
+
+        // Set initial desktop offsets:
+        // Col 1: 0px (stationary reference)
+        // Col 2: 110px
+        // Col 3: 220px
+        // Col 4: 330px
+        gsap.set(col2, { y: 110 });
+        gsap.set(col3, { y: 220 });
+        gsap.set(col4, { y: 330 });
+
+        // Single coordinated ScrollTrigger timeline pinned right below the 80px navbar
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80px",
+            end: "+=680",
+            pin: true,
+            scrub: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Phase 1 (0.00 -> 0.70): Progressive column alignment
+        // Col 2 rises toward Col 1: 110px -> 0px
+        tl.to(col2, { y: 0, duration: 0.42, ease: "none" }, 0.00);
+
+        // Col 3 follows with slight delay: 220px -> 0px
+        tl.to(col3, { y: 0, duration: 0.44, ease: "none" }, 0.14);
+
+        // Col 4 follows last and finishes aligning at 0.70: 330px -> 0px
+        tl.to(col4, { y: 0, duration: 0.46, ease: "none" }, 0.24);
+
+        // Phase 2 (0.70 -> 0.90): Hold the fully aligned layout stationary for 20% of scroll progress
+        tl.to({}, { duration: 0.20 }, 0.70);
+
+        // Phase 3 (0.90 -> 1.00): Smooth release into natural scrolling
+        tl.to({}, { duration: 0.10 }, 0.90);
+      });
+    }, servicesSectionRef);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+      ctx.revert();
+    };
   }, []);
 
   const toggleFaq = (idx: number) => {
@@ -255,85 +362,71 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#06151C] text-[#FFFFFF] font-sans antialiased selection:bg-[#00BCD4] selection:text-[#06151C]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#000000] text-[#FFFFFF] font-sans antialiased selection:bg-[#00BCD4] selection:text-[#050505]">
       {/* ===================================================================== */}
-      {/* SECTION 1: HERO SECTION — FULL VIEWPORT EXPERIENCE (100svh) */}
+      {/* SECTION 1: HERO SECTION — EXACTLY 100VH ON DESKTOP, STATIC IMAGE READY */}
       {/* ===================================================================== */}
-      <section className="relative min-h-[100svh] w-full flex flex-col justify-center pt-[90px] sm:pt-[105px] pb-12 sm:pb-16 bg-[#06151C] overflow-hidden">
-        {/* Full-Width Background Video covering entire hero container */}
+      <section className="relative w-full h-[100vh] min-h-[100dvh] max-lg:h-auto max-lg:min-h-[100svh] flex flex-col justify-center pt-[76px] sm:pt-[80px] pb-8 sm:pb-12 bg-[#000000] overflow-hidden">
+        {/* Full-Width Static Background Image Container covering entire 100vh hero */}
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          {!prefersReducedMotion ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/images/hero-corporate-collab.jpg"
-              className="w-full h-full object-cover object-[75%_center] lg:object-[82%_center]"
-            >
-              <source src="/videos/hero-background.mp4" type="video/mp4" />
-            </video>
-          ) : (
-            <Image
-              src="/images/hero-corporate-collab.jpg"
-              alt="CodePlaced technology collaboration"
-              fill
-              priority
-              className="object-cover object-[75%_center] lg:object-[82%_center]"
-            />
-          )}
+          <Image
+            src={HERO_BACKGROUND_IMAGE}
+            alt="CodePlaced senior engineering consultants collaborating in modern glass corporate office"
+            fill
+            priority
+            className="object-cover object-[75%_center] lg:object-[82%_center]"
+          />
 
-          {/* Precision Gradient Overlays for Maximum Text Readability */}
-          {/* 1. Left-to-right gradient: dense on left, clear on right to showcase video subjects */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#06151C]/95 via-[#06151C]/75 to-[#06151C]/25" />
+          {/* Precision Gradient Overlays for Maximum Text Readability while showcasing the collaborative team on right */}
+          {/* Left-to-right gradient: dense on left for text contrast, clear on right to showcase image subjects */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/92 via-[#000000]/60 to-transparent" />
 
-          {/* 2. Top-to-bottom gradient: seamless navbar blend and dark bottom transition */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#06151C]/70 via-transparent to-[#06151C]" />
+          {/* Top-to-bottom gradient: seamless navbar blend and dark bottom transition */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/70 via-transparent to-[#000000]/85" />
         </div>
 
-        {/* Hero Foreground Content */}
-        <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
-          <div className="max-w-3xl space-y-5 sm:space-y-7">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#06151C]/80 backdrop-blur-md shadow-xs">
+        {/* Hero Foreground Content — Vertically centered within available hero area */}
+        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
+          <div className="max-w-3xl space-y-6 sm:space-y-8">
+            {/* Enterprise Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#000000]/80 backdrop-blur-md shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#00BCD4] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#00BCD4]">
-                AI • SOFTWARE • BUSINESS GROWTH
+              <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
+                ENGINEERING &bull; DATA &bull; AI CONSULTING
               </span>
             </div>
 
-            {/* Main Headline (Responsive typography for 320px up to 4K) */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[70px] font-extrabold tracking-tight text-white leading-[1.09]">
+            {/* Main Headline (Bold, Confident Typography ~68–76px) */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[76px] font-extrabold tracking-tight text-white leading-[1.06]">
               Build AI & Software Products That Drive{" "}
               <span className="text-[#00BCD4]">Business Growth.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-sm sm:text-lg md:text-xl text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
-              We help businesses design, develop, and scale intelligent software solutions — from AI-powered products and data platforms to enterprise systems.
+            <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
+              We help businesses turn complex challenges into practical digital solutions through software development, data analytics, business intelligence, and AI-powered automation.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 h-12 sm:h-13 rounded-full bg-[#00BCD4] hover:bg-[#26c6da] text-[#06151C] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center"
+                className="inline-flex items-center justify-center gap-2 px-8 h-12 sm:h-13 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 ml-0.5" />
               </Link>
 
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-2 px-8 h-12 sm:h-13 rounded-full bg-[#06151C]/80 hover:bg-[#0A2029] text-white font-bold text-sm sm:text-base border border-[#163340] hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center"
+              <a
+                href="#featured-work"
+                className="inline-flex items-center justify-center gap-2 px-8 h-12 sm:h-13 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer"
               >
-                <span>Our Services</span>
-              </Link>
+                <span>Explore Our Work</span>
+              </a>
             </div>
 
-            {/* 3 Compact Trust Indicators */}
-            <div className="pt-5 sm:pt-6 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
+            {/* 3 Compact Credibility Indicators */}
+            <div className="pt-6 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
               <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-[#00BCD4]">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
@@ -347,9 +440,9 @@ export default function HomePage() {
               <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-[#00BCD4]">
                   <ShieldCheck className="w-4 h-4 shrink-0" />
-                  <span className="text-base sm:text-lg font-extrabold text-white">99.99%</span>
+                  <span className="text-sm sm:text-lg font-extrabold text-white">99.99%</span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-300 font-medium leading-snug">
+                <p className="text-[11px] sm:text-sm text-slate-300 font-medium leading-snug">
                   Production SLA
                 </p>
               </div>
@@ -357,9 +450,9 @@ export default function HomePage() {
               <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-[#00BCD4]">
                   <Zap className="w-4 h-4 shrink-0" />
-                  <span className="text-base sm:text-lg font-extrabold text-white">2–4 Wks</span>
+                  <span className="text-sm sm:text-lg font-extrabold text-white">2–4 Wks</span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-300 font-medium leading-snug">
+                <p className="text-[11px] sm:text-sm text-slate-300 font-medium leading-snug">
                   Sprint Delivery
                 </p>
               </div>
@@ -369,198 +462,281 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 2: SERVICES MARQUEE — HORIZONTAL SCROLLING TECHNOLOGY STRIP */}
+      {/* RESTORED TECHNOLOGY MARQUEE — PURE BLACK #000000, ZERO BORDER LINES */}
       {/* ===================================================================== */}
       <ServicesMarquee />
 
       {/* ===================================================================== */}
-      {/* SECTION 3: SERVICES SECTION — PREMIUM BLACK THEME (#05090C) */}
+      {/* SECTION 2: SERVICES — PINNED 3-PHASE GSAP SCROLL ANIMATION */}
       {/* ===================================================================== */}
-      <section className="py-22 sm:py-28 bg-[#05090C] border-b border-[#1C3038]/50 relative text-white">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-end mb-16 sm:mb-20">
-            <div className="lg:col-span-7 space-y-3">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
-                WHAT WE DO
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                Comprehensive Technology Services for Modern Businesses.
-              </h2>
-            </div>
-            <div className="lg:col-span-5">
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                From intelligent AI automation and robust cloud infrastructure to full-stack web and mobile platforms, we deliver end-to-end technology engineering designed to scale.
-              </p>
-            </div>
+      <section
+        id="services"
+        ref={servicesSectionRef}
+        className="py-6 sm:py-8 bg-[#FFFFFF] border-b border-[#E5E7EB] relative text-[#111827] z-20"
+      >
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Centered Editorial Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-6 space-y-1.5">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+              OUR EXPERTISE
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold tracking-tight text-[#111827] leading-[1.12]">
+              Technology Services Built Around Your Business Goals.
+            </h2>
+            <p className="text-sm sm:text-base text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal">
+              From building scalable digital products to engineering data foundations and intelligent automation, we build practical technology solutions tailored for business outcomes.
+            </p>
           </div>
 
-          {/* 6 Equal-Height Cards in Dark (#0B151B) with Subtle Borders (#1C3038) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8">
+          {/* DESKTOP 4-COLUMN STAGGERED SCROLL-ALIGNED GRID — CLEAN BASE, NO BOTTOM HORIZONTAL DIVIDER */}
+          <div className="hidden lg:grid lg:grid-cols-4 border-t border-[#E5E5E5] relative">
             {SERVICES_DATA.map((service, idx) => {
               const ServiceIcon = service.icon;
+              const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref];
               return (
                 <div
                   key={idx}
-                  className="group p-8 sm:p-10 rounded-2xl bg-[#0B151B] border border-[#1C3038] hover:border-[#00BCD4]/60 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#00BCD4]/5"
+                  ref={colRefs[idx]}
+                  className="p-5 xl:p-6 bg-white border-r border-[#E5E5E5] last:border-r-0 border-t border-[#E5E5E5] -mt-[1px] flex flex-col justify-between group transition-colors hover:bg-[#FAFAFA] min-h-[410px] xl:min-h-[425px] will-change-transform"
                 >
-                  <div className="space-y-6">
-                    {/* Pale Cyan / Dark Icon Container (~28-32px icon) */}
-                    <div className="w-14 h-14 rounded-2xl bg-[#00BCD4]/10 border border-[#00BCD4]/25 flex items-center justify-center text-[#00BCD4] group-hover:scale-105 transition-transform duration-300">
-                      <ServiceIcon className="w-7 h-7 sm:w-8 sm:h-8 text-[#00BCD4]" />
+                  <div className="space-y-3.5">
+                    {/* Top Row: Circular Service Icon with Cyan Dot Accent */}
+                    <div className="w-11 h-11 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative group-hover:border-[#00BCD4]/50 transition-colors shrink-0 mb-3.5">
+                      <ServiceIcon className="w-5 h-5 text-[#101820]" />
+                      <span className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-[#00BCD4]" />
                     </div>
 
-                    {/* Bold Service Heading */}
-                    <h3 className="text-2xl font-bold text-white group-hover:text-[#00BCD4] transition-colors tracking-tight">
+                    {/* Service Title */}
+                    <h3 className="text-[20px] xl:text-[22px] font-bold text-[#101820] tracking-tight leading-snug min-h-[54px] flex items-center">
                       {service.title}
                     </h3>
 
-                    {/* Soft Gray Description */}
-                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                    {/* Short Description */}
+                    <p className="text-[14px] xl:text-[15px] text-[#56616B] leading-relaxed font-normal min-h-[64px]">
                       {service.description}
                     </p>
+
+                    {/* Capabilities with Thin Dashed Separators */}
+                    <div className="pt-2 border-t border-dashed border-[#E5E5E5]">
+                      {service.capabilities.map((cap, cIdx) => (
+                        <div
+                          key={cIdx}
+                          className="py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-[13px] xl:text-[14px] font-medium text-[#101820] group/cap"
+                        >
+                          <span className="group-hover/cap:text-[#00BCD4] transition-colors">
+                            {cap}
+                          </span>
+                          <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/cap:text-[#00BCD4] group-hover/cap:translate-x-0.5 group-hover/cap:-translate-y-0.5 transition-all shrink-0 ml-2" />
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Consistently Aligned Learn More Link */}
-                  <div className="pt-6 mt-8 border-t border-[#1C3038]">
+                  {/* Explore Service Link with Cyan Arrow */}
+                  <div className="pt-4 mt-auto">
                     <Link
                       href={service.href}
-                      className="inline-flex items-center gap-2 text-sm font-bold text-[#00BCD4] hover:text-[#26C6DA] group-hover:translate-x-1.5 transition-all"
+                      className="flex items-center justify-between text-[14px] xl:text-[15px] font-bold text-[#101820] hover:text-[#00BCD4] group/link transition-colors pt-2 border-t border-[#E5E5E5]"
                     >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <span>Explore Service</span>
+                      <div className="w-7 h-7 rounded-full bg-slate-100 group-hover/link:bg-[#00BCD4]/10 flex items-center justify-center transition-colors">
+                        <ArrowRight className="w-3.5 h-3.5 text-[#00BCD4] group-hover/link:translate-x-0.5 transition-transform" />
+                      </div>
                     </Link>
                   </div>
                 </div>
               );
             })}
           </div>
+
+          {/* DESKTOP Centered 'View All Services' Button (Cleanly positioned 22px below columns, zero divider line) */}
+          <div className="hidden lg:block text-center pt-5 sm:pt-6">
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-2 px-9 h-11 sm:h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-sm sm:text-base font-extrabold tracking-tight transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-[#00BCD4]/20 group cursor-pointer"
+            >
+              <span>View All Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {/* MOBILE VERTICALLY STACKED SERVICE PRESENTATIONS (lg:hidden) */}
+          <div className="lg:hidden space-y-0 border-t border-b border-[#E5E5E5] divide-y divide-[#E5E5E5] mt-6">
+            {SERVICES_DATA.map((service, idx) => {
+              const ServiceIcon = service.icon;
+              return (
+                <div key={idx} className="p-5 bg-white space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0">
+                      <ServiceIcon className="w-5 h-5 text-[#101820]" />
+                      <span className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
+                    </div>
+                    <span className="text-xs font-mono font-bold text-slate-400">
+                      {service.num}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-[#101820] tracking-tight">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-sm text-[#56616B] leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  <div className="pt-2 border-t border-dashed border-[#E5E5E5]">
+                    {service.capabilities.map((cap, cIdx) => (
+                      <div
+                        key={cIdx}
+                        className="py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-sm font-medium text-[#101820]"
+                      >
+                        <span>{cap}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-1.5">
+                    <Link
+                      href={service.href}
+                      className="inline-flex items-center gap-2 text-sm font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors"
+                    >
+                      <span>Explore Service</span>
+                      <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* MOBILE Centered 'View All Services' Button */}
+          <div className="lg:hidden text-center pt-6">
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-sm font-extrabold tracking-tight transition-all duration-200 shadow-xs group cursor-pointer"
+            >
+              <span>View All Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 4: ABOUT CODEPLACED (BALANCED 50/50 EDITORIAL SECTION #F7F9FA) */}
+      {/* SECTION 3: ABOUT CODEPLACED — COMPACT BLACK SECTION (#000000) */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-24 bg-[#F7F9FA] border-b border-[#E5EAF0] text-[#101820]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Mobile Header: Displayed first on mobile, hidden on desktop */}
-          <div className="block lg:hidden space-y-3 mb-8">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
-              ABOUT CODEPLACED
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#101820] leading-tight">
-              Your Technology Partner for What&apos;s Next.
-            </h2>
-            <p className="text-sm sm:text-base text-[#56616B] leading-relaxed">
-              CodePlaced is an elite technology engineering consultancy. We partner with ambitious organizations to build, modernize, and scale through intelligent digital products, cloud architectures, and production-ready AI automation.
-            </p>
-          </div>
-
-          <div className="flex flex-col lg:flex-row items-stretch gap-10 lg:gap-14">
-            {/* Left Column (50%): Premium Large Team Image matching content height */}
-            <div className="w-full lg:w-1/2 flex">
-              <div className="relative w-full rounded-2xl overflow-hidden border border-[#E5EAF0] bg-white shadow-xl min-h-[300px] sm:min-h-[420px] lg:min-h-[520px] group">
+      <section className="py-8 sm:py-9.5 bg-[#000000] border-b border-[#292929] text-white flex items-center">
+        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            {/* Left Column (45%): Team Photograph */}
+            <div className="w-full lg:w-[45%] flex items-center">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-[#292929] bg-[#0B0B0B] shadow-2xl h-[260px] sm:h-[330px] lg:h-[390px] min-h-[260px] group">
                 <Image
                   src="/images/about-team-collab.jpg"
                   alt="CodePlaced senior engineering team collaborating in modern office"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
                   priority
                 />
               </div>
             </div>
 
-            {/* Right Column (50%): Concise Content */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-between space-y-6">
-              {/* Desktop Header: Hidden on mobile */}
-              <div className="hidden lg:block space-y-3">
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+            {/* Right Column (55%): Company Content, Principles, Verified Stats & CTA */}
+            <div className="w-full lg:w-[55%] flex flex-col justify-between space-y-4 lg:pl-3">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
                   ABOUT CODEPLACED
                 </span>
-                <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-[#101820] leading-[1.15]">
+                <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold tracking-tight text-white leading-tight">
                   Your Technology Partner for What&apos;s Next.
                 </h2>
-                <p className="text-base text-[#56616B] leading-relaxed">
-                  CodePlaced is an elite technology engineering consultancy. We partner with ambitious organizations to build, modernize, and scale through intelligent digital products, cloud architectures, and production-ready AI automation.
-                </p>
+                <div className="space-y-2 text-sm sm:text-base text-[#D1D5DB] leading-relaxed">
+                  <p>
+                    CodePlaced works with businesses to understand their challenges and develop technology solutions that make a practical difference.
+                  </p>
+                  <p>
+                    Our work brings together software engineering, data platforms, analytics, and AI to help organizations improve operations, connect systems, and build scalable digital products.
+                  </p>
+                </div>
               </div>
 
-              {/* Subsection: What Drives Our Work (3 Value Highlights) */}
-              <div className="space-y-3 pt-1">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-[#101820]">
+              {/* Three Value Highlights / Principles */}
+              <div className="space-y-2 pt-0.5">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
                   What Drives Our Work
                 </h3>
-                <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3">
-                  {/* Principle 1: Ownership */}
-                  <div className="p-3.5 rounded-xl bg-white border border-[#E5EAF0] shadow-2xs space-y-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#E0F7FA] border border-[#B2EBF2] text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <ShieldCheck className="w-4 h-4 text-[#00BCD4]" />
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* Highlight 1 */}
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-1.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#101820]">Ownership</h4>
-                      <p className="text-xs text-[#56616B] leading-relaxed mt-0.5">
-                        End-to-end accountability, treating every system as our own.
+                      <h4 className="text-sm font-bold text-white">Business-First</h4>
+                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
+                        Focusing on measurable ROI before writing code.
                       </p>
                     </div>
                   </div>
 
-                  {/* Principle 2: Transparency */}
-                  <div className="p-3.5 rounded-xl bg-white border border-[#E5EAF0] shadow-2xs space-y-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#E0F7FA] border border-[#B2EBF2] text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <Users className="w-4 h-4 text-[#00BCD4]" />
+                  {/* Highlight 2 */}
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-1.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <Layers className="w-3.5 h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#101820]">Transparency</h4>
-                      <p className="text-xs text-[#56616B] leading-relaxed mt-0.5">
-                        Clear sprint milestones, open visibility, and zero surprises.
+                      <h4 className="text-sm font-bold text-white">Practical Engineering</h4>
+                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
+                        Battle-tested architectures your teams can maintain.
                       </p>
                     </div>
                   </div>
 
-                  {/* Principle 3: Innovation */}
-                  <div className="p-3.5 rounded-xl bg-white border border-[#E5EAF0] shadow-2xs space-y-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#E0F7FA] border border-[#B2EBF2] text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <Zap className="w-4 h-4 text-[#00BCD4]" />
+                  {/* Highlight 3 */}
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-1.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <Users className="w-3.5 h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#101820]">Innovation</h4>
-                      <p className="text-xs text-[#56616B] leading-relaxed mt-0.5">
-                        Modern architectures and AI solutions that build a lasting moat.
+                      <h4 className="text-sm font-bold text-white">Long-Term Partnership</h4>
+                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
+                        High velocity, transparent milestones, real value.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Verified Metrics: 2x2 Grid with exact statistics */}
-              <div className="grid grid-cols-2 gap-3 pt-1">
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E5EAF0] space-y-0.5 shadow-xs">
-                  <div className="text-2xl sm:text-3xl font-black text-[#101820] tracking-tight">100+</div>
-                  <div className="text-xs font-semibold text-[#56616B]">Deployments Delivered</div>
+              {/* Verified Metrics Cards: Clean 4-Column Strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-0.5">
+                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">100+</div>
+                  <div className="text-xs font-medium text-slate-400">Deployments</div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E5EAF0] space-y-0.5 shadow-xs">
-                  <div className="text-2xl sm:text-3xl font-black text-[#101820] tracking-tight">95%</div>
-                  <div className="text-xs font-semibold text-[#56616B]">Client Retention Rate</div>
+                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">95%</div>
+                  <div className="text-xs font-medium text-slate-400">Retention Rate</div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E5EAF0] space-y-0.5 shadow-xs">
-                  <div className="text-2xl sm:text-3xl font-black text-[#101820] tracking-tight">2–4 Wks</div>
-                  <div className="text-xs font-semibold text-[#56616B]">Average Sprint Delivery</div>
+                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">2–4 Wks</div>
+                  <div className="text-xs font-medium text-slate-400">Sprint Delivery</div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E5EAF0] space-y-0.5 shadow-xs">
-                  <div className="text-2xl sm:text-3xl font-black text-[#101820] tracking-tight">99.99%</div>
-                  <div className="text-xs font-semibold text-[#56616B]">Production SLA Guarantee</div>
+                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">99.99%</div>
+                  <div className="text-xs font-medium text-slate-400">Production SLA</div>
                 </div>
               </div>
 
-              {/* Prominent CTA Button */}
-              <div className="pt-2">
+              {/* Prominent Learn More CTA */}
+              <div className="pt-1.5">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#101820] hover:bg-[#00BCD4] text-white hover:text-[#06151C] text-sm font-extrabold tracking-tight transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-[#00BCD4]/20 hover:-translate-y-0.5 active:scale-95 group"
+                  className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] text-sm sm:text-base font-extrabold tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
                 >
                   <span>Learn More About Us</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -572,108 +748,133 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 5: FEATURED CASE STUDY — COMPACT PRODUCT SHOWCASE (#06171D) */}
+      {/* SECTION 4: FEATURED CASE STUDY — COMPACT WHITE SECTION WITH BLACK CARD */}
       {/* ===================================================================== */}
-      <section className="py-16 sm:py-20 bg-[#06171D] relative text-white">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
-              FEATURED CASE STUDY
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Real Projects. Measurable Impact.
-            </h2>
+      <section id="featured-work" className="py-8 sm:py-9.5 bg-[#FFFFFF] border-b border-[#E5E7EB] text-[#111827]">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header with Left-Aligned Title and Right-Aligned Link (Nexora Reference) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5 sm:mb-6">
+            <div className="space-y-1.5 max-w-2xl text-left">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+                FEATURED CASE STUDY
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
+                Real Projects. Measurable Impact.
+              </h2>
+              <p className="text-sm sm:text-base text-[#56616B] leading-relaxed font-normal">
+                Explore how we transform business requirements into working digital products.
+              </p>
+            </div>
+
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#111827] hover:text-[#00AFC8] transition-colors group self-start md:self-end pb-1 border-b-2 border-[#111827]/20 hover:border-[#00AFC8]"
+            >
+              <span>View All Case Studies</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
+            </Link>
           </div>
 
-          {/* Compact Case Study Card Container: 48% Laptop Image / 52% Content Split */}
-          <div className="rounded-3xl bg-[#0B222B] border border-[#163B47] overflow-hidden p-6 sm:p-8 lg:p-10 shadow-2xl">
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-              {/* Left Area (48%): High-Resolution Laptop Showing Live Tuitionstime Interface */}
-              <div className="w-full lg:w-[48%] shrink-0 flex items-center justify-center">
-                <div className="relative w-full rounded-2xl overflow-hidden bg-transparent group flex items-center justify-center">
+          {/* Premium Black Project Showcase Card (12-14px border radius, subtle hover scale & border) */}
+          <div className="group bg-[#000000] rounded-[14px] border border-[#242424] hover:border-[#383838] p-5 sm:p-7 lg:p-8 text-white shadow-2xl relative overflow-hidden transition-all duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-9 items-center">
+              {/* Left Column (55%): Device Showcase with Authentic Tuitionstime Screens */}
+              <div className="lg:col-span-7 flex flex-col items-center justify-center relative">
+                <div className="relative w-full flex items-center justify-center transform group-hover:scale-[1.02] transition-transform duration-300 ease-out">
+                  {/* Large MacBook Pro displaying authentic Tuitionstime website */}
                   <Image
                     src="/images/case-studies/tuitionstime/tuitionstime-photorealistic-laptop-hero.webp"
                     alt="Tuitionstime marketplace website interface on MacBook Pro"
                     width={1100}
                     height={730}
                     priority
-                    className="w-full h-auto object-contain transform group-hover:scale-[1.01] transition-transform duration-500 max-h-[340px] sm:max-h-[380px] lg:max-h-[420px]"
+                    className="w-full h-auto object-contain max-h-[320px] sm:max-h-[360px] lg:max-h-[400px] drop-shadow-2xl"
                   />
+
+                  {/* Photorealistic Black Titanium Smartphone Mockup displaying Tuitionstime Tutor Discovery */}
+                  <div className="absolute -bottom-3 sm:-bottom-4 right-0 sm:right-3 md:right-5 lg:right-2 xl:right-5 w-[110px] xs:w-[125px] sm:w-[145px] md:w-[160px] lg:w-[170px] xl:w-[185px] z-10 pointer-events-none select-none transition-transform duration-300 group-hover:translate-y-[-2px]">
+                    <Image
+                      src="/images/case-studies/tuitionstime/tuitionstime-phone-photorealistic.webp"
+                      alt="Tuitionstime mobile tutor discovery platform on premium smartphone"
+                      width={690}
+                      height={1285}
+                      className="w-full h-auto object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Right Area (52%): Compact Project Information, Feature Grid & Metrics */}
-              <div className="w-full lg:w-[52%] space-y-4 sm:space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] text-xs font-bold uppercase tracking-wider">
-                  EdTech / SaaS Marketplace
+              {/* Right Column (45%): Project Information & Features */}
+              <div className="lg:col-span-5 space-y-3.5">
+                <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] text-xs font-mono font-bold uppercase tracking-wider">
+                  EDTECH &bull; DIGITAL MARKETPLACE
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white tracking-tight leading-tight">
-                  Tuitionstime — Complete EdTech Marketplace
+                <h3 className="text-xl sm:text-2xl lg:text-[28px] xl:text-[30px] font-extrabold text-white tracking-tight leading-tight">
+                  Tuitionstime — A Complete EdTech Marketplace
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-                  An education technology marketplace connecting students, tutors, and parents through tutor discovery, class scheduling, learning resources, and integrated platform experiences.
+                <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed font-normal">
+                  A connected education platform bringing students, tutors, and parents together through tutor discovery, online classes, learning management, and communication tools.
                 </p>
 
-                {/* Compact Feature Showcase (4 Short Labels with Small Cyan Icons) */}
-                <div className="grid grid-cols-2 gap-2.5 pt-1">
-                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#06171D] border border-[#163B47] flex items-center gap-2.5">
-                    <Search className="w-4 h-4 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs font-semibold text-slate-200 truncate">
+                {/* Four Concise Platform Features */}
+                <div className="grid grid-cols-2 gap-2 pt-0.5">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
+                    <Search className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
                       Tutor Discovery & Matching
                     </span>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#06171D] border border-[#163B47] flex items-center gap-2.5">
-                    <Calendar className="w-4 h-4 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs font-semibold text-slate-200 truncate">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
+                    <Calendar className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
                       Online Class Booking
                     </span>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#06171D] border border-[#163B47] flex items-center gap-2.5">
-                    <Clock className="w-4 h-4 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs font-semibold text-slate-200 truncate">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
+                    <Clock className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
                       Class & Schedule Management
                     </span>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#06171D] border border-[#163B47] flex items-center gap-2.5">
-                    <GraduationCap className="w-4 h-4 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs font-semibold text-slate-200 truncate">
-                      Student & Tutor Experience
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
+                    <GraduationCap className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
+                      Student & Tutor Experiences
                     </span>
                   </div>
                 </div>
 
-                {/* Verified Metrics in Compact Format */}
-                <div className="grid grid-cols-3 gap-2.5 pt-1">
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#06171D] border border-[#163B47] text-center space-y-0.5">
-                    <div className="text-lg sm:text-2xl font-black text-[#00BCD4]">10K+</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-300 font-medium">Active Students</div>
+                {/* Verified Project Metrics in Clean Horizontal Row */}
+                <div className="grid grid-cols-3 gap-2 pt-0.5">
+                  <div className="p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
+                    <div className="text-lg sm:text-xl font-black text-[#00BCD4]">10K+</div>
+                    <div className="text-[11px] sm:text-xs text-slate-400 font-medium">Active Students</div>
                   </div>
 
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#06171D] border border-[#163B47] text-center space-y-0.5">
-                    <div className="text-lg sm:text-2xl font-black text-[#00BCD4]">2K+</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-300 font-medium">Expert Tutors</div>
+                  <div className="p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
+                    <div className="text-lg sm:text-xl font-black text-[#00BCD4]">2K+</div>
+                    <div className="text-[11px] sm:text-xs text-slate-400 font-medium">Expert Tutors</div>
                   </div>
 
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#06171D] border border-[#163B47] text-center space-y-0.5">
-                    <div className="text-lg sm:text-2xl font-black text-[#00BCD4]">50K+</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-300 font-medium">Classes Completed</div>
+                  <div className="p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
+                    <div className="text-lg sm:text-xl font-black text-[#00BCD4]">50K+</div>
+                    <div className="text-[11px] sm:text-xs text-slate-400 font-medium">Classes Completed</div>
                   </div>
                 </div>
 
-                {/* Prominent CTA Button */}
-                <div className="pt-1">
+                {/* Primary CTA Button with Smooth Hover Motion */}
+                <div className="pt-0.5">
                   <Link
                     href="/case-studies/tuitionstime"
-                    className="inline-flex items-center justify-center gap-2 px-7 h-11 rounded-full bg-[#00BCD4] hover:bg-[#26c6da] text-[#06171D] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 active:scale-95"
+                    className="inline-flex items-center justify-center gap-2 px-6 h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 cursor-pointer"
                   >
-                    <span>View Case Study</span>
-                    <ArrowRight className="w-4 h-4 ml-0.5" />
+                    <span>Explore Case Study</span>
+                    <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1.5 transition-transform duration-300" />
                   </Link>
                 </div>
               </div>
@@ -683,99 +884,49 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 6: IMPACT STATISTICS STRIP (TEAL / SECONDARY DARK #0A2029) */}
+      {/* SECTION 5: INDUSTRIES WE SERVE — PURE BLACK WITH WHITE HOVER CARDS */}
       {/* ===================================================================== */}
-      <section className="py-14 bg-[#0A2029] border-y border-[#163340]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-[#163340]">
-            {/* Metric 1 */}
-            <div className="flex items-center gap-4 lg:px-6 justify-start lg:justify-center">
-              <div className="w-13 h-13 rounded-full border-2 border-[#00BCD4] flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-6 h-6 text-[#00BCD4]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white">100+</div>
-                <div className="text-xs text-slate-300 font-medium">Enterprise Deployments</div>
-              </div>
-            </div>
-
-            {/* Metric 2 */}
-            <div className="flex items-center gap-4 lg:px-6 justify-start lg:justify-center">
-              <div className="w-13 h-13 rounded-full border-2 border-[#00BCD4] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6 text-[#00BCD4]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white">99.99%</div>
-                <div className="text-xs text-slate-300 font-medium">Production SLA Guarantee</div>
-              </div>
-            </div>
-
-            {/* Metric 3 */}
-            <div className="flex items-center gap-4 lg:px-6 justify-start lg:justify-center">
-              <div className="w-13 h-13 rounded-full border-2 border-[#00BCD4] flex items-center justify-center shrink-0">
-                <Users className="w-6 h-6 text-[#00BCD4]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white">95%</div>
-                <div className="text-xs text-slate-300 font-medium">Client Retention Rate</div>
-              </div>
-            </div>
-
-            {/* Metric 4 */}
-            <div className="flex items-center gap-4 lg:px-6 justify-start lg:justify-center">
-              <div className="w-13 h-13 rounded-full border-2 border-[#00BCD4] flex items-center justify-center shrink-0">
-                <Zap className="w-6 h-6 text-[#00BCD4]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white">$140M+</div>
-                <div className="text-xs text-slate-300 font-medium">Client Value Unlocked</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===================================================================== */}
-      {/* SECTION 7: INDUSTRIES SECTION (LIGHT BACKGROUND #F7F9FA) */}
-      {/* ===================================================================== */}
-      <section className="py-22 sm:py-28 bg-[#F7F9FA] border-b border-[#E5EAF0] text-[#101820]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Heading & Description */}
-          <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16 space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
-              CROSS-INDUSTRY EXPERTISE
+      <section className="py-8 sm:py-9.5 bg-[#000000] border-b border-[#292929] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Heading & Supporting Text */}
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+              CROSS-INDUSTRY DOMAIN EXPERTISE
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#101820] leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               Industries We Serve
             </h2>
-            <p className="text-sm sm:text-base text-[#56616B] leading-relaxed">
-              We build practical technology solutions for businesses across industries, addressing operational challenges and supporting long-term growth.
+            <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed">
+              We work with businesses across industries to build solutions that address real operational and technology challenges.
             </p>
           </div>
 
-          {/* 8 Refined Industry Cards (4-column, 2-row grid) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+          {/* 8 Structured Industry Cards (4-Column Desktop Grid) with Refined White Hover Transition */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4.5">
             {INDUSTRIES_DATA.map((industry, idx) => {
               const IndIcon = industry.icon;
               return (
                 <Link
                   key={idx}
                   href={industry.href}
-                  className="group p-7 rounded-2xl bg-white border border-[#E5EAF0] hover:border-[#00BCD4] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl shadow-xs flex flex-col justify-between"
+                  className="group p-5 rounded-2xl bg-[#0B0B0B] hover:bg-[#FFFFFF] focus-visible:bg-[#FFFFFF] border border-[#262626] hover:border-[#E5E7EB] focus-visible:border-[#E5E7EB] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-[#E0F7FA]/50 border border-[#B2EBF2] group-hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors">
-                        <IndIcon className="w-6 h-6 text-[#00BCD4]" />
+                      {/* Icon Container: retains cyan icon, subtle container with hover transition */}
+                      <div className="w-10 h-10 rounded-xl bg-[#161616] group-hover:bg-[#00BCD4]/10 group-focus-visible:bg-[#00BCD4]/10 border border-[#262626] group-hover:border-[#00BCD4]/30 flex items-center justify-center transition-colors duration-300">
+                        <IndIcon className="w-5 h-5 text-[#00BCD4]" />
                       </div>
-                      <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#00BCD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-[#00BCD4] group-focus-visible:text-[#00BCD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                     </div>
 
-                    <h3 className="text-lg font-bold text-[#101820] group-hover:text-[#00BCD4] transition-colors">
+                    {/* Title: white by default, near-black #111111 on hover */}
+                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#111111] group-focus-visible:text-[#111111] transition-colors duration-300 tracking-tight">
                       {industry.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#657381] leading-relaxed">
+                    {/* Description: light gray by default, dark gray #4B5563 on hover */}
+                    <p className="text-xs sm:text-sm text-[#9CA3AF] group-hover:text-[#4B5563] group-focus-visible:text-[#4B5563] leading-relaxed transition-colors duration-300">
                       {industry.description}
                     </p>
                   </div>
@@ -787,41 +938,44 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 8: OUR PROCESS — CONNECTED STEPS (DARK NAVY #06151C) */}
+      {/* SECTION 6: OUR PROCESS — COMPACT WHITE SECTION (#FFFFFF) */}
       {/* ===================================================================== */}
-      <section className="py-22 sm:py-28 bg-[#06151C] relative">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-7.5 sm:py-9 bg-[#FFFFFF] border-b border-[#E5E7EB] text-[#111827]">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16 space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
               HOW WE WORK
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
               A Clear Path From Idea to Impact.
             </h2>
+            <p className="text-sm sm:text-base text-[#56616B] leading-relaxed font-normal">
+              Our proven delivery framework ensures transparency, velocity, and measurable business outcomes.
+            </p>
           </div>
 
-          {/* 4 Steps Horizontal Layout with Connecting Flow */}
+          {/* 4 Connected Phases with Subtle Flow Connector */}
           <div className="relative">
             {/* Desktop Connecting Line */}
-            <div className="hidden lg:block absolute top-14 left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-[#00BCD4]/30 via-[#00BCD4]/50 to-[#00BCD4]/30 z-0" />
+            <div className="hidden lg:block absolute top-8 sm:top-9 left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-[#00AFC8]/20 via-[#00AFC8]/50 to-[#00AFC8]/20 z-0" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 relative z-10">
               {PROCESS_STEPS.map((step, idx) => (
                 <div
                   key={idx}
-                  className="p-8 rounded-2xl bg-[#0A2029] border border-[#163340] hover:border-[#00BCD4]/60 transition-all duration-300 space-y-4 group hover:-translate-y-1 hover:shadow-xl"
+                  className="p-4.5 sm:p-5 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#00AFC8] transition-all duration-300 space-y-3 group hover:-translate-y-1 hover:shadow-xl"
                 >
-                  {/* Cyan Outlined Circular Number */}
-                  <div className="w-13 h-13 rounded-full border-2 border-[#00BCD4] bg-[#06151C] flex items-center justify-center text-base font-extrabold text-[#00BCD4] group-hover:bg-[#00BCD4]/15 transition-colors shadow-sm">
+                  {/* Cyan Outlined Circular Step Badge */}
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-[#00AFC8] bg-[#FFFFFF] flex items-center justify-center text-xs sm:text-sm font-mono font-extrabold text-[#00AFC8] group-hover:bg-[#00AFC8]/10 transition-colors shadow-xs">
                     {step.step}
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#00BCD4] transition-colors tracking-tight">
+                  <h3 className="text-base sm:text-lg font-bold text-[#111827] group-hover:text-[#00AFC8] transition-colors tracking-tight">
                     {step.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-[#56616B] leading-relaxed font-normal">
                     {step.description}
                   </p>
                 </div>
@@ -832,48 +986,48 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 9: TESTIMONIALS (WHITE BACKGROUND #FFFFFF) */}
+      {/* SECTION 7: CLIENT TESTIMONIALS — COMPACT BLACK BACKGROUND (#000000) */}
       {/* ===================================================================== */}
-      <section className="py-22 sm:py-28 bg-[#FFFFFF] border-y border-[#E5EAF0] text-[#101820]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16 space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+      <section className="py-7.5 sm:py-9 bg-[#000000] border-b border-[#292929] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
               CLIENT SUCCESS
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#101820] leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               What Our Clients Say
             </h2>
           </div>
 
           {/* 3-Column Testimonial Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5">
             {TESTIMONIALS_DATA.map((t, idx) => (
               <div
                 key={idx}
-                className="p-8 sm:p-10 rounded-2xl bg-[#F7F9FA] border border-[#E5EAF0] hover:border-[#00BCD4] transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-md"
+                className="p-4.5 sm:p-5.5 rounded-2xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/50 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-lg"
               >
-                <div className="space-y-4">
+                <div className="space-y-2.5">
                   {/* Star Rating */}
                   <div className="flex items-center gap-1 text-amber-400">
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
                     ))}
                   </div>
 
                   {/* Real Testimonial Quote */}
-                  <p className="text-sm sm:text-base text-[#101820] leading-relaxed italic font-medium">
+                  <p className="text-sm sm:text-base text-[#E5E7EB] leading-relaxed italic font-normal">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
 
                 {/* Author Info */}
-                <div className="pt-6 mt-6 border-t border-[#E5EAF0] flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-full bg-[#101820] text-white flex items-center justify-center font-bold text-xs sm:text-sm">
+                <div className="pt-3.5 mt-3.5 border-t border-[#292929] flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#161616] border border-[#292929] text-[#00BCD4] flex items-center justify-center font-bold text-xs">
                     {t.initials}
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-[#101820]">{t.author}</div>
-                    <div className="text-xs text-[#657381]">{t.role}</div>
+                    <div className="text-sm font-bold text-white">{t.author}</div>
+                    <div className="text-xs text-[#9CA3AF]">{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -883,31 +1037,31 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 10: FAQ SECTION (DARK NAVY #06151C) */}
+      {/* SECTION 8: FAQ SECTION — COMPACT WHITE BACKGROUND (#FFFFFF) */}
       {/* ===================================================================== */}
-      <section className="py-22 sm:py-28 bg-[#06151C] relative">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+      <section className="py-8 sm:py-9.5 bg-[#FFFFFF] relative text-[#111827] border-b border-[#E5E7EB]">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             {/* Left Column */}
-            <div className="lg:col-span-5 space-y-5">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+            <div className="lg:col-span-5 space-y-3">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
                 FAQS
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
                 Got Questions? We&apos;ve Got Answers.
               </h2>
 
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-[#56616B] leading-relaxed font-normal">
                 Find quick answers to common questions about our technical capabilities, engagement models, and delivery timelines.
               </p>
 
-              <div className="pt-4">
-                <div className="p-6 rounded-2xl bg-[#0A2029] border border-[#163340] space-y-2">
-                  <h4 className="text-sm sm:text-base font-bold text-white">Have a custom question?</h4>
-                  <p className="text-xs sm:text-sm text-slate-300">
+              <div className="pt-1.5">
+                <div className="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] space-y-1">
+                  <h4 className="text-sm font-bold text-[#111827]">Have a custom inquiry?</h4>
+                  <p className="text-xs sm:text-sm text-[#56616B]">
                     Reach out to our leadership directly at{" "}
-                    <a href="mailto:hello@codeplaced.com" className="text-[#00BCD4] hover:underline font-semibold">
+                    <a href="mailto:hello@codeplaced.com" className="text-[#00AFC8] hover:underline font-semibold">
                       hello@codeplaced.com
                     </a>
                   </p>
@@ -915,24 +1069,24 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Column (5 Accordion Items with Increased Hierarchy) */}
-            <div className="lg:col-span-7 space-y-4">
+            {/* Right Column (Accordion with Clean Dividers & Cyan Active State) */}
+            <div className="lg:col-span-7 space-y-2 sm:space-y-2.5">
               {FAQ_ITEMS.map((faq, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
                     key={idx}
-                    className="rounded-2xl bg-[#0A2029] border border-[#163340] overflow-hidden transition-all duration-200 hover:border-[#00BCD4]/40"
+                    className="rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] overflow-hidden transition-all duration-200 hover:border-[#00AFC8]/60"
                   >
                     <button
                       onClick={() => toggleFaq(idx)}
-                      className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
+                      className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between gap-4 cursor-pointer"
                     >
-                      <span className="text-base sm:text-lg font-bold text-white hover:text-[#00BCD4] transition-colors">
+                      <span className="text-sm sm:text-base font-bold text-[#111827] hover:text-[#00AFC8] transition-colors">
                         {faq.question}
                       </span>
-                      <div className="w-8 h-8 rounded-full border border-[#163340] flex items-center justify-center shrink-0 text-[#00BCD4]">
-                        {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      <div className="w-7 h-7 rounded-full border border-[#E5E7EB] bg-white flex items-center justify-center shrink-0 text-[#00AFC8]">
+                        {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                       </div>
                     </button>
 
@@ -942,9 +1096,9 @@ export default function HomePage() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25, ease: "easeOut" }}
+                          transition={{ duration: 0.22, ease: "easeOut" }}
                         >
-                          <div className="px-5 sm:px-6 pb-6 pt-1 text-sm text-slate-300 leading-relaxed border-t border-[#163340]/40">
+                          <div className="px-3.5 sm:px-4 pb-3.5 pt-1 text-xs sm:text-sm text-[#4B5563] leading-relaxed border-t border-[#E5E7EB]">
                             {faq.answer}
                           </div>
                         </motion.div>
@@ -959,56 +1113,56 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 11: FINAL CTA BANNER (DARK PHOTOGRAPHIC SECTION #06151C) */}
+      {/* SECTION 9: FINAL CTA BANNER — COMPACT BLACK PHOTOGRAPHIC BANNER (#000000) */}
       {/* ===================================================================== */}
-      <section className="py-18 sm:py-22 bg-[#06151C] relative">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-3xl overflow-hidden bg-[#0A2029] border border-[#163340] shadow-2xl">
-            {/* Background Photographic Image on Right with Smooth Gradient Overlay */}
-            <div className="absolute top-0 right-0 w-full lg:w-3/5 h-full opacity-45 lg:opacity-70 pointer-events-none">
+      <section className="py-6 sm:py-8 bg-[#000000] relative">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#0B0B0B] border border-[#292929] shadow-2xl">
+            {/* Background Photographic Image on Right with Tuned Contrast Gradient Overlay */}
+            <div className="absolute top-0 right-0 w-full lg:w-3/5 h-full opacity-65 lg:opacity-85 pointer-events-none">
               <Image
                 src="/images/cta-office-collab.jpg"
-                alt="CodePlaced senior software architects collaborating at glass-wall conference room"
+                alt="CodePlaced senior software architects collaborating at modern conference room"
                 fill
                 className="object-cover object-right"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A2029] via-[#0A2029]/80 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent" />
             </div>
 
             {/* Left Content */}
-            <div className="relative z-10 p-8 sm:p-12 lg:p-16 max-w-2xl space-y-6">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+            <div className="relative z-10 p-6 sm:p-8 lg:p-9 max-w-2xl space-y-3.5">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
                 START YOUR PROJECT
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 Ready to Build Something Intelligent?
               </h2>
 
-              <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal">
-                Have a project in mind? Let&apos;s discuss how CodePlaced can turn your ideas into scalable digital solutions.
+              <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
+                Tell us what you&apos;re working on. We&apos;ll help you explore the right technology approach for your business.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 h-13 rounded-full bg-[#00BCD4] hover:bg-[#26c6da] text-[#06151C] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-7 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                 >
-                  <span>Book a Strategy Call</span>
+                  <span>Book Strategy Call</span>
                   <ArrowRight className="w-4 h-4 ml-0.5" />
                 </Link>
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 h-13 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-2 px-7 h-11 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 transition-all duration-200 cursor-pointer"
                 >
                   <span>Get in Touch</span>
                 </Link>
               </div>
 
               {/* 3 Small Supporting Trust Points */}
-              <div className="pt-6 border-t border-[#163340]/80 flex flex-wrap items-center gap-6 text-xs text-slate-300 font-medium">
+              <div className="pt-3.5 border-t border-[#292929] flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300 font-medium">
                 <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00BCD4]" />
                   <span>Fixed 2–4 Wk Sprints</span>
