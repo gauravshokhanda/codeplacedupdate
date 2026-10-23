@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Mail,
   ArrowUp,
@@ -45,6 +46,7 @@ const GLOBAL_OFFICES = [
 ];
 
 export function Footer({ onOpenBookAudit }: FooterProps) {
+  const pathname = usePathname();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -85,7 +87,14 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
             <Link
-              href="/contact"
+              href="/contact#contact-hero"
+              onClick={(e) => {
+                if (pathname === "/contact") {
+                  e.preventDefault();
+                  const hero = document.getElementById("contact-hero");
+                  if (hero) hero.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
               className="h-11 sm:h-12 px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group cursor-pointer"
             >
               <span>Book Strategy Call</span>

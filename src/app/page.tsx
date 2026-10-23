@@ -273,12 +273,14 @@ export default function HomePage() {
   const col2Ref = useRef<HTMLDivElement>(null);
   const col3Ref = useRef<HTMLDivElement>(null);
   const col4Ref = useRef<HTMLDivElement>(null);
+  const servicesBtnRef = useRef<HTMLDivElement>(null);
 
   // =========================================================================
-  // GSAP SCROLLTRIGGER: 3-PHASE PINNED SERVICES SCROLL ANIMATION
-  // Phase 1 (0.00 -> 0.70): Progressive column rising toward Column 1
-  // Phase 2 (0.70 -> 0.90): Stationary hold of fully aligned layout
-  // Phase 3 (0.90 -> 1.00): Natural release into About CodePlaced
+  // GSAP SCROLLTRIGGER: APPINVENTIV-INSPIRED STAIRCASE SERVICES ANIMATION
+  // Phase A: Initial descending staircase (Col 1 at top, Col 2 +70, Col 3 +140, Col 4 +210)
+  // Phase B (0.00 -> 0.72): Progressive column rising toward Column 1
+  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 4-column layout & CTA
+  // Phase D (0.90 -> 1.00): Natural release into About CodePlaced
   // =========================================================================
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -300,54 +302,92 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
+        const btn = servicesBtnRef.current;
         if (!col2 || !col3 || !col4) return;
 
-        // Viewport height safety check: If viewport height is too small to fit the pinned section,
-        // disable pinning to avoid cutting off columns or buttons
+        // Viewport height calculation: ensure pinned section and stagger fit comfortably within viewport
         const navbarHeight = 80;
         const availableHeight = window.innerHeight - navbarHeight;
-        if (availableHeight < 560) {
+        if (availableHeight < 620) {
           gsap.set([col2, col3, col4], { y: 0 });
+          if (btn) gsap.set(btn, { y: 0 });
           return;
         }
 
-        // Set initial desktop offsets:
-        // Col 1: 0px (stationary reference)
-        // Col 2: 110px
-        // Col 3: 220px
-        // Col 4: 330px
-        gsap.set(col2, { y: 110 });
-        gsap.set(col3, { y: 220 });
-        gsap.set(col4, { y: 330 });
+        // Appinventiv-style staircase offsets:
+        // Col 1 baseline: 0px
+        // Col 2: ~110px below Col 1
+        // Col 3: ~220px below Col 1
+        // Col 4: ~330px below Col 1
+        // Proportioned on standard and compact viewports to prevent clipping
+        let staggerStep = 110;
+        if (availableHeight >= 960) {
+          staggerStep = 110; // Large desktop (1920x1080): Col 2 = +110, Col 3 = +220, Col 4 = +330
+        } else if (availableHeight >= 800) {
+          staggerStep = 75;  // Standard desktop / MacBook (1440x900): Col 2 = +75, Col 3 = +150, Col 4 = +225
+        } else if (availableHeight >= 650) {
+          staggerStep = 45;  // Compact laptop (1366x768): Col 2 = +45, Col 3 = +90, Col 4 = +135
+        } else {
+          staggerStep = 30;
+        }
+
+        const col2Offset = staggerStep;
+        const col3Offset = staggerStep * 2;
+        const col4Offset = staggerStep * 3;
+        const btnOffset = col3Offset;
+
+        gsap.set(col2, { y: col2Offset });
+        gsap.set(col3, { y: col3Offset });
+        gsap.set(col4, { y: col4Offset });
+        if (btn) gsap.set(btn, { y: btnOffset });
 
         // Single coordinated ScrollTrigger timeline pinned right below the 80px navbar
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             start: "top 80px",
-            end: "+=680",
+            end: "+=700",
             pin: true,
+            pinSpacing: true,
             scrub: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        // Phase 1 (0.00 -> 0.70): Progressive column alignment
-        // Col 2 rises toward Col 1: 110px -> 0px
-        tl.to(col2, { y: 0, duration: 0.42, ease: "none" }, 0.00);
+        // 70% of scroll timeline (0.00 -> 0.70) for upward column alignment
+        // Col 2 begins first and rises toward Col 1: col2Offset -> 0px
+        tl.to(col2, { y: 0, duration: 0.45, ease: "none" }, 0.00);
 
-        // Col 3 follows with slight delay: 220px -> 0px
-        tl.to(col3, { y: 0, duration: 0.44, ease: "none" }, 0.14);
+        // Col 3 follows shortly: col3Offset -> 0px
+        tl.to(col3, { y: 0, duration: 0.48, ease: "none" }, 0.10);
 
-        // Col 4 follows last and finishes aligning at 0.70: 330px -> 0px
-        tl.to(col4, { y: 0, duration: 0.46, ease: "none" }, 0.24);
+        // Col 4 rises last starting from lowest position and reaches alignment at 0.70: col4Offset -> 0px
+        tl.to(col4, { y: 0, duration: 0.50, ease: "none" }, 0.20);
 
-        // Phase 2 (0.70 -> 0.90): Hold the fully aligned layout stationary for 20% of scroll progress
-        tl.to({}, { duration: 0.20 }, 0.70);
+        // View All Services button rises in sync with Column 3 to arrive directly below the aligned cards
+        if (btn) {
+          tl.to(btn, { y: 0, duration: 0.48, ease: "none" }, 0.10);
+        }
 
-        // Phase 3 (0.90 -> 1.00): Smooth release into natural scrolling
-        tl.to({}, { duration: 0.10 }, 0.90);
+        // Remaining 30% of scroll timeline (0.70 -> 1.00): Hold fully aligned layout stationary
+        tl.to({}, { duration: 0.30 }, 0.70);
+
+        // Ensure ScrollTrigger measurements are freshly calculated
+        ScrollTrigger.refresh();
+      });
+
+      mm.add("(max-width: 1023px)", () => {
+        const col2 = col2Ref.current;
+        const col3 = col3Ref.current;
+        const col4 = col4Ref.current;
+        const btn = servicesBtnRef.current;
+        if (col2 && col3 && col4) {
+          gsap.set([col2, col3, col4], { y: 0 });
+        }
+        if (btn) {
+          gsap.set(btn, { y: 0 });
+        }
       });
     }, servicesSectionRef);
 
@@ -364,9 +404,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#000000] text-[#FFFFFF] font-sans antialiased selection:bg-[#00BCD4] selection:text-[#050505]">
       {/* ===================================================================== */}
-      {/* SECTION 1: HERO SECTION — EXACTLY 100VH ON DESKTOP, STATIC IMAGE READY */}
+      {/* SECTION 1: HERO SECTION — EXACTLY 100VH ON DESKTOP WITH INTEGRATED MARQUEE */}
       {/* ===================================================================== */}
-      <section className="relative w-full h-[100vh] min-h-[100dvh] max-lg:h-auto max-lg:min-h-[100svh] flex flex-col justify-center pt-[76px] sm:pt-[80px] pb-8 sm:pb-12 bg-[#000000] overflow-hidden">
+      <section className="relative w-full h-[100vh] min-h-[100dvh] max-lg:h-auto max-lg:min-h-[100svh] flex flex-col justify-between pt-[76px] sm:pt-[80px] bg-[#000000] overflow-hidden">
         {/* Full-Width Static Background Image Container covering entire 100vh hero */}
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <Image
@@ -386,10 +426,10 @@ export default function HomePage() {
         </div>
 
         {/* Hero Foreground Content — Vertically centered within available hero area */}
-        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
-          <div className="max-w-3xl space-y-6 sm:space-y-8">
+        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto py-3 sm:py-4">
+          <div className="max-w-3xl space-y-4 sm:space-y-6 lg:space-y-6">
             {/* Enterprise Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#000000]/80 backdrop-blur-md shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#000000]/80 backdrop-blur-md shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#00BCD4] animate-pulse" />
               <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
                 ENGINEERING &bull; DATA &bull; AI CONSULTING
@@ -397,21 +437,21 @@ export default function HomePage() {
             </div>
 
             {/* Main Headline (Bold, Confident Typography ~68–76px) */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[76px] font-extrabold tracking-tight text-white leading-[1.06]">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[72px] font-extrabold tracking-tight text-white leading-[1.06]">
               Build AI & Software Products That Drive{" "}
               <span className="text-[#00BCD4]">Business Growth.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
+            <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
               We help businesses turn complex challenges into practical digital solutions through software development, data analytics, business intelligence, and AI-powered automation.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
               <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 h-12 sm:h-13 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
+                href="/contact#contact-hero"
+                className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 ml-0.5" />
@@ -419,15 +459,15 @@ export default function HomePage() {
 
               <a
                 href="#featured-work"
-                className="inline-flex items-center justify-center gap-2 px-8 h-12 sm:h-13 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-11 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer"
               >
                 <span>Explore Our Work</span>
               </a>
             </div>
 
             {/* 3 Compact Credibility Indicators */}
-            <div className="pt-6 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
-              <div className="space-y-1">
+            <div className="pt-4 sm:pt-5 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
+              <div className="space-y-0.5 sm:space-y-1">
                 <div className="flex items-center gap-1.5 text-[#00BCD4]">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
                   <span className="text-sm sm:text-lg font-extrabold text-white">100+</span>
@@ -437,7 +477,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-0.5 sm:space-y-1">
                 <div className="flex items-center gap-1.5 text-[#00BCD4]">
                   <ShieldCheck className="w-4 h-4 shrink-0" />
                   <span className="text-sm sm:text-lg font-extrabold text-white">99.99%</span>
@@ -447,7 +487,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-0.5 sm:space-y-1">
                 <div className="flex items-center gap-1.5 text-[#00BCD4]">
                   <Zap className="w-4 h-4 shrink-0" />
                   <span className="text-sm sm:text-lg font-extrabold text-white">2–4 Wks</span>
@@ -459,12 +499,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ===================================================================== */}
-      {/* RESTORED TECHNOLOGY MARQUEE — PURE BLACK #000000, ZERO BORDER LINES */}
-      {/* ===================================================================== */}
-      <ServicesMarquee />
+        {/* Integrated Technology Marquee Anchored at the Bottom of the 100vh Hero */}
+        <ServicesMarquee className="shrink-0" />
+      </section>
 
       {/* ===================================================================== */}
       {/* SECTION 2: SERVICES — PINNED 3-PHASE GSAP SCROLL ANIMATION */}
@@ -472,153 +510,162 @@ export default function HomePage() {
       <section
         id="services"
         ref={servicesSectionRef}
-        className="py-6 sm:py-8 bg-[#FFFFFF] border-b border-[#E5E7EB] relative text-[#111827] z-20"
+        className="w-full bg-[#FFFFFF] lg:min-h-[calc(100vh-80px)] flex flex-col justify-start py-6 sm:py-10 lg:py-4 xl:py-5.5 2xl:py-8 relative text-[#111827] z-20 border-b border-[#E5E7EB]"
       >
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Centered Editorial Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-6 space-y-1.5">
+        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative bg-white">
+          {/* Centered Editorial Section Header with Clean Breathing Room */}
+          <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1.5 lg:space-y-2 2xl:space-y-2.5 shrink-0">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
               OUR EXPERTISE
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold tracking-tight text-[#111827] leading-[1.12]">
+            <h2 className="text-2xl sm:text-3xl lg:text-[28px] xl:text-[36px] 2xl:text-[44px] font-extrabold tracking-tight text-[#111827] leading-[1.12] max-w-[760px] xl:max-w-[820px] mx-auto">
               Technology Services Built Around Your Business Goals.
             </h2>
-            <p className="text-sm sm:text-base text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal">
+            <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal pt-0.5">
               From building scalable digital products to engineering data foundations and intelligent automation, we build practical technology solutions tailored for business outcomes.
             </p>
           </div>
 
-          {/* DESKTOP 4-COLUMN STAGGERED SCROLL-ALIGNED GRID — CLEAN BASE, NO BOTTOM HORIZONTAL DIVIDER */}
-          <div className="hidden lg:grid lg:grid-cols-4 border-t border-[#E5E5E5] relative">
-            {SERVICES_DATA.map((service, idx) => {
-              const ServiceIcon = service.icon;
-              const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref];
-              return (
-                <div
-                  key={idx}
-                  ref={colRefs[idx]}
-                  className="p-5 xl:p-6 bg-white border-r border-[#E5E5E5] last:border-r-0 border-t border-[#E5E5E5] -mt-[1px] flex flex-col justify-between group transition-colors hover:bg-[#FAFAFA] min-h-[410px] xl:min-h-[425px] will-change-transform"
-                >
-                  <div className="space-y-3.5">
-                    {/* Top Row: Circular Service Icon with Cyan Dot Accent */}
-                    <div className="w-11 h-11 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative group-hover:border-[#00BCD4]/50 transition-colors shrink-0 mb-3.5">
-                      <ServiceIcon className="w-5 h-5 text-[#101820]" />
-                      <span className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-[#00BCD4]" />
-                    </div>
-
-                    {/* Service Title */}
-                    <h3 className="text-[20px] xl:text-[22px] font-bold text-[#101820] tracking-tight leading-snug min-h-[54px] flex items-center">
-                      {service.title}
-                    </h3>
-
-                    {/* Short Description */}
-                    <p className="text-[14px] xl:text-[15px] text-[#56616B] leading-relaxed font-normal min-h-[64px]">
-                      {service.description}
-                    </p>
-
-                    {/* Capabilities with Thin Dashed Separators */}
-                    <div className="pt-2 border-t border-dashed border-[#E5E5E5]">
-                      {service.capabilities.map((cap, cIdx) => (
-                        <div
-                          key={cIdx}
-                          className="py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-[13px] xl:text-[14px] font-medium text-[#101820] group/cap"
-                        >
-                          <span className="group-hover/cap:text-[#00BCD4] transition-colors">
-                            {cap}
-                          </span>
-                          <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/cap:text-[#00BCD4] group-hover/cap:translate-x-0.5 group-hover/cap:-translate-y-0.5 transition-all shrink-0 ml-2" />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Explore Service Link with Cyan Arrow */}
-                  <div className="pt-4 mt-auto">
-                    <Link
-                      href={service.href}
-                      className="flex items-center justify-between text-[14px] xl:text-[15px] font-bold text-[#101820] hover:text-[#00BCD4] group/link transition-colors pt-2 border-t border-[#E5E5E5]"
-                    >
-                      <span>Explore Service</span>
-                      <div className="w-7 h-7 rounded-full bg-slate-100 group-hover/link:bg-[#00BCD4]/10 flex items-center justify-center transition-colors">
-                        <ArrowRight className="w-3.5 h-3.5 text-[#00BCD4] group-hover/link:translate-x-0.5 transition-transform" />
+          {/* DESKTOP 4-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
+          <div className="hidden lg:block w-full relative">
+            <div className="grid grid-cols-4 border-t border-[#E5E5E5] relative bg-white">
+              {SERVICES_DATA.map((service, idx) => {
+                const ServiceIcon = service.icon;
+                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref];
+                return (
+                  <div
+                    key={idx}
+                    ref={colRefs[idx]}
+                    className="p-3.5 xl:p-4.5 2xl:p-6.5 bg-white border-r border-[#E5E5E5] last:border-r-0 border-t border-[#E5E5E5] -mt-[1px] flex flex-col justify-between group transition-colors hover:bg-[#FAFAFA] min-h-[335px] xl:min-h-[360px] 2xl:min-h-[415px] will-change-transform shadow-xs"
+                  >
+                    <div className="space-y-2 xl:space-y-2.5 2xl:space-y-3.5">
+                      {/* Top Row: Circular Service Icon with Cyan Dot Accent */}
+                      <div className="w-8.5 h-8.5 xl:w-9.5 xl:h-9.5 2xl:w-11 2xl:h-11 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative group-hover:border-[#00BCD4]/50 transition-colors shrink-0 mb-1.5 xl:mb-2 2xl:mb-3">
+                        <ServiceIcon className="w-4 h-4 xl:w-4.5 xl:h-4.5 2xl:w-5 2xl:h-5 text-[#101820]" />
+                        <span className="absolute bottom-0.5 right-0.5 xl:bottom-1 xl:right-1 w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-[#00BCD4]" />
                       </div>
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
 
-          {/* DESKTOP Centered 'View All Services' Button (Cleanly positioned 22px below columns, zero divider line) */}
-          <div className="hidden lg:block text-center pt-5 sm:pt-6">
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center gap-2 px-9 h-11 sm:h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-sm sm:text-base font-extrabold tracking-tight transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-[#00BCD4]/20 group cursor-pointer"
-            >
-              <span>View All Services</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+                      {/* Service Title */}
+                      <h3 className="text-[16px] xl:text-[18px] 2xl:text-[21px] font-bold text-[#101820] tracking-tight leading-snug min-h-[38px] xl:min-h-[44px] 2xl:min-h-[52px] flex items-center">
+                        {service.title}
+                      </h3>
 
-          {/* MOBILE VERTICALLY STACKED SERVICE PRESENTATIONS (lg:hidden) */}
-          <div className="lg:hidden space-y-0 border-t border-b border-[#E5E5E5] divide-y divide-[#E5E5E5] mt-6">
-            {SERVICES_DATA.map((service, idx) => {
-              const ServiceIcon = service.icon;
-              return (
-                <div key={idx} className="p-5 bg-white space-y-3.5">
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0">
-                      <ServiceIcon className="w-5 h-5 text-[#101820]" />
-                      <span className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
+                      {/* Short Description */}
+                      <p className="text-[11.5px] xl:text-[12.5px] 2xl:text-[14px] text-[#56616B] leading-relaxed font-normal min-h-[40px] xl:min-h-[46px] 2xl:min-h-[52px]">
+                        {service.description}
+                      </p>
+
+                      {/* Capabilities with Thin Dashed Separators */}
+                      <div className="pt-1.5 xl:pt-2 2xl:pt-2.5 border-t border-dashed border-[#E5E5E5]">
+                        {service.capabilities.map((cap, cIdx) => (
+                          <div
+                            key={cIdx}
+                            className="py-1 xl:py-1.5 2xl:py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-[11px] xl:text-[12.5px] 2xl:text-[13.5px] font-medium text-[#101820] group/cap"
+                          >
+                            <span className="group-hover/cap:text-[#00BCD4] transition-colors">
+                              {cap}
+                            </span>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/cap:text-[#00BCD4] group-hover/cap:translate-x-0.5 group-hover/cap:-translate-y-0.5 transition-all shrink-0 ml-1.5" />
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <span className="text-xs font-mono font-bold text-slate-400">
-                      {service.num}
-                    </span>
-                  </div>
 
-                  <h3 className="text-lg font-bold text-[#101820] tracking-tight">
-                    {service.title}
-                  </h3>
-
-                  <p className="text-sm text-[#56616B] leading-relaxed">
-                    {service.description}
-                  </p>
-
-                  <div className="pt-2 border-t border-dashed border-[#E5E5E5]">
-                    {service.capabilities.map((cap, cIdx) => (
-                      <div
-                        key={cIdx}
-                        className="py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-sm font-medium text-[#101820]"
+                    {/* Explore Service Link with Cyan Arrow */}
+                    <div className="pt-2 xl:pt-2.5 2xl:pt-3.5 mt-auto">
+                      <Link
+                        href={service.href}
+                        className="flex items-center justify-between text-[12px] xl:text-[13.5px] 2xl:text-[14.5px] font-bold text-[#101820] hover:text-[#00BCD4] group/link transition-colors pt-1.5 xl:pt-2 2xl:pt-2.5 border-t border-[#E5E5E5]"
                       >
-                        <span>{cap}</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
-                      </div>
-                    ))}
+                        <span>Explore Service</span>
+                        <div className="w-5.5 h-5.5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 rounded-full bg-slate-100 group-hover/link:bg-[#00BCD4]/10 flex items-center justify-center transition-colors">
+                          <ArrowRight className="w-3.5 h-3.5 text-[#00BCD4] group-hover/link:translate-x-0.5 transition-transform" />
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-
-                  <div className="pt-1.5">
-                    <Link
-                      href={service.href}
-                      className="inline-flex items-center gap-2 text-sm font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors"
-                    >
-                      <span>Explore Service</span>
-                      <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
-          {/* MOBILE Centered 'View All Services' Button */}
-          <div className="lg:hidden text-center pt-6">
+          {/* DESKTOP Centered 'View All Services' Button — Synchronized with Column 3 Rising */}
+          <div ref={servicesBtnRef} className="hidden lg:block text-center mt-3.5 xl:mt-5 2xl:mt-8 will-change-transform">
             <Link
               href="/services"
-              className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-sm font-extrabold tracking-tight transition-all duration-200 shadow-xs group cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-7 xl:px-8 2xl:px-9 h-10 xl:h-11 2xl:h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-xs sm:text-sm 2xl:text-base font-extrabold tracking-tight transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-[#00BCD4]/20 group cursor-pointer"
             >
               <span>View All Services</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </div>
+
+          {/* TABLET (2-COLUMN) & MOBILE (1-COLUMN) RESPONSIVE PRESENTATION (lg:hidden) */}
+          <div className="lg:hidden mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-b border-[#E5E5E5] py-4">
+              {SERVICES_DATA.map((service, idx) => {
+                const ServiceIcon = service.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="p-5 bg-white border border-[#E5E5E5] rounded-xl space-y-3.5 shadow-xs flex flex-col justify-between"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="w-10 h-10 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0">
+                          <ServiceIcon className="w-5 h-5 text-[#101820]" />
+                          <span className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
+                        </div>
+                        <span className="text-xs font-mono font-bold text-slate-400">
+                          {service.num}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-[#101820] tracking-tight">
+                        {service.title}
+                      </h3>
+
+                      <p className="text-sm text-[#56616B] leading-relaxed">
+                        {service.description}
+                      </p>
+
+                      <div className="pt-2 border-t border-dashed border-[#E5E5E5]">
+                        {service.capabilities.map((cap, cIdx) => (
+                          <div
+                            key={cIdx}
+                            className="py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-sm font-medium text-[#101820]"
+                          >
+                            <span>{cap}</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-[#E5E5E5] mt-4">
+                      <Link
+                        href={service.href}
+                        className="inline-flex items-center justify-between w-full text-sm font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors"
+                      >
+                        <span>Explore Service</span>
+                        <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* TABLET & MOBILE Centered 'View All Services' Button */}
+            <div className="text-center pt-6">
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-sm font-extrabold tracking-tight transition-all duration-200 shadow-xs group cursor-pointer"
+              >
+                <span>View All Services</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -1146,7 +1193,7 @@ export default function HomePage() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                 <Link
-                  href="/contact"
+                  href="/contact#contact-hero"
                   className="inline-flex items-center justify-center gap-2 px-7 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                 >
                   <span>Book Strategy Call</span>

@@ -208,27 +208,14 @@ export function IndustriesMegaMenu({
               </div>
 
               <div className="flex items-center gap-3 flex-shrink-0">
-                {onOpenBookAudit ? (
-                  <button
-                    onClick={() => {
-                      onClose();
-                      onOpenBookAudit("Industry Consultation");
-                    }}
-                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
-                  >
-                    <span>Schedule Strategy Call</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                ) : (
-                  <Link
-                    href="/contact"
-                    onClick={onClose}
-                    className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
-                  >
-                    <span>Schedule Strategy Call</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                )}
+                <Link
+                  href="/contact#contact-hero"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
+                >
+                  <span>Schedule Strategy Call</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>

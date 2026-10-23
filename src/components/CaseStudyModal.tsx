@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, CheckCircle2, Cpu, ShieldCheck, TrendingUp, Layers } from "lucide-react";
 import { CaseStudy } from "@/types";
@@ -129,15 +130,13 @@ export function CaseStudyModal({ study, onClose, onBookCall }: CaseStudyModalPro
                 >
                   Close
                 </button>
-                <button
-                  onClick={() => {
-                    onClose();
-                    onBookCall(study.title);
-                  }}
+                <Link
+                  href="/contact#contact-hero"
+                  onClick={onClose}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B4F6C] hover:bg-[#0E7490] text-white text-xs font-bold transition-all shadow-md shadow-[#0B4F6C]/20"
                 >
-                  Schedule Solution Architecture Call <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                  <span>Schedule Strategy Call</span> <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
           </div>

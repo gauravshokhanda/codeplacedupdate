@@ -377,9 +377,15 @@ const MARQUEE_ITEMS: MarqueeItem[] = [
   { id: "qa-testing", name: "QA & Software Testing", type: "service", icon: <QaTestingIcon /> },
 ];
 
-export function ServicesMarquee() {
+interface ServicesMarqueeProps {
+  className?: string;
+}
+
+export function ServicesMarquee({ className = "" }: ServicesMarqueeProps) {
   return (
-    <div className="w-full max-w-full bg-[#000000] py-5 sm:py-6 flex items-center overflow-hidden select-none relative z-10">
+    <div
+      className={`w-full max-w-full bg-[#000000] h-[50px] sm:h-[66px] lg:h-[72px] flex items-center overflow-hidden select-none relative z-20 ${className}`}
+    >
       <div className="w-full overflow-hidden relative">
         <div
           className="animate-marquee flex items-center"
@@ -390,15 +396,15 @@ export function ServicesMarquee() {
             {MARQUEE_ITEMS.map((item) => (
               <div
                 key={`seq1-${item.id}`}
-                className="flex items-center gap-3.5 sm:gap-4 pr-11 sm:pr-12 text-white hover:text-[#00BCD4] transition-colors duration-200 shrink-0 group cursor-default"
+                className="flex items-center gap-2.5 sm:gap-3.5 pr-9 sm:pr-11 lg:pr-12 text-white hover:text-[#00BCD4] transition-colors duration-200 shrink-0 group cursor-default"
               >
-                {/* Scaled Icon Container: 32px - 36px */}
-                <div className="w-[32px] h-[32px] sm:w-[34px] sm:h-[34px] lg:w-[36px] lg:h-[36px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                {/* Scaled Icon Container: 24px mobile, 26px sm, 28px lg (26-30px range) */}
+                <div className="w-[24px] h-[24px] sm:w-[26px] sm:h-[26px] lg:w-[28px] lg:h-[28px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                   {item.icon}
                 </div>
 
-                {/* Text Label: 18px - 20px font */}
-                <span className="text-[18px] sm:text-[19px] lg:text-[20px] font-bold tracking-tight text-white group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
+                {/* Text Label: 14px mobile, 16px sm, 17px lg (16-18px range) */}
+                <span className="text-[14px] sm:text-[16px] lg:text-[17px] font-bold tracking-tight text-white group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
                   {item.name}
                 </span>
               </div>
@@ -410,15 +416,15 @@ export function ServicesMarquee() {
             {MARQUEE_ITEMS.map((item) => (
               <div
                 key={`seq2-${item.id}`}
-                className="flex items-center gap-3.5 sm:gap-4 pr-11 sm:pr-12 text-white hover:text-[#00BCD4] transition-colors duration-200 shrink-0 group cursor-default"
+                className="flex items-center gap-2.5 sm:gap-3.5 pr-9 sm:pr-11 lg:pr-12 text-white hover:text-[#00BCD4] transition-colors duration-200 shrink-0 group cursor-default"
               >
-                {/* Scaled Icon Container: 32px - 36px */}
-                <div className="w-[32px] h-[32px] sm:w-[34px] sm:h-[34px] lg:w-[36px] lg:h-[36px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                {/* Scaled Icon Container: 24px mobile, 26px sm, 28px lg */}
+                <div className="w-[24px] h-[24px] sm:w-[26px] sm:h-[26px] lg:w-[28px] lg:h-[28px] shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                   {item.icon}
                 </div>
 
-                {/* Text Label: 18px - 20px font */}
-                <span className="text-[18px] sm:text-[19px] lg:text-[20px] font-bold tracking-tight text-white group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
+                {/* Text Label: 14px mobile, 16px sm, 17px lg */}
+                <span className="text-[14px] sm:text-[16px] lg:text-[17px] font-bold tracking-tight text-white group-hover:text-[#00BCD4] transition-colors whitespace-nowrap">
                   {item.name}
                 </span>
               </div>

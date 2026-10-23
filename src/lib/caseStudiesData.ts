@@ -153,6 +153,9 @@ export interface CaseStudyItem {
 export const CASE_STUDY_SLUG_ALIASES: Record<string, string> = {
   "tuitionstime-marketplace": "tuitionstime",
   "edtech-marketplace": "tuitionstime",
+  "hoopwrld-analytics": "hoopwrld",
+  "hoopwrld-case-study": "hoopwrld",
+  "gaming-analytics": "hoopwrld",
   "healthcare-analytics": "healthcare-ai-triage",
   "healthcare-analytics-platform": "healthcare-ai-triage",
   "enterprise-rag": "enterprise-rag-copilot",
@@ -174,6 +177,191 @@ export function getCanonicalSlug(slug: string): string {
 }
 
 export const CASE_STUDIES_DATA: CaseStudyItem[] = [
+  // =========================================================================
+  // HOOPWRLD (FEATURED CASE STUDY: DATA ANALYTICS & BI)
+  // =========================================================================
+  {
+    slug: "hoopwrld",
+    title: "Turning Fragmented Gaming Data Into Reliable Player Analytics",
+    tagline: "We gave Hoopwrld one reliable, mobile-friendly view of how players start, finish and come back to the game",
+    industry: "Gaming (Browser-Based Basketball)",
+    clientType: "Browser-Based Gaming & Sports Platform",
+    heroImage: "/images/case-studies/hoopwrld-hero-visual.png",
+    galleryImages: [
+      "/images/case-studies/hoopwrld-challenge-before.png",
+      "/images/case-studies/hoopwrld-solution-mobile.png",
+      "/images/case-studies/hoopwrld-solution-gameplay.png",
+    ],
+    shortDescription:
+      "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance across 5 disparate source systems.",
+    teamSize: "Data & BI Engineers",
+    duration: "Delivered in Weeks",
+    activeUsers: "Open Gym & The League",
+    availability: "99.9% Pipeline Uptime",
+    metrics: [
+      { value: "5", label: "Data Sources Integrated" },
+      { value: "Daily Pulse", label: "Mobile-First Daily Checks" },
+      { value: "Multi-Platform", label: "Media & Ad Intelligence" },
+    ],
+    detailedKpis: [
+      { value: "5 Sources", label: "Unified Architecture", category: "Integration", delta: "100%", description: "PostgreSQL, GA4, Clerk, Google Ads, and Windsor.ai connected into single Looker Studio pipeline." },
+      { value: "Mobile Pulse", label: "Executive Speed", category: "Visibility", delta: "Instant", description: "Leadership checks previous-day game starts, completions, and registrations in seconds." },
+      { value: "1 Cohort", label: "First-Touch Cohort", category: "Retention", delta: "Clear", description: "Follows player journey: First Game → Game Completion → Account Creation → Return Visit." },
+    ],
+    technologies: ["Looker Studio", "PostgreSQL", "Google Analytics 4", "Clerk", "Google Ads", "Windsor.ai"],
+    problemStatement:
+      "Hoopwrld's data came from several disparate systems: PostgreSQL for gameplay, GA4 for the website, Clerk for sign-ups, and individual ad platforms. Dashboards mixed GA4 event counts with database records, creating discrepancies in game starts, completions, and player counts.",
+    businessGoals: [
+      "Unify 5 data sources into one reliable reporting architecture.",
+      "Eliminate metric discrepancies by separating gameplay records from web events.",
+      "Provide leadership with an instant, mobile-first Daily Pulse for previous-day gameplay.",
+      "Measure true player retention via First-Touch Cohorts.",
+    ],
+    projectScope: [
+      "PostgreSQL reporting views creation & reconciliation",
+      "Looker Studio mobile Daily Pulse dashboard",
+      "Gameplay analytics redesign (New-player health, Game mode, Established players)",
+      "Multi-platform media dashboard (Google Ads, Meta, TikTok, Reddit)",
+    ],
+    challenges: [
+      "Inconsistent gameplay metrics between GA4 and PostgreSQL",
+      "Fragmented reporting requiring multiple report pages for daily checks",
+      "Unclear retention due to overlapping cohort definitions",
+      "Dashboard complexity with duplicate charts and unorganized structures",
+    ],
+    challengeItems: [
+      {
+        number: "01",
+        title: "Inconsistent Gameplay Metrics",
+        category: "Data Integrity",
+        problem: "GA4 event counts and PostgreSQL gameplay records were mixed, creating discrepancies in starts, completions, and player counts.",
+        impact: "Conflicting answers to basic business questions across reports.",
+        solutionTactic: "Standardized all gameplay metrics exclusively on PostgreSQL reporting views verified with developer.",
+      },
+      {
+        number: "02",
+        title: "Fragmented Reporting",
+        category: "Operational Efficiency",
+        problem: "Seeing how yesterday went meant navigating through several different report pages.",
+        impact: "Slow daily monitoring and delayed operational decision making.",
+        solutionTactic: "Engineered a dedicated mobile-first Daily Pulse dashboard for executive review in seconds.",
+      },
+      {
+        number: "03",
+        title: "Unclear Retention Measurement",
+        category: "Analytics Definition",
+        problem: "Cohort definitions and time windows overlapped, making retention difficult to interpret.",
+        impact: "Difficulty identifying exactly where new players drop off.",
+        solutionTactic: "Established First-Touch Cohort tracking following players from first game to completion, registration, and return.",
+      },
+      {
+        number: "04",
+        title: "Dashboard Complexity",
+        category: "Visualization Architecture",
+        problem: "Looker Studio reports had duplicate charts not organized around business questions.",
+        impact: "Visual noise and confusion for non-technical stakeholders.",
+        solutionTactic: "Reorganized dashboards around 3 clear pillars: new-player health, game mode performance, and established players.",
+      },
+    ],
+    ecosystemPersonas: [],
+    userJourneySteps: [
+      { step: "01", stage: "Discovery", title: "First Game", action: "Player lands on Open Gym or League", systemAction: "PostgreSQL logs game start event", outcome: "Baseline activation captured" },
+      { step: "02", stage: "Engagement", title: "Game Completion", action: "Player finishes full basketball game", systemAction: "PostgreSQL records game completion", outcome: "Completion rate telemetry recorded" },
+      { step: "03", stage: "Activation", title: "Account Creation", action: "Player signs up via Clerk auth", systemAction: "Clerk webhook associates player profile", outcome: "Registered player identity established" },
+      { step: "04", stage: "Retention", title: "Return Visit", action: "Player returns for repeat sessions", systemAction: "Cohort tracking captures weekly retention", outcome: "Long-term player habit formed" },
+    ],
+    galleryScreens: [
+      {
+        id: "daily-pulse",
+        title: "Mobile Daily Pulse",
+        tag: "Executive Dashboard",
+        category: "Mobile BI",
+        description: "Mobile-first Looker Studio dashboard showing previous-day starts, completions, completion rate, unique players, registrations, and 7-day trends.",
+        keyFeatures: ["Mobile-optimized layout", "7-day trend indicators", "Open Gym vs League breakdown", "Clerk registration sync"],
+        image: "/images/case-studies/hoopwrld-solution-mobile.png",
+      },
+      {
+        id: "gameplay-overview",
+        title: "Gameplay Analytics",
+        tag: "Core Reporting",
+        category: "Looker Studio",
+        description: "Executive and gameplay dashboards reorganized around new-player health, performance by game mode, and activity from established players.",
+        keyFeatures: ["PostgreSQL reporting views", "Consistent start/completion math", "Game mode segmentation", "Player activity cohorts"],
+        image: "/images/case-studies/hoopwrld-solution-gameplay.png",
+      },
+      {
+        id: "before-report",
+        title: "Old Executive Report (Before)",
+        tag: "Discrepancy Analysis",
+        category: "Audit",
+        description: "Original report showing metric discrepancies caused by mixing GA4 events with database records.",
+        keyFeatures: ["Mixed event sources", "Duplicate chart structures", "Unclear retention windows", "Unreconciled player counts"],
+        image: "/images/case-studies/hoopwrld-challenge-before.png",
+      },
+    ],
+    solution:
+      "CodePlaced reorganized Hoopwrld's reporting so each dashboard answers a specific business question. Gameplay numbers were standardized exclusively on PostgreSQL reporting views, a mobile-first Daily Pulse was built from scratch, and acquisition reporting was cleanly decoupled into a dedicated Media dashboard.",
+    solutionHighlights: [
+      "Standardized all gameplay metrics on PostgreSQL reporting views verified with developers.",
+      "Engineered mobile-first Daily Pulse covering starts, completions, players, registrations, and 7-day trends.",
+      "Implemented First-Touch Cohorts to measure true player drop-off and habit formation.",
+      "Decoupled website & advertising traffic into a dedicated Media dashboard covering Google Ads, Meta, TikTok, and Reddit.",
+    ],
+    architectureNodes: [
+      { title: "Gameplay DB", subtitle: "Source System", desc: "PostgreSQL database tracking game starts, completions, and modes.", status: "Primary Gameplay Source", tech: ["PostgreSQL"] },
+      { title: "Identity & Auth", subtitle: "User Registration", desc: "Clerk authentication tracking registered player accounts.", status: "Auth System", tech: ["Clerk"] },
+      { title: "Web Telemetry", subtitle: "Website Traffic", desc: "GA4 tracking marketing landing pages and traffic sources.", status: "Web Analytics", tech: ["Google Analytics 4"] },
+      { title: "Ad Networks", subtitle: "Acquisition Channels", desc: "Google Ads, Meta, TikTok, Reddit ad performance.", status: "Paid Media", tech: ["Google Ads", "Windsor.ai"] },
+      { title: "Looker Studio", subtitle: "Reporting Engine", desc: "Reorganized dashboards: Daily Pulse, Gameplay Analytics, Media Performance.", status: "Visualization Layer", tech: ["Looker Studio"] },
+    ],
+    engineeringDecisions: [
+      {
+        technology: "PostgreSQL Reporting Views vs GA4",
+        problem: "GA4 client-side events dropped or differed from backend database records, causing conflicting completion numbers.",
+        decision: "Standardized all authoritative gameplay metrics on PostgreSQL reporting views and verified output with Hoopwrld's developer.",
+        benefit: "100% data consistency between game servers and executive reporting.",
+      },
+      {
+        technology: "Dedicated Mobile Daily Pulse",
+        problem: "Leadership had to navigate multiple desktop report pages to check yesterday's numbers.",
+        decision: "Designed a mobile-first Looker Studio dashboard displaying previous-day starts, completions, rate, players, and registrations.",
+        benefit: "Executive team can evaluate previous-day performance on a phone in seconds.",
+      },
+      {
+        technology: "Separated Media & Traffic Dashboard",
+        problem: "Ad campaign metrics cluttered gameplay dashboards and lacked channel-specific granularity.",
+        decision: "Separated website and advertising data into a dedicated Media dashboard via Windsor.ai.",
+        benefit: "Platform-specific reporting for Google Ads, Meta, TikTok, and Reddit covering spend, impressions, CTR, CPC, and conversions.",
+      },
+    ],
+    beforeAfter: [
+      { metric: "Gameplay Data Sources", before: "Mixed GA4 events and database records", after: "PostgreSQL reporting views exclusively", improvement: "Reconciled" },
+      { metric: "Metric Definitions", before: "Conflicting start/completion definitions", after: "Common definitions across periods & modes", improvement: "Standardized" },
+      { metric: "Daily Monitoring", before: "Multiple cumbersome report pages", after: "Mobile-first Daily Pulse", improvement: "Instant" },
+      { metric: "Cohort Analysis", before: "Overlapping windows & unclear drop-off", after: "First-Touch Cohort tracking", improvement: "Clear" },
+      { metric: "Dashboard Layout", before: "Duplicate charts without clear questions", after: "Dedicated reporting views per question", improvement: "Structured" },
+    ],
+    showcaseModules: [
+      { name: "Daily Pulse", tag: "Mobile BI", desc: "Game starts, completions, completion rate, unique players, registrations, and 7-day trends.", image: "/images/case-studies/hoopwrld-solution-mobile.png" },
+      { name: "Gameplay Analytics", tag: "Looker Studio", desc: "New-player health, game mode performance, and established player activity.", image: "/images/case-studies/hoopwrld-solution-gameplay.png" },
+      { name: "Media Reporting", tag: "Acquisition", desc: "Dedicated reporting for Google Ads, Meta, TikTok, and Reddit covering spend, CTR, CPC, and conversions.", image: "/images/case-studies/hoopwrld-challenge-before.png" },
+    ],
+    process: [
+      { step: "01", title: "Audit & Source Analysis", desc: "Audited existing Looker Studio dashboards, PostgreSQL tables, GA4 events, and Clerk registrations to identify discrepancies.", deliverables: ["Metric discrepancy matrix", "Data lineage audit"] },
+      { step: "02", title: "Metric Standardization", desc: "Formulated single source of truth for game starts and completions using PostgreSQL views, confirmed with developers.", deliverables: ["PostgreSQL reporting views", "Reconciled metric definitions"] },
+      { step: "03", title: "Daily Pulse & Gameplay BI", desc: "Designed mobile-first Daily Pulse and reorganized executive gameplay dashboards around player lifecycle stages.", deliverables: ["Mobile Daily Pulse", "Gameplay analytics dashboard"] },
+      { step: "04", title: "Media Dashboard & Validation", desc: "Connected Windsor.ai pipelines for multi-platform ad performance and verified cross-platform reporting integrity.", deliverables: ["Dedicated media dashboard", "Cohort health reporting"] },
+    ],
+    results: [
+      { title: "Unified Reporting", value: "5 Systems", description: "PostgreSQL, GA4, Clerk, Google Ads, and Windsor.ai brought into one coherent setup." },
+      { title: "Daily Visibility", value: "Mobile Pulse", description: "Leadership can check previous-day gameplay on a phone in seconds." },
+      { title: "Clearer Retention", value: "First-Touch", description: "First-Touch Cohort reporting identifies exactly where new players lose interest." },
+      { title: "Consistent Metrics", value: "Standardized", description: "Common metric definitions allow reliable comparisons across periods and game modes." },
+      { title: "Focused Acquisition", value: "Multi-Platform", description: "Dedicated views make advertising spend, CTR, CPC, and conversions easy to evaluate." },
+    ],
+    businessImpact:
+      "Hoopwrld transitioned from conflicting, fragmented reporting to reliable dashboards the team can trust. With daily operations, gameplay analytics, and acquisition reporting kept distinct, leadership makes data-informed decisions with speed and clarity.",
+  },
   // =========================================================================
   // 0. TUITIONSTIME (FEATURED CASE STUDY)
   // =========================================================================
