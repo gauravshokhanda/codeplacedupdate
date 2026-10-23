@@ -360,10 +360,10 @@ export default function AiCopilotsPage() {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/contact"
+                href="/contact#contact-hero"
                 className="w-full sm:w-auto h-[54px] px-8 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl shadow-[#00C8E8]/20 flex items-center justify-center gap-2.5 transition-all active:scale-95"
               >
-                <span>Book a Discovery Call</span>
+                <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 

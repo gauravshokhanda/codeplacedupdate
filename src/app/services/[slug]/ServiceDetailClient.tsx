@@ -453,7 +453,7 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
-                href="/contact"
+                href="/contact#contact-hero"
                 className="w-full sm:w-auto h-[54px] px-9 rounded-full text-black font-extrabold text-sm shadow-lg flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
                   background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",

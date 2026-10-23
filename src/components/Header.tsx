@@ -22,11 +22,10 @@ interface HeaderProps {
 
 const NAV_ITEMS_LIST = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Services", href: "/services", hasDropdown: "services" },
-  { label: "Solutions", href: "/services" },
-  { label: "Industries", href: "/industries", hasDropdown: "industries" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "Industries", href: "/industries", hasDropdown: "industries" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -197,25 +196,25 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   );
 
   // Shared CTA button: bright cyan rounded pill (#00C8E8 with dark text #06151C)
+  // Navigates to /contact#contact-hero, or smooth-scrolls if already on the contact page
+  const handleStrategyCallClick = (e: React.MouseEvent) => {
+    if (pathname === "/contact") {
+      e.preventDefault();
+      const hero = document.getElementById("contact-hero");
+      if (hero) hero.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const renderCtaButton = () => (
     <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
-      {onOpenBookAudit ? (
-        <button
-          onClick={() => onOpenBookAudit("Schedule Strategy Call")}
-          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
-        >
-          <span>Book Strategy Call</span>
-          <ArrowRight className="w-4 h-4 ml-0.5" />
-        </button>
-      ) : (
-        <Link
-          href="/contact"
-          className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
-        >
-          <span>Book Strategy Call</span>
-          <ArrowRight className="w-4 h-4 ml-0.5" />
-        </Link>
-      )}
+      <Link
+        href="/contact#contact-hero"
+        onClick={handleStrategyCallClick}
+        className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+      >
+        <span>Book Strategy Call</span>
+        <ArrowRight className="w-4 h-4 ml-0.5" />
+      </Link>
     </div>
   );
 
@@ -542,8 +541,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
 
             <div className="mt-6 pt-6 border-t border-slate-200/80">
               <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
+                href="/contact#contact-hero"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  handleStrategyCallClick(e);
+                }}
                 className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
               >
                 <span>Book Strategy Call</span>

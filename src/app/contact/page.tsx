@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -236,6 +236,22 @@ export default function ContactPage() {
     }
   };
 
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window !== "undefined" && window.location.hash === "#contact-hero") {
+        setTimeout(() => {
+          if (formRef.current) {
+            formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 120);
+      }
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.fullName) return;
@@ -267,6 +283,7 @@ export default function ContactPage() {
       {/* 1. HERO SECTION (Continuous Canvas + Floating Form Card) */}
       {/* ========================================================================= */}
       <section
+        id="contact-hero"
         ref={formRef}
         className="relative pt-28 pb-20 sm:pt-32 lg:pt-36 lg:pb-28 overflow-hidden bg-[#050505] border-b border-[#1B242B]"
       >
