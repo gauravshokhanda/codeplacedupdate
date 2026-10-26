@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { TuitionstimeCaseStudy } from "@/components/case-studies/TuitionstimeCaseStudy";
+import { HoopwrldCaseStudy } from "@/components/case-studies/HoopwrldCaseStudy";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -61,6 +62,10 @@ export function CaseStudyDetailClient({
 }: CaseStudyDetailClientProps) {
   if (study.slug === "tuitionstime") {
     return <TuitionstimeCaseStudy />;
+  }
+
+  if (study.slug === "hoopwrld") {
+    return <HoopwrldCaseStudy />;
   }
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -227,7 +232,7 @@ export function CaseStudyDetailClient({
                 </a>
 
                 <Link
-                  href="/contact"
+                  href="/contact#contact-hero"
                   className="w-full sm:w-auto h-[50px] px-7 rounded-full bg-white hover:bg-slate-50 text-[#072C4C] font-bold text-xs border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-300"
                 >
                   <span>Book Strategy Call</span>
@@ -934,7 +939,7 @@ export function CaseStudyDetailClient({
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
-              href="/contact"
+              href="/contact#contact-hero"
               className="w-full sm:w-auto h-[54px] px-9 rounded-full text-[#072C4C] bg-[#16D3F5] hover:bg-cyan-300 font-bold text-sm shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95"
             >
               <span>Book Strategy Call</span>

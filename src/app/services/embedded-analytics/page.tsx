@@ -128,10 +128,10 @@ export default function EmbeddedAnalyticsPage() {
               Book a 30-minute scoping call with our Principal Product Architect.
             </p>
             <Link
-              href="/contact"
+              href="/contact#contact-hero"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl transition-all"
             >
-              <span>Schedule Analytics Consultation</span>
+              <span>Schedule Strategy Call</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
