@@ -90,7 +90,7 @@ const FEATURED_CASE_STUDIES = [
     category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
     brand: "Hoopwrld",
     brandIcon: Gamepad2,
-    titlePrefix: "Turning Fragmented Gaming Data Into ",
+    titlePrefix: "Turning Gameplay Data Into ",
     highlightWord: "Reliable Player Analytics.",
     description:
       "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
@@ -279,6 +279,135 @@ export default function CaseStudiesPage() {
               <div className="space-y-8 lg:space-y-10 w-[92%] max-w-[1400px] mx-auto">
                 {matchingStudies.map((study) => {
                   const BrandIcon = study.brandIcon;
+
+                  // -------------------------------------------------------------
+                  // HOOPWRLD CASE STUDY CARD (50% Content / 50% Visual Split)
+                  // Matches Tuitionstime structure, dimensions, border & styling
+                  // Completely solid black left half with ZERO text-image overlap
+                  // -------------------------------------------------------------
+                  // -------------------------------------------------------------
+                  // HOOPWRLD CASE STUDY CARD (50% Content / 50% Visual Split)
+                  // Matches Tuitionstime structure, dimensions, border & styling
+                  // Completely solid black left half with ZERO text-image overlap
+                  // -------------------------------------------------------------
+                  if (study.id === "hoopwrld") {
+                    return (
+                      <motion.div
+                        key={study.id}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <Link
+                          href={`/case-studies/${study.slug}`}
+                          aria-label={`View case study: ${study.brand}`}
+                          className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[420px] lg:h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+                        >
+                          <div className="flex flex-col md:flex-row h-full">
+                            {/* Left Side (50%) — Solid pure black background, zero image behind text */}
+                            <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-between bg-[#050505] z-10">
+                              {/* Upper Left: Badge, Brand, Title, Description, Tech Tags, and CTA */}
+                              <div className="space-y-3.5 max-w-md xl:max-w-[500px] text-left">
+                                {/* Eyebrow Tag */}
+                                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00C7E8]/10 border border-[#00C7E8]/30 text-[#00C7E8] w-fit">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8] animate-pulse" />
+                                  <span>{study.category}</span>
+                                </div>
+
+                                {/* Brand Logo & Name */}
+                                <div className="flex items-center gap-2.5">
+                                  <div className="w-8 h-8 rounded-lg bg-[#00C7E8]/15 border border-[#00C7E8]/35 flex items-center justify-center text-[#00C7E8]">
+                                    <BrandIcon className="w-4 h-4" />
+                                  </div>
+                                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                                    {study.brand}
+                                  </span>
+                                </div>
+
+                                {/* Title with Cyan Highlight */}
+                                <h2 className="text-2xl sm:text-2xl md:text-[22px] lg:text-[28px] xl:text-[32px] font-extrabold text-white tracking-tight leading-[1.18] max-w-[460px]">
+                                  {study.titlePrefix}
+                                  <span className="text-[#00C7E8]">{study.highlightWord}</span>
+                                </h2>
+
+                                {/* Short Description */}
+                                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-sm sm:max-w-md">
+                                  {study.description}
+                                </p>
+
+                                {/* Technology Tags */}
+                                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                                  {study.techTags.map((tech, tIdx) => (
+                                    <span
+                                      key={tIdx}
+                                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
+                                    >
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+
+                                {/* View Case Study CTA Button */}
+                                <div className="pt-1.5">
+                                  <span
+                                    className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00C7E8] text-[#00C7E8] group-hover:bg-[#00C7E8] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm"
+                                  >
+                                    <span>View Case Study</span>
+                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Bottom Row: Metrics Strip with Divider Lines */}
+                              <div className="pt-6 mt-4 sm:mt-0 border-t border-white/[0.08] md:border-t-0 flex flex-wrap items-center gap-5 sm:gap-8 md:gap-4 lg:gap-8 xl:gap-10">
+                                {study.metrics.map((metric, idx) => (
+                                  <div
+                                    key={idx}
+                                    className={`text-left ${
+                                      idx !== 0 ? "border-l border-white/15 pl-4 sm:pl-6 md:pl-4 lg:pl-8" : ""
+                                    }`}
+                                  >
+                                    <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white font-mono tracking-tight">
+                                      {metric.value}
+                                    </div>
+                                    <div className="text-[11px] text-[#A1A1AA] mt-0.5 font-medium whitespace-nowrap">
+                                      {metric.label}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Right side (50%) — Controlled Product Mockup in Clean Black Studio */}
+                            <div className="w-full md:w-1/2 bg-[#050505] relative flex items-center justify-center md:justify-end p-6 sm:p-8 md:p-4 lg:p-6 xl:p-10 select-none overflow-hidden min-h-[260px] sm:min-h-[300px] md:min-h-0">
+                              {/* Ambient Cyan Glow Behind Display */}
+                              <div
+                                className="absolute top-[35%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[radial-gradient(ellipse_at_center,rgba(0,199,232,0.16)_0%,rgba(8,127,165,0.03)_45%,transparent_70%)] blur-3xl -z-0 pointer-events-none"
+                                aria-hidden="true"
+                              />
+
+                              {/* Realistic MacBook Pro Mockup (takes 80-85% of its 50% image area) */}
+                              <div className="relative w-full max-w-[360px] sm:max-w-[420px] md:max-w-[440px] lg:max-w-[530px] xl:max-w-[580px] aspect-[2040/1380] drop-shadow-[0_25px_50px_rgba(0,0,0,0.9)] z-10 transition-transform duration-500 ease-out group-hover:-translate-y-1.5">
+                                <Image
+                                  src="/images/case-studies/hoopwrld-hero-laptop.webp"
+                                  alt={study.imageAlt}
+                                  fill
+                                  priority
+                                  className="object-contain object-center md:object-right"
+                                  sizes="(max-width: 768px) 90vw, (max-width: 1400px) 50vw, 580px"
+                                />
+                                {/* Floor contact shadow for grounding */}
+                                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[85%] h-3 bg-black/80 blur-md rounded-full pointer-events-none" />
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  }
+
+                  // Default / Tuitionstime Card — Exactly Unchanged
                   return (
                     <motion.div
                       key={study.id}
