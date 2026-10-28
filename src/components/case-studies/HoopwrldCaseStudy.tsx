@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
   GraduationCap,
+  Gamepad2,
 } from "lucide-react";
 
 // =============================================================================
@@ -155,7 +156,7 @@ export function HoopwrldCaseStudy() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12">
             {/* LEFT COLUMN — 43% EDITORIAL CONTENT */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="w-full lg:w-[43%] flex-none space-y-6 text-left z-10"
@@ -163,7 +164,7 @@ export function HoopwrldCaseStudy() {
               {/* Eyebrow Label */}
               <div className="flex items-center gap-3">
                 <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#00BCD4]">
-                  CASE STUDY / DATA ANALYTICS
+                  CASE STUDY / HOOPWRLD
                 </span>
                 <span className="h-px w-10 bg-[#00BCD4]/40" />
               </div>
@@ -171,70 +172,38 @@ export function HoopwrldCaseStudy() {
               {/* Main Heading */}
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[50px] font-black tracking-tight leading-[1.1] text-white">
                 Turning Gameplay Data Into{" "}
-                <span className="text-[#00BCD4] block sm:inline lg:block">
+                <span className="text-[#00BCD4] block">
                   Decisions That Drive Growth.
                 </span>
               </h1>
 
               {/* Supporting Description */}
               <p className="text-sm sm:text-base lg:text-[17px] text-[#A1A1AA] leading-relaxed max-w-xl">
-                A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.
+                Bringing gameplay, player activity, retention, and growth reporting into one clearer analytics experience for Hoopwrld.
               </p>
 
-              {/* Sequential Technology Tags */}
-              <div className="space-y-2 pt-1">
-                <div className="text-[11px] font-mono text-[#71717A] uppercase tracking-wider">
-                  Technology Stack
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  {["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"].map((tag, idx) => (
-                    <motion.span
-                      key={tag}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.35, delay: 0.25 + idx * 0.06 }}
-                      className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-white/90 hover:border-[#00BCD4]/40 transition-colors"
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
+              {/* Game Badge Pill */}
+              <div className="pt-1">
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#D4D4D8]">
+                  <Gamepad2 className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <span className="tracking-wide uppercase font-semibold">BROWSER-BASED BASKETBALL GAME</span>
                 </div>
               </div>
 
-              {/* Horizontal Divider & Three Project Details */}
-              <div className="pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-                <div>
-                  <div className="text-[11px] font-mono text-[#71717A] uppercase tracking-wider">
-                    Industry
-                  </div>
-                  <div className="text-xs sm:text-sm font-semibold text-white mt-1">
-                    Gaming & Sports Tech
-                  </div>
-                </div>
-                <div>
-                  <div className="text-[11px] font-mono text-[#71717A] uppercase tracking-wider">
-                    Project Type
-                  </div>
-                  <div className="text-xs sm:text-sm font-semibold text-white mt-1">
-                    Data Analytics Platform
-                  </div>
-                </div>
-                <div>
-                  <div className="text-[11px] font-mono text-[#71717A] uppercase tracking-wider">
-                    Focus
-                  </div>
-                  <div className="text-xs sm:text-sm font-semibold text-[#00BCD4] mt-1">
-                    Gameplay & Growth Analytics
-                  </div>
-                </div>
+              {/* Bottom Tags Strip */}
+              <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-3 text-xs font-mono font-semibold text-[#A1A1AA]">
+                <span className="text-white tracking-wider">GAMING</span>
+                <span className="text-white/20">|</span>
+                <span className="text-white tracking-wider">GAMEPLAY ANALYTICS</span>
+                <span className="text-white/20">|</span>
+                <span className="text-[#00BCD4] tracking-wider">MOBILE-FIRST REPORTING</span>
               </div>
             </motion.div>
 
             {/* RIGHT COLUMN — 57%: PROMINENT PHOTOREALISTIC LAPTOP IN BASKETBALL COURT ENVIRONMENT */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.65, delay: 0.2, ease: "easeOut" }}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
               className="w-full lg:w-[57%] flex-none relative flex items-center justify-center lg:justify-end pt-4 lg:pt-0"
             >
               {/* Soft Cinematic Background Aura */}
@@ -246,7 +215,7 @@ export function HoopwrldCaseStudy() {
               {/* Large Photorealistic Laptop Displaying Authentic AFTER Dashboard */}
               <div className="relative w-full max-w-[560px] sm:max-w-[680px] md:max-w-[760px] lg:max-w-[880px] xl:max-w-[940px] aspect-[1540/1330] select-none drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
                 <Image
-                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-cinematic.webp"
+                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-v2.webp"
                   alt="Hoopwrld Gameplay and Player Analytics Dashboard on Photorealistic Laptop in Basketball Court Environment"
                   fill
                   priority
@@ -502,23 +471,18 @@ export function HoopwrldCaseStudy() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
             {/* LEFT: BEFORE DASHBOARD */}
             <div className="flex flex-col justify-between rounded-2xl border border-white/10 hover:border-red-500/40 bg-[#07090D] shadow-2xl overflow-hidden transition-all duration-300">
-              {/* Window Header */}
-              <div className="px-5 py-3.5 bg-[#0C1015] border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[#EF4444]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#F59E0B]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#10B981]/80" />
-                  <span className="text-xs font-mono text-[#71717A] ml-2 hidden sm:inline">
-                    hoopwrld-legacy-report.internal
-                  </span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-red-500/15 border border-red-500/35 text-red-400">
-                  <span>BEFORE &bull; FRAGMENTED METRICS</span>
-                </div>
+              {/* Card Header with Solid Red Pill */}
+              <div className="px-6 py-4 flex items-center justify-between border-b border-white/[0.06]">
+                <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EF4444] text-white">
+                  BEFORE
+                </span>
+                <span className="text-xs font-mono text-[#71717A] hidden sm:inline">
+                  Legacy Architecture
+                </span>
               </div>
 
               {/* Dashboard Screen */}
-              <div className="relative aspect-[16/10] w-full bg-[#05070A] p-2 flex items-center justify-center">
+              <div className="relative aspect-[16/10] w-full bg-[#05070A] p-3 flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <Image
                     src="/images/case-studies/hoopwrld-challenge-before.webp"
@@ -530,52 +494,35 @@ export function HoopwrldCaseStudy() {
                 </div>
               </div>
 
-              {/* Summary Points Underneath */}
-              <div className="p-5 sm:p-6 bg-[#0A0D12] border-t border-white/[0.08] space-y-2 text-left">
-                <div className="text-sm font-bold text-white tracking-tight">
-                  Legacy Architecture Challenges
-                </div>
-                <ul className="text-xs sm:text-[13px] text-[#A1A1AA] space-y-1.5">
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-400 font-bold">&times;</span>
-                    <span>Conflicting counts between GA4 client telemetry and PostgreSQL database</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-400 font-bold">&times;</span>
-                    <span>Scattered views across multiple tabs made daily health assessment slow</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-400 font-bold">&times;</span>
-                    <span>Retention and cohort drop-off obscured by unstandardized counting logic</span>
-                  </li>
-                </ul>
+              {/* Summary Caption Underneath */}
+              <div className="p-6 bg-[#0A0D12] border-t border-white/[0.08] space-y-2 text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Fragmented And Manual Reports
+                </h3>
+                <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                  Data spread across multiple sources with inconsistent metrics, making it hard to get a clear view of player performance.
+                </p>
               </div>
             </div>
 
             {/* RIGHT: AFTER DASHBOARD */}
             <div className="flex flex-col justify-between rounded-2xl border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#07090D] shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_35px_rgba(0,188,212,0.08)] overflow-hidden transition-all duration-300">
-              {/* Window Header */}
-              <div className="px-5 py-3.5 bg-[#0C1015] border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[#00BCD4]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#00BCD4]/50" />
-                  <span className="w-3 h-3 rounded-full bg-[#00BCD4]/30" />
-                  <span className="text-xs font-mono text-[#71717A] ml-2 hidden sm:inline">
-                    analytics.hoopwrld.com/overview
-                  </span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-[#00BCD4]/15 border border-[#00BCD4]/35 text-[#00BCD4]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                  <span>AFTER &bull; STANDARDIZED BI</span>
-                </div>
+              {/* Card Header with Solid Cyan Pill */}
+              <div className="px-6 py-4 flex items-center justify-between border-b border-white/[0.06]">
+                <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#00BCD4] text-black">
+                  AFTER
+                </span>
+                <span className="text-xs font-mono text-[#00BCD4]/70 hidden sm:inline">
+                  Unified Analytics Experience
+                </span>
               </div>
 
-              {/* Dashboard Screen (EXACT SAME AFTER DASHBOARD AS HERO) */}
-              <div className="relative aspect-[16/10] w-full bg-[#05070A] p-2 flex items-center justify-center">
+              {/* Dashboard Screen (EXACT SAME AFTER DASHBOARD AS HERO ON LAPTOP IN COURT ENVIRONMENT) */}
+              <div className="relative aspect-[16/10] w-full bg-[#05070A] p-3 flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/images/case-studies/extracted_after_dashboard_flat_perfect.png"
-                    alt="Hoopwrld Standardized Looker Studio Player Analytics Dashboard"
+                    src="/images/case-studies/hoopwrld-hero-basketball-laptop-v2.webp"
+                    alt="Hoopwrld Standardized Looker Studio Player Analytics Dashboard on Laptop in Basketball Court"
                     fill
                     className="object-contain object-center"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -583,25 +530,14 @@ export function HoopwrldCaseStudy() {
                 </div>
               </div>
 
-              {/* Summary Points Underneath */}
-              <div className="p-5 sm:p-6 bg-[#0A0D12] border-t border-white/[0.08] space-y-2 text-left">
-                <div className="text-sm font-bold text-white tracking-tight">
-                  Unified Reporting Solution
-                </div>
-                <ul className="text-xs sm:text-[13px] text-[#A1A1AA] space-y-1.5">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#00BCD4] font-bold">&check;</span>
-                    <span>PostgreSQL authoritative database views established as single source of truth</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#00BCD4] font-bold">&check;</span>
-                    <span>First-Touch Cohorts and retention curves track genuine player habits</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#00BCD4] font-bold">&check;</span>
-                    <span>Dedicated Mobile Daily Pulse for instant previous-day performance checks</span>
-                  </li>
-                </ul>
+              {/* Summary Caption Underneath */}
+              <div className="p-6 bg-[#0A0D12] border-t border-white/[0.08] space-y-2 text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#00BCD4] tracking-tight">
+                  A Unified, Interactive Dashboard
+                </h3>
+                <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                  Real-time, easy-to-understand reporting with key gameplay metrics, player cohorts, and growth insights in one place.
+                </p>
               </div>
             </div>
           </div>
