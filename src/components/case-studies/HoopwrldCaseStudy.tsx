@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
   GraduationCap,
+  Gamepad2,
 } from "lucide-react";
 
 // =============================================================================
@@ -138,19 +139,29 @@ export function HoopwrldCaseStudy() {
   return (
     <div className="bg-[#000000] text-white selection:bg-[#00BCD4] selection:text-black font-sans antialiased overflow-x-hidden">
       {/* ===================================================================== */}
-      {/* SECTION 1 — PREMIUM HERO (STRONG EDITORIAL SPLIT — 43% / 57%) */}
+      {/* SECTION 1 — PREMIUM HERO (TWO-COLUMN CINEMATIC EDITORIAL — 43% / 57%) */}
       {/* ===================================================================== */}
-      <section className="relative bg-[#000000] pt-24 sm:pt-28 lg:pt-32 pb-14 sm:pb-16 border-b border-white/[0.08] overflow-hidden flex items-center min-h-[660px] lg:min-h-[720px]">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 xl:gap-14">
-            {/* LEFT COLUMN — 43% EDITORIAL TYPOGRAPHY */}
+      <section className="relative bg-[#000000] pt-24 sm:pt-28 lg:pt-32 pb-14 sm:pb-16 lg:pb-20 border-b border-white/[0.08] overflow-hidden flex items-center min-h-[660px] lg:min-h-[740px]">
+        {/* Subtle Ambient Radial Glow */}
+        <div
+          className="absolute top-0 right-0 w-full lg:w-2/3 h-full pointer-events-none opacity-20 -z-0"
+          style={{
+            background:
+              "radial-gradient(circle at 75% 35%, rgba(0, 188, 212, 0.15) 0%, rgba(8, 127, 165, 0.05) 50%, transparent 75%)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12">
+            {/* LEFT COLUMN — 43% EDITORIAL CONTENT */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="w-full lg:w-[43%] flex-none space-y-6 text-left"
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="w-full lg:w-[43%] flex-none space-y-6 text-left z-10"
             >
-              {/* Eyebrow with Subtle Rule */}
+              {/* Eyebrow Label */}
               <div className="flex items-center gap-3">
                 <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#00BCD4]">
                   CASE STUDY / HOOPWRLD
@@ -158,50 +169,58 @@ export function HoopwrldCaseStudy() {
                 <span className="h-px w-10 bg-[#00BCD4]/40" />
               </div>
 
-              {/* Main Headline (54–64px on desktop, tight leading, max-width around 580px, 2 intentional balanced lines) */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-black tracking-tight leading-[1.08] max-w-[580px]">
-                <span className="text-white block">Turning Gameplay Data Into</span>
-                <span className="text-[#00BCD4] block">Decisions That Drive Growth.</span>
+              {/* Main Heading */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[50px] font-black tracking-tight leading-[1.1] text-white">
+                Turning Gameplay Data Into{" "}
+                <span className="text-[#00BCD4] block">
+                  Decisions That Drive Growth.
+                </span>
               </h1>
 
               {/* Supporting Description */}
-              <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-base lg:text-[17px] text-[#A1A1AA] leading-relaxed max-w-xl">
                 Bringing gameplay, player activity, retention, and growth reporting into one clearer analytics experience for Hoopwrld.
               </p>
 
-              {/* Game Badge */}
-              <div>
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wide uppercase bg-white/[0.04] border border-white/10 text-white/90">
-                  <span className="text-sm">🎮</span>
-                  <span>Browser-Based Basketball Game</span>
+              {/* Game Badge Pill */}
+              <div className="pt-1">
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#D4D4D8]">
+                  <Gamepad2 className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <span className="tracking-wide uppercase font-semibold">BROWSER-BASED BASKETBALL GAME</span>
                 </div>
               </div>
 
-              {/* Compact Project Metadata Row */}
-              <div className="pt-4 border-t border-white/[0.08] flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-mono font-bold uppercase tracking-wider text-[#71717A]">
-                <span className="text-white hover:text-[#00BCD4] transition-colors">GAMING</span>
-                <span className="text-white/20 select-none">|</span>
-                <span className="text-white hover:text-[#00BCD4] transition-colors">GAMEPLAY ANALYTICS</span>
-                <span className="text-white/20 select-none">|</span>
-                <span className="text-[#00BCD4]">MOBILE-FIRST REPORTING</span>
+              {/* Bottom Tags Strip */}
+              <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-3 text-xs font-mono font-semibold text-[#A1A1AA]">
+                <span className="text-white tracking-wider">GAMING</span>
+                <span className="text-white/20">|</span>
+                <span className="text-white tracking-wider">GAMEPLAY ANALYTICS</span>
+                <span className="text-white/20">|</span>
+                <span className="text-[#00BCD4] tracking-wider">MOBILE-FIRST REPORTING</span>
               </div>
             </motion.div>
 
-            {/* RIGHT COLUMN — 57%: LARGE REALISTIC LAPTOP DOMINATING THE VISUAL AREA */}
+            {/* RIGHT COLUMN — 57%: PROMINENT PHOTOREALISTIC LAPTOP IN BASKETBALL COURT ENVIRONMENT */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="w-full lg:w-[57%] flex-none relative"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              className="w-full lg:w-[57%] flex-none relative flex items-center justify-center pt-4 lg:pt-0"
             >
-              <div className="relative w-full aspect-[1920/1330] select-none">
+              {/* Soft Cinematic Background Aura */}
+              <div
+                className="absolute top-[35%] right-[20%] -translate-y-1/2 w-[75%] h-[75%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.14)_0%,rgba(8,127,165,0.04)_50%,transparent_70%)] blur-3xl -z-10 pointer-events-none"
+                aria-hidden="true"
+              />
+
+              {/* Large Photorealistic Laptop Displaying Authentic AFTER Dashboard with Basketball */}
+              <div className="relative w-full max-w-[580px] sm:max-w-[700px] md:max-w-[780px] lg:max-w-[880px] xl:max-w-[940px] aspect-[2200/1350] select-none drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
                 <Image
-                  src="/images/case-studies/hoopwrld-hero-laptop-cinematic.webp"
-                  alt="Hoopwrld Analytics Platform on Realistic Laptop"
+                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp"
+                  alt="Hoopwrld Gameplay and Player Analytics Dashboard on Photorealistic Laptop in Basketball Court Environment"
                   fill
                   priority
-                  className="object-contain object-center scale-100 sm:scale-105 lg:scale-110 xl:scale-115 transition-transform duration-700 ease-out"
-                  sizes="(max-width: 1024px) 100vw, 57vw"
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 57vw, 940px"
+                  className="object-contain object-center"
                 />
               </div>
             </motion.div>
@@ -308,9 +327,9 @@ export function HoopwrldCaseStudy() {
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-[#07090D] shadow-2xl overflow-hidden">
-              <div className="relative aspect-[1024/572] w-full bg-black">
+              <div className="relative aspect-[1024/584] w-full bg-black">
                 <Image
-                  src="/images/case-studies/hoopwrld-challenge-before.png"
+                  src="/images/case-studies/hoopwrld-challenge-before.webp"
                   alt="Hoopwrld Original Executive Report Showing Metric Discrepancies"
                   fill
                   className="object-contain object-center"
@@ -365,9 +384,9 @@ export function HoopwrldCaseStudy() {
 
             {/* Right 55%: Real Mobile Reporting Image */}
             <div className="lg:col-span-7">
-              <div className="relative aspect-[1024/765] w-full rounded-2xl overflow-hidden bg-white shadow-xl border border-[#E4E4E7]">
+              <div className="relative aspect-[1024/579] w-full rounded-2xl overflow-hidden bg-white shadow-xl border border-[#E4E4E7]">
                 <Image
-                  src="/images/case-studies/hoopwrld-solution-mobile.png"
+                  src="/images/case-studies/hoopwrld-solution-mobile.webp"
                   alt="Hoopwrld Mobile-First Gameplay Reporting Visual"
                   fill
                   className="object-contain object-center"
@@ -382,21 +401,21 @@ export function HoopwrldCaseStudy() {
 
           {/* STORY 2 — GAMEPLAY ANALYTICS & RETENTION (REVERSED: IMAGE LEFT / TEXT RIGHT) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Real Gameplay Analytics Screenshot */}
-            <div className="lg:col-span-7">
-              <div className="relative aspect-[1024/572] w-full rounded-2xl border border-[#E4E4E7] bg-white shadow-xl overflow-hidden">
+            {/* Left Column: Real Gameplay Analytics Screenshot (Full 5-Panel Overview) */}
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[912/1024] w-full max-w-[560px] mx-auto rounded-2xl border border-[#E4E4E7] bg-white shadow-xl overflow-hidden">
                 <Image
-                  src="/images/case-studies/hoopwrld-solution-gameplay.png"
+                  src="/images/case-studies/hoopwrld-solution-gameplay.webp"
                   alt="Hoopwrld Gameplay Metrics and Retention Reporting Dashboard"
                   fill
                   className="object-contain object-center"
-                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
             </div>
 
             {/* Right Column: Heading, Explanation, Key Capabilities */}
-            <div className="lg:col-span-5 space-y-4 text-left">
+            <div className="lg:col-span-6 space-y-4 text-left">
               <span className="text-xs font-mono font-bold text-[#087FA5] px-2.5 py-1 rounded bg-[#087FA5]/10 border border-[#087FA5]/25 inline-block">
                 STORY 02
               </span>
@@ -420,32 +439,106 @@ export function HoopwrldCaseStudy() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 5 — BEFORE VS. AFTER (AUTHENTIC COMPARISON VISUAL) */}
+      {/* SECTION 5 — BEFORE VS. AFTER (BALANCED COMPARISON LAYOUT) */}
       {/* ===================================================================== */}
-      <section className="bg-[#000000] text-white py-16 sm:py-20 border-b border-white/[0.08]">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <section className="bg-[#000000] text-white py-16 sm:py-20 lg:py-24 border-b border-white/[0.08] relative overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[500px] pointer-events-none opacity-20 -z-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(0, 188, 212, 0.15) 0%, rgba(8, 127, 165, 0.05) 50%, transparent 70%)",
+          }}
+        />
+
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
           <div className="space-y-3 max-w-3xl text-left">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-              TRANSFORMATION OVERVIEW
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-white tracking-tight leading-tight">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-[#00BCD4] animate-pulse" />
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
+                TRANSFORMATION OVERVIEW
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white tracking-tight leading-tight">
               From Fragmented Reports to a Clearer Picture.
             </h2>
             <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed">
-              A structured contrast highlighting how Hoopwrld shifted from unaligned metrics to reliable, decision-ready analytics.
+              A structured comparison showing how Hoopwrld transitioned from unaligned metrics across multiple platforms to a unified, decision-ready analytics experience.
             </p>
           </div>
 
-          {/* Centered Before vs After Main Comparison Visual */}
-          <div className="max-w-[1120px] mx-auto">
-            <div className="relative aspect-[1024/571] w-full rounded-2xl border border-white/10 bg-[#07090D] shadow-2xl overflow-hidden select-none">
-              <Image
-                src="/images/case-studies/hoopwrld-before-after-supplied.webp"
-                alt="Hoopwrld Before vs After Reporting Transformation"
-                fill
-                className="object-contain object-center"
-                sizes="(max-width: 1200px) 100vw, 1120px"
-              />
+          {/* Balanced Side-by-Side Comparison Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+            {/* LEFT: BEFORE DASHBOARD */}
+            <div className="flex flex-col justify-between rounded-2xl border border-white/10 hover:border-red-500/40 bg-[#07090D] shadow-2xl overflow-hidden transition-all duration-300">
+              {/* Card Header with Solid Red Pill */}
+              <div className="px-6 py-4 flex items-center justify-between border-b border-white/[0.06]">
+                <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EF4444] text-white">
+                  BEFORE
+                </span>
+                <span className="text-xs font-mono text-[#71717A] hidden sm:inline">
+                  Legacy Architecture
+                </span>
+              </div>
+
+              {/* Front-Facing Laptop Mockup */}
+              <div className="relative aspect-[2000/1260] w-full p-3 sm:p-5 flex items-center justify-center">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/images/case-studies/hoopwrld-laptop-before-front.webp"
+                    alt="Legacy Hoopwrld Report with Metric Discrepancies on Front-Facing Laptop Mockup"
+                    fill
+                    className="object-contain object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
+
+              {/* Summary Caption Underneath */}
+              <div className="p-6 bg-[#0A0D12] border-t border-white/[0.08] space-y-2 text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Fragmented And Manual Reports
+                </h3>
+                <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                  Data spread across multiple sources with inconsistent metrics, making it hard to get a clear view of player performance.
+                </p>
+              </div>
+            </div>
+
+            {/* RIGHT: AFTER DASHBOARD */}
+            <div className="flex flex-col justify-between rounded-2xl border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#07090D] shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_35px_rgba(0,188,212,0.08)] overflow-hidden transition-all duration-300">
+              {/* Card Header with Solid Cyan Pill */}
+              <div className="px-6 py-4 flex items-center justify-between border-b border-white/[0.06]">
+                <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#00BCD4] text-black">
+                  AFTER
+                </span>
+                <span className="text-xs font-mono text-[#00BCD4]/70 hidden sm:inline">
+                  Unified Analytics Experience
+                </span>
+              </div>
+
+              {/* Matching Front-Facing Laptop Mockup */}
+              <div className="relative aspect-[2000/1260] w-full p-3 sm:p-5 flex items-center justify-center">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/images/case-studies/hoopwrld-laptop-after-front.webp"
+                    alt="Hoopwrld Standardized Looker Studio Player Analytics Dashboard on Matching Front-Facing Laptop"
+                    fill
+                    className="object-contain object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
+
+              {/* Summary Caption Underneath */}
+              <div className="p-6 bg-[#0A0D12] border-t border-white/[0.08] space-y-2 text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#00BCD4] tracking-tight">
+                  A Unified, Interactive Dashboard
+                </h3>
+                <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                  Real-time, easy-to-understand reporting with key gameplay metrics, player cohorts, and growth insights in one place.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -581,94 +674,104 @@ export function HoopwrldCaseStudy() {
             </p>
           </div>
 
-          {/* Premium Black Featured Card Matching the Main Case Studies Page */}
-          <div className="relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.08)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-8 lg:p-12">
-              {/* Left Column: 45% Content */}
-              <div className="lg:col-span-5 space-y-5 text-left z-10">
-                <div className="space-y-3">
-                  {/* Eyebrow */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                    <span>FEATURED CASE STUDY</span>
-                  </div>
+          {/* Exact Featured Card Design from the Main Case Studies Page */}
+          <Link
+            href="/case-studies/tuitionstime"
+            aria-label="View case study: Tuitionstime"
+            className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[420px] lg:h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+          >
+            {/* Product Imagery (Right-Aligned, Subtle Hover Shift, Seamlessly Blended into Dark Card) */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <Image
+                src="/images/case-studies/tuitionstime-featured-flagship.webp"
+                alt="Tuitionstime EdTech Marketplace Platform by CodePlaced"
+                fill
+                priority
+                className="object-cover object-right md:object-[80%_center] lg:object-right transition-transform duration-500 ease-out group-hover:-translate-y-1.5"
+                sizes="(max-width: 1400px) 92vw, 1400px"
+              />
 
-                  {/* Brand */}
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/15 border border-[#00BCD4]/35 flex items-center justify-center text-[#00BCD4]">
-                      <GraduationCap className="w-4 h-4" />
-                    </div>
-                    <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                      Tuitionstime
+              {/* Dark Vignette Overlay on Left (Guarantees Razor-Sharp Readability of HTML Text on all devices) */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/95 md:via-[#050505]/90 to-transparent w-full md:w-[68%] lg:w-[54%] xl:w-[48%] pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent md:hidden pointer-events-none" />
+            </div>
+
+            {/* Real HTML Content Layer (Left-Aligned Content + Bottom Metrics) */}
+            <div className="relative z-10 h-full p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+              {/* Upper Left: Badge, Brand, Title, Description, Tech Tags, and CTA */}
+              <div className="space-y-3.5 max-w-md xl:max-w-[500px] text-left">
+                {/* Eyebrow Tag */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00C7E8]/10 border border-[#00C7E8]/30 text-[#00C7E8] w-fit">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8] animate-pulse" />
+                  <span>FULL-STACK WEB &amp; MOBILE PLATFORM</span>
+                </div>
+
+                {/* Brand Logo & Name */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#00C7E8]/15 border border-[#00C7E8]/35 flex items-center justify-center text-[#00C7E8]">
+                    <GraduationCap className="w-4 h-4" />
+                  </div>
+                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                    Tuitionstime
+                  </span>
+                </div>
+
+                {/* Title with Cyan Highlight */}
+                <h3 className="text-2xl sm:text-3xl lg:text-[30px] xl:text-[32px] font-extrabold text-white tracking-tight leading-[1.18] max-w-[460px]">
+                  Engineering a Complete{" "}
+                  <span className="text-[#00C7E8]">EdTech Marketplace</span>
+                </h3>
+
+                {/* Short Description */}
+                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-sm sm:max-w-md">
+                  From tutor discovery to classes, bookings, payments, and learning experiences — a connected digital platform built for growth.
+                </p>
+
+                {/* Tech Stack Pills */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Stripe", "AWS"].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
+                    >
+                      {tech}
                     </span>
-                  </div>
-
-                  {/* Headline */}
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-[1.18]">
-                    Engineering a Complete{" "}
-                    <span className="text-[#00BCD4]">EdTech Marketplace</span>
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
-                    From tutor discovery to classes, bookings, payments, and learning experiences — a connected digital platform built for growth.
-                  </p>
+                  ))}
                 </div>
 
-                {/* Verified Metrics Row */}
-                <div className="pt-2 flex flex-wrap items-center gap-6 sm:gap-8 border-t border-white/10">
-                  <div>
-                    <div className="text-xl sm:text-2xl font-black text-white font-mono">
-                      10K+
-                    </div>
-                    <div className="text-[11px] text-[#A1A1AA] font-medium">
-                      Active Students
-                    </div>
-                  </div>
-                  <div className="border-l border-white/15 pl-6 sm:pl-8">
-                    <div className="text-xl sm:text-2xl font-black text-white font-mono">
-                      2K+
-                    </div>
-                    <div className="text-[11px] text-[#A1A1AA] font-medium">
-                      Expert Tutors
-                    </div>
-                  </div>
-                  <div className="border-l border-white/15 pl-6 sm:pl-8">
-                    <div className="text-xl sm:text-2xl font-black text-white font-mono">
-                      50K+
-                    </div>
-                    <div className="text-[11px] text-[#A1A1AA] font-medium">
-                      Classes Completed
-                    </div>
-                  </div>
-                </div>
-
-                {/* Outlined Cyan CTA Button */}
+                {/* CTA Button */}
                 <div className="pt-2">
-                  <Link
-                    href="/case-studies/tuitionstime"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm"
-                  >
+                  <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00C7E8] text-[#00C7E8] group-hover:bg-[#00C7E8] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm shadow-[#00C7E8]/10">
                     <span>View Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                  </Link>
+                  </span>
                 </div>
               </div>
 
-              {/* Right Column: 55% Tuitionstime Product Artwork */}
-              <div className="lg:col-span-7 relative z-10">
-                <div className="relative w-full aspect-[2040/1380] rounded-xl overflow-hidden select-none">
-                  <Image
-                    src="/images/case-studies/tuitionstime-featured-flagship.webp"
-                    alt="Tuitionstime EdTech Marketplace Platform by CodePlaced"
-                    fill
-                    className="object-contain object-center transition-transform duration-500 ease-out group-hover:-translate-y-1"
-                    sizes="(max-width: 1024px) 100vw, 55vw"
-                  />
-                </div>
+              {/* Bottom Row: 3 Verified Metrics Separated by Subtle Vertical Dividers */}
+              <div className="pt-6 mt-4 border-t border-white/[0.08] grid grid-cols-3 gap-3 sm:gap-6 max-w-lg">
+                {[
+                  { value: "10K+", label: "Active Students" },
+                  { value: "2K+", label: "Expert Tutors" },
+                  { value: "50K+", label: "Classes Completed" },
+                ].map((metric, idx) => (
+                  <div
+                    key={metric.label}
+                    className={`${
+                      idx > 0 ? "border-l border-white/[0.08] pl-3 sm:pl-6" : ""
+                    } text-left`}
+                  >
+                    <div className="text-lg sm:text-xl lg:text-2xl font-black text-white font-mono tracking-tight">
+                      {metric.value}
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-[#A1A1AA] font-mono uppercase tracking-wide line-clamp-1 mt-0.5">
+                      {metric.label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 

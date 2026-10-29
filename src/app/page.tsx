@@ -40,7 +40,7 @@ import { ServicesMarquee } from "@/components/ServicesMarquee";
 // HERO BACKGROUND IMAGE CONFIGURATION
 // Easily replace the static hero background image by changing this path:
 // =========================================================================
-export const HERO_BACKGROUND_IMAGE = "/images/hero-team-consulting-v2.jpg";
+const HERO_BACKGROUND_IMAGE = "/images/hero-team-consulting-v2.jpg";
 
 // =========================================================================
 // 1. DATA: EXACTLY FOUR CORE SERVICES (APPINVENTIV 4-COLUMN STAGGERED SHOWCASE)
