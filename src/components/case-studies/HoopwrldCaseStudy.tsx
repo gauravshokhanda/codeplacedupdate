@@ -204,7 +204,7 @@ export function HoopwrldCaseStudy() {
             <motion.div
               initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
-              className="w-full lg:w-[57%] flex-none relative flex items-center justify-center lg:justify-end pt-4 lg:pt-0"
+              className="w-full lg:w-[57%] flex-none relative flex items-center justify-center pt-4 lg:pt-0"
             >
               {/* Soft Cinematic Background Aura */}
               <div
@@ -212,15 +212,15 @@ export function HoopwrldCaseStudy() {
                 aria-hidden="true"
               />
 
-              {/* Large Photorealistic Laptop Displaying Authentic AFTER Dashboard */}
-              <div className="relative w-full max-w-[560px] sm:max-w-[680px] md:max-w-[760px] lg:max-w-[880px] xl:max-w-[940px] aspect-[1540/1330] select-none drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
+              {/* Large Photorealistic Laptop Displaying Authentic AFTER Dashboard with Basketball */}
+              <div className="relative w-full max-w-[580px] sm:max-w-[700px] md:max-w-[780px] lg:max-w-[880px] xl:max-w-[940px] aspect-[2200/1350] select-none drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
                 <Image
-                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-v2.webp"
+                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp"
                   alt="Hoopwrld Gameplay and Player Analytics Dashboard on Photorealistic Laptop in Basketball Court Environment"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 57vw, 940px"
-                  className="object-contain object-center lg:object-right"
+                  className="object-contain object-center"
                 />
               </div>
             </motion.div>
@@ -481,12 +481,12 @@ export function HoopwrldCaseStudy() {
                 </span>
               </div>
 
-              {/* Dashboard Screen */}
-              <div className="relative aspect-[16/10] w-full bg-[#05070A] p-3 flex items-center justify-center">
+              {/* Front-Facing Laptop Mockup */}
+              <div className="relative aspect-[2000/1260] w-full p-3 sm:p-5 flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/images/case-studies/hoopwrld-challenge-before.webp"
-                    alt="Original Legacy Hoopwrld Report with Metric Discrepancies"
+                    src="/images/case-studies/hoopwrld-laptop-before-front.webp"
+                    alt="Legacy Hoopwrld Report with Metric Discrepancies on Front-Facing Laptop Mockup"
                     fill
                     className="object-contain object-center"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -517,12 +517,12 @@ export function HoopwrldCaseStudy() {
                 </span>
               </div>
 
-              {/* Dashboard Screen (EXACT SAME AFTER DASHBOARD AS HERO ON LAPTOP IN COURT ENVIRONMENT) */}
-              <div className="relative aspect-[16/10] w-full bg-[#05070A] p-3 flex items-center justify-center">
+              {/* Matching Front-Facing Laptop Mockup */}
+              <div className="relative aspect-[2000/1260] w-full p-3 sm:p-5 flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/images/case-studies/hoopwrld-hero-basketball-laptop-v2.webp"
-                    alt="Hoopwrld Standardized Looker Studio Player Analytics Dashboard on Laptop in Basketball Court"
+                    src="/images/case-studies/hoopwrld-laptop-after-front.webp"
+                    alt="Hoopwrld Standardized Looker Studio Player Analytics Dashboard on Matching Front-Facing Laptop"
                     fill
                     className="object-contain object-center"
                     sizes="(max-width: 1024px) 100vw, 50vw"
