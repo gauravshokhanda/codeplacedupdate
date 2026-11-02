@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Layers, GraduationCap, Gamepad2, BarChart3, Database, Users } from "lucide-react";
+import { ArrowRight, Layers, GraduationCap, Gamepad2, BarChart3, Database, Users, Globe2 } from "lucide-react";
 
 type FilterCategory = "industries" | "services" | "regions";
 
@@ -22,15 +22,14 @@ const CATEGORY_TABS: { id: FilterCategory; label: string }[] = [
 const FILTERS_BY_CATEGORY: Record<FilterCategory, FilterOption[]> = {
   industries: [
     { id: "all", label: "All" },
+    { id: "ecommerce", label: "Ecommerce" },
     { id: "edtech", label: "EdTech" },
+    { id: "insurance", label: "Insurance" },
+    { id: "human-resources", label: "Human Resources" },
+    { id: "healthcare", label: "Healthcare" },
+    { id: "real-estate", label: "Real Estate" },
     { id: "gaming", label: "Gaming" },
     { id: "saas", label: "SaaS" },
-    { id: "ai", label: "AI" },
-    { id: "healthcare", label: "Healthcare" },
-    { id: "finance", label: "Finance" },
-    { id: "logistics", label: "Logistics" },
-    { id: "manufacturing", label: "Manufacturing" },
-    { id: "retail", label: "Retail" },
     { id: "enterprise", label: "Enterprise" },
   ],
   services: [
@@ -131,7 +130,7 @@ const FEATURED_CASE_STUDIES = [
       { value: "LTV + Churn", label: "Customer Retention Insights" },
     ],
     matching: {
-      industries: ["all", "saas", "enterprise"],
+      industries: ["all", "ecommerce", "saas", "enterprise"],
       services: [
         "all",
         "analytics",
@@ -309,14 +308,8 @@ export default function CaseStudiesPage() {
                   const BrandIcon = study.brandIcon;
 
                   // -------------------------------------------------------------
-                  // HOOPWRLD CASE STUDY CARD (50% Content / 50% Visual Split)
-                  // Matches Tuitionstime structure, dimensions, border & styling
-                  // Completely solid black left half with ZERO text-image overlap
-                  // -------------------------------------------------------------
-                  // -------------------------------------------------------------
-                  // HOOPWRLD CASE STUDY CARD (50% Content / 50% Visual Split)
-                  // Matches Tuitionstime structure, dimensions, border & styling
-                  // Completely solid black left half with ZERO text-image overlap
+                  // HOOPWRLD CASE STUDY CARD (45% Content / 55% Visual Split)
+                  // Flexible Height (no clipping), 40-48px padding, large laptop presentation
                   // -------------------------------------------------------------
                   if (study.id === "hoopwrld") {
                     return (
@@ -329,28 +322,30 @@ export default function CaseStudiesPage() {
                       >
                         <Link
                           href={`/case-studies/${study.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           aria-label={`View case study: ${study.brand}`}
-                          className="block relative rounded-[20px] border border-[#00BCD4]/25 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[440px] lg:h-[470px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
+                          className="block relative rounded-[20px] border border-[#00BCD4]/25 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[460px] lg:min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
                         >
-                          <div className="flex flex-col md:flex-row h-full">
-                            {/* Left Side (~55%) — Hoopwrld Solid Black Content */}
-                            <div className="w-full md:w-[55%] lg:w-[55%] p-6 sm:p-8 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-between bg-[#000000] z-10">
+                          <div className="flex flex-col lg:flex-row h-full items-center p-6 sm:p-8 lg:p-10 xl:p-12 gap-8 lg:gap-10">
+                            {/* Left Side (~45%) — Editorial Information */}
+                            <div className="w-full lg:w-[45%] xl:w-[46%] flex flex-col justify-between text-left z-10 space-y-6 lg:space-y-8">
                               {/* Upper Left: Badge, Brand, Title, Description, Tech Tags, and CTA */}
-                              <div className="space-y-3.5 max-w-md xl:max-w-[480px] text-left">
+                              <div className="space-y-4 max-w-xl">
                                 {/* Eyebrow Tag */}
-                                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
+                                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
                                   <span>{study.category}</span>
                                 </div>
 
                                 {/* Brand Logo & Name */}
                                 <div className="flex items-center gap-2.5">
-                                  <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                                  <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 bg-[#00BCD4]/10 border border-[#00BCD4]/30">
                                     <Image
                                       src="/images/case-studies/hoopwrld-logo-badge.png"
                                       alt="Hoopwrld Logo"
-                                      width={32}
-                                      height={32}
+                                      width={24}
+                                      height={24}
                                       className="object-contain"
                                     />
                                   </div>
@@ -360,22 +355,22 @@ export default function CaseStudiesPage() {
                                 </div>
 
                                 {/* Title with Cyan Highlight */}
-                                <h2 className="text-2xl sm:text-2xl md:text-[22px] lg:text-[26px] xl:text-[30px] font-extrabold text-white tracking-tight leading-[1.18] max-w-[460px]">
+                                <h2 className="text-2xl sm:text-3xl lg:text-[30px] xl:text-[34px] font-extrabold text-white tracking-tight leading-[1.18]">
                                   {study.titlePrefix}
-                                  <span className="text-[#00BCD4]">{study.highlightWord}</span>
+                                  <span className="text-[#00BCD4] block sm:inline lg:block">{study.highlightWord}</span>
                                 </h2>
 
                                 {/* Short Description */}
-                                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-sm sm:max-w-md">
+                                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
                                   {study.description}
                                 </p>
 
                                 {/* Technology Tags */}
-                                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                                <div className="flex flex-wrap items-center gap-1.5 pt-1">
                                   {study.techTags.map((tech, tIdx) => (
                                     <span
                                       key={tIdx}
-                                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
+                                      className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
                                     >
                                       {tech}
                                     </span>
@@ -383,7 +378,7 @@ export default function CaseStudiesPage() {
                                 </div>
 
                                 {/* View Case Study CTA Button */}
-                                <div className="pt-1.5">
+                                <div className="pt-2">
                                   <span
                                     className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm"
                                   >
@@ -393,43 +388,44 @@ export default function CaseStudiesPage() {
                                 </div>
                               </div>
 
-                              {/* Bottom Row: Metrics Strip with Divider Lines */}
-                              <div className="pt-5 mt-4 sm:mt-0 border-t border-white/[0.08] grid grid-cols-3 gap-2 sm:gap-3 xl:gap-4">
-                                {study.metrics.map((metric, idx) => (
-                                  <div
-                                    key={idx}
-                                    className={`text-left ${
-                                      idx !== 0 ? "border-l border-white/15 pl-2.5 sm:pl-3.5 xl:pl-4" : ""
-                                    }`}
-                                  >
-                                    <div className="text-base sm:text-lg lg:text-xl xl:text-2xl font-black text-white font-mono tracking-tight whitespace-nowrap">
-                                      {metric.value}
+                              {/* Bottom Row: Metrics Strip with Icons */}
+                              <div className="pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-3 xl:gap-5">
+                                {study.metrics.map((metric, idx) => {
+                                  const MetricIcon = idx === 0 ? Database : idx === 1 ? BarChart3 : Globe2;
+                                  return (
+                                    <div key={idx} className="flex items-start gap-2.5">
+                                      <MetricIcon className="w-4 h-4 text-[#00BCD4] shrink-0 mt-0.5" />
+                                      <div className="text-left">
+                                        <div className="text-base sm:text-lg lg:text-xl font-black text-white font-mono tracking-tight whitespace-nowrap">
+                                          {metric.value}
+                                        </div>
+                                        <div className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5 font-medium leading-tight">
+                                          {metric.label}
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5 font-medium leading-tight">
-                                      {metric.label}
-                                    </div>
-                                  </div>
-                                ))}
+                                  );
+                                })}
                               </div>
                             </div>
 
-                            {/* Right side (~45%) — Contained Basketball & Analytics Dashboard Mockup */}
-                            <div className="w-full md:w-[45%] lg:w-[45%] bg-[#000000] relative flex items-center justify-center md:justify-end select-none overflow-hidden min-h-[260px] sm:min-h-[300px] md:min-h-0">
+                            {/* Right side (~55%) — Large Contained Basketball & Analytics Dashboard Mockup */}
+                            <div className="w-full lg:w-[55%] xl:w-[54%] relative flex items-center justify-center select-none overflow-hidden min-h-[260px] sm:min-h-[320px] lg:min-h-0">
                               {/* Subtle Ambient Cyan Glow Behind Display */}
                               <div
                                 className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.15)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
                                 aria-hidden="true"
                               />
 
-                              {/* Contained Artwork */}
-                              <div className="relative w-full h-full min-h-[260px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[440px] transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                              {/* Large Contained Laptop Artwork with Basketball on Dark Court Floor */}
+                              <div className="relative w-full aspect-[2200/1350] transition-transform duration-500 ease-out group-hover:scale-[1.02] drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]">
                                 <Image
-                                  src="/images/case-studies/hoopwrld-card-contained-artwork.webp"
+                                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp"
                                   alt={study.imageAlt}
                                   fill
                                   priority
-                                  className="object-contain object-bottom-right md:object-right"
-                                  sizes="(max-width: 768px) 100vw, (max-width: 1400px) 55vw, 680px"
+                                  sizes="(max-width: 1024px) 100vw, 55vw"
+                                  className="object-contain object-center"
                                 />
                               </div>
                             </div>
@@ -454,6 +450,8 @@ export default function CaseStudiesPage() {
                       >
                         <Link
                           href={`/case-studies/${study.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           aria-label={`View case study: ${study.brand}`}
                           className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[460px] lg:min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
                         >
@@ -571,6 +569,8 @@ export default function CaseStudiesPage() {
                     >
                       <Link
                         href={`/case-studies/${study.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         aria-label={`View case study: ${study.brand}`}
                         className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[420px] lg:h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                       >

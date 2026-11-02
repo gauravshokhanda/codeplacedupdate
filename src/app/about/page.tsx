@@ -178,7 +178,7 @@ const CAPABILITIES = [
 const FAQ_ITEMS = [
   {
     q: "What industries does CodePlaced work with?",
-    a: "We partner with Healthcare, Financial Services, SaaS, Retail, Education, Logistics, and Manufacturing enterprises. Our engineering pods tailor each architecture to industry-specific compliance requirements like HIPAA, SOC2, and GDPR.",
+    a: "We partner with Ecommerce, EdTech, Insurance, Human Resources, Healthcare, and Real Estate enterprises. Our engineering pods tailor each architecture to industry-specific compliance requirements like HIPAA, SOC2, and GDPR.",
   },
   {
     q: "How long do projects typically take to deliver?",

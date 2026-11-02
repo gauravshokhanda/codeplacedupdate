@@ -23,6 +23,7 @@ import {
   GraduationCap,
   Gamepad2,
 } from "lucide-react";
+import { RelatedCaseStudies } from "@/components/case-studies/RelatedCaseStudies";
 
 // =============================================================================
 // VERIFIED DATA DEFINITIONS (PROGRESS PARTNERS CASE STUDY)
@@ -731,164 +732,9 @@ export function ProgressPartnersCaseStudy() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 8 — RELATED CASE STUDIES (BLACK BACKGROUND — 2 CARDS) */}
+      {/* SECTION 8 — RELATED CASE STUDIES (SHARED COMPONENT — EXCLUDES CURRENT) */}
       {/* ===================================================================== */}
-      <section className="bg-[#000000] text-white py-16 sm:py-20 lg:py-24 border-b border-white/[0.08]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="space-y-2 max-w-3xl text-left">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-              EXPLORE MORE CASE STUDIES
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Explore More Case Studies.
-            </h2>
-            <p className="text-sm sm:text-base text-[#A1A1AA] leading-relaxed">
-              Discover how we turn complex business challenges into practical reporting solutions across real-world projects.
-            </p>
-          </div>
-
-          {/* Two Large Horizontal Cards Stacked Vertically */}
-          <div className="space-y-6 sm:space-y-8 pt-2">
-            {/* CARD 1: TUITIONSTIME (HORIZONTAL SHOWCASE CARD) */}
-            <Link
-              href="/case-studies/tuitionstime"
-              aria-label="View case study: Tuitionstime"
-              className="block relative rounded-[16px] border border-[#00BCD4]/25 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[360px] lg:h-[380px] xl:h-[400px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
-            >
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Left Side (45%) — Project Information */}
-                <div className="w-full md:w-[45%] p-7 sm:p-8 lg:p-10 flex flex-col justify-between bg-[#000000] z-10 text-left">
-                  <div className="space-y-3.5 max-w-md">
-                    {/* Category Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                      <span>EDTECH &amp; SAAS</span>
-                    </div>
-
-                    {/* Brand Logo & Name */}
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0">
-                        <GraduationCap className="w-4 h-4 text-[#00BCD4]" />
-                      </div>
-                      <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                        Tuitionstime
-                      </span>
-                    </div>
-
-                    {/* Heading with Cyan Highlight */}
-                    <h3 className="text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-extrabold text-white tracking-tight leading-[1.2]">
-                      Engineering a Complete{" "}
-                      <span className="text-[#00BCD4]">EdTech Marketplace</span>
-                    </h3>
-
-                    {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-md">
-                      A UK-based EdTech platform connecting students, parents, and tutors.
-                    </p>
-                  </div>
-
-                  {/* View Case Study CTA Button */}
-                  <div className="pt-4 md:pt-0">
-                    <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm">
-                      <span>View Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Right Side (55%) — Laptop & Mobile Mockup Imagery */}
-                <div className="w-full md:w-[55%] bg-[#000000] relative flex items-center justify-center p-4 sm:p-6 lg:p-8 select-none overflow-hidden min-h-[240px] sm:min-h-[280px] md:min-h-0">
-                  {/* Subtle Ambient Cyan Glow Behind Display */}
-                  <div
-                    className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.14)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
-                    aria-hidden="true"
-                  />
-
-                  {/* Contained Artwork */}
-                  <div className="relative w-full h-full min-h-[220px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[320px] transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-                    <Image
-                      src="/images/case-studies/tuitionstime-featured-flagship.webp"
-                      alt="Tuitionstime EdTech Marketplace Platform"
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 55vw, 700px"
-                      className="object-contain object-center md:object-right"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* CARD 2: HOOPWORLD (HORIZONTAL SHOWCASE CARD) */}
-            <Link
-              href="/case-studies/hoopwrld"
-              aria-label="View case study: Hoopworld"
-              className="block relative rounded-[16px] border border-[#00BCD4]/25 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[360px] lg:h-[380px] xl:h-[400px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
-            >
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Left Side (45%) — Project Information */}
-                <div className="w-full md:w-[45%] p-7 sm:p-8 lg:p-10 flex flex-col justify-between bg-[#000000] z-10 text-left">
-                  <div className="space-y-3.5 max-w-md">
-                    {/* Category Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                      <span>DATA ANALYTICS &amp; BI</span>
-                    </div>
-
-                    {/* Brand Logo & Name */}
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0">
-                        <Gamepad2 className="w-4 h-4 text-[#00BCD4]" />
-                      </div>
-                      <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                        Hoopworld
-                      </span>
-                    </div>
-
-                    {/* Heading with Cyan Highlight */}
-                    <h3 className="text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-extrabold text-white tracking-tight leading-[1.2]">
-                      Turning Gameplay Data Into{" "}
-                      <span className="text-[#00BCD4]">Reliable Player Analytics.</span>
-                    </h3>
-
-                    {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-md">
-                      A unified reporting solution for player performance.
-                    </p>
-                  </div>
-
-                  {/* View Case Study CTA Button */}
-                  <div className="pt-4 md:pt-0">
-                    <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm">
-                      <span>View Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Right Side (55%) — Dashboard & Basketball Visual Imagery */}
-                <div className="w-full md:w-[55%] bg-[#000000] relative flex items-center justify-center p-4 sm:p-6 lg:p-8 select-none overflow-hidden min-h-[240px] sm:min-h-[280px] md:min-h-0">
-                  {/* Subtle Ambient Cyan Glow Behind Display */}
-                  <div
-                    className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.14)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
-                    aria-hidden="true"
-                  />
-
-                  {/* Contained Artwork */}
-                  <div className="relative w-full h-full min-h-[220px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[320px] transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-                    <Image
-                      src="/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp"
-                      alt="Hoopworld Player Analytics & Business Intelligence Dashboard"
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 55vw, 700px"
-                      className="object-contain object-center md:object-right"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <RelatedCaseStudies currentSlug="progress-partners" />
 
       {/* ===================================================================== */}
       {/* SECTION 9 — FINAL CTA (BLACK BACKGROUND) */}

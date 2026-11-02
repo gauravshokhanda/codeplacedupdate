@@ -105,64 +105,50 @@ const SERVICES_DATA = [
 ];
 
 // =========================================================================
-// 2. DATA: INDUSTRIES WE SERVE (8 STRUCTURED ENTERPRISE CATEGORIES)
+// 2. DATA: INDUSTRIES WE SERVE (6 FOCUSED CORE CATEGORIES)
 // =========================================================================
 const INDUSTRIES_DATA = [
   {
+    title: "Ecommerce (D2C, B2B & B2C)",
+    description:
+      "Helping ecommerce businesses build scalable online stores, streamline operations, automate workflows, and turn customer and sales data into actionable insights.",
+    icon: ShoppingBag,
+    href: "/industries#ecommerce",
+  },
+  {
+    title: "EdTech",
+    description:
+      "Building learning platforms, education marketplaces, student management systems, and data-driven solutions that improve learning experiences and operational efficiency.",
+    icon: GraduationCap,
+    href: "/industries#edtech",
+  },
+  {
+    title: "Insurance",
+    description:
+      "Developing digital insurance solutions that simplify policy management, automate claims workflows, improve customer experiences, and support data-driven decision-making.",
+    icon: ShieldCheck,
+    href: "/industries#insurance",
+  },
+  {
+    title: "Human Resources",
+    description:
+      "Creating HR management systems, recruitment platforms, employee portals, and automation solutions that simplify hiring, workforce management, and reporting.",
+    icon: Users,
+    href: "/industries#human-resources",
+  },
+  {
     title: "Healthcare",
     description:
-      "HIPAA-compliant patient portals, diagnostic AI telemetry, and clinical data pipelines.",
+      "Building healthcare platforms, patient management systems, appointment solutions, and secure digital workflows that improve operational efficiency and patient experiences.",
     icon: HeartPulse,
     href: "/industries#healthcare",
   },
   {
-    title: "Finance",
-    description:
-      "Algorithmic ledgers, real-time risk telemetry, fraud monitoring, and automated compliance engines.",
-    icon: Landmark,
-    href: "/industries#finance",
-  },
-  {
-    title: "Retail & eCommerce",
-    description:
-      "Omnichannel sync, headless commerce platforms, and personalized AI recommendation systems.",
-    icon: ShoppingBag,
-    href: "/industries#retail",
-  },
-  {
-    title: "Manufacturing",
-    description:
-      "IoT sensor telematics, supply chain tracking, and predictive equipment maintenance models.",
-    icon: Factory,
-    href: "/industries#manufacturing",
-  },
-  {
-    title: "Education",
-    description:
-      "Adaptive learning marketplaces, tutor discovery platforms, and classroom scheduling engines.",
-    icon: GraduationCap,
-    href: "/industries#education",
-  },
-  {
-    title: "Logistics",
-    description:
-      "Fleet tracking telematics, dynamic route optimization, and intelligent warehouse dispatching.",
-    icon: Truck,
-    href: "/industries#logistics",
-  },
-  {
     title: "Real Estate",
     description:
-      "Property valuation models, tenant portals, and automated digital lease processing pipelines.",
+      "Developing property marketplaces, listing platforms, CRM systems, and analytics solutions that streamline property management, lead tracking, and customer engagement.",
     icon: Building2,
-    href: "/industries#realestate",
-  },
-  {
-    title: "Media & Entertainment",
-    description:
-      "High-throughput streaming analytics, DRM integrations, and programmatic asset pipelines.",
-    icon: Film,
-    href: "/industries#media",
+    href: "/industries#real-estate",
   },
 ];
 
@@ -918,6 +904,8 @@ export default function HomePage() {
                 <div className="pt-0.5">
                   <Link
                     href="/case-studies/tuitionstime"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 cursor-pointer"
                   >
                     <span>Explore Case Study</span>
@@ -948,8 +936,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* 8 Structured Industry Cards (4-Column Desktop Grid) with Refined White Hover Transition */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4.5">
+          {/* 6 Structured Industry Cards (3-Column Desktop Grid) with Refined White Hover Transition */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4.5">
             {INDUSTRIES_DATA.map((industry, idx) => {
               const IndIcon = industry.icon;
               return (

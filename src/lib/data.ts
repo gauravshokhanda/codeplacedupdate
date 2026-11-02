@@ -611,7 +611,7 @@ export const FAQS_LIST: FaqItem[] = [
   {
     category: "Industry Fit",
     question: "What industries and compliance frameworks do you serve?",
-    answer: "We specialize in data-intensive sectors including Healthcare (HIPAA / HITECH), FinTech & Banking (SOC2 Type II, PCI-DSS), B2B SaaS, Logistics & Fleet Telematics, Real Estate, and Manufacturing. Every solution we build includes audit trails, encryption at rest/transit, and role-based access control.",
+    answer: "We specialize in data-intensive sectors including Ecommerce (D2C, B2B & B2C), EdTech, Insurance, Human Resources, Healthcare (HIPAA), and Real Estate. Every solution we build includes audit trails, encryption at rest/transit, and role-based access control.",
   },
   {
     category: "Technical Integration",
