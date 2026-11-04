@@ -9,115 +9,105 @@ import {
   ArrowRight,
   ShieldCheck,
   HeartPulse,
-  Landmark,
-  MonitorSmartphone,
-  Truck,
   ShoppingBag,
   Building2,
   GraduationCap,
-  Factory,
-  Radio,
-  Zap,
-  Film,
-  Building,
-  HardHat,
-  Plane,
-  Briefcase,
+  Users,
   CheckCircle2,
   Workflow,
   ChevronRight,
   Search,
-  ChevronDown,
   ChevronLeft,
   Filter,
   Check,
+  ArrowUpRight,
 } from "lucide-react";
 
 // =========================================================================
 // 1. TRUST METRICS RIBBON (Hero Verified Stats)
 // =========================================================================
 const TRUST_METRICS = [
-  { value: "100+", label: "Enterprise Deployments", sub: "Across 16+ verticals" },
+  { value: "100+", label: "Enterprise Deployments", sub: "Across 6 core verticals" },
   { value: "95%", label: "Client Retention Rate", sub: "Multi-year partnerships" },
   { value: "2–4 Wks", label: "Average Delivery Sprint", sub: "From audit to production" },
   { value: "99.99%", label: "Guaranteed SLA", sub: "Mission-critical reliability" },
 ];
 
 // =========================================================================
-// 2. FEATURED INDUSTRY SOLUTIONS CAROUSEL DATA
+// 2. FEATURED INDUSTRY SOLUTIONS CAROUSEL DATA (6 FOCUSED CORE INDUSTRIES)
 // =========================================================================
 const FEATURED_SOLUTIONS = [
   {
-    id: "healthcare-ai",
-    industry: "Healthcare & Life Sciences",
-    title: "Clinical Copilot & HIPAA EHR Lakehouse",
-    metric: "4.8x Faster",
-    metricLabel: "Patient Intake Cycle",
-    desc: "Air-gapped clinical triage AI copilot with deterministic ICD-10 medical citation guardrails and an encrypted FHIR lakehouse.",
-    tech: ["FHIR", "HL7", "BigQuery", "Looker Studio", "Python", "FastAPI"],
-    badge: "HIPAA Compliant",
-    highlight: "18,000+ physician hours saved annually across 14 hospital networks.",
-    architecture: "EHR Silos → Kafka Ingest → BigQuery Lakehouse → LangGraph Clinical Copilot → Provider Cockpit",
-  },
-  {
-    id: "fintech-fraud",
-    industry: "Financial Services & Banking",
-    title: "Real-Time SEC Audit & Fraud Detection Engine",
-    metric: "< 12 ms",
-    metricLabel: "p99 Ledger Latency",
-    desc: "Sub-second analytical data mart using ClickHouse columnar OLAP with automated reconciliation DAGs and SEC compliance alerts.",
-    tech: ["Snowflake", "ClickHouse", "dbt", "Kafka", "Java", "Spring Boot"],
-    badge: "SOC 2 & SEC Ready",
-    highlight: "99.999% ledger accuracy with $1.4M saved in annual cloud data warehouse overhead.",
-    architecture: "Transaction Stream → Kafka Event Broker → ClickHouse OLAP → Anomaly ML Model → Executive Cockpit",
-  },
-  {
-    id: "retail-analytics",
-    industry: "Retail & E-Commerce",
-    title: "Omnichannel Customer CDP & Multi-Touch ROAS",
+    id: "ecommerce",
+    industry: "Ecommerce (D2C, B2B & B2C)",
+    title: "Scalable Storefronts & Operations Automation",
     metric: "+18%",
     metricLabel: "Gross Margin Expansion",
-    desc: "Unified customer data platform on Snowflake with automated ad attribution modeling, dynamic pricing ML, and inventory telemetry.",
-    tech: ["Snowflake", "dbt Core", "Looker Studio", "Python", "PostgreSQL"],
-    badge: "Multi-Touch ROAS",
-    highlight: "14% blended customer CAC reduction across 2.4M active omnichannel shoppers.",
-    architecture: "Shopify + Ad Spends → dbt Transformations → Snowflake CDP → Dynamic Pricing ML → Real-Time BI",
+    desc: "Helping ecommerce businesses build scalable online stores, streamline operations, automate workflows, and turn customer and sales data into actionable insights.",
+    tech: ["Shopify Plus", "Next.js", "Snowflake", "dbt", "PostgreSQL", "Stripe"],
+    badge: "Omnichannel Scale",
+    highlight: "14% blended customer CAC reduction and automated inventory reconciliation across multi-channel stores.",
+    architecture: "Multi-Store Ingest → Streamlined Workflows → Sales Data Lakehouse → Inventory ML → Analytics Cockpit",
   },
   {
-    id: "logistics-command",
-    industry: "Logistics & Supply Chain",
-    title: "Fleet Command Center & Telematics Telemetry",
-    metric: "24%",
-    metricLabel: "Fleet Downtime Reduction",
-    desc: "High-throughput ELD telematics lakehouse processing 1.2M sensor events/second with predictive route optimization.",
-    tech: ["Kafka", "Apache Spark", "Databricks", "Power BI", "Node.js"],
-    badge: "Sub-25ms GPS Sync",
-    highlight: "$3.2M saved in prevented shipment delays and fuel efficiency routing.",
-    architecture: "Vehicle Sensors → Spark Streaming → Databricks Lakehouse → Telematics API → Dispatch Console",
+    id: "edtech",
+    industry: "EdTech",
+    title: "Learning Platforms & Education Marketplaces",
+    metric: "3.2x",
+    metricLabel: "Student Engagement Lift",
+    desc: "Building learning platforms, education marketplaces, student management systems, and data-driven solutions that improve learning experiences and operational efficiency.",
+    tech: ["Next.js", "React Native", "Node.js", "PostgreSQL", "BigQuery", "WebRTC"],
+    badge: "Learning Systems",
+    highlight: "Connecting students, parents, and tutors with automated scheduling, payments, and real-time learning analytics.",
+    architecture: "Tutor & Student Portals → Live Class Streaming → Postgres Core → Student Retention BI → Learning Cockpit",
   },
   {
-    id: "saas-multitenant",
-    industry: "SaaS & Cloud Platforms",
-    title: "Multi-Tenant Lakehouse & Embedded Copilots",
-    metric: "32%",
-    metricLabel: "ARR Expansion Rate",
-    desc: "Tenant-isolated analytics engine allowing SaaS applications to embed custom SQL exploration and AI copilots natively.",
-    tech: ["React", "Next.js", "ClickHouse", "OpenAI GPT-4o", "Postgres"],
-    badge: "Tenant Isolation",
-    highlight: "4x increase in enterprise tier upgrades driven by white-labeled embedded analytics.",
-    architecture: "Tenant Event Logs → ClickHouse Cloud → Row-Level Security Layer → Embedded Next.js Dashboards",
+    id: "insurance",
+    industry: "Insurance",
+    title: "Digital Policy Management & Claims Automation",
+    metric: "74%",
+    metricLabel: "Faster Claims Workflows",
+    desc: "Developing digital insurance solutions that simplify policy management, automate claims workflows, improve customer experiences, and support data-driven decision-making.",
+    tech: ["Snowflake", "Python", "FastAPI", "React", "Looker Studio", "OCR AI"],
+    badge: "Policy Automation",
+    highlight: "Automated claims intake and underwriting validation with real-time actuarial risk modeling.",
+    architecture: "Policyholder Submissions → Automated Claims OCR → Snowflake Data Mart → Actuarial Risk Engine → Underwriter Dashboard",
   },
   {
-    id: "manufacturing-iot",
-    industry: "Manufacturing & Industrial",
-    title: "Industrial IoT Predictive Maintenance Platform",
-    metric: "35%",
-    metricLabel: "Less Machine Downtime",
-    desc: "Edge-to-cloud vibration and thermal sensor ingestion pipelines predicting equipment failure 72 hours before breakdown.",
-    tech: ["Kafka", "TimeScaleDB", "FastAPI", "Power BI", "Python ML"],
-    badge: "Industry 4.0",
-    highlight: "$4.5M prevented annual downtime across 8 automated assembly facilities.",
-    architecture: "Edge SCADA Sensors → MQTT Broker → Kafka Stream → TimeScaleDB → Maintenance Dispatch Alerts",
+    id: "human-resources",
+    industry: "Human Resources",
+    title: "Workforce Portals & Talent Automation Platform",
+    metric: "65%",
+    metricLabel: "Hiring Cycle Reduction",
+    desc: "Creating HR management systems, recruitment platforms, employee portals, and automation solutions that simplify hiring, workforce management, and reporting.",
+    tech: ["Next.js", "Node.js", "PostgreSQL", "Tailwind CSS", "Redis", "Looker Studio"],
+    badge: "Workforce Systems",
+    highlight: "Unified employee lifecycle management, automated applicant tracking, and executive workforce headcount reporting.",
+    architecture: "Applicant Streams → Automated Screening Pipeline → Employee Portal → Postgres DB → Workforce Headcount BI",
+  },
+  {
+    id: "healthcare",
+    industry: "Healthcare",
+    title: "Patient Platforms & Secure Clinical Workflows",
+    metric: "4.8x",
+    metricLabel: "Faster Patient Intake",
+    desc: "Building healthcare platforms, patient management systems, appointment solutions, and secure digital workflows that improve operational efficiency and patient experiences.",
+    tech: ["FHIR", "HL7", "BigQuery", "Looker Studio", "Python", "FastAPI"],
+    badge: "HIPAA Compliant",
+    highlight: "18,000+ clinical hours saved annually with automated intake, appointment scheduling, and encrypted telemetry.",
+    architecture: "EHR Silos → Kafka Ingest → BigQuery Lakehouse → Encrypted FHIR API → Provider Cockpit",
+  },
+  {
+    id: "real-estate",
+    industry: "Real Estate",
+    title: "Property Marketplaces & CRM Solutions",
+    metric: "80%",
+    metricLabel: "Faster Lead Matching",
+    desc: "Developing property marketplaces, listing platforms, CRM systems, and analytics solutions that streamline property management, lead tracking, and customer engagement.",
+    tech: ["Next.js", "PostgreSQL", "React", "Looker Studio", "Mapbox", "Tailwind CSS"],
+    badge: "PropTech Scale",
+    highlight: "Automated lead tracking, digital lease pipelines, and portfolio valuation dashboards across multi-property networks.",
+    architecture: "Property Listings → Real-Time Search API → Lead CRM Pipeline → Postgres Lakehouse → Portfolio Valuation BI",
   },
 ];
 
@@ -139,207 +129,87 @@ interface IndustryExplorerItem {
 
 const INDUSTRIES_LIST: IndustryExplorerItem[] = [
   {
+    id: "ecommerce",
+    name: "Ecommerce (D2C, B2B & B2C)",
+    category: "Ecommerce",
+    icon: ShoppingBag,
+    badge: "Omnichannel Scale",
+    desc: "Helping ecommerce businesses build scalable online stores, streamline operations, automate workflows, and turn customer and sales data into actionable insights.",
+    impact: "+18% gross margin lift",
+    capabilities: ["Scalable Online Storefronts", "Operations & Workflow Automation", "Sales & Customer Data BI"],
+    tech: ["Shopify Plus", "Next.js", "Snowflake", "Stripe"],
+    compliance: "PCI-DSS, SOC 2, GDPR",
+  },
+  {
+    id: "edtech",
+    name: "EdTech",
+    category: "EdTech",
+    icon: GraduationCap,
+    badge: "Learning Systems",
+    desc: "Building learning platforms, education marketplaces, student management systems, and data-driven solutions that improve learning experiences and operational efficiency.",
+    impact: "3.2x engagement lift",
+    capabilities: ["Education Marketplaces", "Student Management Systems", "Learning Experience Analytics"],
+    tech: ["Next.js", "React Native", "PostgreSQL", "BigQuery"],
+    compliance: "FERPA, COPPA, ADA Title III",
+  },
+  {
+    id: "insurance",
+    name: "Insurance",
+    category: "Insurance",
+    icon: ShieldCheck,
+    badge: "Policy Automation",
+    desc: "Developing digital insurance solutions that simplify policy management, automate claims workflows, improve customer experiences, and support data-driven decision-making.",
+    impact: "74% faster claims",
+    capabilities: ["Digital Policy Management", "Automated Claims Workflows", "Data-Driven Underwriting BI"],
+    tech: ["Snowflake", "Python", "FastAPI", "Looker Studio"],
+    compliance: "NAIC, SOC 2 Type II, HIPAA",
+  },
+  {
+    id: "human-resources",
+    name: "Human Resources",
+    category: "Human Resources",
+    icon: Users,
+    badge: "Workforce Systems",
+    desc: "Creating HR management systems, recruitment platforms, employee portals, and automation solutions that simplify hiring, workforce management, and reporting.",
+    impact: "65% hiring cycle reduction",
+    capabilities: ["HR Management Systems", "Recruitment & Hiring Automation", "Employee Portals & Headcount BI"],
+    tech: ["Next.js", "Node.js", "PostgreSQL", "Redis"],
+    compliance: "SOC 2, GDPR, EEOC Reporting",
+  },
+  {
     id: "healthcare",
-    name: "Healthcare & MedTech",
-    category: "Healthcare & Life Sciences",
+    name: "Healthcare",
+    category: "Healthcare",
     icon: HeartPulse,
-    badge: "HIPAA Ready",
-    desc: "Clinical triage AI, EHR data lakehouses, patient intake telemetry, and diagnostic copilots.",
+    badge: "HIPAA Compliant",
+    desc: "Building healthcare platforms, patient management systems, appointment solutions, and secure digital workflows that improve operational efficiency and patient experiences.",
     impact: "4.8x faster intake",
-    capabilities: ["HIPAA Data Lakehouses", "Clinical Triage Copilots", "EHR Ingestion Pipelines"],
+    capabilities: ["Patient Management Systems", "Appointment & Scheduling Solutions", "Secure Digital Telemetry"],
     tech: ["FHIR", "HL7", "BigQuery", "Looker Studio"],
     compliance: "HIPAA, HITRUST, SOC 2",
   },
   {
-    id: "fintech",
-    name: "Finance & FinTech",
-    category: "Finance & Banking",
-    icon: Landmark,
-    badge: "SOC 2 & SEC",
-    desc: "Real-time ledger reconciliations, automated SEC reporting, fraud risk ML, and portfolio cockpits.",
-    impact: "99.999% ledger accuracy",
-    capabilities: ["Real-Time SEC Reporting", "Sub-Second Risk Analytics", "Fraud Detection ML"],
-    tech: ["Snowflake", "ClickHouse", "dbt", "Kafka"],
-    compliance: "SEC, FINRA, SOC 2 Type II",
-  },
-  {
-    id: "saas",
-    name: "SaaS & Cloud Tech",
-    category: "SaaS & Tech",
-    icon: MonitorSmartphone,
-    badge: "Multi-Tenant",
-    desc: "Embedded customer analytics, multi-tenant lakehouse isolation, usage billing, and in-app AI copilots.",
-    impact: "32% ARR expansion",
-    capabilities: ["Embedded Analytics Widgets", "Tenant Vector Isolation", "In-App AI Copilots"],
-    tech: ["React", "Next.js", "ClickHouse", "OpenAI"],
-    compliance: "SOC 2, GDPR, CCPA",
-  },
-  {
-    id: "retail",
-    name: "Retail & E-Commerce",
-    category: "Commerce & Media",
-    icon: ShoppingBag,
-    badge: "ROAS ML",
-    desc: "Multi-touch marketing attribution, inventory stockout forecasting, and dynamic pricing algorithms.",
-    impact: "18% gross margin lift",
-    capabilities: ["Multi-Touch ROAS Attribution", "Dynamic Pricing Engine", "Inventory Forecasting"],
-    tech: ["Snowflake", "dbt Core", "Looker Studio", "Python"],
-    compliance: "PCI-DSS, GDPR",
-  },
-  {
-    id: "logistics",
-    name: "Logistics & Supply Chain",
-    category: "Supply Chain & IoT",
-    icon: Truck,
-    badge: "Sub-25ms GPS",
-    desc: "Fleet telematics lakehouses, weather-adjusted route forecasting, and automated bill-of-lading OCR.",
-    impact: "24% cost reduction",
-    capabilities: ["Fleet Telematics Stream", "Route Optimization ML", "Automated BOL OCR Normalization"],
-    tech: ["Kafka", "Databricks", "Spark", "Power BI"],
-    compliance: "DOT, ELD Mandate, SOC 2",
-  },
-  {
-    id: "manufacturing",
-    name: "Manufacturing & Industrial",
-    category: "Supply Chain & IoT",
-    icon: Factory,
-    badge: "Industry 4.0",
-    desc: "Sensor streaming lakehouses, predictive vibration anomaly detection, and plant OEE telemetry.",
-    impact: "35% less downtime",
-    capabilities: ["Predictive Maintenance ML", "Plant Floor OEE Dashboards", "SCADA Historian Lakehouse"],
-    tech: ["TimeScaleDB", "Kafka", "Python", "Power BI"],
-    compliance: "ISO 9001, ISA-95, OSHA",
-  },
-  {
-    id: "insurance",
-    name: "Insurance & Underwriting",
-    category: "Finance & Banking",
-    icon: ShieldCheck,
-    badge: "Risk Intelligence",
-    desc: "Automated policy extraction, first-notice-of-loss claims triage, and actuarial loss modeling.",
-    impact: "74% faster claims",
-    capabilities: ["Claims Triage OCR", "Actuarial Risk Models", "Fraud Scoring Engine"],
-    tech: ["Snowflake", "LangChain", "Python", "Looker Studio"],
-    compliance: "NAIC, HIPAA, SOC 2",
-  },
-  {
-    id: "realestate",
-    name: "Real Estate & PropTech",
-    category: "Commerce & Media",
+    id: "real-estate",
+    name: "Real Estate",
+    category: "Real Estate",
     icon: Building2,
-    badge: "Doc AI",
-    desc: "Commercial lease abstraction OCR, automated NOI waterfall modeling, and valuation ML.",
-    impact: "80% faster review",
-    capabilities: ["Lease Abstraction OCR", "Portfolio NOI Modeling", "Tenant Churn Forecasting"],
-    tech: ["OpenAI", "PostgreSQL", "React", "Next.js"],
+    badge: "PropTech Scale",
+    desc: "Developing property marketplaces, listing platforms, CRM systems, and analytics solutions that streamline property management, lead tracking, and customer engagement.",
+    impact: "80% faster lead review",
+    capabilities: ["Property Marketplaces & Listings", "Lead Tracking CRM Systems", "Property Analytics & BI"],
+    tech: ["Next.js", "PostgreSQL", "Mapbox", "Looker Studio"],
     compliance: "SOC 2, Fair Housing Act",
-  },
-  {
-    id: "education",
-    name: "Education & EdTech",
-    category: "Public & Regulated",
-    icon: GraduationCap,
-    badge: "FERPA Ready",
-    desc: "Adaptive AI tutoring copilots, automated rubric grading, and student retention telemetry.",
-    impact: "3.2x engagement",
-    capabilities: ["Adaptive Learning Copilots", "Student Retention BI", "Automated Rubric Graders"],
-    tech: ["Node.js", "Python", "OpenAI", "BigQuery"],
-    compliance: "FERPA, COPPA, ADA Title III",
-  },
-  {
-    id: "energy",
-    name: "Energy & Utilities",
-    category: "Supply Chain & IoT",
-    icon: Zap,
-    badge: "Grid Analytics",
-    desc: "Smart meter Kafka streams, peak grid load forecasting ML, and automated ESG carbon compliance.",
-    impact: "28% peak savings",
-    capabilities: ["Smart Meter Streaming", "Grid Load Forecast ML", "ESG Carbon Telemetry"],
-    tech: ["Kafka", "Apache Spark", "Databricks", "Power BI"],
-    compliance: "NERC CIP, FERC, ISO 14001",
-  },
-  {
-    id: "telecom",
-    name: "Telecommunications",
-    category: "SaaS & Tech",
-    icon: Radio,
-    badge: "Sub-10ms Queries",
-    desc: "Real-time 5G network telemetry, subscriber churn prediction ML, and high-concurrency billing analytics.",
-    impact: "Sub-10ms queries",
-    capabilities: ["5G Telemetry Ingestion", "Subscriber Churn ML", "CDR Billing Lakehouse"],
-    tech: ["ClickHouse", "Kafka", "Go", "Looker Studio"],
-    compliance: "FCC, CALEA, SOC 2",
-  },
-  {
-    id: "government",
-    name: "Government & Public Sector",
-    category: "Public & Regulated",
-    icon: Building,
-    badge: "FedRAMP Ready",
-    desc: "FedRAMP & CJIS compliant data environments, citizen telemetry portals, and automated case document indexing.",
-    impact: "100% audit pass",
-    capabilities: ["FedRAMP Data Lakehouse", "Citizen Portal Telemetry", "Case Document Indexing"],
-    tech: ["AWS GovCloud", "PostgreSQL", "React", "Python"],
-    compliance: "FedRAMP, CJIS, FISMA",
-  },
-  {
-    id: "construction",
-    name: "Construction & Engineering",
-    category: "Supply Chain & IoT",
-    icon: HardHat,
-    badge: "IoT Telemetry",
-    desc: "Jobsite sensor streaming, subcontractor risk modeling, and automated project cost forecasting DAGs.",
-    impact: "22% margin protect",
-    capabilities: ["Jobsite Sensor Telemetry", "Subcontractor Risk ML", "Cost Variance DAGs"],
-    tech: ["Python", "FastAPI", "PostgreSQL", "Power BI"],
-    compliance: "OSHA, Procore Sync",
-  },
-  {
-    id: "media",
-    name: "Media & Advertising",
-    category: "Commerce & Media",
-    icon: Film,
-    badge: "Real-Time Attribution",
-    desc: "Programmatic ad yield optimization, content recommendation graphs, and real-time impression analytics.",
-    impact: "42% higher yield",
-    capabilities: ["Programmatic Yield Engine", "Content Recommendation Graph", "Impression Streaming OLAP"],
-    tech: ["ClickHouse", "Kafka", "Python", "React"],
-    compliance: "GDPR, COPPA, IAB TCF",
-  },
-  {
-    id: "hospitality",
-    name: "Hospitality & Travel",
-    category: "Commerce & Media",
-    icon: Plane,
-    badge: "Yield ML",
-    desc: "Dynamic room pricing ML, RevPAR intelligence cockpits, and guest sentiment graph analytics.",
-    impact: "15% RevPAR lift",
-    capabilities: ["Dynamic Yield Engine", "RevPAR BI Cockpit", "Guest Sentiment AI"],
-    tech: ["Snowflake", "ClickHouse", "Python", "Tableau"],
-    compliance: "PCI-DSS, GDPR",
-  },
-  {
-    id: "professional-services",
-    name: "Professional & Legal Services",
-    category: "Public & Regulated",
-    icon: Briefcase,
-    badge: "Practice BI",
-    desc: "Resource utilization telemetry, automated client billing attribution, and contract knowledge copilots.",
-    impact: "20+ hrs/wk saved",
-    capabilities: ["Contract Review Copilot", "Utilization Telemetry", "Knowledge Search RAG"],
-    tech: ["LangChain", "OpenAI", "PostgreSQL", "React"],
-    compliance: "ABA Model Rules, SOC 2",
   },
 ];
 
 const FILTER_CATEGORIES = [
   "All Industries",
-  "Healthcare & Life Sciences",
-  "Finance & Banking",
-  "SaaS & Tech",
-  "Supply Chain & IoT",
-  "Commerce & Media",
-  "Public & Regulated",
+  "Ecommerce",
+  "EdTech",
+  "Insurance",
+  "Human Resources",
+  "Healthcare",
+  "Real Estate",
 ];
 
 // =========================================================================
@@ -347,209 +217,223 @@ const FILTER_CATEGORIES = [
 // =========================================================================
 const BLUEPRINTS = [
   {
+    id: "ecommerce-blueprint",
+    name: "Omnichannel Commerce Lakehouse",
+    domain: "Ecommerce",
+    badge: "Sub-Second OLAP",
+    sla: "99.99% Availability",
+    steps: [
+      { num: "01", title: "Multi-Store Ingest", desc: "Shopify Plus, Amazon Seller, Stripe webhooks, and warehouse ERP feeds.", tech: "CDC Pipeline Sync", tag: "Zero Event Loss" },
+      { num: "02", title: "Event Streaming", desc: "High-throughput Kafka cluster handling order queues and inventory reconciliation.", tech: "Apache Kafka Cluster", tag: "Sub-Minute Sync" },
+      { num: "03", title: "Sales Lakehouse", desc: "Snowflake columnar lakehouse with automated dbt rollup margin models.", tech: "Snowflake + dbt Cloud", tag: "Clean Data Mart" },
+      { num: "04", title: "Inventory & LTV ML", desc: "Predictive stockout warning models and unified customer lifetime value analytics.", tech: "Python ML Pipeline", tag: "Margin Protection" },
+      { num: "05", title: "Executive Cockpit", desc: "Real-time blended ROAS, inventory turns, and executive margin dashboard.", tech: "Looker Studio / Next.js", tag: "Executive Agility" },
+    ],
+  },
+  {
+    id: "edtech-blueprint",
+    name: "Learning Platform Lakehouse",
+    domain: "EdTech",
+    badge: "FERPA & COPPA Ready",
+    sla: "Sub-20ms Video Telemetry",
+    steps: [
+      { num: "01", title: "Student & Tutor Feeds", desc: "Marketplace discovery, session booking, payment gateways, and messaging.", tech: "Next.js + WebRTC", tag: "Real-Time Sync" },
+      { num: "02", title: "Telemetry Ingestion", desc: "Class attendance streams, lesson completion markers, and tutor reviews.", tech: "Kafka Event Streams", tag: "Live Telemetry" },
+      { num: "03", title: "Learning Warehouse", desc: "BigQuery core database with student progress models and automated dbt DAGs.", tech: "BigQuery Lakehouse", tag: "Deterministic Data" },
+      { num: "04", title: "Retention Engine", desc: "Student dropout risk scoring, personalized tutor matching, and feedback analytics.", tech: "Predictive Scoring", tag: "3.2x Engagement" },
+      { num: "05", title: "Administrative Portal", desc: "Executive parent-teacher portals, payout ledgers, and academic cockpits.", tech: "Snappy Next.js UI", tag: "Full Visibility" },
+    ],
+  },
+  {
+    id: "insurance-blueprint",
+    name: "Policy & Claims OCR Engine",
+    domain: "Insurance",
+    badge: "SOC 2 & NAIC Ready",
+    sla: "74% Faster Claims",
+    steps: [
+      { num: "01", title: "First Notice of Loss", desc: "Policyholder digital portals, mobile FNOL uploads, and broker submissions.", tech: "Encrypted Ingest API", tag: "Zero Paperwork" },
+      { num: "02", title: "Automated OCR", desc: "AI document OCR extracting damage reports, medical bills, and police records.", tech: "Document AI / OCR", tag: "PHI Scrubbing" },
+      { num: "03", title: "Underwriting Mart", desc: "Snowflake actuarial data mart storing policy histories and loss logs.", tech: "Snowflake Data Mart", tag: "Actuarial Core" },
+      { num: "04", title: "Actuarial Risk Engine", desc: "Automated claims triage, reserve calculations, and real-time fraud scoring.", tech: "Python Risk DAGs", tag: "99.9% Accuracy" },
+      { num: "05", title: "Adjuster Cockpit", desc: "C-suite loss ratio telemetry, adjuster work queues, and regulatory audit feeds.", tech: "Looker Studio Portal", tag: "Instant Adjudication" },
+    ],
+  },
+  {
     id: "healthcare-blueprint",
     name: "Healthcare EHR Lakehouse",
     domain: "Healthcare",
     badge: "HIPAA Air-Gapped",
     sla: "99.99% Availability",
     steps: [
-      { num: "01", title: "Data Sources", desc: "Epic, Cerner, FHIR APIs, PACS DICOM images, and legacy SQL Server clinical silos.", tech: "FHIR / HL7 CDC", tag: "Encrypted Ingest" },
-      { num: "02", title: "Ingestion & Security", desc: "De-identification pipeline with HIPAA Safe Harbor hashing and automated Kafka streams.", tech: "Kafka + Air-Gapped VPC", tag: "PHI Scrubbing" },
-      { num: "03", title: "Lakehouse Core", desc: "BigQuery / Databricks Delta lake with automated dbt clinical testing and data quality checks.", tech: "Delta Lake + dbt Core", tag: "Deterministic Data" },
-      { num: "04", title: "AI Clinical Copilot", desc: "LangGraph deterministic reasoning agent with medical citation guardrails and vector index.", tech: "Hybrid RAG + Vector DB", tag: "Zero Hallucinations" },
-      { num: "05", title: "Provider Cockpit", desc: "Snappy Next.js WebGL & Looker Studio cockpits for ICU occupancy, triage, and doctor workflows.", tech: "Looker Studio / Next.js", tag: "< 18ms Queries" },
+      { num: "01", title: "Data Sources", desc: "Epic, Cerner, FHIR APIs, PACS DICOM images, and legacy SQL clinical silos.", tech: "FHIR / HL7 CDC", tag: "Encrypted Ingest" },
+      { num: "02", title: "Ingestion & Security", desc: "De-identification pipeline with HIPAA Safe Harbor hashing and Kafka streams.", tech: "Kafka + Air-Gapped VPC", tag: "PHI Scrubbing" },
+      { num: "03", title: "Lakehouse Core", desc: "BigQuery / Databricks Delta lake with automated dbt clinical testing.", tech: "Delta Lake + dbt Core", tag: "Deterministic Data" },
+      { num: "04", title: "AI Clinical Copilot", desc: "LangGraph deterministic reasoning agent with medical citation guardrails.", tech: "Hybrid RAG + Vector DB", tag: "Zero Hallucinations" },
+      { num: "05", title: "Provider Cockpit", desc: "Next.js WebGL & Looker Studio cockpits for ICU occupancy and doctor workflows.", tech: "Looker Studio / Next.js", tag: "< 18ms Queries" },
     ],
   },
   {
-    id: "fintech-blueprint",
-    name: "Real-Time FinTech Ledger",
-    domain: "Financial Services",
-    badge: "SOC 2 & SEC Ready",
-    sla: "< 12ms p99 Latency",
+    id: "human-resources-blueprint",
+    name: "Workforce Intelligence Engine",
+    domain: "Human Resources",
+    badge: "SOC 2 & GDPR Ready",
+    sla: "65% Hiring Reduction",
     steps: [
-      { num: "01", title: "Transaction Feeds", desc: "Core banking APIs, Stripe webhooks, SWIFT/ACH message queues, and stock exchange tick feeds.", tech: "Event Streaming", tag: "Zero Event Loss" },
-      { num: "02", title: "Event Broker", desc: "High-throughput Apache Kafka cluster partitioned by tenant with distributed idempotency locks.", tech: "Apache Kafka Cluster", tag: "10M+ Events/Sec" },
-      { num: "03", title: "Columnar OLAP Mart", desc: "ClickHouse real-time columnar database aggregating billions of rows in sub-second queries.", tech: "ClickHouse Columnar", tag: "Sub-Second OLAP" },
-      { num: "04", title: "Fraud & Recon ML", desc: "Continuous ledger reconciliation DAGs and real-time transaction anomaly detection models.", tech: "dbt Tests + Scikit-Learn", tag: "99.999% Accuracy" },
-      { num: "05", title: "Executive Cockpit", desc: "C-suite risk telemetry, real-time VaR models, automated SEC 10-K audit reporting tables.", tech: "Power BI / React Portal", tag: "Executive Agility" },
+      { num: "01", title: "Talent Streams", desc: "ATS applicant feeds, job board scrapers, payroll systems, and HRIS logs.", tech: "CDC Sync Pipelines", tag: "Unified Streams" },
+      { num: "02", title: "Automated Screening", desc: "Intelligent candidate matching, resume parsing, and interview scheduling DAGs.", tech: "Automated Workflows", tag: "10x Faster Screening" },
+      { num: "03", title: "Workforce Mart", desc: "PostgreSQL operational database with consolidated employee lifecycle models.", tech: "PostgreSQL + Redis", tag: "Consolidated Core" },
+      { num: "04", title: "Attrition & Parity ML", desc: "Predictive flight risk modeling, compensation parity audits, and headcount forecasting.", tech: "Predictive ML DAGs", tag: "Proactive Retention" },
+      { num: "05", title: "Executive HR Cockpit", desc: "C-suite headcount dashboards, time-to-hire telemetry, and EEOC audit reporting.", tech: "Looker Studio BI", tag: "Executive Clarity" },
     ],
   },
   {
-    id: "saas-blueprint",
-    name: "SaaS Multi-Tenant Engine",
-    domain: "SaaS & Cloud Platforms",
-    badge: "Multi-Tenant Isolated",
-    sla: "Sub-15ms In-App Response",
+    id: "real-estate-blueprint",
+    name: "PropTech MLS & Lead Pipeline",
+    domain: "Real Estate",
+    badge: "Sub-25ms Map FPS",
+    sla: "80% Faster Lead Match",
     steps: [
-      { num: "01", title: "App Event Telemetry", desc: "PostHog, Segment, Stripe billing webhooks, and Postgres operational application database.", tech: "CDC Sync Pipelines", tag: "Sub-Minute Sync" },
-      { num: "02", title: "Row-Level Security", desc: "Cryptographic tenant isolation with automatic tenant routing and partitioned schemas.", tech: "Tenant Routing Layer", tag: "100% Data Isolation" },
-      { num: "03", title: "Warehouse Mart", desc: "Snowflake / ClickHouse data mart with automated dbt rollup models for tenant usage telemetry.", tech: "Snowflake + dbt Cloud", tag: "Cost Optimized" },
-      { num: "04", title: "In-App AI Copilot", desc: "Contextual RAG assistant answering customer questions using tenant-specific knowledge bases.", tech: "OpenAI GPT-4o + pgvector", tag: "Isolated Vector DB" },
-      { num: "05", title: "Embedded Analytics", desc: "Native embedded React analytics components with custom SQL query sandbox and PDF export.", tech: "React + Tailwind + WebGL", tag: "White-Labeled UI" },
-    ],
-  },
-  {
-    id: "logistics-blueprint",
-    name: "Supply Chain IoT Command",
-    domain: "Logistics & Fleet",
-    badge: "Sub-25ms GPS Sync",
-    sla: "24/7 Zero Downtime",
-    steps: [
-      { num: "01", title: "Fleet & Sensors", desc: "ELD GPS pings, OBD-II engine diagnostics, temperature sensors, and warehouse RFID readers.", tech: "IoT Edge Gateways", tag: "1.2M Pings/Sec" },
-      { num: "02", title: "Stream Processing", desc: "Apache Spark Structured Streaming consuming Kafka topics with geospatial geofence filtering.", tech: "Spark + Kafka Cluster", tag: "Real-Time Stream" },
-      { num: "03", title: "Historian Lakehouse", desc: "Databricks Delta Lake storing billions of historical vehicle trips with Z-order indexing.", tech: "Databricks Delta Lake", tag: "Petabyte Scalable" },
-      { num: "04", title: "Route Optimization ML", desc: "Weather-adjusted predictive arrival models and automated dynamic route re-dispatching.", tech: "Python Fast Route DAGs", tag: "24% Cost Saved" },
-      { num: "05", title: "Dispatch Portal", desc: "Interactive map view with live driver routing, detention alert triggers, and BOL OCR indexing.", tech: "Next.js + Mapbox + Power BI", tag: "Sub-25ms Map FPS" },
+      { num: "01", title: "MLS Listing Feeds", desc: "RETS / RESO Web APIs, syndication feeds, 3D tours, and GIS boundary data.", tech: "RESO Web API Sync", tag: "Sub-Minute Sync" },
+      { num: "02", title: "Geospatial Index", desc: "Mapbox vector tiles and PostGIS spatial indexing for instant geographic search.", tech: "PostGIS Spatial Index", tag: "High Concurrency" },
+      { num: "03", title: "Property Data Mart", desc: "Unified listing, valuation, and transaction database with automated data hygiene.", tech: "PostgreSQL Lakehouse", tag: "Clean Data Core" },
+      { num: "04", title: "Lead CRM DAGs", desc: "Predictive buyer intent scoring, automated SMS tour booking, and lead routing.", tech: "CRM Automation DAGs", tag: "Instant Nurturing" },
+      { num: "05", title: "Brokerage Cockpit", desc: "Portfolio NOI telemetry, agent commission accounting, and valuation dashboards.", tech: "Next.js + Mapbox UI", tag: "Portfolio Agility" },
     ],
   },
 ];
 
 // =========================================================================
-// 5. INDUSTRY CAPABILITIES & TECH STACKS ACCORDION DATA
+// 5. INDUSTRY CAPABILITIES & TECH STACKS DATA (6 CORE INDUSTRIES)
 // =========================================================================
 const DETAILED_SERVICES = [
   {
-    id: "healthcare",
-    name: "Healthcare & MedTech",
-    icon: HeartPulse,
-    summary: "Clinical triage AI, HIPAA-shielded data lakehouses, patient intake telemetry, and physician productivity cockpits.",
-    challenge: "Fragmented EHR silos and manual intake forms cause 45-minute average wait times, physician burnout, and compliance vulnerabilities across hospital networks.",
-    solutions: [
-      "HIPAA-Shielded Data Lakehouses (FHIR / HL7 Ingestion)",
-      "Clinical Triage AI Copilots with deterministic citation guardrails",
-      "ICU bed occupancy & physician productivity executive dashboards",
-      "Automated medical coding (ICD-10 / CPT) classification models",
-    ],
-    techStack: ["FHIR", "HL7", "BigQuery", "Looker Studio", "Python", "FastAPI", "GCP Healthcare API"],
-    outcomes: ["4.8x faster patient intake", "18,000+ physician hours saved", "100% HIPAA audit compliance"],
-  },
-  {
-    id: "fintech",
-    name: "Financial Services & Banking",
-    icon: Landmark,
-    summary: "Sub-second ledger reconciliations, real-time SEC audit compliance, fraud risk ML, and executive liquidity cockpits.",
-    challenge: "Legacy data warehouse queries take 8+ minutes to execute, leaving leadership blind to intraday liquidity risks, transaction fraud, and regulatory reconciliations.",
-    solutions: [
-      "Sub-second ClickHouse columnar data marts for high-frequency transactions",
-      "Real-time fraud scoring DAGs processing 10,000+ events per second",
-      "Automated SEC 10-K / FINRA regulatory compliance reporting tables",
-      "Executive liquidity, portfolio IRR, and multi-asset exposure cockpits",
-    ],
-    techStack: ["Snowflake", "ClickHouse", "dbt", "Kafka", "Java", "Spring Boot", "AWS KMS HSM"],
-    outcomes: ["< 12ms p99 query latency", "99.999% verified ledger accuracy", "$1.4M annual cloud cost saved"],
-  },
-  {
-    id: "saas",
-    name: "SaaS & Cloud Platforms",
-    icon: MonitorSmartphone,
-    summary: "Tenant-isolated embedded analytics widgets, in-app RAG copilots, product telemetry, and usage-based billing telemetry.",
-    challenge: "Engineering teams spend months building custom reporting instead of core product features, resulting in customer churn and low expansion revenue.",
-    solutions: [
-      "Multi-tenant embedded analytics widgets with row-level security",
-      "In-app AI copilots operating over tenant-isolated knowledge bases",
-      "Real-time product telemetry (PostHog/Segment) to Snowflake pipelines",
-      "Stripe billing usage-metering and Net Revenue Retention (NRR) telemetry",
-    ],
-    techStack: ["React", "Next.js", "ClickHouse", "OpenAI GPT-4o", "PostgreSQL", "dbt Cloud"],
-    outcomes: ["32% ARR expansion lift", "4x faster enterprise onboarding", "Sub-15ms embedded queries"],
-  },
-  {
-    id: "logistics",
-    name: "Logistics & Supply Chain",
-    icon: Truck,
-    summary: "High-throughput ELD sensor streaming, weather-adjusted route optimization ML, and automated bill-of-lading OCR.",
-    challenge: "Delayed carrier status updates, manual bill-of-lading entries, and blind route congestion lead to demurrage penalties and high fuel overhead.",
-    solutions: [
-      "High-throughput ELD GPS and sensor streaming lakehouse (1.2M msgs/sec)",
-      "Weather and congestion-adjusted predictive route optimization ML",
-      "Automated bill-of-lading (BOL) and shipping invoice OCR normalization",
-      "Central dispatch command portal with live fleet geofencing alerts",
-    ],
-    techStack: ["Kafka", "Apache Spark", "Databricks", "Power BI", "Node.js", "Mapbox GL"],
-    outcomes: ["24% reduction in fleet downtime", "$3.2M saved in prevented delays", "Sub-25ms GPS telemetry"],
-  },
-  {
-    id: "retail",
-    name: "Retail & E-Commerce",
+    id: "ecommerce",
+    name: "Ecommerce (D2C, B2B & B2C)",
     icon: ShoppingBag,
-    summary: "Unified customer data platforms (CDP), multi-touch attribution DAGs, dynamic pricing, and stockout forecasting ML.",
-    challenge: "Fragmented ad spend across channels causes inaccurate CAC calculations, blind attribution, and expensive inventory stockouts.",
+    summary: "Scalable online stores, streamlined operations, automated workflows, and sales data analytics.",
+    challenge: "Fragmented customer data, manual order processing, and slow storefront performance reduce conversion and limit scale across retail channels.",
     solutions: [
-      "Unified customer data platform (CDP) on Snowflake linking Shopify + ad channels",
-      "Multi-touch marketing attribution DAGs with incrementality testing",
-      "SKU-level stockout forecasting ML models with automated supplier PO dispatch",
-      "Executive gross margin velocity and blended CAC cockpit",
+      "Scalable Next.js & Shopify Plus storefronts with headless architecture",
+      "Automated inventory sync & ERP fulfillment workflows across channels",
+      "Sales data lakehouses & unified customer lifetime value (LTV) analytics",
+      "Dynamic pricing and conversion rate optimization (CRO) telemetry",
     ],
-    techStack: ["Snowflake", "dbt Core", "Looker Studio", "Python", "FastAPI", "Stripe API"],
-    outcomes: ["18% gross margin expansion", "-14% blended customer CAC", "Real-time ad ROAS sync"],
+    techStack: ["Next.js", "Shopify Plus", "Snowflake", "dbt", "PostgreSQL", "Stripe API"],
+    outcomes: ["+18% gross margin lift", "Zero stockout sync errors", "Sub-second storefront speed"],
   },
   {
-    id: "manufacturing",
-    name: "Manufacturing & Industrial",
-    icon: Factory,
-    summary: "Edge-to-cloud SCADA streaming, predictive vibration anomaly machine learning, and multi-plant OEE executive radar.",
-    challenge: "Unplanned factory downtime costs millions annually due to lagging edge sensor monitoring and delayed maintenance dispatch.",
+    id: "edtech",
+    name: "EdTech",
+    icon: GraduationCap,
+    summary: "Learning platforms, education marketplaces, student management systems, and data-driven solutions.",
+    challenge: "Disconnected classroom tools, manual scheduling, and poor visibility into student progress create operational overhead and hinder retention.",
     solutions: [
-      "Industrial IoT edge-to-cloud Kafka streaming pipelines for SCADA sensors",
-      "Predictive vibration and thermal anomaly machine learning models",
-      "Plant floor operator tablets and shift handoff digital logs",
-      "Multi-facility Overall Equipment Effectiveness (OEE) executive radar",
+      "Connected tutor discovery, booking, and class scheduling marketplaces",
+      "Interactive live learning platforms with video and real-time collaboration",
+      "Student progress tracking, retention modeling, and administrative BI",
+      "Automated lesson billing, subscription payments, and tutor payouts",
     ],
-    techStack: ["TimeScaleDB", "Kafka", "Python", "Power BI", "FastAPI", "Docker Edge"],
-    outcomes: ["35% less machine downtime", "$4.5M prevented annual loss", "72-hour advance failure alert"],
+    techStack: ["Next.js", "React Native", "Node.js", "PostgreSQL", "BigQuery", "WebRTC"],
+    outcomes: ["3.2x student engagement lift", "50K+ classes supported", "100% FERPA compliance"],
+  },
+  {
+    id: "insurance",
+    name: "Insurance",
+    icon: ShieldCheck,
+    summary: "Digital insurance solutions, policy management, claims workflows, and risk decision engines.",
+    challenge: "Paper-heavy policy intake and manual claims reviews result in slow turnaround times, higher claim handling costs, and poor customer retention.",
+    solutions: [
+      "Digital policy management portals and self-service policyholder portals",
+      "Automated claims workflows with intelligent document OCR and triage",
+      "Actuarial risk scoring and data-driven underwriting decision engines",
+      "Executive loss ratio, fraud detection, and regulatory compliance dashboards",
+    ],
+    techStack: ["Snowflake", "Python", "FastAPI", "React", "Looker Studio", "OCR AI"],
+    outcomes: ["74% faster claims workflows", "99.9% policy data accuracy", "Full regulatory audit readiness"],
+  },
+  {
+    id: "human-resources",
+    name: "Human Resources",
+    icon: Users,
+    summary: "HR management systems, recruitment platforms, employee portals, and workforce automation.",
+    challenge: "Disjointed HR tools, manual hiring tracking, and fragmented employee records delay hiring cycles and create compliance bottlenecks.",
+    solutions: [
+      "Modern HR management systems (HRIS) and employee self-service portals",
+      "Automated recruitment pipelines with applicant tracking and interview flows",
+      "Workforce onboarding, document compliance, and performance tracking",
+      "Headcount reporting, compensation analytics, and retention dashboards",
+    ],
+    techStack: ["Next.js", "Node.js", "PostgreSQL", "Tailwind CSS", "Redis", "Looker Studio"],
+    outcomes: ["65% hiring cycle reduction", "90% faster onboarding", "Consolidated employee telemetry"],
+  },
+  {
+    id: "healthcare",
+    name: "Healthcare",
+    icon: HeartPulse,
+    summary: "Healthcare platforms, patient management systems, appointment tools, and secure digital workflows.",
+    challenge: "Fragmented clinical data silos, manual intake paperwork, and cumbersome appointment scheduling lead to long wait times and provider burnout.",
+    solutions: [
+      "HIPAA-compliant patient portals with online scheduling and telehealth intake",
+      "Electronic Health Record (EHR) data lakehouses with encrypted FHIR/HL7 sync",
+      "Provider productivity, bed occupancy, and clinic operations cockpits",
+      "Secure digital messaging, prescription workflows, and telemetry pipelines",
+    ],
+    techStack: ["FHIR", "HL7", "BigQuery", "Looker Studio", "Python", "FastAPI", "GCP Healthcare"],
+    outcomes: ["4.8x faster patient intake", "18,000+ clinical hours saved", "100% HIPAA audit compliance"],
+  },
+  {
+    id: "real-estate",
+    name: "Real Estate",
+    icon: Building2,
+    summary: "Property marketplaces, listing platforms, CRM systems, and real estate analytics solutions.",
+    challenge: "Scattered property listings, manual lead tracking, and opaque valuation reporting slow deal velocity and complicate property management.",
+    solutions: [
+      "High-performance property marketplaces and interactive map listing platforms",
+      "Real estate CRM systems for automated lead tracking, nurturing, and tours",
+      "Tenant portals with automated lease processing, rent collection, and maintenance",
+      "Portfolio Net Operating Income (NOI) analytics and property valuation models",
+    ],
+    techStack: ["Next.js", "PostgreSQL", "React", "Looker Studio", "Mapbox", "Tailwind CSS"],
+    outcomes: ["80% faster lead review", "Sub-25ms property search", "Unified portfolio visibility"],
   },
 ];
 
 // =========================================================================
-// 6. CLIENT LOGOS & TRUSTED ECOSYSTEM
-// =========================================================================
-const CLIENT_ECOSYSTEM = [
-  { name: "OpenAI", role: "GPT-4o Enterprise", tag: "AI Infrastructure" },
-  { name: "Snowflake", role: "Premier Partner", tag: "Data Warehouse" },
-  { name: "Databricks", role: "Lakehouse Core", tag: "Lakehouse Partner" },
-  { name: "AWS", role: "Advanced Tier", tag: "Cloud Infrastructure" },
-  { name: "Google Cloud", role: "BigQuery & Vertex", tag: "Cloud AI" },
-  { name: "Microsoft Azure", role: "Fabric & Power BI", tag: "Enterprise BI" },
-  { name: "Apache Kafka", role: "Event Streaming", tag: "Real-Time Ingestion" },
-  { name: "ClickHouse", role: "Columnar OLAP", tag: "High-Speed Analytics" },
-];
-
-// =========================================================================
-// 7. INDUSTRY RESEARCH & WHITE PAPERS
+// 6. INDUSTRY RESEARCH & ARCHITECTURE GUIDES DATA
 // =========================================================================
 const RESEARCH_PAPERS = [
   {
-    title: "Healthcare Analytics Blueprint: HIPAA Lakehouses & Deterministic RAG",
-    category: "Healthcare & Life Sciences",
+    title: "Healthcare Analytics Blueprint: HIPAA Lakehouses & Clinical Workflows",
+    category: "Healthcare",
     readTime: "8 min read",
-    tag: "Architecture Guide",
-    desc: "A tactical guide to eliminating AI hallucinations in clinical triage copilots using reciprocal rank fusion, dense vector embeddings, and strict FHIR guardrails.",
+    image: "/images/industries-multi-domain-hero.jpg",
+    desc: "A tactical guide to eliminating data fragmentation in clinical operations using encrypted FHIR data pipelines, automated patient intake, and strict HIPAA guardrails.",
+    href: "/case-studies",
   },
   {
-    title: "FinTech KPI & SEC Audit Framework: Sub-Second Financial Telemetry",
-    category: "Finance & Banking",
+    title: "Digital Insurance & Claims Framework: Sub-Second Financial Telemetry",
+    category: "Insurance",
     readTime: "10 min read",
-    tag: "Playbook",
-    desc: "Architectural blueprint for sub-second trade telemetry, zero-loss financial event streams, and automated SEC regulatory audit feeds using Kafka and ClickHouse.",
+    image: "/images/cta-office-collab.jpg",
+    desc: "Architectural blueprint for sub-second policy telemetry, automated document OCR for First Notice of Loss, and actuarial risk scoring models in Snowflake.",
+    href: "/case-studies/progress-partners",
   },
   {
-    title: "The Multi-Tenant SaaS Metrics Handbook: Embedded Analytics at Scale",
-    category: "SaaS & Cloud Tech",
-    readTime: "6 min read",
-    tag: "Whitepaper",
-    desc: "How high-growth B2B SaaS engineering teams architect row-level security, isolated vector indexes, and sub-15ms embedded dashboards.",
+    title: "Omnichannel Commerce & Multi-Tenant Platforms at Scale",
+    category: "Ecommerce & EdTech",
+    readTime: "7 min read",
+    image: "/images/hero-team-consulting-v2.jpg",
+    desc: "How high-growth commerce and education platforms architect real-time inventory synchronization, sub-second search indexing, and automated student-tutor matching.",
+    href: "/case-studies/tuitionstime",
   },
 ];
 
 export default function IndustriesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
-  const [activeBlueprintId, setActiveBlueprintId] = useState("healthcare-blueprint");
+  const [activeBlueprintId, setActiveBlueprintId] = useState("ecommerce-blueprint");
   const [solutionIndex, setSolutionIndex] = useState(0);
-  const [expandedCapability, setExpandedCapability] = useState<string | null>("healthcare");
-  const [showAllIndustries, setShowAllIndustries] = useState(false);
-
-  const isFiltering = searchQuery.trim() !== "" || selectedCategory !== "All Industries";
+  const [selectedCapabilityId, setSelectedCapabilityId] = useState("ecommerce");
 
   // Filtered industries logic
   const filteredIndustries = useMemo(() => {
@@ -574,6 +458,13 @@ export default function IndustriesPage() {
     return BLUEPRINTS.find((b) => b.id === activeBlueprintId) || BLUEPRINTS[0];
   }, [activeBlueprintId]);
 
+  const activeCapability = useMemo(() => {
+    return (
+      DETAILED_SERVICES.find((s) => s.id === selectedCapabilityId) ||
+      DETAILED_SERVICES[0]
+    );
+  }, [selectedCapabilityId]);
+
   const handleNextSolution = () => {
     setSolutionIndex((prev) => (prev + 1) % FEATURED_SOLUTIONS.length);
   };
@@ -582,22 +473,18 @@ export default function IndustriesPage() {
     setSolutionIndex((prev) => (prev - 1 + FEATURED_SOLUTIONS.length) % FEATURED_SOLUTIONS.length);
   };
 
-  const toggleCapability = (id: string) => {
-    setExpandedCapability((prev) => (prev === id ? null : id));
-  };
-
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#000000] text-[#FFFFFF] font-sans antialiased selection:bg-[#00BCD4] selection:text-[#050505]">
       {/* ========================================================================= */}
       {/* 1. HERO — INDUSTRIES WE TRANSFORM (PURE BLACK #000000 54/46 SPLIT WITH PHOTO) */}
       {/* ========================================================================= */}
       <section className="relative w-full pt-28 pb-12 sm:pt-32 sm:pb-14 lg:pt-36 lg:pb-16 bg-[#000000] border-b border-[#1B242B] overflow-hidden">
-        {/* Ambient Subtle Radial Glow */}
+        {/* Subtle Cyan Decorative Glow Behind Image */}
         <div
-          className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] pointer-events-none opacity-20 -z-0"
+          className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[700px] h-[500px] pointer-events-none opacity-25 -z-0"
           style={{
             background:
-              "radial-gradient(circle at center, rgba(0, 188, 212, 0.16) 0%, rgba(8, 127, 165, 0.05) 50%, transparent 75%)",
+              "radial-gradient(circle at center, rgba(0, 188, 212, 0.22) 0%, rgba(8, 127, 165, 0.08) 45%, transparent 70%)",
           }}
         />
 
@@ -611,69 +498,44 @@ export default function IndustriesPage() {
               className="lg:col-span-7 space-y-5 sm:space-y-6 text-left"
             >
               {/* Eyebrow Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#101214] text-[#00BCD4] shadow-xs"
-              >
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#101214] text-[#00BCD4] shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#00BCD4] animate-pulse" />
                 <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider">
                   ENTERPRISE DOMAIN INTELLIGENCE
                 </span>
-              </motion.div>
+              </div>
 
-              {/* Main Headline: 52–60px on desktop */}
-              <motion.h1
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-extrabold tracking-tight text-white leading-[1.08] [text-wrap:balance]"
-              >
-                Digital Transformation Across{" "}
-                <span className="text-[#00BCD4]">Critical Industries.</span>
-              </motion.h1>
+              {/* Main Headline */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-extrabold tracking-tight text-white leading-[1.08] [text-wrap:balance]">
+                Digital Transformation<br />
+                Across <span className="text-[#00BCD4]">Critical Industries.</span>
+              </h1>
 
               {/* Subheadline Description */}
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                className="text-base sm:text-[17px] text-slate-300 leading-relaxed font-normal max-w-2xl"
-              >
-                We engineer production lakehouses, sub-second OLAP marts, deterministic AI copilots, and C-suite analytics cockpits tailored to your industry&apos;s compliance guardrails and latency SLAs.
-              </motion.p>
+              <p className="text-base sm:text-[17px] text-slate-300 leading-relaxed font-normal max-w-2xl">
+                We engineer scalable digital platforms, modern cloud architectures, automated workflows, and data-driven systems tailored to the compliance, operational velocity, and growth demands of mission-critical industries.
+              </p>
 
               {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-1"
-              >
-                <a
-                  href="#featured-solutions"
-                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
-                >
-                  <span>Explore Featured Solutions</span>
-                  <ArrowRight className="w-4 h-4 ml-0.5" />
-                </a>
-
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-1">
                 <Link
                   href="/contact#contact-hero"
-                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-12 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-sm sm:text-base border border-white/15 hover:border-[#00BCD4]/60 transition-all duration-200 text-center"
+                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
                 >
                   <span>Schedule Strategy Call</span>
+                  <ArrowRight className="w-4 h-4 ml-0.5" />
                 </Link>
-              </motion.div>
+
+                <Link
+                  href="/case-studies"
+                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-12 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-sm sm:text-base border border-white/15 hover:border-[#00BCD4]/60 transition-all duration-200 text-center"
+                >
+                  <span>Explore Case Studies</span>
+                </Link>
+              </div>
 
               {/* 4-Metric Trust Ribbon */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-                className="pt-5 sm:pt-6 border-t border-[#1B242B] grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5"
-              >
+              <div className="pt-5 sm:pt-6 border-t border-[#1B242B] grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
                 {TRUST_METRICS.map((metric) => (
                   <div key={metric.label} className="space-y-0.5">
                     <div className="text-2xl sm:text-3xl font-mono font-black text-[#00BCD4] tracking-tight">
@@ -687,35 +549,36 @@ export default function IndustriesPage() {
                     </div>
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </motion.div>
 
-            {/* Right 46% Column: High-Quality Photorealistic Collaborative Workspace Image */}
-            {/* Right 46% Column: Photorealistic Multi-Industry Visual */}
+            {/* Right 46% Column: Prominent High-Quality Industry Visual with Subtle Cyan Aura */}
             <motion.div
-              initial={{ opacity: 0, scale: 1.04 }}
+              initial={{ opacity: 0, scale: 1.03 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative w-full h-[280px] sm:h-[340px] md:h-[390px] lg:h-[430px] rounded-2xl overflow-hidden border border-[#1B242B] shadow-2xl bg-[#101214]">
+              {/* Subtle Cyan Decorative Curve Glow */}
+              <div className="absolute -inset-2.5 rounded-3xl bg-gradient-to-tr from-[#00BCD4]/20 via-transparent to-[#00BCD4]/10 -z-10 blur-xl opacity-70" />
+
+              <div className="relative w-full h-[280px] sm:h-[340px] md:h-[390px] lg:h-[430px] rounded-2xl overflow-hidden border border-[#00BCD4]/30 shadow-2xl bg-[#101214]">
                 <Image
                   src="/images/industries-multi-domain-hero.jpg"
-                  alt="CodePlaced digital transformation engineering across healthcare, industrial automation, and logistics operations"
+                  alt="CodePlaced digital transformation engineering across critical enterprise industries"
                   fill
                   priority
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 45vw"
                 />
 
-                {/* Subtle dark bottom & side gradient to blend seamlessly into pure black page */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/65 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/25 via-transparent to-transparent pointer-events-none" />
+                {/* Subtle dark gradient overlay to blend seamlessly */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/70 via-transparent to-transparent pointer-events-none" />
 
-                {/* Subtle verified pill badge on corner */}
-                <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#000000]/80 backdrop-blur-md border border-white/10 text-white text-[11px] font-mono">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>One Technology Partner &bull; Multi-Industry Solutions</span>
+                {/* Verified badge pill */}
+                <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#000000]/85 backdrop-blur-md border border-[#00BCD4]/40 text-white text-[11px] font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                  <span>One Technology Partner &bull; 6 Core Industries</span>
                 </div>
               </div>
             </motion.div>
@@ -724,7 +587,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. FEATURED INDUSTRY SOLUTIONS — BLACK (COMPACT 50/50 COMPOSITION) */}
+      {/* 2. FEATURED INDUSTRY SOLUTIONS — PURE BLACK #000000 CAROUSEL */}
       {/* ========================================================================= */}
       <section id="featured-solutions" className="py-12 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -761,8 +624,8 @@ export default function IndustriesPage() {
             </div>
           </div>
 
-          {/* Active Solution Card (Compact 50/50 Composition) */}
-          <div className="relative overflow-hidden rounded-[24px] bg-[#101214] border border-[#1B242B] shadow-2xl p-6 sm:p-8 lg:p-9">
+          {/* Active Solution Card (Dark Gray #101214 with Thin Cyan Border) */}
+          <div className="relative overflow-hidden rounded-[24px] bg-[#101214] border border-[#00BCD4]/30 hover:border-[#00BCD4]/50 shadow-2xl p-6 sm:p-8 lg:p-9 transition-colors">
             <AnimatePresence mode="wait">
               <motion.div
                 key={FEATURED_SOLUTIONS[solutionIndex].id}
@@ -772,13 +635,13 @@ export default function IndustriesPage() {
                 transition={{ duration: 0.25 }}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center"
               >
-                {/* Left 7 Columns */}
+                {/* Left 7 Columns: Project Details */}
                 <div className="lg:col-span-7 space-y-4 sm:space-y-5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#00BCD4] bg-[#000000] px-3 py-0.5 rounded-full border border-[#1B242B]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#00BCD4] bg-[#000000] px-3 py-1 rounded-full border border-[#00BCD4]/30">
                       {FEATURED_SOLUTIONS[solutionIndex].industry}
                     </span>
-                    <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                    <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-500/30">
                       {FEATURED_SOLUTIONS[solutionIndex].badge}
                     </span>
                   </div>
@@ -793,7 +656,7 @@ export default function IndustriesPage() {
 
                   {/* Architecture Data Flow String */}
                   <div className="text-xs font-mono bg-[#000000] p-3 rounded-xl border border-[#1B242B] overflow-x-auto whitespace-nowrap text-slate-200">
-                    <span className="text-[#00BCD4] font-bold">Data Pipeline: </span>
+                    <span className="text-[#00BCD4] font-bold">Data Flow: </span>
                     {FEATURED_SOLUTIONS[solutionIndex].architecture}
                   </div>
 
@@ -827,16 +690,16 @@ export default function IndustriesPage() {
                       href="/case-studies"
                       className="inline-flex items-center justify-center gap-2 px-5 h-10 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-[#1B242B] hover:border-[#00BCD4]/40 transition-all"
                     >
-                      <span>Read Case Study</span>
+                      <span>Read Case Studies</span>
                     </Link>
                   </div>
                 </div>
 
                 {/* Right 5 Columns: Verified Result Card */}
-                <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-[#000000] border border-[#1B242B] text-white shadow-xl space-y-4">
+                <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-[#000000] border border-[#00BCD4]/25 text-white shadow-xl space-y-4">
                   <div className="space-y-1">
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
-                      Quantified Result
+                      Quantified Business Result
                     </span>
                     <div className="text-4xl sm:text-5xl font-black text-[#00BCD4] tracking-tight font-mono">
                       {FEATURED_SOLUTIONS[solutionIndex].metric}
@@ -883,24 +746,24 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. EXPLORE MISSION-CRITICAL INDUSTRIES — PURE WHITE #FFFFFF INTERACTIVE EXPLORER */}
+      {/* 3. EXPLORE MISSION-CRITICAL INDUSTRIES — PURE WHITE #FFFFFF WITH DARK CARDS */}
       {/* ========================================================================= */}
-      <section id="industries-explorer" className="py-12 sm:py-14 bg-[#FFFFFF] text-[#101820] border-b border-slate-200">
+      <section id="industries-explorer" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-5 sm:mb-6">
+          <div className="max-w-3xl mx-auto text-center space-y-2 mb-6 sm:mb-8">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
               COMPLETE DOMAIN CATALOG
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#101820] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
               Explore Mission-Critical Industries
             </h2>
             <p className="text-[#566171] text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
-              Inspect specialized architecture patterns, compliance frameworks, and benchmark metrics for your sector.
+              Inspect specialized architecture patterns, compliance frameworks, and benchmark metrics across our 6 core sectors.
             </p>
           </div>
 
           {/* Search & Category Filter Bar */}
-          <div className="p-3 sm:p-4 rounded-xl bg-[#F5F6F8] border border-slate-200 mb-5 space-y-2.5">
+          <div className="p-3 sm:p-4 rounded-xl bg-[#F5F6F8] border border-slate-200 mb-6 space-y-2.5">
             {/* Search Input */}
             <div className="relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#566171]" />
@@ -908,20 +771,20 @@ export default function IndustriesPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by industry name, capability (e.g. 'FHIR', 'Fraud', 'ROAS', 'IoT'), or compliance..."
-                className="w-full h-10 pl-10 pr-4 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-medium text-[#101820] placeholder:text-[#566171]/70 focus:outline-none focus:border-[#087FA5] transition-all"
+                placeholder="Search by industry name, capability, or tech..."
+                className="w-full h-10 pl-10 pr-4 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-medium text-[#111111] placeholder:text-[#566171]/70 focus:outline-none focus:border-[#087FA5] transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#566171] hover:text-[#101820] cursor-pointer"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#566171] hover:text-[#111111] cursor-pointer"
                 >
                   Clear
                 </button>
               )}
             </div>
 
-            {/* Category Filter Pills */}
+            {/* Category Filter Chips */}
             <div className="flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-slate-200">
               <span className="text-[11px] font-bold text-[#566171] mr-1 flex items-center gap-1">
                 <Filter className="w-3 h-3" /> Category:
@@ -929,12 +792,7 @@ export default function IndustriesPage() {
               {FILTER_CATEGORIES.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => {
-                    setSelectedCategory(cat);
-                    if (cat === "All Industries") {
-                      setShowAllIndustries(false);
-                    }
-                  }}
+                  onClick={() => setSelectedCategory(cat)}
                   className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                     selectedCategory === cat
                       ? "bg-[#101820] text-white shadow-xs"
@@ -947,65 +805,51 @@ export default function IndustriesPage() {
             </div>
           </div>
 
-          {/* Clean 3-Column Compact Responsive Grid with 6-card (desktop) / 4-card (mobile) initial preview */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4.5">
+          {/* 3-Column x 2-Row Grid on Desktop: Black/Dark-Gray (#101214) Cards with Thin Cyan Borders */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredIndustries.map((ind, idx) => {
               const IndIcon = ind.icon;
-              // Visibility logic:
-              // When user is searching or has filtered, show ALL matching cards.
-              // When in default state (!isFiltering):
-              // - indices 0..3: always visible
-              // - indices 4..5: visible on desktop (sm:flex), hidden on mobile unless showAllIndustries
-              // - indices 6+: hidden unless showAllIndustries
-              const isInitiallyHiddenMobile = !isFiltering && !showAllIndustries && idx >= 4;
-              const isInitiallyHiddenDesktop = !isFiltering && !showAllIndustries && idx >= 6;
-              const visibilityClass = isFiltering
-                ? "flex"
-                : isInitiallyHiddenDesktop
-                ? (showAllIndustries ? "flex" : "hidden")
-                : isInitiallyHiddenMobile
-                ? (showAllIndustries ? "flex" : "hidden sm:flex")
-                : "flex";
 
               return (
                 <motion.div
                   key={ind.id}
+                  id={ind.id}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-20px" }}
-                  transition={{ duration: 0.5, delay: (idx % 6) * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  className={`rounded-xl bg-white border border-slate-200 p-5 shadow-2xs hover:shadow-md hover:border-[#00BCD4] transition-all duration-200 flex-col justify-between group hover:-translate-y-1 ${visibilityClass}`}
+                  transition={{ duration: 0.4, delay: (idx % 6) * 0.05 }}
+                  className="rounded-2xl bg-[#101214] border border-[#00BCD4]/25 hover:border-[#00BCD4] p-5 sm:p-6 shadow-md hover:shadow-xl transition-all duration-200 flex flex-col justify-between group hover:-translate-y-1 scroll-mt-28 text-white"
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-3.5">
                     {/* Header: Icon + Badge */}
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-[#EBF9FC] text-[#087FA5] border border-[#00BCD4]/20 flex items-center justify-center group-hover:bg-[#087FA5] group-hover:text-white transition-colors duration-200">
-                        <IndIcon className="w-4 h-4" />
+                      <div className="w-10 h-10 rounded-xl bg-[#000000] text-[#00BCD4] border border-[#00BCD4]/30 flex items-center justify-center group-hover:bg-[#00BCD4] group-hover:text-[#050505] transition-colors duration-200">
+                        <IndIcon className="w-5 h-5" />
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-[#087FA5] bg-[#EBF9FC] px-2 py-0.5 rounded-full border border-[#00BCD4]/25">
+                      <span className="text-[10px] font-mono font-bold text-[#00BCD4] bg-[#000000] px-2.5 py-0.5 rounded-full border border-[#00BCD4]/30">
                         {ind.badge}
                       </span>
                     </div>
 
                     {/* Title + Desc */}
                     <div>
-                      <h3 className="text-base font-bold text-[#101820] tracking-tight group-hover:text-[#087FA5] transition-colors duration-200">
+                      <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight group-hover:text-[#00BCD4] transition-colors duration-200">
                         {ind.name}
                       </h3>
-                      <p className="text-xs text-[#566171] mt-1 leading-relaxed line-clamp-2">
+                      <p className="text-xs text-slate-300 mt-1.5 leading-relaxed line-clamp-3">
                         {ind.desc}
                       </p>
                     </div>
 
                     {/* Key Capabilities */}
-                    <div className="space-y-1 pt-1.5 border-t border-slate-100">
+                    <div className="space-y-1.5 pt-2 border-t border-[#1B242B]">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                        Key Capabilities:
+                        Core Capabilities:
                       </span>
-                      <ul className="space-y-0.5">
+                      <ul className="space-y-1">
                         {ind.capabilities.slice(0, 3).map((cap) => (
-                          <li key={cap} className="text-[11px] text-[#101820] flex items-center gap-1.5">
-                            <span className="w-1 h-1 rounded-full bg-[#087FA5] shrink-0" />
+                          <li key={cap} className="text-[11px] text-slate-200 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] shrink-0" />
                             <span className="truncate">{cap}</span>
                           </li>
                         ))}
@@ -1013,18 +857,20 @@ export default function IndustriesPage() {
                     </div>
                   </div>
 
-                  {/* Card Bottom: Outcome & Action Link */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  {/* Card Bottom: Outcome & Action Link with Circular Arrow */}
+                  <div className="mt-5 pt-3.5 border-t border-[#1B242B] flex items-center justify-between">
                     <div>
-                      <div className="text-[9px] uppercase font-bold text-[#566171]">Benchmark Impact</div>
-                      <div className="text-xs font-black text-emerald-600">{ind.impact}</div>
+                      <div className="text-[9px] uppercase font-bold text-slate-400">Benchmark Impact</div>
+                      <div className="text-xs font-mono font-black text-emerald-400">{ind.impact}</div>
                     </div>
                     <Link
                       href="/contact#contact-hero"
-                      className="inline-flex items-center gap-1 text-xs font-bold text-[#101820] group-hover:text-[#087FA5] transition-colors duration-200"
+                      className="inline-flex items-center gap-2 text-xs font-bold text-[#00BCD4] hover:text-[#20d7f5] transition-colors group/link"
                     >
-                      <span>Explore</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      <span>Explore Industry</span>
+                      <div className="w-6 h-6 rounded-full bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center group-hover/link:bg-[#00BCD4] group-hover/link:text-[#050505] transition-all">
+                        <ArrowUpRight className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                      </div>
                     </Link>
                   </div>
                 </motion.div>
@@ -1032,26 +878,8 @@ export default function IndustriesPage() {
             })}
           </div>
 
-          {/* View All Industries / Show Less Interactive Toggle Button */}
-          {!isFiltering && filteredIndustries.length > 6 && (
-            <div className="flex justify-center pt-7">
-              <button
-                onClick={() => setShowAllIndustries(!showAllIndustries)}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-[#F5F6F8] text-[#101820] font-bold text-xs sm:text-sm border border-slate-300 hover:border-[#00BCD4] shadow-2xs hover:shadow-xs transition-all duration-200 cursor-pointer active:scale-95"
-                aria-expanded={showAllIndustries}
-              >
-                <span>{showAllIndustries ? "Show Less" : "View All Industries (16)"}</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    showAllIndustries ? "rotate-180 text-[#087FA5]" : "text-[#566171]"
-                  }`}
-                />
-              </button>
-            </div>
-          )}
-
           {filteredIndustries.length === 0 && (
-            <div className="p-8 text-center rounded-xl bg-[#F5F6F8] border border-slate-200">
+            <div className="p-8 text-center rounded-xl bg-[#F5F6F8] border border-slate-200 mt-6">
               <p className="text-[#566171] font-semibold text-xs sm:text-sm">
                 No industries found matching &ldquo;{searchQuery}&rdquo;.
               </p>
@@ -1059,7 +887,6 @@ export default function IndustriesPage() {
                 onClick={() => {
                   setSearchQuery("");
                   setSelectedCategory("All Industries");
-                  setShowAllIndustries(false);
                 }}
                 className="mt-3 px-4 py-1.5 rounded-full bg-[#101820] text-white text-xs font-bold cursor-pointer hover:bg-black transition-colors"
               >
@@ -1071,7 +898,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS — PURE BLACK #000000 COMPACT */}
+      {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS — PURE BLACK #000000 */}
       {/* ========================================================================= */}
       <section id="blueprints" className="py-12 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -1083,11 +910,11 @@ export default function IndustriesPage() {
               Industry Architecture Blueprints
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
-              Inspect production-tested data flow diagrams from source ingestion to lakehouse, analytics marts, and AI copilots.
+              Inspect production-tested data flow diagrams from source ingestion to lakehouse, analytics marts, and executive dashboards.
             </p>
           </div>
 
-          {/* Blueprint Selector Tabs */}
+          {/* Blueprint Selector Tabs with Cyan Active State */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-7">
             {BLUEPRINTS.map((bp) => {
               const isActive = activeBlueprintId === bp.id;
@@ -1102,14 +929,14 @@ export default function IndustriesPage() {
                   }`}
                 >
                   <Workflow className="w-3.5 h-3.5" />
-                  <span>{bp.name}</span>
+                  <span>{bp.domain}</span>
                 </button>
               );
             })}
           </div>
 
           {/* Active Blueprint Visualization Panel */}
-          <div className="p-5 sm:p-7 rounded-[22px] bg-[#101214] border border-[#1B242B] shadow-xl space-y-6">
+          <div className="p-5 sm:p-7 rounded-[22px] bg-[#101214] border border-[#00BCD4]/25 shadow-xl space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#1B242B]">
               <div>
                 <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
@@ -1129,16 +956,16 @@ export default function IndustriesPage() {
               </div>
             </div>
 
-            {/* Horizontal 5-Step Pipeline Flow */}
+            {/* Horizontal 5-Step Pipeline Flow with Cyan Connecting Arrows */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
-              {activeBlueprint.steps.map((step) => (
+              {activeBlueprint.steps.map((step, idx) => (
                 <div
                   key={step.num}
                   className="p-4 rounded-xl bg-[#000000] border border-[#1B242B] hover:border-[#00BCD4]/50 transition-all flex flex-col justify-between space-y-2.5 relative group"
                 >
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="w-6 h-6 rounded-md bg-[#101214] text-[#00BCD4] font-mono text-xs font-black flex items-center justify-center border border-[#1B242B]">
+                      <span className="w-6 h-6 rounded-md bg-[#101214] text-[#00BCD4] font-mono text-xs font-black flex items-center justify-center border border-[#00BCD4]/30">
                         {step.num}
                       </span>
                       <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
@@ -1158,6 +985,13 @@ export default function IndustriesPage() {
                       {step.tech}
                     </div>
                   </div>
+
+                  {/* Desktop connecting arrow to next step */}
+                  {idx < activeBlueprint.steps.length - 1 && (
+                    <div className="hidden md:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 rounded-full bg-[#101214] border border-[#00BCD4]/50 items-center justify-center text-[#00BCD4] shadow-xs pointer-events-none">
+                      <ChevronRight className="w-2.5 h-2.5" />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -1165,7 +999,7 @@ export default function IndustriesPage() {
             {/* Bottom Actions in Blueprint */}
             <div className="pt-4 border-t border-[#1B242B] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
               <span className="text-[#A1AAB7] text-center sm:text-left text-[11px] sm:text-xs">
-                Ready to deploy this exact architecture in your private cloud environment?
+                Need this exact architecture tailored to your cloud environment?
               </span>
               <Link
                 href="/contact#contact-hero"
@@ -1180,15 +1014,15 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. CAPABILITIES & TECH STACKS — PURE WHITE #FFFFFF COMPACT ACCORDIONS */}
+      {/* 5. CAPABILITIES & TECH STACKS — PURE WHITE #FFFFFF TWO-COLUMN LAYOUT */}
       {/* ========================================================================= */}
-      <section id="capabilities" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#101820] border-b border-slate-200">
+      <section id="capabilities" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-2 mb-8 sm:mb-9">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
               SPECIALIZED PRACTICES
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#101820] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
               Capabilities & Tech Stacks
             </h2>
             <p className="text-[#566171] text-sm sm:text-base leading-relaxed">
@@ -1196,163 +1030,189 @@ export default function IndustriesPage() {
             </p>
           </div>
 
-          {/* Clean Expandable Editorial Accordions */}
-          <div className="max-w-4xl mx-auto divide-y divide-slate-200 border-t border-b border-slate-200">
-            {DETAILED_SERVICES.map((svc) => {
-              const SvcIcon = svc.icon;
-              const isExpanded = expandedCapability === svc.id;
+          {/* Two-Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            {/* Left Column (~33%): Vertical List of 6 Industries */}
+            <div className="lg:col-span-4 space-y-2">
+              {DETAILED_SERVICES.map((svc) => {
+                const isSelected = selectedCapabilityId === svc.id;
+                const SvcIcon = svc.icon;
 
-              return (
-                <div key={svc.id} className="transition-colors">
-                  {/* Header Row */}
+                return (
                   <button
-                    onClick={() => toggleCapability(svc.id)}
-                    className="w-full py-4 sm:py-4.5 text-left flex items-start sm:items-center justify-between gap-3 cursor-pointer focus:outline-none group"
-                    aria-expanded={isExpanded}
+                    key={svc.id}
+                    onClick={() => setSelectedCapabilityId(svc.id)}
+                    className={`w-full text-left p-3.5 sm:p-4 rounded-xl flex items-center justify-between transition-all duration-200 cursor-pointer border ${
+                      isSelected
+                        ? "bg-[#EBF9FC] border-l-4 border-[#00BCD4] border-t-slate-200 border-r-slate-200 border-b-slate-200 text-[#101820] shadow-xs"
+                        : "bg-white hover:bg-slate-50 border-slate-200 text-[#566171] hover:text-[#111111]"
+                    }`}
                   >
-                    <div className="flex items-start sm:items-center gap-3.5">
-                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                        isExpanded ? "bg-[#101820] text-white" : "bg-[#F5F6F8] text-[#087FA5] group-hover:bg-[#101820] group-hover:text-white"
-                      }`}>
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                          isSelected
+                            ? "bg-[#00BCD4] text-[#050505]"
+                            : "bg-[#F5F6F8] text-[#087FA5]"
+                        }`}
+                      >
                         <SvcIcon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="text-base sm:text-lg font-bold text-[#101820] tracking-tight">
+                        <div className="text-xs sm:text-sm font-bold text-[#111111]">
                           {svc.name}
-                        </h3>
-                        <p className="text-xs text-[#566171] mt-0.5 line-clamp-1">
+                        </div>
+                        <div className="text-[11px] text-[#566171] truncate max-w-[200px]">
                           {svc.summary}
-                        </p>
+                        </div>
                       </div>
                     </div>
-
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                      isExpanded ? "rotate-180 bg-[#101820] text-white" : "bg-[#F5F6F8] text-[#101820] group-hover:bg-[#101820] group-hover:text-white"
-                    }`}>
-                      <ChevronDown className="w-3.5 h-3.5" />
-                    </div>
+                    <ChevronRight
+                      className={`w-4 h-4 transition-transform ${
+                        isSelected ? "text-[#087FA5] translate-x-1" : "text-slate-300"
+                      }`}
+                    />
                   </button>
+                );
+              })}
+            </div>
 
-                  {/* Expanded Content Panel */}
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pb-5 pt-1.5 space-y-4">
-                          {/* Domain Challenge */}
-                          <div className="p-3.5 sm:p-4 rounded-xl bg-[#F5F6F8] border border-slate-200 space-y-1">
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-600">
-                              Domain Challenge:
-                            </span>
-                            <p className="text-xs text-[#566171] leading-relaxed">
-                              {svc.challenge}
-                            </p>
-                          </div>
-
-                          {/* Engineered Solutions Grid */}
-                          <div className="space-y-1.5">
-                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                              Engineered Solutions:
-                            </span>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                              {svc.solutions.map((sol) => (
-                                <div key={sol} className="p-2.5 rounded-lg bg-[#F5F6F8] border border-slate-200 flex items-start gap-2 text-xs font-medium text-[#101820]">
-                                  <CheckCircle2 className="w-3.5 h-3.5 text-[#087FA5] shrink-0 mt-0.5" />
-                                  <span>{sol}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Tech Stack & Outcomes */}
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                            <div className="space-y-1.5">
-                              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                                Tech Stack:
-                              </span>
-                              <div className="flex flex-wrap gap-1">
-                                {svc.techStack.map((tech) => (
-                                  <span
-                                    key={tech}
-                                    className="px-2 py-0.5 rounded-md bg-[#F5F6F8] border border-slate-200 text-[11px] font-mono font-bold text-[#101820]"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-
-                            <div className="space-y-1.5">
-                              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                                Quantified Outcomes:
-                              </span>
-                              <div className="space-y-1">
-                                {svc.outcomes.map((out) => (
-                                  <div key={out} className="flex items-center gap-1.5 text-xs font-bold text-emerald-700">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                                    <span>{out}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Action Button */}
-                          <div className="pt-1">
-                            <Link
-                              href="/contact#contact-hero"
-                              className="inline-flex items-center gap-1.5 px-5 h-9 rounded-full bg-[#101820] hover:bg-black text-white font-bold text-xs transition-all shadow-xs"
-                            >
-                              <span>Consult {svc.name} Practice Lead</span>
-                              <ArrowRight className="w-3 h-3" />
-                            </Link>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+            {/* Right Column (~67%): Large Capability Information Panel */}
+            <div className="lg:col-span-8 p-6 sm:p-8 rounded-2xl bg-[#F8FAFC] border border-slate-200 space-y-6">
+              {/* Panel Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+                <div>
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#087FA5]">
+                    Specialized Industry Practice
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-black text-[#111111] mt-0.5">
+                    {activeCapability.name}
+                  </h3>
                 </div>
-              );
-            })}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Production Ready
+                </div>
+              </div>
+
+              {/* Domain Challenge Box */}
+              <div className="p-4 rounded-xl bg-white border border-rose-100 shadow-2xs space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-600">
+                  Industry Challenge:
+                </span>
+                <p className="text-xs sm:text-sm text-[#566171] leading-relaxed">
+                  {activeCapability.challenge}
+                </p>
+              </div>
+
+              {/* Engineered Solutions in 2-Column Subgrid */}
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                  Engineered Solutions:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {activeCapability.solutions.map((sol) => (
+                    <div
+                      key={sol}
+                      className="p-3 rounded-lg bg-white border border-slate-200 flex items-start gap-2.5 text-xs font-semibold text-[#111111] shadow-2xs"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-[#00BCD4] shrink-0 mt-0.5" />
+                      <span>{sol}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tech Stack & Quantified Outcomes */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 border-t border-slate-200">
+                {/* Tech Stack */}
+                <div className="space-y-2">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                    Production Tech Stack:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {activeCapability.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono font-bold text-[#111111] shadow-2xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Outcomes */}
+                <div className="space-y-2">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                    Quantified Client Outcomes:
+                  </span>
+                  <div className="space-y-1.5">
+                    {activeCapability.outcomes.map((out) => (
+                      <div key={out} className="flex items-center gap-2 text-xs font-bold text-emerald-700">
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span>{out}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <div className="pt-2 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <span className="text-xs text-[#566171]">
+                  Speak with our domain engineers specializing in {activeCapability.name}.
+                </span>
+                <Link
+                  href="/contact#contact-hero"
+                  className="inline-flex items-center justify-center gap-1.5 px-6 h-10 rounded-full bg-[#101820] hover:bg-black text-white font-bold text-xs transition-all shadow-xs shrink-0 cursor-pointer"
+                >
+                  <span>Consult Practice Lead</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. TRUST & BUSINESS IMPACT — PURE BLACK #000000 COMPACT SECTION */}
+      {/* 6. TRUSTED INDUSTRIES & ENTERPRISE IMPACT — PURE BLACK #000000 */}
       {/* ========================================================================= */}
       <section className="py-12 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
-          {/* Part A: Ecosystem Trust Strip */}
-          <div className="text-center space-y-5">
-            <div className="space-y-1.5">
+          {/* Top: 6 Compact Industry Cards in a Horizontal Row */}
+          <div className="space-y-4 text-center">
+            <div className="space-y-1">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
-                PROVEN ENTERPRISE ECOSYSTEM
+                TRUSTED DOMAINS
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                Trusted by Data-Driven Teams Across High-Stakes Industries
+                Engineered for High-Stakes Sectors
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 sm:gap-3">
-              {CLIENT_ECOSYSTEM.map((brand) => (
-                <div
-                  key={brand.name}
-                  className="p-3 rounded-lg bg-[#101214] border border-[#1B242B] hover:border-[#00BCD4]/50 transition-colors text-center space-y-0.5"
-                >
-                  <div className="text-xs sm:text-sm font-black text-white">{brand.name}</div>
-                  <div className="text-[10px] font-mono text-[#A1AAB7] truncate">{brand.tag}</div>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {INDUSTRIES_LIST.map((ind) => {
+                const IndIcon = ind.icon;
+                return (
+                  <a
+                    key={ind.id}
+                    href={`#${ind.id}`}
+                    className="p-4 rounded-xl bg-[#101214] border border-[#1B242B] hover:border-[#00BCD4]/60 transition-all text-center flex flex-col items-center justify-center gap-2 group cursor-pointer shadow-xs"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-[#000000] border border-[#1B242B] group-hover:border-[#00BCD4]/40 flex items-center justify-center text-[#00BCD4]">
+                      <IndIcon className="w-4 h-4" />
+                    </div>
+                    <span className="text-xs font-bold text-white group-hover:text-[#00BCD4] transition-colors leading-tight">
+                      {ind.name}
+                    </span>
+                  </a>
+                );
+              })}
             </div>
           </div>
 
-          {/* Part B: Institutional Impact Metrics */}
+          {/* Bottom: 4 Impact Metrics in Equal-Sized Cards */}
           <div className="pt-8 sm:pt-10 border-t border-[#1B242B]">
             <div className="max-w-3xl mx-auto text-center space-y-2 mb-8 sm:mb-9">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
@@ -1366,27 +1226,27 @@ export default function IndustriesPage() {
               </p>
             </div>
 
-            {/* Clean Horizontal Metrics Strip (2x2 on Mobile) */}
+            {/* Clean 4-Metric Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-              <div className="p-5 rounded-xl bg-[#101214] border border-[#1B242B] text-center space-y-1.5">
+              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
                 <div className="text-3xl sm:text-4xl font-mono font-black text-[#00BCD4]">100+</div>
                 <div className="text-xs sm:text-sm font-bold text-white">Production Deployments</div>
                 <p className="text-[11px] text-[#A1AAB7] leading-relaxed">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#101214] border border-[#1B242B] text-center space-y-1.5">
+              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
                 <div className="text-3xl sm:text-4xl font-mono font-black text-[#00BCD4]">95%</div>
                 <div className="text-xs sm:text-sm font-bold text-white">Client Retention</div>
                 <p className="text-[11px] text-[#A1AAB7] leading-relaxed">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#101214] border border-[#1B242B] text-center space-y-1.5">
+              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
                 <div className="text-3xl sm:text-4xl font-mono font-black text-[#00BCD4]">99.99%</div>
                 <div className="text-xs sm:text-sm font-bold text-white">Verified SLA Guarantee</div>
-                <p className="text-[11px] text-[#A1AAB7] leading-relaxed">High-availability streaming pipelines and air-gapped private VPC clusters.</p>
+                <p className="text-[11px] text-[#A1AAB7] leading-relaxed">High-availability streaming pipelines and private cloud configurations.</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#101214] border border-[#1B242B] text-center space-y-1.5">
+              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
                 <div className="text-3xl sm:text-4xl font-mono font-black text-emerald-400">$140M+</div>
                 <div className="text-xs sm:text-sm font-bold text-emerald-400">Client Value Unlocked</div>
                 <p className="text-[11px] text-[#A1AAB7] leading-relaxed">Combined cloud infrastructure savings and operational margin growth.</p>
@@ -1397,52 +1257,66 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. INDUSTRY RESEARCH & ARCHITECTURE GUIDES — PURE WHITE #FFFFFF COMPACT */}
+      {/* 7. INDUSTRY RESEARCH & ARCHITECTURE GUIDES — PURE WHITE #FFFFFF */}
       {/* ========================================================================= */}
-      <section id="research" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#101820] border-b border-slate-200">
+      <section id="research" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-2 mb-8 sm:mb-9">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
               ENGINEERING PLAYBOOKS
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#101820] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
               Industry Research & Architecture Guides
             </h2>
             <p className="text-[#566171] text-xs sm:text-sm leading-relaxed">
-              Tactical playbooks and engineering whitepapers on sub-second data streaming and deterministic AI.
+              Tactical playbooks and engineering whitepapers on digital transformation, sub-second telemetry, and compliance frameworks.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* 3-Column Article Card Design with Photo on Top */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {RESEARCH_PAPERS.map((paper) => (
               <div
                 key={paper.title}
-                className="p-6 rounded-xl bg-white border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#00BCD4] hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between space-y-3.5 group"
+                className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:border-[#00BCD4] hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden group"
               >
-                <div className="space-y-2.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-[#087FA5] bg-[#EBF9FC] px-2 py-0.5 rounded-full border border-[#00BCD4]/20 text-[10px]">
+                <div>
+                  {/* Photo on Top */}
+                  <div className="relative w-full h-44 bg-slate-900 overflow-hidden">
+                    <Image
+                      src={paper.image}
+                      alt={paper.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                    <span className="absolute top-3 left-3 font-mono font-bold text-[#00BCD4] bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] border border-[#00BCD4]/30">
                       {paper.category}
                     </span>
-                    <span className="text-[#566171] font-semibold text-[11px]">{paper.readTime}</span>
+                    <span className="absolute bottom-3 right-3 text-white text-[11px] font-mono bg-black/70 px-2 py-0.5 rounded">
+                      {paper.readTime}
+                    </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#101820] leading-snug group-hover:text-[#087FA5] transition-colors">
-                    {paper.title}
-                  </h3>
-
-                  <p className="text-xs text-[#566171] leading-relaxed">
-                    {paper.desc}
-                  </p>
+                  {/* Card Content */}
+                  <div className="p-5 space-y-2.5">
+                    <h3 className="text-base font-extrabold text-[#111111] leading-snug group-hover:text-[#087FA5] transition-colors">
+                      {paper.title}
+                    </h3>
+                    <p className="text-xs text-[#566171] leading-relaxed">
+                      {paper.desc}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100">
+                <div className="px-5 pb-5 pt-2 border-t border-slate-100">
                   <Link
-                    href="/blog"
-                    className="text-xs font-bold text-[#101820] group-hover:text-[#087FA5] inline-flex items-center gap-1 transition-colors"
+                    href={paper.href}
+                    className="text-xs font-bold text-[#087FA5] group-hover:text-[#00BCD4] inline-flex items-center gap-1.5 transition-colors"
                   >
-                    <span>Read Whitepaper</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <span>Read the Guide</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
@@ -1452,24 +1326,33 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 8. FINAL CTA — PURE BLACK #000000 COMPACT */}
+      {/* 8. FINAL CTA BANNER — WHITE SECTION BACKGROUND WITH BLACK CARD BANNER */}
       {/* ========================================================================= */}
-      <section className="py-12 sm:py-14 lg:py-16 bg-[#000000] text-white">
+      <section className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-[28px] p-7 sm:p-10 lg:p-12 text-center overflow-hidden bg-[#101214] border border-[#1B242B] text-white shadow-2xl space-y-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#00BCD4]/10 text-[#00BCD4] border border-[#00BCD4]/30">
+          <div className="relative rounded-[28px] p-7 sm:p-10 lg:p-12 text-center overflow-hidden bg-[#000000] border border-[#00BCD4]/30 text-white shadow-2xl space-y-5">
+            {/* Subtle Cyan Aura / Curve */}
+            <div
+              className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none opacity-20 -z-0"
+              style={{
+                background:
+                  "radial-gradient(circle at center, rgba(0, 188, 212, 0.4) 0%, transparent 70%)",
+              }}
+            />
+
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#00BCD4]/10 text-[#00BCD4] border border-[#00BCD4]/30 relative z-10">
               <Sparkles className="w-3.5 h-3.5 text-[#00BCD4]" /> Start Your 2–4 Week Industry Engagement
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black max-w-2xl mx-auto text-white tracking-tight leading-tight">
-              Ready to Engineer Mission-Critical Systems for Your Domain?
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black max-w-2xl mx-auto text-white tracking-tight leading-tight relative z-10">
+              Ready to Engineer Mission-Critical Systems for Your Industry?
             </h2>
 
-            <p className="text-[#A1AAB7] text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
+            <p className="text-[#A1AAB7] text-xs sm:text-sm leading-relaxed max-w-xl mx-auto relative z-10">
               Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
             </p>
 
-            <div className="pt-1 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 relative z-10">
               <Link
                 href="/contact#contact-hero"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-lg transition-all active:scale-95 cursor-pointer"
@@ -1479,7 +1362,7 @@ export default function IndustriesPage() {
               </Link>
               <Link
                 href="/case-studies"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 h-11 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs sm:text-sm border border-[#1B242B] hover:border-white/25 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 h-11 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs sm:text-sm border border-[#1B242B] hover:border-[#00BCD4]/50 transition-all"
               >
                 <span>Explore Case Studies</span>
               </Link>

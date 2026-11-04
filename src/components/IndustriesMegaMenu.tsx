@@ -8,14 +8,8 @@ import {
   GraduationCap,
   Building2,
   ShoppingBag,
-  Landmark,
-  Factory,
-  Truck,
-  Plane,
-  MonitorSmartphone,
-  Utensils,
-  Film,
-  Zap,
+  ShieldCheck,
+  Users,
   ArrowRight,
 } from "lucide-react";
 
@@ -36,101 +30,59 @@ interface IndustryItem {
 
 const INDUSTRY_COLUMNS: { title: string; items: IndustryItem[] }[] = [
   {
-    title: "Healthcare, Public & Commerce",
+    title: "Commerce & Learning",
+    items: [
+      {
+        name: "Ecommerce (D2C, B2B & B2C)",
+        desc: "Scalable stores, workflow automation & sales data analytics",
+        href: "/industries#ecommerce",
+        icon: ShoppingBag,
+        emoji: "🛒",
+      },
+      {
+        name: "EdTech",
+        desc: "Learning platforms, student portals & education BI",
+        href: "/industries#edtech",
+        icon: GraduationCap,
+        emoji: "🎓",
+      },
+    ],
+  },
+  {
+    title: "Risk & Operations",
+    items: [
+      {
+        name: "Insurance",
+        desc: "Policy management, automated claims & decision systems",
+        href: "/industries#insurance",
+        icon: ShieldCheck,
+        emoji: "🛡️",
+      },
+      {
+        name: "Human Resources",
+        desc: "HR management, hiring automation & employee portals",
+        href: "/industries#human-resources",
+        icon: Users,
+        emoji: "👥",
+      },
+    ],
+  },
+  {
+    title: "Care & Property",
     items: [
       {
         name: "Healthcare",
-        desc: "Clinical data pipelines, HIPAA patient portals & health telemetry",
+        desc: "Patient platforms, appointment tools & clinical workflows",
         href: "/industries#healthcare",
         icon: HeartPulse,
         emoji: "🏥",
       },
       {
-        name: "Education",
-        desc: "Adaptive learning systems, FERPA portals & student analytics",
-        href: "/industries#education",
-        icon: GraduationCap,
-        emoji: "🎓",
-      },
-      {
         name: "Real Estate",
-        desc: "CRM lead automation, tenant portals & valuation models",
-        href: "/industries#realestate",
+        desc: "Property marketplaces, listing platforms & CRM analytics",
+        href: "/industries#real-estate",
         icon: Building2,
         emoji: "🏠",
-      },
-      {
-        name: "Ecommerce",
-        desc: "Omni-channel storefronts, inventory sync & dynamic pricing",
-        href: "/industries#retail",
-        icon: ShoppingBag,
-        emoji: "🛒",
-      },
-    ],
-  },
-  {
-    title: "Finance, Supply & Operations",
-    items: [
-      {
-        name: "FinTech",
-        desc: "Real-time ledger audit, fraud detection & risk analytics",
-        href: "/industries#finance",
-        icon: Landmark,
-        emoji: "💰",
-      },
-      {
-        name: "Manufacturing",
-        desc: "IoT telemetry, predictive maintenance & quality gates",
-        href: "/industries#manufacturing",
-        icon: Factory,
-        emoji: "🏭",
-      },
-      {
-        name: "Logistics",
-        desc: "Fleet telematics, route planning & warehouse automation",
-        href: "/industries#logistics",
-        icon: Truck,
-        emoji: "🚚",
-      },
-      {
-        name: "Travel",
-        desc: "Booking engines, loyalty platforms & dynamic reservations",
-        href: "/industries",
-        icon: Plane,
-        emoji: "✈️",
-      },
-    ],
-  },
-  {
-    title: "Technology, Media & Energy",
-    items: [
-      {
-        name: "SaaS & Startups",
-        desc: "Multi-tenant platforms, rapid MVP builds & scaling",
-        href: "/industries#saas",
-        icon: MonitorSmartphone,
-        emoji: "📊",
-      },
-      {
-        name: "Food & Restaurant",
-        desc: "POS integration, delivery aggregators & order pipelines",
-        href: "/industries",
-        icon: Utensils,
-        emoji: "🍽",
-      },
-      {
-        name: "Media & Entertainment",
-        desc: "Streaming infrastructure, digital assets & CMS portals",
-        href: "/industries",
-        icon: Film,
-        emoji: "📱",
-      },
-      {
-        name: "Energy & Utilities",
-        desc: "Smart grid telemetry, IoT monitoring & compliance reporting",
-        href: "/industries",
-        icon: Zap,
-        emoji: "⚡",
       },
     ],
   },

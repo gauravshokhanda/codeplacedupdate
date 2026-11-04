@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 
 import { TuitionstimeThreePhonesShowcase } from "./TuitionstimePhoneScreens";
+import { RelatedCaseStudies } from "@/components/case-studies/RelatedCaseStudies";
 
 // =============================================================================
 // DATA DEFINITIONS (PRESERVING AUTHENTIC TUITIONSTIME DATA & VERIFIED METRICS)
@@ -1258,76 +1259,9 @@ export function TuitionstimeCaseStudy() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 10. MORE CASE STUDIES (SOLID WHITE #FFFFFF SECTION + 3 CLIENT CARDS)       */}
+      {/* 10. EXPLORE MORE CASE STUDIES (SHARED COMPONENT — EXCLUDES CURRENT)        */}
       {/* ========================================================================= */}
-      <section id="more-case-studies" className="py-20 lg:py-24 bg-white text-[#111111] scroll-mt-20">
-        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-10 text-left">
-          {/* Header Row with 'View All Case Studies' CTA */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="max-w-2xl space-y-3">
-              <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-                MORE CASE STUDIES
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
-                Explore More Success Stories
-              </h2>
-              <p className="text-base sm:text-[17px] text-[#555C68] leading-relaxed">
-                Discover how we&apos;ve helped businesses across different
-                industries build powerful digital solutions.
-              </p>
-            </div>
-
-            <div>
-              <Link
-                href="/case-studies"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 hover:border-[#00C8E8] text-[#111111] hover:text-[#00C8E8] font-mono text-xs font-bold transition-all shadow-xs"
-              >
-                <span>View All Case Studies</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-
-          {/* 3 Related Case Study Cards on White Surfaces */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {RELATED_CASE_STUDIES.map((cs) => (
-              <Link
-                key={cs.id}
-                href={cs.href}
-                className="group rounded-3xl bg-white border border-slate-200/80 hover:border-[#00C8E8] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 cursor-pointer"
-              >
-                <div>
-                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
-                    <Image
-                      src={cs.image}
-                      alt={cs.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-
-                  <div className="p-6 sm:p-7 space-y-2.5">
-                    <h3 className="text-lg font-bold text-[#111111] group-hover:text-[#00C8E8] transition-colors tracking-tight">
-                      {cs.title}
-                    </h3>
-                    <p className="text-sm text-[#555C68] leading-relaxed">
-                      {cs.description}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-6 sm:px-7 pb-6 pt-0">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#00C8E8] group-hover:translate-x-1 transition-transform">
-                    <span>View Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RelatedCaseStudies currentSlug="tuitionstime" />
 
       {/* ========================================================================= */}
       {/* 11. FINAL CTA SECTION (SOLID BLACK #050505 WITH NO GRADIENT OR GLOW)      */}

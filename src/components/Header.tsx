@@ -481,32 +481,46 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                             className="overflow-hidden pl-4 space-y-2 pt-1"
                           >
                             <Link
-                              href="/industries"
+                              href="/industries#ecommerce"
                               onClick={() => setMobileMenuOpen(false)}
                               className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
-                              • Healthcare & Life Sciences
+                              • Ecommerce (D2C, B2B & B2C)
                             </Link>
                             <Link
-                              href="/industries"
+                              href="/industries#edtech"
                               onClick={() => setMobileMenuOpen(false)}
                               className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
-                              • FinTech & Banking
+                              • EdTech
                             </Link>
                             <Link
-                              href="/industries"
+                              href="/industries#insurance"
                               onClick={() => setMobileMenuOpen(false)}
                               className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
-                              • Logistics & Fleet Telematics
+                              • Insurance
                             </Link>
                             <Link
-                              href="/industries"
+                              href="/industries#human-resources"
                               onClick={() => setMobileMenuOpen(false)}
                               className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
                             >
-                              • SaaS & High-Concurrency
+                              • Human Resources
+                            </Link>
+                            <Link
+                              href="/industries#healthcare"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
+                            >
+                              • Healthcare
+                            </Link>
+                            <Link
+                              href="/industries#real-estate"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block py-1.5 text-sm font-semibold text-slate-600 hover:text-[#00BCD4]"
+                            >
+                              • Real Estate
                             </Link>
                           </motion.div>
                         )}

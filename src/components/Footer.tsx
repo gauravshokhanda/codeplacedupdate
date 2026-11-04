@@ -229,33 +229,33 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
+                <Link href="/industries#ecommerce" className="hover:text-cyan-300 transition-colors block">
+                  Ecommerce
+                </Link>
+              </li>
+              <li>
+                <Link href="/industries#edtech" className="hover:text-cyan-300 transition-colors block">
+                  EdTech
+                </Link>
+              </li>
+              <li>
+                <Link href="/industries#insurance" className="hover:text-cyan-300 transition-colors block">
+                  Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/industries#human-resources" className="hover:text-cyan-300 transition-colors block">
+                  Human Resources
+                </Link>
+              </li>
+              <li>
+                <Link href="/industries#healthcare" className="hover:text-cyan-300 transition-colors block">
                   Healthcare
                 </Link>
               </li>
               <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
-                  Finance
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
-                  Retail
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
-                  Logistics
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
-                  SaaS
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
-                  Manufacturing
+                <Link href="/industries#real-estate" className="hover:text-cyan-300 transition-colors block">
+                  Real Estate
                 </Link>
               </li>
             </ul>

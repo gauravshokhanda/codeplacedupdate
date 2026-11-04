@@ -10,6 +10,7 @@ import {
   GraduationCap,
   Gamepad2,
 } from "lucide-react";
+import { RelatedCaseStudies } from "@/components/case-studies/RelatedCaseStudies";
 
 // =============================================================================
 // VERIFIED DATA DEFINITIONS (AUTHENTIC CLIENT PROJECT MATERIAL)
@@ -658,122 +659,9 @@ export function HoopwrldCaseStudy() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 9 — EXPLORE MORE CASE STUDIES (FEATURED TUITIONSTIME CARD) */}
+      {/* SECTION 9 — EXPLORE MORE CASE STUDIES (SHARED COMPONENT — EXCLUDES CURRENT) */}
       {/* ===================================================================== */}
-      <section className="bg-[#FFFFFF] text-[#101214] py-16 sm:py-20 border-b border-[#E4E4E7]">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="space-y-2 max-w-3xl text-left">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#087FA5]">
-              EXPLORE MORE CASE STUDIES
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
-              Explore More Case Studies.
-            </h2>
-            <p className="text-sm sm:text-base text-[#52525B] leading-relaxed">
-              Discover how we turn complex business challenges into practical digital solutions.
-            </p>
-          </div>
-
-          {/* Exact Featured Card Design from the Main Case Studies Page */}
-          <Link
-            href="/case-studies/tuitionstime"
-            aria-label="View case study: Tuitionstime"
-            className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[420px] lg:h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
-          >
-            {/* Product Imagery (Right-Aligned, Subtle Hover Shift, Seamlessly Blended into Dark Card) */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              <Image
-                src="/images/case-studies/tuitionstime-featured-flagship.webp"
-                alt="Tuitionstime EdTech Marketplace Platform by CodePlaced"
-                fill
-                priority
-                className="object-cover object-right md:object-[80%_center] lg:object-right transition-transform duration-500 ease-out group-hover:-translate-y-1.5"
-                sizes="(max-width: 1400px) 92vw, 1400px"
-              />
-
-              {/* Dark Vignette Overlay on Left (Guarantees Razor-Sharp Readability of HTML Text on all devices) */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/95 md:via-[#050505]/90 to-transparent w-full md:w-[68%] lg:w-[54%] xl:w-[48%] pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent md:hidden pointer-events-none" />
-            </div>
-
-            {/* Real HTML Content Layer (Left-Aligned Content + Bottom Metrics) */}
-            <div className="relative z-10 h-full p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
-              {/* Upper Left: Badge, Brand, Title, Description, Tech Tags, and CTA */}
-              <div className="space-y-3.5 max-w-md xl:max-w-[500px] text-left">
-                {/* Eyebrow Tag */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00C7E8]/10 border border-[#00C7E8]/30 text-[#00C7E8] w-fit">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8] animate-pulse" />
-                  <span>FULL-STACK WEB &amp; MOBILE PLATFORM</span>
-                </div>
-
-                {/* Brand Logo & Name */}
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#00C7E8]/15 border border-[#00C7E8]/35 flex items-center justify-center text-[#00C7E8]">
-                    <GraduationCap className="w-4 h-4" />
-                  </div>
-                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                    Tuitionstime
-                  </span>
-                </div>
-
-                {/* Title with Cyan Highlight */}
-                <h3 className="text-2xl sm:text-3xl lg:text-[30px] xl:text-[32px] font-extrabold text-white tracking-tight leading-[1.18] max-w-[460px]">
-                  Engineering a Complete{" "}
-                  <span className="text-[#00C7E8]">EdTech Marketplace</span>
-                </h3>
-
-                {/* Short Description */}
-                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-sm sm:max-w-md">
-                  From tutor discovery to classes, bookings, payments, and learning experiences — a connected digital platform built for growth.
-                </p>
-
-                {/* Tech Stack Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Stripe", "AWS"].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTA Button */}
-                <div className="pt-2">
-                  <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00C7E8] text-[#00C7E8] group-hover:bg-[#00C7E8] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm shadow-[#00C7E8]/10">
-                    <span>View Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                  </span>
-                </div>
-              </div>
-
-              {/* Bottom Row: 3 Verified Metrics Separated by Subtle Vertical Dividers */}
-              <div className="pt-6 mt-4 border-t border-white/[0.08] grid grid-cols-3 gap-3 sm:gap-6 max-w-lg">
-                {[
-                  { value: "10K+", label: "Active Students" },
-                  { value: "2K+", label: "Expert Tutors" },
-                  { value: "50K+", label: "Classes Completed" },
-                ].map((metric, idx) => (
-                  <div
-                    key={metric.label}
-                    className={`${
-                      idx > 0 ? "border-l border-white/[0.08] pl-3 sm:pl-6" : ""
-                    } text-left`}
-                  >
-                    <div className="text-lg sm:text-xl lg:text-2xl font-black text-white font-mono tracking-tight">
-                      {metric.value}
-                    </div>
-                    <div className="text-[10px] sm:text-[11px] text-[#A1A1AA] font-mono uppercase tracking-wide line-clamp-1 mt-0.5">
-                      {metric.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Link>
-        </div>
-      </section>
+      <RelatedCaseStudies currentSlug="hoopwrld" />
 
       {/* ===================================================================== */}
       {/* SECTION 10 — FINAL CTA (BLACK BACKGROUND) */}
