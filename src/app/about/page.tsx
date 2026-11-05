@@ -117,7 +117,7 @@ const HOW_WE_WORK_STEPS = [
   },
 ];
 
-// Meet Our Team (Kashish excluded; 5 members in balanced responsive layout)
+// Meet Our Team
 const ENGINEERING_TEAM = [
   {
     name: "Ankit",
@@ -143,6 +143,16 @@ const ENGINEERING_TEAM = [
     name: "Sadiya Ansari",
     role: "Growth & Editing Specialist",
     image: "/team/team-6.jpg",
+  },
+  {
+    name: "Tanya Gupta",
+    role: "Marketing Specialist",
+    image: "/team/tanya-gupta.webp",
+  },
+  {
+    name: "Aditya Kumar",
+    role: "Data Analyst",
+    image: "/team/aditya-kumar.webp",
   },
 ];
 
@@ -675,7 +685,7 @@ export default function AboutPage() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className={`w-full h-full object-cover ${(member as any).imagePosition || "object-top"} group-hover:scale-105 transition-transform duration-500 ease-out`}
                   />
                 </div>
 
