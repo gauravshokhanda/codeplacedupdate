@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Layers, GraduationCap, Gamepad2, BarChart3, Database, Users, Globe2 } from "lucide-react";
+import { CaseStudyCard, CaseStudyData } from "@/components/case-studies/CaseStudyCard";
 
 type FilterCategory = "industries" | "services" | "regions";
 
@@ -51,95 +52,105 @@ const FILTERS_BY_CATEGORY: Record<FilterCategory, FilterOption[]> = {
 };
 
 // Featured Case Studies
-const FEATURED_CASE_STUDIES = [
-  {
-    id: "tuitionstime",
-    slug: "tuitionstime",
-    category: "Featured Case Study",
-    brand: "Tuitionstime",
-    brandIcon: GraduationCap,
-    titlePrefix: "Engineering a Complete ",
-    highlightWord: "EdTech Marketplace",
-    description:
-      "From tutor discovery to demos, classes, meetings, payments, learning resources and analytics.",
-    image: "/images/case-studies/tuitionstime-featured-flagship.webp",
-    imageAlt: "Tuitionstime EdTech Marketplace Platform",
-    techTags: ["Next.js", "React Native", "Node.js", "PostgreSQL", "Razorpay", "Twilio"],
-    metrics: [
-      { value: "10K+", label: "Active Students" },
-      { value: "2K+", label: "Expert Tutors" },
-      { value: "50K+", label: "Classes Completed" },
-    ],
-    matching: {
-      industries: ["all", "edtech", "saas"],
-      services: [
-        "all",
-        "full-stack",
-        "architecture",
-        "automation",
-        "analytics",
-        "seo",
+const FEATURED_CASE_STUDIES: (CaseStudyData & {
+  matching: {
+    industries: string[];
+    services: string[];
+    regions: string[];
+  };
+})[] = [
+    {
+      id: "tuitionstime",
+      slug: "tuitionstime",
+      category: "EDTECH & SAAS PLATFORM",
+      brand: "Tuitionstime",
+      brandIcon: GraduationCap,
+      titlePrefix: "Engineering a Complete ",
+      highlightWord: "EdTech Marketplace",
+      description:
+        "From tutor discovery to demos, classes, meetings, payments, learning resources and analytics.",
+      image: "/images/case-studies/tuitionstime-featured-flagship.webp",
+      mobileImage: "/images/case-studies/tuitionstime/tuitionstime-photorealistic-laptop-hero.webp",
+      imageAlt: "Tuitionstime EdTech Marketplace Platform",
+      techTags: ["Next.js", "React Native", "Node.js", "PostgreSQL", "Razorpay", "Twilio"],
+      metrics: [
+        { value: "10K+", label: "Active Students", icon: Users },
+        { value: "2K+", label: "Expert Tutors", icon: GraduationCap },
+        { value: "50K+", label: "Classes Completed", icon: Layers },
       ],
-      regions: ["all", "india-apac", "north-america", "global"],
+      matching: {
+        industries: ["all", "edtech", "saas"],
+        services: [
+          "all",
+          "full-stack",
+          "architecture",
+          "automation",
+          "analytics",
+          "seo",
+        ],
+        regions: ["all", "india-apac", "north-america", "global"],
+      },
     },
-  },
-  {
-    id: "hoopwrld",
-    slug: "hoopwrld",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Hoopwrld",
-    brandIcon: Gamepad2,
-    titlePrefix: "Turning Gameplay Data Into ",
-    highlightWord: "Reliable Player Analytics.",
-    description:
-      "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
-    image: "/images/case-studies/hoopwrld-card-contained-artwork.webp",
-    imageAlt: "Hoopwrld Player Analytics & Business Intelligence Dashboard",
-    techTags: ["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"],
-    metrics: [
-      { value: "5 Sources", label: "Data Sources Integrated" },
-      { value: "Daily Pulse", label: "Mobile-First Daily Checks" },
-      { value: "Multi-Platform", label: "Web + Media Reporting" },
-    ],
-    matching: {
-      industries: ["all", "gaming", "saas"],
-      services: [
-        "all",
-        "analytics",
-        "architecture",
+    {
+      id: "hoopwrld",
+      slug: "hoopwrld",
+      category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
+      brand: "Hoopwrld",
+      brandIcon: Gamepad2,
+      brandLogoUrl: "/images/case-studies/hoopwrld-logo-badge.png",
+      titlePrefix: "Turning Gameplay Data Into ",
+      highlightWord: "Reliable Player Analytics.",
+      description:
+        "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
+      image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
+      mobileImage: "/images/case-studies/hoopwrld-after-laptop-front.webp",
+      imageAlt: "Hoopwrld Player Analytics & Business Intelligence Dashboard",
+      techTags: ["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"],
+      metrics: [
+        { value: "5 Sources", label: "Data Sources Integrated", icon: Database },
+        { value: "Daily Pulse", label: "Mobile-First Daily Checks", icon: BarChart3 },
+        { value: "Multi-Platform", label: "Web + Media Reporting", icon: Globe2 },
       ],
-      regions: ["all", "north-america", "global"],
+      matching: {
+        industries: ["all", "gaming", "saas"],
+        services: [
+          "all",
+          "analytics",
+          "architecture",
+        ],
+        regions: ["all", "north-america", "global"],
+      },
     },
-  },
-  {
-    id: "progress-partners",
-    slug: "progress-partners",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Progress Partners",
-    brandIcon: BarChart3,
-    titlePrefix: "Turning Complex Data Into ",
-    highlightWord: "Clearer Growth Decisions.",
-    description:
-      "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
-    image: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    imageAlt: "Progress Partners Business Intelligence & Revenue Analytics Dashboard",
-    techTags: ["BigQuery", "SQL", "Preset", "GA4", "Stripe", "Solidgate", "Amplitude", "AnyTrack"],
-    metrics: [
-      { value: "8 Sources", label: "Data Sources Unified" },
-      { value: "Daily KPIs", label: "Daily Dashboard Usage" },
-      { value: "LTV + Churn", label: "Customer Retention Insights" },
-    ],
-    matching: {
-      industries: ["all", "ecommerce", "saas", "enterprise"],
-      services: [
-        "all",
-        "analytics",
-        "architecture",
+    {
+      id: "progress-partners",
+      slug: "progress-partners",
+      category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
+      brand: "Progress Partners",
+      brandIcon: BarChart3,
+      titlePrefix: "Turning Complex Data Into ",
+      highlightWord: "Clearer Growth Decisions.",
+      description:
+        "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
+      image: "/images/case-studies/progress-partners/hero-dashboard.webp",
+      mobileImage: "/images/case-studies/progress-partners/hero-dashboard.webp",
+      imageAlt: "Progress Partners Business Intelligence & Revenue Analytics Dashboard",
+      techTags: ["BigQuery", "SQL", "Preset", "GA4", "Stripe", "Solidgate", "Amplitude", "AnyTrack"],
+      metrics: [
+        { value: "8 Sources", label: "Data Sources Unified", icon: Database },
+        { value: "Daily KPIs", label: "Daily Dashboard Usage", icon: BarChart3 },
+        { value: "LTV + Churn", label: "Customer Retention Insights", icon: Users },
       ],
-      regions: ["all", "north-america", "global"],
+      matching: {
+        industries: ["all", "ecommerce", "saas", "enterprise"],
+        services: [
+          "all",
+          "analytics",
+          "architecture",
+        ],
+        regions: ["all", "north-america", "global"],
+      },
     },
-  },
-];
+  ];
 
 const APPROACH_STEPS = [
   {
@@ -147,18 +158,21 @@ const APPROACH_STEPS = [
     title: "Understand",
     description:
       "Identify the business problem, clarify requirements, and establish what success should look like.",
+    shortDesc: "Clarify requirements and define measurable success.",
   },
   {
     step: "02",
     title: "Engineer",
     description:
       "Bring together development, data, and AI capabilities to build practical, scalable solutions.",
+    shortDesc: "Build scalable, production-ready digital solutions.",
   },
   {
     step: "03",
     title: "Improve",
     description:
       "Refine solutions through testing, feedback, and evolving business requirements.",
+    shortDesc: "Iterate continuously through metrics and feedback.",
   },
 ];
 
@@ -188,20 +202,20 @@ export default function CaseStudiesPage() {
         }}
       />
 
-      <main className="pt-28 sm:pt-36 lg:pt-40 relative z-10">
+      <main className="pt-20 sm:pt-28 lg:pt-40 relative z-10">
         {/* Top Dark Showcase: Hero + Filters + Featured Case Study */}
-        <div className="space-y-10 sm:space-y-12 pb-20 sm:pb-24">
+        <div className="space-y-6 sm:space-y-8 lg:space-y-12 pb-8 sm:pb-14 lg:pb-24">
         {/* ========================================================================= */}
         {/* 1. CENTERED HERO SECTION (SINGLE-LINE HEADING ON DESKTOP) */}
         {/* ========================================================================= */}
-        <section className="text-center mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
+        <section className="text-center mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-3 sm:space-y-5 lg:space-y-6">
           {/* Eyebrow Label */}
           <div className="flex justify-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] border border-[#00C7E8]/40 text-[#00C7E8]"
+              className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9.5px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] border border-[#00C7E8]/40 text-[#00C7E8]"
             >
               CASE STUDIES
             </motion.div>
@@ -212,9 +226,9 @@ export default function CaseStudiesPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-4"
+            className="space-y-2 sm:space-y-4"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[80px] font-black tracking-tight text-white leading-none whitespace-normal md:whitespace-nowrap">
+            <h1 className="text-[28px] xs:text-3xl sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[80px] font-black tracking-tight text-white leading-tight md:leading-none whitespace-normal md:whitespace-nowrap">
               Optimize. Innovate.{" "}
               <span
                 className="bg-clip-text text-transparent"
@@ -226,7 +240,7 @@ export default function CaseStudiesPage() {
                 Disrupt.
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xs sm:text-base lg:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl mx-auto">
               Explore how CodePlaced engineers scalable digital products,
               intelligent platforms, and enterprise solutions that turn ambitious
               ideas into measurable business impact.
@@ -240,17 +254,17 @@ export default function CaseStudiesPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="pt-3 space-y-5"
+            className="pt-0.5 sm:pt-3 space-y-2.5 sm:space-y-4"
           >
             {/* Category Tabs: Industries | Services | Regions */}
-            <div className="flex items-center justify-center gap-8 sm:gap-12">
+            <div className="flex items-center justify-center gap-4 sm:gap-8 lg:gap-12">
               {CATEGORY_TABS.map((tab) => {
                 const isTabActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => handleTabChange(tab.id)}
-                    className={`relative pb-2 text-sm sm:text-base font-semibold transition-colors duration-200 cursor-pointer ${
+                    className={`relative pb-1.5 sm:pb-2 text-xs sm:text-base font-semibold transition-colors duration-200 cursor-pointer ${
                       isTabActive
                         ? "text-white font-bold"
                         : "text-[#71717A] hover:text-[#E2E8F0]"
@@ -270,14 +284,14 @@ export default function CaseStudiesPage() {
             </div>
 
             {/* Outlined Filter Chips Under Active Tab */}
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-4xl mx-auto pt-1">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 max-w-4xl mx-auto pt-0.5">
               {currentFilters.map((chip) => {
                 const isActive = activeFilter === chip.id;
                 return (
                   <button
                     key={chip.id}
                     onClick={() => setActiveFilter(chip.id)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all duration-200 cursor-pointer ${
+                    className={`px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10.5px] sm:text-xs font-mono transition-all duration-200 cursor-pointer ${
                       isActive
                         ? "text-white font-bold border border-[#00C7E8] shadow-md shadow-[#00C7E8]/20"
                         : "bg-[#07090D]/80 text-[#A1A1AA] border border-white/[0.08] hover:border-[#00C7E8]/40 hover:text-white"
@@ -297,376 +311,25 @@ export default function CaseStudiesPage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* 3. FEATURED CASE STUDY CARDS (APPINVENTIV KFC-STYLE SHOWCASE CARDS) */}
-        {/* ~90% Viewport Width, 380-450px Height, Left HTML Content, Right Product Artwork */}
+        {/* 3. FEATURED CASE STUDY CARDS (STANDARDIZED REUSABLE CARD COMPONENT)       */}
+        {/* Mobile: Standardized compact layout with identical heights & 16:10 visuals*/}
+        {/* Desktop: Pinned 100% authentic showcase layouts                           */}
         {/* ========================================================================= */}
-        <section id="featured-case-study" className="pt-2 px-4 sm:px-6 scroll-mt-20">
+        <section id="featured-case-study" className="pt-1 sm:pt-2 px-3 sm:px-6 scroll-mt-20">
           <AnimatePresence mode="wait">
             {matchingStudies.length > 0 ? (
-              <div className="space-y-8 lg:space-y-10 w-[92%] max-w-[1400px] mx-auto">
-                {matchingStudies.map((study) => {
-                  const BrandIcon = study.brandIcon;
-
-                  // -------------------------------------------------------------
-                  // HOOPWRLD CASE STUDY CARD (45% Content / 55% Visual Split)
-                  // Flexible Height (no clipping), 40-48px padding, large laptop presentation
-                  // -------------------------------------------------------------
-                  if (study.id === "hoopwrld") {
-                    return (
-                      <motion.div
-                        key={study.id}
-                        initial={{ opacity: 1, y: 0 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.4 }}
-                      >
-                        <Link
-                          href={`/case-studies/${study.slug}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`View case study: ${study.brand}`}
-                          className="block relative rounded-[20px] border border-[#00BCD4]/25 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[460px] lg:min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
-                        >
-                          <div className="flex flex-col lg:flex-row h-full items-center p-6 sm:p-8 lg:p-10 xl:p-12 gap-8 lg:gap-10">
-                            {/* Left Side (~45%) — Editorial Information */}
-                            <div className="w-full lg:w-[45%] xl:w-[46%] flex flex-col justify-between text-left z-10 space-y-6 lg:space-y-8">
-                              {/* Upper Left: Badge, Brand, Title, Description, Tech Tags, and CTA */}
-                              <div className="space-y-4 max-w-xl">
-                                {/* Eyebrow Tag */}
-                                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                                  <span>{study.category}</span>
-                                </div>
-
-                                {/* Brand Logo & Name */}
-                                <div className="flex items-center gap-2.5">
-                                  <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 bg-[#00BCD4]/10 border border-[#00BCD4]/30">
-                                    <Image
-                                      src="/images/case-studies/hoopwrld-logo-badge.png"
-                                      alt="Hoopwrld Logo"
-                                      width={24}
-                                      height={24}
-                                      className="object-contain"
-                                    />
-                                  </div>
-                                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                                    {study.brand}
-                                  </span>
-                                </div>
-
-                                {/* Title with Cyan Highlight */}
-                                <h2 className="text-2xl sm:text-3xl lg:text-[30px] xl:text-[34px] font-extrabold text-white tracking-tight leading-[1.18]">
-                                  {study.titlePrefix}
-                                  <span className="text-[#00BCD4] block sm:inline lg:block">{study.highlightWord}</span>
-                                </h2>
-
-                                {/* Short Description */}
-                                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
-                                  {study.description}
-                                </p>
-
-                                {/* Technology Tags */}
-                                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                                  {study.techTags.map((tech, tIdx) => (
-                                    <span
-                                      key={tIdx}
-                                      className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
-                                    >
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-
-                                {/* View Case Study CTA Button */}
-                                <div className="pt-2">
-                                  <span
-                                    className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm"
-                                  >
-                                    <span>View Case Study</span>
-                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                                  </span>
-                                </div>
-                              </div>
-
-                              {/* Bottom Row: Metrics Strip with Icons */}
-                              <div className="pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-3 xl:gap-5">
-                                {study.metrics.map((metric, idx) => {
-                                  const MetricIcon = idx === 0 ? Database : idx === 1 ? BarChart3 : Globe2;
-                                  return (
-                                    <div key={idx} className="flex items-start gap-2.5">
-                                      <MetricIcon className="w-4 h-4 text-[#00BCD4] shrink-0 mt-0.5" />
-                                      <div className="text-left">
-                                        <div className="text-base sm:text-lg lg:text-xl font-black text-white font-mono tracking-tight whitespace-nowrap">
-                                          {metric.value}
-                                        </div>
-                                        <div className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5 font-medium leading-tight">
-                                          {metric.label}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-
-                            {/* Right side (~55%) — Large Contained Basketball & Analytics Dashboard Mockup */}
-                            <div className="w-full lg:w-[55%] xl:w-[54%] relative flex items-center justify-center select-none overflow-hidden min-h-[260px] sm:min-h-[320px] lg:min-h-0">
-                              {/* Subtle Ambient Cyan Glow Behind Display */}
-                              <div
-                                className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.15)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
-                                aria-hidden="true"
-                              />
-
-                              {/* Large Contained Laptop Artwork with Basketball on Dark Court Floor */}
-                              <div className="relative w-full aspect-[2200/1350] transition-transform duration-500 ease-out group-hover:scale-[1.02] drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]">
-                                <Image
-                                  src="/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp"
-                                  alt={study.imageAlt}
-                                  fill
-                                  priority
-                                  sizes="(max-width: 1024px) 100vw, 55vw"
-                                  className="object-contain object-center"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    );
-                  }
-
-                  // -------------------------------------------------------------
-                  // PROGRESS PARTNERS CASE STUDY CARD (48% Content / 52% Visual Split)
-                  // Flexible Height (no clipping), 40-48px padding, framed visual container
-                  // -------------------------------------------------------------
-                  if (study.id === "progress-partners") {
-                    return (
-                      <motion.div
-                        key={study.id}
-                        initial={{ opacity: 1, y: 0 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.4 }}
-                      >
-                        <Link
-                          href={`/case-studies/${study.slug}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`View case study: ${study.brand}`}
-                          className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[460px] lg:min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
-                        >
-                          <div className="flex flex-col lg:flex-row h-full items-center p-6 sm:p-8 lg:p-10 xl:p-12 gap-8 lg:gap-10">
-                            {/* Left Side (48%) — Solid Black Content */}
-                            <div className="w-full lg:w-[48%] flex flex-col justify-between text-left z-10 space-y-6 lg:space-y-8">
-                              {/* Upper Group: Badge, Brand, Title, Description, Tech Tags, and CTA */}
-                              <div className="space-y-4 max-w-xl">
-                                {/* Eyebrow Tag */}
-                                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                                  <span>{study.category}</span>
-                                </div>
-
-                                {/* Brand Logo & Name */}
-                                <div className="flex items-center gap-2.5">
-                                  <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0">
-                                    <BarChart3 className="w-4 h-4 text-[#00BCD4]" />
-                                  </div>
-                                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                                    {study.brand}
-                                  </span>
-                                </div>
-
-                                {/* Title with Cyan Highlight */}
-                                <h2 className="text-2xl sm:text-3xl lg:text-[32px] xl:text-[36px] font-extrabold text-white tracking-tight leading-[1.15]">
-                                  {study.titlePrefix}
-                                  <span className="text-[#00BCD4] block">{study.highlightWord}</span>
-                                </h2>
-
-                                {/* Short Description */}
-                                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
-                                  {study.description}
-                                </p>
-
-                                {/* Technology Tags */}
-                                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                                  {study.techTags.map((tech, tIdx) => (
-                                    <span
-                                      key={tIdx}
-                                      className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
-                                    >
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-
-                                {/* View Case Study CTA Button */}
-                                <div className="pt-2">
-                                  <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm">
-                                    <span>View Case Study</span>
-                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                                  </span>
-                                </div>
-                              </div>
-
-                              {/* Bottom Group: Metrics Row with Icons */}
-                              <div className="pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-4 xl:gap-6">
-                                {study.metrics.map((metric, idx) => {
-                                  const MetricIcon =
-                                    idx === 0 ? Database : idx === 1 ? BarChart3 : Users;
-                                  return (
-                                    <div key={idx} className="flex items-start gap-2.5">
-                                      <MetricIcon className="w-4 h-4 text-[#00BCD4] shrink-0 mt-0.5" />
-                                      <div className="text-left">
-                                        <div className="text-base sm:text-lg lg:text-xl font-black text-white font-mono tracking-tight whitespace-nowrap">
-                                          {metric.value}
-                                        </div>
-                                        <div className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5 font-medium leading-tight">
-                                          {metric.label}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-
-                            {/* Right Side (52%) — Authentic AFTER Analytics Dashboard Display */}
-                            <div className="w-full lg:w-[52%] relative flex items-center justify-center select-none overflow-hidden min-h-[260px] sm:min-h-[320px] lg:min-h-0">
-                              {/* Subtle Ambient Cyan Glow Behind Display */}
-                              <div
-                                className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.15)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
-                                aria-hidden="true"
-                              />
-
-                              {/* Neatly Framed Visual Container */}
-                              <div className="relative w-full aspect-[1071/712] rounded-2xl overflow-hidden border border-[#00BCD4]/35 bg-[#07090D] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(0,188,212,0.1)] p-2 sm:p-2.5 transition-transform duration-500 ease-out group-hover:scale-[1.01]">
-                                <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#0A0D12]">
-                                  <Image
-                                    src={study.image}
-                                    alt={study.imageAlt}
-                                    fill
-                                    priority
-                                    className="object-contain object-center"
-                                    sizes="(max-width: 1024px) 100vw, 52vw"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    );
-                  }
-
-                  // Default / Tuitionstime Card — Exactly Unchanged
-                  return (
-                    <motion.div
-                      key={study.id}
-                      initial={{ opacity: 1, y: 0 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -12 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <Link
-                        href={`/case-studies/${study.slug}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`View case study: ${study.brand}`}
-                        className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[420px] lg:h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
-                      >
-                        {/* Product Imagery (Right-Aligned, Subtle Hover Shift, Seamlessly Blended into Dark Card) */}
-                        <div className="absolute inset-0 z-0 overflow-hidden">
-                          <Image
-                            src={study.image}
-                            alt={study.imageAlt}
-                            fill
-                            priority
-                            className="object-cover object-right md:object-[80%_center] lg:object-right transition-transform duration-500 ease-out group-hover:-translate-y-1.5"
-                            sizes="(max-width: 1400px) 92vw, 1400px"
-                          />
-
-                          {/* Dark Vignette Overlay on Left (Guarantees Razor-Sharp Readability of HTML Text on all devices) */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/95 md:via-[#050505]/90 to-transparent w-full md:w-[68%] lg:w-[54%] xl:w-[48%] pointer-events-none" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent md:hidden pointer-events-none" />
-                        </div>
-
-                        {/* Real HTML Content Layer (Left-Aligned Content + Bottom Metrics) */}
-                        <div className="relative z-10 h-full p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
-                          {/* Upper Left: Badge, Brand, Title, Description, Tech Tags, and CTA */}
-                          <div className="space-y-3.5 max-w-md xl:max-w-[500px] text-left">
-                            {/* Eyebrow Tag */}
-                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00C7E8]/10 border border-[#00C7E8]/30 text-[#00C7E8] w-fit">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#00C7E8] animate-pulse" />
-                              <span>{study.category}</span>
-                            </div>
-
-                            {/* Brand Logo & Name */}
-                            <div className="flex items-center gap-2.5">
-                              <div className="w-8 h-8 rounded-lg bg-[#00C7E8]/15 border border-[#00C7E8]/35 flex items-center justify-center text-[#00C7E8]">
-                                <BrandIcon className="w-4 h-4" />
-                              </div>
-                              <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                                {study.brand}
-                              </span>
-                            </div>
-
-                            {/* Title with Cyan Highlight */}
-                            <h2 className="text-2xl sm:text-3xl lg:text-[30px] xl:text-[32px] font-extrabold text-white tracking-tight leading-[1.18] max-w-[460px]">
-                              {study.titlePrefix}
-                              <span className="text-[#00C7E8]">{study.highlightWord}</span>
-                            </h2>
-
-                            {/* Short Description */}
-                            <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-sm sm:max-w-md">
-                              {study.description}
-                            </p>
-
-                            {/* Technology Tags */}
-                            <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                              {study.techTags.map((tech, tIdx) => (
-                                <span
-                                  key={tIdx}
-                                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-
-                            {/* View Case Study CTA Button */}
-                            <div className="pt-1.5">
-                              <span
-                                className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00C7E8] text-[#00C7E8] group-hover:bg-[#00C7E8] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm"
-                              >
-                                <span>View Case Study</span>
-                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Bottom Row: Metrics Strip with Divider Lines (Appinventiv Style) */}
-                          <div className="pt-6 mt-4 sm:mt-0 border-t border-white/[0.08] lg:border-t-0 flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-10">
-                            {study.metrics.map((metric, idx) => (
-                              <div
-                                key={idx}
-                                className={`text-left ${
-                                  idx !== 0 ? "lg:border-l lg:border-white/15 lg:pl-8" : ""
-                                }`}
-                              >
-                                <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white font-mono tracking-tight">
-                                  {metric.value}
-                                </div>
-                                <div className="text-[11px] text-[#A1A1AA] mt-0.5 font-medium whitespace-nowrap">
-                                  {metric.label}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
+              <div className="space-y-3 sm:space-y-4 lg:space-y-10 w-[94%] sm:w-[92%] max-w-[1400px] mx-auto">
+                {matchingStudies.map((study) => (
+                  <motion.div
+                    key={study.id}
+                    initial={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <CaseStudyCard study={study} />
+                  </motion.div>
+                ))}
               </div>
             ) : (
               <motion.div
@@ -680,91 +343,92 @@ export default function CaseStudiesPage() {
                   <Layers className="w-6 h-6" />
                 </div>
                 <div className="space-y-2">
-                  <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#00C7E8]">
-                    ENTERPRISE PORTFOLIO
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                    Case Studies Under Client NDA
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-md mx-auto">
-                    We have engineered and deployed mission-critical architectures in
-                    this sector. Detailed blueprints, schema designs, and live
-                    walk-throughs are presented during strategy sessions under mutual
-                    NDA.
-                  </p>
-                </div>
-                <div className="flex items-center justify-center gap-3 pt-2">
-                  <button
-                    onClick={() => setActiveFilter("all")}
-                    className="px-5 py-2.5 rounded-full text-xs font-mono font-bold text-white cursor-pointer transition-opacity hover:opacity-90"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #087FA5 0%, #00C7E8 100%)",
-                    }}
-                  >
-                    Show All Case Studies
-                  </button>
-                  <Link
-                    href="/contact#contact-hero"
-                    className="px-5 py-2.5 rounded-full text-xs font-mono font-bold text-[#A1A1AA] hover:text-white border border-white/10 hover:border-[#00C7E8]/40 transition-colors"
-                  >
-                    Book Strategy Call
-                  </Link>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </section>
+                    <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#00C7E8]">
+                      ENTERPRISE PORTFOLIO
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                      Case Studies Under Client NDA
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-md mx-auto">
+                      We have engineered and deployed mission-critical architectures in
+                      this sector. Detailed blueprints, schema designs, and live
+                      walk-throughs are presented during strategy sessions under mutual
+                      NDA.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-center gap-3 pt-2">
+                    <button
+                      onClick={() => setActiveFilter("all")}
+                      className="px-5 py-2.5 rounded-full text-xs font-mono font-bold text-white cursor-pointer transition-opacity hover:opacity-90"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #087FA5 0%, #00C7E8 100%)",
+                      }}
+                    >
+                      Show All Case Studies
+                    </button>
+                    <Link
+                      href="/contact#contact-hero"
+                      className="px-5 py-2.5 rounded-full text-xs font-mono font-bold text-[#A1A1AA] hover:text-white border border-white/10 hover:border-[#00C7E8]/40 transition-colors"
+                    >
+                      Book Strategy Call
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </section>
         </div>
 
         {/* ========================================================================= */}
-        {/* 3. APPROACH / EDITORIAL SECTION — PURE WHITE BACKGROUND */}
+        {/* 3. APPROACH / EDITORIAL SECTION — PURE WHITE BACKGROUND (COMPACT)         */}
         {/* ========================================================================= */}
-        <section id="project-approach" className="bg-[#FFFFFF] text-[#101820] py-20 lg:py-24 border-t border-slate-200 relative z-20">
+        <section id="project-approach" className="bg-[#FFFFFF] text-[#101820] py-7 sm:py-10 md:py-16 lg:py-24 border-t border-slate-200 relative z-20">
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5 }}
-              className="max-w-3xl mb-12 sm:mb-16"
+              className="max-w-3xl mb-4 sm:mb-6 md:mb-12"
             >
-              <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#087FA5] mb-4">
+              <div className="inline-flex items-center px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#087FA5] mb-2 sm:mb-3">
                 BEHIND EVERY PROJECT
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black tracking-tight text-[#101820] leading-[1.14]">
+              <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[46px] font-black tracking-tight text-[#101820] leading-[1.15]">
                 From Business Challenges to Working Solutions.
               </h2>
-              <p className="mt-4 text-base sm:text-lg text-[#566171] leading-relaxed">
+              <p className="mt-1.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[#566171] leading-relaxed">
                 We focus on understanding the challenge, engineering the right solution, and continuously improving what we build.
               </p>
             </motion.div>
 
-            {/* Three-Column Editorial Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 border-t border-b border-slate-200">
+            {/* Three-Column Horizontal Process Row */}
+            <div className="grid grid-cols-3 divide-x divide-slate-200 border-t border-b border-slate-200 py-3 sm:py-4 md:py-0">
               {APPROACH_STEPS.map((item, idx) => (
                 <motion.div
                   key={item.step}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.45, delay: idx * 0.1 }}
-                  className={`py-8 sm:py-10 ${
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  className={`px-2 sm:px-4 md:px-8 py-0.5 md:py-8 lg:py-10 text-left ${
                     idx === 0
                       ? "md:pr-8 lg:pr-10"
                       : idx === 1
-                      ? "md:px-8 lg:px-10"
-                      : "md:pl-8 lg:pl-10"
-                  }`}
+                        ? "md:px-8 lg:px-10"
+                        : "md:pl-8 lg:pl-10"
+                    }`}
                 >
-                  <div className="text-2xl sm:text-3xl font-mono font-black text-[#087FA5] mb-3">
+                  <div className="text-xs sm:text-sm md:text-2xl lg:text-3xl font-mono font-black text-[#087FA5] mb-0.5 md:mb-3">
                     {item.step}
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#101820] tracking-tight mb-2.5">
+                  <h3 className="text-xs sm:text-base md:text-xl lg:text-2xl font-bold text-[#101820] tracking-tight leading-tight mb-1 md:mb-2.5">
                     {item.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-[#566171] leading-relaxed">
-                    {item.description}
+                  <p className="text-[10px] sm:text-xs md:text-sm lg:text-base text-[#566171] leading-tight sm:leading-snug md:leading-relaxed">
+                    <span className="md:hidden line-clamp-2">{item.shortDesc}</span>
+                    <span className="hidden md:inline">{item.description}</span>
                   </p>
                 </motion.div>
               ))}
@@ -775,19 +439,19 @@ export default function CaseStudiesPage() {
         {/* ========================================================================= */}
         {/* 4. COMPACT BLACK CTA SECTION */}
         {/* ========================================================================= */}
-        <section id="case-studies-cta" className="bg-[#050505] border-t border-[#1B242B] text-white py-16 sm:py-20 lg:py-24 relative z-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <section id="case-studies-cta" className="bg-[#050505] border-t border-[#1B242B] text-white py-8 sm:py-12 md:py-16 lg:py-24 relative z-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5 }}
-              className="space-y-4"
+              className="space-y-2.5 sm:space-y-4"
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
                 Have a Project in Mind? Let&apos;s Build It Together.
               </h2>
-              <p className="text-sm sm:text-base text-[#A1A1AA] max-w-xl mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-[#A1A1AA] max-w-xl mx-auto leading-relaxed">
                 Partner with our engineering team to architect, build, and deploy high-performance software tailored to your goals.
               </p>
             </motion.div>
@@ -797,11 +461,11 @@ export default function CaseStudiesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: 0.1 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2"
+              className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-1 sm:pt-2"
             >
               <Link
                 href="/contact#contact-hero"
-                className="w-full sm:w-auto h-12 px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
+                className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -809,7 +473,7 @@ export default function CaseStudiesPage() {
 
               <Link
                 href="/services"
-                className="w-full sm:w-auto h-12 px-8 rounded-full bg-transparent hover:bg-white/10 text-white font-bold text-sm sm:text-base border border-neutral-700 flex items-center justify-center transition-all"
+                className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-transparent hover:bg-white/10 text-white font-bold text-xs sm:text-base border border-neutral-700 flex items-center justify-center transition-all"
               >
                 <span>Explore Our Services</span>
               </Link>

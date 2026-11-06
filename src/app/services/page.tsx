@@ -41,24 +41,24 @@ const USE_INTERACTIVE_SHOWCASE = true;
 // Connected Tech Ecosystem Capabilities
 const TECH_ECOSYSTEM_NODES = [
   {
+    id: "ai",
+    code: "01 // AI",
+    title: "AI & Automation",
+    subtitle: "RAG Copilots, Agent Swarms & Workflows",
+    tech: "OpenAI GPT-4o • Claude • Pinecone",
+    metric: "Low-Latency Vectors",
+    icon: Bot,
+    accent: "#00BCD4",
+  },
+  {
     id: "software",
-    code: "01 // DEV",
+    code: "02 // DEV",
     title: "Software Development",
     subtitle: "Custom Web, Mobile & Microservices",
     tech: "Next.js 15 • TypeScript • React 19",
     metric: "Sub-25ms SLA",
     icon: Code2,
     accent: "#00BCD4",
-  },
-  {
-    id: "data",
-    code: "02 // DATA",
-    title: "Data Engineering",
-    subtitle: "Pipelines, Warehousing & Medallion Sync",
-    tech: "Snowflake • dbt • Apache Kafka",
-    metric: "Automated DAGs",
-    icon: Database,
-    accent: "#0284C7",
   },
   {
     id: "analytics",
@@ -71,14 +71,14 @@ const TECH_ECOSYSTEM_NODES = [
     accent: "#10B981",
   },
   {
-    id: "ai",
-    code: "04 // AI",
-    title: "AI & Automation",
-    subtitle: "RAG Copilots, Agent Swarms & Workflows",
-    tech: "OpenAI GPT-4o • Claude • Pinecone",
-    metric: "Low-Latency Vectors",
-    icon: Bot,
-    accent: "#00BCD4",
+    id: "data",
+    code: "04 // DATA",
+    title: "Data Engineering",
+    subtitle: "Pipelines, Warehousing & Medallion Sync",
+    tech: "Snowflake • dbt • Apache Kafka",
+    metric: "Automated DAGs",
+    icon: Database,
+    accent: "#0284C7",
   },
 ];
 
@@ -189,12 +189,12 @@ const TECH_STACK_MAP: Record<TechCategory, { name: string; tag: string; desc: st
 function ServiceGatewayCard({ service, index }: { service: ServiceDetailItem; index: number }) {
   const ServiceIcon =
     service.num === "01"
-      ? Smartphone
+      ? Bot
       : service.num === "02"
-      ? Database
+      ? Code2
       : service.num === "03"
       ? TrendingUp
-      : Bot;
+      : Database;
 
   return (
     <motion.div
@@ -299,37 +299,37 @@ interface EcosystemNodeItem {
 
 const ECOSYSTEM_NODES: EcosystemNodeItem[] = [
   {
+    id: "ai",
+    code: "01 // AI",
+    title: "AI & Automation",
+    shortTitle: "AI & Agents",
+    badge: "Autonomous Swarms",
+    capability: "Enterprise RAG copilots & adaptive multi-agent swarms",
+    icon: Bot,
+    accent: "#00BCD4",
+    desktopClass: "top-[8%] left-[3%]",
+    mobileClass: "top-[3%] left-[1%]",
+    svgPath: "M 140 100 C 190 115, 220 160, 245 195",
+    pulseDuration: "4.0s",
+  },
+  {
     id: "software",
-    code: "01 // DEV",
-    title: "Software Engineering",
+    code: "02 // DEV",
+    title: "Software Development",
     shortTitle: "Software",
     badge: "Next.js 15 • Microservices",
     capability: "Sub-25ms web apps, cloud microservices & scalable backends",
     icon: Code2,
     accent: "#00BCD4",
-    desktopClass: "top-[8%] left-[3%]",
-    mobileClass: "top-[3%] left-[1%]",
-    svgPath: "M 140 100 C 190 115, 220 160, 245 195",
-    pulseDuration: "3.2s",
-  },
-  {
-    id: "data",
-    code: "02 // DATA",
-    title: "Data Engineering",
-    shortTitle: "Data",
-    badge: "Pipelines • Lakehouse",
-    capability: "Petabyte streaming ETL & automated DAG synchronization",
-    icon: Database,
-    accent: "#0284C7",
     desktopClass: "top-[6%] right-[3%]",
     mobileClass: "top-[3%] right-[1%]",
     svgPath: "M 460 90 C 410 110, 380 160, 355 195",
-    pulseDuration: "3.8s",
+    pulseDuration: "3.2s",
   },
   {
     id: "analytics",
     code: "03 // BI",
-    title: "Analytics & BI",
+    title: "Data Analytics & BI",
     shortTitle: "Analytics",
     badge: "Real-Time KPIs",
     capability: "Unified executive cockpits, telemetry & predictive metrics",
@@ -341,18 +341,18 @@ const ECOSYSTEM_NODES: EcosystemNodeItem[] = [
     pulseDuration: "3.5s",
   },
   {
-    id: "ai",
-    code: "04 // AI",
-    title: "AI & Automation",
-    shortTitle: "AI & Agents",
-    badge: "Autonomous Swarms",
-    capability: "Enterprise RAG copilots & adaptive multi-agent swarms",
-    icon: Bot,
-    accent: "#00BCD4",
+    id: "data",
+    code: "04 // DATA",
+    title: "Data Engineering",
+    shortTitle: "Data",
+    badge: "Pipelines • Lakehouse",
+    capability: "Petabyte streaming ETL & automated DAG synchronization",
+    icon: Database,
+    accent: "#0284C7",
     desktopClass: "bottom-[10%] right-[4%]",
     mobileClass: "bottom-[5%] right-[1%]",
     svgPath: "M 455 370 C 405 350, 380 300, 355 265",
-    pulseDuration: "4.0s",
+    pulseDuration: "3.8s",
   },
 ];
 
@@ -669,7 +669,7 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION — PURE BLACK (#000000, FULL VIEWPORT 100SVH ON DESKTOP) */}
       {/* ========================================================================= */}
-      <section className="relative bg-[#000000] border-b border-[#222222] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-20 pb-8 sm:pt-24 sm:pb-10 lg:pt-20 lg:pb-8 overflow-hidden">
+      <section className="relative bg-[#000000] border-b border-[#222222] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-16 pb-6 sm:pt-24 sm:pb-10 lg:pt-20 lg:pb-8 overflow-hidden">
         {/* Subtle Ambient Backlight */}
         <div
           className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[540px] h-[540px] pointer-events-none opacity-15 -z-0"
@@ -679,17 +679,17 @@ export default function ServicesPage() {
         />
 
         <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 items-center">
             
             {/* Left Column (52% / 7 cols): Bold Headline, Readable Copy, CTAs & Stats */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
+            <div className="lg:col-span-7 space-y-3.5 sm:space-y-5 text-left">
               
               {/* 1. Small Hero Label */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-[#111111] text-slate-200 border border-[#262626]"
+                className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase bg-[#111111] text-slate-200 border border-[#262626]"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#00BCD4]" />
                 <span>FULL-STACK DIGITAL PARTNER</span>
@@ -700,12 +700,12 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.08, ease: "easeOut" }}
-                className="text-[34px] xs:text-[38px] sm:text-5xl lg:text-[56px] xl:text-[64px] font-black tracking-tight text-white leading-[1.06]"
+                className="text-[28px] xs:text-[32px] sm:text-5xl lg:text-[56px] xl:text-[64px] font-black tracking-tight text-white leading-[1.08]"
               >
                 <span className="block">
                   Build. Scale. <span className="text-[#00BCD4]">Transform.</span>
                 </span>
-                <span className="block text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-bold text-neutral-200 mt-2 sm:mt-2.5 tracking-tight">
+                <span className="block text-xl xs:text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-bold text-neutral-200 mt-1.5 sm:mt-2.5 tracking-tight">
                   Digital Products With Confidence.
                 </span>
               </motion.h1>
@@ -715,7 +715,7 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.16, ease: "easeOut" }}
-                className="text-sm sm:text-base lg:text-[17px] text-neutral-300 max-w-xl leading-relaxed font-normal"
+                className="text-xs xs:text-sm sm:text-base lg:text-[17px] text-neutral-300 max-w-xl leading-relaxed font-normal"
               >
                 From custom applications and analytics platforms to AI-powered solutions and digital growth systems, we help organizations design, build, and scale technology that delivers measurable business impact.
               </motion.p>
@@ -725,46 +725,41 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.24, ease: "easeOut" }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-0.5"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-0.5"
               >
                 <a
                   href="#four-pillars-gateway"
-                  className="h-11 sm:h-12 px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
+                  className="h-10 sm:h-12 px-6 sm:px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group text-center"
                 >
                   <span>Explore Services</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </a>
 
                 <Link
                   href="/contact#contact-hero"
-                  className="h-11 sm:h-12 px-7 rounded-full bg-[#111111] hover:bg-[#181818] text-white font-bold text-sm sm:text-base border border-[#262626] hover:border-[#00BCD4]/50 flex items-center justify-center transition-all"
+                  className="h-10 sm:h-12 px-6 sm:px-7 rounded-full bg-[#111111] hover:bg-[#181818] text-white font-bold text-xs sm:text-base border border-[#262626] hover:border-[#00BCD4]/50 flex items-center justify-center transition-all text-center"
                 >
                   <span>Book Strategy Call</span>
                 </Link>
               </motion.div>
 
-              {/* 5. Mobile Technology Visual (Strictly between CTAs and Stats on mobile) */}
-              <div className="block lg:hidden pt-3 pb-2">
-                <InteractiveConnectedEcosystem isMobile />
-              </div>
-
-              {/* 6. Verified Trust Stats (Clean 2x2 grid on mobile, horizontal row with dividers on desktop) */}
+              {/* 5. Verified Trust Stats (Clean 2x2 grid on mobile, horizontal row with dividers on desktop) */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.32, ease: "easeOut" }}
-                className="pt-5 sm:pt-6 border-t border-[#222222] grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
+                className="pt-4 sm:pt-6 border-t border-[#222222] grid grid-cols-2 sm:grid-cols-4 gap-2.5 xs:gap-3.5 sm:gap-6"
               >
                 {HERO_TRUST_STATS.map((stat, sIdx) => (
                   <div
                     key={sIdx}
-                    className={`space-y-0.5 sm:space-y-1 ${
+                    className={`p-2.5 sm:p-0 rounded-lg sm:rounded-none bg-[#0D0D0D] sm:bg-transparent border border-white/5 sm:border-none space-y-0.5 sm:space-y-1 ${
                       sIdx > 0 ? "sm:border-l sm:border-[#222222] sm:pl-5" : ""
                     }`}
                   >
-                    <div className="text-2xl sm:text-3xl lg:text-[32px] font-black text-white font-mono tracking-tight">{stat.value}</div>
-                    <div className="text-xs font-semibold text-neutral-300">{stat.label}</div>
-                    <div className="text-[11px] text-neutral-400 font-mono">{stat.detail}</div>
+                    <div className="text-xl sm:text-3xl lg:text-[32px] font-black text-white font-mono tracking-tight">{stat.value}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-neutral-300">{stat.label}</div>
+                    <div className="text-[10px] sm:text-[11px] text-neutral-400 font-mono">{stat.detail}</div>
                   </div>
                 ))}
               </motion.div>
@@ -787,19 +782,19 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 2. FOUR PILLARS OF ENGINEERING EXCELLENCE — WHITE (#FFFFFF) */}
       {/* ========================================================================= */}
-      <section id="four-pillars-gateway" className="py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
+      <section id="four-pillars-gateway" className="py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         {USE_INTERACTIVE_SHOWCASE ? (
           <InteractiveServicesShowcase />
         ) : (
-          <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
+          <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
             <div className="text-center max-w-2xl mx-auto space-y-2.5">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
                 CORE DISCIPLINES
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
                 Four Pillars Of Engineering Excellence
               </h2>
-              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-lg text-neutral-600 leading-relaxed font-normal">
                 Click any service gateway to explore its dedicated production architecture, capabilities, and delivery methodology.
               </p>
             </div>
@@ -815,25 +810,140 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. HOW CODEPLACED DELIVERS PRODUCTION RESULTS — PURE BLACK (#000000) */}
+      {/* 3. AI SERVICES & AUTONOMOUS AGENTS — PURE BLACK (#000000) */}
+      {/* Clean, business-focused presentation matching homepage aesthetic */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
+      <section className="py-10 sm:py-16 lg:py-20 bg-[#000000] border-b border-[#222222] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
           
-          <div className="text-center max-w-2xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+          <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
+            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+              ENTERPRISE INTELLIGENCE
+            </span>
+            <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
+              AI Services & Autonomous Agents
+            </h2>
+            <p className="text-xs sm:text-base lg:text-lg text-neutral-400 leading-relaxed font-normal">
+              Practical, private AI solutions engineered to automate operational workflows, unlock organizational knowledge, and drive measurable business efficiency.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
+            {/* Visual Column: Clean Premium Agency Visual */}
+            <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-[#222222] bg-[#0C0F14] shadow-xl group">
+              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden">
+                <img
+                  src="/images/about-team-collab.jpg"
+                  alt="CodePlaced AI Systems Engineering"
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent" />
+                
+                {/* Clean Feature Overlay Badge */}
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 p-3 rounded-xl bg-[#090C12]/90 border border-white/10 backdrop-blur-md flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/40 flex items-center justify-center text-[#00BCD4]">
+                      <Bot className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white leading-tight">Enterprise Vector RAG & Agents</div>
+                      <div className="text-[10px] text-neutral-400 font-mono">Private VPC Isolated • Zero Data Retention</div>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-[#00BCD4] px-2 py-0.5 rounded bg-black border border-[#00BCD4]/30 hidden xs:inline-block">
+                    LIVE
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Column: 4 Concise AI Capabilities */}
+            <div className="lg:col-span-6 space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5">
+                {[
+                  {
+                    title: "Private VPC Vector RAG",
+                    desc: "Sub-50ms hybrid semantic search over internal databases, documents, and codebases with zero data leaks.",
+                    icon: Search,
+                  },
+                  {
+                    title: "Autonomous Agent Swarms",
+                    desc: "Supervisor orchestrators routing specialized tool-calling agents for research, analysis, and execution.",
+                    icon: Bot,
+                  },
+                  {
+                    title: "Document Intelligence",
+                    desc: "Automated OCR extraction, invoice parsing, and contract analysis via modern multimodal reasoning models.",
+                    icon: Layers,
+                  },
+                  {
+                    title: "Zero-Leak Guardrails",
+                    desc: "Automated PII scrubbing, prompt injection defense, and strict SOC2/HIPAA compliance guardrails.",
+                    icon: ShieldCheck,
+                  },
+                ].map((item, idx) => {
+                  const ItemIcon = item.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-3.5 sm:p-4 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/40 transition-colors space-y-1.5"
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-[#00BCD4]/10 flex items-center justify-center text-[#00BCD4]">
+                          <ItemIcon className="w-3.5 h-3.5" />
+                        </div>
+                        <h4 className="text-xs sm:text-sm font-bold text-white">{item.title}</h4>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-neutral-400 leading-relaxed font-normal">
+                        {item.desc}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Cyan CTA Button */}
+              <div className="pt-1 flex items-center gap-3">
+                <Link
+                  href="/services/ai-copilots"
+                  className="inline-flex items-center justify-center gap-2 h-10 sm:h-11 px-6 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-black font-extrabold text-xs sm:text-sm tracking-tight shadow-md transition-all active:scale-95"
+                >
+                  <span>Explore AI Services</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/contact#contact-hero"
+                  className="inline-flex items-center justify-center h-10 sm:h-11 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white font-semibold text-xs sm:text-sm border border-white/10 transition-all"
+                >
+                  <span>Book Consultation</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. HOW CODEPLACED DELIVERS PRODUCTION RESULTS — PURE BLACK (#000000) */}
+      {/* ========================================================================= */}
+      <section className="py-10 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+          
+          <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
+            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
               PRODUCTION ROADMAP
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               How CodePlaced Delivers Production Results
             </h2>
-            <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal">
+            <p className="text-xs sm:text-base lg:text-lg text-neutral-400 leading-relaxed font-normal">
               A disciplined, step-by-step engineering roadmap from initial discovery to continuous production scale.
             </p>
           </div>
 
-          {/* 6 Process Cards in 1 Row on Desktop */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 relative items-stretch">
+          {/* 6 Process Cards: Compact 2-Column Grid on Mobile (3 rows of 2), 6 Columns on Desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 xs:gap-3 sm:gap-4 relative items-stretch">
             {DELIVERY_STEPS.map((step, sIdx) => {
               const StepIcon = step.icon;
               return (
@@ -843,22 +953,22 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: sIdx * 0.05, ease: "easeOut" }}
-                  className="p-5 sm:p-6 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/50 hover:bg-[#161616] transition-all duration-300 flex flex-col justify-between group relative"
+                  className="p-3 xs:p-3.5 sm:p-6 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/50 hover:bg-[#161616] transition-all duration-300 flex flex-col justify-between group relative"
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-2.5 sm:space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xl font-black text-[#00BCD4] font-mono">
+                      <span className="text-sm xs:text-base sm:text-xl font-black text-[#00BCD4] font-mono">
                         {step.num}
                       </span>
-                      <StepIcon className="w-5 h-5 text-neutral-400 group-hover:text-[#00BCD4] transition-colors" />
+                      <StepIcon className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-[#00BCD4] transition-colors" />
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-[#00BCD4] transition-colors">
+                      <h3 className="text-xs xs:text-sm sm:text-lg font-bold text-white group-hover:text-[#00BCD4] transition-colors leading-snug">
                         {step.name}
                       </h3>
 
-                      <p className="text-[13px] text-neutral-400 leading-relaxed mt-2">
+                      <p className="text-[10.5px] xs:text-[11.5px] sm:text-[13px] text-neutral-400 leading-snug mt-1 sm:mt-2 line-clamp-3 sm:line-clamp-none">
                         {step.desc}
                       </p>
                     </div>
@@ -879,56 +989,47 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. WHY LEADING COMPANIES CHOOSE CODEPLACED — WHITE (#FFFFFF) */}
+      {/* 5. WHY LEADING COMPANIES CHOOSE CODEPLACED — WHITE (#FFFFFF) */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
+      <section className="py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           
-          <div className="text-center max-w-2xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+          <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
+            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
               THE CODEPLACED ADVANTAGE
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               Why Leading Companies Choose CodePlaced
             </h2>
-            <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal">
+            <p className="text-xs sm:text-base lg:text-lg text-neutral-600 leading-relaxed font-normal">
               Engineered for velocity, reliability, and measurable business growth.
             </p>
           </div>
 
-          {/* 6 Benefit Cards in Balanced 3-Column Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          {/* 6 Benefit Cards: Compact 2-Column Grid on Mobile, 3 Columns on Desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 items-stretch">
             {WHY_CODEPLACED.map((card, cIdx) => {
               const CardIcon = card.icon;
               return (
-                <motion.div
+                <div
                   key={cIdx}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: cIdx * 0.05, ease: "easeOut" }}
-                  className="p-7 sm:p-8 rounded-2xl bg-white border border-[#E5E7EB] hover:border-[#00BCD4]/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 space-y-5 flex flex-col justify-between group"
+                  className="p-3 xs:p-4 sm:p-7 rounded-xl sm:rounded-2xl bg-white border border-[#E5E7EB] hover:border-[#00BCD4]/60 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] text-neutral-900 flex items-center justify-center group-hover:bg-[#00BCD4]/10 group-hover:border-[#00BCD4]/40 group-hover:text-[#00BCD4] transition-colors">
-                        <CardIcon className="w-6 h-6 transition-colors" />
-                      </div>
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00AFC8]">
-                        {card.tag}
-                      </span>
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-[#101820] flex items-center justify-center group-hover:border-[#00BCD4]/40 transition-colors">
+                      <CardIcon className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-[#00BCD4]" />
                     </div>
 
                     <div>
-                      <h3 className="text-xl font-bold text-neutral-900 group-hover:text-[#00BCD4] transition-colors">
+                      <h3 className="text-xs xs:text-sm sm:text-lg font-bold text-neutral-900 group-hover:text-[#00BCD4] transition-colors leading-snug">
                         {card.title}
                       </h3>
-                      <p className="text-[15px] text-neutral-600 mt-2.5 leading-relaxed">
+                      <p className="text-[10.5px] xs:text-[11.5px] sm:text-sm text-neutral-600 mt-1 sm:mt-2 leading-relaxed line-clamp-3 sm:line-clamp-none font-normal">
                         {card.desc}
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -937,30 +1038,30 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. PRODUCTION-PROVEN TOOLS & FRAMEWORKS — PURE BLACK (#000000) */}
+      {/* 6. PRODUCTION-PROVEN TOOLS & FRAMEWORKS — PURE BLACK (#000000) */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+      <section className="py-10 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
           
-          <div className="text-center max-w-2xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+          <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
+            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
               MODERN TOOLS
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               Production-Proven Tools & Frameworks
             </h2>
-            <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal">
+            <p className="text-xs sm:text-base lg:text-lg text-neutral-400 leading-relaxed font-normal">
               Battle-tested frameworks, modern languages, and high-throughput cloud infrastructure.
             </p>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
+          {/* Filter Tabs: Horizontally Scrollable on Mobile, Centered Wrap on Desktop */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto w-full pb-2 scrollbar-none sm:justify-center sm:flex-wrap">
             {TECH_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveTechTab(cat)}
-                className={`px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-mono font-bold transition-all duration-200 cursor-pointer ${
+                className={`px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-mono font-bold transition-all duration-200 cursor-pointer shrink-0 ${
                   activeTechTab === cat
                     ? "bg-[#00BCD4] text-neutral-950 font-black shadow-md scale-105"
                     : "bg-[#111111] text-neutral-300 hover:text-white hover:bg-[#181818] border border-[#222222] hover:border-neutral-700"
@@ -971,29 +1072,21 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* Active Category Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+          {/* Active Category Cards: Compact 2-Column Grid on Mobile, 4 Columns on Desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 items-stretch">
             {TECH_STACK_MAP[activeTechTab].map((tool, tIdx) => (
-              <motion.div
+              <div
                 key={tool.name}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25, delay: tIdx * 0.04 }}
-                className="p-6 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/50 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
+                className="p-3 sm:p-5 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/40 transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-lg">{tool.icon}</span>
-                      <div className="text-base font-bold text-white">{tool.name}</div>
-                    </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black text-[#00BCD4] border border-[#262626] font-semibold">
-                      {tool.tag}
-                    </span>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-base sm:text-lg shrink-0">{tool.icon}</span>
+                    <div className="text-xs xs:text-sm sm:text-base font-bold text-white leading-snug truncate">{tool.name}</div>
                   </div>
-                  <p className="text-[13px] text-neutral-400 leading-relaxed mt-3">{tool.desc}</p>
+                  <p className="text-[10.5px] xs:text-[11.5px] sm:text-xs text-neutral-400 leading-relaxed font-normal">{tool.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -1001,11 +1094,11 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. FINAL CTA SECTION — WHITE BACKGROUND (#FFFFFF) WITH PREMIUM BLACK CARD */}
+      {/* 7. FINAL CTA SECTION — WHITE BACKGROUND (#FFFFFF) WITH PREMIUM BLACK CARD */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] text-neutral-900">
+      <section className="py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] text-neutral-900">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-[1240px] mx-auto rounded-2xl sm:rounded-3xl bg-[#000000] border border-[#222222] p-10 sm:p-14 lg:p-18 text-center text-white relative overflow-hidden shadow-2xl">
+          <div className="max-w-[1240px] mx-auto rounded-2xl sm:rounded-3xl bg-[#000000] border border-[#222222] p-6 xs:p-8 sm:p-14 lg:p-18 text-center text-white relative overflow-hidden shadow-2xl">
             {/* Subtle Cyan Grid Accent */}
             <div
               className="absolute inset-0 opacity-10 pointer-events-none"
@@ -1018,35 +1111,35 @@ export default function ServicesPage() {
               }}
             />
 
-            <div className="max-w-2xl mx-auto relative z-10 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white/10 text-white border border-white/20">
+            <div className="max-w-2xl mx-auto relative z-10 space-y-3.5 sm:space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-white/10 text-white border border-white/20">
                 <Sparkles className="w-3.5 h-3.5 text-[#00BCD4]" />
                 <span>START YOUR NEXT SPRINT</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.12] text-white">
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.12] text-white">
                 Technology That Turns Ideas{" "}
                 <span className="text-[#00BCD4]">
                   Into Impact.
                 </span>
               </h2>
 
-              <p className="text-base sm:text-lg text-neutral-300 max-w-xl mx-auto leading-relaxed font-normal pt-1">
+              <p className="text-xs xs:text-sm sm:text-base lg:text-lg text-neutral-300 max-w-xl mx-auto leading-relaxed font-normal pt-0.5 sm:pt-1">
                 From product engineering and AI systems to analytics and growth platforms, we build digital experiences that scale.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 pt-2 sm:pt-4">
                 <Link
                   href="/contact#contact-hero"
-                  className="w-full sm:w-auto h-12 px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
+                  className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group text-center"
                 >
                   <span>Book Strategy Call</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
                 <Link
                   href="/case-studies"
-                  className="w-full sm:w-auto h-12 px-8 rounded-full bg-transparent hover:bg-white/10 text-white font-bold text-sm sm:text-base border border-neutral-700 flex items-center justify-center transition-all"
+                  className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-transparent hover:bg-white/10 text-white font-bold text-xs sm:text-base border border-neutral-700 flex items-center justify-center transition-all text-center"
                 >
                   <span>View Case Studies</span>
                 </Link>
