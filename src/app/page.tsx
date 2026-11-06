@@ -33,6 +33,8 @@ import {
   Layers,
   Sparkles,
   TrendingUp,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { ServicesMarquee } from "@/components/ServicesMarquee";
 
@@ -48,6 +50,20 @@ const HERO_BACKGROUND_IMAGE = "/images/hero-team-consulting-v2.jpg";
 const SERVICES_DATA = [
   {
     num: "01",
+    title: "AI & Automation",
+    description:
+      "Build intelligent applications and automate business workflows with practical AI solutions.",
+    capabilities: [
+      "AI Agents & RAG",
+      "Workflow Automation",
+      "AI Integrations",
+      "Intelligent Applications",
+    ],
+    icon: Bot,
+    href: "/services/ai-copilots",
+  },
+  {
+    num: "02",
     title: "Software Development",
     description:
       "Build scalable digital products, web applications, mobile applications, and custom business software.",
@@ -59,20 +75,6 @@ const SERVICES_DATA = [
     ],
     icon: Code2,
     href: "/services/app-web-development",
-  },
-  {
-    num: "02",
-    title: "Data Engineering",
-    description:
-      "Build reliable data infrastructure that connects systems, automates pipelines, and makes information accessible.",
-    capabilities: [
-      "Data Pipelines & ETL/ELT",
-      "Data Warehousing",
-      "Data Integration",
-      "Data Architecture",
-    ],
-    icon: Database,
-    href: "/services/data-engineering-analytics",
   },
   {
     num: "03",
@@ -90,17 +92,17 @@ const SERVICES_DATA = [
   },
   {
     num: "04",
-    title: "AI & Automation",
+    title: "Data Engineering",
     description:
-      "Build intelligent applications and automate business workflows with practical AI solutions.",
+      "Build reliable data infrastructure that connects systems, automates pipelines, and makes information accessible.",
     capabilities: [
-      "AI Agents & RAG",
-      "Workflow Automation",
-      "AI Integrations",
-      "Intelligent Applications",
+      "Data Pipelines & ETL/ELT",
+      "Data Warehousing",
+      "Data Integration",
+      "Data Architecture",
     ],
-    icon: Bot,
-    href: "/services/ai-copilots",
+    icon: Database,
+    href: "/services/data-engineering-analytics",
   },
 ];
 
@@ -253,6 +255,32 @@ if (typeof window !== "undefined") {
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchEndX === null) return;
+    const distance = touchStartX - touchEndX;
+    const isLeftSwipe = distance > 40;
+    const isRightSwipe = distance < -40;
+
+    if (isLeftSwipe) {
+      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS_DATA.length);
+    } else if (isRightSwipe) {
+      setActiveTestimonial((prev) => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length);
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
 
   const servicesSectionRef = useRef<HTMLDivElement>(null);
   const col1Ref = useRef<HTMLDivElement>(null);
@@ -392,7 +420,7 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 1: HERO SECTION — EXACTLY 100VH ON DESKTOP WITH INTEGRATED MARQUEE */}
       {/* ===================================================================== */}
-      <section className="relative w-full h-[100vh] min-h-[100dvh] max-lg:h-auto max-lg:min-h-[100svh] flex flex-col justify-between pt-[76px] sm:pt-[80px] bg-[#000000] overflow-hidden">
+      <section className="relative w-full lg:h-[100vh] lg:min-h-[100dvh] flex flex-col justify-between pt-[72px] sm:pt-[80px] pb-2 sm:pb-0 bg-[#000000] overflow-hidden">
         {/* Full-Width Static Background Image Container covering entire 100vh hero */}
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <Image
@@ -412,73 +440,73 @@ export default function HomePage() {
         </div>
 
         {/* Hero Foreground Content — Vertically centered within available hero area */}
-        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto py-3 sm:py-4">
-          <div className="max-w-3xl space-y-4 sm:space-y-6 lg:space-y-6">
+        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-4 sm:py-6 lg:my-auto lg:py-4">
+          <div className="max-w-3xl space-y-3 sm:space-y-5 lg:space-y-6">
             {/* Enterprise Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#000000]/80 backdrop-blur-md shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#00BCD4] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-0.5 sm:px-4 sm:py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#000000]/80 backdrop-blur-md shadow-xs">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00BCD4] animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
                 ENGINEERING &bull; DATA &bull; AI CONSULTING
               </span>
             </div>
 
-            {/* Main Headline (Bold, Confident Typography ~68–76px) */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[72px] font-extrabold tracking-tight text-white leading-[1.06]">
+            {/* Main Headline (Bold, Confident Typography) */}
+            <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[72px] font-extrabold tracking-tight text-white leading-[1.1] sm:leading-[1.06]">
               Build AI & Software Products That Drive{" "}
               <span className="text-[#00BCD4]">Business Growth.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
+            <p className="text-xs sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
               We help businesses turn complex challenges into practical digital solutions through software development, data analytics, business intelligence, and AI-powered automation.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
+            <div className="flex flex-row items-center gap-2.5 sm:gap-4 pt-0.5">
               <Link
                 href="/contact#contact-hero"
-                className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-5 sm:px-8 h-10 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer shrink-0"
               >
                 <span>Book Strategy Call</span>
-                <ArrowRight className="w-4 h-4 ml-0.5" />
+                <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
               </Link>
 
               <a
                 href="#featured-work"
-                className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-11 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-8 h-10 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-base border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer shrink-0"
               >
-                <span>Explore Our Work</span>
+                <span>Explore Work</span>
               </a>
             </div>
 
             {/* 3 Compact Credibility Indicators */}
-            <div className="pt-4 sm:pt-5 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
+            <div className="pt-3 sm:pt-5 border-t border-white/10 grid grid-cols-3 gap-2 sm:gap-6 max-w-xl">
               <div className="space-y-0.5 sm:space-y-1">
-                <div className="flex items-center gap-1.5 text-[#00BCD4]">
-                  <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span className="text-sm sm:text-lg font-extrabold text-white">100+</span>
+                <div className="flex items-center gap-1 sm:gap-1.5 text-[#00BCD4]">
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="text-xs sm:text-lg font-extrabold text-white">100+</span>
                 </div>
-                <p className="text-[11px] sm:text-sm text-slate-300 font-medium leading-snug">
+                <p className="text-[10px] sm:text-sm text-slate-300 font-medium leading-tight">
                   Enterprise Deployments
                 </p>
               </div>
 
               <div className="space-y-0.5 sm:space-y-1">
-                <div className="flex items-center gap-1.5 text-[#00BCD4]">
-                  <ShieldCheck className="w-4 h-4 shrink-0" />
-                  <span className="text-sm sm:text-lg font-extrabold text-white">99.99%</span>
+                <div className="flex items-center gap-1 sm:gap-1.5 text-[#00BCD4]">
+                  <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="text-xs sm:text-lg font-extrabold text-white">99.99%</span>
                 </div>
-                <p className="text-[11px] sm:text-sm text-slate-300 font-medium leading-snug">
+                <p className="text-[10px] sm:text-sm text-slate-300 font-medium leading-tight">
                   Production SLA
                 </p>
               </div>
 
               <div className="space-y-0.5 sm:space-y-1">
-                <div className="flex items-center gap-1.5 text-[#00BCD4]">
-                  <Zap className="w-4 h-4 shrink-0" />
-                  <span className="text-sm sm:text-lg font-extrabold text-white">2–4 Wks</span>
+                <div className="flex items-center gap-1 sm:gap-1.5 text-[#00BCD4]">
+                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="text-xs sm:text-lg font-extrabold text-white">2–4 Wks</span>
                 </div>
-                <p className="text-[11px] sm:text-sm text-slate-300 font-medium leading-snug">
+                <p className="text-[10px] sm:text-sm text-slate-300 font-medium leading-tight">
                   Sprint Delivery
                 </p>
               </div>
@@ -486,8 +514,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Integrated Technology Marquee Anchored at the Bottom of the 100vh Hero */}
-        <ServicesMarquee className="shrink-0" />
+        {/* Integrated Technology Marquee Anchored at the Bottom */}
+        <ServicesMarquee className="shrink-0 mt-2 lg:mt-0" />
       </section>
 
       {/* ===================================================================== */}
@@ -496,15 +524,15 @@ export default function HomePage() {
       <section
         id="services"
         ref={servicesSectionRef}
-        className="w-full bg-[#FFFFFF] lg:min-h-[calc(100vh-80px)] flex flex-col justify-start py-6 sm:py-10 lg:py-4 xl:py-5.5 2xl:py-8 relative text-[#111827] z-20 border-b border-[#E5E7EB]"
+        className="w-full bg-[#FFFFFF] lg:min-h-[calc(100vh-80px)] flex flex-col justify-start py-7 sm:py-9 lg:py-4 xl:py-5.5 2xl:py-8 relative text-[#111827] z-20 border-b border-[#E5E7EB]"
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative bg-white">
           {/* Centered Editorial Section Header with Clean Breathing Room */}
-          <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1.5 lg:space-y-2 2xl:space-y-2.5 shrink-0">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1 sm:space-y-1.5 lg:space-y-2 2xl:space-y-2.5 shrink-0">
+            <span className="text-[10.5px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
               OUR EXPERTISE
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[28px] xl:text-[36px] 2xl:text-[44px] font-extrabold tracking-tight text-[#111827] leading-[1.12] max-w-[760px] xl:max-w-[820px] mx-auto">
+            <h2 className="text-xl sm:text-3xl lg:text-[28px] xl:text-[36px] 2xl:text-[44px] font-extrabold tracking-tight text-[#111827] leading-[1.15] lg:leading-[1.12] max-w-[760px] xl:max-w-[820px] mx-auto">
               Technology Services Built Around Your Business Goals.
             </h2>
             <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal pt-0.5">
@@ -586,55 +614,43 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* TABLET (2-COLUMN) & MOBILE (1-COLUMN) RESPONSIVE PRESENTATION (lg:hidden) */}
-          <div className="lg:hidden mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-b border-[#E5E5E5] py-4">
+          {/* TABLET & MOBILE 2x2 COMPACT GRID (lg:hidden) */}
+          <div className="lg:hidden mt-3 sm:mt-8">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 border-t border-b border-[#E5E5E5] py-2.5 sm:py-5">
               {SERVICES_DATA.map((service, idx) => {
                 const ServiceIcon = service.icon;
                 return (
                   <div
                     key={idx}
-                    className="p-5 bg-white border border-[#E5E5E5] rounded-xl space-y-3.5 shadow-xs flex flex-col justify-between"
+                    className="p-2.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group"
                   >
-                    <div className="space-y-3">
+                    <div>
                       <div className="flex items-center justify-between">
-                        <div className="w-10 h-10 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0">
-                          <ServiceIcon className="w-5 h-5 text-[#101820]" />
-                          <span className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
+                        <div className="w-6 h-6 sm:w-8.5 sm:h-8.5 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0 group-hover:border-[#00BCD4]/40 transition-colors">
+                          <ServiceIcon className="w-3 h-3 sm:w-4 sm:h-4 text-[#101820]" />
+                          <span className="absolute bottom-0.5 right-0.5 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#00BCD4]" />
                         </div>
-                        <span className="text-xs font-mono font-bold text-slate-400">
+                        <span className="text-[9px] sm:text-xs font-mono font-bold text-slate-400">
                           {service.num}
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-[#101820] tracking-tight">
+                      <h3 className="text-[11.5px] xs:text-xs sm:text-base font-bold text-[#101820] tracking-tight leading-snug line-clamp-1 xs:line-clamp-2 mt-1 sm:mt-2.5 group-hover:text-[#00BCD4] transition-colors">
                         {service.title}
                       </h3>
 
-                      <p className="text-sm text-[#56616B] leading-relaxed">
+                      <p className="text-[10px] xs:text-[10.5px] sm:text-xs text-[#56616B] leading-relaxed line-clamp-2 mt-0.5 sm:mt-1.5 font-normal">
                         {service.description}
                       </p>
-
-                      <div className="pt-2 border-t border-dashed border-[#E5E5E5]">
-                        {service.capabilities.map((cap, cIdx) => (
-                          <div
-                            key={cIdx}
-                            className="py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-sm font-medium text-[#101820]"
-                          >
-                            <span>{cap}</span>
-                            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
-                          </div>
-                        ))}
-                      </div>
                     </div>
 
-                    <div className="pt-3 border-t border-[#E5E5E5] mt-4">
+                    <div className="pt-1.5 sm:pt-2.5 mt-2 sm:mt-3 border-t border-[#E5E5E5]">
                       <Link
                         href={service.href}
-                        className="inline-flex items-center justify-between w-full text-sm font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors"
+                        className="inline-flex items-center justify-between w-full text-[10.5px] sm:text-xs font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors group/link"
                       >
                         <span>Explore Service</span>
-                        <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                        <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover/link:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -643,13 +659,13 @@ export default function HomePage() {
             </div>
 
             {/* TABLET & MOBILE Centered 'View All Services' Button */}
-            <div className="text-center pt-6">
+            <div className="text-center pt-3 sm:pt-6">
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-sm font-extrabold tracking-tight transition-all duration-200 shadow-xs group cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-5 sm:px-8 h-9 sm:h-12 rounded-full bg-white border border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-[#050505] text-xs sm:text-sm font-extrabold tracking-tight transition-all duration-200 shadow-xs group cursor-pointer"
               >
                 <span>View All Services</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -659,12 +675,12 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 3: ABOUT CODEPLACED — COMPACT BLACK SECTION (#000000) */}
       {/* ===================================================================== */}
-      <section className="py-8 sm:py-9.5 bg-[#000000] border-b border-[#292929] text-white flex items-center">
+      <section className="py-7 sm:py-8 lg:py-9.5 bg-[#000000] border-b border-[#292929] text-white flex items-center">
         <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row items-center gap-3.5 sm:gap-6 lg:gap-12">
             {/* Left Column (45%): Team Photograph */}
             <div className="w-full lg:w-[45%] flex items-center">
-              <div className="relative w-full rounded-2xl overflow-hidden border border-[#292929] bg-[#0B0B0B] shadow-2xl h-[260px] sm:h-[330px] lg:h-[390px] min-h-[260px] group">
+              <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-[#292929] bg-[#0B0B0B] shadow-2xl h-[135px] xs:h-[155px] sm:h-[240px] lg:h-[390px] min-h-0 group">
                 <Image
                   src="/images/about-team-collab.jpg"
                   alt="CodePlaced senior engineering team collaborating in modern office"
@@ -677,64 +693,64 @@ export default function HomePage() {
             </div>
 
             {/* Right Column (55%): Company Content, Principles, Verified Stats & CTA */}
-            <div className="w-full lg:w-[55%] flex flex-col justify-between space-y-4 lg:pl-3">
-              <div className="space-y-2.5">
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+            <div className="w-full lg:w-[55%] flex flex-col justify-between space-y-2.5 sm:space-y-4 lg:pl-3">
+              <div className="space-y-1 sm:space-y-2">
+                <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
                   ABOUT CODEPLACED
                 </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold tracking-tight text-white leading-tight">
+                <h2 className="text-lg xs:text-xl sm:text-2xl lg:text-[36px] font-extrabold tracking-tight text-white leading-tight">
                   Your Technology Partner for What&apos;s Next.
                 </h2>
-                <div className="space-y-2 text-sm sm:text-base text-[#D1D5DB] leading-relaxed">
+                <div className="space-y-1 sm:space-y-1.5 text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed">
                   <p>
                     CodePlaced works with businesses to understand their challenges and develop technology solutions that make a practical difference.
                   </p>
-                  <p>
+                  <p className="hidden sm:block">
                     Our work brings together software engineering, data platforms, analytics, and AI to help organizations improve operations, connect systems, and build scalable digital products.
                   </p>
                 </div>
               </div>
 
               {/* Three Value Highlights / Principles */}
-              <div className="space-y-2 pt-0.5">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
+              <div className="space-y-1 sm:space-y-2 pt-0.5">
+                <h3 className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-white">
                   What Drives Our Work
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-3">
                   {/* Highlight 1 */}
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-1.5">
-                    <div className="w-7 h-7 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <div className="p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] flex items-center sm:block gap-2.5 sm:space-y-1.5">
+                    <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">Business-First</h4>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Business-First</h4>
+                      <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
                         Focusing on measurable ROI before writing code.
                       </p>
                     </div>
                   </div>
 
                   {/* Highlight 2 */}
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-1.5">
-                    <div className="w-7 h-7 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <Layers className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <div className="p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] flex items-center sm:block gap-2.5 sm:space-y-1.5">
+                    <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <Layers className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">Practical Engineering</h4>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Practical Engineering</h4>
+                      <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
                         Battle-tested architectures your teams can maintain.
                       </p>
                     </div>
                   </div>
 
                   {/* Highlight 3 */}
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-1.5">
-                    <div className="w-7 h-7 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <Users className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <div className="p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] flex items-center sm:block gap-2.5 sm:space-y-1.5">
+                    <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">Long-Term Partnership</h4>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Long-Term Partnership</h4>
+                      <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
                         High velocity, transparent milestones, real value.
                       </p>
                     </div>
@@ -742,37 +758,37 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Verified Metrics Cards: Clean 4-Column Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-0.5">
-                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">100+</div>
-                  <div className="text-xs font-medium text-slate-400">Deployments</div>
+              {/* Verified Metrics Cards: Clean 2x2 on Mobile, 4-Column on sm: */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2.5 pt-0.5">
+                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
+                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">100+</div>
+                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Deployments</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">95%</div>
-                  <div className="text-xs font-medium text-slate-400">Retention Rate</div>
+                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
+                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">95%</div>
+                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Retention Rate</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">2–4 Wks</div>
-                  <div className="text-xs font-medium text-slate-400">Sprint Delivery</div>
+                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
+                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">2–4 Wks</div>
+                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Sprint Delivery</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs">
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">99.99%</div>
-                  <div className="text-xs font-medium text-slate-400">Production SLA</div>
+                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
+                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">99.99%</div>
+                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Production SLA</div>
                 </div>
               </div>
 
               {/* Prominent Learn More CTA */}
-              <div className="pt-1.5">
+              <div className="pt-0.5">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] text-sm sm:text-base font-extrabold tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 sm:px-6 h-9 sm:h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] text-xs sm:text-sm font-extrabold tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 active:scale-95 group cursor-pointer"
                 >
                   <span>Learn More About Us</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
                 </Link>
               </div>
             </div>
@@ -783,49 +799,49 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 4: FEATURED CASE STUDY — COMPACT WHITE SECTION WITH BLACK CARD */}
       {/* ===================================================================== */}
-      <section id="featured-work" className="py-8 sm:py-9.5 bg-[#FFFFFF] border-b border-[#E5E7EB] text-[#111827]">
+      <section id="featured-work" className="py-7 sm:py-8 lg:py-9.5 bg-[#FFFFFF] border-b border-[#E5E7EB] text-[#111827]">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header with Left-Aligned Title and Right-Aligned Link (Nexora Reference) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5 sm:mb-6">
-            <div className="space-y-1.5 max-w-2xl text-left">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+          {/* Section Header with Left-Aligned Title and Right-Aligned Link */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-2.5 sm:gap-4 mb-3 sm:mb-6">
+            <div className="space-y-1 max-w-2xl text-left">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
                 FEATURED CASE STUDY
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
                 Real Projects. Measurable Impact.
               </h2>
-              <p className="text-sm sm:text-base text-[#56616B] leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm md:text-base text-[#56616B] leading-relaxed font-normal">
                 Explore how we transform business requirements into working digital products.
               </p>
             </div>
 
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#111827] hover:text-[#00AFC8] transition-colors group self-start md:self-end pb-1 border-b-2 border-[#111827]/20 hover:border-[#00AFC8]"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm md:text-base font-bold text-[#111827] hover:text-[#00AFC8] transition-colors group self-start md:self-end pb-1 border-b-2 border-[#111827]/20 hover:border-[#00AFC8]"
             >
               <span>View All Case Studies</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
             </Link>
           </div>
 
-          {/* Premium Black Project Showcase Card (12-14px border radius, subtle hover scale & border) */}
-          <div className="group bg-[#000000] rounded-[14px] border border-[#242424] hover:border-[#383838] p-5 sm:p-7 lg:p-8 text-white shadow-2xl relative overflow-hidden transition-all duration-300">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-9 items-center">
-              {/* Left Column (55%): Device Showcase with Authentic Tuitionstime Screens */}
+          {/* Premium Black Project Showcase Card */}
+          <div className="group bg-[#000000] rounded-xl sm:rounded-[14px] border border-[#242424] hover:border-[#383838] p-3 sm:p-6 lg:p-8 text-white shadow-2xl relative overflow-hidden transition-all duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-7 lg:gap-9 items-center">
+              {/* Left Column: Device Showcase with Authentic Tuitionstime Screens */}
               <div className="lg:col-span-7 flex flex-col items-center justify-center relative">
                 <div className="relative w-full flex items-center justify-center transform group-hover:scale-[1.02] transition-transform duration-300 ease-out">
-                  {/* Large MacBook Pro displaying authentic Tuitionstime website */}
+                  {/* Large MacBook Pro */}
                   <Image
                     src="/images/case-studies/tuitionstime/tuitionstime-photorealistic-laptop-hero.webp"
                     alt="Tuitionstime marketplace website interface on MacBook Pro"
                     width={1100}
                     height={730}
                     priority
-                    className="w-full h-auto object-contain max-h-[320px] sm:max-h-[360px] lg:max-h-[400px] drop-shadow-2xl"
+                    className="w-full h-auto object-contain max-h-[160px] xs:max-h-[190px] sm:max-h-[280px] lg:max-h-[400px] drop-shadow-2xl"
                   />
 
-                  {/* Photorealistic Black Titanium Smartphone Mockup displaying Tuitionstime Tutor Discovery */}
-                  <div className="absolute -bottom-3 sm:-bottom-4 right-0 sm:right-3 md:right-5 lg:right-2 xl:right-5 w-[110px] xs:w-[125px] sm:w-[145px] md:w-[160px] lg:w-[170px] xl:w-[185px] z-10 pointer-events-none select-none transition-transform duration-300 group-hover:translate-y-[-2px]">
+                  {/* Photorealistic Black Titanium Smartphone Mockup */}
+                  <div className="absolute -bottom-1.5 sm:-bottom-4 right-0 sm:right-3 md:right-5 lg:right-2 xl:right-5 w-[75px] xs:w-[90px] sm:w-[135px] md:w-[160px] lg:w-[170px] xl:w-[185px] z-10 pointer-events-none select-none transition-transform duration-300 group-hover:translate-y-[-2px]">
                     <Image
                       src="/images/case-studies/tuitionstime/tuitionstime-phone-photorealistic.webp"
                       alt="Tuitionstime mobile tutor discovery platform on premium smartphone"
@@ -837,79 +853,79 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Right Column (45%): Project Information & Features */}
-              <div className="lg:col-span-5 space-y-3.5">
-                <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] text-xs font-mono font-bold uppercase tracking-wider">
+              {/* Right Column: Project Information & Features */}
+              <div className="lg:col-span-5 space-y-2 sm:space-y-3.5">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] text-[9.5px] sm:text-xs font-mono font-bold uppercase tracking-wider">
                   EDTECH &bull; DIGITAL MARKETPLACE
                 </div>
 
-                <h3 className="text-xl sm:text-2xl lg:text-[28px] xl:text-[30px] font-extrabold text-white tracking-tight leading-tight">
+                <h3 className="text-base xs:text-lg sm:text-2xl lg:text-[28px] xl:text-[30px] font-extrabold text-white tracking-tight leading-tight">
                   Tuitionstime — A Complete EdTech Marketplace
                 </h3>
 
-                <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                   A connected education platform bringing students, tutors, and parents together through tutor discovery, online classes, learning management, and communication tools.
                 </p>
 
                 {/* Four Concise Platform Features */}
-                <div className="grid grid-cols-2 gap-2 pt-0.5">
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
-                    <Search className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
+                <div className="grid grid-cols-2 gap-1 sm:gap-2 pt-0.5">
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-1.5 sm:gap-2">
+                    <Search className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-[10px] sm:text-[13px] font-semibold text-slate-200 line-clamp-1">
                       Tutor Discovery & Matching
                     </span>
                   </div>
 
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-1.5 sm:gap-2">
+                    <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-[10px] sm:text-[13px] font-semibold text-slate-200 line-clamp-1">
                       Online Class Booking
                     </span>
                   </div>
 
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
-                    <Clock className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-1.5 sm:gap-2">
+                    <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-[10px] sm:text-[13px] font-semibold text-slate-200 line-clamp-1">
                       Class & Schedule Management
                     </span>
                   </div>
 
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-2">
-                    <GraduationCap className="w-3.5 h-3.5 text-[#00BCD4] shrink-0" />
-                    <span className="text-xs sm:text-[13px] font-semibold text-slate-200">
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] flex items-center gap-1.5 sm:gap-2">
+                    <GraduationCap className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4] shrink-0" />
+                    <span className="text-[10px] sm:text-[13px] font-semibold text-slate-200 line-clamp-1">
                       Student & Tutor Experiences
                     </span>
                   </div>
                 </div>
 
                 {/* Verified Project Metrics in Clean Horizontal Row */}
-                <div className="grid grid-cols-3 gap-2 pt-0.5">
-                  <div className="p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
-                    <div className="text-lg sm:text-xl font-black text-[#00BCD4]">10K+</div>
-                    <div className="text-[11px] sm:text-xs text-slate-400 font-medium">Active Students</div>
+                <div className="grid grid-cols-3 gap-1 sm:gap-2 pt-0.5">
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
+                    <div className="text-sm sm:text-xl font-black text-[#00BCD4]">10K+</div>
+                    <div className="text-[9.5px] sm:text-xs text-slate-400 font-medium leading-tight">Active Students</div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
-                    <div className="text-lg sm:text-xl font-black text-[#00BCD4]">2K+</div>
-                    <div className="text-[11px] sm:text-xs text-slate-400 font-medium">Expert Tutors</div>
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
+                    <div className="text-sm sm:text-xl font-black text-[#00BCD4]">2K+</div>
+                    <div className="text-[9.5px] sm:text-xs text-slate-400 font-medium leading-tight">Expert Tutors</div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
-                    <div className="text-lg sm:text-xl font-black text-[#00BCD4]">50K+</div>
-                    <div className="text-[11px] sm:text-xs text-slate-400 font-medium">Classes Completed</div>
+                  <div className="p-1.5 sm:p-2.5 rounded-md sm:rounded-xl bg-[#0B0B0B] border border-[#242424] text-center space-y-0.5">
+                    <div className="text-sm sm:text-xl font-black text-[#00BCD4]">50K+</div>
+                    <div className="text-[9.5px] sm:text-xs text-slate-400 font-medium leading-tight">Classes Completed</div>
                   </div>
                 </div>
 
-                {/* Primary CTA Button with Smooth Hover Motion */}
+                {/* Primary CTA Button */}
                 <div className="pt-0.5">
                   <Link
                     href="/case-studies/tuitionstime"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-9 sm:h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 cursor-pointer text-center"
                   >
                     <span>Explore Case Study</span>
-                    <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-1.5 transition-transform duration-300" />
                   </Link>
                 </div>
               </div>
@@ -921,47 +937,47 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 5: INDUSTRIES WE SERVE — PURE BLACK WITH WHITE HOVER CARDS */}
       {/* ===================================================================== */}
-      <section className="py-8 sm:py-9.5 bg-[#000000] border-b border-[#292929] text-white">
+      <section className="py-7 sm:py-8 lg:py-9.5 bg-[#000000] border-b border-[#292929] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading & Supporting Text */}
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
               CROSS-INDUSTRY DOMAIN EXPERTISE
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               Industries We Serve
             </h2>
-            <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed">
               We work with businesses across industries to build solutions that address real operational and technology challenges.
             </p>
           </div>
 
-          {/* 6 Structured Industry Cards (3-Column Desktop Grid) with Refined White Hover Transition */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4.5">
+          {/* 6 Structured Industry Cards: 2-Column on Mobile (3 Rows), 3-Column on lg: */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3.5 lg:gap-4.5">
             {INDUSTRIES_DATA.map((industry, idx) => {
               const IndIcon = industry.icon;
               return (
                 <Link
                   key={idx}
                   href={industry.href}
-                  className="group p-5 rounded-2xl bg-[#0B0B0B] hover:bg-[#FFFFFF] focus-visible:bg-[#FFFFFF] border border-[#262626] hover:border-[#E5E7EB] focus-visible:border-[#E5E7EB] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
+                  className="group p-2.5 sm:p-4 lg:p-5 rounded-lg sm:rounded-2xl bg-[#0B0B0B] hover:bg-[#FFFFFF] focus-visible:bg-[#FFFFFF] border border-[#262626] hover:border-[#E5E7EB] focus-visible:border-[#E5E7EB] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-1.5 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      {/* Icon Container: retains cyan icon, subtle container with hover transition */}
-                      <div className="w-10 h-10 rounded-xl bg-[#161616] group-hover:bg-[#00BCD4]/10 group-focus-visible:bg-[#00BCD4]/10 border border-[#262626] group-hover:border-[#00BCD4]/30 flex items-center justify-center transition-colors duration-300">
-                        <IndIcon className="w-5 h-5 text-[#00BCD4]" />
+                      {/* Icon Container */}
+                      <div className="w-6 h-6 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-md sm:rounded-xl bg-[#161616] group-hover:bg-[#00BCD4]/10 group-focus-visible:bg-[#00BCD4]/10 border border-[#262626] group-hover:border-[#00BCD4]/30 flex items-center justify-center transition-colors duration-300">
+                        <IndIcon className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-[#00BCD4]" />
                       </div>
-                      <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-[#00BCD4] group-focus-visible:text-[#00BCD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                      <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-slate-500 group-hover:text-[#00BCD4] group-focus-visible:text-[#00BCD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                     </div>
 
-                    {/* Title: white by default, near-black #111111 on hover */}
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#111111] group-focus-visible:text-[#111111] transition-colors duration-300 tracking-tight">
+                    {/* Title */}
+                    <h3 className="text-[11.5px] xs:text-xs sm:text-base lg:text-lg font-bold text-white group-hover:text-[#111111] group-focus-visible:text-[#111111] transition-colors duration-300 tracking-tight line-clamp-1 mt-1 sm:mt-3">
                       {industry.title}
                     </h3>
 
-                    {/* Description: light gray by default, dark gray #4B5563 on hover */}
-                    <p className="text-xs sm:text-sm text-[#9CA3AF] group-hover:text-[#4B5563] group-focus-visible:text-[#4B5563] leading-relaxed transition-colors duration-300">
+                    {/* Description */}
+                    <p className="text-[10px] xs:text-[10.5px] sm:text-xs lg:text-sm text-[#9CA3AF] group-hover:text-[#4B5563] group-focus-visible:text-[#4B5563] leading-snug line-clamp-2 mt-0.5 sm:mt-1.5 transition-colors duration-300">
                       {industry.description}
                     </p>
                   </div>
@@ -975,44 +991,46 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 6: OUR PROCESS — COMPACT WHITE SECTION (#FFFFFF) */}
       {/* ===================================================================== */}
-      <section className="py-7.5 sm:py-9 bg-[#FFFFFF] border-b border-[#E5E7EB] text-[#111827]">
+      <section className="py-7 sm:py-8 lg:py-9 bg-[#FFFFFF] border-b border-[#E5E7EB] text-[#111827]">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
               HOW WE WORK
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
               A Clear Path From Idea to Impact.
             </h2>
-            <p className="text-sm sm:text-base text-[#56616B] leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm md:text-base text-[#56616B] leading-relaxed font-normal">
               Our proven delivery framework ensures transparency, velocity, and measurable business outcomes.
             </p>
           </div>
 
-          {/* 4 Connected Phases with Subtle Flow Connector */}
+          {/* 4 Connected Phases: 2x2 Grid on Mobile, 4-Column on Desktop */}
           <div className="relative">
             {/* Desktop Connecting Line */}
             <div className="hidden lg:block absolute top-8 sm:top-9 left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-[#00AFC8]/20 via-[#00AFC8]/50 to-[#00AFC8]/20 z-0" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 relative z-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5 lg:gap-5 relative z-10">
               {PROCESS_STEPS.map((step, idx) => (
                 <div
                   key={idx}
-                  className="p-4.5 sm:p-5 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#00AFC8] transition-all duration-300 space-y-3 group hover:-translate-y-1 hover:shadow-xl"
+                  className="p-2.5 sm:p-4 lg:p-5 rounded-lg sm:rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#00AFC8] transition-all duration-300 space-y-1.5 sm:space-y-3 group hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between"
                 >
-                  {/* Cyan Outlined Circular Step Badge */}
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-[#00AFC8] bg-[#FFFFFF] flex items-center justify-center text-xs sm:text-sm font-mono font-extrabold text-[#00AFC8] group-hover:bg-[#00AFC8]/10 transition-colors shadow-xs">
-                    {step.step}
+                  <div>
+                    {/* Cyan Outlined Circular Step Badge */}
+                    <div className="w-6 h-6 sm:w-8.5 sm:h-8.5 lg:w-10 lg:h-10 rounded-full border-2 border-[#00AFC8] bg-[#FFFFFF] flex items-center justify-center text-[10px] sm:text-xs lg:text-sm font-mono font-extrabold text-[#00AFC8] group-hover:bg-[#00AFC8]/10 transition-colors shadow-xs">
+                      {step.step}
+                    </div>
+
+                    <h3 className="text-[11.5px] xs:text-xs sm:text-base lg:text-lg font-bold text-[#111827] group-hover:text-[#00AFC8] transition-colors tracking-tight line-clamp-1 mt-1 sm:mt-2.5">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-[10px] xs:text-[10.5px] sm:text-xs lg:text-sm text-[#56616B] leading-snug font-normal line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-1.5">
+                      {step.description}
+                    </p>
                   </div>
-
-                  <h3 className="text-base sm:text-lg font-bold text-[#111827] group-hover:text-[#00AFC8] transition-colors tracking-tight">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-[#56616B] leading-relaxed font-normal">
-                    {step.description}
-                  </p>
                 </div>
               ))}
             </div>
@@ -1023,19 +1041,19 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 7: CLIENT TESTIMONIALS — COMPACT BLACK BACKGROUND (#000000) */}
       {/* ===================================================================== */}
-      <section className="py-7.5 sm:py-9 bg-[#000000] border-b border-[#292929] text-white">
+      <section className="py-7 sm:py-8 lg:py-9 bg-[#000000] border-b border-[#292929] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
               CLIENT SUCCESS
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               What Our Clients Say
             </h2>
           </div>
 
-          {/* 3-Column Testimonial Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5">
+          {/* DESKTOP (md: & above): 3-Column Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-3.5 sm:gap-5">
             {TESTIMONIALS_DATA.map((t, idx) => (
               <div
                 key={idx}
@@ -1068,33 +1086,117 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+
+          {/* MOBILE (md:hidden): Compact Swipeable Carousel with Dots & Controls */}
+          <div
+            className="md:hidden select-none"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="p-3.5 sm:p-5 rounded-xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/40 transition-all duration-300 flex flex-col justify-between shadow-lg min-h-0">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  {/* Star Rating */}
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(TESTIMONIALS_DATA[activeTestimonial].rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400" />
+                    ))}
+                  </div>
+                  <span className="text-[9.5px] font-mono text-slate-400 font-bold bg-[#161616] px-2 py-0.5 rounded-full border border-white/10">
+                    {activeTestimonial + 1} / {TESTIMONIALS_DATA.length}
+                  </span>
+                </div>
+
+                {/* Testimonial Quote */}
+                <p className="text-xs sm:text-sm text-[#E5E7EB] leading-relaxed italic font-normal">
+                  &ldquo;{TESTIMONIALS_DATA[activeTestimonial].quote}&rdquo;
+                </p>
+              </div>
+
+              {/* Author Info + Carousel Navigation */}
+              <div className="pt-2.5 mt-2.5 border-t border-[#292929] flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-[#292929] text-[#00BCD4] flex items-center justify-center font-bold text-[10px] sm:text-xs shrink-0">
+                    {TESTIMONIALS_DATA[activeTestimonial].initials}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-sm font-bold text-white truncate">
+                      {TESTIMONIALS_DATA[activeTestimonial].author}
+                    </div>
+                    <div className="text-[9.5px] sm:text-xs text-[#9CA3AF] truncate">
+                      {TESTIMONIALS_DATA[activeTestimonial].role}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Arrow Controls */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() =>
+                      setActiveTestimonial(
+                        (prev) => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length
+                      )
+                    }
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-white/10 text-white hover:text-[#00BCD4] hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors cursor-pointer"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS_DATA.length)
+                    }
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-white/10 text-white hover:text-[#00BCD4] hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors cursor-pointer"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center justify-center gap-1.5 mt-2">
+              {TESTIMONIALS_DATA.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveTestimonial(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeTestimonial === i ? "w-5 bg-[#00BCD4]" : "w-1.5 bg-slate-700 hover:bg-slate-500"
+                  }`}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ===================================================================== */}
       {/* SECTION 8: FAQ SECTION — COMPACT WHITE BACKGROUND (#FFFFFF) */}
       {/* ===================================================================== */}
-      <section className="py-8 sm:py-9.5 bg-[#FFFFFF] relative text-[#111827] border-b border-[#E5E7EB]">
+      <section className="py-7 sm:py-8 lg:py-9.5 bg-[#FFFFFF] relative text-[#111827] border-b border-[#E5E7EB]">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
             {/* Left Column */}
-            <div className="lg:col-span-5 space-y-3">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+            <div className="lg:col-span-5 space-y-2 sm:space-y-3">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
                 FAQS
               </span>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
                 Got Questions? We&apos;ve Got Answers.
               </h2>
 
-              <p className="text-sm sm:text-base text-[#56616B] leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm md:text-base text-[#56616B] leading-relaxed font-normal">
                 Find quick answers to common questions about our technical capabilities, engagement models, and delivery timelines.
               </p>
 
-              <div className="pt-1.5">
-                <div className="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] space-y-1">
-                  <h4 className="text-sm font-bold text-[#111827]">Have a custom inquiry?</h4>
-                  <p className="text-xs sm:text-sm text-[#56616B]">
+              <div className="pt-0.5 sm:pt-1.5">
+                <div className="p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] space-y-0.5 sm:space-y-1">
+                  <h4 className="text-xs sm:text-sm font-bold text-[#111827]">Have a custom inquiry?</h4>
+                  <p className="text-[10.5px] sm:text-xs md:text-sm text-[#56616B]">
                     Reach out to our leadership directly at{" "}
                     <a href="mailto:hello@codeplaced.com" className="text-[#00AFC8] hover:underline font-semibold">
                       hello@codeplaced.com
@@ -1105,23 +1207,23 @@ export default function HomePage() {
             </div>
 
             {/* Right Column (Accordion with Clean Dividers & Cyan Active State) */}
-            <div className="lg:col-span-7 space-y-2 sm:space-y-2.5">
+            <div className="lg:col-span-7 space-y-1.5 sm:space-y-2.5">
               {FAQ_ITEMS.map((faq, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
                     key={idx}
-                    className="rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] overflow-hidden transition-all duration-200 hover:border-[#00AFC8]/60"
+                    className="rounded-lg sm:rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] overflow-hidden transition-all duration-200 hover:border-[#00AFC8]/60"
                   >
                     <button
                       onClick={() => toggleFaq(idx)}
-                      className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between gap-4 cursor-pointer"
+                      className="w-full py-2.5 px-3 sm:p-3.5 lg:p-4 text-left flex items-center justify-between gap-2.5 cursor-pointer"
                     >
-                      <span className="text-sm sm:text-base font-bold text-[#111827] hover:text-[#00AFC8] transition-colors">
+                      <span className="text-xs sm:text-sm md:text-base font-bold text-[#111827] hover:text-[#00AFC8] transition-colors leading-snug">
                         {faq.question}
                       </span>
-                      <div className="w-7 h-7 rounded-full border border-[#E5E7EB] bg-white flex items-center justify-center shrink-0 text-[#00AFC8]">
-                        {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                      <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-full border border-[#E5E7EB] bg-white flex items-center justify-center shrink-0 text-[#00AFC8]">
+                        {isOpen ? <Minus className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : <Plus className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
                       </div>
                     </button>
 
@@ -1133,7 +1235,7 @@ export default function HomePage() {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.22, ease: "easeOut" }}
                         >
-                          <div className="px-3.5 sm:px-4 pb-3.5 pt-1 text-xs sm:text-sm text-[#4B5563] leading-relaxed border-t border-[#E5E7EB]">
+                          <div className="px-3 sm:px-4 pb-2.5 pt-1 text-xs sm:text-sm text-[#4B5563] leading-relaxed border-t border-[#E5E7EB]">
                             {faq.answer}
                           </div>
                         </motion.div>
@@ -1150,9 +1252,9 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 9: FINAL CTA BANNER — COMPACT BLACK PHOTOGRAPHIC BANNER (#000000) */}
       {/* ===================================================================== */}
-      <section className="py-6 sm:py-8 bg-[#000000] relative">
+      <section className="py-5 sm:py-8 bg-[#000000] relative">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#0B0B0B] border border-[#292929] shadow-2xl">
+          <div className="relative rounded-xl sm:rounded-3xl overflow-hidden bg-[#0B0B0B] border border-[#292929] shadow-2xl">
             {/* Background Photographic Image on Right with Tuned Contrast Gradient Overlay */}
             <div className="absolute top-0 right-0 w-full lg:w-3/5 h-full opacity-65 lg:opacity-85 pointer-events-none">
               <Image
@@ -1165,49 +1267,49 @@ export default function HomePage() {
             </div>
 
             {/* Left Content */}
-            <div className="relative z-10 p-6 sm:p-8 lg:p-9 max-w-2xl space-y-3.5">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+            <div className="relative z-10 p-3.5 sm:p-7 lg:p-9 max-w-2xl space-y-2 sm:space-y-3.5">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
                 START YOUR PROJECT
               </span>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+              <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 Ready to Build Something Intelligent?
               </h2>
 
-              <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
+              <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
                 Tell us what you&apos;re working on. We&apos;ll help you explore the right technology approach for your business.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-0.5">
                 <Link
                   href="/contact#contact-hero"
-                  className="inline-flex items-center justify-center gap-2 px-7 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer text-center"
                 >
                   <span>Book Strategy Call</span>
-                  <ArrowRight className="w-4 h-4 ml-0.5" />
+                  <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                 </Link>
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-7 h-11 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-sm sm:text-base border border-white/20 transition-all duration-200 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-base border border-white/20 transition-all duration-200 cursor-pointer text-center"
                 >
                   <span>Get in Touch</span>
                 </Link>
               </div>
 
               {/* 3 Small Supporting Trust Points */}
-              <div className="pt-3.5 border-t border-[#292929] flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300 font-medium">
+              <div className="pt-2 sm:pt-3.5 border-t border-[#292929] flex flex-wrap items-center gap-2.5 sm:gap-6 text-[10px] sm:text-xs text-slate-300 font-medium">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
                   <span>Fixed 2–4 Wk Sprints</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
                   <span>Bilateral NDA Guardrails</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#00BCD4]" />
+                  <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
                   <span>100% IP Ownership</span>
                 </div>
               </div>

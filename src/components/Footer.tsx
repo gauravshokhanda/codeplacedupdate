@@ -7,10 +7,6 @@ import {
   Mail,
   ArrowUp,
   ArrowRight,
-  Globe2,
-  MapPin,
-  Sparkles,
-  ShieldCheck,
 } from "lucide-react";
 import { CodePlacedLogo } from "./CodePlacedLogo";
 
@@ -18,41 +14,15 @@ interface FooterProps {
   onOpenBookAudit?: (scope?: string) => void;
 }
 
-const GLOBAL_OFFICES = [
-  {
-    country: "India",
-    flag: "🇮🇳",
-    city: "Jaipur, Rajasthan",
-    specialization: "Data Engineering, AI Systems & Product Development",
-  },
-  {
-    country: "United States",
-    flag: "🇺🇸",
-    city: "San Francisco / New York",
-    specialization: "Enterprise Consulting & Client Partnerships",
-  },
-  {
-    country: "United Kingdom",
-    flag: "🇬🇧",
-    city: "London",
-    specialization: "Fintech & Cloud Architecture",
-  },
-  {
-    country: "UAE",
-    flag: "🇦🇪",
-    city: "Dubai",
-    specialization: "Logistics, Retail & AI Transformation",
-  },
-];
-
 export function Footer({ onOpenBookAudit }: FooterProps) {
   const pathname = usePathname();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="bg-[#000000] text-slate-300 pt-10 sm:pt-12 pb-8 border-t border-[#292929] relative overflow-hidden font-sans select-none">
+    <footer className="bg-[#000000] text-slate-300 pt-6 sm:pt-10 pb-5 sm:pb-8 border-t border-[#292929] relative overflow-hidden font-sans select-none">
       {/* Background ambient lighting */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[200px] bg-[#00BCD4]/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -68,16 +38,16 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
         }}
       />
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-10">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 sm:space-y-8">
         {/* ========================================================================= */}
         {/* LAYER 1: BRAND POSITIONING & STRATEGY CONTACT ROW */}
         {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-[#292929]">
-          <div className="space-y-2.5 max-w-2xl">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3.5 sm:gap-6 pb-5 sm:pb-8 border-b border-[#292929]">
+          <div className="space-y-1 sm:space-y-2.5 max-w-2xl">
             <Link href="/" className="inline-block">
               <CodePlacedLogo variant="white" size="lg" />
             </Link>
-            <p className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            <p className="text-base sm:text-2xl font-black text-white tracking-tight">
               Technology That Turns Ideas Into Impact.
             </p>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl font-normal">
@@ -85,7 +55,7 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full lg:w-auto shrink-0">
             <Link
               href="/contact#contact-hero"
               onClick={(e) => {
@@ -95,7 +65,7 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
                   if (hero) hero.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
               }}
-              className="h-11 sm:h-12 px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group cursor-pointer"
+              className="h-9 sm:h-12 px-5 sm:px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group cursor-pointer"
             >
               <span>Book Strategy Call</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -103,7 +73,7 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
 
             <a
               href="mailto:hello@codeplaced.com"
-              className="h-11 sm:h-12 px-6 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/15 flex items-center justify-center gap-2 transition-all"
+              className="h-9 sm:h-12 px-4 sm:px-6 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/15 flex items-center justify-center gap-2 transition-all"
             >
               <Mail className="w-4 h-4 text-[#00BCD4]" />
               <span>hello@codeplaced.com</span>
@@ -112,54 +82,15 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
         </div>
 
         {/* ========================================================================= */}
-        {/* LAYER 2: GLOBAL PRESENCE (4 Location Hubs) */}
+        {/* LAYER 2: NAVIGATION COLUMNS (2-COL ON MOBILE, 4-COL ON DESKTOP) */}
         {/* ========================================================================= */}
-        <div className="space-y-3.5">
-          <div className="flex items-center gap-2">
-            <Globe2 className="w-4 h-4 text-[#00BCD4]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
-              Global Presence & Delivery Centers
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            {GLOBAL_OFFICES.map((office, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/40 transition-all duration-300 space-y-1.5 group"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base">{office.flag}</span>
-                    <span className="text-sm font-bold text-white group-hover:text-[#00BCD4] transition-colors">
-                      {office.country}
-                    </span>
-                  </div>
-                  <MapPin className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#00BCD4] transition-colors" />
-                </div>
-
-                <div className="text-xs font-semibold text-slate-300">
-                  {office.city}
-                </div>
-
-                <p className="text-[11px] text-slate-400 leading-snug pt-0.5">
-                  {office.specialization}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* LAYER 3: 4 NAVIGATION COLUMNS */}
-        {/* ========================================================================= */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 pt-8 border-t border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {/* Col 1: Company */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
               Company
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+            <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
                 <Link href="/about" className="hover:text-cyan-300 transition-colors block">
                   About
@@ -189,11 +120,11 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
           </div>
 
           {/* Col 2: Services */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
               Services
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+            <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
                 <Link href="/services" className="hover:text-cyan-300 transition-colors block">
                   App & Web Development
@@ -223,11 +154,11 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
           </div>
 
           {/* Col 3: Industries */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
               Industries
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+            <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
                 <Link href="/industries#ecommerce" className="hover:text-cyan-300 transition-colors block">
                   Ecommerce
@@ -262,11 +193,11 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
           </div>
 
           {/* Col 4: Technology Partners */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
               Technology Partners
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+            <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li className="text-slate-300 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                 <span>AWS</span>
@@ -296,14 +227,14 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
         </div>
 
         {/* ========================================================================= */}
-        {/* LAYER 4: BOTTOM ROW (Copyright, Privacy, Terms, LinkedIn, GitHub, Back to Top) */}
+        {/* LAYER 3: BOTTOM ROW (Copyright, Privacy, Terms, LinkedIn, GitHub, Back to Top) */}
         {/* ========================================================================= */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="pt-4 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-slate-400">
           <div>
             © 2026 CodePlaced Inc. All rights reserved.
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-slate-400">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-slate-400">
             <Link href="/privacy" className="hover:text-slate-200 transition-colors">
               Privacy Policy
             </Link>
@@ -333,11 +264,11 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 cursor-pointer text-[11px] sm:text-xs"
             aria-label="Back to top"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-cyan-300" />
+            <ArrowUp className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-300" />
           </button>
         </div>
       </div>
