@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   Workflow,
   ChevronRight,
+  ChevronDown,
   Search,
   ChevronLeft,
   Filter,
@@ -433,7 +434,9 @@ export default function IndustriesPage() {
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
   const [activeBlueprintId, setActiveBlueprintId] = useState("ecommerce-blueprint");
   const [solutionIndex, setSolutionIndex] = useState(0);
+  const [mobileSolutionId, setMobileSolutionId] = useState("ecommerce");
   const [selectedCapabilityId, setSelectedCapabilityId] = useState("ecommerce");
+  const [mobileExpandedCapability, setMobileExpandedCapability] = useState<string | null>(null);
 
   // Filtered industries logic
   const filteredIndustries = useMemo(() => {
@@ -465,6 +468,13 @@ export default function IndustriesPage() {
     );
   }, [selectedCapabilityId]);
 
+  const activeMobileSolution = useMemo(() => {
+    return (
+      FEATURED_SOLUTIONS.find((s) => s.id === mobileSolutionId) ||
+      FEATURED_SOLUTIONS[0]
+    );
+  }, [mobileSolutionId]);
+
   const handleNextSolution = () => {
     setSolutionIndex((prev) => (prev + 1) % FEATURED_SOLUTIONS.length);
   };
@@ -478,7 +488,7 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 1. HERO — INDUSTRIES WE TRANSFORM (PURE BLACK #000000 54/46 SPLIT WITH PHOTO) */}
       {/* ========================================================================= */}
-      <section className="relative w-full pt-28 pb-12 sm:pt-32 sm:pb-14 lg:pt-36 lg:pb-16 bg-[#000000] border-b border-[#1B242B] overflow-hidden">
+      <section className="relative w-full pt-20 pb-8 sm:pt-28 sm:pb-12 lg:pt-36 lg:pb-16 bg-[#000000] border-b border-[#1B242B] overflow-hidden">
         {/* Subtle Cyan Decorative Glow Behind Image */}
         <div
           className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[700px] h-[500px] pointer-events-none opacity-25 -z-0"
@@ -489,38 +499,38 @@ export default function IndustriesPage() {
         />
 
         <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Left 54% Column */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="lg:col-span-7 space-y-5 sm:space-y-6 text-left"
+              className="lg:col-span-7 space-y-4 sm:space-y-6 text-left"
             >
               {/* Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#101214] text-[#00BCD4] shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#00BCD4] animate-pulse" />
-                <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#101214] text-[#00BCD4] shadow-xs">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00BCD4] animate-pulse" />
+                <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
                   ENTERPRISE DOMAIN INTELLIGENCE
                 </span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-extrabold tracking-tight text-white leading-[1.08] [text-wrap:balance]">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-extrabold tracking-tight text-white leading-[1.12] sm:leading-[1.08] [text-wrap:balance]">
                 Digital Transformation<br />
                 Across <span className="text-[#00BCD4]">Critical Industries.</span>
               </h1>
 
               {/* Subheadline Description */}
-              <p className="text-base sm:text-[17px] text-slate-300 leading-relaxed font-normal max-w-2xl">
+              <p className="text-sm sm:text-[17px] text-slate-300 leading-relaxed font-normal max-w-2xl">
                 We engineer scalable digital platforms, modern cloud architectures, automated workflows, and data-driven systems tailored to the compliance, operational velocity, and growth demands of mission-critical industries.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-1">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-1">
                 <Link
                   href="/contact#contact-hero"
-                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-sm sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
                 >
                   <span>Schedule Strategy Call</span>
                   <ArrowRight className="w-4 h-4 ml-0.5" />
@@ -528,23 +538,23 @@ export default function IndustriesPage() {
 
                 <Link
                   href="/case-studies"
-                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 h-12 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-sm sm:text-base border border-white/15 hover:border-[#00BCD4]/60 transition-all duration-200 text-center"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 h-11 sm:h-12 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs sm:text-base border border-white/15 hover:border-[#00BCD4]/60 transition-all duration-200 text-center"
                 >
                   <span>Explore Case Studies</span>
                 </Link>
               </div>
 
-              {/* 4-Metric Trust Ribbon */}
-              <div className="pt-5 sm:pt-6 border-t border-[#1B242B] grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
+              {/* 4-Metric Trust Ribbon (2x2 on Mobile, 4-col on sm+) */}
+              <div className="pt-4 sm:pt-6 border-t border-[#1B242B] grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-5">
                 {TRUST_METRICS.map((metric) => (
-                  <div key={metric.label} className="space-y-0.5">
-                    <div className="text-2xl sm:text-3xl font-mono font-black text-[#00BCD4] tracking-tight">
+                  <div key={metric.label} className="p-2.5 sm:p-0 rounded-lg bg-[#101214]/60 sm:bg-transparent border border-[#1B242B]/40 sm:border-0 space-y-0.5">
+                    <div className="text-xl sm:text-3xl font-mono font-black text-[#00BCD4] tracking-tight">
                       {metric.value}
                     </div>
-                    <div className="text-xs font-bold text-white leading-tight">
+                    <div className="text-[11px] sm:text-xs font-bold text-white leading-tight">
                       {metric.label}
                     </div>
-                    <div className="text-[11px] text-[#A1AAB7] leading-tight">
+                    <div className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-tight">
                       {metric.sub}
                     </div>
                   </div>
@@ -552,17 +562,17 @@ export default function IndustriesPage() {
               </div>
             </motion.div>
 
-            {/* Right 46% Column: Prominent High-Quality Industry Visual with Subtle Cyan Aura */}
+            {/* Right 46% Column: Industry Visual */}
             <motion.div
               initial={{ opacity: 0, scale: 1.03 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 relative"
+              className="lg:col-span-5 relative mt-1 lg:mt-0"
             >
               {/* Subtle Cyan Decorative Curve Glow */}
               <div className="absolute -inset-2.5 rounded-3xl bg-gradient-to-tr from-[#00BCD4]/20 via-transparent to-[#00BCD4]/10 -z-10 blur-xl opacity-70" />
 
-              <div className="relative w-full h-[280px] sm:h-[340px] md:h-[390px] lg:h-[430px] rounded-2xl overflow-hidden border border-[#00BCD4]/30 shadow-2xl bg-[#101214]">
+              <div className="relative w-full h-[190px] xs:h-[220px] sm:h-[300px] md:h-[360px] lg:h-[430px] rounded-xl sm:rounded-2xl overflow-hidden border border-[#00BCD4]/30 shadow-2xl bg-[#101214]">
                 <Image
                   src="/images/industries-multi-domain-hero.jpg"
                   alt="CodePlaced digital transformation engineering across critical enterprise industries"
@@ -576,7 +586,7 @@ export default function IndustriesPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/70 via-transparent to-transparent pointer-events-none" />
 
                 {/* Verified badge pill */}
-                <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#000000]/85 backdrop-blur-md border border-[#00BCD4]/40 text-white text-[11px] font-mono">
+                <div className="absolute bottom-2.5 left-2.5 sm:bottom-4 sm:left-4 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#000000]/85 backdrop-blur-md border border-[#00BCD4]/40 text-white text-[10px] sm:text-[11px] font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
                   <span>One Technology Partner &bull; 6 Core Industries</span>
                 </div>
@@ -589,24 +599,24 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 2. FEATURED INDUSTRY SOLUTIONS — PURE BLACK #000000 CAROUSEL */}
       {/* ========================================================================= */}
-      <section id="featured-solutions" className="py-12 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
+      <section id="featured-solutions" className="py-10 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header with Carousel Controls */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-9">
-            <div className="space-y-2">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+          {/* Section Header with Desktop Carousel Controls */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 mb-6 sm:mb-8">
+            <div className="space-y-1.5 sm:space-y-2">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
                 FLAGSHIP SOLUTIONS
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-white tracking-tight">
+              <h2 className="text-xl sm:text-3xl lg:text-[38px] font-black text-white tracking-tight">
                 Featured Industry Solutions
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-base max-w-2xl leading-relaxed">
                 Deep-dive into battle-tested architectures solving high-impact domain challenges with measurable client outcomes.
               </p>
             </div>
 
-            {/* Slider Controls */}
-            <div className="flex items-center gap-2.5 self-start md:self-auto">
+            {/* Desktop Slider Controls */}
+            <div className="hidden lg:flex items-center gap-2.5">
               <button
                 onClick={handlePrevSolution}
                 className="w-10 h-10 rounded-full border border-[#1B242B] hover:border-[#00BCD4] bg-[#101214] hover:bg-[#101214]/80 text-white flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
@@ -624,8 +634,115 @@ export default function IndustriesPage() {
             </div>
           </div>
 
-          {/* Active Solution Card (Dark Gray #101214 with Thin Cyan Border) */}
-          <div className="relative overflow-hidden rounded-[24px] bg-[#101214] border border-[#00BCD4]/30 hover:border-[#00BCD4]/50 shadow-2xl p-6 sm:p-8 lg:p-9 transition-colors">
+          {/* MOBILE VIEW (lg:hidden): Horizontal Industry Tabs + Single Selected Solution Card */}
+          <div className="lg:hidden space-y-4">
+            {/* Horizontal Tabs */}
+            <div className="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap pb-1">
+              {FEATURED_SOLUTIONS.map((sol) => {
+                const isActive = activeMobileSolution.id === sol.id;
+                return (
+                  <button
+                    key={sol.id}
+                    onClick={() => setMobileSolutionId(sol.id)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                      isActive
+                        ? "bg-[#00BCD4] text-[#050505] shadow-xs font-black"
+                        : "bg-[#101214] hover:bg-[#101214]/80 text-slate-300 border border-[#1B242B]"
+                    }`}
+                  >
+                    {sol.industry}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Single Selected Solution Card */}
+            <div className="rounded-2xl bg-[#101214] border border-[#00BCD4]/30 p-4 sm:p-5 space-y-3.5 shadow-xl">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#00BCD4] bg-[#000000] px-2.5 py-0.5 rounded-full border border-[#00BCD4]/30">
+                  {activeMobileSolution.industry}
+                </span>
+                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  {activeMobileSolution.badge}
+                </span>
+              </div>
+
+              <h3 className="text-base sm:text-lg font-extrabold text-white leading-snug">
+                {activeMobileSolution.title}
+              </h3>
+
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {activeMobileSolution.desc}
+              </p>
+
+              {/* Data Flow Tag */}
+              <div className="text-[11px] font-mono bg-[#000000] p-2.5 rounded-xl border border-[#1B242B] text-slate-200 truncate">
+                <span className="text-[#00BCD4] font-bold">Data Flow: </span>
+                {activeMobileSolution.architecture}
+              </div>
+
+              {/* Tech Stack Chips */}
+              <div className="space-y-1">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Production Stack:
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {activeMobileSolution.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2 py-0.5 rounded-md bg-[#000000] border border-[#1B242B] text-[10px] font-mono font-bold text-white"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quantified Result Card */}
+              <div className="p-3.5 rounded-xl bg-[#000000] border border-[#00BCD4]/25 space-y-1.5">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
+                    Quantified Result
+                  </span>
+                  <span className="text-2xl font-mono font-black text-[#00BCD4]">
+                    {activeMobileSolution.metric}
+                  </span>
+                </div>
+                <div className="text-xs font-bold text-slate-200">
+                  {activeMobileSolution.metricLabel}
+                </div>
+                <div className="text-[11px] text-slate-300">
+                  {activeMobileSolution.highlight}
+                </div>
+                <div className="pt-2 border-t border-[#1B242B] flex items-center justify-between text-[10px] text-[#A1AAB7]">
+                  <span className="flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-[#00BCD4]" /> Production Audited
+                  </span>
+                  <span className="font-mono text-white">Fixed-Sprint Delivery</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-2 border-t border-[#1B242B] flex flex-col gap-2">
+                <Link
+                  href="/contact#contact-hero"
+                  className="w-full inline-flex items-center justify-center gap-1.5 h-10 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs shadow-md transition-all active:scale-95"
+                >
+                  <span>Deploy Similar Architecture</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/case-studies"
+                  className="w-full inline-flex items-center justify-center gap-1.5 h-10 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-[#1B242B] transition-all"
+                >
+                  <span>Read Case Studies</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* DESKTOP VIEW (hidden lg:block): Active Solution Card (Dark Gray #101214 with Thin Cyan Border) */}
+          <div className="hidden lg:block relative overflow-hidden rounded-[24px] bg-[#101214] border border-[#00BCD4]/30 hover:border-[#00BCD4]/50 shadow-2xl p-6 sm:p-8 lg:p-9 transition-colors">
             <AnimatePresence mode="wait">
               <motion.div
                 key={FEATURED_SOLUTIONS[solutionIndex].id}
@@ -748,13 +865,13 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 3. EXPLORE MISSION-CRITICAL INDUSTRIES — PURE WHITE #FFFFFF WITH DARK CARDS */}
       {/* ========================================================================= */}
-      <section id="industries-explorer" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
+      <section id="industries-explorer" className="py-10 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-2 mb-6 sm:mb-8">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
+          <div className="max-w-3xl mx-auto text-center space-y-1.5 sm:space-y-2 mb-5 sm:mb-8">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
               COMPLETE DOMAIN CATALOG
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
+            <h2 className="text-xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
               Explore Mission-Critical Industries
             </h2>
             <p className="text-[#566171] text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
@@ -763,7 +880,7 @@ export default function IndustriesPage() {
           </div>
 
           {/* Search & Category Filter Bar */}
-          <div className="p-3 sm:p-4 rounded-xl bg-[#F5F6F8] border border-slate-200 mb-6 space-y-2.5">
+          <div className="p-3 sm:p-4 rounded-xl bg-[#F5F6F8] border border-slate-200 mb-5 sm:mb-6 space-y-2.5">
             {/* Search Input */}
             <div className="relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#566171]" />
@@ -772,7 +889,7 @@ export default function IndustriesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by industry name, capability, or tech..."
-                className="w-full h-10 pl-10 pr-4 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-medium text-[#111111] placeholder:text-[#566171]/70 focus:outline-none focus:border-[#087FA5] transition-all"
+                className="w-full h-9 sm:h-10 pl-10 pr-4 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-medium text-[#111111] placeholder:text-[#566171]/70 focus:outline-none focus:border-[#087FA5] transition-all"
               />
               {searchQuery && (
                 <button
@@ -784,16 +901,16 @@ export default function IndustriesPage() {
               )}
             </div>
 
-            {/* Category Filter Chips */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-slate-200">
-              <span className="text-[11px] font-bold text-[#566171] mr-1 flex items-center gap-1">
+            {/* Category Filter Chips - Horizontally scrollable on mobile */}
+            <div className="flex items-center gap-1.5 pt-1.5 border-t border-slate-200 overflow-x-auto whitespace-nowrap pb-1">
+              <span className="text-[11px] font-bold text-[#566171] mr-1 flex items-center gap-1 shrink-0">
                 <Filter className="w-3 h-3" /> Category:
               </span>
               {FILTER_CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                     selectedCategory === cat
                       ? "bg-[#101820] text-white shadow-xs"
                       : "bg-white hover:bg-slate-100 text-[#566171] border border-slate-200"
@@ -805,8 +922,53 @@ export default function IndustriesPage() {
             </div>
           </div>
 
-          {/* 3-Column x 2-Row Grid on Desktop: Black/Dark-Gray (#101214) Cards with Thin Cyan Borders */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* MOBILE VIEW (md:hidden): Compact 2-Column Grid (2 cards per row) */}
+          <div className="grid grid-cols-2 md:hidden gap-2.5 sm:gap-3">
+            {filteredIndustries.map((ind, idx) => {
+              const IndIcon = ind.icon;
+
+              return (
+                <motion.div
+                  key={ind.id}
+                  id={`mobile-${ind.id}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10px" }}
+                  transition={{ duration: 0.3, delay: (idx % 6) * 0.04 }}
+                  className="rounded-xl bg-[#101214] border border-[#00BCD4]/25 hover:border-[#00BCD4] p-3 flex flex-col justify-between shadow-xs transition-all text-white group"
+                >
+                  <div>
+                    {/* Header: Small Cyan Icon + Badge */}
+                    <div className="flex items-center justify-between gap-1">
+                      <div className="w-7 h-7 rounded-lg bg-[#000000] text-[#00BCD4] border border-[#00BCD4]/30 flex items-center justify-center shrink-0">
+                        <IndIcon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[9px] font-mono font-bold text-[#00BCD4] bg-[#000000] px-1.5 py-0.5 rounded border border-[#00BCD4]/30 truncate max-w-[70px]">
+                        {ind.badge}
+                      </span>
+                    </div>
+
+                    {/* Title + 2-line Description */}
+                    <h3 className="text-xs sm:text-sm font-extrabold text-white mt-2 leading-snug line-clamp-1 group-hover:text-[#00BCD4] transition-colors">
+                      {ind.name}
+                    </h3>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300 mt-1 line-clamp-2 leading-tight">
+                      {ind.desc}
+                    </p>
+                  </div>
+
+                  {/* Clean Explore Link with Small Arrow */}
+                  <div className="mt-2.5 pt-2 border-t border-[#1B242B] flex items-center justify-between text-[10px] sm:text-xs font-bold text-[#00BCD4] group-hover:text-[#20d7f5] transition-colors">
+                    <span className="truncate">Explore</span>
+                    <ArrowUpRight className="w-3 h-3 shrink-0 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* DESKTOP VIEW (hidden md:grid): 3-Column x 2-Row Grid on Desktop */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredIndustries.map((ind, idx) => {
               const IndIcon = ind.icon;
 
@@ -900,13 +1062,13 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 4. INDUSTRY ARCHITECTURE BLUEPRINTS — PURE BLACK #000000 */}
       {/* ========================================================================= */}
-      <section id="blueprints" className="py-12 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
+      <section id="blueprints" className="py-10 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-2 mb-7 sm:mb-8">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+          <div className="max-w-3xl mx-auto text-center space-y-1.5 sm:space-y-2 mb-5 sm:mb-8">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
               TECHNICAL BLUEPRINTS
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-white tracking-tight">
+            <h2 className="text-xl sm:text-3xl lg:text-[38px] font-black text-white tracking-tight">
               Industry Architecture Blueprints
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
@@ -914,15 +1076,15 @@ export default function IndustriesPage() {
             </p>
           </div>
 
-          {/* Blueprint Selector Tabs with Cyan Active State */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-7">
+          {/* Blueprint Selector Tabs with Cyan Active State (Horizontal scroll on mobile) */}
+          <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap pb-1 mb-5 sm:mb-7">
             {BLUEPRINTS.map((bp) => {
               const isActive = activeBlueprintId === bp.id;
               return (
                 <button
                   key={bp.id}
                   onClick={() => setActiveBlueprintId(bp.id)}
-                  className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
                     isActive
                       ? "bg-[#00BCD4] text-[#050505] shadow-md shadow-[#00BCD4]/25"
                       : "bg-[#101214] hover:bg-[#101214]/80 text-slate-300 border border-[#1B242B]"
@@ -936,28 +1098,58 @@ export default function IndustriesPage() {
           </div>
 
           {/* Active Blueprint Visualization Panel */}
-          <div className="p-5 sm:p-7 rounded-[22px] bg-[#101214] border border-[#00BCD4]/25 shadow-xl space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#1B242B]">
+          <div className="p-4 sm:p-7 rounded-[20px] sm:rounded-[22px] bg-[#101214] border border-[#00BCD4]/25 shadow-xl space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 sm:pb-4 border-b border-[#1B242B]">
               <div>
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
+                <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
                   {activeBlueprint.domain} Architecture Specification
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-white mt-0.5">
+                <h3 className="text-base sm:text-2xl font-black text-white mt-0.5">
                   {activeBlueprint.name}
                 </h3>
               </div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] sm:text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30">
                   {activeBlueprint.badge}
                 </span>
-                <span className="text-xs font-mono text-white bg-[#000000] px-2.5 py-0.5 rounded-full border border-[#1B242B] font-bold">
+                <span className="text-[10px] sm:text-xs font-mono text-white bg-[#000000] px-2 py-0.5 rounded-full border border-[#1B242B] font-bold">
                   {activeBlueprint.sla}
                 </span>
               </div>
             </div>
 
-            {/* Horizontal 5-Step Pipeline Flow with Cyan Connecting Arrows */}
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
+            {/* MOBILE VIEW (md:hidden): Compact Vertical Pipeline Stack */}
+            <div className="md:hidden space-y-2">
+              {activeBlueprint.steps.map((step) => (
+                <div
+                  key={step.num}
+                  className="p-3 rounded-xl bg-[#000000] border border-[#1B242B] flex items-start gap-2.5"
+                >
+                  <span className="w-6 h-6 rounded-md bg-[#101214] text-[#00BCD4] font-mono text-xs font-black flex items-center justify-center border border-[#00BCD4]/30 shrink-0 mt-0.5">
+                    {step.num}
+                  </span>
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <div className="flex items-center justify-between gap-1.5">
+                      <h4 className="text-xs font-bold text-white truncate">
+                        {step.title}
+                      </h4>
+                      <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30 shrink-0">
+                        {step.tag}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">
+                      {step.desc}
+                    </p>
+                    <div className="text-[10px] font-mono text-[#00BCD4] font-semibold truncate pt-0.5">
+                      {step.tech}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* DESKTOP VIEW (hidden md:grid): Horizontal 5-Step Pipeline Flow with Cyan Connecting Arrows */}
+            <div className="hidden md:grid md:grid-cols-5 gap-3 relative">
               {activeBlueprint.steps.map((step, idx) => (
                 <div
                   key={step.num}
@@ -997,13 +1189,13 @@ export default function IndustriesPage() {
             </div>
 
             {/* Bottom Actions in Blueprint */}
-            <div className="pt-4 border-t border-[#1B242B] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="pt-3.5 sm:pt-4 border-t border-[#1B242B] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 text-xs">
               <span className="text-[#A1AAB7] text-center sm:text-left text-[11px] sm:text-xs">
                 Need this exact architecture tailored to your cloud environment?
               </span>
               <Link
                 href="/contact#contact-hero"
-                className="inline-flex items-center justify-center gap-1.5 px-5 h-9 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs shadow-md transition-all whitespace-nowrap active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 px-5 h-9 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs shadow-md transition-all whitespace-nowrap active:scale-95 cursor-pointer text-center"
               >
                 <span>Request Full Architecture Spec</span>
                 <ArrowRight className="w-3 h-3" />
@@ -1014,24 +1206,146 @@ export default function IndustriesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. CAPABILITIES & TECH STACKS — PURE WHITE #FFFFFF TWO-COLUMN LAYOUT */}
+      {/* 5. CAPABILITIES & TECH STACKS — PURE WHITE #FFFFFF TWO-COLUMN / ACCORDION */}
       {/* ========================================================================= */}
-      <section id="capabilities" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
+      <section id="capabilities" className="py-10 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-2 mb-8 sm:mb-9">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
+          <div className="max-w-3xl mx-auto text-center space-y-1.5 sm:space-y-2 mb-6 sm:mb-9">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
               SPECIALIZED PRACTICES
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
+            <h2 className="text-xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
               Capabilities & Tech Stacks
             </h2>
-            <p className="text-[#566171] text-sm sm:text-base leading-relaxed">
+            <p className="text-[#566171] text-xs sm:text-base leading-relaxed">
               Explore domain challenges, tailored solutions, specialized tech stacks, and quantified outcomes.
             </p>
           </div>
 
-          {/* Two-Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* MOBILE VIEW (lg:hidden): Clean Accordion Layout */}
+          <div className="lg:hidden space-y-2.5">
+            {DETAILED_SERVICES.map((svc) => {
+              const isExpanded = mobileExpandedCapability === svc.id;
+              const SvcIcon = svc.icon;
+
+              return (
+                <div
+                  key={svc.id}
+                  className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-xs transition-all"
+                >
+                  <button
+                    onClick={() =>
+                      setMobileExpandedCapability(isExpanded ? null : svc.id)
+                    }
+                    className="w-full text-left p-3.5 flex items-center justify-between gap-3 bg-white hover:bg-slate-50 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                          isExpanded
+                            ? "bg-[#00BCD4] text-[#050505]"
+                            : "bg-[#F5F6F8] text-[#087FA5]"
+                        }`}
+                      >
+                        <SvcIcon className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-xs sm:text-sm font-bold text-[#111111] truncate">
+                          {svc.name}
+                        </div>
+                        <div className="text-[11px] text-[#566171] truncate">
+                          {svc.summary}
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`w-4 h-4 text-[#566171] shrink-0 transition-transform duration-200 ${
+                        isExpanded ? "rotate-180 text-[#087FA5]" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {isExpanded && (
+                    <div className="p-3.5 pt-2 border-t border-slate-100 bg-[#F8FAFC] space-y-3 text-xs">
+                      {/* Challenge */}
+                      <div className="p-2.5 rounded-lg bg-white border border-rose-100 space-y-1">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-600">
+                          Industry Challenge:
+                        </span>
+                        <p className="text-[11px] text-[#566171] leading-relaxed">
+                          {svc.challenge}
+                        </p>
+                      </div>
+
+                      {/* Engineered Solutions */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                          Engineered Solutions:
+                        </span>
+                        <div className="space-y-1.5">
+                          {svc.solutions.map((sol) => (
+                            <div
+                              key={sol}
+                              className="p-2 rounded-lg bg-white border border-slate-200 flex items-start gap-2 text-[11px] font-semibold text-[#111111]"
+                            >
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#00BCD4] shrink-0 mt-0.5" />
+                              <span>{sol}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Tech Stack */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                          Production Tech Stack:
+                        </span>
+                        <div className="flex flex-wrap gap-1">
+                          {svc.techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-2 py-0.5 rounded bg-white border border-slate-200 text-[10px] font-mono font-bold text-[#111111]"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Quantified Outcomes */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                          Quantified Client Outcomes:
+                        </span>
+                        <div className="space-y-1">
+                          {svc.outcomes.map((out) => (
+                            <div key={out} className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-700">
+                              <Check className="w-3 h-3 text-emerald-600 shrink-0" />
+                              <span>{out}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* CTA Button */}
+                      <div className="pt-2 border-t border-slate-200">
+                        <Link
+                          href="/contact#contact-hero"
+                          className="w-full inline-flex items-center justify-center gap-1.5 h-9 rounded-full bg-[#101820] hover:bg-black text-white font-bold text-xs transition-all shadow-xs"
+                        >
+                          <span>Consult Practice Lead</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* DESKTOP VIEW (hidden lg:grid): Two-Column Layout */}
+          <div className="hidden lg:grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
             {/* Left Column (~33%): Vertical List of 6 Industries */}
             <div className="lg:col-span-4 space-y-2">
               {DETAILED_SERVICES.map((svc) => {
@@ -1178,32 +1492,32 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 6. TRUSTED INDUSTRIES & ENTERPRISE IMPACT — PURE BLACK #000000 */}
       {/* ========================================================================= */}
-      <section className="py-12 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
-          {/* Top: 6 Compact Industry Cards in a Horizontal Row */}
-          <div className="space-y-4 text-center">
+      <section className="py-10 sm:py-14 lg:py-16 bg-[#000000] border-b border-[#1B242B] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+          {/* Top: 6 Compact Industry Cards in a 3-Col Mobile / 6-Col Desktop Row */}
+          <div className="space-y-3.5 text-center">
             <div className="space-y-1">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
                 TRUSTED DOMAINS
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-black text-white tracking-tight">
                 Engineered for High-Stakes Sectors
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
               {INDUSTRIES_LIST.map((ind) => {
                 const IndIcon = ind.icon;
                 return (
                   <a
                     key={ind.id}
                     href={`#${ind.id}`}
-                    className="p-4 rounded-xl bg-[#101214] border border-[#1B242B] hover:border-[#00BCD4]/60 transition-all text-center flex flex-col items-center justify-center gap-2 group cursor-pointer shadow-xs"
+                    className="p-2.5 sm:p-4 rounded-xl bg-[#101214] border border-[#1B242B] hover:border-[#00BCD4]/60 transition-all text-center flex flex-col items-center justify-center gap-1.5 sm:gap-2 group cursor-pointer shadow-xs"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-[#000000] border border-[#1B242B] group-hover:border-[#00BCD4]/40 flex items-center justify-center text-[#00BCD4]">
-                      <IndIcon className="w-4 h-4" />
+                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[#000000] border border-[#1B242B] group-hover:border-[#00BCD4]/40 flex items-center justify-center text-[#00BCD4]">
+                      <IndIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
-                    <span className="text-xs font-bold text-white group-hover:text-[#00BCD4] transition-colors leading-tight">
+                    <span className="text-[11px] sm:text-xs font-bold text-white group-hover:text-[#00BCD4] transition-colors leading-tight line-clamp-1">
                       {ind.name}
                     </span>
                   </a>
@@ -1212,13 +1526,13 @@ export default function IndustriesPage() {
             </div>
           </div>
 
-          {/* Bottom: 4 Impact Metrics in Equal-Sized Cards */}
-          <div className="pt-8 sm:pt-10 border-t border-[#1B242B]">
-            <div className="max-w-3xl mx-auto text-center space-y-2 mb-8 sm:mb-9">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
+          {/* Bottom: 4 Impact Metrics in 2x2 Grid on Mobile, 4-Col on Desktop */}
+          <div className="pt-6 sm:pt-10 border-t border-[#1B242B]">
+            <div className="max-w-3xl mx-auto text-center space-y-1.5 sm:space-y-2 mb-6 sm:mb-9">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4]">
                 MEASURED RETURN ON INVESTMENT
               </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <h3 className="text-xl sm:text-3xl font-black text-white tracking-tight">
                 Enterprise Scale & Institutional Impact
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -1226,30 +1540,30 @@ export default function IndustriesPage() {
               </p>
             </div>
 
-            {/* Clean 4-Metric Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
-                <div className="text-3xl sm:text-4xl font-mono font-black text-[#00BCD4]">100+</div>
-                <div className="text-xs sm:text-sm font-bold text-white">Production Deployments</div>
-                <p className="text-[11px] text-[#A1AAB7] leading-relaxed">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
+            {/* Compact 2x2 on Mobile, 4-col on Desktop Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5">
+              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">100+</div>
+                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Production Deployments</div>
+                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
-                <div className="text-3xl sm:text-4xl font-mono font-black text-[#00BCD4]">95%</div>
-                <div className="text-xs sm:text-sm font-bold text-white">Client Retention</div>
-                <p className="text-[11px] text-[#A1AAB7] leading-relaxed">Long-term engineering partnerships across multi-year modernization roadmaps.</p>
+              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">95%</div>
+                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Client Retention</div>
+                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">Long-term engineering partnerships across modernization roadmaps.</p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
-                <div className="text-3xl sm:text-4xl font-mono font-black text-[#00BCD4]">99.99%</div>
-                <div className="text-xs sm:text-sm font-bold text-white">Verified SLA Guarantee</div>
-                <p className="text-[11px] text-[#A1AAB7] leading-relaxed">High-availability streaming pipelines and private cloud configurations.</p>
+              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">99.99%</div>
+                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Verified SLA Guarantee</div>
+                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">High-availability streaming pipelines and cloud configs.</p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
-                <div className="text-3xl sm:text-4xl font-mono font-black text-emerald-400">$140M+</div>
-                <div className="text-xs sm:text-sm font-bold text-emerald-400">Client Value Unlocked</div>
-                <p className="text-[11px] text-[#A1AAB7] leading-relaxed">Combined cloud infrastructure savings and operational margin growth.</p>
+              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-emerald-400">$140M+</div>
+                <div className="text-xs sm:text-sm font-bold text-emerald-400 leading-tight">Client Value Unlocked</div>
+                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">Combined cloud infrastructure savings and margin growth.</p>
               </div>
             </div>
           </div>
@@ -1259,13 +1573,13 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 7. INDUSTRY RESEARCH & ARCHITECTURE GUIDES — PURE WHITE #FFFFFF */}
       {/* ========================================================================= */}
-      <section id="research" className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
+      <section id="research" className="py-10 sm:py-14 lg:py-16 bg-[#FFFFFF] text-[#111111] border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-2 mb-8 sm:mb-9">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
+          <div className="max-w-3xl mx-auto text-center space-y-1.5 sm:space-y-2 mb-6 sm:mb-9">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#087FA5]">
               ENGINEERING PLAYBOOKS
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
+            <h2 className="text-xl sm:text-3xl lg:text-[38px] font-black text-[#111111] tracking-tight">
               Industry Research & Architecture Guides
             </h2>
             <p className="text-[#566171] text-xs sm:text-sm leading-relaxed">
@@ -1273,8 +1587,58 @@ export default function IndustriesPage() {
             </p>
           </div>
 
-          {/* 3-Column Article Card Design with Photo on Top */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* MOBILE VIEW (md:hidden): Compact Horizontal Swipeable Carousel */}
+          <div className="md:hidden flex overflow-x-auto gap-3 pb-2 snap-x snap-mandatory">
+            {RESEARCH_PAPERS.map((paper) => (
+              <div
+                key={paper.title}
+                className="w-[78vw] max-w-[280px] shrink-0 snap-start rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between overflow-hidden group"
+              >
+                <div>
+                  {/* Photo on Top */}
+                  <div className="relative w-full h-32 bg-slate-900 overflow-hidden">
+                    <Image
+                      src={paper.image}
+                      alt={paper.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 80vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                    <span className="absolute top-2.5 left-2.5 font-mono font-bold text-[#00BCD4] bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-full text-[9px] border border-[#00BCD4]/30">
+                      {paper.category}
+                    </span>
+                    <span className="absolute bottom-2.5 right-2.5 text-white text-[10px] font-mono bg-black/70 px-1.5 py-0.5 rounded">
+                      {paper.readTime}
+                    </span>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-3.5 space-y-1.5">
+                    <h3 className="text-xs sm:text-sm font-extrabold text-[#111111] leading-snug line-clamp-2 group-hover:text-[#087FA5] transition-colors">
+                      {paper.title}
+                    </h3>
+                    <p className="text-[11px] text-[#566171] leading-relaxed line-clamp-2">
+                      {paper.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-3.5 pb-3.5 pt-2 border-t border-slate-100">
+                  <Link
+                    href={paper.href}
+                    className="text-xs font-bold text-[#087FA5] group-hover:text-[#00BCD4] inline-flex items-center gap-1.5 transition-colors"
+                  >
+                    <span>Read Guide</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* DESKTOP VIEW (hidden md:grid): 3-Column Article Card Design */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
             {RESEARCH_PAPERS.map((paper) => (
               <div
                 key={paper.title}
@@ -1328,9 +1692,9 @@ export default function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 8. FINAL CTA BANNER — WHITE SECTION BACKGROUND WITH BLACK CARD BANNER */}
       {/* ========================================================================= */}
-      <section className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] text-white">
+      <section className="py-10 sm:py-14 lg:py-16 bg-[#FFFFFF] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-[28px] p-7 sm:p-10 lg:p-12 text-center overflow-hidden bg-[#000000] border border-[#00BCD4]/30 text-white shadow-2xl space-y-5">
+          <div className="relative rounded-[22px] sm:rounded-[28px] p-6 sm:p-10 lg:p-12 text-center overflow-hidden bg-[#000000] border border-[#00BCD4]/30 text-white shadow-2xl space-y-4 sm:space-y-5">
             {/* Subtle Cyan Aura / Curve */}
             <div
               className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none opacity-20 -z-0"
@@ -1340,11 +1704,11 @@ export default function IndustriesPage() {
               }}
             />
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#00BCD4]/10 text-[#00BCD4] border border-[#00BCD4]/30 relative z-10">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-[#00BCD4]/10 text-[#00BCD4] border border-[#00BCD4]/30 relative z-10">
               <Sparkles className="w-3.5 h-3.5 text-[#00BCD4]" /> Start Your 2–4 Week Industry Engagement
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black max-w-2xl mx-auto text-white tracking-tight leading-tight relative z-10">
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-black max-w-2xl mx-auto text-white tracking-tight leading-tight relative z-10">
               Ready to Engineer Mission-Critical Systems for Your Industry?
             </h2>
 
@@ -1352,7 +1716,7 @@ export default function IndustriesPage() {
               Schedule a 30-minute technical architecture review directly with our Principal Engineers. We execute mutual NDAs upfront.
             </p>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 relative z-10">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 relative z-10">
               <Link
                 href="/contact#contact-hero"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-lg transition-all active:scale-95 cursor-pointer"
