@@ -126,28 +126,23 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
             </h4>
             <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
-                <Link href="/services" className="hover:text-cyan-300 transition-colors block">
-                  App & Web Development
+                <Link href="/services/ai-copilots" className="hover:text-cyan-300 transition-colors block">
+                  AI & Automation
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-cyan-300 transition-colors block">
+                <Link href="/services/app-web-development" className="hover:text-cyan-300 transition-colors block">
+                  Software Development
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/executive-dashboards" className="hover:text-cyan-300 transition-colors block">
+                  Data Analytics & Business Intelligence
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/data-engineering-analytics" className="hover:text-cyan-300 transition-colors block">
                   Data Engineering
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-cyan-300 transition-colors block">
-                  Analytics & BI
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-cyan-300 transition-colors block">
-                  Digital Marketing
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-cyan-300 transition-colors block">
-                  AI Services
                 </Link>
               </li>
             </ul>

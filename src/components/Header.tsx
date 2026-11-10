@@ -332,68 +332,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                             transition={{ duration: 0.25 }}
                             className="overflow-hidden pl-3 pr-1 space-y-3 pt-2"
                           >
-                            {/* 1. App & Web Development */}
+                            {/* 1. AI & Automation */}
                             <div className="space-y-1">
                               <Link
-                                href="/services/app-web-development"
+                                href="/services/ai-copilots"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
                               >
-                                01. App & Web Development
-                              </Link>
-                              <div className="pl-2 space-y-1">
-                                <Link
-                                  href="/services/app-web-development"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Mobile & Web Applications
-                                </Link>
-                                <Link
-                                  href="/services/cloud-infrastructure"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Cloud Modernization & FinOps
-                                </Link>
-                              </div>
-                            </div>
-
-                            {/* 2. Data Engineering & Analytics */}
-                            <div className="space-y-1">
-                              <Link
-                                href="/services/data-engineering-analytics"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
-                              >
-                                02. Data Engineering & Analytics
-                              </Link>
-                              <div className="pl-2 space-y-1">
-                                <Link
-                                  href="/services/data-platforms"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Data Platforms & Lakehouses
-                                </Link>
-                                <Link
-                                  href="/services/executive-dashboards"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Executive BI & Power BI Cockpits
-                                </Link>
-                              </div>
-                            </div>
-
-                            {/* 3. AI Services & Agents */}
-                            <div className="space-y-1">
-                              <Link
-                                href="/services/ai-services"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
-                              >
-                                03. AI Services & Agents
+                                01. AI & Automation
                               </Link>
                               <div className="pl-2 space-y-1">
                                 <Link
@@ -408,34 +354,88 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                                   onClick={() => setMobileMenuOpen(false)}
                                   className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
-                                  • Autonomous Multi-Agent Swarms
+                                  • Autonomous Agent Swarms & Workflows
                                 </Link>
                               </div>
                             </div>
 
-                            {/* 4. Digital & Social Marketing */}
+                            {/* 2. Software Development */}
                             <div className="space-y-1">
                               <Link
-                                href="/services/digital-social-marketing"
+                                href="/services/app-web-development"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
                               >
-                                04. Digital & Social Marketing
+                                02. Software Development
                               </Link>
                               <div className="pl-2 space-y-1">
                                 <Link
-                                  href="/services/digital-social-marketing"
+                                  href="/services/app-web-development"
                                   onClick={() => setMobileMenuOpen(false)}
                                   className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
-                                  • Paid Ads & Programmatic SEO
+                                  • Web & Native Mobile Applications
                                 </Link>
                                 <Link
-                                  href="/services/digital-social-marketing"
+                                  href="/services/cloud-infrastructure"
                                   onClick={() => setMobileMenuOpen(false)}
                                   className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
                                 >
-                                  • Marketing Analytics & Attribution
+                                  • Cloud Platforms & SaaS Systems
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* 3. Data Analytics & Business Intelligence */}
+                            <div className="space-y-1">
+                              <Link
+                                href="/services/executive-dashboards"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
+                              >
+                                03. Data Analytics & Business Intelligence
+                              </Link>
+                              <div className="pl-2 space-y-1">
+                                <Link
+                                  href="/services/executive-dashboards"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
+                                >
+                                  • Executive BI & Power BI Cockpits
+                                </Link>
+                                <Link
+                                  href="/services/embedded-analytics"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
+                                >
+                                  • KPI Telemetry & Attribution Systems
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* 4. Data Engineering */}
+                            <div className="space-y-1">
+                              <Link
+                                href="/services/data-engineering-analytics"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
+                              >
+                                04. Data Engineering
+                              </Link>
+                              <div className="pl-2 space-y-1">
+                                <Link
+                                  href="/services/data-platforms"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
+                                >
+                                  • Data Platforms & Lakehouses
+                                </Link>
+                                <Link
+                                  href="/services/data-engineering-analytics"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
+                                >
+                                  • Automated Pipelines & ETL/ELT
                                 </Link>
                               </div>
                             </div>

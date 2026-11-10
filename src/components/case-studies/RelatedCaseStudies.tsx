@@ -48,7 +48,7 @@ const ALL_CASE_STUDIES: RelatedCaseStudyItem[] = [
     brandIcon: Gamepad2,
     brandLogoUrl: "/images/case-studies/hoopwrld-logo-badge.png",
     titlePrefix: "Turning Gameplay Data Into ",
-    highlightWord: "Reliable Player Analytics.",
+    highlightWord: "Reliable Player Analytics",
     description:
       "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
     image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
@@ -68,7 +68,7 @@ const ALL_CASE_STUDIES: RelatedCaseStudyItem[] = [
     brand: "Progress Partners",
     brandIcon: BarChart3,
     titlePrefix: "Turning Complex Data Into ",
-    highlightWord: "Clearer Growth Decisions.",
+    highlightWord: "Clearer Growth Decisions",
     description:
       "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
     image: "/images/case-studies/progress-partners/hero-dashboard.webp",

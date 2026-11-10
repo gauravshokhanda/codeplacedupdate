@@ -99,7 +99,7 @@ const FEATURED_CASE_STUDIES: (CaseStudyData & {
       brandIcon: Gamepad2,
       brandLogoUrl: "/images/case-studies/hoopwrld-logo-badge.png",
       titlePrefix: "Turning Gameplay Data Into ",
-      highlightWord: "Reliable Player Analytics.",
+      highlightWord: "Reliable Player Analytics",
       description:
         "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
       image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
@@ -128,7 +128,7 @@ const FEATURED_CASE_STUDIES: (CaseStudyData & {
       brand: "Progress Partners",
       brandIcon: BarChart3,
       titlePrefix: "Turning Complex Data Into ",
-      highlightWord: "Clearer Growth Decisions.",
+      highlightWord: "Clearer Growth Decisions",
       description:
         "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
       image: "/images/case-studies/progress-partners/hero-dashboard.webp",
@@ -157,22 +157,22 @@ const APPROACH_STEPS = [
     step: "01",
     title: "Understand",
     description:
-      "Identify the business problem, clarify requirements, and establish what success should look like.",
-    shortDesc: "Clarify requirements and define measurable success.",
+      "Analyze the core commercial bottleneck, audit technical constraints, and define quantifiable KPIs for delivery.",
+    shortDesc: "Audit constraints and define quantifiable KPIs.",
   },
   {
     step: "02",
     title: "Engineer",
     description:
-      "Bring together development, data, and AI capabilities to build practical, scalable solutions.",
-    shortDesc: "Build scalable, production-ready digital solutions.",
+      "Deploy senior pods to architect and build high-performance software, data pipelines, and AI systems in rapid sprints.",
+    shortDesc: "Build scalable, production-ready systems in rapid sprints.",
   },
   {
     step: "03",
-    title: "Improve",
+    title: "Optimize",
     description:
-      "Refine solutions through testing, feedback, and evolving business requirements.",
-    shortDesc: "Iterate continuously through metrics and feedback.",
+      "Benchmark production telemetry, eliminate performance bottlenecks, and scale systems with proactive SLA support.",
+    shortDesc: "Benchmark telemetry and scale with proactive SLA support.",
   },
 ];
 
@@ -228,22 +228,20 @@ export default function CaseStudiesPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="space-y-2 sm:space-y-4"
           >
-            <h1 className="text-[28px] xs:text-3xl sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[80px] font-black tracking-tight text-white leading-tight md:leading-none whitespace-normal md:whitespace-nowrap">
-              Optimize. Innovate.{" "}
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] sm:leading-[1.08] [text-wrap:balance]">
+              Real Projects.{" "}
               <span
-                className="bg-clip-text text-transparent"
+                className="bg-clip-text text-transparent inline-block"
                 style={{
                   backgroundImage:
                     "linear-gradient(135deg, #00C7E8 0%, #087FA5 100%)",
                 }}
               >
-                Disrupt.
+                Measurable Impact.
               </span>
             </h1>
             <p className="text-xs sm:text-base lg:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl mx-auto">
-              Explore how CodePlaced engineers scalable digital products,
-              intelligent platforms, and enterprise solutions that turn ambitious
-              ideas into measurable business impact.
+              Explore how CodePlaced delivers production-grade applications, data platforms, and AI automation to help organizations achieve measurable business outcomes.
             </p>
           </motion.div>
 
@@ -396,10 +394,10 @@ export default function CaseStudiesPage() {
                 BEHIND EVERY PROJECT
               </div>
               <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[46px] font-black tracking-tight text-[#101820] leading-[1.15]">
-                From Business Challenges to Working Solutions.
+                From Business Challenges to Working Solutions
               </h2>
               <p className="mt-1.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[#566171] leading-relaxed">
-                We focus on understanding the challenge, engineering the right solution, and continuously improving what we build.
+                We focus on understanding the challenge, engineering the right solution, and continuously optimizing what we build.
               </p>
             </motion.div>
 
@@ -449,10 +447,10 @@ export default function CaseStudiesPage() {
               className="space-y-2.5 sm:space-y-4"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
-                Have a Project in Mind? Let&apos;s Build It Together.
+                Ready to Build Something Exceptional?
               </h2>
               <p className="text-xs sm:text-sm md:text-base text-[#A1A1AA] max-w-xl mx-auto leading-relaxed">
-                Partner with our engineering team to architect, build, and deploy high-performance software tailored to your goals.
+                Partner with our senior engineering pods to design, build, and deploy production software tailored to your commercial goals.
               </p>
             </motion.div>
 

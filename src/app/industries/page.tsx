@@ -44,7 +44,7 @@ const FEATURED_SOLUTIONS = [
     title: "Scalable Storefronts & Operations Automation",
     metric: "+18%",
     metricLabel: "Gross Margin Expansion",
-    desc: "Helping ecommerce businesses build scalable online stores, streamline operations, automate workflows, and turn customer and sales data into actionable insights.",
+    desc: "Scalable storefront architectures, automated inventory reconciliation, and real-time customer lifetime value analytics that drive sustainable margin growth.",
     tech: ["Shopify Plus", "Next.js", "Snowflake", "dbt", "PostgreSQL", "Stripe"],
     badge: "Omnichannel Scale",
     highlight: "14% blended customer CAC reduction and automated inventory reconciliation across multi-channel stores.",
@@ -56,7 +56,7 @@ const FEATURED_SOLUTIONS = [
     title: "Learning Platforms & Education Marketplaces",
     metric: "3.2x",
     metricLabel: "Student Engagement Lift",
-    desc: "Building learning platforms, education marketplaces, student management systems, and data-driven solutions that improve learning experiences and operational efficiency.",
+    desc: "Multi-sided education marketplaces, live video classroom infrastructure, and comprehensive student lifecycle portals designed for engagement and scale.",
     tech: ["Next.js", "React Native", "Node.js", "PostgreSQL", "BigQuery", "WebRTC"],
     badge: "Learning Systems",
     highlight: "Connecting students, parents, and tutors with automated scheduling, payments, and real-time learning analytics.",
@@ -68,7 +68,7 @@ const FEATURED_SOLUTIONS = [
     title: "Digital Policy Management & Claims Automation",
     metric: "74%",
     metricLabel: "Faster Claims Workflows",
-    desc: "Developing digital insurance solutions that simplify policy management, automate claims workflows, improve customer experiences, and support data-driven decision-making.",
+    desc: "Digital policy management platforms, automated claims document extraction, and real-time actuarial risk modeling that eliminate processing delays.",
     tech: ["Snowflake", "Python", "FastAPI", "React", "Looker Studio", "OCR AI"],
     badge: "Policy Automation",
     highlight: "Automated claims intake and underwriting validation with real-time actuarial risk modeling.",
@@ -80,7 +80,7 @@ const FEATURED_SOLUTIONS = [
     title: "Workforce Portals & Talent Automation Platform",
     metric: "65%",
     metricLabel: "Hiring Cycle Reduction",
-    desc: "Creating HR management systems, recruitment platforms, employee portals, and automation solutions that simplify hiring, workforce management, and reporting.",
+    desc: "Centralized employee lifecycle portals, automated candidate screening pipelines, and executive workforce reporting that streamline talent operations.",
     tech: ["Next.js", "Node.js", "PostgreSQL", "Tailwind CSS", "Redis", "Looker Studio"],
     badge: "Workforce Systems",
     highlight: "Unified employee lifecycle management, automated applicant tracking, and executive workforce headcount reporting.",
@@ -92,7 +92,7 @@ const FEATURED_SOLUTIONS = [
     title: "Patient Platforms & Secure Clinical Workflows",
     metric: "4.8x",
     metricLabel: "Faster Patient Intake",
-    desc: "Building healthcare platforms, patient management systems, appointment solutions, and secure digital workflows that improve operational efficiency and patient experiences.",
+    desc: "HIPAA-compliant patient portals, automated appointment scheduling, and secure clinical telemetry workflows that improve operational efficiency.",
     tech: ["FHIR", "HL7", "BigQuery", "Looker Studio", "Python", "FastAPI"],
     badge: "HIPAA Compliant",
     highlight: "18,000+ clinical hours saved annually with automated intake, appointment scheduling, and encrypted telemetry.",
@@ -517,13 +517,12 @@ export default function IndustriesPage() {
 
               {/* Main Headline */}
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-extrabold tracking-tight text-white leading-[1.12] sm:leading-[1.08] [text-wrap:balance]">
-                Digital Transformation<br />
-                Across <span className="text-[#00BCD4]">Critical Industries.</span>
+                Domain Engineering Built for <span className="text-[#00BCD4]">Industry Scale.</span>
               </h1>
 
               {/* Subheadline Description */}
               <p className="text-sm sm:text-[17px] text-slate-300 leading-relaxed font-normal max-w-2xl">
-                We engineer scalable digital platforms, modern cloud architectures, automated workflows, and data-driven systems tailored to the compliance, operational velocity, and growth demands of mission-critical industries.
+                We combine deep sector knowledge with production software engineering, AI automation, and cloud data platforms to solve complex operational and regulatory challenges.
               </p>
 
               {/* CTA Buttons */}

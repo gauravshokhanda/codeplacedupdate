@@ -60,24 +60,24 @@ const TRUSTED_LOGOS = [
 
 const CAPABILITY_CARDS = [
   {
-    title: "Data Engineering",
-    desc: "Modern data platforms, ETL pipelines, warehousing and governance.",
-    icon: Database,
-  },
-  {
     title: "AI & Automation",
-    desc: "LLM applications, AI agents, RAG systems and workflow automation.",
+    desc: "AI agents, private RAG knowledge bases, and workflow automation.",
     icon: Cpu,
   },
   {
-    title: "Cloud Architecture",
-    desc: "AWS, Azure, GCP infrastructure and scalable deployments.",
+    title: "Software Development",
+    desc: "Scalable web apps, native mobile platforms, and SaaS systems.",
+    icon: Code2,
+  },
+  {
+    title: "Data Analytics & BI",
+    desc: "Executive command centers, KPI telemetry, and predictive metrics.",
     icon: Cloud,
   },
   {
-    title: "Custom Software",
-    desc: "Web applications, SaaS platforms and enterprise systems.",
-    icon: Code2,
+    title: "Data Engineering",
+    desc: "Modern lakehouse architectures, ETL pipelines, and warehousing.",
+    icon: Database,
   },
 ];
 

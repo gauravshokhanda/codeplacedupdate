@@ -98,22 +98,22 @@ const HOW_WE_WORK_STEPS = [
   {
     num: "01",
     phase: "Understand",
-    desc: "We begin by understanding the business, its challenges, and what success should look like.",
+    desc: "We analyze your business objectives, audit technical bottlenecks, and define quantifiable milestones.",
   },
   {
     num: "02",
-    phase: "Plan",
-    desc: "We define a practical solution, establish priorities, and align the technical approach with business needs.",
+    phase: "Architect",
+    desc: "We design resilient system blueprints, API contracts, and security guardrails tailored for scale.",
   },
   {
     num: "03",
     phase: "Build",
-    desc: "Our team works across development, data, and AI to create solutions that are usable and scalable.",
+    desc: "Our senior pods deliver production-ready software, automated data pipelines, and AI systems in rapid sprints.",
   },
   {
     num: "04",
-    phase: "Improve",
-    desc: "We test, refine, and support continuous improvement based on feedback and real requirements.",
+    phase: "Scale",
+    desc: "We continuously benchmark production telemetry, optimize performance, and provide proactive SLA support.",
   },
 ];
 
@@ -268,9 +268,9 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.1, ease: EASING }}
                 className="text-[28px] xs:text-[32px] sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[62px] font-black leading-[1.12] sm:leading-[1.09] tracking-tight text-white [text-wrap:balance]"
               >
-                We Build Technology Around{" "}
+                Building Practical Technology Solutions That Deliver{" "}
                 <span className="text-[#00BCD4]">
-                  Real Business Challenges.
+                  Lasting Impact.
                 </span>
               </motion.h1>
 
@@ -281,7 +281,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.18, ease: EASING }}
                 className="text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed font-normal"
               >
-                CodePlaced brings together expertise in software development, data analytics, AI, and digital solutions to help businesses turn complex challenges into practical, scalable solutions.
+                CodePlaced is a modern technology partner. We combine senior full-stack engineering, advanced cloud data platforms, and practical AI automation to help organizations scale faster with less friction.
               </motion.p>
 
               {/* 4. Primary and Secondary CTAs */}
