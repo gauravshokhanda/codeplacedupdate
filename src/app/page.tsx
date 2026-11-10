@@ -52,12 +52,12 @@ const SERVICES_DATA = [
     num: "01",
     title: "AI & Automation",
     description:
-      "Build intelligent applications and automate business workflows with practical AI solutions.",
+      "Deploy intelligent AI agents, private RAG engines, and workflow automation that eliminate operational bottlenecks.",
     capabilities: [
-      "AI Agents & RAG",
-      "Workflow Automation",
-      "AI Integrations",
-      "Intelligent Applications",
+      "AI Agents & Workflow Swarms",
+      "Private RAG Knowledge Bases",
+      "Process & Task Automation",
+      "Document & Data Extraction",
     ],
     icon: Bot,
     href: "/services/ai-copilots",
@@ -66,12 +66,12 @@ const SERVICES_DATA = [
     num: "02",
     title: "Software Development",
     description:
-      "Build scalable digital products, web applications, mobile applications, and custom business software.",
+      "Build high-performance web apps, mobile applications, and multi-tenant SaaS platforms engineered for scale.",
     capabilities: [
       "Web & Mobile Applications",
-      "SaaS Development",
-      "Custom Software",
-      "API Integrations",
+      "Multi-Tenant SaaS Platforms",
+      "Custom Enterprise Software",
+      "High-Throughput APIs",
     ],
     icon: Code2,
     href: "/services/app-web-development",
@@ -80,12 +80,12 @@ const SERVICES_DATA = [
     num: "03",
     title: "Data Analytics & Business Intelligence",
     description:
-      "Turn business data into actionable insights through dashboards, reporting, and performance measurement.",
+      "Transform complex data into single-source-of-truth executive dashboards, KPI telemetry, and predictive metrics.",
     capabilities: [
-      "Executive Dashboards",
-      "Power BI & Tableau",
-      "Business Reporting",
-      "Data Visualization",
+      "Executive Cockpits & Dashboards",
+      "Power BI, Tableau & Looker",
+      "Cross-Platform Attribution",
+      "Cohort & Retention Analytics",
     ],
     icon: BarChart3,
     href: "/services/executive-dashboards",
@@ -94,12 +94,12 @@ const SERVICES_DATA = [
     num: "04",
     title: "Data Engineering",
     description:
-      "Build reliable data infrastructure that connects systems, automates pipelines, and makes information accessible.",
+      "Build resilient automated data pipelines, lakehouse architectures, and warehousing solutions with zero data loss.",
     capabilities: [
-      "Data Pipelines & ETL/ELT",
-      "Data Warehousing",
-      "Data Integration",
-      "Data Architecture",
+      "Automated ETL/ELT Pipelines",
+      "Lakehouse & Data Warehouses",
+      "Cross-System Integrations",
+      "Data Governance & SLA Audits",
     ],
     icon: Database,
     href: "/services/data-engineering-analytics",
@@ -113,42 +113,42 @@ const INDUSTRIES_DATA = [
   {
     title: "Ecommerce (D2C, B2B & B2C)",
     description:
-      "Helping ecommerce businesses build scalable online stores, streamline operations, automate workflows, and turn customer and sales data into actionable insights.",
+      "Scalable storefront architectures, automated inventory reconciliation, and real-time customer lifetime value analytics.",
     icon: ShoppingBag,
     href: "/industries#ecommerce",
   },
   {
     title: "EdTech",
     description:
-      "Building learning platforms, education marketplaces, student management systems, and data-driven solutions that improve learning experiences and operational efficiency.",
+      "Multi-sided education marketplaces, live video classroom infrastructure, and comprehensive student lifecycle portals.",
     icon: GraduationCap,
     href: "/industries#edtech",
   },
   {
     title: "Insurance",
     description:
-      "Developing digital insurance solutions that simplify policy management, automate claims workflows, improve customer experiences, and support data-driven decision-making.",
+      "Digital policy management platforms, automated claims document extraction, and real-time actuarial risk modeling.",
     icon: ShieldCheck,
     href: "/industries#insurance",
   },
   {
     title: "Human Resources",
     description:
-      "Creating HR management systems, recruitment platforms, employee portals, and automation solutions that simplify hiring, workforce management, and reporting.",
+      "Centralized employee lifecycle portals, automated candidate screening pipelines, and executive workforce reporting.",
     icon: Users,
     href: "/industries#human-resources",
   },
   {
     title: "Healthcare",
     description:
-      "Building healthcare platforms, patient management systems, appointment solutions, and secure digital workflows that improve operational efficiency and patient experiences.",
+      "HIPAA-compliant patient portals, automated appointment scheduling, and secure clinical telemetry workflows.",
     icon: HeartPulse,
     href: "/industries#healthcare",
   },
   {
     title: "Real Estate",
     description:
-      "Developing property marketplaces, listing platforms, CRM systems, and analytics solutions that streamline property management, lead tracking, and customer engagement.",
+      "Property marketplace platforms, automated CRM lead capture workflows, and predictive market valuation tools.",
     icon: Building2,
     href: "/industries#real-estate",
   },
@@ -162,25 +162,25 @@ const PROCESS_STEPS = [
     step: "01",
     title: "Discover & Plan",
     description:
-      "Deep technical audits, architecture mapping, and sprint roadmapping aligned with strategic business objectives.",
+      "Technical audit, architecture blueprints, and sprint roadmapping aligned with clear business KPIs.",
   },
   {
     step: "02",
     title: "Design & Build",
     description:
-      "Agile 2-week execution cycles delivering production-grade code, scalable microservices, and modern UI systems.",
+      "High-velocity 2-week agile sprints delivering modular code, scalable microservices, and modern UX.",
   },
   {
     step: "03",
     title: "Test & Launch",
     description:
-      "Rigorous end-to-end QA, security compliance, stress benchmarking, and zero-downtime deployment pipelines.",
+      "End-to-end security audits, load benchmarking, and automated zero-downtime production deployment.",
   },
   {
     step: "04",
     title: "Scale & Support",
     description:
-      "24/7 SLA infrastructure monitoring, predictive telemetry, performance tuning, and continuous feature expansion.",
+      "24/7 proactive infrastructure telemetry, performance optimization, and continuous feature expansion.",
   },
 ];
 
@@ -458,7 +458,7 @@ export default function HomePage() {
 
             {/* Description */}
             <p className="text-xs sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
-              We help businesses turn complex challenges into practical digital solutions through software development, data analytics, business intelligence, and AI-powered automation.
+              We build custom AI, data engineering & software solutions for high-growth companies. From strategic architecture to production systems, our senior engineering pods deliver with speed and precision.
             </p>
 
             {/* CTA Buttons */}
@@ -530,13 +530,13 @@ export default function HomePage() {
           {/* Centered Editorial Section Header with Clean Breathing Room */}
           <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1 sm:space-y-1.5 lg:space-y-2 2xl:space-y-2.5 shrink-0">
             <span className="text-[10.5px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              OUR EXPERTISE
+              CORE CAPABILITIES
             </span>
             <h2 className="text-xl sm:text-3xl lg:text-[28px] xl:text-[36px] 2xl:text-[44px] font-extrabold tracking-tight text-[#111827] leading-[1.15] lg:leading-[1.12] max-w-[760px] xl:max-w-[820px] mx-auto">
-              Technology Services Built Around Your Business Goals.
+              Everything You Need to Build and Scale to Market.
             </h2>
             <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal pt-0.5">
-              From building scalable digital products to engineering data foundations and intelligent automation, we build practical technology solutions tailored for business outcomes.
+              End-to-end technical solutions designed for scale, performance, and measurable business impact — from rapid MVP builds to enterprise-grade architectures.
             </p>
           </div>
 
@@ -696,17 +696,17 @@ export default function HomePage() {
             <div className="w-full lg:w-[55%] flex flex-col justify-between space-y-2.5 sm:space-y-4 lg:pl-3">
               <div className="space-y-1 sm:space-y-2">
                 <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                  ABOUT CODEPLACED
+                  WHY CHOOSE CODEPLACED
                 </span>
                 <h2 className="text-lg xs:text-xl sm:text-2xl lg:text-[36px] font-extrabold tracking-tight text-white leading-tight">
-                  Your Technology Partner for What&apos;s Next.
+                  Built for Speed, Scale & Engineering Excellence.
                 </h2>
                 <div className="space-y-1 sm:space-y-1.5 text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed">
                   <p>
-                    CodePlaced works with businesses to understand their challenges and develop technology solutions that make a practical difference.
+                    We combine deep technical expertise with rapid delivery to help high-growth companies build better products, faster.
                   </p>
                   <p className="hidden sm:block">
-                    Our work brings together software engineering, data platforms, analytics, and AI to help organizations improve operations, connect systems, and build scalable digital products.
+                    Our senior engineering pods take direct ownership from day one, delivering reliable software, clean data pipelines, and intelligent AI automation in fixed milestone sprints.
                   </p>
                 </div>
               </div>
@@ -714,7 +714,7 @@ export default function HomePage() {
               {/* Three Value Highlights / Principles */}
               <div className="space-y-1 sm:space-y-2 pt-0.5">
                 <h3 className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-white">
-                  What Drives Our Work
+                  Why High-Growth Companies Choose Us
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-3">
                   {/* Highlight 1 */}
@@ -723,9 +723,9 @@ export default function HomePage() {
                       <ShieldCheck className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Business-First</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Senior Engineers</h4>
                       <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
-                        Focusing on measurable ROI before writing code.
+                        Direct access to technical leads without junior handoffs.
                       </p>
                     </div>
                   </div>
@@ -736,9 +736,9 @@ export default function HomePage() {
                       <Layers className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Practical Engineering</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Fixed-Milestone Sprints</h4>
                       <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
-                        Battle-tested architectures your teams can maintain.
+                        Predictable 2–4 week delivery with continuous previews.
                       </p>
                     </div>
                   </div>
@@ -749,9 +749,9 @@ export default function HomePage() {
                       <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Long-Term Partnership</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Full IP Ownership</h4>
                       <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
-                        High velocity, transparent milestones, real value.
+                        Clean codebases, zero lock-in, and reliable long-term support.
                       </p>
                     </div>
                   </div>
@@ -805,13 +805,13 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-2.5 sm:gap-4 mb-3 sm:mb-6">
             <div className="space-y-1 max-w-2xl text-left">
               <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                FEATURED CASE STUDY
+                FEATURED CLIENT WORK
               </span>
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
                 Real Projects. Measurable Impact.
               </h2>
               <p className="text-xs sm:text-sm md:text-base text-[#56616B] leading-relaxed font-normal">
-                Explore how we transform business requirements into working digital products.
+                See how our senior engineering pods solve high-stakes challenges and launch products that scale.
               </p>
             </div>
 
@@ -864,7 +864,7 @@ export default function HomePage() {
                 </h3>
 
                 <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
-                  A connected education platform bringing students, tutors, and parents together through tutor discovery, online classes, learning management, and communication tools.
+                  A comprehensive digital education marketplace unifying tutor discovery, interactive video classrooms, real-time scheduling, automated payments, and student learning analytics.
                 </p>
 
                 {/* Four Concise Platform Features */}
@@ -945,10 +945,10 @@ export default function HomePage() {
               CROSS-INDUSTRY DOMAIN EXPERTISE
             </span>
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-              Industries We Serve
+              Industries We Transform
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed">
-              We work with businesses across industries to build solutions that address real operational and technology challenges.
+              We bring targeted technical and data expertise to solve the complex operational and scale challenges of high-demand sectors.
             </p>
           </div>
 
@@ -999,10 +999,10 @@ export default function HomePage() {
               HOW WE WORK
             </span>
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
-              A Clear Path From Idea to Impact.
+              A Clear Path From Discovery to Scale.
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-[#56616B] leading-relaxed font-normal">
-              Our proven delivery framework ensures transparency, velocity, and measurable business outcomes.
+              Our proven 4-stage delivery methodology ensures rapid velocity, technical rigor, and predictable milestones.
             </p>
           </div>
 
@@ -1269,15 +1269,15 @@ export default function HomePage() {
             {/* Left Content */}
             <div className="relative z-10 p-3.5 sm:p-7 lg:p-9 max-w-2xl space-y-2 sm:space-y-3.5">
               <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                START YOUR PROJECT
+                START YOUR ENGAGEMENT
               </span>
 
               <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                Ready to Build Something Intelligent?
+                Ready to Build Something Exceptional?
               </h2>
 
               <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
-                Tell us what you&apos;re working on. We&apos;ll help you explore the right technology approach for your business.
+                Tell us about your project. Our senior engineering team will evaluate your requirements and outline a practical delivery roadmap within 24 hours.
               </p>
 
               {/* Action Buttons */}

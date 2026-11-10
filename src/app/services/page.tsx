@@ -92,12 +92,12 @@ const HERO_TRUST_STATS = [
 
 // Delivery Process Steps (6 Steps)
 const DELIVERY_STEPS = [
-  { num: "01", name: "Discovery", desc: "Requirements gathering, KPI mapping & legacy tech stack audit", icon: Search },
-  { num: "02", name: "Planning", desc: "System architecture, OpenAPI specs & sprint roadmap", icon: Target },
-  { num: "03", name: "Design", desc: "Tokenized design systems, clickable Figma UX & user flows", icon: Layers },
-  { num: "04", name: "Development", desc: "Clean modular code, 2-week agile sprints & PR previews", icon: Code2 },
-  { num: "05", name: "Testing", desc: "100k synthetic load tests, security audits & QA sign-off", icon: ShieldCheck },
-  { num: "06", name: "Launch", desc: "Zero-downtime cutover, Datadog telemetry & 24/7 SLA", icon: Rocket },
+  { num: "01", name: "Discovery", desc: "Technical audit, architecture review & strategic milestone roadmap", icon: Search },
+  { num: "02", name: "Architecture", desc: "Scalable system design, API contracts & security guardrails", icon: Target },
+  { num: "03", name: "UX Engineering", desc: "Interactive Figma design systems & responsive user journeys", icon: Layers },
+  { num: "04", name: "Agile Sprints", desc: "High-velocity 2-week execution cycles with live staging previews", icon: Code2 },
+  { num: "05", name: "QA & Hardening", desc: "Automated end-to-end testing, security audits & load benchmarking", icon: ShieldCheck },
+  { num: "06", name: "Production Scale", desc: "Zero-downtime deployment, real-time telemetry & proactive 24/7 SLA", icon: Rocket },
 ];
 
 // Why CodePlaced Benefit Cards (6 Cards in Balanced 3-Column Grid)
@@ -703,10 +703,10 @@ export default function ServicesPage() {
                 className="text-[28px] xs:text-[32px] sm:text-5xl lg:text-[56px] xl:text-[64px] font-black tracking-tight text-white leading-[1.08]"
               >
                 <span className="block">
-                  Build. Scale. <span className="text-[#00BCD4]">Transform.</span>
+                  Engineering Excellence <span className="text-[#00BCD4]">Built for Scale.</span>
                 </span>
                 <span className="block text-xl xs:text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-bold text-neutral-200 mt-1.5 sm:mt-2.5 tracking-tight">
-                  Digital Products With Confidence.
+                  Custom Software, Data & AI Systems.
                 </span>
               </motion.h1>
 
@@ -717,7 +717,7 @@ export default function ServicesPage() {
                 transition={{ duration: 0.45, delay: 0.16, ease: "easeOut" }}
                 className="text-xs xs:text-sm sm:text-base lg:text-[17px] text-neutral-300 max-w-xl leading-relaxed font-normal"
               >
-                From custom applications and analytics platforms to AI-powered solutions and digital growth systems, we help organizations design, build, and scale technology that delivers measurable business impact.
+                We engineer enterprise software applications, production AI agents, automated data platforms, and executive BI command centers that deliver measurable business growth.
               </motion.p>
 
               {/* 4. Action CTA Buttons */}
