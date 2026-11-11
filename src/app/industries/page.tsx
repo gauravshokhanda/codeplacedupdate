@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -438,6 +438,29 @@ export default function IndustriesPage() {
   const [selectedCapabilityId, setSelectedCapabilityId] = useState("ecommerce");
   const [mobileExpandedCapability, setMobileExpandedCapability] = useState<string | null>(null);
 
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window === "undefined") return;
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+
+      setTimeout(() => {
+        const isMobile = window.innerWidth < 768;
+        const targetEl = isMobile
+          ? document.getElementById(`mobile-${hash}`) || document.getElementById(hash)
+          : document.getElementById(hash) || document.getElementById(`mobile-${hash}`);
+
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   // Filtered industries logic
   const filteredIndustries = useMemo(() => {
     return INDUSTRIES_LIST.filter((ind) => {
@@ -531,7 +554,7 @@ export default function IndustriesPage() {
                   href="/contact#contact-hero"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
                 >
-                  <span>Schedule Strategy Call</span>
+                  <span>Send an Inquiry</span>
                   <ArrowRight className="w-4 h-4 ml-0.5" />
                 </Link>
 
@@ -934,7 +957,7 @@ export default function IndustriesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-10px" }}
                   transition={{ duration: 0.3, delay: (idx % 6) * 0.04 }}
-                  className="rounded-xl bg-[#101214] border border-[#00BCD4]/25 hover:border-[#00BCD4] p-3 flex flex-col justify-between shadow-xs transition-all text-white group"
+                  className="rounded-xl bg-[#101214] border border-[#00BCD4]/25 hover:border-[#00BCD4] p-3 flex flex-col justify-between shadow-xs transition-all text-white group scroll-mt-24"
                 >
                   <div>
                     {/* Header: Small Cyan Icon + Badge */}
@@ -1720,7 +1743,7 @@ export default function IndustriesPage() {
                 href="/contact#contact-hero"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-lg transition-all active:scale-95 cursor-pointer"
               >
-                <span>Book Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
               </Link>
               <Link

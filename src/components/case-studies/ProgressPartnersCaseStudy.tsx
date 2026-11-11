@@ -768,7 +768,7 @@ export function ProgressPartnersCaseStudy() {
               href="/contact#contact-hero"
               className="px-7 py-3 rounded-full text-sm font-mono font-bold text-black bg-[#00BCD4] hover:bg-[#00C7E8] transition-all shadow-lg shadow-[#00BCD4]/25 hover:shadow-[#00BCD4]/40 cursor-pointer"
             >
-              Book a Strategy Call &rarr;
+              Send an Inquiry &rarr;
             </Link>
             <Link
               href="/case-studies"

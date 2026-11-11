@@ -118,7 +118,12 @@ const HOW_WE_WORK_STEPS = [
 ];
 
 // Meet Our Team
-const ENGINEERING_TEAM = [
+const ENGINEERING_TEAM: {
+  name: string;
+  role: string;
+  image: string;
+  imagePosition?: string;
+}[] = [
   {
     name: "Ankit",
     role: "Data Analyst Manager",
@@ -706,7 +711,7 @@ export default function AboutPage() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className={`w-full h-full object-cover ${(member as any).imagePosition || "object-top"} group-hover:scale-105 transition-transform duration-500 ease-out`}
+                    className={`w-full h-full object-cover ${member.imagePosition || "object-top"} group-hover:scale-105 transition-transform duration-500 ease-out`}
                   />
                 </div>
 
@@ -889,12 +894,12 @@ export default function AboutPage() {
               <h2 className="text-xl sm:text-3xl lg:text-4xl xl:text-[44px] font-black tracking-tight leading-[1.12] text-white">
                 Have a Business Challenge?{" "}
                 <span className="text-[#00BCD4]">
-                  Let's Find the Right Solution.
+                  Let&apos;s Find the Right Solution.
                 </span>
               </h2>
 
               <p className="text-xs sm:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed font-normal">
-                Tell us what you're building or what isn't working. We'll explore how the right technology can help.
+                Tell us what you&apos;re building or what isn&apos;t working. We&apos;ll explore how the right technology can help.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-1 sm:pt-2">
@@ -902,7 +907,7 @@ export default function AboutPage() {
                   href="/contact#contact-hero"
                   className="w-full sm:w-auto h-11 sm:h-12 px-7 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
                 >
-                  <span>Book Strategy Call</span>
+                  <span>Send an Inquiry</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
 

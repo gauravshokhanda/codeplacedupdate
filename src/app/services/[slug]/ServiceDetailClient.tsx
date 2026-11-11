@@ -120,7 +120,7 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
                   background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
                 }}
               >
-                <span>Schedule Discovery Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4 text-black" />
               </Link>
 
@@ -459,7 +459,7 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
                   background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
                 }}
               >
-                <span>Book Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4 text-black" />
               </Link>
 

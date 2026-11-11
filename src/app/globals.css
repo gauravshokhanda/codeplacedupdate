@@ -20,6 +20,17 @@
     box-sizing: border-box;
   }
 
+  html {
+    scroll-padding-top: 76px;
+    scrollbar-width: none;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      scroll-padding-top: 80px;
+    }
+  }
+
   body {
     background-color: #F7FBFF;
     color: #0F172A;
@@ -68,9 +79,6 @@
   height: 0;
 }
 
-html {
-  scrollbar-width: none;
-}
 
 /* Global Background System */
 .page-background {

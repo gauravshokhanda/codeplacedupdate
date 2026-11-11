@@ -363,7 +363,7 @@ export default function AiCopilotsPage() {
                 href="/contact#contact-hero"
                 className="w-full sm:w-auto h-[54px] px-8 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl shadow-[#00C8E8]/20 flex items-center justify-center gap-2.5 transition-all active:scale-95"
               >
-                <span>Book Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
@@ -1116,7 +1116,7 @@ export default function AiCopilotsPage() {
                 href="/contact"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl transition-all"
               >
-                <span>Book a Discovery Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

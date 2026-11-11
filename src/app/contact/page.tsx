@@ -161,7 +161,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How do we get started?",
-    a: "Simply submit the consultation form on this page or schedule a strategy call. A Principal Engineer will review your requirements and coordinate a 30-minute discovery session with clear timelines, architecture recommendations, and estimated scope within 24 hours.",
+    a: "Simply submit the inquiry form on this page. A Principal Engineer will review your requirements and coordinate an initial discovery session with clear timelines, architecture recommendations, and estimated scope within 24 hours.",
   },
 ];
 
@@ -335,7 +335,7 @@ export default function ContactPage() {
                 {/* Form Header */}
                 <div className="mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100 lg:border-[#1B242B]">
                   <h2 className="text-xl sm:text-[26px] font-black text-neutral-900 lg:text-white tracking-tight">
-                    Schedule a Strategy Call
+                    Send an Inquiry
                   </h2>
                   <p className="text-xs sm:text-sm text-neutral-500 lg:text-[#A1AAB7] mt-0.5 sm:mt-1">
                     Direct architectural conversation with our Principal Engineers.
@@ -352,12 +352,11 @@ export default function ContactPage() {
                       <CheckCircle2 className="w-8 h-8 sm:w-9 sm:h-9 stroke-[2.5]" />
                     </div>
                     <h3 className="text-xl sm:text-2xl font-black text-neutral-900 lg:text-white">
-                      Strategy Call Requested!
+                      Inquiry Received!
                     </h3>
                     <p className="text-neutral-600 lg:text-[#A1AAB7] text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
                       Thank you, <strong className="text-neutral-950 lg:text-white">{formData.fullName}</strong>. Our
-                      technical leadership has received your details and will coordinate your 30-min
-                      consultation within 24 hours.
+                      technical leadership has received your inquiry and will review your technical requirements within 24 hours.
                     </p>
                     <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-50 lg:bg-[#050505] border border-slate-200 lg:border-[#1B242B] text-left text-xs text-neutral-700 lg:text-[#A1AAB7] space-y-1.5 max-w-sm mx-auto">
                       <div>
@@ -527,7 +526,7 @@ export default function ContactPage() {
                           <span>Connecting with Engineering...</span>
                         ) : (
                           <>
-                            <span>Schedule Strategy Call</span>
+                            <span>Send an Inquiry</span>
                             <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
                           </>
                         )}
@@ -815,7 +814,7 @@ export default function ContactPage() {
                     background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
                   }}
                 >
-                  Book Strategy Call
+                  Send an Inquiry
                 </button>
               </div>
             </div>
@@ -1093,7 +1092,7 @@ export default function ContactPage() {
                 onClick={scrollToForm}
                 className="w-full sm:w-auto h-11 sm:h-[54px] px-8 rounded-xl text-black font-extrabold text-xs sm:text-[15px] transition-all shadow-xl flex items-center justify-center gap-2 active:scale-95 group cursor-pointer bg-[#00BCD4] hover:bg-[#20d7f5]"
               >
-                <span>Schedule Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
               </button>
 

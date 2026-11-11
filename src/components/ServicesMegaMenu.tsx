@@ -8,7 +8,6 @@ import {
   Smartphone,
   Layers,
   Boxes,
-  Palette,
   ShieldCheck,
   Bot,
   Sparkles,
@@ -18,7 +17,6 @@ import {
   Cloud,
   Workflow,
   Terminal,
-  Cpu,
   ArrowRight,
   Zap,
 } from "lucide-react";
@@ -30,14 +28,14 @@ interface ServicesMegaMenuProps {
   isDarkTheme?: boolean;
 }
 
-interface ServiceLink {
+export interface ServiceLink {
   title: string;
   desc: string;
   href: string;
   icon: React.ElementType;
 }
 
-interface ServiceCategory {
+export interface ServiceCategory {
   title: string;
   categoryHref: string;
   items: ServiceLink[];
@@ -61,12 +59,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         icon: Workflow,
       },
       {
-        title: "Private Vector Intelligence",
-        desc: "Sub-50ms hybrid semantic search with zero data leaks",
-        href: "/services/ai-services",
-        icon: Cpu,
-      },
-      {
         title: "Workflow & Process Automation",
         desc: "Automated business operations eliminating repetitive tasks",
         href: "/services/ai-copilots",
@@ -77,12 +69,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         desc: "Automated OCR, invoice processing & contract parsing",
         href: "/services/ai-services",
         icon: Layers,
-      },
-      {
-        title: "Zero-Leak AI Guardrails",
-        desc: "Strict PII scrubbing, HIPAA compliance & defense",
-        href: "/services/ai-services",
-        icon: ShieldCheck,
       },
     ],
   },
@@ -109,22 +95,10 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         icon: Boxes,
       },
       {
-        title: "Cloud Modernization & FinOps",
-        desc: "AWS, GCP & Kubernetes autoscaling architectures",
-        href: "/services/cloud-infrastructure",
-        icon: Cloud,
-      },
-      {
         title: "APIs & Microservices",
         desc: "High-throughput FastAPI microservices & REST/GraphQL",
         href: "/services/app-web-development",
         icon: Terminal,
-      },
-      {
-        title: "Enterprise Maintenance & SLA",
-        desc: "Proactive uptime monitoring, security & zero downtime",
-        href: "/services/app-web-development",
-        icon: ShieldCheck,
       },
     ],
   },
@@ -156,18 +130,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         href: "/services/data-engineering-analytics",
         icon: Sparkles,
       },
-      {
-        title: "KPI Telemetry & Attribution",
-        desc: "Multi-touch attribution & closed-loop revenue ROI",
-        href: "/services/digital-social-marketing",
-        icon: LineChart,
-      },
-      {
-        title: "Self-Service Analytics Portals",
-        desc: "Empowering business teams to query verified metrics",
-        href: "/services/executive-dashboards",
-        icon: Database,
-      },
     ],
   },
   {
@@ -187,22 +149,10 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         icon: Cloud,
       },
       {
-        title: "Real-Time Event Streaming",
-        desc: "Apache Kafka and CDC streaming for live propagation",
-        href: "/services/data-platforms",
-        icon: Zap,
-      },
-      {
         title: "Data Architecture & Governance",
         desc: "Role-based access control, HIPAA/SOC2 compliance",
         href: "/services/data-engineering-analytics",
         icon: ShieldCheck,
-      },
-      {
-        title: "dbt Transformations & Testing",
-        desc: "SQL CI/CD pipelines and automated schema validation",
-        href: "/services/data-platforms",
-        icon: Terminal,
       },
       {
         title: "Cloud Warehouse Optimization",
@@ -217,7 +167,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
 export function ServicesMegaMenu({
   isOpen,
   onClose,
-  onOpenBookAudit,
 }: ServicesMegaMenuProps) {
   return (
     <AnimatePresence>
@@ -230,12 +179,12 @@ export function ServicesMegaMenu({
           className="absolute top-full left-0 right-0 w-full z-[1000] border-t border-b border-x border-[#E5EAF0] bg-white rounded-b-[16px] max-h-[calc(100vh-90px)] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.12)] text-[#101820] transition-colors duration-200"
         >
           {/* Main 4-Column Categorized Grid */}
-          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-8">
+          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-6 sm:py-7">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8">
               {SERVICE_COLUMNS.map((col, cIdx) => (
-                <div key={cIdx} className="space-y-4">
+                <div key={cIdx} className="space-y-3.5">
                   {/* Column Header */}
-                  <div className="pb-3 border-b border-[#E5EAF0]">
+                  <div className="pb-2.5 border-b border-[#E5EAF0]">
                     <Link
                       href={col.categoryHref}
                       onClick={onClose}
@@ -245,8 +194,8 @@ export function ServicesMegaMenu({
                     </Link>
                   </div>
 
-                  {/* Services List */}
-                  <div className="space-y-1">
+                  {/* Services List (4 Subservices per Category) */}
+                  <div className="space-y-0.5">
                     {col.items.map((item, iIdx) => {
                       const ItemIcon = item.icon;
                       return (
@@ -277,7 +226,7 @@ export function ServicesMegaMenu({
           </div>
 
           {/* Bottom CTA Bar */}
-          <div className="border-t border-[#E5EAF0] px-6 sm:px-8 py-4 sm:py-5 bg-[#F7F9FB]">
+          <div className="border-t border-[#E5EAF0] px-6 sm:px-8 py-4 bg-[#F7F9FB]">
             <div className="max-w-[1360px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <h4 className="text-sm font-extrabold text-[#101820]">
@@ -294,7 +243,7 @@ export function ServicesMegaMenu({
                   onClick={onClose}
                   className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
                 >
-                  <span>Schedule Strategy Call</span>
+                  <span>Send an Inquiry</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

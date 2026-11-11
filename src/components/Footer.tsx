@@ -14,7 +14,27 @@ interface FooterProps {
   onOpenBookAudit?: (scope?: string) => void;
 }
 
+function InstagramIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
 export function Footer({ onOpenBookAudit }: FooterProps) {
+  void onOpenBookAudit;
   const pathname = usePathname();
 
   const scrollToTop = () => {
@@ -67,7 +87,7 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
               }}
               className="h-9 sm:h-12 px-5 sm:px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group cursor-pointer"
             >
-              <span>Book Strategy Call</span>
+              <span>Send an Inquiry</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
 
@@ -230,27 +250,37 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-slate-400">
-            <Link href="/privacy" className="hover:text-slate-200 transition-colors">
+            <Link href="/privacy-policy" className="hover:text-slate-200 transition-colors">
               Privacy Policy
             </Link>
             <span>•</span>
-            <Link href="/terms" className="hover:text-slate-200 transition-colors">
-              Terms
+            <Link href="/terms-and-conditions" className="hover:text-slate-200 transition-colors">
+              Terms & Conditions
             </Link>
             <span>•</span>
             <a
               href="https://www.linkedin.com/company/codeplaced/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="hover:text-cyan-300 transition-colors"
             >
               LinkedIn
             </a>
             <span>•</span>
             <a
-              href="https://github.com"
+              href="https://www.instagram.com/codeplaced?mdxt=Zm4zNXJldTN5M2J5"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-cyan-300 transition-colors"
+            >
+              <InstagramIcon className="w-3.5 h-3.5 text-cyan-300" />
+              <span>Instagram</span>
+            </a>
+            <span>•</span>
+            <a
+              href="https://github.com/gauravshokhanda"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-cyan-300 transition-colors"
             >
               GitHub
