@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { TuitionstimeCaseStudy } from "@/components/case-studies/TuitionstimeCaseStudy";
 import { HoopwrldCaseStudy } from "@/components/case-studies/HoopwrldCaseStudy";
+import { TopPlacedAICaseStudy } from "@/components/case-studies/TopPlacedAICaseStudy";
+import { CollectIQCaseStudy } from "@/components/case-studies/CollectIQCaseStudy";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -84,6 +86,14 @@ export function CaseStudyDetailClient({
 
   if (study.slug === "hoopwrld") {
     return <HoopwrldCaseStudy />;
+  }
+
+  if (study.slug === "topplaced-ai") {
+    return <TopPlacedAICaseStudy />;
+  }
+
+  if (study.slug === "collectiq") {
+    return <CollectIQCaseStudy />;
   }
 
   const handleShare = async () => {

@@ -11,6 +11,12 @@ import {
   Users,
   GraduationCap,
   Layers,
+  Bot,
+  Target,
+  Code2,
+  Cpu,
+  Building2,
+  Workflow,
 } from "lucide-react";
 
 export interface CaseStudyData {
@@ -45,6 +51,12 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
   // Resolve metric icons safely
   const getMetricIcon = (idx: number, customIcon?: React.ElementType) => {
     if (customIcon) return customIcon;
+    if (study.id === "collectiq") {
+      return idx === 0 ? Building2 : idx === 1 ? Workflow : Bot;
+    }
+    if (study.id === "topplaced-ai") {
+      return idx === 0 ? Bot : idx === 1 ? Target : Code2;
+    }
     if (study.id === "tuitionstime") {
       return idx === 0 ? Users : idx === 1 ? GraduationCap : Layers;
     }
@@ -154,7 +166,13 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
             </div>
 
             {/* 8. Project Image (16:10 aspect ratio, centered, prominent, contained) */}
-            <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-[#0A0D12] border border-[#00BCD4]/25 flex items-center justify-center p-2 mt-1">
+            <div
+              className={`relative w-full aspect-[16/10] rounded-xl overflow-hidden flex items-center justify-center mt-1 ${
+                study.id === "topplaced-ai"
+                  ? "bg-transparent"
+                  : "bg-[#0A0D12] border border-[#00BCD4]/25 p-2"
+              }`}
+            >
               <div
                 className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.12)_0%,transparent_70%)] pointer-events-none"
                 aria-hidden="true"
@@ -371,6 +389,208 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
                   aria-hidden="true"
                 />
                 <div className="relative w-full aspect-[1071/712] rounded-2xl overflow-hidden border border-[#00BCD4]/35 bg-[#07090D] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(0,188,212,0.1)] p-2.5 transition-transform duration-500 ease-out group-hover:scale-[1.01]">
+                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#0A0D12]">
+                    <Image
+                      src={study.image}
+                      alt={study.imageAlt}
+                      fill
+                      priority
+                      className="object-contain object-center"
+                      sizes="52vw"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ) : study.id === "topplaced-ai" ? (
+          <Link
+            href={`/case-studies/${study.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View case study: ${study.brand}`}
+            className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
+          >
+            <div className="flex flex-row h-full items-center p-10 xl:p-12 gap-10">
+              {/* Left Side (48%) — Solid Black Content */}
+              <div className="w-[48%] flex flex-col justify-between text-left z-10 space-y-8">
+                <div className="space-y-4 max-w-xl">
+                  {/* Eyebrow Tag */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                    <span>{study.category}</span>
+                  </div>
+
+                  {/* Brand Logo & Name */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0">
+                      <Cpu className="w-4 h-4 text-[#00BCD4]" />
+                    </div>
+                    <span className="text-2xl font-bold tracking-tight text-white">
+                      {study.brand}
+                    </span>
+                  </div>
+
+                  {/* Title with Cyan Highlight */}
+                  <h2 className="text-[32px] xl:text-[36px] font-extrabold text-white tracking-tight leading-[1.15]">
+                    {study.titlePrefix}
+                    <span className="text-[#00BCD4] block">{study.highlightWord}</span>
+                  </h2>
+
+                  {/* Short Description */}
+                  <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                    {study.description}
+                  </p>
+
+                  {/* Technology Tags */}
+                  <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                    {study.techTags.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* View Case Study CTA Button */}
+                  <div className="pt-2">
+                    <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm">
+                      <span>View Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom Group: Capabilities Row with Icons */}
+                <div className="pt-6 border-t border-white/[0.08] grid grid-cols-3 gap-4 xl:gap-6">
+                  {study.metrics.map((metric, idx) => {
+                    const MetricIcon = getMetricIcon(idx, metric.icon);
+                    return (
+                      <div key={idx} className="flex items-start gap-2.5">
+                        <MetricIcon className="w-4 h-4 text-[#00BCD4] shrink-0 mt-0.5" />
+                        <div className="text-left">
+                          <div className="text-sm xl:text-base font-black text-white font-mono tracking-tight whitespace-nowrap">
+                            {metric.value}
+                          </div>
+                          <div className="text-[11px] text-[#A1A1AA] mt-0.5 font-medium leading-tight">
+                            {metric.label}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right Side (52%) — Authentic Live Interview Workspace Display */}
+              <div className="w-[52%] relative flex items-center justify-center select-none">
+                <div
+                  className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.14)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
+                  aria-hidden="true"
+                />
+                <div className="relative w-full aspect-[2330/1314] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_35px_rgba(0,188,212,0.08)] transition-transform duration-500 ease-out group-hover:scale-[1.015]">
+                  <Image
+                    src={study.image}
+                    alt={study.imageAlt}
+                    fill
+                    priority
+                    className="object-cover object-center rounded-xl"
+                    sizes="(max-width: 1280px) 50vw, 640px"
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
+        ) : study.id === "collectiq" ? (
+          <Link
+            href={`/case-studies/${study.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View case study: ${study.brand}`}
+            className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
+          >
+            <div className="flex flex-row h-full items-center p-10 xl:p-12 gap-10">
+              {/* Left Side (48%) — Solid Black Content */}
+              <div className="w-[48%] flex flex-col justify-between text-left z-10 space-y-8">
+                <div className="space-y-4 max-w-xl">
+                  {/* Eyebrow Tag */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] w-fit">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                    <span>{study.category}</span>
+                  </div>
+
+                  {/* Brand Logo & Name */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0">
+                      <Building2 className="w-4 h-4 text-[#00BCD4]" />
+                    </div>
+                    <span className="text-2xl font-bold tracking-tight text-white">
+                      {study.brand}
+                    </span>
+                  </div>
+
+                  {/* Title with Cyan Highlight */}
+                  <h2 className="text-[32px] xl:text-[36px] font-extrabold text-white tracking-tight leading-[1.15]">
+                    {study.titlePrefix}
+                    <span className="text-[#00BCD4] block">{study.highlightWord}</span>
+                  </h2>
+
+                  {/* Short Description */}
+                  <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                    {study.description}
+                  </p>
+
+                  {/* Technology Tags */}
+                  <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                    {study.techTags.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#D4D4D8]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* View Case Study CTA Button */}
+                  <div className="pt-2">
+                    <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#00BCD4] text-[#00BCD4] group-hover:bg-[#00BCD4] group-hover:text-black font-mono text-xs font-bold transition-all duration-200 shadow-sm">
+                      <span>View Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom Group: Capabilities Row with Icons */}
+                <div className="pt-6 border-t border-white/[0.08] grid grid-cols-3 gap-4 xl:gap-6">
+                  {study.metrics.map((metric, idx) => {
+                    const MetricIcon = getMetricIcon(idx, metric.icon);
+                    return (
+                      <div key={idx} className="flex items-start gap-2.5">
+                        <MetricIcon className="w-4 h-4 text-[#00BCD4] shrink-0 mt-0.5" />
+                        <div className="text-left">
+                          <div className="text-sm xl:text-base font-black text-white font-mono tracking-tight whitespace-nowrap">
+                            {metric.value}
+                          </div>
+                          <div className="text-[11px] text-[#A1A1AA] mt-0.5 font-medium leading-tight">
+                            {metric.label}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right Side (52%) — Authentic CollectIQ Showcase Display */}
+              <div className="w-[52%] relative flex items-center justify-center select-none overflow-hidden">
+                <div
+                  className="absolute top-[40%] right-[25%] -translate-y-1/2 w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,rgba(0,188,212,0.15)_0%,rgba(0,188,212,0.02)_45%,transparent_70%)] blur-2xl pointer-events-none"
+                  aria-hidden="true"
+                />
+                <div className="relative w-full aspect-[2355/1575] rounded-2xl overflow-hidden border border-[#00BCD4]/35 bg-[#07090D] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(0,188,212,0.1)] p-2 transition-transform duration-500 ease-out group-hover:scale-[1.01]">
                   <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#0A0D12]">
                     <Image
                       src={study.image}
