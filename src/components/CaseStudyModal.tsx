@@ -135,7 +135,7 @@ export function CaseStudyModal({ study, onClose, onBookCall }: CaseStudyModalPro
                   onClick={onClose}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B4F6C] hover:bg-[#0E7490] text-white text-xs font-bold transition-all shadow-md shadow-[#0B4F6C]/20"
                 >
-                  <span>Schedule Strategy Call</span> <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Send an Inquiry</span> <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>

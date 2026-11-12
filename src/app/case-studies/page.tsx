@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Layers, GraduationCap, Gamepad2, BarChart3, Database, Users, Globe2 } from "lucide-react";
+import { ArrowRight, Layers, GraduationCap, Gamepad2, BarChart3, Database, Users, Globe2, Cpu, Bot, Target, Code2, Building2, Workflow } from "lucide-react";
 import { CaseStudyCard, CaseStudyData } from "@/components/case-studies/CaseStudyCard";
 
 type FilterCategory = "industries" | "services" | "regions";
@@ -150,6 +150,67 @@ const FEATURED_CASE_STUDIES: (CaseStudyData & {
         regions: ["all", "north-america", "global"],
       },
     },
+    {
+      id: "topplaced-ai",
+      slug: "topplaced-ai",
+      category: "AI INTERVIEW INTELLIGENCE / SAAS",
+      brand: "TopPlaced AI",
+      brandIcon: Cpu,
+      titlePrefix: "Building an AI-Powered ",
+      highlightWord: "Interview Simulation Platform",
+      description:
+        "An interview simulator that adapts, evaluates, and monitors the complete candidate journey. TopPlaced AI combines voice-led mock interviews, role-specific assessments, integrated coding tools, configurable evaluation rubrics, and multi-signal proctoring into one candidate-facing experience.",
+      image: "/images/case-studies/topplaced-ai/topplaced-card-live-interview.webp",
+      mobileImage: "/images/case-studies/topplaced-ai/topplaced-card-live-interview.webp",
+      imageAlt: "TopPlaced AI - AI-Powered Interview Simulation Platform",
+      techTags: ["Voice AI", "STAR Rubrics", "Proctoring", "Code Sandbox", "WebRTC"],
+      metrics: [
+        { value: "Voice-Led", label: "Voice-Led Interviews", icon: Bot },
+        { value: "Role-Specific", label: "Role-Specific Assessments", icon: Target },
+        { value: "Coding Tools", label: "Integrated Coding Tools", icon: Code2 },
+      ],
+      matching: {
+        industries: ["all", "saas", "edtech", "enterprise"],
+        services: [
+          "all",
+          "automation",
+          "full-stack",
+          "architecture",
+        ],
+        regions: ["all", "north-america", "india-apac", "global"],
+      },
+    },
+    {
+      id: "collectiq",
+      slug: "collectiq",
+      category: "SAAS / AI AUTOMATION / FINTECH OPERATIONS",
+      brand: "CollectIQ",
+      brandIcon: Building2,
+      titlePrefix: "Building an AI-Powered ",
+      highlightWord: "Collections Operating System",
+      description:
+        "A connected SaaS platform bringing together consumer debt collections, commercial receivables, intelligent workflows, account management, and collection intelligence in one operational ecosystem.",
+      image: "/images/case-studies/collectiq/collectiq-hero-showcase.webp",
+      mobileImage: "/images/case-studies/collectiq/collectiq-hero-showcase.webp",
+      imageAlt: "CollectIQ - AI-Powered Collections Operating System",
+      techTags: ["SaaS Architecture", "Workflow Builder", "AI Assistant", "CRM Operations", "Multi-Tenant"],
+      metrics: [
+        { value: "Collections", label: "Collections Management", icon: Building2 },
+        { value: "Workflows", label: "Workflow Automation", icon: Workflow },
+        { value: "AI Insights", label: "AI-Powered Insights", icon: Bot },
+      ],
+      matching: {
+        industries: ["all", "saas", "enterprise"],
+        services: [
+          "all",
+          "automation",
+          "architecture",
+          "full-stack",
+          "analytics",
+        ],
+        regions: ["all", "north-america", "global"],
+      },
+    },
   ];
 
 const APPROACH_STEPS = [
@@ -180,7 +241,15 @@ export default function CaseStudiesPage() {
   const [activeTab, setActiveTab] = useState<FilterCategory>("industries");
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const currentFilters = FILTERS_BY_CATEGORY[activeTab];
+  // Temporarily display only categories containing published projects (e.g. hides empty Insurance, HR)
+  // Preserves full FILTERS_BY_CATEGORY configuration for future additions
+  const currentFilters = FILTERS_BY_CATEGORY[activeTab].filter(
+    (chip) =>
+      chip.id === "all" ||
+      FEATURED_CASE_STUDIES.some((study) =>
+        study.matching[activeTab].includes(chip.id)
+      )
+  );
 
   const handleTabChange = (tab: FilterCategory) => {
     setActiveTab(tab);
@@ -205,142 +274,140 @@ export default function CaseStudiesPage() {
       <main className="pt-20 sm:pt-28 lg:pt-40 relative z-10">
         {/* Top Dark Showcase: Hero + Filters + Featured Case Study */}
         <div className="space-y-6 sm:space-y-8 lg:space-y-12 pb-8 sm:pb-14 lg:pb-24">
-        {/* ========================================================================= */}
-        {/* 1. CENTERED HERO SECTION (SINGLE-LINE HEADING ON DESKTOP) */}
-        {/* ========================================================================= */}
-        <section className="text-center mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-3 sm:space-y-5 lg:space-y-6">
-          {/* Eyebrow Label */}
-          <div className="flex justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9.5px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] border border-[#00C7E8]/40 text-[#00C7E8]"
-            >
-              CASE STUDIES
-            </motion.div>
-          </div>
-
-          {/* Single-Line Heading on Desktop & Laptop: "Optimize. Innovate. Disrupt." */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-2 sm:space-y-4"
-          >
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] sm:leading-[1.08] [text-wrap:balance]">
-              Real Projects.{" "}
-              <span
-                className="bg-clip-text text-transparent inline-block"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(135deg, #00C7E8 0%, #087FA5 100%)",
-                }}
+          {/* ========================================================================= */}
+          {/* 1. CENTERED HERO SECTION (SINGLE-LINE HEADING ON DESKTOP) */}
+          {/* ========================================================================= */}
+          <section className="text-center mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-3 sm:space-y-5 lg:space-y-6">
+            {/* Eyebrow Label */}
+            <div className="flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9.5px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] border border-[#00C7E8]/40 text-[#00C7E8]"
               >
-                Measurable Impact.
-              </span>
-            </h1>
-            <p className="text-xs sm:text-base lg:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl mx-auto">
-              Explore how CodePlaced delivers production-grade applications, data platforms, and AI automation to help organizations achieve measurable business outcomes.
-            </p>
-          </motion.div>
+                CASE STUDIES
+              </motion.div>
+            </div>
 
-          {/* ========================================================================= */}
-          {/* 2. CASE STUDY NAVIGATION & FILTERS (COMPACT & CENTERED) */}
-          {/* ========================================================================= */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="pt-0.5 sm:pt-3 space-y-2.5 sm:space-y-4"
-          >
-            {/* Category Tabs: Industries | Services | Regions */}
-            <div className="flex items-center justify-center gap-4 sm:gap-8 lg:gap-12">
-              {CATEGORY_TABS.map((tab) => {
-                const isTabActive = activeTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => handleTabChange(tab.id)}
-                    className={`relative pb-1.5 sm:pb-2 text-xs sm:text-base font-semibold transition-colors duration-200 cursor-pointer ${
-                      isTabActive
+            {/* Single-Line Heading on Desktop & Laptop: "Optimize. Innovate. Disrupt." */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="space-y-2 sm:space-y-4"
+            >
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] sm:leading-[1.08] [text-wrap:balance]">
+                Real Projects.{" "}
+                <span
+                  className="bg-clip-text text-transparent inline-block"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(135deg, #00C7E8 0%, #087FA5 100%)",
+                  }}
+                >
+                  Measurable Impact.
+                </span>
+              </h1>
+              <p className="text-xs sm:text-base lg:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl mx-auto">
+                Explore how CodePlaced delivers production-grade applications, data platforms, and AI automation to help organizations achieve measurable business outcomes.
+              </p>
+            </motion.div>
+
+            {/* ========================================================================= */}
+            {/* 2. CASE STUDY NAVIGATION & FILTERS (COMPACT & CENTERED) */}
+            {/* ========================================================================= */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="pt-0.5 sm:pt-3 space-y-2.5 sm:space-y-4"
+            >
+              {/* Category Tabs: Industries | Services | Regions */}
+              <div className="flex items-center justify-center gap-4 sm:gap-8 lg:gap-12">
+                {CATEGORY_TABS.map((tab) => {
+                  const isTabActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabChange(tab.id)}
+                      className={`relative pb-1.5 sm:pb-2 text-xs sm:text-base font-semibold transition-colors duration-200 cursor-pointer ${isTabActive
                         ? "text-white font-bold"
                         : "text-[#71717A] hover:text-[#E2E8F0]"
-                    }`}
-                  >
-                    <span>{tab.label}</span>
-                    {isTabActive && (
-                      <motion.div
-                        layoutId="activeTabUnderline"
-                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00C7E8] rounded-full"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                        }`}
+                    >
+                      <span>{tab.label}</span>
+                      {isTabActive && (
+                        <motion.div
+                          layoutId="activeTabUnderline"
+                          className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00C7E8] rounded-full"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
 
-            {/* Outlined Filter Chips Under Active Tab */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 max-w-4xl mx-auto pt-0.5">
-              {currentFilters.map((chip) => {
-                const isActive = activeFilter === chip.id;
-                return (
-                  <button
-                    key={chip.id}
-                    onClick={() => setActiveFilter(chip.id)}
-                    className={`px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10.5px] sm:text-xs font-mono transition-all duration-200 cursor-pointer ${
-                      isActive
+              {/* Outlined Filter Chips Under Active Tab */}
+              <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 max-w-4xl mx-auto pt-0.5">
+                {currentFilters.map((chip) => {
+                  const isActive = activeFilter === chip.id;
+                  return (
+                    <button
+                      key={chip.id}
+                      onClick={() => setActiveFilter(chip.id)}
+                      className={`px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10.5px] sm:text-xs font-mono transition-all duration-200 cursor-pointer ${isActive
                         ? "text-white font-bold border border-[#00C7E8] shadow-md shadow-[#00C7E8]/20"
                         : "bg-[#07090D]/80 text-[#A1A1AA] border border-white/[0.08] hover:border-[#00C7E8]/40 hover:text-white"
-                    }`}
-                    style={{
-                      background: isActive
-                        ? "linear-gradient(135deg, rgba(8, 127, 165, 0.45) 0%, rgba(0, 199, 232, 0.35) 100%)"
-                        : undefined,
-                    }}
-                  >
-                    {chip.label}
-                  </button>
-                );
-              })}
-            </div>
-          </motion.div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 3. FEATURED CASE STUDY CARDS (STANDARDIZED REUSABLE CARD COMPONENT)       */}
-        {/* Mobile: Standardized compact layout with identical heights & 16:10 visuals*/}
-        {/* Desktop: Pinned 100% authentic showcase layouts                           */}
-        {/* ========================================================================= */}
-        <section id="featured-case-study" className="pt-1 sm:pt-2 px-3 sm:px-6 scroll-mt-20">
-          <AnimatePresence mode="wait">
-            {matchingStudies.length > 0 ? (
-              <div className="space-y-3 sm:space-y-4 lg:space-y-10 w-[94%] sm:w-[92%] max-w-[1400px] mx-auto">
-                {matchingStudies.map((study) => (
-                  <motion.div
-                    key={study.id}
-                    initial={{ opacity: 1, y: 0 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <CaseStudyCard study={study} />
-                  </motion.div>
-                ))}
+                        }`}
+                      style={{
+                        background: isActive
+                          ? "linear-gradient(135deg, rgba(8, 127, 165, 0.45) 0%, rgba(0, 199, 232, 0.35) 100%)"
+                          : undefined,
+                      }}
+                    >
+                      {chip.label}
+                    </button>
+                  );
+                })}
               </div>
-            ) : (
-              <motion.div
-                key="filter-empty-state"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="p-10 sm:p-14 rounded-[20px] bg-[#07090D] border border-white/[0.08] text-center space-y-5 max-w-xl mx-auto shadow-2xl"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#050505] border border-[#00C7E8]/30 text-[#00C7E8] flex items-center justify-center mx-auto">
-                  <Layers className="w-6 h-6" />
+            </motion.div>
+          </section>
+
+          {/* ========================================================================= */}
+          {/* 3. FEATURED CASE STUDY CARDS (STANDARDIZED REUSABLE CARD COMPONENT)       */}
+          {/* Mobile: Standardized compact layout with identical heights & 16:10 visuals*/}
+          {/* Desktop: Pinned 100% authentic showcase layouts                           */}
+          {/* ========================================================================= */}
+          <section id="featured-case-study" className="pt-1 sm:pt-2 px-3 sm:px-6 scroll-mt-20">
+            <AnimatePresence mode="wait">
+              {matchingStudies.length > 0 ? (
+                <div className="space-y-3 sm:space-y-4 lg:space-y-10 w-[94%] sm:w-[92%] max-w-[1400px] mx-auto">
+                  {matchingStudies.map((study) => (
+                    <motion.div
+                      key={study.id}
+                      initial={{ opacity: 1, y: 0 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <CaseStudyCard study={study} />
+                    </motion.div>
+                  ))}
                 </div>
-                <div className="space-y-2">
+              ) : (
+                <motion.div
+                  key="filter-empty-state"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="p-10 sm:p-14 rounded-[20px] bg-[#07090D] border border-white/[0.08] text-center space-y-5 max-w-xl mx-auto shadow-2xl"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#050505] border border-[#00C7E8]/30 text-[#00C7E8] flex items-center justify-center mx-auto">
+                    <Layers className="w-6 h-6" />
+                  </div>
+                  <div className="space-y-2">
                     <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#00C7E8]">
                       ENTERPRISE PORTFOLIO
                     </span>
@@ -369,7 +436,7 @@ export default function CaseStudiesPage() {
                       href="/contact#contact-hero"
                       className="px-5 py-2.5 rounded-full text-xs font-mono font-bold text-[#A1A1AA] hover:text-white border border-white/10 hover:border-[#00C7E8]/40 transition-colors"
                     >
-                      Book Strategy Call
+                      Send an Inquiry
                     </Link>
                   </div>
                 </motion.div>
@@ -410,12 +477,11 @@ export default function CaseStudiesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className={`px-2 sm:px-4 md:px-8 py-0.5 md:py-8 lg:py-10 text-left ${
-                    idx === 0
-                      ? "md:pr-8 lg:pr-10"
-                      : idx === 1
-                        ? "md:px-8 lg:px-10"
-                        : "md:pl-8 lg:pl-10"
+                  className={`px-2 sm:px-4 md:px-8 py-0.5 md:py-8 lg:py-10 text-left ${idx === 0
+                    ? "md:pr-8 lg:pr-10"
+                    : idx === 1
+                      ? "md:px-8 lg:px-10"
+                      : "md:pl-8 lg:pl-10"
                     }`}
                 >
                   <div className="text-xs sm:text-sm md:text-2xl lg:text-3xl font-mono font-black text-[#087FA5] mb-0.5 md:mb-3">
@@ -465,7 +531,7 @@ export default function CaseStudiesPage() {
                 href="/contact#contact-hero"
                 className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
               >
-                <span>Book Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 

@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
-  Smartphone,
   Database,
   TrendingUp,
   Bot,
@@ -21,7 +21,6 @@ import {
   Code2,
   Rocket,
   ChevronRight,
-  Cpu,
 } from "lucide-react";
 import { SERVICES_DATA, ServiceDetailItem } from "@/lib/servicesData";
 import { InteractiveServicesShowcase } from "@/components/InteractiveServicesShowcase";
@@ -37,50 +36,6 @@ const USE_INTERACTIVE_SHOWCASE = true;
 // =========================================================================
 // DATA STRUCTURES
 // =========================================================================
-
-// Connected Tech Ecosystem Capabilities
-const TECH_ECOSYSTEM_NODES = [
-  {
-    id: "ai",
-    code: "01 // AI",
-    title: "AI & Automation",
-    subtitle: "RAG Copilots, Agent Swarms & Workflows",
-    tech: "OpenAI GPT-4o • Claude • Pinecone",
-    metric: "Low-Latency Vectors",
-    icon: Bot,
-    accent: "#00BCD4",
-  },
-  {
-    id: "software",
-    code: "02 // DEV",
-    title: "Software Development",
-    subtitle: "Custom Web, Mobile & Microservices",
-    tech: "Next.js 15 • TypeScript • React 19",
-    metric: "Sub-25ms SLA",
-    icon: Code2,
-    accent: "#00BCD4",
-  },
-  {
-    id: "analytics",
-    code: "03 // BI",
-    title: "Analytics & BI",
-    subtitle: "Executive Cockpits & Predictive Telemetry",
-    tech: "Power BI • Tableau • Datadog",
-    metric: "Real-Time KPIs",
-    icon: BarChart3,
-    accent: "#10B981",
-  },
-  {
-    id: "data",
-    code: "04 // DATA",
-    title: "Data Engineering",
-    subtitle: "Pipelines, Warehousing & Medallion Sync",
-    tech: "Snowflake • dbt • Apache Kafka",
-    metric: "Automated DAGs",
-    icon: Database,
-    accent: "#0284C7",
-  },
-];
 
 // Hero Trust Stats
 const HERO_TRUST_STATS = [
@@ -279,385 +234,6 @@ function ServiceGatewayCard({ service, index }: { service: ServiceDetailItem; in
 }
 
 // =========================================================================
-// CONNECTED TECHNOLOGY ECOSYSTEM VISUAL (INTERACTIVE ARCHITECTURE NETWORK)
-// =========================================================================
-
-interface EcosystemNodeItem {
-  id: string;
-  code: string;
-  title: string;
-  shortTitle: string;
-  badge: string;
-  capability: string;
-  icon: React.ComponentType<{ className?: string }>;
-  accent: string;
-  desktopClass: string;
-  mobileClass: string;
-  svgPath: string;
-  pulseDuration: string;
-}
-
-const ECOSYSTEM_NODES: EcosystemNodeItem[] = [
-  {
-    id: "ai",
-    code: "01 // AI",
-    title: "AI & Automation",
-    shortTitle: "AI & Agents",
-    badge: "Autonomous Swarms",
-    capability: "Enterprise RAG copilots & adaptive multi-agent swarms",
-    icon: Bot,
-    accent: "#00BCD4",
-    desktopClass: "top-[8%] left-[3%]",
-    mobileClass: "top-[3%] left-[1%]",
-    svgPath: "M 140 100 C 190 115, 220 160, 245 195",
-    pulseDuration: "4.0s",
-  },
-  {
-    id: "software",
-    code: "02 // DEV",
-    title: "Software Development",
-    shortTitle: "Software",
-    badge: "Next.js 15 • Microservices",
-    capability: "Sub-25ms web apps, cloud microservices & scalable backends",
-    icon: Code2,
-    accent: "#00BCD4",
-    desktopClass: "top-[6%] right-[3%]",
-    mobileClass: "top-[3%] right-[1%]",
-    svgPath: "M 460 90 C 410 110, 380 160, 355 195",
-    pulseDuration: "3.2s",
-  },
-  {
-    id: "analytics",
-    code: "03 // BI",
-    title: "Data Analytics & BI",
-    shortTitle: "Analytics",
-    badge: "Real-Time KPIs",
-    capability: "Unified executive cockpits, telemetry & predictive metrics",
-    icon: BarChart3,
-    accent: "#10B981",
-    desktopClass: "bottom-[12%] left-[4%]",
-    mobileClass: "bottom-[5%] left-[1%]",
-    svgPath: "M 145 365 C 195 350, 220 300, 245 265",
-    pulseDuration: "3.5s",
-  },
-  {
-    id: "data",
-    code: "04 // DATA",
-    title: "Data Engineering",
-    shortTitle: "Data",
-    badge: "Pipelines • Lakehouse",
-    capability: "Petabyte streaming ETL & automated DAG synchronization",
-    icon: Database,
-    accent: "#0284C7",
-    desktopClass: "bottom-[10%] right-[4%]",
-    mobileClass: "bottom-[5%] right-[1%]",
-    svgPath: "M 455 370 C 405 350, 380 300, 355 265",
-    pulseDuration: "3.8s",
-  },
-];
-
-function InteractiveConnectedEcosystem({ isMobile = false }: { isMobile?: boolean }) {
-  const [activeNode, setActiveNode] = useState<string | null>(null);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMobile) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMouseOffset({ x: x * 12, y: y * 12 });
-  };
-
-  const handleMouseLeave = () => {
-    setMouseOffset({ x: 0, y: 0 });
-    setActiveNode(null);
-  };
-
-  const activeItem = ECOSYSTEM_NODES.find((n) => n.id === activeNode);
-
-  return (
-    <div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`relative w-full max-w-[620px] lg:max-w-none mx-auto select-none flex items-center justify-center ${
-        isMobile ? "aspect-[580/420]" : "aspect-[580/480] sm:aspect-[600/480]"
-      }`}
-      aria-label="CodePlaced Connected Technology Ecosystem"
-    >
-      {/* 1. Ambient Luminous Cyan Diffusion Glow */}
-      <div
-        style={{
-          transform: `translate3d(${mouseOffset.x * -0.3}px, ${mouseOffset.y * -0.3}px, 0)`,
-        }}
-        className="absolute inset-8 rounded-full bg-gradient-to-tr from-[#00BCD4]/15 via-[#0284C7]/5 to-[#00BCD4]/15 blur-3xl pointer-events-none -z-0 transition-transform duration-300"
-        aria-hidden="true"
-      />
-
-      {/* 2. SVG Connecting Network Backplane with Luminous Cyan Conduits */}
-      <svg
-        viewBox="0 0 600 460"
-        className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-10"
-        aria-hidden="true"
-      >
-        <defs>
-          <filter id="cyanGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Ambient Orbital Rings */}
-        <circle
-          cx="300"
-          cy="230"
-          r="135"
-          fill="none"
-          stroke="#1E2838"
-          strokeWidth="1"
-          strokeDasharray="3 6"
-          opacity="0.8"
-        />
-        <circle
-          cx="300"
-          cy="230"
-          r="92"
-          fill="none"
-          stroke="#00BCD4"
-          strokeWidth="1"
-          strokeDasharray="2 6"
-          opacity="0.35"
-        />
-
-        {/* Subtle Horizontal & Vertical Architecture Grid Lines */}
-        <line x1="200" y1="230" x2="400" y2="230" stroke="#161D2A" strokeWidth="1" strokeDasharray="2 4" />
-        <line x1="300" y1="130" x2="300" y2="330" stroke="#161D2A" strokeWidth="1" strokeDasharray="2 4" />
-
-        {/* Secondary Cross-Connection Data Busses (Telemetry Links) */}
-        <path
-          d="M 125 125 C 145 190, 145 270, 125 335"
-          fill="none"
-          stroke="#1A2230"
-          strokeWidth="1"
-          strokeDasharray="2 4"
-        />
-        <path
-          d="M 475 115 C 455 185, 455 275, 475 345"
-          fill="none"
-          stroke="#1A2230"
-          strokeWidth="1"
-          strokeDasharray="2 4"
-        />
-
-        {/* Base Connection Tracks */}
-        {ECOSYSTEM_NODES.map((node) => (
-          <path
-            key={`base-${node.id}`}
-            d={node.svgPath}
-            fill="none"
-            stroke="#202A3C"
-            strokeWidth="1.5"
-            strokeDasharray="4 6"
-          />
-        ))}
-
-        {/* Active & Illuminated Cyan Conduit Paths */}
-        {ECOSYSTEM_NODES.map((node) => {
-          const isActive = activeNode === node.id;
-          const isDimmed = activeNode !== null && !isActive;
-
-          return (
-            <g key={`conduit-${node.id}`}>
-              {/* Luminous Core Conduit */}
-              <path
-                d={node.svgPath}
-                fill="none"
-                stroke={isActive ? "#00BCD4" : "#00BCD4"}
-                strokeWidth={isActive ? "2.5" : "1.75"}
-                opacity={isActive ? 1 : isDimmed ? 0.2 : 0.65}
-                filter={isActive ? "url(#cyanGlow)" : undefined}
-                className="transition-all duration-300"
-              />
-
-              {/* Inward Data Pulse (Node to Core) */}
-              <circle
-                r={isActive ? 4 : 3}
-                fill="#00BCD4"
-                filter="url(#cyanGlow)"
-                opacity={isDimmed ? 0.2 : 0.95}
-              >
-                <animateMotion
-                  path={node.svgPath}
-                  dur={isActive ? "1.6s" : node.pulseDuration}
-                  repeatCount="indefinite"
-                />
-              </circle>
-
-              {/* Secondary Bidirectional Pulse (Core to Node) */}
-              <circle
-                r={isActive ? 3 : 2}
-                fill="#38BDF8"
-                opacity={isDimmed ? 0.15 : 0.75}
-              >
-                <animateMotion
-                  path={node.svgPath}
-                  dur={isActive ? "1.6s" : node.pulseDuration}
-                  begin={isActive ? "0.8s" : "1.6s"}
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
-          );
-        })}
-
-        {/* Dynamic Junction Pips along the Network */}
-        <circle cx="195" cy="148" r="2.5" fill="#00BCD4" opacity="0.6" />
-        <circle cx="405" cy="145" r="2.5" fill="#00BCD4" opacity="0.6" />
-        <circle cx="198" cy="312" r="2.5" fill="#00BCD4" opacity="0.6" />
-        <circle cx="402" cy="315" r="2.5" fill="#00BCD4" opacity="0.6" />
-      </svg>
-
-      {/* 3. Central System Core (Connected Digital Product Hub) */}
-      <div
-        style={{
-          transform: `translate3d(${mouseOffset.x * 0.5}px, ${mouseOffset.y * 0.5}px, 0)`,
-        }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto transition-transform duration-300"
-      >
-        <div className="relative w-[160px] sm:w-[185px] p-3 sm:p-3.5 rounded-2xl bg-[#090C12]/95 border border-[#242C3C] backdrop-blur-xl shadow-[0_0_40px_rgba(0,188,212,0.18)] text-center">
-          
-          {/* Rotating Subtle Radar Orbit */}
-          <div className="absolute -inset-2.5 rounded-full border border-dashed border-[#1C2534] animate-[spin_50s_linear_infinite] pointer-events-none" />
-
-          {/* Core Header */}
-          <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-[#1A202C] text-[9px] sm:text-[10px] font-mono">
-            <span className="text-neutral-400">PRODUCT CORE</span>
-            <div className="inline-flex items-center gap-1 text-[#00BCD4]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-              <span>LIVE</span>
-            </div>
-          </div>
-
-          {/* Central Layered Hub Emblem */}
-          <div className="my-2 relative">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#0F1722] to-[#080B10] border border-[#00BCD4]/40 flex items-center justify-center text-[#00BCD4] shadow-[0_0_16px_rgba(0,188,212,0.3)] mx-auto relative group">
-              <Cpu className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
-              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#00BCD4] animate-ping opacity-75" />
-            </div>
-          </div>
-
-          {/* Dynamic Telemetry Feedback Readout */}
-          <div className="min-h-[34px] flex flex-col justify-center">
-            {activeItem ? (
-              <div className="space-y-0.5">
-                <div className="text-[10px] font-mono font-bold text-[#00BCD4] uppercase tracking-wider">
-                  SYNC: {activeItem.shortTitle}
-                </div>
-                <div className="text-[9px] text-neutral-300 font-medium line-clamp-1">
-                  {activeItem.badge}
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-0.5">
-                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-300 uppercase tracking-wider">
-                  CONNECTED ECOSYSTEM
-                </div>
-                <div className="text-[9px] text-neutral-400 font-mono">
-                  Software • Data • AI
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Bottom Telemetry Ticker */}
-          <div className="mt-1.5 pt-1.5 border-t border-[#1A202C] flex items-center justify-between text-[9px] font-mono text-neutral-400">
-            <span>SLA: 99.9%</span>
-            <span className="text-[#00BCD4]">SUB-25ms</span>
-          </div>
-
-        </div>
-      </div>
-
-      {/* 4. Surrounding Asymmetric Capability Nodes */}
-      {ECOSYSTEM_NODES.map((node) => {
-        const isActive = activeNode === node.id;
-        const isDimmed = activeNode !== null && !isActive;
-        const NodeIcon = node.icon;
-        const positionClass = isMobile ? node.mobileClass : node.desktopClass;
-
-        return (
-          <div
-            key={node.id}
-            onMouseEnter={() => setActiveNode(node.id)}
-            onMouseLeave={() => setActiveNode(null)}
-            onClick={() => setActiveNode(isActive ? null : node.id)}
-            style={{
-              transform: `translate3d(${mouseOffset.x * 1.1}px, ${mouseOffset.y * 1.1}px, 0)`,
-            }}
-            className={`absolute ${positionClass} z-20 cursor-pointer select-none transition-all duration-300 group ${
-              isDimmed ? "opacity-30 scale-95" : "opacity-100 scale-100"
-            }`}
-          >
-            <div
-              className={`relative rounded-xl bg-[#0C0F17]/95 border backdrop-blur-md px-3 py-2 sm:px-3.5 sm:py-2.5 transition-all duration-300 shadow-xl ${
-                isActive
-                  ? "border-[#00BCD4] shadow-[0_0_24px_rgba(0,188,212,0.35)] -translate-y-1 bg-[#101626]"
-                  : "border-[#222938] hover:border-[#00BCD4]/70 hover:bg-[#121826]"
-              }`}
-            >
-              <div className="flex items-center gap-2 sm:gap-2.5">
-                <div
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all duration-300 shrink-0 ${
-                    isActive
-                      ? "bg-[#00BCD4] text-black shadow-[0_0_12px_rgba(0,188,212,0.6)]"
-                      : "bg-[#141A26] border border-[#23293A] text-[#00BCD4] group-hover:border-[#00BCD4]/50"
-                  }`}
-                >
-                  <NodeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                </div>
-
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-wider">
-                      {node.code}
-                    </span>
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                        isActive ? "bg-[#00BCD4] shadow-[0_0_6px_#00BCD4]" : "bg-neutral-600"
-                      }`}
-                    />
-                  </div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-white tracking-tight leading-snug whitespace-nowrap">
-                    {node.shortTitle}
-                  </h4>
-                </div>
-              </div>
-
-              {/* Dynamic Capability Tooltip on Hover/Active */}
-              {isActive && (
-                <div className="absolute left-0 top-full mt-2 w-52 sm:w-60 p-2.5 rounded-xl bg-[#080B11] border border-[#00BCD4]/60 shadow-[0_8px_30px_rgba(0,0,0,0.8)] z-30 pointer-events-none text-[11px] text-neutral-200 leading-snug">
-                  <div className="flex items-center gap-1.5 text-[9px] font-mono text-[#00BCD4] uppercase tracking-wider mb-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
-                    <span>{node.title}</span>
-                  </div>
-                  <div>{node.capability}</div>
-                  <div className="mt-1.5 pt-1.5 border-t border-[#1C212E] text-[10px] font-mono text-[#00BCD4]">
-                    {node.badge}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        );
-      })}
-
-    </div>
-  );
-}
-
-// =========================================================================
 // MAIN SERVICES PAGE COMPONENT
 // =========================================================================
 export default function ServicesPage() {
@@ -669,7 +245,7 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION — PURE BLACK (#000000, FULL VIEWPORT 100SVH ON DESKTOP) */}
       {/* ========================================================================= */}
-      <section className="relative bg-[#000000] border-b border-[#222222] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-16 pb-6 sm:pt-24 sm:pb-10 lg:pt-20 lg:pb-8 overflow-hidden">
+      <section className="relative bg-[#000000] border-b border-[#222222] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-24 pb-8 sm:pt-28 sm:pb-12 lg:pt-24 lg:pb-10 overflow-x-clip">
         {/* Subtle Ambient Backlight */}
         <div
           className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[540px] h-[540px] pointer-events-none opacity-15 -z-0"
@@ -739,8 +315,30 @@ export default function ServicesPage() {
                   href="/contact#contact-hero"
                   className="h-10 sm:h-12 px-6 sm:px-7 rounded-full bg-[#111111] hover:bg-[#181818] text-white font-bold text-xs sm:text-base border border-[#262626] hover:border-[#00BCD4]/50 flex items-center justify-center transition-all text-center"
                 >
-                  <span>Book Strategy Call</span>
+                  <span>Send an Inquiry</span>
                 </Link>
+              </motion.div>
+
+              {/* Mobile Hero Banner Image: Visible below CTAs, contained & responsive without excessive height */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.28, ease: "easeOut" }}
+                className="block lg:hidden my-3 sm:my-5 w-full"
+              >
+                <div className="relative w-full max-w-[640px] mx-auto rounded-2xl p-1 sm:p-1.5 bg-gradient-to-b from-[#141B26] to-[#0A0D14] border border-[#223044] shadow-[0_0_35px_rgba(0,188,212,0.18)]">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00BCD4]/20 via-[#0284C7]/20 to-[#00BCD4]/10 rounded-2xl blur-lg opacity-60 pointer-events-none -z-10" />
+                  <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#05070A] border border-white/5">
+                    <Image
+                      src="/images/services/services-hero-team.jpg"
+                      alt="CodePlaced Connected Engineering Architecture: AI & Automation, Software Development, Data Analytics, Data Engineering"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 640px"
+                      priority
+                      className="object-cover object-[40%_center] select-none"
+                    />
+                  </div>
+                </div>
               </motion.div>
 
               {/* 5. Verified Trust Stats (Clean 2x2 grid on mobile, horizontal row with dividers on desktop) */}
@@ -765,14 +363,28 @@ export default function ServicesPage() {
               </motion.div>
             </div>
 
-            {/* Desktop Right Column: Interactive Technology Solutions Ecosystem Visual (48% / 5 cols) */}
+            {/* Desktop Right Column: Services Hero Banner Visual (48% / 5 cols) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="hidden lg:flex lg:col-span-5 relative items-center justify-end w-full"
+              className="hidden lg:flex lg:col-span-5 relative items-center justify-center xl:justify-end w-full"
             >
-              <InteractiveConnectedEcosystem />
+              <div className="relative w-full rounded-2xl p-1.5 bg-gradient-to-b from-[#141B26] to-[#0A0D14] border border-[#223044] shadow-[0_0_50px_rgba(0,188,212,0.18)] hover:border-[#00BCD4]/60 transition-all duration-300 group">
+                {/* Subtle Cyan Ambient Glow behind image */}
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-[#00BCD4]/25 via-[#0284C7]/20 to-[#00BCD4]/15 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition-opacity -z-10 pointer-events-none" />
+
+                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#05070A] border border-white/5">
+                  <Image
+                    src="/images/services/services-hero-team.jpg"
+                    alt="CodePlaced Four Core Engineering Services — AI & Automation, Software Development, Data Analytics, Data Engineering"
+                    fill
+                    sizes="(max-width: 1280px) 45vw, 600px"
+                    priority
+                    className="object-cover object-[38%_center] select-none"
+                  />
+                </div>
+              </div>
             </motion.div>
 
           </div>
@@ -782,7 +394,7 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 2. FOUR PILLARS OF ENGINEERING EXCELLENCE — WHITE (#FFFFFF) */}
       {/* ========================================================================= */}
-      <section id="four-pillars-gateway" className="py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
+      <section id="four-pillars-gateway" className="scroll-mt-24 sm:scroll-mt-28 py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         {USE_INTERACTIVE_SHOWCASE ? (
           <InteractiveServicesShowcase />
         ) : (
@@ -832,10 +444,12 @@ export default function ServicesPage() {
             {/* Visual Column: Clean Premium Agency Visual */}
             <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-[#222222] bg-[#0C0F14] shadow-xl group">
               <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden">
-                <img
-                  src="/images/about-team-collab.jpg"
-                  alt="CodePlaced AI Systems Engineering"
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 opacity-80"
+                <Image
+                  src="/images/services/ai-automation.webp"
+                  alt="CodePlaced Enterprise AI & Automation multi-agent supervisor operations workflow"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 640px"
+                  className="object-cover object-center group-hover:scale-102 transition-transform duration-500 opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent" />
                 
@@ -915,7 +529,7 @@ export default function ServicesPage() {
                   href="/contact#contact-hero"
                   className="inline-flex items-center justify-center h-10 sm:h-11 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white font-semibold text-xs sm:text-sm border border-white/10 transition-all"
                 >
-                  <span>Book Consultation</span>
+                  <span>Send an Inquiry</span>
                 </Link>
               </div>
             </div>
@@ -1074,7 +688,7 @@ export default function ServicesPage() {
 
           {/* Active Category Cards: Compact 2-Column Grid on Mobile, 4 Columns on Desktop */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 items-stretch">
-            {TECH_STACK_MAP[activeTechTab].map((tool, tIdx) => (
+            {TECH_STACK_MAP[activeTechTab].map((tool) => (
               <div
                 key={tool.name}
                 className="p-3 sm:p-5 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/40 transition-all duration-200 flex flex-col justify-between"
@@ -1133,7 +747,7 @@ export default function ServicesPage() {
                   href="/contact#contact-hero"
                   className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group text-center"
                 >
-                  <span>Book Strategy Call</span>
+                  <span>Send an Inquiry</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
 

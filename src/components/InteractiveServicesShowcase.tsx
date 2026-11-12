@@ -2,423 +2,66 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Smartphone,
-  Database,
-  TrendingUp,
   Bot,
-  ShieldCheck,
-  CheckCircle2,
-  Activity,
-  Terminal,
-  Cpu,
-  Layers,
-  Lock,
-  Globe2,
-  Workflow,
-  Sparkles,
-  Search,
-  ExternalLink,
   BarChart3,
   Code2,
+  Database,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SERVICES_DATA, ServiceDetailItem } from "@/lib/servicesData";
+import { SERVICES_DATA } from "@/lib/servicesData";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 // =========================================================================
-// REALISTIC VISUAL PREVIEWS FOR EACH SERVICE
+// REALISTIC SERVICE VISUAL CONFIGURATION
 // =========================================================================
-
-// Visual 01: App & Web Development (Next.js 15 & Native Mobile Architecture)
-function AppWebDevelopmentVisual() {
-  return (
-    <div className="w-full rounded-2xl bg-[#0B0B0B] border border-[#262626] p-5 sm:p-6 text-white shadow-2xl relative overflow-hidden font-sans">
-      {/* Top Window Bar */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#222222]">
-        <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#EF4444]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#10B981]" />
-          <span className="text-[11px] font-mono text-neutral-400 ml-2 truncate">
-            https://app.enterprise-core.io/production
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#161616] border border-[#2a2a2a] text-[10px] font-mono text-[#00BCD4]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-          <span>SSR 18ms</span>
-        </div>
-      </div>
-
-      {/* Main Architecture Content */}
-      <div className="pt-4 space-y-4">
-        {/* Metric Highlights Row */}
-        <div className="grid grid-cols-3 gap-2.5">
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">p99 Latency</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">&lt; 250ms</div>
-            <div className="text-[9px] text-[#00BCD4] font-mono">Edge CDN Active</div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Mobile FPS</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">60 FPS</div>
-            <div className="text-[9px] text-[#10B981] font-mono">Flutter Native</div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Uptime SLA</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">99.99%</div>
-            <div className="text-[9px] text-neutral-400 font-mono">Multi-AZ Mesh</div>
-          </div>
-        </div>
-
-        {/* Live Endpoints & Component Status */}
-        <div className="p-3.5 rounded-xl bg-[#121212] border border-[#222222] space-y-2">
-          <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
-            <span>LIVE PRODUCTION ENDPOINTS</span>
-            <span className="text-[#00BCD4]">HTTP/3 Enabled</span>
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E] text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="text-[#10B981] font-bold">GET</span>
-                <span className="text-neutral-300">/api/v2/auth/session</span>
-              </div>
-              <span className="text-neutral-400">14ms • 200 OK</span>
-            </div>
-
-            <div className="flex items-center justify-between p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E] text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="text-[#00BCD4] font-bold">POST</span>
-                <span className="text-neutral-300">/api/v2/orders/stream</span>
-              </div>
-              <span className="text-neutral-400">22ms • 201 Created</span>
-            </div>
-
-            <div className="flex items-center justify-between p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E] text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="text-[#A855F7] font-bold">WS</span>
-                <span className="text-neutral-300">/telemetry/live-sync</span>
-              </div>
-              <span className="text-[#10B981]">Connected (100% SLA)</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Engineering Stack Badges */}
-        <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-neutral-400">
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Next.js 15</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">TypeScript</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Flutter</span>
-          </div>
-          <span className="text-[#00BCD4] font-semibold">SOC2 Compliant</span>
-        </div>
-      </div>
-    </div>
-  );
+interface ServiceVisualConfig {
+  imageSrc: string;
+  alt: string;
+  badge: string;
+  highlightTag: string;
+  subMetric: string;
 }
 
-// Visual 02: Data Engineering & Analytics (Snowflake Lakehouse & dbt DAG)
-function DataEngineeringVisual() {
-  return (
-    <div className="w-full rounded-2xl bg-[#0B0B0B] border border-[#262626] p-5 sm:p-6 text-white shadow-2xl relative overflow-hidden font-sans">
-      {/* Top Console Bar */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#222222]">
-        <div className="flex items-center gap-2">
-          <Database className="w-4 h-4 text-[#00BCD4]" />
-          <span className="text-xs font-mono font-bold text-white tracking-wide">
-            Snowflake Lakehouse & dbt Pipeline
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#161616] border border-[#2a2a2a] text-[10px] font-mono text-[#10B981]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-          <span>DAG: 48/48 Passing</span>
-        </div>
-      </div>
-
-      {/* Main Pipeline Content */}
-      <div className="pt-4 space-y-4">
-        {/* Throughput & Speedup Cards */}
-        <div className="grid grid-cols-3 gap-2.5">
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Stream Throughput</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">1.4M/s</div>
-            <div className="text-[9px] text-[#00BCD4] font-mono">Kafka Real-Time</div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Query Speedup</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">18x</div>
-            <div className="text-[9px] text-[#10B981] font-mono">Snowflake Marts</div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Audit Accuracy</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">100%</div>
-            <div className="text-[9px] text-neutral-400 font-mono">Zero Discrepancy</div>
-          </div>
-        </div>
-
-        {/* Medallion Architecture Flow */}
-        <div className="p-3.5 rounded-xl bg-[#121212] border border-[#222222] space-y-2.5">
-          <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
-            <span>MEDALLION LAKEHOUSE PIPELINE</span>
-            <span className="text-[#00BCD4]">Auto-Partitioned</span>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono">
-            <div className="p-2.5 rounded-lg bg-[#0B0B0B] border border-[#282828] space-y-1">
-              <span className="text-[#CD7F32] font-black text-[11px] block">BRONZE</span>
-              <span className="text-[10px] text-neutral-400 block truncate">Raw Event Stream</span>
-              <span className="text-[9px] text-emerald-400 font-mono">1.4M rows/s</span>
-            </div>
-            <div className="p-2.5 rounded-lg bg-[#0B0B0B] border border-[#282828] space-y-1">
-              <span className="text-slate-300 font-black text-[11px] block">SILVER</span>
-              <span className="text-[10px] text-neutral-400 block truncate">dbt Cleansed</span>
-              <span className="text-[9px] text-[#00BCD4] font-mono">Schema Valid</span>
-            </div>
-            <div className="p-2.5 rounded-lg bg-[#0B0B0B] border border-[#282828] space-y-1">
-              <span className="text-amber-300 font-black text-[11px] block">GOLD</span>
-              <span className="text-[10px] text-neutral-400 block truncate">Power BI Marts</span>
-              <span className="text-[9px] text-purple-300 font-mono">Sub-1s Queries</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Telemetry Stack */}
-        <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-neutral-400">
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Snowflake</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">dbt Core</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Power BI</span>
-          </div>
-          <span className="text-[#00BCD4] font-semibold">HIPAA & SOC2</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Visual 03: Data Analytics & Business Intelligence (Executive BI & Telemetry Cockpit)
-function AnalyticsBIVisual() {
-  return (
-    <div className="w-full rounded-2xl bg-[#0B0B0B] border border-[#262626] p-4 sm:p-6 text-white shadow-2xl relative overflow-hidden font-sans">
-      {/* Top Console Bar */}
-      <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#222222]">
-        <div className="flex items-center gap-2">
-          <BarChart3 className="w-4 h-4 text-[#00BCD4]" />
-          <span className="text-xs font-mono font-bold text-white tracking-wide truncate">
-            Executive BI & Predictive Telemetry Cockpit
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#161616] border border-[#2a2a2a] text-[10px] font-mono text-[#00BCD4] shrink-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-          <span>DirectQuery Sub-1s</span>
-        </div>
-      </div>
-
-      {/* Main Analytics Content */}
-      <div className="pt-3 sm:pt-4 space-y-3 sm:space-y-4">
-        {/* Metrics Row */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
-          <div className="p-2 sm:p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400">Query Speed</div>
-            <div className="text-sm sm:text-base font-black text-white font-mono mt-0.5">&lt; 800ms</div>
-            <div className="text-[8px] sm:text-[9px] text-[#00BCD4] font-mono">In-Memory Cache</div>
-          </div>
-          <div className="p-2 sm:p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400">Blended ROAS</div>
-            <div className="text-sm sm:text-base font-black text-white font-mono mt-0.5">+340%</div>
-            <div className="text-[8px] sm:text-[9px] text-[#10B981] font-mono">Closed Revenue</div>
-          </div>
-          <div className="p-2 sm:p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400">Single Source</div>
-            <div className="text-sm sm:text-base font-black text-white font-mono mt-0.5">100%</div>
-            <div className="text-[8px] sm:text-[9px] text-purple-300 font-mono">Audit Verified</div>
-          </div>
-        </div>
-
-        {/* Live KPI Readouts */}
-        <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#121212] border border-[#222222] space-y-2">
-          <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-neutral-400">
-            <span>EXECUTIVE KPI TELEMETRY</span>
-            <span className="text-[#10B981]">Live Refresh</span>
-          </div>
-
-          <div className="space-y-1.5 text-xs font-mono">
-            <div className="flex items-center justify-between p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E]">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#00BCD4]" />
-                <span className="text-neutral-200">Revenue & Margin Telemetry</span>
-              </div>
-              <span className="text-emerald-400 font-bold">+28.4% YoY</span>
-            </div>
-
-            <div className="flex items-center justify-between p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E]">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                <span className="text-neutral-200">Predictive Churn & LTV Ratio</span>
-              </div>
-              <span className="text-emerald-400 font-bold">4.6x LTV:CAC</span>
-            </div>
-
-            <div className="flex items-center justify-between p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E]">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#A855F7]" />
-                <span className="text-neutral-200">Automated Anomaly Detection</span>
-              </div>
-              <span className="text-[#00BCD4] font-bold">0 Outliers</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Stack Badges */}
-        <div className="flex items-center justify-between pt-1 text-[10px] sm:text-[11px] font-mono text-neutral-400">
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Power BI</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Tableau</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Datadog</span>
-          </div>
-          <span className="text-[#00BCD4] font-semibold">Leadership Ready</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Visual 04: AI Services & Agents (Multi-Agent Swarms & Vector RAG)
-function AIServicesVisual() {
-  return (
-    <div className="w-full rounded-2xl bg-[#0B0B0B] border border-[#262626] p-5 sm:p-6 text-white shadow-2xl relative overflow-hidden font-sans">
-      {/* Top Console Bar */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#222222]">
-        <div className="flex items-center gap-2">
-          <Bot className="w-4 h-4 text-[#00BCD4]" />
-          <span className="text-xs font-mono font-bold text-white tracking-wide">
-            Enterprise Multi-Agent Swarm & Vector RAG
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#161616] border border-[#2a2a2a] text-[10px] font-mono text-[#00BCD4]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-          <span>VPC Isolated</span>
-        </div>
-      </div>
-
-      {/* Main Agent Orchestration Content */}
-      <div className="pt-4 space-y-4">
-        {/* Metrics Row */}
-        <div className="grid grid-cols-3 gap-2.5">
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Vector Retrieval</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">&lt; 400ms</div>
-            <div className="text-[9px] text-[#00BCD4] font-mono">Pinecone Hybrid</div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Data Leakage</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">0%</div>
-            <div className="text-[9px] text-[#10B981] font-mono">Zero Data Retention</div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-[#141414] border border-[#222222] text-left">
-            <div className="text-[10px] font-mono text-neutral-400">Task Velocity</div>
-            <div className="text-base font-black text-white font-mono mt-0.5">10x</div>
-            <div className="text-[9px] text-purple-300 font-mono">Agent Swarm Sync</div>
-          </div>
-        </div>
-
-        {/* Live Multi-Agent Swarm Orchestration Trace */}
-        <div className="p-3.5 rounded-xl bg-[#121212] border border-[#222222] space-y-2">
-          <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
-            <span>SUPERVISOR AGENT EXECUTION TRACE</span>
-            <span className="text-[#10B981]">Sandboxed Safe</span>
-          </div>
-
-          <div className="space-y-1.5 text-xs font-mono">
-            <div className="p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="px-1.5 py-0.5 rounded bg-cyan-950/60 text-[#00BCD4] text-[10px]">ROUTER</span>
-                <span className="text-neutral-300">Supervisor: Parse intent &amp; construct plan</span>
-              </div>
-              <span className="text-neutral-400">12ms</span>
-            </div>
-
-            <div className="p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 text-[10px]">RAG</span>
-                <span className="text-neutral-300">Pinecone: 12 context chunks retrieved</span>
-              </div>
-              <span className="text-neutral-400">38ms</span>
-            </div>
-
-            <div className="p-2 rounded-lg bg-[#0B0B0B] border border-[#1E1E1E] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 text-[10px]">GUARD</span>
-                <span className="text-neutral-300">HIPAA PII Redaction &amp; Verification</span>
-              </div>
-              <span className="text-emerald-400 font-bold">100% Passed</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Stack Badges */}
-        <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-neutral-400">
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">GPT-4o</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Claude 3.5</span>
-            <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#282828] text-neutral-300">Pinecone</span>
-          </div>
-          <span className="text-[#00BCD4] font-semibold">Strict Zero-Trust</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Map service index to its corresponding realistic visual component in exact homepage order:
-// 01 AI & Automation -> AIServicesVisual
-// 02 Software Development -> AppWebDevelopmentVisual
-// 03 Data Analytics & BI -> AnalyticsBIVisual
-// 04 Data Engineering -> DataEngineeringVisual
-const SERVICE_VISUALS = [
-  AIServicesVisual,
-  AppWebDevelopmentVisual,
-  AnalyticsBIVisual,
-  DataEngineeringVisual,
-];
-
-// Mobile Service Selector Cards (2x2 Grid)
-const MOBILE_SELECTOR_CARDS = [
-  {
-    idx: 0,
-    title: "AI & Automation",
-    desc: "Intelligent agents, RAG & workflow automation",
-    icon: Bot,
+const SERVICE_VISUAL_MAP: Record<string, ServiceVisualConfig> = {
+  "ai-services": {
+    imageSrc: "/images/services/ai-automation-service.jpg",
+    alt: "CodePlaced Enterprise AI & Automation multi-agent supervisor operations workflow",
+    badge: "AUTONOMOUS AGENT WORKFLOWS",
+    highlightTag: "Private VPC RAG • Sub-400ms Vectors",
+    subMetric: "10x Operational Velocity",
   },
-  {
-    idx: 1,
-    title: "Software Development",
-    desc: "Scalable web apps, mobile & cloud APIs",
-    icon: Code2,
+  "app-web-development": {
+    imageSrc: "/images/services/software-development-team.jpg",
+    alt: "CodePlaced Full-stack software development SaaS web and mobile platform",
+    badge: "ENTERPRISE SAAS & MOBILE PLATFORMS",
+    highlightTag: "Next.js 15 • React 19 • Flutter",
+    subMetric: "Sub-25ms SSR SLA",
   },
-  {
-    idx: 2,
-    title: "Data Analytics & BI",
-    desc: "Executive dashboards, KPIs & predictive insights",
-    icon: BarChart3,
+  "digital-social-marketing": {
+    imageSrc: "/images/services/data-analytics-team.jpg",
+    alt: "CodePlaced Executive BI telemetry cockpit and KPI analytics dashboard",
+    badge: "EXECUTIVE BI & KPI TELEMETRY",
+    highlightTag: "Power BI • Tableau • Real-Time",
+    subMetric: "Single Source of Truth",
   },
-  {
-    idx: 3,
-    title: "Data Engineering",
-    desc: "Lakehouses, pipelines & automated ETL",
-    icon: Database,
+  "data-engineering-analytics": {
+    imageSrc: "/images/services/data-engineering-team.jpg",
+    alt: "CodePlaced Cloud data engineering pipelines and lakehouse architecture",
+    badge: "PETABYTE PIPELINES & LAKEHOUSE",
+    highlightTag: "Snowflake • dbt • Apache Kafka",
+    subMetric: "1.4M rows/s Throughput",
   },
-];
+};
 
 // =========================================================================
 // MAIN INTERACTIVE SERVICES SHOWCASE COMPONENT
@@ -430,11 +73,39 @@ export function InteractiveServicesShowcase() {
   const isProgrammaticScrollRef = useRef(false);
 
   const activeService = SERVICES_DATA[activeIdx] || SERVICES_DATA[0];
-  const VisualComponent = SERVICE_VISUALS[activeIdx] || SERVICE_VISUALS[0];
 
   // GSAP ScrollTrigger for Desktop (> 1024px)
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const handleHashSync = () => {
+      if (typeof window === "undefined") return;
+      const hash = window.location.hash.toLowerCase().replace("#", "");
+      if (!hash) return;
+
+      let targetIdx = -1;
+      if (hash.includes("ai")) targetIdx = 0;
+      else if (hash.includes("software") || hash.includes("web") || hash.includes("app")) targetIdx = 1;
+      else if (hash.includes("analytics") || hash.includes("bi") || hash.includes("marketing")) targetIdx = 2;
+      else if (hash.includes("engineering") || hash.includes("platform")) targetIdx = 3;
+
+      if (targetIdx !== -1) {
+        setActiveIdx(targetIdx);
+        isProgrammaticScrollRef.current = true;
+        setTimeout(() => {
+          const el = document.getElementById(hash) || document.getElementById("four-pillars-gateway");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          setTimeout(() => {
+            isProgrammaticScrollRef.current = false;
+          }, 800);
+        }, 100);
+      }
+    };
+
+    handleHashSync();
+    window.addEventListener("hashchange", handleHashSync);
 
     const mm = gsap.matchMedia();
 
@@ -466,6 +137,7 @@ export function InteractiveServicesShowcase() {
     });
 
     return () => {
+      window.removeEventListener("hashchange", handleHashSync);
       mm.revert();
     };
   }, []);
@@ -492,6 +164,16 @@ export function InteractiveServicesShowcase() {
   return (
     <div ref={containerRef} className="relative w-full">
       <div ref={pinnedContentRef} className="w-full">
+        {/* Anchor Targets for Navbar Dropdown Deep Linking */}
+        <div id="ai-automation" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="ai-services" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="software-development" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="app-web-development" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="data-analytics-bi" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="data-analytics" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="data-engineering" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="data-engineering-analytics" className="scroll-mt-24 sm:scroll-mt-28" />
+
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
           
           {/* Section Header */}
@@ -552,9 +234,9 @@ export function InteractiveServicesShowcase() {
                         {service.title}
                       </h4>
 
-                      {/* Short Description */}
-                      <p className="text-[10px] xs:text-[10.5px] text-neutral-500 leading-relaxed mt-1 line-clamp-2">
-                        {service.positioning}
+                      {/* Service Tagline Description (Clear, Never Clipped) */}
+                      <p className="text-[10.5px] xs:text-[11px] text-neutral-500 leading-relaxed mt-1">
+                        {service.tagline}
                       </p>
                     </div>
 
@@ -594,7 +276,7 @@ export function InteractiveServicesShowcase() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-mono font-bold text-[#00BCD4] px-2 py-0.5 rounded bg-[#00BCD4]/10 uppercase tracking-wider">
-                      {activeService.num} // {activeService.tagline}
+                      {`${activeService.num} • ${activeService.tagline}`}
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-neutral-900 tracking-tight leading-tight pt-0.5">
@@ -605,7 +287,45 @@ export function InteractiveServicesShowcase() {
                   </p>
                 </div>
 
-                {/* Clean Professional Business Visual (Clean Metric Plate, No Code/Terminal) */}
+                {/* Responsive Service Visual Image (Mandatory: Visible on all mobile screens) */}
+                <div className="rounded-xl overflow-hidden border border-[#E5E7EB] bg-[#0A0D14] shadow-sm">
+                  <div className="relative aspect-[16/10] w-full">
+                    <Image
+                      src={
+                        (SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).imageSrc
+                      }
+                      alt={
+                        (SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).alt
+                      }
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 600px"
+                      className="object-cover object-center"
+                      priority
+                    />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-black/10 pointer-events-none rounded-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Top Badge */}
+                    <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                      <span className="text-[9px] font-mono font-bold text-white tracking-wide">
+                        {(SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).badge}
+                      </span>
+                    </div>
+
+                    {/* Bottom Telemetry Info */}
+                    <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[9.5px] font-mono text-neutral-300">
+                      <span className="truncate max-w-[70%]">
+                        {(SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).highlightTag}
+                      </span>
+                      <span className="text-[#00BCD4] font-bold shrink-0">
+                        {(SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).subMetric}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Clean Professional Business Visual (Performance & Engineering Highlights) */}
                 <div className="rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] p-3.5 space-y-3">
                   <div className="flex items-center justify-between text-xs font-bold text-neutral-800 pb-2 border-b border-[#E5E7EB]">
                     <span>Performance & Engineering Highlights</span>
@@ -669,7 +389,7 @@ export function InteractiveServicesShowcase() {
                     href="/contact#contact-hero"
                     className="inline-flex items-center justify-center h-10 px-4 rounded-full bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-xs border border-[#E5E7EB] transition-all text-center"
                   >
-                    <span>Book Call</span>
+                    <span>Send an Inquiry</span>
                   </Link>
                 </div>
               </div>
@@ -842,7 +562,46 @@ export function InteractiveServicesShowcase() {
                     transition={{ duration: 0.35, ease: "easeOut" }}
                     className="w-full"
                   >
-                    <VisualComponent />
+                    <div className="relative aspect-[16/11] lg:aspect-[4/3] xl:aspect-[16/11] w-full rounded-2xl overflow-hidden border border-[#242A35] bg-[#0A0D14] shadow-2xl group">
+                      <Image
+                        src={
+                          (SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).imageSrc
+                        }
+                        alt={
+                          (SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).alt
+                        }
+                        fill
+                        sizes="(max-width: 1280px) 50vw, 640px"
+                        className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                        priority
+                      />
+                      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-2xl" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+
+                      {/* Top Badge */}
+                      <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                          <span className="text-[10px] font-mono font-bold text-white tracking-wide">
+                            {(SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).badge}
+                          </span>
+                        </div>
+                        <div className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-[#00BCD4]/15 border border-[#00BCD4]/30 text-[10px] font-mono text-[#00BCD4] font-semibold">
+                          {(SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).subMetric}
+                        </div>
+                      </div>
+
+                      {/* Bottom Info */}
+                      <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
+                        <div className="text-[11.5px] font-mono text-neutral-300 font-medium">
+                          {(SERVICE_VISUAL_MAP[activeService.slug] || SERVICE_VISUAL_MAP["ai-services"]).highlightTag}
+                        </div>
+                        <div className="inline-flex items-center gap-1.5 text-[10px] font-mono text-[#00BCD4] font-bold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
+                          <span>PRODUCTION DEPLOYED</span>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>

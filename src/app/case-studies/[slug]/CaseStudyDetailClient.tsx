@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { TuitionstimeCaseStudy } from "@/components/case-studies/TuitionstimeCaseStudy";
 import { HoopwrldCaseStudy } from "@/components/case-studies/HoopwrldCaseStudy";
+import { TopPlacedAICaseStudy } from "@/components/case-studies/TopPlacedAICaseStudy";
+import { CollectIQCaseStudy } from "@/components/case-studies/CollectIQCaseStudy";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -60,19 +62,12 @@ export function CaseStudyDetailClient({
   nextStudy,
   relatedStudies,
 }: CaseStudyDetailClientProps) {
-  if (study.slug === "tuitionstime") {
-    return <TuitionstimeCaseStudy />;
-  }
-
-  if (study.slug === "hoopwrld") {
-    return <HoopwrldCaseStudy />;
-  }
-
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
+    if (study.slug === "tuitionstime" || study.slug === "hoopwrld") return;
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight <= 0) return;
@@ -83,7 +78,23 @@ export function CaseStudyDetailClient({
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [study.slug]);
+
+  if (study.slug === "tuitionstime") {
+    return <TuitionstimeCaseStudy />;
+  }
+
+  if (study.slug === "hoopwrld") {
+    return <HoopwrldCaseStudy />;
+  }
+
+  if (study.slug === "topplaced-ai") {
+    return <TopPlacedAICaseStudy />;
+  }
+
+  if (study.slug === "collectiq") {
+    return <CollectIQCaseStudy />;
+  }
 
   const handleShare = async () => {
     try {
@@ -235,7 +246,7 @@ export function CaseStudyDetailClient({
                   href="/contact#contact-hero"
                   className="w-full sm:w-auto h-[50px] px-7 rounded-full bg-white hover:bg-slate-50 text-[#072C4C] font-bold text-xs border border-slate-200/90 shadow-xs flex items-center justify-center transition-all duration-300"
                 >
-                  <span>Book Strategy Call</span>
+                  <span>Send an Inquiry</span>
                 </Link>
               </div>
             </div>
@@ -942,7 +953,7 @@ export function CaseStudyDetailClient({
               href="/contact#contact-hero"
               className="w-full sm:w-auto h-[54px] px-9 rounded-full text-[#072C4C] bg-[#16D3F5] hover:bg-cyan-300 font-bold text-sm shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              <span>Book Strategy Call</span>
+              <span>Send an Inquiry</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 

@@ -13,7 +13,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { CodePlacedLogo } from "./CodePlacedLogo";
-import { ServicesMegaMenu } from "./ServicesMegaMenu";
+import { ServicesMegaMenu, SERVICE_COLUMNS } from "./ServicesMegaMenu";
 import { IndustriesMegaMenu } from "./IndustriesMegaMenu";
 
 interface HeaderProps {
@@ -84,6 +84,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
 
   // Close mobile menu on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileMenuOpen(false);
     setMegaMenuOpen(false);
     setIndustriesMenuOpen(false);
@@ -212,7 +213,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
         onClick={handleStrategyCallClick}
         className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
       >
-        <span>Book Strategy Call</span>
+        <span>Send an Inquiry</span>
         <ArrowRight className="w-4 h-4 ml-0.5" />
       </Link>
     </div>
@@ -291,7 +292,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-0 top-[72px] sm:top-[76px] z-[998] backdrop-blur-2xl bg-white/98 border-b border-slate-200/90 text-[#111827] shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto"
+            className="fixed inset-x-0 top-[76px] sm:top-[80px] z-[998] backdrop-blur-2xl bg-white/98 border-b border-slate-200/90 text-[#111827] shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto"
           >
             <nav className="flex flex-col space-y-1.5">
               {NAV_ITEMS_LIST.map((item) => {
@@ -332,113 +333,29 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                             transition={{ duration: 0.25 }}
                             className="overflow-hidden pl-3 pr-1 space-y-3 pt-2"
                           >
-                            {/* 1. AI & Automation */}
-                            <div className="space-y-1">
-                              <Link
-                                href="/services/ai-copilots"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
-                              >
-                                01. AI & Automation
-                              </Link>
-                              <div className="pl-2 space-y-1">
+                            {SERVICE_COLUMNS.map((col) => (
+                              <div key={col.title} className="space-y-1">
                                 <Link
-                                  href="/services/ai-copilots"
+                                  href={col.categoryHref}
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
+                                  className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4] hover:text-[#00C8E8] transition-colors"
                                 >
-                                  • AI Copilots & Enterprise RAG
+                                  {col.title}
                                 </Link>
-                                <Link
-                                  href="/services/ai-services"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Autonomous Agent Swarms & Workflows
-                                </Link>
+                                <div className="pl-2 space-y-1">
+                                  {col.items.map((item) => (
+                                    <Link
+                                      key={item.title}
+                                      href={item.href}
+                                      onClick={() => setMobileMenuOpen(false)}
+                                      className="block py-0.5 text-xs sm:text-sm text-slate-600 hover:text-[#00BCD4] transition-colors"
+                                    >
+                                      • {item.title}
+                                    </Link>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-
-                            {/* 2. Software Development */}
-                            <div className="space-y-1">
-                              <Link
-                                href="/services/app-web-development"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
-                              >
-                                02. Software Development
-                              </Link>
-                              <div className="pl-2 space-y-1">
-                                <Link
-                                  href="/services/app-web-development"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Web & Native Mobile Applications
-                                </Link>
-                                <Link
-                                  href="/services/cloud-infrastructure"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Cloud Platforms & SaaS Systems
-                                </Link>
-                              </div>
-                            </div>
-
-                            {/* 3. Data Analytics & Business Intelligence */}
-                            <div className="space-y-1">
-                              <Link
-                                href="/services/executive-dashboards"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
-                              >
-                                03. Data Analytics & Business Intelligence
-                              </Link>
-                              <div className="pl-2 space-y-1">
-                                <Link
-                                  href="/services/executive-dashboards"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Executive BI & Power BI Cockpits
-                                </Link>
-                                <Link
-                                  href="/services/embedded-analytics"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • KPI Telemetry & Attribution Systems
-                                </Link>
-                              </div>
-                            </div>
-
-                            {/* 4. Data Engineering */}
-                            <div className="space-y-1">
-                              <Link
-                                href="/services/data-engineering-analytics"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-xs font-bold uppercase tracking-wider text-[#00BCD4]"
-                              >
-                                04. Data Engineering
-                              </Link>
-                              <div className="pl-2 space-y-1">
-                                <Link
-                                  href="/services/data-platforms"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Data Platforms & Lakehouses
-                                </Link>
-                                <Link
-                                  href="/services/data-engineering-analytics"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-600 hover:text-[#00BCD4]"
-                                >
-                                  • Automated Pipelines & ETL/ELT
-                                </Link>
-                              </div>
-                            </div>
+                            ))}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -562,7 +479,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                 }}
                 className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
               >
-                <span>Book Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

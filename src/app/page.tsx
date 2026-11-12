@@ -298,6 +298,7 @@ export default function HomePage() {
   // =========================================================================
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPrefersReducedMotion(mediaQuery.matches);
     const handleChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", handleChange);
@@ -420,23 +421,26 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 1: HERO SECTION — EXACTLY 100VH ON DESKTOP WITH INTEGRATED MARQUEE */}
       {/* ===================================================================== */}
-      <section className="relative w-full lg:h-[100vh] lg:min-h-[100dvh] flex flex-col justify-between pt-[72px] sm:pt-[80px] pb-2 sm:pb-0 bg-[#000000] overflow-hidden">
-        {/* Full-Width Static Background Image Container covering entire 100vh hero */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+      <section className="relative w-full lg:h-[100vh] lg:min-h-[100dvh] flex flex-col justify-between pt-[84px] sm:pt-[88px] lg:pt-[80px] pb-2 sm:pb-0 bg-[#000000] overflow-hidden">
+        {/* Desktop Static Background Image Container covering entire 100vh hero */}
+        <div className="hidden lg:block absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <Image
             src={HERO_BACKGROUND_IMAGE}
             alt="CodePlaced senior engineering consultants collaborating in modern glass corporate office"
             fill
             priority
-            className="object-cover object-[75%_center] lg:object-[82%_center]"
+            className="object-cover object-[82%_center]"
           />
 
           {/* Precision Gradient Overlays for Maximum Text Readability while showcasing the collaborative team on right */}
-          {/* Left-to-right gradient: dense on left for text contrast, clear on right to showcase image subjects */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/92 via-[#000000]/60 to-transparent" />
-
-          {/* Top-to-bottom gradient: seamless navbar blend and dark bottom transition */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/70 via-transparent to-[#000000]/85" />
+        </div>
+
+        {/* Mobile Background: Ambient Cyber Glow */}
+        <div className="block lg:hidden absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <div className="absolute top-1/4 -right-16 w-72 h-72 rounded-full bg-[#00BCD4]/10 blur-3xl" />
+          <div className="absolute bottom-10 -left-16 w-60 h-60 rounded-full bg-[#087FA5]/15 blur-2xl" />
         </div>
 
         {/* Hero Foreground Content — Vertically centered within available hero area */}
@@ -461,13 +465,38 @@ export default function HomePage() {
               We build custom AI, data engineering & software solutions for high-growth companies. From strategic architecture to production systems, our senior engineering pods deliver with speed and precision.
             </p>
 
+            {/* Mobile Hero Banner Image: Visible, crisp, natural 16:9 aspect ratio */}
+            <div className="block lg:hidden my-2.5 sm:my-4">
+              <div className="relative aspect-[16/9] w-full rounded-xl sm:rounded-2xl overflow-hidden border border-white/15 bg-[#0A0D14] shadow-2xl shadow-black/80">
+                <Image
+                  src={HERO_BACKGROUND_IMAGE}
+                  alt="CodePlaced senior engineering consultants collaborating on AI and software systems"
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
+                  className="object-cover object-center"
+                />
+                {/* Subtle protective vignette and highlight border */}
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-xl sm:rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+                {/* Subtle live pod indicator badge in bottom corner */}
+                <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                  <span className="text-[9px] font-mono font-bold text-white tracking-wide">
+                    ENGINEERING &bull; DATA &bull; AI
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* CTA Buttons */}
             <div className="flex flex-row items-center gap-2.5 sm:gap-4 pt-0.5">
               <Link
                 href="/contact#contact-hero"
                 className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-5 sm:px-8 h-10 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer shrink-0"
               >
-                <span>Book Strategy Call</span>
+                <span>Send an Inquiry</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
               </Link>
 
@@ -519,12 +548,147 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
+      {/* SECTION 2: CLIENT TESTIMONIALS — COMPACT BLACK BACKGROUND (#000000) */}
+      {/* ===================================================================== */}
+      <section className="py-7 sm:py-8 lg:py-9 bg-[#000000] border-b border-[#292929] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
+            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+              CLIENT SUCCESS
+            </span>
+            <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+              What Our Clients Say
+            </h2>
+          </div>
+
+          {/* DESKTOP (md: & above): 3-Column Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-3.5 sm:gap-5">
+            {TESTIMONIALS_DATA.map((t, idx) => (
+              <div
+                key={idx}
+                className="p-4.5 sm:p-5.5 rounded-2xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/50 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-lg"
+              >
+                <div className="space-y-2.5">
+                  {/* Star Rating */}
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
+                    ))}
+                  </div>
+
+                  {/* Real Testimonial Quote */}
+                  <p className="text-sm sm:text-base text-[#E5E7EB] leading-relaxed italic font-normal">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                </div>
+
+                {/* Author Info */}
+                <div className="pt-3.5 mt-3.5 border-t border-[#292929] flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#161616] border border-[#292929] text-[#00BCD4] flex items-center justify-center font-bold text-xs">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-white">{t.author}</div>
+                    <div className="text-xs text-[#9CA3AF]">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* MOBILE (md:hidden): Compact Swipeable Carousel with Dots & Controls */}
+          <div
+            className="md:hidden select-none"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="p-3.5 sm:p-5 rounded-xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/40 transition-all duration-300 flex flex-col justify-between shadow-lg min-h-0">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  {/* Star Rating */}
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(TESTIMONIALS_DATA[activeTestimonial].rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400" />
+                    ))}
+                  </div>
+                  <span className="text-[9.5px] font-mono text-slate-400 font-bold bg-[#161616] px-2 py-0.5 rounded-full border border-white/10">
+                    {activeTestimonial + 1} / {TESTIMONIALS_DATA.length}
+                  </span>
+                </div>
+
+                {/* Testimonial Quote */}
+                <p className="text-xs sm:text-sm text-[#E5E7EB] leading-relaxed italic font-normal">
+                  &ldquo;{TESTIMONIALS_DATA[activeTestimonial].quote}&rdquo;
+                </p>
+              </div>
+
+              {/* Author Info + Carousel Navigation */}
+              <div className="pt-2.5 mt-2.5 border-t border-[#292929] flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-[#292929] text-[#00BCD4] flex items-center justify-center font-bold text-[10px] sm:text-xs shrink-0">
+                    {TESTIMONIALS_DATA[activeTestimonial].initials}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-sm font-bold text-white truncate">
+                      {TESTIMONIALS_DATA[activeTestimonial].author}
+                    </div>
+                    <div className="text-[9.5px] sm:text-xs text-[#9CA3AF] truncate">
+                      {TESTIMONIALS_DATA[activeTestimonial].role}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Arrow Controls */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() =>
+                      setActiveTestimonial(
+                        (prev) => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length
+                      )
+                    }
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-white/10 text-white hover:text-[#00BCD4] hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors cursor-pointer"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS_DATA.length)
+                    }
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-white/10 text-white hover:text-[#00BCD4] hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors cursor-pointer"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center justify-center gap-1.5 mt-2">
+              {TESTIMONIALS_DATA.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveTestimonial(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeTestimonial === i ? "w-5 bg-[#00BCD4]" : "w-1.5 bg-slate-700 hover:bg-slate-500"
+                  }`}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===================================================================== */}
       {/* SECTION 2: SERVICES — PINNED 3-PHASE GSAP SCROLL ANIMATION */}
       {/* ===================================================================== */}
       <section
         id="services"
         ref={servicesSectionRef}
-        className="w-full bg-[#FFFFFF] lg:min-h-[calc(100vh-80px)] flex flex-col justify-start py-7 sm:py-9 lg:py-4 xl:py-5.5 2xl:py-8 relative text-[#111827] z-20 border-b border-[#E5E7EB]"
+        className="scroll-mt-0 w-full bg-[#FFFFFF] lg:min-h-[calc(100vh-80px)] flex flex-col justify-start py-7 sm:py-9 lg:py-4 xl:py-5.5 2xl:py-8 relative text-[#111827] z-20 border-b border-[#E5E7EB]"
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative bg-white">
           {/* Centered Editorial Section Header with Clean Breathing Room */}
@@ -635,11 +799,11 @@ export default function HomePage() {
                         </span>
                       </div>
 
-                      <h3 className="text-[11.5px] xs:text-xs sm:text-base font-bold text-[#101820] tracking-tight leading-snug line-clamp-1 xs:line-clamp-2 mt-1 sm:mt-2.5 group-hover:text-[#00BCD4] transition-colors">
+                      <h3 className="text-[12px] xs:text-xs sm:text-base font-bold text-[#101820] tracking-tight leading-snug mt-1 sm:mt-2.5 group-hover:text-[#00BCD4] transition-colors">
                         {service.title}
                       </h3>
 
-                      <p className="text-[10px] xs:text-[10.5px] sm:text-xs text-[#56616B] leading-relaxed line-clamp-2 mt-0.5 sm:mt-1.5 font-normal">
+                      <p className="text-[10.5px] xs:text-[11px] sm:text-xs text-[#56616B] leading-relaxed mt-1 sm:mt-1.5 font-normal">
                         {service.description}
                       </p>
                     </div>
@@ -1038,140 +1202,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===================================================================== */}
-      {/* SECTION 7: CLIENT TESTIMONIALS — COMPACT BLACK BACKGROUND (#000000) */}
-      {/* ===================================================================== */}
-      <section className="py-7 sm:py-8 lg:py-9 bg-[#000000] border-b border-[#292929] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              CLIENT SUCCESS
-            </span>
-            <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-              What Our Clients Say
-            </h2>
-          </div>
-
-          {/* DESKTOP (md: & above): 3-Column Grid */}
-          <div className="hidden md:grid md:grid-cols-3 gap-3.5 sm:gap-5">
-            {TESTIMONIALS_DATA.map((t, idx) => (
-              <div
-                key={idx}
-                className="p-4.5 sm:p-5.5 rounded-2xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/50 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-lg"
-              >
-                <div className="space-y-2.5">
-                  {/* Star Rating */}
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
-                    ))}
-                  </div>
-
-                  {/* Real Testimonial Quote */}
-                  <p className="text-sm sm:text-base text-[#E5E7EB] leading-relaxed italic font-normal">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                </div>
-
-                {/* Author Info */}
-                <div className="pt-3.5 mt-3.5 border-t border-[#292929] flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-[#161616] border border-[#292929] text-[#00BCD4] flex items-center justify-center font-bold text-xs">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-white">{t.author}</div>
-                    <div className="text-xs text-[#9CA3AF]">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* MOBILE (md:hidden): Compact Swipeable Carousel with Dots & Controls */}
-          <div
-            className="md:hidden select-none"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div className="p-3.5 sm:p-5 rounded-xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/40 transition-all duration-300 flex flex-col justify-between shadow-lg min-h-0">
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  {/* Star Rating */}
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {[...Array(TESTIMONIALS_DATA[activeTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400" />
-                    ))}
-                  </div>
-                  <span className="text-[9.5px] font-mono text-slate-400 font-bold bg-[#161616] px-2 py-0.5 rounded-full border border-white/10">
-                    {activeTestimonial + 1} / {TESTIMONIALS_DATA.length}
-                  </span>
-                </div>
-
-                {/* Testimonial Quote */}
-                <p className="text-xs sm:text-sm text-[#E5E7EB] leading-relaxed italic font-normal">
-                  &ldquo;{TESTIMONIALS_DATA[activeTestimonial].quote}&rdquo;
-                </p>
-              </div>
-
-              {/* Author Info + Carousel Navigation */}
-              <div className="pt-2.5 mt-2.5 border-t border-[#292929] flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-[#292929] text-[#00BCD4] flex items-center justify-center font-bold text-[10px] sm:text-xs shrink-0">
-                    {TESTIMONIALS_DATA[activeTestimonial].initials}
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs sm:text-sm font-bold text-white truncate">
-                      {TESTIMONIALS_DATA[activeTestimonial].author}
-                    </div>
-                    <div className="text-[9.5px] sm:text-xs text-[#9CA3AF] truncate">
-                      {TESTIMONIALS_DATA[activeTestimonial].role}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Arrow Controls */}
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <button
-                    onClick={() =>
-                      setActiveTestimonial(
-                        (prev) => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length
-                      )
-                    }
-                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-white/10 text-white hover:text-[#00BCD4] hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors cursor-pointer"
-                    aria-label="Previous testimonial"
-                  >
-                    <ChevronLeft className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                  </button>
-                  <button
-                    onClick={() =>
-                      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS_DATA.length)
-                    }
-                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#161616] border border-white/10 text-white hover:text-[#00BCD4] hover:border-[#00BCD4]/40 flex items-center justify-center transition-colors cursor-pointer"
-                    aria-label="Next testimonial"
-                  >
-                    <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Pagination Dots */}
-            <div className="flex items-center justify-center gap-1.5 mt-2">
-              {TESTIMONIALS_DATA.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveTestimonial(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeTestimonial === i ? "w-5 bg-[#00BCD4]" : "w-1.5 bg-slate-700 hover:bg-slate-500"
-                  }`}
-                  aria-label={`Go to testimonial ${i + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ===================================================================== */}
       {/* SECTION 8: FAQ SECTION — COMPACT WHITE BACKGROUND (#FFFFFF) */}
@@ -1250,67 +1280,109 @@ export default function HomePage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* SECTION 9: FINAL CTA BANNER — COMPACT BLACK PHOTOGRAPHIC BANNER (#000000) */}
+      {/* SECTION 8: FINAL CTA BANNER — COMPACT BLACK CARD (#000000) */}
       {/* ===================================================================== */}
       <section className="py-5 sm:py-8 bg-[#000000] relative">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-xl sm:rounded-3xl overflow-hidden bg-[#0B0B0B] border border-[#292929] shadow-2xl">
-            {/* Background Photographic Image on Right with Tuned Contrast Gradient Overlay */}
-            <div className="absolute top-0 right-0 w-full lg:w-3/5 h-full opacity-65 lg:opacity-85 pointer-events-none">
-              <Image
-                src="/images/cta-office-collab.jpg"
-                alt="CodePlaced senior software architects collaborating at modern conference room"
-                fill
-                className="object-cover object-right"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent" />
+          <div className="relative rounded-xl sm:rounded-3xl overflow-hidden bg-[#0B0B0B] border border-[#292929] shadow-2xl p-4 sm:p-7 lg:p-9">
+            {/* Ambient Cyan Radial Glow Accent */}
+            <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none opacity-30">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,188,212,0.2),transparent_70%)]" />
             </div>
 
-            {/* Left Content */}
-            <div className="relative z-10 p-3.5 sm:p-7 lg:p-9 max-w-2xl space-y-2 sm:space-y-3.5">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                START YOUR ENGAGEMENT
-              </span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center relative z-10">
+              {/* Left Column (7 cols): Content + Actions */}
+              <div className="lg:col-span-7 space-y-2.5 sm:space-y-3.5">
+                <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+                  START YOUR ENGAGEMENT
+                </span>
 
-              <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                Ready to Build Something Exceptional?
-              </h2>
+                <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                  Ready to Build Something Exceptional?
+                </h2>
 
-              <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
-                Tell us about your project. Our senior engineering team will evaluate your requirements and outline a practical delivery roadmap within 24 hours.
-              </p>
+                <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
+                  Tell us about your project. Our senior engineering team will evaluate your requirements and outline a practical delivery roadmap within 24 hours.
+                </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-0.5">
-                <Link
-                  href="/contact#contact-hero"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer text-center"
-                >
-                  <span>Book Strategy Call</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
-                </Link>
+                {/* Mobile Collaborative Team Image: Placed below description on mobile */}
+                <div className="block lg:hidden my-3">
+                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-white/15 bg-[#121212] shadow-xl">
+                    <Image
+                      src="/images/cta-software-collaboration.jpg"
+                      alt="CodePlaced technology engineering team collaborating on software solutions"
+                      fill
+                      sizes="(max-width: 640px) 100vw, 550px"
+                      className="object-cover object-center"
+                    />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-                <Link
-                  href="/contact"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-base border border-white/20 transition-all duration-200 cursor-pointer text-center"
-                >
-                  <span>Get in Touch</span>
-                </Link>
+                    {/* Live status badge */}
+                    <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                      <span className="text-[9.5px] font-mono font-bold text-white tracking-wide">
+                        SENIOR ENGINEERING PODS
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-0.5">
+                  <Link
+                    href="/contact#contact-hero"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer text-center"
+                  >
+                    <span>Send an Inquiry</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-base border border-white/20 transition-all duration-200 cursor-pointer text-center"
+                  >
+                    <span>Get in Touch</span>
+                  </Link>
+                </div>
+
+                {/* 3 Small Supporting Trust Points */}
+                <div className="pt-2 sm:pt-3.5 border-t border-[#292929] flex flex-wrap items-center gap-2.5 sm:gap-6 text-[10px] sm:text-xs text-slate-300 font-medium">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
+                    <span>Fixed 2–4 Wk Sprints</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
+                    <span>Bilateral NDA Guardrails</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
+                    <span>100% IP Ownership</span>
+                  </div>
+                </div>
               </div>
 
-              {/* 3 Small Supporting Trust Points */}
-              <div className="pt-2 sm:pt-3.5 border-t border-[#292929] flex flex-wrap items-center gap-2.5 sm:gap-6 text-[10px] sm:text-xs text-slate-300 font-medium">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
-                  <span>Fixed 2–4 Wk Sprints</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
-                  <span>Bilateral NDA Guardrails</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
-                  <span>100% IP Ownership</span>
+              {/* Right Column (5 cols, Desktop): Dedicated Collaborative Team Image */}
+              <div className="hidden lg:block lg:col-span-5 relative">
+                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-white/15 bg-[#121212] shadow-2xl group">
+                  <Image
+                    src="/images/cta-software-collaboration.jpg"
+                    alt="CodePlaced technology engineering team collaborating on software solutions in modern office"
+                    fill
+                    sizes="(max-width: 1280px) 40vw, 520px"
+                    className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Corner Badge */}
+                  <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
+                    <span className="text-[10px] font-mono font-bold text-white tracking-wide">
+                      SENIOR ENGINEERING PODS
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

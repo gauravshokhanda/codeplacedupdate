@@ -12,10 +12,16 @@ import {
   Users,
   Layers,
   Globe2,
+  Cpu,
+  Bot,
+  Target,
+  Code2,
+  Building2,
+  Workflow,
 } from "lucide-react";
 import { CaseStudyCard, CaseStudyData } from "@/components/case-studies/CaseStudyCard";
 
-export type CaseStudySlug = "tuitionstime" | "hoopwrld" | "progress-partners";
+export type CaseStudySlug = "tuitionstime" | "hoopwrld" | "progress-partners" | "topplaced-ai" | "collectiq";
 
 type RelatedCaseStudyItem = CaseStudyData;
 
@@ -79,6 +85,46 @@ const ALL_CASE_STUDIES: RelatedCaseStudyItem[] = [
       { value: "8 Sources", label: "Data Sources Unified", icon: Database },
       { value: "Daily KPIs", label: "Daily Dashboard Usage", icon: BarChart3 },
       { value: "LTV + Churn", label: "Customer Retention Insights", icon: Users },
+    ],
+  },
+  {
+    id: "topplaced-ai",
+    slug: "topplaced-ai",
+    category: "AI INTERVIEW INTELLIGENCE / SAAS",
+    brand: "TopPlaced AI",
+    brandIcon: Cpu,
+    titlePrefix: "Building an AI-Powered ",
+    highlightWord: "Interview Simulation Platform",
+    description:
+      "An interview simulator that adapts, evaluates, and monitors the complete candidate journey. TopPlaced AI combines voice-led mock interviews, role-specific assessments, integrated coding tools, configurable evaluation rubrics, and multi-signal proctoring into one candidate-facing experience.",
+    image: "/images/case-studies/topplaced-ai/topplaced-card-live-interview.webp",
+    mobileImage: "/images/case-studies/topplaced-ai/topplaced-card-live-interview.webp",
+    imageAlt: "TopPlaced AI - AI-Powered Interview Simulation Platform",
+    techTags: ["Voice AI", "STAR Rubrics", "Proctoring", "Code Sandbox", "WebRTC"],
+    metrics: [
+      { value: "Voice-Led", label: "Voice-Led Interviews", icon: Bot },
+      { value: "Role-Specific", label: "Role-Specific Assessments", icon: Target },
+      { value: "Coding Tools", label: "Integrated Coding Tools", icon: Code2 },
+    ],
+  },
+  {
+    id: "collectiq",
+    slug: "collectiq",
+    category: "SAAS / AI AUTOMATION / FINTECH OPERATIONS",
+    brand: "CollectIQ",
+    brandIcon: Building2,
+    titlePrefix: "Building an AI-Powered ",
+    highlightWord: "Collections Operating System",
+    description:
+      "A connected SaaS platform bringing together consumer debt collections, commercial receivables, intelligent workflows, account management, and collection intelligence in one operational ecosystem.",
+    image: "/images/case-studies/collectiq/collectiq-hero-showcase.webp",
+    mobileImage: "/images/case-studies/collectiq/collectiq-hero-showcase.webp",
+    imageAlt: "CollectIQ - AI-Powered Collections Operating System",
+    techTags: ["SaaS Architecture", "Workflow Builder", "AI Assistant", "CRM Operations", "Multi-Tenant"],
+    metrics: [
+      { value: "Collections", label: "Collections Management", icon: Building2 },
+      { value: "Workflows", label: "Workflow Automation", icon: Workflow },
+      { value: "AI Insights", label: "AI-Powered Insights", icon: Bot },
     ],
   },
 ];

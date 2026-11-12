@@ -165,7 +165,7 @@ export function IndustriesMegaMenu({
                   onClick={onClose}
                   className="inline-flex items-center gap-2 px-6 h-[40px] rounded-full text-black font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer bg-[#00C8E8] hover:bg-[#00B4D2]"
                 >
-                  <span>Schedule Strategy Call</span>
+                  <span>Send an Inquiry</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

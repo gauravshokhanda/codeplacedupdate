@@ -1298,7 +1298,7 @@ export function TuitionstimeCaseStudy() {
                 href="/contact"
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0A0A0A] hover:bg-white/[0.05] text-white border border-white/[0.12] hover:border-[#00C8E8] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
               >
-                <span>Schedule a Call</span>
+                <span>Send an Inquiry</span>
                 <Calendar className="w-4 h-4 text-[#00C8E8]" />
               </Link>
             </div>
