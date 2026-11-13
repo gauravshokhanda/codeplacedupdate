@@ -209,13 +209,8 @@ const CAPABILITY_CARDS = [
     icon: Code2,
   },
   {
-    title: "Data Analytics & BI",
-    desc: "Executive command centers, KPI telemetry, and predictive metrics.",
-    icon: Cloud,
-  },
-  {
-    title: "Data Engineering",
-    desc: "Modern lakehouse architectures, ETL pipelines, and warehousing.",
+    title: "Data Analytics & Engineering",
+    desc: "Modern lakehouses, ETL pipelines, executive dashboards, and predictive insights.",
     icon: Database,
   },
   {

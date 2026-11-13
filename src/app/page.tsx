@@ -14,7 +14,6 @@ import {
   Bot,
   Code2,
   Database,
-  BarChart3,
   HeartPulse,
   ShoppingBag,
   GraduationCap,
@@ -34,7 +33,7 @@ import { ServicesMarquee } from "@/components/ServicesMarquee";
 import { HeroTechnologyShowcase } from "@/components/HeroTechnologyShowcase";
 
 // =========================================================================
-// 1. DATA: FIVE CORE SERVICES (5-COLUMN STAGGERED SHOWCASE)
+// 1. DATA: FOUR CORE SERVICES (4-COLUMN STAGGERED SHOWCASE)
 // =========================================================================
 const SERVICES_DATA = [
   {
@@ -67,34 +66,20 @@ const SERVICES_DATA = [
   },
   {
     num: "03",
-    title: "Data Analytics & Business Intelligence",
+    title: "Data Analytics & Engineering",
     description:
-      "Transform complex data into single-source-of-truth executive dashboards, KPI telemetry, and predictive metrics.",
-    capabilities: [
-      "Executive Cockpits & Dashboards",
-      "Power BI, Tableau & Looker",
-      "Cross-Platform Attribution",
-      "Cohort & Retention Analytics",
-    ],
-    icon: BarChart3,
-    href: "/services/executive-dashboards",
-  },
-  {
-    num: "04",
-    title: "Data Engineering",
-    description:
-      "Build resilient automated data pipelines, lakehouse architectures, and warehousing solutions with zero data loss.",
+      "Build reliable data foundations and turn complex information into actionable dashboards, KPI telemetry, and predictive insights.",
     capabilities: [
       "Automated ETL/ELT Pipelines",
-      "Lakehouse & Data Warehouses",
-      "Cross-System Integrations",
-      "Data Governance & SLA Audits",
+      "Lakehouses & Data Warehouses",
+      "Power BI, Tableau & Looker",
+      "Predictive Analytics & Governance",
     ],
     icon: Database,
     href: "/services/data-platforms",
   },
   {
-    num: "05",
+    num: "04",
     title: "Digital Marketing",
     description:
       "Grow your online presence and attract the right customers through search optimization, performance advertising, analytics, social media, and brand strategy.",
@@ -291,14 +276,13 @@ export default function HomePage() {
   const col2Ref = useRef<HTMLDivElement>(null);
   const col3Ref = useRef<HTMLDivElement>(null);
   const col4Ref = useRef<HTMLDivElement>(null);
-  const col5Ref = useRef<HTMLDivElement>(null);
   const servicesBtnRef = useRef<HTMLDivElement>(null);
 
   // =========================================================================
   // GSAP SCROLLTRIGGER: APPINVENTIV-INSPIRED STAIRCASE SERVICES ANIMATION
-  // Phase A: Initial descending staircase (Col 1 at top, Col 2..Col 5 staggered)
+  // Phase A: Initial descending staircase (Col 1 at top, Col 2..Col 4 staggered)
   // Phase B (0.00 -> 0.72): Progressive column rising toward Column 1
-  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 5-column layout & CTA
+  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 4-column layout & CTA
   // Phase D (0.90 -> 1.00): Natural release into About CodePlaced
   // =========================================================================
   useEffect(() => {
@@ -322,20 +306,19 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
-        const col5 = col5Ref.current;
         const btn = servicesBtnRef.current;
-        if (!col2 || !col3 || !col4 || !col5) return;
+        if (!col2 || !col3 || !col4) return;
 
         // Viewport height calculation: ensure pinned section and stagger fit comfortably within viewport
         const navbarHeight = 80;
         const availableHeight = window.innerHeight - navbarHeight;
         if (availableHeight < 620) {
-          gsap.set([col2, col3, col4, col5], { y: 0 });
+          gsap.set([col2, col3, col4], { y: 0 });
           if (btn) gsap.set(btn, { y: 0 });
           return;
         }
 
-        // Proportioned 5-column staircase offsets on standard and compact viewports
+        // Proportioned 4-column staircase offsets on standard and compact viewports
         let staggerStep = 80;
         if (availableHeight >= 960) {
           staggerStep = 80;
@@ -350,13 +333,11 @@ export default function HomePage() {
         const col2Offset = staggerStep;
         const col3Offset = staggerStep * 2;
         const col4Offset = staggerStep * 3;
-        const col5Offset = staggerStep * 4;
         const btnOffset = col3Offset;
 
         gsap.set(col2, { y: col2Offset });
         gsap.set(col3, { y: col3Offset });
         gsap.set(col4, { y: col4Offset });
-        gsap.set(col5, { y: col5Offset });
         if (btn) gsap.set(btn, { y: btnOffset });
 
         // Single coordinated ScrollTrigger timeline pinned right below the 80px navbar
@@ -377,7 +358,6 @@ export default function HomePage() {
         tl.to(col2, { y: 0, duration: 0.42, ease: "none" }, 0.00);
         tl.to(col3, { y: 0, duration: 0.46, ease: "none" }, 0.08);
         tl.to(col4, { y: 0, duration: 0.48, ease: "none" }, 0.16);
-        tl.to(col5, { y: 0, duration: 0.50, ease: "none" }, 0.22);
 
         // View All Services button rises in sync with Column 3 to arrive directly below the aligned cards
         if (btn) {
@@ -395,10 +375,9 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
-        const col5 = col5Ref.current;
         const btn = servicesBtnRef.current;
-        if (col2 && col3 && col4 && col5) {
-          gsap.set([col2, col3, col4, col5], { y: 0 });
+        if (col2 && col3 && col4) {
+          gsap.set([col2, col3, col4], { y: 0 });
         }
         if (btn) {
           gsap.set(btn, { y: 0 });
@@ -694,12 +673,12 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* DESKTOP 5-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
+          {/* DESKTOP 4-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
           <div className="hidden lg:block w-full relative">
-            <div className="grid grid-cols-5 border-t border-[#E5E5E5] relative bg-white">
+            <div className="grid grid-cols-4 border-t border-[#E5E5E5] relative bg-white">
               {SERVICES_DATA.map((service, idx) => {
                 const ServiceIcon = service.icon;
-                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref, col5Ref];
+                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref];
                 return (
                   <div
                     key={idx}
@@ -778,7 +757,7 @@ export default function HomePage() {
                   <div
                     key={idx}
                     className={`p-3.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group ${
-                      idx === 4 ? "sm:col-span-2" : ""
+                      idx === 3 ? "sm:col-span-1" : ""
                     }`}
                   >
                     <div>

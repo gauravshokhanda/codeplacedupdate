@@ -147,13 +147,8 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href="/services/executive-dashboards" className="hover:text-cyan-300 transition-colors block">
-                  Data Analytics & Business Intelligence
-                </Link>
-              </li>
-              <li>
                 <Link href="/services/data-platforms" className="hover:text-cyan-300 transition-colors block">
-                  Data Engineering
+                  Data Analytics & Engineering
                 </Link>
               </li>
               <li>

@@ -281,7 +281,7 @@ export default function ServicesPage() {
     <div className="relative min-h-screen font-sans selection:bg-[#00BCD4] selection:text-black">
 
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION — SEAMLESS OBSIDIAN (#070B0E) + 5-PILLAR PIPELINE        */}
+      {/* 1. HERO SECTION — SEAMLESS OBSIDIAN (#070B0E) + 4-PILLAR PIPELINE        */}
       {/* ========================================================================= */}
       <section className="relative bg-[#070B0E] border-b border-white/[0.08] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-[92px] pb-8 sm:pt-28 sm:pb-10 lg:pt-24 lg:pb-10 overflow-x-clip">
         {/* Seamless Obsidian Ambient Cyan Glow */}
@@ -381,7 +381,7 @@ export default function ServicesPage() {
               </motion.div>
             </div>
 
-            {/* Desktop Right Column (6 cols): Interactive 5-Pillar Stepped Pipeline */}
+            {/* Desktop Right Column (6 cols): Interactive 4-Pillar Stepped Pipeline */}
             <div className="hidden lg:flex lg:col-span-6 relative items-center justify-center w-full">
               <ServicesHeroPipeline />
             </div>

@@ -107,8 +107,8 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
     ],
   },
   {
-    title: "Data Analytics & Business Intelligence",
-    categoryHref: "/services/executive-dashboards",
+    title: "Data Analytics & Engineering",
+    categoryHref: "/services/data-platforms",
     items: [
       {
         title: "Executive BI Dashboards",
@@ -134,12 +134,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         href: "/services/data-engineering-analytics",
         icon: Sparkles,
       },
-    ],
-  },
-  {
-    title: "Data Engineering",
-    categoryHref: "/services/data-platforms",
-    items: [
       {
         title: "Data Pipelines & ETL/ELT",
         desc: "Automated lakehouse pipelines & real-time streaming",
@@ -157,12 +151,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         desc: "Role-based access control, HIPAA/SOC2 compliance",
         href: "/services/data-platforms",
         icon: ShieldCheck,
-      },
-      {
-        title: "Cloud Warehouse Optimization",
-        desc: "Compute cost reduction, query tuning & auto-suspend",
-        href: "/services/data-platforms",
-        icon: Sparkles,
       },
     ],
   },
@@ -212,9 +200,9 @@ export function ServicesMegaMenu({
           transition={{ duration: 0.18, ease: "easeOut" }}
           className="absolute top-full left-0 right-0 w-full z-[1000] border-t border-b border-x border-[#E5EAF0] bg-white rounded-b-[16px] max-h-[calc(100vh-90px)] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.12)] text-[#101820] transition-colors duration-200"
         >
-          {/* Main 5-Column Categorized Grid */}
+          {/* Main 4-Column Categorized Grid */}
           <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-5 sm:py-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:grid-rows-[auto_1fr] gap-6 xl:gap-x-6 xl:gap-y-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-[auto_1fr] gap-6 xl:gap-x-6 xl:gap-y-0">
               {SERVICE_COLUMNS.map((col, cIdx) => (
                 <div
                   key={cIdx}

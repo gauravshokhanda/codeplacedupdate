@@ -24,7 +24,7 @@ if (typeof window !== "undefined") {
 
 const DIGITAL_MARKETING_SERVICE: ServiceDetailItem = {
   slug: "digital-marketing",
-  num: "05",
+  num: "04",
   title: "Digital Marketing",
   shortTitle: "Digital Marketing",
   tagline: "Visibility, Acquisition & Brand Growth",
@@ -58,7 +58,27 @@ const DIGITAL_MARKETING_SERVICE: ServiceDetailItem = {
 };
 
 export const SHOWCASE_SERVICES_DATA: ServiceDetailItem[] = [
-  ...SERVICES_DATA,
+  ...SERVICES_DATA
+    .filter((service) => service.slug !== "digital-social-marketing")
+    .map((service) =>
+      service.slug === "data-engineering-analytics"
+        ? {
+            ...service,
+            num: "03",
+            title: "Data Analytics & Engineering",
+            shortTitle: "Data & Analytics",
+            tagline: "Build Trusted Data Foundations & Insights",
+            positioning:
+              "We unite modern data engineering with business intelligence, building reliable pipelines, governed lakehouses, executive dashboards, and predictive models that turn operational data into decisions.",
+            capabilities: [
+              ...SERVICES_DATA.find(
+                (item) => item.slug === "digital-social-marketing"
+              )!.capabilities,
+              ...service.capabilities,
+            ],
+          }
+        : service
+    ),
   DIGITAL_MARKETING_SERVICE,
 ];
 
