@@ -12,14 +12,55 @@ import {
   BarChart3,
   Code2,
   Database,
+  TrendingUp,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SERVICES_DATA } from "@/lib/servicesData";
+import { SERVICES_DATA, ServiceDetailItem, getPrimaryServiceHref } from "@/lib/servicesData";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+const DIGITAL_MARKETING_SERVICE: ServiceDetailItem = {
+  slug: "digital-marketing",
+  num: "05",
+  title: "Digital Marketing",
+  shortTitle: "Digital Marketing",
+  tagline: "Visibility, Acquisition & Brand Growth",
+  positioning:
+    "Grow your online presence and attract the right customers through search optimization, performance advertising, analytics, social media, and brand strategy.",
+  color: "#00BCD4",
+  badge: "CONNECTED DIGITAL MARKETING",
+  heroMetrics: [
+    { value: "SEO + AEO", label: "Search Visibility", detail: "Organic & AI-powered discovery" },
+    { value: "Paid Media", label: "Google & Meta Ads", detail: "High-intent lead generation" },
+    { value: "GA4", label: "Performance Tracking", detail: "Full-funnel attribution" },
+  ],
+  capabilities: [
+    { title: "Answer Engine Optimization (AEO)", desc: "Structure your content so AI assistants and answer engines can find, understand, and surface your business." },
+    { title: "Search Engine Optimization (SEO)", desc: "Technical, on-page, and content SEO that builds lasting organic visibility for high-intent searches." },
+    { title: "Google Ads & Meta Ads", desc: "Targeted search, display, and paid social campaigns designed to reach the right audience and generate qualified leads." },
+    { title: "Google Analytics & Performance Tracking", desc: "GA4 implementation, conversion tracking, funnel analysis, and clear multi-channel performance reporting." },
+    { title: "Social Media Management", desc: "Consistent content planning, publishing, and audience engagement across key digital platforms." },
+    { title: "Branding & Digital Strategy", desc: "Clear brand positioning, visual consistency, and connected messaging across every digital touchpoint." },
+  ],
+  architectureNodes: [],
+  techStack: [
+    { name: "Google Analytics 4", tag: "Analytics", desc: "Event & conversion attribution" },
+    { name: "Google Ads", tag: "Paid Search", desc: "High-intent search acquisition" },
+    { name: "Meta Ads Manager", tag: "Paid Social", desc: "Audience & creative funnels" },
+    { name: "Google Search Console", tag: "SEO & AEO", desc: "Search & answer visibility" },
+    { name: "Schema & Entity Graph", tag: "AEO", desc: "AI answer engine optimization" },
+  ],
+  deliverables: [],
+  faqs: [],
+};
+
+export const SHOWCASE_SERVICES_DATA: ServiceDetailItem[] = [
+  ...SERVICES_DATA,
+  DIGITAL_MARKETING_SERVICE,
+];
 
 // =========================================================================
 // REALISTIC SERVICE VISUAL CONFIGURATION
@@ -61,6 +102,13 @@ const SERVICE_VISUAL_MAP: Record<string, ServiceVisualConfig> = {
     highlightTag: "Snowflake • dbt • Apache Kafka",
     subMetric: "1.4M rows/s Throughput",
   },
+  "digital-marketing": {
+    imageSrc: "/images/services/data-analytics-bi-cockpit.webp",
+    alt: "CodePlaced Digital Marketing conversion funnel, AEO, SEO, and paid media analytics dashboard",
+    badge: "FULL-FUNNEL DIGITAL MARKETING",
+    highlightTag: "AEO • SEO • Google & Meta Ads • GA4",
+    subMetric: "Connected Growth Strategy",
+  },
 };
 
 // =========================================================================
@@ -72,7 +120,7 @@ export function InteractiveServicesShowcase() {
   const pinnedContentRef = useRef<HTMLDivElement>(null);
   const isProgrammaticScrollRef = useRef(false);
 
-  const activeService = SERVICES_DATA[activeIdx] || SERVICES_DATA[0];
+  const activeService = SHOWCASE_SERVICES_DATA[activeIdx] || SHOWCASE_SERVICES_DATA[0];
 
   // GSAP ScrollTrigger for Desktop (> 1024px)
   useEffect(() => {
@@ -86,8 +134,9 @@ export function InteractiveServicesShowcase() {
       let targetIdx = -1;
       if (hash.includes("ai")) targetIdx = 0;
       else if (hash.includes("software") || hash.includes("web") || hash.includes("app")) targetIdx = 1;
-      else if (hash.includes("analytics") || hash.includes("bi") || hash.includes("marketing")) targetIdx = 2;
+      else if (hash.includes("analytics") || hash.includes("bi")) targetIdx = 2;
       else if (hash.includes("engineering") || hash.includes("platform")) targetIdx = 3;
+      else if (hash.includes("marketing") || hash.includes("seo") || hash.includes("aeo")) targetIdx = 4;
 
       if (targetIdx !== -1) {
         setActiveIdx(targetIdx);
@@ -114,10 +163,12 @@ export function InteractiveServicesShowcase() {
       const pinnedEl = pinnedContentRef.current;
       if (!triggerEl || !pinnedEl) return;
 
+      const totalServices = SHOWCASE_SERVICES_DATA.length;
+
       const st = ScrollTrigger.create({
         trigger: triggerEl,
         start: "top 80px",
-        end: "+=1200",
+        end: "+=1500",
         pin: pinnedEl,
         pinSpacing: true,
         scrub: 0.5,
@@ -125,8 +176,8 @@ export function InteractiveServicesShowcase() {
         onUpdate: (self) => {
           if (isProgrammaticScrollRef.current) return;
           const progress = self.progress;
-          // Map progress 0.0 -> 1.0 into indices 0, 1, 2, 3
-          const newIdx = Math.min(3, Math.floor(progress * 4));
+          // Map progress 0.0 -> 1.0 into indices 0..totalServices-1
+          const newIdx = Math.min(totalServices - 1, Math.floor(progress * totalServices));
           setActiveIdx(newIdx);
         },
       });
@@ -152,12 +203,12 @@ export function InteractiveServicesShowcase() {
   };
 
   const handlePrev = () => {
-    const nextIdx = (activeIdx - 1 + SERVICES_DATA.length) % SERVICES_DATA.length;
+    const nextIdx = (activeIdx - 1 + SHOWCASE_SERVICES_DATA.length) % SHOWCASE_SERVICES_DATA.length;
     handleSelectService(nextIdx);
   };
 
   const handleNext = () => {
-    const nextIdx = (activeIdx + 1) % SERVICES_DATA.length;
+    const nextIdx = (activeIdx + 1) % SHOWCASE_SERVICES_DATA.length;
     handleSelectService(nextIdx);
   };
 
@@ -173,6 +224,7 @@ export function InteractiveServicesShowcase() {
         <div id="data-analytics" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="data-engineering" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="data-engineering-analytics" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="digital-marketing" className="scroll-mt-24 sm:scroll-mt-28" />
 
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
           
@@ -182,7 +234,7 @@ export function InteractiveServicesShowcase() {
               CORE DISCIPLINES
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
-              Four Pillars Of Engineering Excellence
+              Our Pillars of Engineering Excellence
             </h2>
             <p className="text-xs sm:text-base lg:text-lg text-neutral-600 leading-relaxed font-normal">
               Explore our core technical practices, system architectures, and production delivery methodologies.
@@ -190,13 +242,12 @@ export function InteractiveServicesShowcase() {
           </div>
 
           {/* ========================================================================= */}
-          {/* MOBILE SERVICE SHOWCASE (BELOW 1024px): 2x2 GRID + EDITORIAL DETAIL */}
+          {/* MOBILE: CORE PILLARS (5 COMPACT CLICKABLE CARDS) + DETAILED SHOWCASE       */}
           {/* ========================================================================= */}
-          <div className="block lg:hidden space-y-4">
-            {/* Top 2x2 Service Cards Grid (Matching Homepage Style) */}
+          <div className="block lg:hidden space-y-5">
+            {/* Compact 2-Col Core Pillars Navigation Grid (5th Card Centered/Full-Width) */}
             <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5">
-              {SERVICES_DATA.map((service, idx) => {
-                const isSelected = activeIdx === idx;
+              {SHOWCASE_SERVICES_DATA.map((service, idx) => {
                 const ServiceIcon =
                   service.num === "01"
                     ? Bot
@@ -204,64 +255,46 @@ export function InteractiveServicesShowcase() {
                     ? Code2
                     : service.num === "03"
                     ? BarChart3
-                    : Database;
+                    : service.num === "04"
+                    ? Database
+                    : TrendingUp;
 
                 return (
-                  <button
+                  <Link
                     key={service.slug}
-                    type="button"
-                    onClick={() => setActiveIdx(idx)}
-                    className={`p-3 sm:p-4 rounded-xl text-left transition-all duration-200 border flex flex-col justify-between group cursor-pointer bg-white shadow-xs select-none ${
-                      isSelected
-                        ? "border-[#00BCD4] ring-2 ring-[#00BCD4]/30"
-                        : "border-[#E5E7EB] hover:border-[#00BCD4]/50"
+                    href={getPrimaryServiceHref(service.slug)}
+                    className={`p-3 sm:p-4 rounded-xl text-left transition-all duration-200 border border-[#E5E7EB] hover:border-[#00BCD4] flex flex-col justify-between gap-2.5 group bg-white shadow-xs select-none ${
+                      idx === 4 ? "col-span-2" : ""
                     }`}
                   >
-                    <div>
-                      {/* Top Row: Circular Icon with Cyan Dot Accent + Number */}
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="w-7 h-7 sm:w-8.5 sm:h-8.5 rounded-full bg-[#FAFAFA] border border-[#E5E7EB] flex items-center justify-center text-[#101820] relative shrink-0 group-hover:border-[#00BCD4]/40 transition-colors">
-                          <ServiceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#101820]" />
-                          <span className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
-                        </div>
-                        <span className="text-[10px] font-mono font-bold text-neutral-400">
-                          {service.num}
-                        </span>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#FAFAFA] border border-[#E5E7EB] flex items-center justify-center text-[#101820] relative shrink-0 group-hover:border-[#00BCD4]/40 transition-colors">
+                        <ServiceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#101820]" />
+                        <span className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
                       </div>
-
-                      {/* Service Title */}
-                      <h4 className="text-xs sm:text-sm font-bold text-neutral-900 tracking-tight leading-snug group-hover:text-[#00BCD4] transition-colors">
-                        {service.title}
-                      </h4>
-
-                      {/* Service Tagline Description (Clear, Never Clipped) */}
-                      <p className="text-[10.5px] xs:text-[11px] text-neutral-500 leading-relaxed mt-1">
-                        {service.tagline}
-                      </p>
+                      <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-[#00BCD4] group-hover:translate-x-0.5 transition-all shrink-0" />
                     </div>
 
-                    {/* Bottom Action Link */}
-                    <div className="pt-2 mt-2.5 border-t border-[#E5E7EB] flex items-center justify-between text-[10.5px] xs:text-[11px] font-bold text-[#00BCD4]">
-                      <span>{isSelected ? "Active Discipline" : "Select Service"}</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                    </div>
-                  </button>
+                    <h3 className="text-[12px] min-[375px]:text-[13px] sm:text-sm font-bold text-neutral-900 tracking-tight leading-snug group-hover:text-[#00BCD4] transition-colors">
+                      {service.title}
+                    </h3>
+                  </Link>
                 );
               })}
             </div>
 
             {/* Detailed Service Presentation Section */}
-            <div className="pt-2 space-y-3">
+            <div className="pt-4 border-t border-[#E5E7EB] space-y-3">
               {/* Horizontally Scrollable Service Selector Tabs */}
               <div className="flex items-center gap-1.5 overflow-x-auto w-full pb-1 scrollbar-none">
-                {SERVICES_DATA.map((service, idx) => (
+                {SHOWCASE_SERVICES_DATA.map((service, idx) => (
                   <button
                     key={service.slug}
                     type="button"
                     onClick={() => setActiveIdx(idx)}
                     className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                       activeIdx === idx
-                        ? "bg-[#00BCD4] text-neutral-950 font-bold shadow-xs scale-102"
+                        ? "bg-[#00BCD4] text-neutral-950 font-bold shadow-xs"
                         : "bg-[#F3F4F6] text-neutral-600 border border-[#E5E7EB] hover:text-neutral-900"
                     }`}
                   >
@@ -271,7 +304,7 @@ export function InteractiveServicesShowcase() {
               </div>
 
               {/* Clean Editorial Detail Card */}
-              <div className="rounded-2xl bg-white border border-[#E5E7EB] p-4 xs:p-5 shadow-xs space-y-4">
+              <div className="rounded-2xl bg-white border border-[#E5E7EB] p-4 sm:p-5 shadow-xs space-y-3.5">
                 {/* Header */}
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
@@ -347,10 +380,13 @@ export function InteractiveServicesShowcase() {
                 {/* Key Capabilities */}
                 <div className="space-y-2 pt-1 border-t border-[#E5E7EB]">
                   <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 block">
-                    Core Capabilities
+                    {activeService.slug === "digital-marketing" ? "Key Offerings" : "Core Capabilities"}
                   </span>
-                  <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
-                    {activeService.capabilities.slice(0, 4).map((cap, cIdx) => (
+                  <div className="grid grid-cols-1 min-[375px]:grid-cols-2 gap-2">
+                    {(activeService.slug === "digital-marketing"
+                      ? activeService.capabilities
+                      : activeService.capabilities.slice(0, 4)
+                    ).map((cap, cIdx) => (
                       <div key={cIdx} className="flex items-start gap-1.5 text-xs text-neutral-700 font-medium">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] shrink-0 mt-1.5" />
                         <span className="leading-snug">{cap.title}</span>
@@ -379,7 +415,7 @@ export function InteractiveServicesShowcase() {
                 {/* Explore CTA Row */}
                 <div className="pt-3 border-t border-[#E5E7EB] flex items-center gap-2.5">
                   <Link
-                    href={`/services/${activeService.slug}`}
+                    href={getPrimaryServiceHref(activeService.slug)}
                     className="flex-1 inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-black font-extrabold text-xs tracking-tight shadow-xs transition-all active:scale-95 text-center"
                   >
                     <span>Explore Service</span>
@@ -402,9 +438,9 @@ export function InteractiveServicesShowcase() {
           <div className="hidden lg:block space-y-8 sm:space-y-10">
             {/* Minimal Interactive Service Navigation Tabs + Counter Bar */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-2 border-b border-[#E5E7EB]">
-              {/* 4 Interactive Service Tabs */}
+              {/* 5 Interactive Service Tabs */}
               <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
-                {SERVICES_DATA.map((service, idx) => {
+                {SHOWCASE_SERVICES_DATA.map((service, idx) => {
                   const isActive = activeIdx === idx;
                   return (
                     <button
@@ -437,14 +473,14 @@ export function InteractiveServicesShowcase() {
                 <div className="flex items-center gap-2 font-mono text-xs font-bold text-neutral-500">
                   <span className="text-[#00BCD4] text-sm">0{activeIdx + 1}</span>
                   <span>/</span>
-                  <span>04</span>
+                  <span>0{SHOWCASE_SERVICES_DATA.length}</span>
                 </div>
 
                 {/* Progress Line */}
                 <div className="w-24 h-1.5 bg-[#F0F2F5] rounded-full overflow-hidden">
                   <motion.div
                     className="h-full bg-[#00BCD4] rounded-full"
-                    animate={{ width: `${((activeIdx + 1) / 4) * 100}%` }}
+                    animate={{ width: `${((activeIdx + 1) / SHOWCASE_SERVICES_DATA.length) * 100}%` }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   />
                 </div>
@@ -486,7 +522,7 @@ export function InteractiveServicesShowcase() {
                     {/* Category Pill + Eyebrow */}
                     <div className="flex items-center gap-2.5">
                       <span className="text-xs font-mono font-black text-[#00BCD4] px-2.5 py-0.5 rounded bg-[#F7F8FA] border border-[#E5E7EB]">
-                        {activeService.num} / 04
+                        {activeService.num} / 0{SHOWCASE_SERVICES_DATA.length}
                       </span>
                       <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#00AFC8]">
                         {activeService.tagline}
@@ -503,13 +539,18 @@ export function InteractiveServicesShowcase() {
                       {activeService.positioning}
                     </p>
 
-                    {/* Core Capabilities: 4 Clean Minimal Items */}
+                    {/* Core Capabilities / Key Offerings */}
                     <div className="pt-4 border-t border-[#E5E7EB] space-y-3">
                       <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 block">
-                        Core Engineered Capabilities
+                        {activeService.slug === "digital-marketing"
+                          ? "Key Offerings"
+                          : "Core Engineered Capabilities"}
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        {activeService.capabilities.slice(0, 4).map((cap, cIdx) => (
+                        {(activeService.slug === "digital-marketing"
+                          ? activeService.capabilities
+                          : activeService.capabilities.slice(0, 4)
+                        ).map((cap, cIdx) => (
                           <div
                             key={cIdx}
                             className="flex items-start gap-2 text-[13.5px] text-neutral-700 font-medium group/item"
@@ -540,7 +581,7 @@ export function InteractiveServicesShowcase() {
                       </div>
 
                       <Link
-                        href={`/services/${activeService.slug}`}
+                        href={getPrimaryServiceHref(activeService.slug)}
                         className="inline-flex items-center justify-center gap-2.5 h-11 px-6 rounded-full bg-neutral-900 hover:bg-[#00BCD4] text-white hover:text-black font-extrabold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-sm group/btn shrink-0"
                       >
                         <span>Explore Dedicated Page</span>

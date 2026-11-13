@@ -1,48 +1,23 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
 import { METRICS_DATA, TRUSTED_BRANDS } from "@/lib/data";
 
-function CounterItem({
+function MetricCard({
   value,
   suffix,
   label,
   subtext,
-  inView,
 }: {
   value: number;
   suffix: string;
   label: string;
   subtext: string;
-  inView: boolean;
 }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-
-    let start = 0;
-    const duration = 1500;
-    const increment = Math.ceil(value / (duration / 25));
-
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(start);
-      }
-    }, 25);
-
-    return () => clearInterval(timer);
-  }, [inView, value]);
-
   return (
     <div className="relative group p-6 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-400/40 shadow-lg shadow-black/20 transition-all duration-300 text-center">
       <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight flex items-center justify-center">
-        <span>{count}</span>
+        <span>{value}</span>
         <span className="text-[#38BDF8] ml-0.5">{suffix}</span>
       </div>
       <div className="text-sm sm:text-base font-bold text-slate-200 mt-2">
@@ -57,29 +32,24 @@ function CounterItem({
 }
 
 export function MetricsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(containerRef, { once: true, margin: "-60px" });
-
   return (
     <section
       id="metrics"
-      ref={containerRef}
-      className="min-h-[400px] py-16 lg:py-20 relative flex flex-col justify-center bg-gradient-to-b from-[#082F49] via-[#083344] to-[#041d27] text-white overflow-hidden"
+      className="min-h-[340px] py-14 lg:py-16 relative flex flex-col justify-center bg-gradient-to-b from-[#082F49] via-[#083344] to-[#041d27] text-white overflow-hidden"
     >
       {/* Subtle ambient lighting */}
       <div className="absolute top-0 left-1/3 w-[500px] h-[250px] bg-[#0284C7]/15 rounded-full blur-[100px] pointer-events-none -z-0" />
 
       <div className="site-container w-full relative z-10 space-y-12">
-        {/* Top: 5 Glowing Metric Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+        {/* Top: 2 Approved Metric Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-4 sm:gap-6">
           {METRICS_DATA.map((metric) => (
-            <CounterItem
+            <MetricCard
               key={metric.id}
               value={metric.value}
               suffix={metric.suffix}
               label={metric.label}
               subtext={metric.subtext}
-              inView={inView}
             />
           ))}
         </div>

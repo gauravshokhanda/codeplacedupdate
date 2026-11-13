@@ -212,25 +212,6 @@ export default function ExecutiveDashboardsPage() {
             ))}
           </div>
         </section>
-
-        {/* 5. Bottom CTA */}
-        <section className="bg-[#050505] border-t border-[#1B242B] text-white py-16 text-center">
-          <div className="site-container max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-black">
-              Ready for Sub-Second Executive Visibility?
-            </h2>
-            <p className="text-[#A1AAB7] text-sm sm:text-base">
-              Book a 30-minute scoping call with our Principal Dashboard Engineer.
-            </p>
-            <Link
-              href="/contact#contact-hero"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl transition-all"
-            >
-              <span>Send an Inquiry</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
       </div>
   );
 }

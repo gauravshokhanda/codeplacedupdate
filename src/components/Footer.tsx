@@ -9,33 +9,16 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { CodePlacedLogo } from "./CodePlacedLogo";
+import { SHOW_INDUSTRIES } from "@/lib/featureFlags";
 
 interface FooterProps {
   onOpenBookAudit?: (scope?: string) => void;
 }
 
-function InstagramIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  );
-}
-
 export function Footer({ onOpenBookAudit }: FooterProps) {
   void onOpenBookAudit;
   const pathname = usePathname();
+  const isAboutPage = pathname === "/about" || pathname === "/about/";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -63,48 +46,54 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
         {/* LAYER 1: BRAND POSITIONING & STRATEGY CONTACT ROW */}
         {/* ========================================================================= */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3.5 sm:gap-6 pb-5 sm:pb-8 border-b border-[#292929]">
-          <div className="space-y-1 sm:space-y-2.5 max-w-2xl">
+          <div className={`space-y-1 sm:space-y-2.5 ${isAboutPage ? "max-w-3xl" : "max-w-2xl"}`}>
             <Link href="/" className="inline-block">
               <CodePlacedLogo variant="white" size="lg" />
             </Link>
             <p className="text-base sm:text-2xl font-black text-white tracking-tight">
               Technology That Turns Ideas Into Impact.
             </p>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl font-normal">
+            <p className={`text-xs sm:text-sm text-slate-300 leading-relaxed font-normal ${isAboutPage ? "max-w-2xl" : "max-w-xl"}`}>
               Building scalable digital products, modern data platforms, enterprise AI systems, and growth engines for modern businesses.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full lg:w-auto shrink-0">
-            <Link
-              href="/contact#contact-hero"
-              onClick={(e) => {
-                if (pathname === "/contact") {
-                  e.preventDefault();
-                  const hero = document.getElementById("contact-hero");
-                  if (hero) hero.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-              }}
-              className="h-9 sm:h-12 px-5 sm:px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group cursor-pointer"
-            >
-              <span>Send an Inquiry</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+          {!isAboutPage && (
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full lg:w-auto shrink-0">
+              <Link
+                href="/contact#contact-hero"
+                onClick={(e) => {
+                  if (pathname === "/contact") {
+                    e.preventDefault();
+                    const hero = document.getElementById("contact-hero");
+                    if (hero) hero.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+                className="h-9 sm:h-12 px-5 sm:px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group cursor-pointer"
+              >
+                <span>Send an Inquiry</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
 
-            <a
-              href="mailto:hello@codeplaced.com"
-              className="h-9 sm:h-12 px-4 sm:px-6 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/15 flex items-center justify-center gap-2 transition-all"
-            >
-              <Mail className="w-4 h-4 text-[#00BCD4]" />
-              <span>hello@codeplaced.com</span>
-            </a>
-          </div>
+              <a
+                href="mailto:hello@codeplaced.com"
+                className="h-9 sm:h-12 px-4 sm:px-6 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/15 flex items-center justify-center gap-2 transition-all"
+              >
+                <Mail className="w-4 h-4 text-[#00BCD4]" />
+                <span>hello@codeplaced.com</span>
+              </a>
+            </div>
+          )}
         </div>
 
         {/* ========================================================================= */}
         {/* LAYER 2: NAVIGATION COLUMNS (2-COL ON MOBILE, 4-COL ON DESKTOP) */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
+        <div
+          className={`grid grid-cols-2 ${
+            SHOW_INDUSTRIES ? "md:grid-cols-4" : "md:grid-cols-3"
+          } gap-6 sm:gap-8 lg:gap-12`}
+        >
           {/* Col 1: Company */}
           <div className="space-y-3 sm:space-y-4">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
@@ -126,11 +115,13 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
                   Case Studies
                 </Link>
               </li>
-              <li>
-                <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
-                  Industries
-                </Link>
-              </li>
+              {SHOW_INDUSTRIES && (
+                <li>
+                  <Link href="/industries" className="hover:text-cyan-300 transition-colors block">
+                    Industries
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link href="/contact" className="hover:text-cyan-300 transition-colors block">
                   Contact
@@ -161,51 +152,58 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href="/services/data-engineering-analytics" className="hover:text-cyan-300 transition-colors block">
+                <Link href="/services/data-platforms" className="hover:text-cyan-300 transition-colors block">
                   Data Engineering
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/digital-marketing" className="hover:text-cyan-300 transition-colors block">
+                  Digital Marketing
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Col 3: Industries */}
-          <div className="space-y-3 sm:space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
-              Industries
-            </h4>
-            <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
-              <li>
-                <Link href="/industries#ecommerce" className="hover:text-cyan-300 transition-colors block">
-                  Ecommerce
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries#edtech" className="hover:text-cyan-300 transition-colors block">
-                  EdTech
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries#insurance" className="hover:text-cyan-300 transition-colors block">
-                  Insurance
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries#human-resources" className="hover:text-cyan-300 transition-colors block">
-                  Human Resources
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries#healthcare" className="hover:text-cyan-300 transition-colors block">
-                  Healthcare
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries#real-estate" className="hover:text-cyan-300 transition-colors block">
-                  Real Estate
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {SHOW_INDUSTRIES && (
+            <div className="space-y-3 sm:space-y-4">
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
+                Industries
+              </h4>
+              <ul className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+                <li>
+                  <Link href="/industries#ecommerce" className="hover:text-cyan-300 transition-colors block">
+                    Ecommerce
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#edtech" className="hover:text-cyan-300 transition-colors block">
+                    EdTech
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#insurance" className="hover:text-cyan-300 transition-colors block">
+                    Insurance
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#human-resources" className="hover:text-cyan-300 transition-colors block">
+                    Human Resources
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#healthcare" className="hover:text-cyan-300 transition-colors block">
+                    Healthcare
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#real-estate" className="hover:text-cyan-300 transition-colors block">
+                    Real Estate
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
 
           {/* Col 4: Technology Partners */}
           <div className="space-y-3 sm:space-y-4">
@@ -265,16 +263,6 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
               className="hover:text-cyan-300 transition-colors"
             >
               LinkedIn
-            </a>
-            <span>•</span>
-            <a
-              href="https://www.instagram.com/codeplaced?mdxt=Zm4zNXJldTN5M2J5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-cyan-300 transition-colors"
-            >
-              <InstagramIcon className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Instagram</span>
             </a>
             <span>•</span>
             <a

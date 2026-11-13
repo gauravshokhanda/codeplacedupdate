@@ -75,8 +75,6 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
       <div className="block lg:hidden">
         <Link
           href={`/case-studies/${study.slug}`}
-          target="_blank"
-          rel="noopener noreferrer"
           aria-label={`View case study: ${study.brand}`}
           className="block relative rounded-[18px] sm:rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden p-3.5 sm:p-5 shadow-[0_16px_36px_rgba(0,0,0,0.85),0_0_30px_rgba(0,188,212,0.06)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.95),0_0_35px_rgba(0,188,212,0.12)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
         >
@@ -198,8 +196,6 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
         {study.id === "hoopwrld" ? (
           <Link
             href={`/case-studies/${study.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`View case study: ${study.brand}`}
             className="block relative rounded-[20px] border border-[#00BCD4]/25 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
           >
@@ -304,8 +300,6 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
         ) : study.id === "progress-partners" ? (
           <Link
             href={`/case-studies/${study.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`View case study: ${study.brand}`}
             className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
           >
@@ -406,8 +400,6 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
         ) : study.id === "topplaced-ai" ? (
           <Link
             href={`/case-studies/${study.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`View case study: ${study.brand}`}
             className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
           >
@@ -496,7 +488,7 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
                     alt={study.imageAlt}
                     fill
                     priority
-                    className="object-cover object-center rounded-xl"
+                    className="object-contain object-center rounded-xl"
                     sizes="(max-width: 1280px) 50vw, 640px"
                   />
                 </div>
@@ -506,8 +498,6 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
         ) : study.id === "collectiq" ? (
           <Link
             href={`/case-studies/${study.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`View case study: ${study.brand}`}
             className="block relative rounded-[20px] border border-[#00BCD4]/30 hover:border-[#00BCD4]/60 bg-[#000000] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,188,212,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,188,212,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
           >
@@ -609,26 +599,24 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
           /* Tuitionstime Desktop Flagship Card */
           <Link
             href={`/case-studies/${study.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`View case study: ${study.brand}`}
-            className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden h-[450px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+            className="block relative rounded-[20px] border border-[#00C7E8]/25 hover:border-[#00C7E8]/60 bg-[#050505] overflow-hidden min-h-[500px] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(0,199,232,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(0,199,232,0.14)] transition-all duration-300 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00C7E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
           >
-            {/* Product Imagery */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
+            {/* Product Imagery — Full Laptop & Mobile Mockup Contained Without Top/Bottom Cropping */}
+            <div className="absolute -top-[6%] bottom-0 right-0 left-0 z-0 overflow-hidden pointer-events-none">
               <Image
                 src={study.image}
                 alt={study.imageAlt}
                 fill
                 priority
-                className="object-cover object-right transition-transform duration-500 ease-out group-hover:-translate-y-1.5"
+                className="object-contain object-right transition-transform duration-500 ease-out group-hover:scale-[1.015]"
                 sizes="(max-width: 1400px) 92vw, 1400px"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/95 to-transparent w-[54%] xl:w-[48%] pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/95 to-transparent w-[58%] xl:w-[52%] pointer-events-none" />
             </div>
 
             {/* Real HTML Content Layer */}
-            <div className="relative z-10 h-full p-10 flex flex-col justify-between">
+            <div className="relative z-10 min-h-[500px] p-10 xl:p-12 flex flex-col justify-between">
               <div className="space-y-3.5 max-w-md xl:max-w-[500px] text-left">
                 {/* Eyebrow Tag */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#00C7E8]/10 border border-[#00C7E8]/30 text-[#00C7E8] w-fit">

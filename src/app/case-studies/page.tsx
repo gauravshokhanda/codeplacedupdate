@@ -2,9 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Layers, GraduationCap, Gamepad2, BarChart3, Database, Users, Globe2, Cpu, Bot, Target, Code2, Building2, Workflow } from "lucide-react";
+import { Layers, GraduationCap, Gamepad2, BarChart3, Database, Users, Globe2, Cpu, Bot, Target, Code2, Building2, Workflow } from "lucide-react";
 import { CaseStudyCard, CaseStudyData } from "@/components/case-studies/CaseStudyCard";
 
 type FilterCategory = "industries" | "services" | "regions";
@@ -271,108 +270,123 @@ export default function CaseStudiesPage() {
         }}
       />
 
-      <main className="pt-20 sm:pt-28 lg:pt-40 relative z-10">
+      <main className="pt-24 sm:pt-28 lg:pt-32 relative z-10">
         {/* Top Dark Showcase: Hero + Filters + Featured Case Study */}
-        <div className="space-y-6 sm:space-y-8 lg:space-y-12 pb-8 sm:pb-14 lg:pb-24">
+        <div className="space-y-5 sm:space-y-6 lg:space-y-8 pb-8 sm:pb-14 lg:pb-24">
           {/* ========================================================================= */}
-          {/* 1. CENTERED HERO SECTION (SINGLE-LINE HEADING ON DESKTOP) */}
+          {/* 1. LEFT-ALIGNED HERO & STRUCTURED PORTFOLIO FILTER INTERFACE              */}
           {/* ========================================================================= */}
-          <section className="text-center mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-3 sm:space-y-5 lg:space-y-6">
-            {/* Eyebrow Label */}
-            <div className="flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9.5px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] border border-[#00C7E8]/40 text-[#00C7E8]"
-              >
-                CASE STUDIES
-              </motion.div>
-            </div>
-
-            {/* Single-Line Heading on Desktop & Laptop: "Optimize. Innovate. Disrupt." */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="space-y-2 sm:space-y-4"
-            >
-              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] sm:leading-[1.08] [text-wrap:balance]">
-                Real Projects.{" "}
-                <span
-                  className="bg-clip-text text-transparent inline-block"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(135deg, #00C7E8 0%, #087FA5 100%)",
-                  }}
+          <section className="px-3 sm:px-6">
+            <div className="w-[94%] sm:w-[92%] max-w-[1400px] mx-auto text-left space-y-5 sm:space-y-6">
+              {/* Eyebrow + Left-Aligned Heading & Description */}
+              <div className="space-y-3 sm:space-y-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9.5px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#07090D] border border-[#00C7E8]/40 text-[#00C7E8]"
                 >
-                  Measurable Impact.
-                </span>
-              </h1>
-              <p className="text-xs sm:text-base lg:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl mx-auto">
-                Explore how CodePlaced delivers production-grade applications, data platforms, and AI automation to help organizations achieve measurable business outcomes.
-              </p>
-            </motion.div>
+                  CASE STUDIES
+                </motion.div>
 
-            {/* ========================================================================= */}
-            {/* 2. CASE STUDY NAVIGATION & FILTERS (COMPACT & CENTERED) */}
-            {/* ========================================================================= */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="pt-0.5 sm:pt-3 space-y-2.5 sm:space-y-4"
-            >
-              {/* Category Tabs: Industries | Services | Regions */}
-              <div className="flex items-center justify-center gap-4 sm:gap-8 lg:gap-12">
-                {CATEGORY_TABS.map((tab) => {
-                  const isTabActive = activeTab === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => handleTabChange(tab.id)}
-                      className={`relative pb-1.5 sm:pb-2 text-xs sm:text-base font-semibold transition-colors duration-200 cursor-pointer ${isTabActive
-                        ? "text-white font-bold"
-                        : "text-[#71717A] hover:text-[#E2E8F0]"
-                        }`}
-                    >
-                      <span>{tab.label}</span>
-                      {isTabActive && (
-                        <motion.div
-                          layoutId="activeTabUnderline"
-                          className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00C7E8] rounded-full"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Outlined Filter Chips Under Active Tab */}
-              <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 max-w-4xl mx-auto pt-0.5">
-                {currentFilters.map((chip) => {
-                  const isActive = activeFilter === chip.id;
-                  return (
-                    <button
-                      key={chip.id}
-                      onClick={() => setActiveFilter(chip.id)}
-                      className={`px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10.5px] sm:text-xs font-mono transition-all duration-200 cursor-pointer ${isActive
-                        ? "text-white font-bold border border-[#00C7E8] shadow-md shadow-[#00C7E8]/20"
-                        : "bg-[#07090D]/80 text-[#A1A1AA] border border-white/[0.08] hover:border-[#00C7E8]/40 hover:text-white"
-                        }`}
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="space-y-2.5 sm:space-y-3.5"
+                >
+                  <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-black tracking-tight text-white leading-[1.1] sm:leading-[1.08]">
+                    Real Projects.{" "}
+                    <span
+                      className="bg-clip-text text-transparent inline-block"
                       style={{
-                        background: isActive
-                          ? "linear-gradient(135deg, rgba(8, 127, 165, 0.45) 0%, rgba(0, 199, 232, 0.35) 100%)"
-                          : undefined,
+                        backgroundImage:
+                          "linear-gradient(135deg, #00C7E8 0%, #087FA5 100%)",
                       }}
                     >
-                      {chip.label}
-                    </button>
-                  );
-                })}
+                      Measurable Impact.
+                    </span>
+                  </h1>
+                  <p className="text-xs sm:text-base lg:text-lg text-[#A1A1AA] font-normal leading-relaxed max-w-2xl">
+                    Explore how CodePlaced delivers production-grade applications, data platforms, and AI automation to help organizations achieve measurable business outcomes.
+                  </p>
+                </motion.div>
               </div>
-            </motion.div>
+
+              {/* ===================================================================== */}
+              {/* 2. PROFESSIONAL PROJECT PORTFOLIO FILTER BAR (LEFT-ALIGNED)           */}
+              {/* ===================================================================== */}
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.18 }}
+                className="pt-2 border-t border-white/[0.08] space-y-3"
+              >
+                {/* Top Row: Category Tabs (Industries | Services | Regions) + Active Count */}
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-[#0B0E14] border border-white/[0.08]">
+                    {CATEGORY_TABS.map((tab) => {
+                      const isTabActive = activeTab === tab.id;
+                      return (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => handleTabChange(tab.id)}
+                          className={`relative px-3.5 sm:px-5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                            isTabActive
+                              ? "text-[#050505] font-extrabold"
+                              : "text-[#A1A1AA] hover:text-white"
+                          }`}
+                        >
+                          {isTabActive && (
+                            <motion.div
+                              layoutId="activeTabUnderline"
+                              className="absolute inset-0 rounded-lg bg-[#00C7E8] shadow-sm shadow-[#00C7E8]/30"
+                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                            />
+                          )}
+                          <span className="relative z-10">{tab.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <span className="text-[11px] sm:text-xs font-mono text-[#71717A]">
+                    Showing{" "}
+                    <span className="text-[#00C7E8] font-bold">
+                      {matchingStudies.length}
+                    </span>{" "}
+                    {matchingStudies.length === 1 ? "project" : "projects"}
+                  </span>
+                </div>
+
+                {/* Filter Chips Row: Horizontally Scrollable on Mobile, Neatly Wrapped on Desktop */}
+                <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto sm:flex-wrap pb-1 sm:pb-0 scrollbar-none">
+                  {currentFilters.map((chip) => {
+                    const isActive = activeFilter === chip.id;
+                    return (
+                      <button
+                        key={chip.id}
+                        type="button"
+                        onClick={() => setActiveFilter(chip.id)}
+                        className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono transition-all duration-200 cursor-pointer shrink-0 ${
+                          isActive
+                            ? "text-white font-bold border border-[#00C7E8] shadow-md shadow-[#00C7E8]/20"
+                            : "bg-[#07090D]/80 text-[#A1A1AA] border border-white/[0.08] hover:border-[#00C7E8]/40 hover:text-white"
+                        }`}
+                        style={{
+                          background: isActive
+                            ? "linear-gradient(135deg, rgba(8, 127, 165, 0.45) 0%, rgba(0, 199, 232, 0.35) 100%)"
+                            : undefined,
+                        }}
+                      >
+                        {chip.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </div>
           </section>
 
           {/* ========================================================================= */}
@@ -380,7 +394,7 @@ export default function CaseStudiesPage() {
           {/* Mobile: Standardized compact layout with identical heights & 16:10 visuals*/}
           {/* Desktop: Pinned 100% authentic showcase layouts                           */}
           {/* ========================================================================= */}
-          <section id="featured-case-study" className="pt-1 sm:pt-2 px-3 sm:px-6 scroll-mt-20">
+          <section id="featured-case-study" className="px-3 sm:px-6 scroll-mt-20">
             <AnimatePresence mode="wait">
               {matchingStudies.length > 0 ? (
                 <div className="space-y-3 sm:space-y-4 lg:space-y-10 w-[94%] sm:w-[92%] max-w-[1400px] mx-auto">
@@ -468,8 +482,8 @@ export default function CaseStudiesPage() {
               </p>
             </motion.div>
 
-            {/* Three-Column Horizontal Process Row */}
-            <div className="grid grid-cols-3 divide-x divide-slate-200 border-t border-b border-slate-200 py-3 sm:py-4 md:py-0">
+            {/* Three-Column Horizontal Process Row (stacked cleanly on tiny mobile widths) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 border-t border-b border-slate-200 py-1 sm:py-4 md:py-0">
               {APPROACH_STEPS.map((item, idx) => (
                 <motion.div
                   key={item.step}
@@ -477,7 +491,7 @@ export default function CaseStudiesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className={`px-2 sm:px-4 md:px-8 py-0.5 md:py-8 lg:py-10 text-left ${idx === 0
+                  className={`px-2 sm:px-4 md:px-8 py-4 sm:py-0.5 md:py-8 lg:py-10 text-left ${idx === 0
                     ? "md:pr-8 lg:pr-10"
                     : idx === 1
                       ? "md:px-8 lg:px-10"
@@ -497,51 +511,6 @@ export default function CaseStudiesPage() {
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 4. COMPACT BLACK CTA SECTION */}
-        {/* ========================================================================= */}
-        <section id="case-studies-cta" className="bg-[#050505] border-t border-[#1B242B] text-white py-8 sm:py-12 md:py-16 lg:py-24 relative z-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5 }}
-              className="space-y-2.5 sm:space-y-4"
-            >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
-                Ready to Build Something Exceptional?
-              </h2>
-              <p className="text-xs sm:text-sm md:text-base text-[#A1A1AA] max-w-xl mx-auto leading-relaxed">
-                Partner with our senior engineering pods to design, build, and deploy production software tailored to your commercial goals.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, delay: 0.1 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-1 sm:pt-2"
-            >
-              <Link
-                href="/contact#contact-hero"
-                className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group"
-              >
-                <span>Send an Inquiry</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <Link
-                href="/services"
-                className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-transparent hover:bg-white/10 text-white font-bold text-xs sm:text-base border border-neutral-700 flex items-center justify-center transition-all"
-              >
-                <span>Explore Our Services</span>
-              </Link>
-            </motion.div>
           </div>
         </section>
       </main>

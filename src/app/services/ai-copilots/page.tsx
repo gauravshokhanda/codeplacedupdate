@@ -1099,29 +1099,6 @@ export default function AiCopilotsPage() {
             </div>
           </div>
         </section>
-
-        {/* ========================================================================= */}
-        {/* 10. CTA SECTION */}
-        {/* ========================================================================= */}
-        <section className="bg-[#050505] border-t border-[#1B242B] text-white py-16 sm:py-20 text-center">
-          <div className="site-container max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black">
-              Ready to Deploy Production AI in 4 Weeks?
-            </h2>
-            <p className="text-[#A1AAB7] text-sm sm:text-base leading-relaxed">
-              Book a 30-minute discovery call with a Principal AI Architect. We sign NDAs upfront and map your technical milestone blueprint.
-            </p>
-            <div className="pt-2">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00C8E8] hover:bg-[#00B4D2] text-black font-bold text-sm shadow-xl transition-all"
-              >
-                <span>Send an Inquiry</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
       </div>
   );
 }

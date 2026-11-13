@@ -166,7 +166,7 @@ export function VideoShowcase({
 
                 <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-xs font-bold text-emerald-400 border border-emerald-500/30">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>99.9% Uptime</span>
+                  <span>Production Ready</span>
                 </div>
               </div>
 

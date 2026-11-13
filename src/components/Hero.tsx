@@ -31,11 +31,8 @@ const TRUSTED_LOGOS = [
 ];
 
 const HERO_STATS = [
-  { value: "250+", label: "Projects Delivered" },
-  { value: "150+", label: "Clients Served" },
-  { value: "1,200+", label: "Automated Workflows" },
-  { value: "18+", label: "Industries Supported" },
-  { value: "250M+", label: "Records Processed Monthly" },
+  { value: "20+", label: "Trusted Clients" },
+  { value: "10+", label: "Countries Reached" },
 ];
 
 export function Hero({ onOpenBookAudit }: HeroProps) {
@@ -205,20 +202,18 @@ export function Hero({ onOpenBookAudit }: HeroProps) {
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* 7. HERO STATISTICS ROW (5 White Cards with Subtle Shadows) */}
+        {/* 7. HERO STATISTICS ROW (2 White Cards with Subtle Shadows) */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="grid grid-cols-2 md:grid-cols-5 gap-3.5 sm:gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 max-w-xl mx-auto gap-3.5 sm:gap-5"
         >
           {HERO_STATS.map((stat, idx) => (
             <div
               key={idx}
-              className={`${
-                idx === 4 ? "col-span-2 md:col-span-1" : ""
-              } p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#00b7c2]/30 transition-all duration-200 text-center flex flex-col justify-center`}
+              className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#00b7c2]/30 transition-all duration-200 text-center flex flex-col justify-center"
             >
               <div
                 className="text-2xl sm:text-3xl lg:text-4xl font-[900] tracking-tight mb-1 bg-clip-text text-transparent"

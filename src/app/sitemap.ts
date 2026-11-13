@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { CASE_STUDIES_DATA } from "@/lib/caseStudiesData";
 import { BLOG_POSTS } from "@/lib/blogData";
+import { SHOW_INDUSTRIES } from "@/lib/featureFlags";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://codeplaced.com";
@@ -43,12 +44,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/industries`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    ...(SHOW_INDUSTRIES
+      ? [
+          {
+            url: `${baseUrl}/industries`,
+            lastModified,
+            changeFrequency: "monthly" as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
     {
       url: `${baseUrl}/contact`,
       lastModified,
@@ -62,13 +67,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/services/data-platforms`,
+      url: `${baseUrl}/services/app-web-development`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
       url: `${baseUrl}/services/executive-dashboards`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/data-platforms`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/digital-marketing`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.85,

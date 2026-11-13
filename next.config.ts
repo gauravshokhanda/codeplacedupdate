@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { SHOW_INDUSTRIES } from "./src/lib/featureFlags";
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,6 +9,23 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+  },
+  async redirects() {
+    if (SHOW_INDUSTRIES) {
+      return [];
+    }
+    return [
+      {
+        source: "/industries",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/industries/:path*",
+        destination: "/",
+        permanent: false,
+      },
+    ];
   },
 };
 

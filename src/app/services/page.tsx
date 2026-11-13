@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
@@ -22,8 +22,12 @@ import {
   Rocket,
   ChevronRight,
 } from "lucide-react";
-import { SERVICES_DATA, ServiceDetailItem } from "@/lib/servicesData";
-import { InteractiveServicesShowcase } from "@/components/InteractiveServicesShowcase";
+import { ServiceDetailItem, getPrimaryServiceHref } from "@/lib/servicesData";
+import {
+  InteractiveServicesShowcase,
+  SHOWCASE_SERVICES_DATA,
+} from "@/components/InteractiveServicesShowcase";
+import { ServicesHeroPipeline } from "@/components/ServicesHeroPipeline";
 
 // =========================================================================
 // CONFIGURATION SWITCH:
@@ -39,10 +43,8 @@ const USE_INTERACTIVE_SHOWCASE = true;
 
 // Hero Trust Stats
 const HERO_TRUST_STATS = [
-  { value: "250+", label: "Projects Delivered", detail: "Global Deployments" },
-  { value: "150+", label: "Clients Served", detail: "Startups & Fortune 500" },
-  { value: "15+", label: "Industries Served", detail: "Fintech, Health, Retail" },
-  { value: "99.9%", label: "Reliability Rate", detail: "Strict SLA Guarantees" },
+  { value: "20+", label: "Trusted Clients", detail: "Startups & Enterprises" },
+  { value: "10+", label: "Countries Reached", detail: "Global Delivery" },
 ];
 
 // Delivery Process Steps (6 Steps)
@@ -92,6 +94,37 @@ const WHY_CODEPLACED = [
     tag: "SINGLE SOURCE OF TRUTH",
     desc: "Single source of truth data modeling ensuring your leadership team operates with verified, real-time analytics and predictive forecasts.",
     icon: BarChart3,
+  },
+];
+
+// Project screenshots (existing case study assets, linked to existing case study pages)
+const PROJECT_SCREENSHOTS = [
+  {
+    slug: "collectiq",
+    name: "CollectIQ",
+    category: "SaaS / AI Automation",
+    summary: "Collections operating system with recovery tracking, workflows and AI insights.",
+    image: "/images/case-studies/collectiq/collectiq-collections-dashboard.webp",
+    alt: "CollectIQ collections dashboard screenshot",
+    fit: "object-cover object-top",
+  },
+  {
+    slug: "progress-partners",
+    name: "Progress Partners",
+    category: "Data Analytics & BI",
+    summary: "Unified ROAS and LTV dashboard built from marketing, subscription and payment data.",
+    image: "/images/case-studies/progress-partners/hero-dashboard.webp",
+    alt: "Progress Partners business intelligence dashboard screenshot",
+    fit: "object-contain object-center",
+  },
+  {
+    slug: "topplaced-ai",
+    name: "TopPlaced AI",
+    category: "AI Interview Platform",
+    summary: "Voice-led AI interview simulator with coding tools, rubrics and proctoring.",
+    image: "/images/case-studies/topplaced-ai/topplaced-card-live-interview.webp",
+    alt: "TopPlaced AI live interview workspace screenshot",
+    fit: "object-contain object-center",
   },
 ];
 
@@ -148,8 +181,10 @@ function ServiceGatewayCard({ service, index }: { service: ServiceDetailItem; in
       : service.num === "02"
       ? Code2
       : service.num === "03"
-      ? TrendingUp
-      : Database;
+      ? BarChart3
+      : service.num === "04"
+      ? Database
+      : TrendingUp;
 
   return (
     <motion.div
@@ -189,10 +224,13 @@ function ServiceGatewayCard({ service, index }: { service: ServiceDetailItem; in
           {/* Clean, Spacious Core Capabilities (No Cluttered Pills) */}
           <div className="pt-5 border-t border-[#E5E7EB] space-y-2.5">
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 block">
-              Core Engineered Capabilities
+              {service.slug === "digital-marketing" ? "Key Offerings" : "Core Engineered Capabilities"}
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
-              {service.capabilities.slice(0, 4).map((cap, cIdx) => (
+              {(service.slug === "digital-marketing"
+                ? service.capabilities
+                : service.capabilities.slice(0, 4)
+              ).map((cap, cIdx) => (
                 <div
                   key={cIdx}
                   className="flex items-start gap-2 text-[13px] sm:text-[14px] text-neutral-700 font-medium group/item"
@@ -219,7 +257,7 @@ function ServiceGatewayCard({ service, index }: { service: ServiceDetailItem; in
           </div>
 
           <Link
-            href={`/services/${service.slug}`}
+            href={getPrimaryServiceHref(service.slug)}
             className="inline-flex items-center gap-2.5 text-sm font-bold text-neutral-900 hover:text-[#00BCD4] transition-colors group/link"
           >
             <span>Explore Dedicated Page</span>
@@ -243,46 +281,47 @@ export default function ServicesPage() {
     <div className="relative min-h-screen font-sans selection:bg-[#00BCD4] selection:text-black">
 
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION — PURE BLACK (#000000, FULL VIEWPORT 100SVH ON DESKTOP) */}
+      {/* 1. HERO SECTION — SEAMLESS OBSIDIAN (#070B0E) + 5-PILLAR PIPELINE        */}
       {/* ========================================================================= */}
-      <section className="relative bg-[#000000] border-b border-[#222222] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-24 pb-8 sm:pt-28 sm:pb-12 lg:pt-24 lg:pb-10 overflow-x-clip">
-        {/* Subtle Ambient Backlight */}
+      <section className="relative bg-[#070B0E] border-b border-white/[0.08] text-white min-h-0 lg:min-h-[100svh] flex flex-col justify-center pt-[92px] pb-8 sm:pt-28 sm:pb-10 lg:pt-24 lg:pb-10 overflow-x-clip">
+        {/* Seamless Obsidian Ambient Cyan Glow */}
         <div
-          className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[540px] h-[540px] pointer-events-none opacity-15 -z-0"
+          aria-hidden="true"
+          className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[540px] h-[540px] pointer-events-none opacity-20 -z-0"
           style={{
-            background: "radial-gradient(circle, rgba(0,188,212,0.2) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%)",
           }}
         />
 
-        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 items-center">
+        <div className="max-w-[1380px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-12 items-center">
             
-            {/* Left Column (52% / 7 cols): Bold Headline, Readable Copy, CTAs & Stats */}
-            <div className="lg:col-span-7 space-y-3.5 sm:space-y-5 text-left">
+            {/* Left Column (6 cols): Bold Headline, Readable Copy, CTAs & Stats */}
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-left">
               
               {/* 1. Small Hero Label */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase bg-[#111111] text-slate-200 border border-[#262626]"
+                className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase bg-white/[0.03] text-white/80 border border-white/15"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#00BCD4]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" aria-hidden="true" />
                 <span>FULL-STACK DIGITAL PARTNER</span>
               </motion.div>
 
-              {/* 2. Headline with Confident 58-66px Desktop Typography & Cyan Highlight */}
+              {/* 2. Headline with Confident Typography & Electric Cyan Highlight */}
               <motion.h1
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.08, ease: "easeOut" }}
-                className="text-[28px] xs:text-[32px] sm:text-5xl lg:text-[56px] xl:text-[64px] font-black tracking-tight text-white leading-[1.08]"
+                className="text-[30px] min-[375px]:text-[34px] sm:text-5xl lg:text-[50px] xl:text-[58px] font-black tracking-tight text-white leading-[1.08]"
               >
                 <span className="block">
-                  Engineering Excellence <span className="text-[#00BCD4]">Built for Scale.</span>
+                  Engineering Excellence <span className="text-[#06B6D4]">Built for Scale.</span>
                 </span>
-                <span className="block text-xl xs:text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-bold text-neutral-200 mt-1.5 sm:mt-2.5 tracking-tight">
-                  Custom Software, Data & AI Systems.
+                <span className="block text-lg min-[375px]:text-xl sm:text-3xl lg:text-[30px] xl:text-[36px] font-bold text-white/80 mt-1.5 sm:mt-2.5 tracking-tight">
+                  Custom Software, Data &amp; AI Systems.
                 </span>
               </motion.h1>
 
@@ -291,7 +330,7 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.16, ease: "easeOut" }}
-                className="text-xs xs:text-sm sm:text-base lg:text-[17px] text-neutral-300 max-w-xl leading-relaxed font-normal"
+                className="text-[13.5px] min-[375px]:text-sm sm:text-base lg:text-[17px] text-white/65 max-w-xl leading-relaxed font-normal"
               >
                 We engineer enterprise software applications, production AI agents, automated data platforms, and executive BI command centers that deliver measurable business growth.
               </motion.p>
@@ -301,100 +340,60 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.24, ease: "easeOut" }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-0.5"
+                className="grid grid-cols-1 min-[375px]:grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-0.5"
               >
                 <a
                   href="#four-pillars-gateway"
-                  className="h-10 sm:h-12 px-6 sm:px-7 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group text-center"
+                  className="h-11 sm:h-12 px-5 sm:px-7 rounded-full bg-[#06B6D4] hover:bg-[#22D3EE] text-[#070B0E] font-extrabold text-[13px] min-[390px]:text-sm sm:text-base shadow-[0_0_24px_rgba(6,182,212,0.25)] flex items-center justify-center gap-2 transition-all active:scale-95 group text-center whitespace-nowrap"
                 >
-                  <span>Explore Services</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <span className="lg:hidden">Explore Our Services</span>
+                  <span className="hidden lg:inline">Explore Services</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" aria-hidden="true" />
                 </a>
 
                 <Link
                   href="/contact#contact-hero"
-                  className="h-10 sm:h-12 px-6 sm:px-7 rounded-full bg-[#111111] hover:bg-[#181818] text-white font-bold text-xs sm:text-base border border-[#262626] hover:border-[#00BCD4]/50 flex items-center justify-center transition-all text-center"
+                  className="h-11 sm:h-12 px-5 sm:px-7 rounded-full bg-white/[0.03] hover:bg-white/[0.07] text-white font-bold text-[13px] min-[390px]:text-sm sm:text-base border border-white/15 hover:border-[#06B6D4] flex items-center justify-center transition-all text-center whitespace-nowrap"
                 >
                   <span>Send an Inquiry</span>
                 </Link>
               </motion.div>
 
-              {/* Mobile Hero Banner Image: Visible below CTAs, contained & responsive without excessive height */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.28, ease: "easeOut" }}
-                className="block lg:hidden my-3 sm:my-5 w-full"
-              >
-                <div className="relative w-full max-w-[640px] mx-auto rounded-2xl p-1 sm:p-1.5 bg-gradient-to-b from-[#141B26] to-[#0A0D14] border border-[#223044] shadow-[0_0_35px_rgba(0,188,212,0.18)]">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00BCD4]/20 via-[#0284C7]/20 to-[#00BCD4]/10 rounded-2xl blur-lg opacity-60 pointer-events-none -z-10" />
-                  <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-[#05070A] border border-white/5">
-                    <Image
-                      src="/images/services/services-hero-team.jpg"
-                      alt="CodePlaced Connected Engineering Architecture: AI & Automation, Software Development, Data Analytics, Data Engineering"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 640px"
-                      priority
-                      className="object-cover object-[40%_center] select-none"
-                    />
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 5. Verified Trust Stats (Clean 2x2 grid on mobile, horizontal row with dividers on desktop) */}
+              {/* 5. Approved Trust Stats (Clean 2-column horizontal bar) */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.32, ease: "easeOut" }}
-                className="pt-4 sm:pt-6 border-t border-[#222222] grid grid-cols-2 sm:grid-cols-4 gap-2.5 xs:gap-3.5 sm:gap-6"
+                className="pt-4 sm:pt-6 border-t border-white/10 max-w-lg grid grid-cols-2 gap-3 sm:gap-8"
               >
                 {HERO_TRUST_STATS.map((stat, sIdx) => (
                   <div
                     key={sIdx}
-                    className={`p-2.5 sm:p-0 rounded-lg sm:rounded-none bg-[#0D0D0D] sm:bg-transparent border border-white/5 sm:border-none space-y-0.5 sm:space-y-1 ${
-                      sIdx > 0 ? "sm:border-l sm:border-[#222222] sm:pl-5" : ""
+                    className={`p-3 sm:p-0 rounded-lg sm:rounded-none bg-white/[0.03] sm:bg-transparent border border-white/10 sm:border-none space-y-0.5 sm:space-y-1 ${
+                      sIdx > 0 ? "sm:border-l sm:border-white/10 sm:pl-8" : ""
                     }`}
                   >
                     <div className="text-xl sm:text-3xl lg:text-[32px] font-black text-white font-mono tracking-tight">{stat.value}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-neutral-300">{stat.label}</div>
-                    <div className="text-[10px] sm:text-[11px] text-neutral-400 font-mono">{stat.detail}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-white/85">{stat.label}</div>
+                    <div className="text-[10px] sm:text-[11px] text-white/65 font-mono">{stat.detail}</div>
                   </div>
                 ))}
               </motion.div>
             </div>
 
-            {/* Desktop Right Column: Services Hero Banner Visual (48% / 5 cols) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="hidden lg:flex lg:col-span-5 relative items-center justify-center xl:justify-end w-full"
-            >
-              <div className="relative w-full rounded-2xl p-1.5 bg-gradient-to-b from-[#141B26] to-[#0A0D14] border border-[#223044] shadow-[0_0_50px_rgba(0,188,212,0.18)] hover:border-[#00BCD4]/60 transition-all duration-300 group">
-                {/* Subtle Cyan Ambient Glow behind image */}
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-[#00BCD4]/25 via-[#0284C7]/20 to-[#00BCD4]/15 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition-opacity -z-10 pointer-events-none" />
-
-                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#05070A] border border-white/5">
-                  <Image
-                    src="/images/services/services-hero-team.jpg"
-                    alt="CodePlaced Four Core Engineering Services — AI & Automation, Software Development, Data Analytics, Data Engineering"
-                    fill
-                    sizes="(max-width: 1280px) 45vw, 600px"
-                    priority
-                    className="object-cover object-[38%_center] select-none"
-                  />
-                </div>
-              </div>
-            </motion.div>
+            {/* Desktop Right Column (6 cols): Interactive 5-Pillar Stepped Pipeline */}
+            <div className="hidden lg:flex lg:col-span-6 relative items-center justify-center w-full">
+              <ServicesHeroPipeline />
+            </div>
 
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. FOUR PILLARS OF ENGINEERING EXCELLENCE — WHITE (#FFFFFF) */}
+      {/* 2. OUR PILLARS OF ENGINEERING EXCELLENCE — WHITE (#FFFFFF) */}
       {/* ========================================================================= */}
-      <section id="four-pillars-gateway" className="scroll-mt-24 sm:scroll-mt-28 py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
+      <section id="four-pillars-gateway" className="scroll-mt-24 sm:scroll-mt-28 py-8 sm:py-14 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         {USE_INTERACTIVE_SHOWCASE ? (
           <InteractiveServicesShowcase />
         ) : (
@@ -404,16 +403,16 @@ export default function ServicesPage() {
                 CORE DISCIPLINES
               </span>
               <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
-                Four Pillars Of Engineering Excellence
+                Our Pillars of Engineering Excellence
               </h2>
               <p className="text-sm sm:text-lg text-neutral-600 leading-relaxed font-normal">
                 Click any service gateway to explore its dedicated production architecture, capabilities, and delivery methodology.
               </p>
             </div>
 
-            {/* Original Clean 2x2 Gateway Grid */}
+            {/* Clean Gateway Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-              {SERVICES_DATA.map((svc, idx) => (
+              {SHOWCASE_SERVICES_DATA.map((svc, idx) => (
                 <ServiceGatewayCard key={svc.slug} service={svc} index={idx} />
               ))}
             </div>
@@ -425,8 +424,8 @@ export default function ServicesPage() {
       {/* 3. AI SERVICES & AUTONOMOUS AGENTS — PURE BLACK (#000000) */}
       {/* Clean, business-focused presentation matching homepage aesthetic */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-16 lg:py-20 bg-[#000000] border-b border-[#222222] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
+      <section className="py-8 sm:py-14 lg:py-20 bg-[#000000] border-b border-[#222222] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
             <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
@@ -464,7 +463,7 @@ export default function ServicesPage() {
                       <div className="text-[10px] text-neutral-400 font-mono">Private VPC Isolated • Zero Data Retention</div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-[#00BCD4] px-2 py-0.5 rounded bg-black border border-[#00BCD4]/30 hidden xs:inline-block">
+                  <span className="text-[10px] font-mono font-bold text-[#00BCD4] px-2 py-0.5 rounded bg-black border border-[#00BCD4]/30 hidden sm:inline-block">
                     LIVE
                   </span>
                 </div>
@@ -517,17 +516,17 @@ export default function ServicesPage() {
               </div>
 
               {/* Cyan CTA Button */}
-              <div className="pt-1 flex items-center gap-3">
+              <div className="pt-1 flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <Link
                   href="/services/ai-copilots"
-                  className="inline-flex items-center justify-center gap-2 h-10 sm:h-11 px-6 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-black font-extrabold text-xs sm:text-sm tracking-tight shadow-md transition-all active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 h-10 sm:h-11 px-5 sm:px-6 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-black font-extrabold text-xs sm:text-sm tracking-tight shadow-md transition-all active:scale-95 whitespace-nowrap"
                 >
                   <span>Explore AI Services</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 shrink-0" />
                 </Link>
                 <Link
                   href="/contact#contact-hero"
-                  className="inline-flex items-center justify-center h-10 sm:h-11 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white font-semibold text-xs sm:text-sm border border-white/10 transition-all"
+                  className="inline-flex items-center justify-center h-10 sm:h-11 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white font-semibold text-xs sm:text-sm border border-white/10 transition-all whitespace-nowrap"
                 >
                   <span>Send an Inquiry</span>
                 </Link>
@@ -539,10 +538,76 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
+      {/* 3b. PROJECT SCREENSHOTS — WHITE (#FFFFFF), AUTHENTIC CASE STUDY ASSETS */}
+      {/* ========================================================================= */}
+      <section className="py-8 sm:py-14 lg:py-16 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+            <div className="space-y-2 max-w-2xl">
+              <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
+                SELECTED PROJECTS
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold tracking-tight text-neutral-900 leading-tight">
+                Products We&apos;ve Built
+              </h2>
+            </div>
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-neutral-900 hover:text-[#00AFC8] transition-colors group self-start md:self-end pb-1 border-b-2 border-neutral-900/20 hover:border-[#00AFC8]"
+            >
+              <span>View All Case Studies</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+            {PROJECT_SCREENSHOTS.map((project, pIdx) => (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: pIdx * 0.06, ease: "easeOut" }}
+              >
+                <Link
+                  href={`/case-studies/${project.slug}`}
+                  className="group block h-full rounded-xl overflow-hidden bg-white border border-[#E5E7EB] hover:border-[#00BCD4]/60 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="relative aspect-[16/10] w-full bg-[#0A0D14] overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className={`${project.fit} group-hover:scale-[1.02] transition-transform duration-500`}
+                    />
+                  </div>
+                  <div className="p-4 sm:p-5 space-y-1.5">
+                    <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#00AFC8] block">
+                      {project.category}
+                    </span>
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#00AFC8] transition-colors leading-snug">
+                        {project.name}
+                      </h3>
+                      <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#00BCD4] group-hover:translate-x-1 transition-all shrink-0" />
+                    </div>
+                    <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed">
+                      {project.summary}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
       {/* 4. HOW CODEPLACED DELIVERS PRODUCTION RESULTS — PURE BLACK (#000000) */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+      <section className="py-8 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
             <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
@@ -557,7 +622,7 @@ export default function ServicesPage() {
           </div>
 
           {/* 6 Process Cards: Compact 2-Column Grid on Mobile (3 rows of 2), 6 Columns on Desktop */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 xs:gap-3 sm:gap-4 relative items-stretch">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2.5 sm:gap-4 relative items-stretch">
             {DELIVERY_STEPS.map((step, sIdx) => {
               const StepIcon = step.icon;
               return (
@@ -567,22 +632,22 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: sIdx * 0.05, ease: "easeOut" }}
-                  className="p-3 xs:p-3.5 sm:p-6 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/50 hover:bg-[#161616] transition-all duration-300 flex flex-col justify-between group relative"
+                  className="p-3 min-[375px]:p-3.5 sm:p-6 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/50 hover:bg-[#161616] transition-all duration-300 flex flex-col justify-between group relative"
                 >
-                  <div className="space-y-2.5 sm:space-y-4">
+                  <div className="space-y-2 sm:space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm xs:text-base sm:text-xl font-black text-[#00BCD4] font-mono">
+                      <span className="text-sm min-[375px]:text-base sm:text-xl font-black text-[#00BCD4] font-mono">
                         {step.num}
                       </span>
                       <StepIcon className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-[#00BCD4] transition-colors" />
                     </div>
 
                     <div>
-                      <h3 className="text-xs xs:text-sm sm:text-lg font-bold text-white group-hover:text-[#00BCD4] transition-colors leading-snug">
+                      <h3 className="text-xs min-[375px]:text-sm sm:text-lg font-bold text-white group-hover:text-[#00BCD4] transition-colors leading-snug">
                         {step.name}
                       </h3>
 
-                      <p className="text-[10.5px] xs:text-[11.5px] sm:text-[13px] text-neutral-400 leading-snug mt-1 sm:mt-2 line-clamp-3 sm:line-clamp-none">
+                      <p className="text-[10.5px] min-[375px]:text-[11.5px] sm:text-[13px] text-neutral-400 leading-snug mt-1 sm:mt-2 line-clamp-3 sm:line-clamp-none">
                         {step.desc}
                       </p>
                     </div>
@@ -605,8 +670,8 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 5. WHY LEADING COMPANIES CHOOSE CODEPLACED — WHITE (#FFFFFF) */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+      <section className="py-8 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
             <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
@@ -627,7 +692,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={cIdx}
-                  className="p-3 xs:p-4 sm:p-7 rounded-xl sm:rounded-2xl bg-white border border-[#E5E7EB] hover:border-[#00BCD4]/60 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                  className="p-3 min-[375px]:p-4 sm:p-7 rounded-xl sm:rounded-2xl bg-white border border-[#E5E7EB] hover:border-[#00BCD4]/60 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div className="space-y-2 sm:space-y-3">
                     <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-[#101820] flex items-center justify-center group-hover:border-[#00BCD4]/40 transition-colors">
@@ -635,10 +700,10 @@ export default function ServicesPage() {
                     </div>
 
                     <div>
-                      <h3 className="text-xs xs:text-sm sm:text-lg font-bold text-neutral-900 group-hover:text-[#00BCD4] transition-colors leading-snug">
+                      <h3 className="text-xs min-[375px]:text-sm sm:text-lg font-bold text-neutral-900 group-hover:text-[#00BCD4] transition-colors leading-snug">
                         {card.title}
                       </h3>
-                      <p className="text-[10.5px] xs:text-[11.5px] sm:text-sm text-neutral-600 mt-1 sm:mt-2 leading-relaxed line-clamp-3 sm:line-clamp-none font-normal">
+                      <p className="text-[10.5px] min-[375px]:text-[11.5px] sm:text-sm text-neutral-600 mt-1 sm:mt-2 leading-relaxed line-clamp-3 sm:line-clamp-none font-normal">
                         {card.desc}
                       </p>
                     </div>
@@ -654,8 +719,8 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* 6. PRODUCTION-PROVEN TOOLS & FRAMEWORKS — PURE BLACK (#000000) */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
+      <section className="py-8 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
             <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
@@ -669,11 +734,14 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          {/* Filter Tabs: Horizontally Scrollable on Mobile, Centered Wrap on Desktop */}
+          {/* Filter Tabs: Hover on Desktop, Tap on Mobile/Touch */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto w-full pb-2 scrollbar-none sm:justify-center sm:flex-wrap">
             {TECH_CATEGORIES.map((cat) => (
               <button
                 key={cat}
+                type="button"
+                onMouseEnter={() => setActiveTechTab(cat)}
+                onFocus={() => setActiveTechTab(cat)}
                 onClick={() => setActiveTechTab(cat)}
                 className={`px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-mono font-bold transition-all duration-200 cursor-pointer shrink-0 ${
                   activeTechTab === cat
@@ -686,80 +754,33 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* Active Category Cards: Compact 2-Column Grid on Mobile, 4 Columns on Desktop */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 items-stretch">
-            {TECH_STACK_MAP[activeTechTab].map((tool) => (
-              <div
-                key={tool.name}
-                className="p-3 sm:p-5 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/40 transition-all duration-200 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-base sm:text-lg shrink-0">{tool.icon}</span>
-                    <div className="text-xs xs:text-sm sm:text-base font-bold text-white leading-snug truncate">{tool.name}</div>
+          {/* Active Category Cards: Smooth 200-300ms Transition, 2-Column Grid on Mobile, 4 Columns on Desktop */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTechTab}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 items-stretch"
+            >
+              {TECH_STACK_MAP[activeTechTab].map((tool) => (
+                <div
+                  key={tool.name}
+                  className="p-3 sm:p-5 rounded-xl bg-[#111111] border border-[#222222] hover:border-[#00BCD4]/40 transition-all duration-200 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-base sm:text-lg shrink-0">{tool.icon}</span>
+                      <div className="text-xs min-[375px]:text-sm sm:text-base font-bold text-white leading-snug truncate">{tool.name}</div>
+                    </div>
+                    <p className="text-[10.5px] min-[375px]:text-[11.5px] sm:text-xs text-neutral-400 leading-relaxed font-normal">{tool.desc}</p>
                   </div>
-                  <p className="text-[10.5px] xs:text-[11.5px] sm:text-xs text-neutral-400 leading-relaxed font-normal">{tool.desc}</p>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. FINAL CTA SECTION — WHITE BACKGROUND (#FFFFFF) WITH PREMIUM BLACK CARD */}
-      {/* ========================================================================= */}
-      <section className="py-10 sm:py-16 lg:py-24 bg-[#FFFFFF] text-neutral-900">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-[1240px] mx-auto rounded-2xl sm:rounded-3xl bg-[#000000] border border-[#222222] p-6 xs:p-8 sm:p-14 lg:p-18 text-center text-white relative overflow-hidden shadow-2xl">
-            {/* Subtle Cyan Grid Accent */}
-            <div
-              className="absolute inset-0 opacity-10 pointer-events-none"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to right, rgba(0, 188, 212, 0.2) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(0, 188, 212, 0.2) 1px, transparent 1px)
-                `,
-                backgroundSize: "36px 36px",
-              }}
-            />
-
-            <div className="max-w-2xl mx-auto relative z-10 space-y-3.5 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-white/10 text-white border border-white/20">
-                <Sparkles className="w-3.5 h-3.5 text-[#00BCD4]" />
-                <span>START YOUR NEXT SPRINT</span>
-              </div>
-
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.12] text-white">
-                Technology That Turns Ideas{" "}
-                <span className="text-[#00BCD4]">
-                  Into Impact.
-                </span>
-              </h2>
-
-              <p className="text-xs xs:text-sm sm:text-base lg:text-lg text-neutral-300 max-w-xl mx-auto leading-relaxed font-normal pt-0.5 sm:pt-1">
-                From product engineering and AI systems to analytics and growth platforms, we build digital experiences that scale.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 pt-2 sm:pt-4">
-                <Link
-                  href="/contact#contact-hero"
-                  className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 group text-center"
-                >
-                  <span>Send an Inquiry</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-
-                <Link
-                  href="/case-studies"
-                  className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-transparent hover:bg-white/10 text-white font-bold text-xs sm:text-base border border-neutral-700 flex items-center justify-center transition-all text-center"
-                >
-                  <span>View Case Studies</span>
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

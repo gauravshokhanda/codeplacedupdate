@@ -613,7 +613,7 @@ export function TopPlacedAICaseStudy() {
             {/* Left Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left">
               <span className="text-xs font-mono font-bold text-[#00BCD4] uppercase tracking-wider block">
-                01 &bull; COMMAND CENTER &bull; PDF PAGE 5
+                01 &bull; COMMAND CENTER
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 Candidate Dashboard
@@ -695,7 +695,7 @@ export function TopPlacedAICaseStudy() {
             {/* Right Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left order-1 lg:order-2">
               <span className="text-xs font-mono font-bold text-[#00BCD4] uppercase tracking-wider block">
-                02 &bull; TRACK SELECTION &bull; PDF PAGE 6
+                02 &bull; TRACK SELECTION
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 Interview Track Selection
@@ -749,7 +749,7 @@ export function TopPlacedAICaseStudy() {
             {/* Left Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left">
               <span className="text-xs font-mono font-bold text-[#00BCD4] uppercase tracking-wider block">
-                03 &bull; GRANULAR CALIBRATION &bull; PDF PAGES 7–10
+                03 &bull; GRANULAR CALIBRATION
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 Personalized Interview Configuration
@@ -786,10 +786,10 @@ export function TopPlacedAICaseStudy() {
                 <div className="grid grid-cols-2 gap-2">
                   {(
                     [
-                      { key: "seniority", label: "Seniority (Page 7)" },
-                      { key: "role", label: "Domain & Role (Page 8)" },
-                      { key: "company", label: "Target Company (Page 9)" },
-                      { key: "preflight", label: "Session Launch (Page 10)" },
+                      { key: "seniority", label: "Seniority" },
+                      { key: "role", label: "Domain & Role" },
+                      { key: "company", label: "Target Company" },
+                      { key: "preflight", label: "Session Launch" },
                     ] as const
                   ).map((tab) => (
                     <button
@@ -890,7 +890,7 @@ export function TopPlacedAICaseStudy() {
             {/* Right Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left order-1 lg:order-2">
               <span className="text-xs font-mono font-bold text-[#00838F] uppercase tracking-wider block">
-                04 &bull; HARDWARE &amp; INTEGRITY SETUP &bull; PDF PAGES 11–13
+                04 &bull; HARDWARE &amp; INTEGRITY SETUP
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-[#101214] tracking-tight">
                 Device Readiness &amp; Verification
@@ -927,9 +927,9 @@ export function TopPlacedAICaseStudy() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {(
                     [
-                      { key: "camera", label: "Camera (Page 12)" },
-                      { key: "readiness", label: "Permissions (Page 11)" },
-                      { key: "secondary", label: "3rd Eye (Page 13)" },
+                      { key: "camera", label: "Camera" },
+                      { key: "readiness", label: "Permissions" },
+                      { key: "secondary", label: "3rd Eye" },
                     ] as const
                   ).map((tab) => (
                     <button
@@ -956,7 +956,7 @@ export function TopPlacedAICaseStudy() {
             {/* Left Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left">
               <span className="text-xs font-mono font-bold text-[#00838F] uppercase tracking-wider block">
-                05 &bull; INTEGRITY &amp; PROCTORING &bull; PDF PAGE 14
+                05 &bull; INTEGRITY &amp; PROCTORING
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-[#101214] tracking-tight">
                 Explain &amp; Surface Proctoring Warnings
@@ -1043,7 +1043,7 @@ export function TopPlacedAICaseStudy() {
             {/* Right Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left order-1 lg:order-2">
               <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-                MULTI-SURFACE WORKSPACE &bull; PDF PAGES 15–16
+                MULTI-SURFACE WORKSPACE
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                 Conversational AI Meets Hands-On Evaluation.
@@ -1081,7 +1081,7 @@ export function TopPlacedAICaseStudy() {
                 6 Multi-Surface Workspace Components
               </h3>
               <p className="text-xs text-[#A1A1AA]">
-                Decomposition of the candidate-facing simulation room as documented on pages 15 and 16.
+                Decomposition of the candidate-facing simulation room across core interactive surfaces.
               </p>
             </div>
 
@@ -1123,7 +1123,7 @@ export function TopPlacedAICaseStudy() {
           {/* Header */}
           <div className="max-w-3xl text-left space-y-3">
             <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00838F]">
-              IMPLEMENTATION THINKING &bull; PDF PAGE 17
+              IMPLEMENTATION THINKING
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
               A Product Architecture That Supports the Journey.

@@ -3,6 +3,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { SHOW_INDUSTRIES } from "@/lib/featureFlags";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
@@ -25,13 +27,11 @@ import {
 } from "lucide-react";
 
 // =========================================================================
-// 1. TRUST METRICS RIBBON (Hero Verified Stats)
+// 1. TRUST METRICS RIBBON (Approved Company Credibility Stats)
 // =========================================================================
 const TRUST_METRICS = [
-  { value: "100+", label: "Enterprise Deployments", sub: "Across 6 core verticals" },
-  { value: "95%", label: "Client Retention Rate", sub: "Multi-year partnerships" },
-  { value: "2–4 Wks", label: "Average Delivery Sprint", sub: "From audit to production" },
-  { value: "99.99%", label: "Guaranteed SLA", sub: "Mission-critical reliability" },
+  { value: "20+", label: "Trusted Clients", sub: "Across core verticals" },
+  { value: "10+", label: "Countries Reached", sub: "Global engineering delivery" },
 ];
 
 // =========================================================================
@@ -222,7 +222,7 @@ const BLUEPRINTS = [
     name: "Omnichannel Commerce Lakehouse",
     domain: "Ecommerce",
     badge: "Sub-Second OLAP",
-    sla: "99.99% Availability",
+    sla: "High-Availability Cloud",
     steps: [
       { num: "01", title: "Multi-Store Ingest", desc: "Shopify Plus, Amazon Seller, Stripe webhooks, and warehouse ERP feeds.", tech: "CDC Pipeline Sync", tag: "Zero Event Loss" },
       { num: "02", title: "Event Streaming", desc: "High-throughput Kafka cluster handling order queues and inventory reconciliation.", tech: "Apache Kafka Cluster", tag: "Sub-Minute Sync" },
@@ -255,7 +255,7 @@ const BLUEPRINTS = [
       { num: "01", title: "First Notice of Loss", desc: "Policyholder digital portals, mobile FNOL uploads, and broker submissions.", tech: "Encrypted Ingest API", tag: "Zero Paperwork" },
       { num: "02", title: "Automated OCR", desc: "AI document OCR extracting damage reports, medical bills, and police records.", tech: "Document AI / OCR", tag: "PHI Scrubbing" },
       { num: "03", title: "Underwriting Mart", desc: "Snowflake actuarial data mart storing policy histories and loss logs.", tech: "Snowflake Data Mart", tag: "Actuarial Core" },
-      { num: "04", title: "Actuarial Risk Engine", desc: "Automated claims triage, reserve calculations, and real-time fraud scoring.", tech: "Python Risk DAGs", tag: "99.9% Accuracy" },
+      { num: "04", title: "Actuarial Risk Engine", desc: "Automated claims triage, reserve calculations, and real-time fraud scoring.", tech: "Python Risk DAGs", tag: "Automated Scoring" },
       { num: "05", title: "Adjuster Cockpit", desc: "C-suite loss ratio telemetry, adjuster work queues, and regulatory audit feeds.", tech: "Looker Studio Portal", tag: "Instant Adjudication" },
     ],
   },
@@ -264,7 +264,7 @@ const BLUEPRINTS = [
     name: "Healthcare EHR Lakehouse",
     domain: "Healthcare",
     badge: "HIPAA Air-Gapped",
-    sla: "99.99% Availability",
+    sla: "High-Availability Cloud",
     steps: [
       { num: "01", title: "Data Sources", desc: "Epic, Cerner, FHIR APIs, PACS DICOM images, and legacy SQL clinical silos.", tech: "FHIR / HL7 CDC", tag: "Encrypted Ingest" },
       { num: "02", title: "Ingestion & Security", desc: "De-identification pipeline with HIPAA Safe Harbor hashing and Kafka streams.", tech: "Kafka + Air-Gapped VPC", tag: "PHI Scrubbing" },
@@ -350,7 +350,7 @@ const DETAILED_SERVICES = [
       "Executive loss ratio, fraud detection, and regulatory compliance dashboards",
     ],
     techStack: ["Snowflake", "Python", "FastAPI", "React", "Looker Studio", "OCR AI"],
-    outcomes: ["74% faster claims workflows", "99.9% policy data accuracy", "Full regulatory audit readiness"],
+    outcomes: ["74% faster claims workflows", "Validated policy data accuracy", "Full regulatory audit readiness"],
   },
   {
     id: "human-resources",
@@ -430,6 +430,7 @@ const RESEARCH_PAPERS = [
 ];
 
 export default function IndustriesPage() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
   const [activeBlueprintId, setActiveBlueprintId] = useState("ecommerce-blueprint");
@@ -437,6 +438,12 @@ export default function IndustriesPage() {
   const [mobileSolutionId, setMobileSolutionId] = useState("ecommerce");
   const [selectedCapabilityId, setSelectedCapabilityId] = useState("ecommerce");
   const [mobileExpandedCapability, setMobileExpandedCapability] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!SHOW_INDUSTRIES) {
+      router.replace("/");
+    }
+  }, [router]);
 
   useEffect(() => {
     const handleHash = () => {
@@ -506,6 +513,10 @@ export default function IndustriesPage() {
     setSolutionIndex((prev) => (prev - 1 + FEATURED_SOLUTIONS.length) % FEATURED_SOLUTIONS.length);
   };
 
+  if (!SHOW_INDUSTRIES) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#000000] text-[#FFFFFF] font-sans antialiased selection:bg-[#00BCD4] selection:text-[#050505]">
       {/* ========================================================================= */}
@@ -566,8 +577,8 @@ export default function IndustriesPage() {
                 </Link>
               </div>
 
-              {/* 4-Metric Trust Ribbon (2x2 on Mobile, 4-col on sm+) */}
-              <div className="pt-4 sm:pt-6 border-t border-[#1B242B] grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-5">
+              {/* 2-Metric Trust Ribbon */}
+              <div className="pt-4 sm:pt-6 border-t border-[#1B242B] max-w-md grid grid-cols-2 gap-3.5 sm:gap-8">
                 {TRUST_METRICS.map((metric) => (
                   <div key={metric.label} className="p-2.5 sm:p-0 rounded-lg bg-[#101214]/60 sm:bg-transparent border border-[#1B242B]/40 sm:border-0 space-y-0.5">
                     <div className="text-xl sm:text-3xl font-mono font-black text-[#00BCD4] tracking-tight">
@@ -1562,30 +1573,18 @@ export default function IndustriesPage() {
               </p>
             </div>
 
-            {/* Compact 2x2 on Mobile, 4-col on Desktop Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5">
-              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">100+</div>
-                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Production Deployments</div>
-                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">Fixed-scope 2–4 week delivery sprints with zero downtime cutover.</p>
+            {/* Compact 2-Column Approved Credibility Metrics */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-3.5 sm:gap-6">
+              <div className="p-5 sm:p-6 lg:p-7 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">20+</div>
+                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Trusted Clients</div>
+                <p className="text-[11px] sm:text-xs text-[#A1AAB7] leading-relaxed">Partnering with high-growth ventures and enterprises across industries.</p>
               </div>
 
-              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">95%</div>
-                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Client Retention</div>
-                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">Long-term engineering partnerships across modernization roadmaps.</p>
-              </div>
-
-              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">99.99%</div>
-                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Verified SLA Guarantee</div>
-                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">High-availability streaming pipelines and cloud configs.</p>
-              </div>
-
-              <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1 sm:space-y-1.5 shadow-xl">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-emerald-400">$140M+</div>
-                <div className="text-xs sm:text-sm font-bold text-emerald-400 leading-tight">Client Value Unlocked</div>
-                <p className="text-[10px] sm:text-[11px] text-[#A1AAB7] leading-relaxed line-clamp-2">Combined cloud infrastructure savings and margin growth.</p>
+              <div className="p-5 sm:p-6 lg:p-7 rounded-xl sm:rounded-2xl bg-[#101214] border border-[#00BCD4]/25 text-center space-y-1.5 shadow-xl">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-black text-[#00BCD4]">10+</div>
+                <div className="text-xs sm:text-sm font-bold text-white leading-tight">Countries Reached</div>
+                <p className="text-[11px] sm:text-xs text-[#A1AAB7] leading-relaxed">Global engineering delivery supporting distributed teams and markets.</p>
               </div>
             </div>
           </div>

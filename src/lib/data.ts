@@ -11,6 +11,7 @@ import {
   BlogPost,
   FaqItem,
 } from "@/types";
+import { SHOW_INDUSTRIES } from "@/lib/featureFlags";
 
 export interface AwardItem {
   id: string;
@@ -26,7 +27,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies", badge: "Live" },
-  { label: "Industries", href: "/industries" },
+  ...(SHOW_INDUSTRIES ? [{ label: "Industries", href: "/industries" }] : []),
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -96,39 +97,18 @@ export const WHY_CHOOSE_US: FeatureCard[] = [
 
 export const METRICS_DATA: MetricItem[] = [
   {
-    id: "projects",
-    value: 250,
-    suffix: "+",
-    label: "Projects Delivered",
-    subtext: "Digital products & platforms",
-  },
-  {
     id: "clients",
-    value: 150,
-    suffix: "+",
-    label: "Global Clients",
-    subtext: "Startups to enterprises",
-  },
-  {
-    id: "workflows",
-    value: 1200,
-    suffix: "+",
-    label: "Automated Workflows",
-    subtext: "Pipelines & production systems",
-  },
-  {
-    id: "industries",
     value: 20,
     suffix: "+",
-    label: "Industries Served",
-    subtext: "Healthcare, Fintech, Retail & SaaS",
+    label: "Trusted Clients",
+    subtext: "High-growth ventures & enterprises",
   },
   {
-    id: "uptime",
-    value: 99.9,
-    suffix: "%",
-    label: "Platform Reliability",
-    subtext: "Enterprise uptime SLA",
+    id: "countries",
+    value: 10,
+    suffix: "+",
+    label: "Countries Reached",
+    subtext: "Global engineering delivery",
   },
 ];
 
@@ -362,42 +342,42 @@ export const SERVICES_LIST: ServiceItem[] = [
   },
 ];
 
-// The 4 Awards Cards explicitly requested:
+// Core Engineering Pillars (Factual Focus Areas)
 export const AWARDS_LIST: AwardItem[] = [
   {
-    id: "award-1",
-    badgeTitle: "Top AI Consultancy",
-    year: "2026",
-    organization: "Global Tech Leaders Summit",
-    category: "Enterprise AI Innovation",
-    description: "Awarded #1 Enterprise AI Solution Partner for outstanding 2-4 week production delivery velocity and verifiable model accuracy.",
+    id: "pillar-1",
+    badgeTitle: "Practical AI Delivery",
+    year: "AI",
+    organization: "Engineering Focus",
+    category: "Enterprise AI Architecture",
+    description: "Designing private VPC RAG systems and workflow automation tailored to real operational constraints.",
     iconName: "Award",
   },
   {
-    id: "award-2",
-    badgeTitle: "Data Architecture of the Year",
-    year: "2025",
-    organization: "Modern Data Stack Consortium",
+    id: "pillar-2",
+    badgeTitle: "Modern Data Platforms",
+    year: "Data",
+    organization: "Engineering Focus",
     category: "Lakehouse Engineering",
-    description: "Recognized for building sub-35ms real-time telemetry streaming architectures supporting over 1.2 billion events daily.",
+    description: "Building clean, tested data warehouses and automated analytics pipelines with full schema governance.",
     iconName: "ShieldCheck",
   },
   {
-    id: "award-3",
-    badgeTitle: "Excellence in Enterprise Trust",
-    year: "2026",
-    organization: "CyberSecurity & Compliance Board",
-    category: "Zero-Downtime & Security",
-    description: "Certified for zero security incidents and 100% audit pass rates across HIPAA, SOC2 Type II, and ISO 27001 deployments.",
+    id: "pillar-3",
+    badgeTitle: "Security & IP Ownership",
+    year: "Cloud",
+    organization: "Engineering Focus",
+    category: "Private Cloud Deployment",
+    description: "Deploying directly into client cloud infrastructure with complete code and intellectual property ownership.",
     iconName: "Lock",
   },
   {
-    id: "award-4",
-    badgeTitle: "Clutch Global Leader",
-    year: "2025",
-    organization: "Clutch Enterprise Reviews",
-    category: "Client Satisfaction 5.0 ★",
-    description: "Ranked Top 1% Worldwide across 150+ client deployments for on-time delivery and post-launch operational compounding.",
+    id: "pillar-4",
+    badgeTitle: "Global Engineering Trust",
+    year: "20+",
+    organization: "Verified Reach",
+    category: "Trusted by 20+ Clients",
+    description: "Partnering with organizations across 10+ countries on dependable software delivery and long-term support.",
     iconName: "Star",
   },
 ];
