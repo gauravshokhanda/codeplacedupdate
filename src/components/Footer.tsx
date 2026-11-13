@@ -14,25 +14,6 @@ interface FooterProps {
   onOpenBookAudit?: (scope?: string) => void;
 }
 
-function InstagramIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  );
-}
-
 export function Footer({ onOpenBookAudit }: FooterProps) {
   void onOpenBookAudit;
   const pathname = usePathname();
@@ -265,16 +246,6 @@ export function Footer({ onOpenBookAudit }: FooterProps) {
               className="hover:text-cyan-300 transition-colors"
             >
               LinkedIn
-            </a>
-            <span>•</span>
-            <a
-              href="https://www.instagram.com/codeplaced?mdxt=Zm4zNXJldTN5M2J5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-cyan-300 transition-colors"
-            >
-              <InstagramIcon className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Instagram</span>
             </a>
             <span>•</span>
             <a
