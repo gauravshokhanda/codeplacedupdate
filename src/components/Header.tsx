@@ -23,8 +23,8 @@ interface HeaderProps {
 const NAV_ITEMS_LIST = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", hasDropdown: "services" },
-  { label: "Case Studies", href: "/case-studies" },
   { label: "Industries", href: "/industries", hasDropdown: "industries" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -95,7 +95,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
 
   // Shared Navigation Links component (Centered)
   const renderNavLinks = () => (
-    <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+    <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
       {NAV_ITEMS_LIST.map((item) => {
         const isServices = item.hasDropdown === "services";
         const isIndustries = item.hasDropdown === "industries";
@@ -130,14 +130,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             >
               <Link
                 href="/services"
-                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
+                className={`relative px-2.5 xl:px-3.5 py-2 text-[13.5px] xl:text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
               >
                 <span>{item.label}</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${chevronColorClass}`}
                 />
                 <span
-                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
+                  className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                     isActive && !megaMenuOpen
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -158,7 +158,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             >
               <Link
                 href="/industries"
-                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
+                className={`relative px-2.5 xl:px-3.5 py-2 text-[13.5px] xl:text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
               >
                 <span>{item.label}</span>
                 <ChevronDown
@@ -167,7 +167,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                   }`}
                 />
                 <span
-                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
+                  className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                     isActive && !industriesMenuOpen
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -182,11 +182,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           <Link
             key={item.label}
             href={item.href}
-            className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${linkColorClass}`}
+            className={`relative px-2.5 xl:px-3.5 py-2 text-[13.5px] xl:text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${linkColorClass}`}
           >
             <span>{item.label}</span>
             <span
-              className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
+              className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`}
             />
@@ -209,11 +209,10 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   const renderCtaButton = () => (
     <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
       <Link
-        href="/contact#contact-hero"
-        onClick={handleStrategyCallClick}
-        className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00C8E8]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+        href="/intelligence-portal"
+        className="inline-flex items-center justify-center gap-1.5 px-5 h-[40px] rounded-full text-[#06151C] bg-[#00D5E5] hover:bg-[#20e2f2] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00D5E5]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
       >
-        <span>Send an Inquiry</span>
+        <span>Intelligence Portal</span>
         <ArrowRight className="w-4 h-4 ml-0.5" />
       </Link>
     </div>
@@ -470,17 +469,24 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               })}
             </nav>
 
-            <div className="mt-6 pt-6 border-t border-slate-200/80">
+            <div className="mt-6 pt-6 border-t border-slate-200/80 space-y-3">
+              <Link
+                href="/intelligence-portal"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00D5E5] hover:bg-[#20e2f2] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
+              >
+                <span>Intelligence Portal</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
               <Link
                 href="/contact#contact-hero"
                 onClick={(e) => {
                   setMobileMenuOpen(false);
                   handleStrategyCallClick(e);
                 }}
-                className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
+                className="w-full py-3.5 rounded-full text-slate-800 border border-slate-300 font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all active:scale-95"
               >
                 <span>Send an Inquiry</span>
-                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </motion.div>
