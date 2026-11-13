@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-jakarta: var(--font-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
 @layer base {
   :root {
     --primary: #0B4F6C;
@@ -16,7 +21,6 @@
   }
 
   * {
-    scroll-behavior: smooth;
     box-sizing: border-box;
   }
 
@@ -83,12 +87,10 @@
 /* Global Background System */
 .page-background {
   background:
-    radial-gradient(
-      circle at top center,
-      rgba(255,255,255,0.95) 0%,
-      rgba(235,246,251,0.9) 40%,
-      rgba(226,241,248,1) 100%
-    );
+    radial-gradient(circle at top center,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(235, 246, 251, 0.9) 40%,
+      rgba(226, 241, 248, 1) 100%);
   min-height: 100vh;
   position: relative;
 }
@@ -98,16 +100,12 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(15,180,220,0.08),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 80% 15%,
-      rgba(32,180,140,0.06),
-      transparent 40%
-    );
+    radial-gradient(circle at 20% 20%,
+      rgba(15, 180, 220, 0.08),
+      transparent 45%),
+    radial-gradient(circle at 80% 15%,
+      rgba(32, 180, 140, 0.06),
+      transparent 40%);
   pointer-events: none;
   z-index: 0;
 }
@@ -194,6 +192,7 @@
   0% {
     background-position: 0px 0px;
   }
+
   100% {
     background-position: 36px 36px;
   }
@@ -203,9 +202,11 @@
   0% {
     transform: translate(0px, 0px) scale(1);
   }
+
   50% {
     transform: translate(30px, -20px) scale(1.08);
   }
+
   100% {
     transform: translate(-20px, 25px) scale(0.95);
   }
@@ -216,12 +217,15 @@
     transform: translateY(0px) scale(0.8);
     opacity: 0;
   }
+
   20% {
     opacity: 0.4;
   }
+
   80% {
     opacity: 0.4;
   }
+
   100% {
     transform: translateY(-80px) scale(1.2);
     opacity: 0;
@@ -238,5 +242,137 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
+  }
+}
+
+/* ========================================================================= */
+/* HERO ORGANIC PARTICLE-NETWORK ECOSYSTEM KEYFRAMES                         */
+/* ========================================================================= */
+@keyframes orbitSpinClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpinCounter {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes coreReactorPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 0.85;
+  }
+}
+
+@keyframes splineDashFlow {
+  from {
+    stroke-dashoffset: 36;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes splineParticleOut {
+  0% {
+    stroke-dashoffset: 112;
+  }
+
+  100% {
+    stroke-dashoffset: -12;
+  }
+}
+
+@keyframes splineParticleIn {
+  0% {
+    stroke-dashoffset: -12;
+  }
+
+  100% {
+    stroke-dashoffset: 112;
+  }
+}
+
+@keyframes ambientDrift {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: translate3d(8px, -14px, 0) scale(1.25);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-orbit-cw {
+    animation: orbitSpinClockwise 28s linear infinite;
+  }
+
+  .animate-orbit-ccw {
+    animation: orbitSpinCounter 20s linear infinite;
+  }
+
+  .animate-core-pulse {
+    animation: coreReactorPulse 3.6s ease-in-out infinite;
+  }
+
+  .animate-spline-dash {
+    animation: splineDashFlow 2.6s linear infinite;
+  }
+
+  .animate-spline-particle-out {
+    animation: splineParticleOut 3.2s linear infinite;
+  }
+
+  .animate-spline-particle-in {
+    animation: splineParticleIn 4.2s linear infinite;
+  }
+
+  .animate-spline-surge-fast {
+    animation: splineParticleOut 1.15s linear infinite;
+  }
+
+  .animate-spline-surge-return {
+    animation: splineParticleIn 1.4s linear infinite;
+  }
+
+  .animate-ambient-drift {
+    animation: ambientDrift 7s ease-in-out infinite;
+  }
+  .animate-pillar-levitate {
+    animation: pillarLevitate 6s ease-in-out infinite;
+  }
+}
+
+@keyframes pillarLevitate {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
   }
 }

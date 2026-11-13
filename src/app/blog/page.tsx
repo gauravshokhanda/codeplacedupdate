@@ -11,7 +11,6 @@ import {
   BookOpen,
   Calendar,
   Clock,
-  CheckCircle2,
   Mail,
   Filter,
 } from "lucide-react";
@@ -26,6 +25,8 @@ export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [newsletterEmail, setNewsletterEmail] = useState<string>("");
   const [subscribed, setSubscribed] = useState<boolean>(false);
+
+  const [newsletterError, setNewsletterError] = useState<string | null>(null);
 
   // Identify featured article (either explicitly marked or first post)
   const featuredArticle: BlogPostItem = useMemo(() => {
@@ -49,12 +50,14 @@ export default function BlogPage() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newsletterEmail.trim()) {
-      setSubscribed(true);
-      setTimeout(() => {
-        setNewsletterEmail("");
-      }, 3000);
+    const trimmed = newsletterEmail.trim();
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+    if (!isValidEmail) {
+      setNewsletterError("Please enter a valid work email address.");
+      return;
     }
+    setNewsletterError(null);
+    setSubscribed(true);
   };
 
   return (
@@ -420,32 +423,52 @@ export default function BlogPage() {
           </p>
 
           {subscribed ? (
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold shadow-xs">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Thank you for subscribing! Check your inbox shortly.</span>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-3 px-6 py-4 rounded-2xl bg-[#101820] border border-[#00C8E8]/30 text-white text-sm shadow-xs">
+              <span className="text-[#A1AAB7] text-xs sm:text-sm">
+                Automated newsletter subscription is not connected yet. Write to{" "}
+                <a
+                  href={`mailto:contact@codeplaced.com?subject=Subscribe%20to%20CodePlaced%20Weekly%20Briefing&body=Please%20add%20${encodeURIComponent(newsletterEmail.trim())}%20to%20the%20briefing.`}
+                  className="text-[#00C8E8] font-bold underline underline-offset-4"
+                >
+                  contact@codeplaced.com
+                </a>{" "}
+                to join directly.
+              </span>
             </div>
           ) : (
             <form
               onSubmit={handleSubscribe}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2"
+              noValidate
+              className="flex flex-col items-center justify-center gap-2 max-w-md mx-auto pt-2"
             >
-              <input
-                type="email"
-                required
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="Enter your work email"
-                className="w-full sm:w-72 h-11 px-4 rounded-full bg-[#101820] border border-[#1B242B] text-sm text-white placeholder:text-[#A1AAB7]/50 focus:outline-hidden focus:ring-2 focus:ring-[#00C8E8]/30 focus:border-[#00C8E8] shadow-xs"
-              />
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-6 h-11 rounded-full text-black font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer flex-shrink-0"
-                style={{
-                  background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
-                }}
-              >
-                Subscribe
-              </button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+                <input
+                  type="email"
+                  required
+                  value={newsletterEmail}
+                  onChange={(e) => {
+                    setNewsletterEmail(e.target.value);
+                    if (newsletterError) setNewsletterError(null);
+                  }}
+                  placeholder="Enter your work email"
+                  aria-invalid={Boolean(newsletterError)}
+                  className="w-full sm:w-72 h-11 px-4 rounded-full bg-[#101820] border border-[#1B242B] text-sm text-white placeholder:text-[#A1AAB7]/50 focus:outline-hidden focus:ring-2 focus:ring-[#00C8E8]/30 focus:border-[#00C8E8] shadow-xs"
+                />
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-6 h-11 rounded-full text-black font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer flex-shrink-0"
+                  style={{
+                    background: "linear-gradient(135deg, #087FA5 0%, #00C8E8 100%)",
+                  }}
+                >
+                  Subscribe
+                </button>
+              </div>
+              {newsletterError && (
+                <p role="alert" className="text-xs text-rose-400 font-medium pt-1">
+                  {newsletterError}
+                </p>
+              )}
             </form>
           )}
 

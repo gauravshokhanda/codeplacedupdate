@@ -19,6 +19,10 @@ import {
   Terminal,
   ArrowRight,
   Zap,
+  TrendingUp,
+  Search,
+  Megaphone,
+  Share2,
 } from "lucide-react";
 
 interface ServicesMegaMenuProps {
@@ -134,7 +138,7 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
   },
   {
     title: "Data Engineering",
-    categoryHref: "/services/data-engineering-analytics",
+    categoryHref: "/services/data-platforms",
     items: [
       {
         title: "Data Pipelines & ETL/ELT",
@@ -151,14 +155,44 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
       {
         title: "Data Architecture & Governance",
         desc: "Role-based access control, HIPAA/SOC2 compliance",
-        href: "/services/data-engineering-analytics",
+        href: "/services/data-platforms",
         icon: ShieldCheck,
       },
       {
         title: "Cloud Warehouse Optimization",
         desc: "Compute cost reduction, query tuning & auto-suspend",
-        href: "/services/data-engineering-analytics",
+        href: "/services/data-platforms",
         icon: Sparkles,
+      },
+    ],
+  },
+  {
+    title: "Digital Marketing",
+    categoryHref: "/services/digital-marketing",
+    items: [
+      {
+        title: "AEO & Search Engine Optimization",
+        desc: "AI search discoverability, technical SEO & organic growth",
+        href: "/services/digital-marketing",
+        icon: Search,
+      },
+      {
+        title: "Google Ads & Meta Ads",
+        desc: "High-intent paid search & social lead generation",
+        href: "/services/digital-marketing",
+        icon: Megaphone,
+      },
+      {
+        title: "Google Analytics & Tracking",
+        desc: "GA4 setup, conversion tracking & funnel attribution",
+        href: "/services/digital-marketing",
+        icon: TrendingUp,
+      },
+      {
+        title: "Social Media & Branding",
+        desc: "Content planning, brand positioning & digital strategy",
+        href: "/services/digital-marketing",
+        icon: Share2,
       },
     ],
   },
@@ -178,13 +212,16 @@ export function ServicesMegaMenu({
           transition={{ duration: 0.18, ease: "easeOut" }}
           className="absolute top-full left-0 right-0 w-full z-[1000] border-t border-b border-x border-[#E5EAF0] bg-white rounded-b-[16px] max-h-[calc(100vh-90px)] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.12)] text-[#101820] transition-colors duration-200"
         >
-          {/* Main 4-Column Categorized Grid */}
-          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-6 sm:py-7">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8">
+          {/* Main 5-Column Categorized Grid */}
+          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-5 sm:py-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:grid-rows-[auto_1fr] gap-6 xl:gap-x-6 xl:gap-y-0">
               {SERVICE_COLUMNS.map((col, cIdx) => (
-                <div key={cIdx} className="space-y-3.5">
-                  {/* Column Header */}
-                  <div className="pb-2.5 border-b border-[#E5EAF0]">
+                <div
+                  key={cIdx}
+                  className="flex flex-col gap-3 xl:row-span-2 xl:grid xl:grid-rows-subgrid xl:gap-y-3"
+                >
+                  {/* Column Header (Uniform Height via Subgrid on Desktop & Min-Height on Tablet) */}
+                  <div className="flex items-start pb-2.5 border-b border-[#E5EAF0] md:min-h-[48px] xl:min-h-0">
                     <Link
                       href={col.categoryHref}
                       onClick={onClose}
@@ -194,8 +231,8 @@ export function ServicesMegaMenu({
                     </Link>
                   </div>
 
-                  {/* Services List (4 Subservices per Category) */}
-                  <div className="space-y-0.5">
+                  {/* Services List (4 Subservices per Category — Icon & Title Only) */}
+                  <div className="space-y-1">
                     {col.items.map((item, iIdx) => {
                       const ItemIcon = item.icon;
                       return (
@@ -203,19 +240,14 @@ export function ServicesMegaMenu({
                           key={iIdx}
                           href={item.href}
                           onClick={onClose}
-                          className="group p-2.5 -mx-2.5 rounded-xl transition-all duration-150 flex items-start gap-3 block border border-transparent hover:bg-[#EBF9FC] hover:border-[#00C8E8]/25"
+                          className="group px-2.5 py-2 -mx-2.5 min-h-[48px] rounded-xl transition-all duration-150 flex items-center gap-3 border border-transparent hover:bg-[#EBF9FC] hover:border-[#00C8E8]/25"
                         >
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-150 mt-0.5 bg-[#F7F9FB] border border-[#E5EAF0] text-[#007F9C] group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8]">
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-150 bg-[#F7F9FB] border border-[#E5EAF0] text-[#007F9C] group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8]">
                             <ItemIcon className="w-4 h-4" />
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-[13px] font-bold text-[#101820] group-hover:text-[#007F9C] transition-colors block leading-snug">
-                              {item.title}
-                            </span>
-                            <span className="text-[11px] text-[#566171] group-hover:text-[#101820] transition-colors block truncate leading-normal mt-0.5">
-                              {item.desc}
-                            </span>
-                          </div>
+                          <span className="flex-1 min-w-0 text-[13px] font-bold text-[#101820] group-hover:text-[#007F9C] transition-colors leading-snug">
+                            {item.title}
+                          </span>
                         </Link>
                       );
                     })}

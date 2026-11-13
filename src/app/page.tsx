@@ -3,13 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { SHOW_INDUSTRIES } from "@/lib/featureFlags";
 import {
   ArrowRight,
   ArrowUpRight,
-  CheckCircle2,
   ShieldCheck,
-  Zap,
   Plus,
   Minus,
   Bot,
@@ -17,35 +16,25 @@ import {
   Database,
   BarChart3,
   HeartPulse,
-  Landmark,
   ShoppingBag,
-  Factory,
   GraduationCap,
-  Truck,
   Building2,
-  Film,
   Users,
   Star,
-  Lock,
   Search,
   Calendar,
   Clock,
   Layers,
-  Sparkles,
-  TrendingUp,
   ChevronLeft,
   ChevronRight,
+  Globe,
+  TrendingUp,
 } from "lucide-react";
 import { ServicesMarquee } from "@/components/ServicesMarquee";
+import { HeroTechnologyShowcase } from "@/components/HeroTechnologyShowcase";
 
 // =========================================================================
-// HERO BACKGROUND IMAGE CONFIGURATION
-// Easily replace the static hero background image by changing this path:
-// =========================================================================
-const HERO_BACKGROUND_IMAGE = "/images/hero-team-consulting-v2.jpg";
-
-// =========================================================================
-// 1. DATA: EXACTLY FOUR CORE SERVICES (APPINVENTIV 4-COLUMN STAGGERED SHOWCASE)
+// 1. DATA: FIVE CORE SERVICES (5-COLUMN STAGGERED SHOWCASE)
 // =========================================================================
 const SERVICES_DATA = [
   {
@@ -102,7 +91,21 @@ const SERVICES_DATA = [
       "Data Governance & SLA Audits",
     ],
     icon: Database,
-    href: "/services/data-engineering-analytics",
+    href: "/services/data-platforms",
+  },
+  {
+    num: "05",
+    title: "Digital Marketing",
+    description:
+      "Grow your online presence and attract the right customers through search optimization, performance advertising, analytics, social media, and brand strategy.",
+    capabilities: [
+      "AEO & SEO",
+      "Google Ads & Meta Ads",
+      "Google Analytics & Tracking",
+      "Social Media Management & Branding",
+    ],
+    icon: TrendingUp,
+    href: "/services/digital-marketing",
   },
 ];
 
@@ -255,6 +258,7 @@ if (typeof window !== "undefined") {
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  void prefersReducedMotion;
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
@@ -287,13 +291,14 @@ export default function HomePage() {
   const col2Ref = useRef<HTMLDivElement>(null);
   const col3Ref = useRef<HTMLDivElement>(null);
   const col4Ref = useRef<HTMLDivElement>(null);
+  const col5Ref = useRef<HTMLDivElement>(null);
   const servicesBtnRef = useRef<HTMLDivElement>(null);
 
   // =========================================================================
   // GSAP SCROLLTRIGGER: APPINVENTIV-INSPIRED STAIRCASE SERVICES ANIMATION
-  // Phase A: Initial descending staircase (Col 1 at top, Col 2 +70, Col 3 +140, Col 4 +210)
+  // Phase A: Initial descending staircase (Col 1 at top, Col 2..Col 5 staggered)
   // Phase B (0.00 -> 0.72): Progressive column rising toward Column 1
-  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 4-column layout & CTA
+  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 5-column layout & CTA
   // Phase D (0.90 -> 1.00): Natural release into About CodePlaced
   // =========================================================================
   useEffect(() => {
@@ -317,43 +322,41 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
+        const col5 = col5Ref.current;
         const btn = servicesBtnRef.current;
-        if (!col2 || !col3 || !col4) return;
+        if (!col2 || !col3 || !col4 || !col5) return;
 
         // Viewport height calculation: ensure pinned section and stagger fit comfortably within viewport
         const navbarHeight = 80;
         const availableHeight = window.innerHeight - navbarHeight;
         if (availableHeight < 620) {
-          gsap.set([col2, col3, col4], { y: 0 });
+          gsap.set([col2, col3, col4, col5], { y: 0 });
           if (btn) gsap.set(btn, { y: 0 });
           return;
         }
 
-        // Appinventiv-style staircase offsets:
-        // Col 1 baseline: 0px
-        // Col 2: ~110px below Col 1
-        // Col 3: ~220px below Col 1
-        // Col 4: ~330px below Col 1
-        // Proportioned on standard and compact viewports to prevent clipping
-        let staggerStep = 110;
+        // Proportioned 5-column staircase offsets on standard and compact viewports
+        let staggerStep = 80;
         if (availableHeight >= 960) {
-          staggerStep = 110; // Large desktop (1920x1080): Col 2 = +110, Col 3 = +220, Col 4 = +330
+          staggerStep = 80;
         } else if (availableHeight >= 800) {
-          staggerStep = 75;  // Standard desktop / MacBook (1440x900): Col 2 = +75, Col 3 = +150, Col 4 = +225
+          staggerStep = 55;
         } else if (availableHeight >= 650) {
-          staggerStep = 45;  // Compact laptop (1366x768): Col 2 = +45, Col 3 = +90, Col 4 = +135
+          staggerStep = 34;
         } else {
-          staggerStep = 30;
+          staggerStep = 22;
         }
 
         const col2Offset = staggerStep;
         const col3Offset = staggerStep * 2;
         const col4Offset = staggerStep * 3;
+        const col5Offset = staggerStep * 4;
         const btnOffset = col3Offset;
 
         gsap.set(col2, { y: col2Offset });
         gsap.set(col3, { y: col3Offset });
         gsap.set(col4, { y: col4Offset });
+        gsap.set(col5, { y: col5Offset });
         if (btn) gsap.set(btn, { y: btnOffset });
 
         // Single coordinated ScrollTrigger timeline pinned right below the 80px navbar
@@ -361,7 +364,7 @@ export default function HomePage() {
           scrollTrigger: {
             trigger: section,
             start: "top 80px",
-            end: "+=700",
+            end: "+=750",
             pin: true,
             pinSpacing: true,
             scrub: true,
@@ -370,23 +373,19 @@ export default function HomePage() {
           },
         });
 
-        // 70% of scroll timeline (0.00 -> 0.70) for upward column alignment
-        // Col 2 begins first and rises toward Col 1: col2Offset -> 0px
-        tl.to(col2, { y: 0, duration: 0.45, ease: "none" }, 0.00);
-
-        // Col 3 follows shortly: col3Offset -> 0px
-        tl.to(col3, { y: 0, duration: 0.48, ease: "none" }, 0.10);
-
-        // Col 4 rises last starting from lowest position and reaches alignment at 0.70: col4Offset -> 0px
-        tl.to(col4, { y: 0, duration: 0.50, ease: "none" }, 0.20);
+        // 72% of scroll timeline (0.00 -> 0.72) for upward column alignment
+        tl.to(col2, { y: 0, duration: 0.42, ease: "none" }, 0.00);
+        tl.to(col3, { y: 0, duration: 0.46, ease: "none" }, 0.08);
+        tl.to(col4, { y: 0, duration: 0.48, ease: "none" }, 0.16);
+        tl.to(col5, { y: 0, duration: 0.50, ease: "none" }, 0.22);
 
         // View All Services button rises in sync with Column 3 to arrive directly below the aligned cards
         if (btn) {
-          tl.to(btn, { y: 0, duration: 0.48, ease: "none" }, 0.10);
+          tl.to(btn, { y: 0, duration: 0.46, ease: "none" }, 0.08);
         }
 
-        // Remaining 30% of scroll timeline (0.70 -> 1.00): Hold fully aligned layout stationary
-        tl.to({}, { duration: 0.30 }, 0.70);
+        // Remaining 28% of scroll timeline (0.72 -> 1.00): Hold fully aligned layout stationary
+        tl.to({}, { duration: 0.28 }, 0.72);
 
         // Ensure ScrollTrigger measurements are freshly calculated
         ScrollTrigger.refresh();
@@ -396,9 +395,10 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
+        const col5 = col5Ref.current;
         const btn = servicesBtnRef.current;
-        if (col2 && col3 && col4) {
-          gsap.set([col2, col3, col4], { y: 0 });
+        if (col2 && col3 && col4 && col5) {
+          gsap.set([col2, col3, col4, col5], { y: 0 });
         }
         if (btn) {
           gsap.set(btn, { y: 0 });
@@ -419,132 +419,122 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#000000] text-[#FFFFFF] font-sans antialiased selection:bg-[#00BCD4] selection:text-[#050505]">
       {/* ===================================================================== */}
-      {/* SECTION 1: HERO SECTION — EXACTLY 100VH ON DESKTOP WITH INTEGRATED MARQUEE */}
+      {/* SECTION 1: HERO SECTION — CODEPLACED BLACK & CYAN ORGANIC ECOSYSTEM   */}
       {/* ===================================================================== */}
-      <section className="relative w-full lg:h-[100vh] lg:min-h-[100dvh] flex flex-col justify-between pt-[84px] sm:pt-[88px] lg:pt-[80px] pb-2 sm:pb-0 bg-[#000000] overflow-hidden">
-        {/* Desktop Static Background Image Container covering entire 100vh hero */}
-        <div className="hidden lg:block absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <Image
-            src={HERO_BACKGROUND_IMAGE}
-            alt="CodePlaced senior engineering consultants collaborating in modern glass corporate office"
-            fill
-            priority
-            className="object-cover object-[82%_center]"
+      <section className="relative w-full lg:min-h-[100dvh] flex flex-col justify-between pt-[92px] sm:pt-[104px] lg:pt-[82px] bg-[#000000] overflow-hidden">
+        {/* Ambient Cyber Grid & Cyan/Blue Glow Backdrop */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0" aria-hidden="true">
+          <div
+            className="absolute inset-0 opacity-[0.055]"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(0, 188, 212, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 188, 212, 0.25) 1px, transparent 1px)
+              `,
+              backgroundSize: "48px 48px",
+            }}
           />
-
-          {/* Precision Gradient Overlays for Maximum Text Readability while showcasing the collaborative team on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/92 via-[#000000]/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/70 via-transparent to-[#000000]/85" />
+          <div className="absolute -top-40 left-[12%] w-[520px] h-[520px] rounded-full bg-[#00BCD4]/[0.11] blur-[140px]" />
+          <div className="absolute bottom-8 right-[8%] w-[500px] h-[500px] rounded-full bg-[#087FA5]/[0.12] blur-[150px]" />
+          {/* Subtle Mobile-Only Ambient Particle Depth (< md) */}
+          <div className="md:hidden">
+            <span className="absolute top-24 right-8 w-1.5 h-1.5 rounded-full bg-[#00BCD4]/60 shadow-[0_0_8px_#00BCD4] animate-ambient-drift" />
+            <span className="absolute top-40 right-16 w-1 h-1 rounded-full bg-[#22D3EE]/50 animate-ambient-drift" style={{ animationDelay: "-2s" }} />
+            <span className="absolute top-32 left-[72%] w-1 h-1 rounded-full bg-[#00BCD4]/45 animate-ambient-drift" style={{ animationDelay: "-3.5s" }} />
+            <span className="absolute bottom-24 right-10 w-1.5 h-1.5 rounded-full bg-[#087FA5]/60 animate-ambient-drift" style={{ animationDelay: "-1.5s" }} />
+            <span className="absolute bottom-36 left-6 w-1 h-1 rounded-full bg-[#22D3EE]/40 animate-ambient-drift" style={{ animationDelay: "-4s" }} />
+          </div>
         </div>
 
-        {/* Mobile Background: Ambient Cyber Glow */}
-        <div className="block lg:hidden absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-1/4 -right-16 w-72 h-72 rounded-full bg-[#00BCD4]/10 blur-3xl" />
-          <div className="absolute bottom-10 -left-16 w-60 h-60 rounded-full bg-[#087FA5]/15 blur-2xl" />
-        </div>
+        {/* Hero Foreground Content — 1380px Max-Width, 45% Left / 55% Right Split */}
+        <div className="max-w-[1380px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-5 sm:py-8 lg:my-auto lg:py-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr] gap-0 md:gap-8 lg:gap-6 xl:gap-10 items-center">
+            {/* Left Content (45% on lg+): Eyebrow, H1, Copy, CTAs, Sub-stats */}
+            <div className="space-y-4 sm:space-y-5 lg:space-y-6">
+              {/* Glowing Monospace Eyebrow with Tiny Cyan Particle Accents */}
+              <div className="inline-flex items-center gap-2 sm:gap-2.5">
+                <span className="relative flex items-center justify-center w-2 h-2 shrink-0" aria-hidden="true">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] shadow-[0_0_10px_#00BCD4]" />
+                  <span className="absolute -top-1 -right-1 w-1 h-1 rounded-full bg-[#22D3EE]/80" />
+                </span>
+                <span className="font-mono text-[10.5px] min-[375px]:text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[#00BCD4] drop-shadow-[0_0_12px_rgba(0,188,212,0.45)]">
+                  AI, DATA &amp; SOFTWARE ARCHITECTURE
+                </span>
+                <span className="w-1 h-1 rounded-full bg-[#00BCD4]/50 shrink-0" aria-hidden="true" />
+              </div>
 
-        {/* Hero Foreground Content — Vertically centered within available hero area */}
-        <div className="max-w-[1360px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-4 sm:py-6 lg:my-auto lg:py-4">
-          <div className="max-w-3xl space-y-3 sm:space-y-5 lg:space-y-6">
-            {/* Enterprise Badge */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-0.5 sm:px-4 sm:py-1.5 rounded-full border border-[#00BCD4]/40 bg-[#000000]/80 backdrop-blur-md shadow-xs">
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00BCD4] animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#00BCD4]">
-                ENGINEERING &bull; DATA &bull; AI CONSULTING
-              </span>
-            </div>
+              {/* H1 in Tight, Bold Plus Jakarta Sans */}
+              <h1 className="font-[family-name:var(--font-jakarta)] text-[30px] min-[375px]:text-[34px] sm:text-5xl lg:text-[42px] xl:text-[50px] 2xl:text-[54px] font-extrabold tracking-[-0.03em] text-white leading-[1.09]">
+                Build AI &amp; Software Products That Drive{" "}
+                <span className="text-[#00BCD4]">Business Growth.</span>
+              </h1>
 
-            {/* Main Headline (Bold, Confident Typography) */}
-            <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[72px] font-extrabold tracking-tight text-white leading-[1.1] sm:leading-[1.06]">
-              Build AI & Software Products That Drive{" "}
-              <span className="text-[#00BCD4]">Business Growth.</span>
-            </h1>
+              {/* Supporting Description */}
+              <p className="text-[13.5px] min-[375px]:text-sm sm:text-base lg:text-[15px] xl:text-base text-slate-300/90 leading-relaxed font-normal max-w-xl">
+                We build custom AI, data engineering &amp; software solutions for high-growth companies. From strategic architecture to production systems, our senior engineering pods deliver with speed and precision.
+              </p>
 
-            {/* Description */}
-            <p className="text-xs sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl drop-shadow-xs">
-              We build custom AI, data engineering & software solutions for high-growth companies. From strategic architecture to production systems, our senior engineering pods deliver with speed and precision.
-            </p>
+              {/* Action Buttons */}
+              <div className="grid grid-cols-1 min-[375px]:grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-4 pt-1">
+                <Link
+                  href="/contact#contact-hero"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-7 h-11 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-[13px] min-[390px]:text-sm xl:text-[15px] tracking-tight transition-all duration-200 shadow-[0_0_24px_rgba(0,188,212,0.32)] hover:shadow-[0_0_36px_rgba(0,188,212,0.52)] hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer shrink-0 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-[#20d7f5] focus-visible:outline-offset-2"
+                >
+                  <span>Send an Inquiry</span>
+                  <ArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+                </Link>
 
-            {/* Mobile Hero Banner Image: Visible, crisp, natural 16:9 aspect ratio */}
-            <div className="block lg:hidden my-2.5 sm:my-4">
-              <div className="relative aspect-[16/9] w-full rounded-xl sm:rounded-2xl overflow-hidden border border-white/15 bg-[#0A0D14] shadow-2xl shadow-black/80">
-                <Image
-                  src={HERO_BACKGROUND_IMAGE}
-                  alt="CodePlaced senior engineering consultants collaborating on AI and software systems"
-                  fill
-                  priority
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
-                  className="object-cover object-center"
-                />
-                {/* Subtle protective vignette and highlight border */}
-                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-xl sm:rounded-2xl" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                <a
+                  href="#featured-work"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-7 h-11 sm:h-12 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white font-semibold text-[13px] min-[390px]:text-sm xl:text-[15px] border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer shrink-0 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-[#00BCD4] focus-visible:outline-offset-2"
+                >
+                  <span>Explore Work</span>
+                </a>
+              </div>
 
-                {/* Subtle live pod indicator badge in bottom corner */}
-                <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                  <span className="text-[9px] font-mono font-bold text-white tracking-wide">
-                    ENGINEERING &bull; DATA &bull; AI
-                  </span>
+              {/* Sub-stats Row with Micro Cyan Cyber Icons (Compact 2-Col Grid on Mobile) */}
+              <div className="pt-4 mt-1 border-t border-white/[0.09] grid grid-cols-2 md:flex md:flex-wrap md:items-center gap-3 sm:gap-5 md:gap-8">
+                <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0 mt-0.5 sm:mt-0">
+                    <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[11px] min-[375px]:text-xs sm:text-sm font-bold text-white block leading-tight">
+                      Trusted by 20+ Clients
+                    </span>
+                    <span className="font-mono text-[9.5px] min-[375px]:text-[10px] sm:text-[11px] text-slate-400 block leading-snug">
+                      High-growth ventures &amp; enterprises
+                    </span>
+                  </div>
+                </div>
+
+                <div className="hidden md:block h-7 w-[1px] bg-white/[0.1]" aria-hidden="true" />
+
+                <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 flex items-center justify-center text-[#00BCD4] shrink-0 mt-0.5 sm:mt-0">
+                    <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[11px] min-[375px]:text-xs sm:text-sm font-bold text-white block leading-tight">
+                      Across 10+ Countries
+                    </span>
+                    <span className="font-mono text-[9.5px] min-[375px]:text-[10px] sm:text-[11px] text-slate-400 block leading-snug">
+                      Global engineering delivery
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-row items-center gap-2.5 sm:gap-4 pt-0.5">
-              <Link
-                href="/contact#contact-hero"
-                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-5 sm:px-8 h-10 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer shrink-0"
-              >
-                <span>Send an Inquiry</span>
-                <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
-              </Link>
-
-              <a
-                href="#featured-work"
-                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-8 h-10 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-base border border-white/20 hover:border-[#00BCD4]/60 backdrop-blur-md transition-all duration-200 text-center cursor-pointer shrink-0"
-              >
-                <span>Explore Work</span>
-              </a>
-            </div>
-
-            {/* 3 Compact Credibility Indicators */}
-            <div className="pt-3 sm:pt-5 border-t border-white/10 grid grid-cols-3 gap-2 sm:gap-6 max-w-xl">
-              <div className="space-y-0.5 sm:space-y-1">
-                <div className="flex items-center gap-1 sm:gap-1.5 text-[#00BCD4]">
-                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span className="text-xs sm:text-lg font-extrabold text-white">100+</span>
-                </div>
-                <p className="text-[10px] sm:text-sm text-slate-300 font-medium leading-tight">
-                  Enterprise Deployments
-                </p>
-              </div>
-
-              <div className="space-y-0.5 sm:space-y-1">
-                <div className="flex items-center gap-1 sm:gap-1.5 text-[#00BCD4]">
-                  <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span className="text-xs sm:text-lg font-extrabold text-white">99.99%</span>
-                </div>
-                <p className="text-[10px] sm:text-sm text-slate-300 font-medium leading-tight">
-                  Production SLA
-                </p>
-              </div>
-
-              <div className="space-y-0.5 sm:space-y-1">
-                <div className="flex items-center gap-1 sm:gap-1.5 text-[#00BCD4]">
-                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  <span className="text-xs sm:text-lg font-extrabold text-white">2–4 Wks</span>
-                </div>
-                <p className="text-[10px] sm:text-sm text-slate-300 font-medium leading-tight">
-                  Sprint Delivery
-                </p>
-              </div>
+            {/* Right Interactive Ecosystem (Desktop/Tablet md+ Only, Borderless Organic Network) */}
+            <div className="hidden md:flex items-center justify-center w-full">
+              <HeroTechnologyShowcase />
             </div>
           </div>
         </div>
 
-        {/* Integrated Technology Marquee Anchored at the Bottom */}
-        <ServicesMarquee className="shrink-0 mt-2 lg:mt-0" />
+        {/* Full-Width Original Capability & Tech Marquee Anchored at the Bottom */}
+        <ServicesMarquee className="shrink-0 mt-1 sm:mt-2 lg:mt-0" />
       </section>
 
       {/* ===================================================================== */}
@@ -704,59 +694,60 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* DESKTOP 4-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
+          {/* DESKTOP 5-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
           <div className="hidden lg:block w-full relative">
-            <div className="grid grid-cols-4 border-t border-[#E5E5E5] relative bg-white">
+            <div className="grid grid-cols-5 border-t border-[#E5E5E5] relative bg-white">
               {SERVICES_DATA.map((service, idx) => {
                 const ServiceIcon = service.icon;
-                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref];
+                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref, col5Ref];
                 return (
                   <div
                     key={idx}
                     ref={colRefs[idx]}
-                    className="p-3.5 xl:p-4.5 2xl:p-6.5 bg-white border-r border-[#E5E5E5] last:border-r-0 border-t border-[#E5E5E5] -mt-[1px] flex flex-col justify-between group transition-colors hover:bg-[#FAFAFA] min-h-[335px] xl:min-h-[360px] 2xl:min-h-[415px] will-change-transform shadow-xs"
+                    className="p-3 xl:p-4 2xl:p-5.5 bg-white border-r border-[#E5E5E5] last:border-r-0 border-t border-[#E5E5E5] -mt-[1px] flex flex-col justify-between group transition-colors hover:bg-[#FAFAFA] min-h-[360px] xl:min-h-[395px] 2xl:min-h-[445px] will-change-transform shadow-xs"
                   >
-                    <div className="space-y-2 xl:space-y-2.5 2xl:space-y-3.5">
+                    <div className="space-y-1.5 xl:space-y-2 2xl:space-y-3">
                       {/* Top Row: Circular Service Icon with Cyan Dot Accent */}
-                      <div className="w-8.5 h-8.5 xl:w-9.5 xl:h-9.5 2xl:w-11 2xl:h-11 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative group-hover:border-[#00BCD4]/50 transition-colors shrink-0 mb-1.5 xl:mb-2 2xl:mb-3">
+                      <div className="w-8 h-8 xl:w-9 xl:h-9 2xl:w-10.5 2xl:h-10.5 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative group-hover:border-[#00BCD4]/50 transition-colors shrink-0 mb-1 xl:mb-1.5 2xl:mb-2">
                         <ServiceIcon className="w-4 h-4 xl:w-4.5 xl:h-4.5 2xl:w-5 2xl:h-5 text-[#101820]" />
                         <span className="absolute bottom-0.5 right-0.5 xl:bottom-1 xl:right-1 w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-[#00BCD4]" />
                       </div>
 
                       {/* Service Title */}
-                      <h3 className="text-[16px] xl:text-[18px] 2xl:text-[21px] font-bold text-[#101820] tracking-tight leading-snug min-h-[38px] xl:min-h-[44px] 2xl:min-h-[52px] flex items-center">
+                      <h3 className="text-[14.5px] xl:text-[16.5px] 2xl:text-[19px] font-bold text-[#101820] tracking-tight leading-snug min-h-[38px] xl:min-h-[44px] 2xl:min-h-[50px] flex items-center">
                         {service.title}
                       </h3>
 
                       {/* Short Description */}
-                      <p className="text-[11.5px] xl:text-[12.5px] 2xl:text-[14px] text-[#56616B] leading-relaxed font-normal min-h-[40px] xl:min-h-[46px] 2xl:min-h-[52px]">
+                      <p className="text-[11px] xl:text-[12px] 2xl:text-[13px] text-[#56616B] leading-relaxed font-normal min-h-[54px] xl:min-h-[60px] 2xl:min-h-[66px]">
                         {service.description}
                       </p>
 
                       {/* Capabilities with Thin Dashed Separators */}
-                      <div className="pt-1.5 xl:pt-2 2xl:pt-2.5 border-t border-dashed border-[#E5E5E5]">
+                      <div className="pt-1.5 xl:pt-2 border-t border-dashed border-[#E5E5E5]">
                         {service.capabilities.map((cap, cIdx) => (
-                          <div
+                          <Link
                             key={cIdx}
-                            className="py-1 xl:py-1.5 2xl:py-2 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-[11px] xl:text-[12.5px] 2xl:text-[13.5px] font-medium text-[#101820] group/cap"
+                            href={service.href}
+                            className="py-1 xl:py-1.25 2xl:py-1.5 border-b border-dashed border-[#E5E5E5] flex items-center justify-between text-[10.5px] xl:text-[11.5px] 2xl:text-[12.5px] font-medium text-[#101820] group/cap"
                           >
-                            <span className="group-hover/cap:text-[#00BCD4] transition-colors">
+                            <span className="group-hover/cap:text-[#00BCD4] transition-colors leading-snug">
                               {cap}
                             </span>
-                            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/cap:text-[#00BCD4] group-hover/cap:translate-x-0.5 group-hover/cap:-translate-y-0.5 transition-all shrink-0 ml-1.5" />
-                          </div>
+                            <ArrowUpRight className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-slate-400 group-hover/cap:text-[#00BCD4] group-hover/cap:translate-x-0.5 group-hover/cap:-translate-y-0.5 transition-all shrink-0 ml-1" />
+                          </Link>
                         ))}
                       </div>
                     </div>
 
                     {/* Explore Service Link with Cyan Arrow */}
-                    <div className="pt-2 xl:pt-2.5 2xl:pt-3.5 mt-auto">
+                    <div className="pt-2 xl:pt-2.5 2xl:pt-3 mt-auto">
                       <Link
                         href={service.href}
-                        className="flex items-center justify-between text-[12px] xl:text-[13.5px] 2xl:text-[14.5px] font-bold text-[#101820] hover:text-[#00BCD4] group/link transition-colors pt-1.5 xl:pt-2 2xl:pt-2.5 border-t border-[#E5E5E5]"
+                        className="flex items-center justify-between text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-bold text-[#101820] hover:text-[#00BCD4] group/link transition-colors pt-1.5 xl:pt-2 border-t border-[#E5E5E5]"
                       >
                         <span>Explore Service</span>
-                        <div className="w-5.5 h-5.5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 rounded-full bg-slate-100 group-hover/link:bg-[#00BCD4]/10 flex items-center justify-center transition-colors">
+                        <div className="w-5.5 h-5.5 xl:w-6 xl:h-6 2xl:w-6.5 2xl:h-6.5 rounded-full bg-slate-100 group-hover/link:bg-[#00BCD4]/10 flex items-center justify-center transition-colors">
                           <ArrowRight className="w-3.5 h-3.5 text-[#00BCD4] group-hover/link:translate-x-0.5 transition-transform" />
                         </div>
                       </Link>
@@ -778,43 +769,45 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* TABLET & MOBILE 2x2 COMPACT GRID (lg:hidden) */}
-          <div className="lg:hidden mt-3 sm:mt-8">
-            <div className="grid grid-cols-2 gap-2 sm:gap-4 border-t border-b border-[#E5E5E5] py-2.5 sm:py-5">
+          {/* TABLET & MOBILE COMPACT SERVICES GRID (lg:hidden) */}
+          <div className="lg:hidden mt-4 sm:mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-b border-[#E5E5E5] py-3 sm:py-5">
               {SERVICES_DATA.map((service, idx) => {
                 const ServiceIcon = service.icon;
                 return (
                   <div
                     key={idx}
-                    className="p-2.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group"
+                    className={`p-3.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group ${
+                      idx === 4 ? "sm:col-span-2" : ""
+                    }`}
                   >
                     <div>
                       <div className="flex items-center justify-between">
-                        <div className="w-6 h-6 sm:w-8.5 sm:h-8.5 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0 group-hover:border-[#00BCD4]/40 transition-colors">
-                          <ServiceIcon className="w-3 h-3 sm:w-4 sm:h-4 text-[#101820]" />
+                        <div className="w-7 h-7 sm:w-8.5 sm:h-8.5 rounded-full bg-[#FAFAFA] border border-[#E5E5E5] flex items-center justify-center text-[#101820] relative shrink-0 group-hover:border-[#00BCD4]/40 transition-colors">
+                          <ServiceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#101820]" />
                           <span className="absolute bottom-0.5 right-0.5 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#00BCD4]" />
                         </div>
-                        <span className="text-[9px] sm:text-xs font-mono font-bold text-slate-400">
+                        <span className="text-[10px] sm:text-xs font-mono font-bold text-slate-400">
                           {service.num}
                         </span>
                       </div>
 
-                      <h3 className="text-[12px] xs:text-xs sm:text-base font-bold text-[#101820] tracking-tight leading-snug mt-1 sm:mt-2.5 group-hover:text-[#00BCD4] transition-colors">
+                      <h3 className="text-sm sm:text-base font-bold text-[#101820] tracking-tight leading-snug mt-2 sm:mt-2.5 group-hover:text-[#00BCD4] transition-colors">
                         {service.title}
                       </h3>
 
-                      <p className="text-[10.5px] xs:text-[11px] sm:text-xs text-[#56616B] leading-relaxed mt-1 sm:mt-1.5 font-normal">
+                      <p className="text-xs text-[#56616B] leading-relaxed mt-1 sm:mt-1.5 font-normal">
                         {service.description}
                       </p>
                     </div>
 
-                    <div className="pt-1.5 sm:pt-2.5 mt-2 sm:mt-3 border-t border-[#E5E5E5]">
+                    <div className="pt-2.5 mt-3 border-t border-[#E5E5E5]">
                       <Link
                         href={service.href}
-                        className="inline-flex items-center justify-between w-full text-[10.5px] sm:text-xs font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors group/link"
+                        className="inline-flex items-center justify-between w-full text-xs font-extrabold text-[#00BCD4] hover:text-[#101820] transition-colors group/link"
                       >
                         <span>Explore Service</span>
-                        <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover/link:translate-x-0.5 transition-transform" />
+                        <ArrowRight className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -846,8 +839,8 @@ export default function HomePage() {
             <div className="w-full lg:w-[45%] flex items-center">
               <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-[#292929] bg-[#0B0B0B] shadow-2xl h-[135px] xs:h-[155px] sm:h-[240px] lg:h-[390px] min-h-0 group">
                 <Image
-                  src="/images/about-team-collab.jpg"
-                  alt="CodePlaced senior engineering team collaborating in modern office"
+                  src="/images/cta-software-collaboration.jpg"
+                  alt="CodePlaced senior engineering team collaborating in modern technology office"
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
@@ -875,73 +868,50 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Three Value Highlights / Principles */}
+              {/* Two Rebalanced Value Highlights / Principles */}
               <div className="space-y-1 sm:space-y-2 pt-0.5">
                 <h3 className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-white">
                   Why High-Growth Companies Choose Us
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3.5">
                   {/* Highlight 1 */}
-                  <div className="p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] flex items-center sm:block gap-2.5 sm:space-y-1.5">
-                    <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <ShieldCheck className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
+                  <div className="p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/40 transition-colors flex items-center sm:block gap-2.5 sm:space-y-1.5">
+                    <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <Layers className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#00BCD4]" />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Senior Engineers</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-white">Fixed-Milestone Sprints</h4>
                       <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
-                        Direct access to technical leads without junior handoffs.
+                        Predictable 2–4 week delivery with continuous previews and zero scope drift.
                       </p>
                     </div>
                   </div>
 
                   {/* Highlight 2 */}
-                  <div className="p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] flex items-center sm:block gap-2.5 sm:space-y-1.5">
-                    <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <Layers className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">Fixed-Milestone Sprints</h4>
-                      <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
-                        Predictable 2–4 week delivery with continuous previews.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Highlight 3 */}
-                  <div className="p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] flex items-center sm:block gap-2.5 sm:space-y-1.5">
-                    <div className="w-5.5 h-5.5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
-                      <Users className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#00BCD4]" />
+                  <div className="p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] hover:border-[#00BCD4]/40 transition-colors flex items-center sm:block gap-2.5 sm:space-y-1.5">
+                    <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4] flex items-center justify-center shrink-0">
+                      <Users className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#00BCD4]" />
                     </div>
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-white">Full IP Ownership</h4>
                       <p className="text-[10px] sm:text-xs text-slate-400 leading-tight mt-0.5">
-                        Clean codebases, zero lock-in, and reliable long-term support.
+                        Clean codebases, zero vendor lock-in, and reliable long-term production support.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Verified Metrics Cards: Clean 2x2 on Mobile, 4-Column on sm: */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2.5 pt-0.5">
-                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
-                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">100+</div>
-                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Deployments</div>
+              {/* Approved Company Credibility Metrics: Clean 2-Column Layout */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 pt-0.5 max-w-md">
+                <div className="p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
+                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">20+</div>
+                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Trusted Clients</div>
                 </div>
 
-                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
-                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">95%</div>
-                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Retention Rate</div>
-                </div>
-
-                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
-                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">2–4 Wks</div>
-                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Sprint Delivery</div>
-                </div>
-
-                <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
-                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">99.99%</div>
-                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Production SLA</div>
+                <div className="p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl bg-[#0B0B0B] border border-[#292929] space-y-0.5 shadow-xs text-center sm:text-left">
+                  <div className="text-base sm:text-xl lg:text-2xl font-black text-[#00BCD4] tracking-tight">10+</div>
+                  <div className="text-[10px] sm:text-xs font-medium text-slate-300">Countries Reached</div>
                 </div>
               </div>
 
@@ -972,11 +942,8 @@ export default function HomePage() {
                 FEATURED CLIENT WORK
               </span>
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
-                Real Projects. Measurable Impact.
+                Real Project with Real ROI
               </h2>
-              <p className="text-xs sm:text-sm md:text-base text-[#56616B] leading-relaxed font-normal">
-                See how our senior engineering pods solve high-stakes challenges and launch products that scale.
-              </p>
             </div>
 
             <Link
@@ -1084,8 +1051,6 @@ export default function HomePage() {
                 <div className="pt-0.5">
                   <Link
                     href="/case-studies/tuitionstime"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-9 sm:h-11 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00BCD4]/30 cursor-pointer text-center"
                   >
                     <span>Explore Case Study</span>
@@ -1101,56 +1066,58 @@ export default function HomePage() {
       {/* ===================================================================== */}
       {/* SECTION 5: INDUSTRIES WE SERVE — PURE BLACK WITH WHITE HOVER CARDS */}
       {/* ===================================================================== */}
-      <section className="py-7 sm:py-8 lg:py-9.5 bg-[#000000] border-b border-[#292929] text-white">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Heading & Supporting Text */}
-          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              CROSS-INDUSTRY DOMAIN EXPERTISE
-            </span>
-            <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-              Industries We Transform
-            </h2>
-            <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed">
-              We bring targeted technical and data expertise to solve the complex operational and scale challenges of high-demand sectors.
-            </p>
-          </div>
+      {SHOW_INDUSTRIES && (
+        <section className="py-7 sm:py-8 lg:py-9.5 bg-[#000000] border-b border-[#292929] text-white">
+          <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Heading & Supporting Text */}
+            <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
+                CROSS-INDUSTRY DOMAIN EXPERTISE
+              </span>
+              <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                Industries We Transform
+              </h2>
+              <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed">
+                We bring targeted technical and data expertise to solve the complex operational and scale challenges of high-demand sectors.
+              </p>
+            </div>
 
-          {/* 6 Structured Industry Cards: 2-Column on Mobile (3 Rows), 3-Column on lg: */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3.5 lg:gap-4.5">
-            {INDUSTRIES_DATA.map((industry, idx) => {
-              const IndIcon = industry.icon;
-              return (
-                <Link
-                  key={idx}
-                  href={industry.href}
-                  className="group p-2.5 sm:p-4 lg:p-5 rounded-lg sm:rounded-2xl bg-[#0B0B0B] hover:bg-[#FFFFFF] focus-visible:bg-[#FFFFFF] border border-[#262626] hover:border-[#E5E7EB] focus-visible:border-[#E5E7EB] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
-                >
-                  <div className="space-y-1.5 sm:space-y-3">
-                    <div className="flex items-center justify-between">
-                      {/* Icon Container */}
-                      <div className="w-6 h-6 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-md sm:rounded-xl bg-[#161616] group-hover:bg-[#00BCD4]/10 group-focus-visible:bg-[#00BCD4]/10 border border-[#262626] group-hover:border-[#00BCD4]/30 flex items-center justify-center transition-colors duration-300">
-                        <IndIcon className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-[#00BCD4]" />
+            {/* 6 Structured Industry Cards: 2-Column on Mobile (3 Rows), 3-Column on lg: */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3.5 lg:gap-4.5">
+              {INDUSTRIES_DATA.map((industry, idx) => {
+                const IndIcon = industry.icon;
+                return (
+                  <Link
+                    key={idx}
+                    href={industry.href}
+                    className="group p-2.5 sm:p-4 lg:p-5 rounded-lg sm:rounded-2xl bg-[#0B0B0B] hover:bg-[#FFFFFF] focus-visible:bg-[#FFFFFF] border border-[#262626] hover:border-[#E5E7EB] focus-visible:border-[#E5E7EB] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-[#00BCD4]"
+                  >
+                    <div className="space-y-1.5 sm:space-y-3">
+                      <div className="flex items-center justify-between">
+                        {/* Icon Container */}
+                        <div className="w-6 h-6 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-md sm:rounded-xl bg-[#161616] group-hover:bg-[#00BCD4]/10 group-focus-visible:bg-[#00BCD4]/10 border border-[#262626] group-hover:border-[#00BCD4]/30 flex items-center justify-center transition-colors duration-300">
+                          <IndIcon className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-[#00BCD4]" />
+                        </div>
+                        <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-slate-500 group-hover:text-[#00BCD4] group-focus-visible:text-[#00BCD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                       </div>
-                      <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-slate-500 group-hover:text-[#00BCD4] group-focus-visible:text-[#00BCD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+
+                      {/* Title */}
+                      <h3 className="text-[11.5px] xs:text-xs sm:text-base lg:text-lg font-bold text-white group-hover:text-[#111111] group-focus-visible:text-[#111111] transition-colors duration-300 tracking-tight line-clamp-1 mt-1 sm:mt-3">
+                        {industry.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-[10px] xs:text-[10.5px] sm:text-xs lg:text-sm text-[#9CA3AF] group-hover:text-[#4B5563] group-focus-visible:text-[#4B5563] leading-snug line-clamp-2 mt-0.5 sm:mt-1.5 transition-colors duration-300">
+                        {industry.description}
+                      </p>
                     </div>
-
-                    {/* Title */}
-                    <h3 className="text-[11.5px] xs:text-xs sm:text-base lg:text-lg font-bold text-white group-hover:text-[#111111] group-focus-visible:text-[#111111] transition-colors duration-300 tracking-tight line-clamp-1 mt-1 sm:mt-3">
-                      {industry.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-[10px] xs:text-[10.5px] sm:text-xs lg:text-sm text-[#9CA3AF] group-hover:text-[#4B5563] group-focus-visible:text-[#4B5563] leading-snug line-clamp-2 mt-0.5 sm:mt-1.5 transition-colors duration-300">
-                      {industry.description}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ===================================================================== */}
       {/* SECTION 6: OUR PROCESS — COMPACT WHITE SECTION (#FFFFFF) */}
@@ -1227,7 +1194,7 @@ export default function HomePage() {
                 <div className="p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] space-y-0.5 sm:space-y-1">
                   <h4 className="text-xs sm:text-sm font-bold text-[#111827]">Have a custom inquiry?</h4>
                   <p className="text-[10.5px] sm:text-xs md:text-sm text-[#56616B]">
-                    Reach out to our leadership directly at{" "}
+                    Reach us out so we can build solutions to drive customers.{" "}
                     <a href="mailto:hello@codeplaced.com" className="text-[#00AFC8] hover:underline font-semibold">
                       hello@codeplaced.com
                     </a>
@@ -1274,117 +1241,6 @@ export default function HomePage() {
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===================================================================== */}
-      {/* SECTION 8: FINAL CTA BANNER — COMPACT BLACK CARD (#000000) */}
-      {/* ===================================================================== */}
-      <section className="py-5 sm:py-8 bg-[#000000] relative">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-xl sm:rounded-3xl overflow-hidden bg-[#0B0B0B] border border-[#292929] shadow-2xl p-4 sm:p-7 lg:p-9">
-            {/* Ambient Cyan Radial Glow Accent */}
-            <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none opacity-30">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,188,212,0.2),transparent_70%)]" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center relative z-10">
-              {/* Left Column (7 cols): Content + Actions */}
-              <div className="lg:col-span-7 space-y-2.5 sm:space-y-3.5">
-                <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                  START YOUR ENGAGEMENT
-                </span>
-
-                <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                  Ready to Build Something Exceptional?
-                </h2>
-
-                <p className="text-xs sm:text-sm md:text-base text-[#D1D5DB] leading-relaxed font-normal max-w-xl">
-                  Tell us about your project. Our senior engineering team will evaluate your requirements and outline a practical delivery roadmap within 24 hours.
-                </p>
-
-                {/* Mobile Collaborative Team Image: Placed below description on mobile */}
-                <div className="block lg:hidden my-3">
-                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-white/15 bg-[#121212] shadow-xl">
-                    <Image
-                      src="/images/cta-software-collaboration.jpg"
-                      alt="CodePlaced technology engineering team collaborating on software solutions"
-                      fill
-                      sizes="(max-width: 640px) 100vw, 550px"
-                      className="object-cover object-center"
-                    />
-                    <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-xl" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-                    {/* Live status badge */}
-                    <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                      <span className="text-[9.5px] font-mono font-bold text-white tracking-wide">
-                        SENIOR ENGINEERING PODS
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-0.5">
-                  <Link
-                    href="/contact#contact-hero"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-[#050505] font-extrabold text-xs sm:text-base tracking-tight transition-all duration-200 shadow-lg shadow-[#00BCD4]/30 hover:shadow-xl hover:shadow-[#00BCD4]/40 hover:-translate-y-0.5 active:scale-95 cursor-pointer text-center"
-                  >
-                    <span>Send an Inquiry</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
-                  </Link>
-
-                  <Link
-                    href="/contact"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-7 h-9 sm:h-12 rounded-full bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-base border border-white/20 transition-all duration-200 cursor-pointer text-center"
-                  >
-                    <span>Get in Touch</span>
-                  </Link>
-                </div>
-
-                {/* 3 Small Supporting Trust Points */}
-                <div className="pt-2 sm:pt-3.5 border-t border-[#292929] flex flex-wrap items-center gap-2.5 sm:gap-6 text-[10px] sm:text-xs text-slate-300 font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
-                    <span>Fixed 2–4 Wk Sprints</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
-                    <span>Bilateral NDA Guardrails</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00BCD4]" />
-                    <span>100% IP Ownership</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column (5 cols, Desktop): Dedicated Collaborative Team Image */}
-              <div className="hidden lg:block lg:col-span-5 relative">
-                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-white/15 bg-[#121212] shadow-2xl group">
-                  <Image
-                    src="/images/cta-software-collaboration.jpg"
-                    alt="CodePlaced technology engineering team collaborating on software solutions in modern office"
-                    fill
-                    sizes="(max-width: 1280px) 40vw, 520px"
-                    className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-2xl" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Corner Badge */}
-                  <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 border border-white/15 backdrop-blur-md">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00BCD4] animate-pulse" />
-                    <span className="text-[10px] font-mono font-bold text-white tracking-wide">
-                      SENIOR ENGINEERING PODS
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

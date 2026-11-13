@@ -15,6 +15,7 @@ import {
 import { CodePlacedLogo } from "./CodePlacedLogo";
 import { ServicesMegaMenu, SERVICE_COLUMNS } from "./ServicesMegaMenu";
 import { IndustriesMegaMenu } from "./IndustriesMegaMenu";
+import { SHOW_INDUSTRIES } from "@/lib/featureFlags";
 
 interface HeaderProps {
   onOpenBookAudit?: (scope?: string) => void;
@@ -23,11 +24,15 @@ interface HeaderProps {
 const NAV_ITEMS_LIST = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", hasDropdown: "services" },
-  { label: "Industries", href: "/industries", hasDropdown: "industries" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "Industries", href: "/industries", hasDropdown: "industries" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
+
+const VISIBLE_NAV_ITEMS = NAV_ITEMS_LIST.filter(
+  (item) => SHOW_INDUSTRIES || item.hasDropdown !== "industries"
+);
 
 export function Header({ onOpenBookAudit }: HeaderProps) {
   const pathname = usePathname();
@@ -40,6 +45,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
 
+  const headerRef = useRef<HTMLElement | null>(null);
   const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -82,7 +88,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     };
   }, []);
 
-  // Close mobile menu on route change
+  // Close menus on route change
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileMenuOpen(false);
@@ -90,13 +96,39 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
     setIndustriesMenuOpen(false);
   }, [pathname]);
 
+  // Dismiss menus on Escape key or outside click
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMegaMenuOpen(false);
+        setIndustriesMenuOpen(false);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setMegaMenuOpen(false);
+        setIndustriesMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
+
   // Global unified dark navbar across all routes with seamless #050505 canvas
   const isDarkTheme = true;
 
   // Shared Navigation Links component (Centered)
   const renderNavLinks = () => (
-    <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
-      {NAV_ITEMS_LIST.map((item) => {
+    <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+      {VISIBLE_NAV_ITEMS.map((item) => {
         const isServices = item.hasDropdown === "services";
         const isIndustries = item.hasDropdown === "industries";
         const isActive =
@@ -126,24 +158,34 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               key={item.label}
               onMouseEnter={handleMouseEnterServices}
               onMouseLeave={handleMouseLeaveServices}
-              className="relative"
+              className="relative flex items-center"
             >
               <Link
                 href="/services"
-                className={`relative px-2.5 xl:px-3.5 py-2 text-[13.5px] xl:text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
+                onClick={() => setMegaMenuOpen(false)}
+                className={`relative pl-3.5 pr-1 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center ${linkColorClass}`}
               >
                 <span>{item.label}</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${chevronColorClass}`}
-                />
                 <span
-                  className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
+                  className={`absolute bottom-0 left-3.5 right-1 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                     isActive && !megaMenuOpen
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
                   }`}
                 />
               </Link>
+              <button
+                type="button"
+                onClick={() => setMegaMenuOpen((prev) => !prev)}
+                aria-label="Toggle Services menu"
+                aria-expanded={megaMenuOpen}
+                aria-haspopup="true"
+                className="p-1.5 pr-2.5 rounded-md text-white/80 hover:text-[#00BCD4] transition-colors cursor-pointer"
+              >
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${chevronColorClass}`}
+                />
+              </button>
             </div>
           );
         }
@@ -158,7 +200,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             >
               <Link
                 href="/industries"
-                className={`relative px-2.5 xl:px-3.5 py-2 text-[13.5px] xl:text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
+                className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group inline-flex items-center gap-1 ${linkColorClass}`}
               >
                 <span>{item.label}</span>
                 <ChevronDown
@@ -167,7 +209,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
                   }`}
                 />
                 <span
-                  className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
+                  className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                     isActive && !industriesMenuOpen
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -182,11 +224,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           <Link
             key={item.label}
             href={item.href}
-            className={`relative px-2.5 xl:px-3.5 py-2 text-[13.5px] xl:text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${linkColorClass}`}
+            className={`relative px-3.5 py-2 text-[15px] font-semibold tracking-tight transition-colors duration-200 group ${linkColorClass}`}
           >
             <span>{item.label}</span>
             <span
-              className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
+              className={`absolute bottom-0 left-3.5 right-3.5 h-[2px] ${underlineBg} transition-transform duration-300 origin-center ${
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`}
             />
@@ -209,10 +251,11 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   const renderCtaButton = () => (
     <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
       <Link
-        href="/intelligence-portal"
-        className="inline-flex items-center justify-center gap-1.5 px-5 h-[40px] rounded-full text-[#06151C] bg-[#00D5E5] hover:bg-[#20e2f2] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#00D5E5]/30 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+        href="/contact#contact-hero"
+        onClick={handleStrategyCallClick}
+        className="inline-flex items-center justify-center gap-1.5 px-6 h-[42px] rounded-full text-[#050A0E] bg-[#06B6D4] hover:bg-[#22D3EE] font-extrabold text-sm tracking-tight transition-all duration-200 shadow-[0_0_20px_rgba(6,182,212,0.28)] hover:shadow-[0_0_28px_rgba(6,182,212,0.48)] hover:-translate-y-0.5 active:scale-95 cursor-pointer"
       >
-        <span>Intelligence Portal</span>
+        <span>Send an Inquiry</span>
         <ArrowRight className="w-4 h-4 ml-0.5" />
       </Link>
     </div>
@@ -221,37 +264,42 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. UNIFIED FIXED NAVBAR — PURE BLACK #000000 AT ALL SCROLL POSITIONS */}
+      {/* 1. UNIFIED FIXED NAVBAR — OBSIDIAN #070B0E AT ALL SCROLL POSITIONS */}
       {/* ========================================================================= */}
       <header
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-200 bg-[#000000] border-b border-[#292929] ${
-          showSticky ? "shadow-md shadow-black/80" : ""
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-200 bg-[#070B0E]/92 backdrop-blur-xl border-b border-white/[0.08] ${
+          showSticky ? "shadow-lg shadow-black/70" : ""
         }`}
       >
         {/* Main Navbar */}
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-[76px] sm:h-[80px] flex items-center justify-between">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 h-[76px] sm:h-[80px] flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] gap-3">
           {/* Logo on Left */}
-          <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2 group flex-shrink-0 justify-self-start">
             <CodePlacedLogo size="md" variant="light" />
           </Link>
 
           {/* Navigation Links (Centered) */}
-          <div className="flex-1 flex justify-center">
+          <div className="hidden lg:flex justify-center justify-self-center">
             {renderNavLinks()}
           </div>
 
-          {/* Right CTA */}
-          {renderCtaButton()}
+          {/* Right CTA & Mobile Menu Toggle */}
+          <div className="flex items-center gap-3 justify-self-end flex-shrink-0">
+            {renderCtaButton()}
 
-          {/* Mobile Menu Toggle (Clean Hamburger on Right) */}
-          <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl transition-colors text-white hover:text-[#00C8E8] hover:bg-white/10 cursor-pointer"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {/* Mobile Menu Toggle (Clean Hamburger on Right) */}
+            <div className="flex items-center lg:hidden">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-expanded={mobileMenuOpen}
+                className="p-2.5 rounded-xl transition-colors text-white hover:text-[#00C8E8] hover:bg-white/10 cursor-pointer"
+                aria-label="Toggle navigation menu"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -268,17 +316,19 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
           />
         </div>
 
-        <div
-          onMouseEnter={handleMouseEnterIndustries}
-          onMouseLeave={handleMouseLeaveIndustries}
-        >
-          <IndustriesMegaMenu
-            isOpen={industriesMenuOpen}
-            onClose={() => setIndustriesMenuOpen(false)}
-            onOpenBookAudit={onOpenBookAudit}
-            isDarkTheme={true}
-          />
-        </div>
+        {SHOW_INDUSTRIES && (
+          <div
+            onMouseEnter={handleMouseEnterIndustries}
+            onMouseLeave={handleMouseLeaveIndustries}
+          >
+            <IndustriesMegaMenu
+              isOpen={industriesMenuOpen}
+              onClose={() => setIndustriesMenuOpen(false)}
+              onOpenBookAudit={onOpenBookAudit}
+              isDarkTheme={true}
+            />
+          </div>
+        )}
       </header>
 
       {/* ========================================================================= */}
@@ -294,7 +344,7 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
             className="fixed inset-x-0 top-[76px] sm:top-[80px] z-[998] backdrop-blur-2xl bg-white/98 border-b border-slate-200/90 text-[#111827] shadow-2xl px-6 py-6 lg:hidden max-h-[85vh] overflow-y-auto"
           >
             <nav className="flex flex-col space-y-1.5">
-              {NAV_ITEMS_LIST.map((item) => {
+              {VISIBLE_NAV_ITEMS.map((item) => {
                 if (item.label === "Services") {
                   return (
                     <div
@@ -469,24 +519,17 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
               })}
             </nav>
 
-            <div className="mt-6 pt-6 border-t border-slate-200/80 space-y-3">
-              <Link
-                href="/intelligence-portal"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00D5E5] hover:bg-[#20e2f2] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
-              >
-                <span>Intelligence Portal</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+            <div className="mt-6 pt-6 border-t border-slate-200/80">
               <Link
                 href="/contact#contact-hero"
                 onClick={(e) => {
                   setMobileMenuOpen(false);
                   handleStrategyCallClick(e);
                 }}
-                className="w-full py-3.5 rounded-full text-slate-800 border border-slate-300 font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all active:scale-95"
+                className="w-full py-3.5 rounded-full text-[#06151C] bg-[#00C8E8] hover:bg-[#20d7f5] font-extrabold text-sm tracking-wide shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
               >
                 <span>Send an Inquiry</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </motion.div>

@@ -237,3 +237,18 @@ export const SERVICES_DATA: ServiceDetailItem[] = [
     caseStudySlug: "healthcare-analytics-platform",
   },
 ];
+
+// Primary (dedicated) destination for each of the four core services.
+// Legacy slugs above stay routable via /services/[slug]; the Services page
+// links only to these four dedicated pages.
+export const PRIMARY_SERVICE_HREFS: Record<string, string> = {
+  "ai-services": "/services/ai-copilots",
+  "app-web-development": "/services/app-web-development",
+  "digital-social-marketing": "/services/executive-dashboards",
+  "data-engineering-analytics": "/services/data-platforms",
+  "digital-marketing": "/services/digital-marketing",
+};
+
+export function getPrimaryServiceHref(slug: string): string {
+  return PRIMARY_SERVICE_HREFS[slug] ?? `/services/${slug}`;
+}

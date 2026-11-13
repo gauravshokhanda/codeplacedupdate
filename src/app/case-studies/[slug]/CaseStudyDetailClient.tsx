@@ -877,8 +877,6 @@ export function CaseStudyDetailClient({
                 <Link
                   key={rel.slug}
                   href={`/case-studies/${rel.slug}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="p-6 rounded-[28px] bg-white border border-[#072C4C]/[0.08] hover:border-[#16D3F5] hover:shadow-[0_30px_80px_rgba(0,0,0,0.15)] hover:-translate-y-2 transition-all duration-400 flex flex-col justify-between space-y-6 group cursor-pointer"
                 >
                   <div className="space-y-4">

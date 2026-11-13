@@ -430,8 +430,10 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. FINAL CTA */}
+      {/* 7. FINAL CTA — omitted on the dedicated Software Development page, where */}
+      {/*    the global footer already carries the inquiry CTA. */}
       {/* ========================================================================= */}
+      {service.slug !== "app-web-development" && (
       <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#050505] text-white relative overflow-hidden">
         <div className="max-w-[1200px] mx-auto rounded-[36px] p-10 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-2xl bg-[#101820] border border-[#1B242B]">
           <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
@@ -473,6 +475,7 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
           </div>
         </div>
       </section>
+      )}
 
     </div>
   );
