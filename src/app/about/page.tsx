@@ -95,10 +95,10 @@ const CORE_VALUES = [
 const LEADERSHIP_TEAM = [
   {
     name: "Manya Tyagi",
-    role: "Co-Founder",
+    role: "Founder",
     bio: "Manya leads business intelligence, analytics, AI initiatives, and growth strategies at CodePlaced. She specializes in turning complex datasets into actionable insights that help organizations make smarter decisions, streamline operations, and unlock scalable revenue growth.",
     image: "/team/Manya.png",
-    imagePosition: "object-[85%_20%]",
+    imagePosition: "object-center",
     focusAreas: [
       "AI Strategy",
       "Business Intelligence",
@@ -111,8 +111,8 @@ const LEADERSHIP_TEAM = [
     name: "Gaurav Shokhanda",
     role: "Co-Founder & Tech Lead",
     bio: "Gaurav oversees technology strategy, software architecture, cloud infrastructure, and product engineering at CodePlaced. He helps businesses build scalable, cloud-native systems and AI automation workflows that support long-term enterprise growth.",
-    image: "/team/gaurav-shokhanda.jpg",
-    imagePosition: "object-[50%_10%]",
+    image: "/team/gaurav.jpg",
+    imagePosition: "object-center",
     focusAreas: [
       "Cloud Architecture",
       "Full-Stack Engineering",
