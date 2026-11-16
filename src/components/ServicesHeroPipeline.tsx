@@ -36,7 +36,7 @@ const SERVICE_PILLARS: ServicePillar[] = [
     title: "DIGITAL MARKETING & GROWTH",
     pills: ["AEO & SEO", "Google & Meta Ads", "GA4 Tracking & Branding"],
     icon: TrendingUp,
-    positionClass: "top-[0%] right-[0%]",
+    positionClass: "top-[3%] right-[0%]",
     floatDelay: "-1.2s",
   },
   {
@@ -75,14 +75,14 @@ const PIPELINE_STREAMS: PipelineStream[] = [
     id: "stream-02-01",
     from: "pillar-02",
     to: "pillar-01",
-    pathD: "M 205 384 C 245 332, 305 318, 342 308",
-    start: { x: 205, y: 384 },
-    end: { x: 342, y: 308 },
+    pathD: "M 475 326 C 425 282, 385 276, 338 268",
+    start: { x: 475, y: 326 },
+    end: { x: 338, y: 268 },
     pulseDuration: "2.2s",
-    pulseDelay: "-0.55s",
+    pulseDelay: "-0.7s",
   },
   {
-    id: "stream-01-03",
+    id: "stream-01-04",
     from: "pillar-01",
     to: "pillar-03",
     pathD: "M 480 250 C 430 205, 385 198, 338 184",
@@ -99,7 +99,7 @@ const PIPELINE_STREAMS: PipelineStream[] = [
     start: { x: 205, y: 128 },
     end: { x: 342, y: 56 },
     pulseDuration: "2.1s",
-    pulseDelay: "-1.65s",
+    pulseDelay: "-1.4s",
   },
 ];
 

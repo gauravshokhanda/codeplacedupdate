@@ -10,10 +10,8 @@ import {
   Boxes,
   ShieldCheck,
   Bot,
-  Sparkles,
   Database,
   BarChart3,
-  LineChart,
   Cloud,
   Workflow,
   Terminal,
@@ -137,20 +135,20 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
       {
         title: "Data Pipelines & ETL/ELT",
         desc: "Automated lakehouse pipelines & real-time streaming",
-        href: "/services/data-platforms",
+        href: "/services/data-analytics-engineering",
         icon: Database,
       },
       {
         title: "Data Warehouses & Lakes",
         desc: "Snowflake, BigQuery & medallion architecture schemas",
-        href: "/services/data-platforms",
+        href: "/services/data-analytics-engineering",
         icon: Cloud,
       },
       {
-        title: "Data Architecture & Governance",
-        desc: "Role-based access control, HIPAA/SOC2 compliance",
-        href: "/services/data-platforms",
-        icon: ShieldCheck,
+        title: "Executive BI & Looker Studio",
+        desc: "Executive command centers & Power BI KPI reporting",
+        href: "/services/data-analytics-engineering",
+        icon: BarChart3,
       },
     ],
   },
@@ -206,10 +204,10 @@ export function ServicesMegaMenu({
               {SERVICE_COLUMNS.map((col, cIdx) => (
                 <div
                   key={cIdx}
-                  className="flex flex-col gap-3 xl:row-span-2 xl:grid xl:grid-rows-subgrid xl:gap-y-3"
+                  className="flex flex-col gap-3 lg:row-span-2 lg:grid lg:grid-rows-subgrid lg:gap-y-3"
                 >
                   {/* Column Header (Uniform Height via Subgrid on Desktop & Min-Height on Tablet) */}
-                  <div className="flex items-start pb-2.5 border-b border-[#E5EAF0] md:min-h-[48px] xl:min-h-0">
+                  <div className="flex items-start pb-2.5 border-b border-[#E5EAF0] md:min-h-[44px] lg:min-h-0">
                     <Link
                       href={col.categoryHref}
                       onClick={onClose}

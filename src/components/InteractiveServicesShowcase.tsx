@@ -9,7 +9,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Bot,
-  BarChart3,
   Code2,
   Database,
   TrendingUp,
@@ -108,6 +107,13 @@ const SERVICE_VISUAL_MAP: Record<string, ServiceVisualConfig> = {
     highlightTag: "Next.js 15 • React 19 • Flutter",
     subMetric: "Sub-25ms SSR SLA",
   },
+  "data-analytics-engineering": {
+    imageSrc: "/images/services/data-engineering-team.jpg",
+    alt: "CodePlaced Data Analytics & Engineering cloud warehouses, ETL pipelines, and executive BI dashboards",
+    badge: "PIPELINES, LAKEHOUSES & BI",
+    highlightTag: "Snowflake • dbt • Power BI • Kafka",
+    subMetric: "1.4M/s & Sub-1s BI",
+  },
   "digital-social-marketing": {
     imageSrc: "/images/services/data-analytics-team.jpg",
     alt: "CodePlaced Executive BI telemetry cockpit and KPI analytics dashboard",
@@ -154,9 +160,8 @@ export function InteractiveServicesShowcase() {
       let targetIdx = -1;
       if (hash.includes("ai")) targetIdx = 0;
       else if (hash.includes("software") || hash.includes("web") || hash.includes("app")) targetIdx = 1;
-      else if (hash.includes("analytics") || hash.includes("bi")) targetIdx = 2;
-      else if (hash.includes("engineering") || hash.includes("platform")) targetIdx = 3;
-      else if (hash.includes("marketing") || hash.includes("seo") || hash.includes("aeo")) targetIdx = 4;
+      else if (hash.includes("analytics") || hash.includes("bi") || hash.includes("engineering") || hash.includes("platform")) targetIdx = 2;
+      else if (hash.includes("marketing") || hash.includes("seo") || hash.includes("aeo")) targetIdx = 3;
 
       if (targetIdx !== -1) {
         setActiveIdx(targetIdx);
@@ -188,7 +193,7 @@ export function InteractiveServicesShowcase() {
       const st = ScrollTrigger.create({
         trigger: triggerEl,
         start: "top 80px",
-        end: "+=1500",
+        end: "+=1200",
         pin: pinnedEl,
         pinSpacing: true,
         scrub: 0.5,
@@ -240,6 +245,7 @@ export function InteractiveServicesShowcase() {
         <div id="ai-services" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="software-development" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="app-web-development" className="scroll-mt-24 sm:scroll-mt-28" />
+        <div id="data-analytics-engineering" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="data-analytics-bi" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="data-analytics" className="scroll-mt-24 sm:scroll-mt-28" />
         <div id="data-engineering" className="scroll-mt-24 sm:scroll-mt-28" />
@@ -250,9 +256,6 @@ export function InteractiveServicesShowcase() {
           
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              CORE DISCIPLINES
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               Our Pillars of Engineering Excellence
             </h2>
@@ -265,17 +268,15 @@ export function InteractiveServicesShowcase() {
           {/* MOBILE: CORE PILLARS (5 COMPACT CLICKABLE CARDS) + DETAILED SHOWCASE       */}
           {/* ========================================================================= */}
           <div className="block lg:hidden space-y-5">
-            {/* Compact 2-Col Core Pillars Navigation Grid (5th Card Centered/Full-Width) */}
+            {/* Compact 2x2 Core Pillars Navigation Grid */}
             <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5">
-              {SHOWCASE_SERVICES_DATA.map((service, idx) => {
+              {SHOWCASE_SERVICES_DATA.map((service) => {
                 const ServiceIcon =
                   service.num === "01"
                     ? Bot
                     : service.num === "02"
                     ? Code2
                     : service.num === "03"
-                    ? BarChart3
-                    : service.num === "04"
                     ? Database
                     : TrendingUp;
 
@@ -283,9 +284,7 @@ export function InteractiveServicesShowcase() {
                   <Link
                     key={service.slug}
                     href={getPrimaryServiceHref(service.slug)}
-                    className={`p-3 sm:p-4 rounded-xl text-left transition-all duration-200 border border-[#E5E7EB] hover:border-[#00BCD4] flex flex-col justify-between gap-2.5 group bg-white shadow-xs select-none ${
-                      idx === 4 ? "col-span-2" : ""
-                    }`}
+                    className="p-3 sm:p-4 rounded-xl text-left transition-all duration-200 border border-[#E5E7EB] hover:border-[#00BCD4] flex flex-col justify-between gap-2.5 group bg-white shadow-xs select-none"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#FAFAFA] border border-[#E5E7EB] flex items-center justify-center text-[#101820] relative shrink-0 group-hover:border-[#00BCD4]/40 transition-colors">

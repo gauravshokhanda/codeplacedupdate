@@ -109,12 +109,12 @@ const PROJECT_SCREENSHOTS = [
     fit: "object-cover object-top",
   },
   {
-    slug: "progress-partners",
-    name: "Progress Partners",
-    category: "Data Analytics & BI",
+    slug: "growthpulse",
+    name: "GrowthPulse",
+    category: "Data Analytics & Engineering",
     summary: "Unified ROAS and LTV dashboard built from marketing, subscription and payment data.",
-    image: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    alt: "Progress Partners business intelligence dashboard screenshot",
+    image: "/images/case-studies/growthpulse/hero-dashboard.webp",
+    alt: "GrowthPulse business intelligence dashboard screenshot",
     fit: "object-contain object-center",
   },
   {
@@ -181,8 +181,6 @@ function ServiceGatewayCard({ service, index }: { service: ServiceDetailItem; in
       : service.num === "02"
       ? Code2
       : service.num === "03"
-      ? BarChart3
-      : service.num === "04"
       ? Database
       : TrendingUp;
 
@@ -399,9 +397,6 @@ export default function ServicesPage() {
         ) : (
           <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
             <div className="text-center max-w-2xl mx-auto space-y-2.5">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                CORE DISCIPLINES
-              </span>
               <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
                 Our Pillars of Engineering Excellence
               </h2>
@@ -428,9 +423,6 @@ export default function ServicesPage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
-            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              ENTERPRISE INTELLIGENCE
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               AI Services & Autonomous Agents
             </h2>
@@ -543,10 +535,7 @@ export default function ServicesPage() {
       <section className="py-8 sm:py-14 lg:py-16 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-            <div className="space-y-2 max-w-2xl">
-              <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                SELECTED PROJECTS
-              </span>
+            <div className="max-w-2xl">
               <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold tracking-tight text-neutral-900 leading-tight">
                 Products We&apos;ve Built
               </h2>
@@ -610,9 +599,6 @@ export default function ServicesPage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
-            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              PRODUCTION ROADMAP
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               How CodePlaced Delivers Production Results
             </h2>
@@ -674,9 +660,6 @@ export default function ServicesPage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
-            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              THE CODEPLACED ADVANTAGE
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               Why Leading Companies Choose CodePlaced
             </h2>
@@ -723,9 +706,6 @@ export default function ServicesPage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-2.5">
-            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              MODERN TOOLS
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               Production-Proven Tools & Frameworks
             </h2>

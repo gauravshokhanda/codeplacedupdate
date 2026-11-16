@@ -289,9 +289,6 @@ export default function BlogPage() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#007F9C] mb-1">
-                Resource Center
-              </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#101820] tracking-tight">
                 {selectedCategory === "All"
                   ? "Latest Articles & Engineering Guides"

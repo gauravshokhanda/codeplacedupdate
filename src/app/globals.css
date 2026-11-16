@@ -362,16 +362,19 @@
   .animate-ambient-drift {
     animation: ambientDrift 7s ease-in-out infinite;
   }
+
   .animate-pillar-levitate {
     animation: pillarLevitate 6s ease-in-out infinite;
   }
 }
 
 @keyframes pillarLevitate {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
+
   50% {
     transform: translate3d(0, -6px, 0);
   }

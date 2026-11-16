@@ -355,8 +355,8 @@ const MARQUEE_ITEMS: MarqueeItem[] = [
   { id: "android", name: "Android", type: "tech", icon: <AndroidLogo /> },
   { id: "apple", name: "Apple iOS", type: "tech", icon: <AppleLogo /> },
 
-  // 6. Data Analytics & Business Intelligence + Tech
-  { id: "data-analytics", name: "Data Analytics & BI", type: "service", icon: <AnalyticsIcon /> },
+  // 6. Data Analytics & Engineering + Tech
+  { id: "data-analytics", name: "Data Analytics & Engineering", type: "service", icon: <AnalyticsIcon /> },
   { id: "powerbi", name: "Microsoft Power BI", type: "tech", icon: <PowerBiLogo /> },
   { id: "looker", name: "Looker Studio", type: "tech", icon: <LookerStudioLogo /> },
 

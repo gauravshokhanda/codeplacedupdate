@@ -417,7 +417,7 @@ const RESEARCH_PAPERS = [
     readTime: "10 min read",
     image: "/images/cta-office-collab.jpg",
     desc: "Architectural blueprint for sub-second policy telemetry, automated document OCR for First Notice of Loss, and actuarial risk scoring models in Snowflake.",
-    href: "/case-studies/progress-partners",
+    href: "/case-studies/growthpulse",
   },
   {
     title: "Omnichannel Commerce & Multi-Tenant Platforms at Scale",

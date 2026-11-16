@@ -705,10 +705,6 @@ export function TuitionstimeCaseStudy() {
         <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12">
           {/* Header & Narrative */}
           <div className="max-w-3xl space-y-4 text-left">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-              ABOUT THE PROJECT
-            </span>
-
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
               Building a Smarter Way <br />
               to <span className="text-[#00C8E8]">Learn and Teach</span>
@@ -775,10 +771,6 @@ export function TuitionstimeCaseStudy() {
         <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
           {/* Header */}
           <div className="max-w-2xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-              THE CHALLENGE
-            </span>
-
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
               Solving Key Challenges <br />
               in <span className="text-[#00C8E8]">Education</span>
@@ -833,10 +825,6 @@ export function TuitionstimeCaseStudy() {
             {/* Left Column: Heading, Narrative & 6 Compact Feature Cards */}
             <div className="lg:col-span-6 space-y-7 text-left">
               <div className="space-y-4">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-                  THE SOLUTION
-                </span>
-
                 <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-white tracking-tight leading-[1.14]">
                   A Unified Learning <br />
                   <span className="text-[#00C8E8]">Ecosystem</span>
@@ -918,9 +906,6 @@ export function TuitionstimeCaseStudy() {
         <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
           {/* Header */}
           <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-              HOW THE PLATFORM WORKS
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
               From Tutor Discovery to <span className="text-[#00C8E8]">Regular Learning</span>
             </h2>
@@ -977,10 +962,6 @@ export function TuitionstimeCaseStudy() {
             {/* Left Column: Heading, Role Tabs & Role-Specific Checklist */}
             <div className="lg:col-span-5 space-y-7 text-left">
               <div className="space-y-4">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-                  PLATFORM OVERVIEW
-                </span>
-
                 <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
                   Three Experiences, <br />
                   One <span className="text-[#00C8E8]">Connected Platform</span>
@@ -1047,9 +1028,6 @@ export function TuitionstimeCaseStudy() {
         <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
           {/* Header */}
           <div className="max-w-2xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-              OUR PROCESS
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
               From Idea to <span className="text-[#00C8E8]">Impact</span>
             </h2>
@@ -1095,9 +1073,6 @@ export function TuitionstimeCaseStudy() {
         <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 space-y-12 text-left">
           {/* Header */}
           <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-              TECHNOLOGY STACK
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#111111] tracking-tight leading-[1.14]">
               Modern Technologies <br className="hidden sm:inline" />
               for a <span className="text-[#00C8E8]">Scalable Platform</span>
@@ -1142,10 +1117,6 @@ export function TuitionstimeCaseStudy() {
             {/* Left Column: Eyebrow, Heading, Description, 4 Stats Cards & Ongoing Partnership */}
             <div className="lg:col-span-7 space-y-8 text-left">
               <div className="space-y-4">
-                <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-                  THE RESULTS
-                </span>
-
                 <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-white tracking-tight leading-[1.14]">
                   Making a Real Impact <br />
                   in <span className="text-[#00C8E8]">Education</span>
@@ -1269,10 +1240,6 @@ export function TuitionstimeCaseStudy() {
       <section id="final-cta" className="relative py-20 sm:py-24 lg:py-28 bg-[#050505] text-white overflow-hidden scroll-mt-20">
         <div className="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <div className="max-w-3xl mx-auto space-y-6">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#00C8E8] uppercase">
-              Have a project in mind?
-            </span>
-
             <h2 className="text-3xl sm:text-5xl lg:text-[50px] font-black text-white tracking-tight leading-[1.12]">
               Let&apos;s Build Something{" "}
               <span className="text-[#00C8E8]">Amazing Together</span>

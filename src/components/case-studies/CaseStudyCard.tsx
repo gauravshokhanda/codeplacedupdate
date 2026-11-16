@@ -60,7 +60,7 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
     if (study.id === "tuitionstime") {
       return idx === 0 ? Users : idx === 1 ? GraduationCap : Layers;
     }
-    if (study.id === "hoopwrld") {
+    if (study.id === "courtmetrics") {
       return idx === 0 ? Database : idx === 1 ? BarChart3 : Globe2;
     }
     return idx === 0 ? Database : idx === 1 ? BarChart3 : Users;
@@ -193,7 +193,7 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
       {/* 2. DESKTOP VIEW (>= 1024px) — 100% PRESERVED EXACTLY AS ORIGINAL     */}
       {/* ===================================================================== */}
       <div className="hidden lg:block">
-        {study.id === "hoopwrld" ? (
+        {study.id === "courtmetrics" ? (
           <Link
             href={`/case-studies/${study.slug}`}
             aria-label={`View case study: ${study.brand}`}
@@ -213,8 +213,8 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 bg-[#00BCD4]/10 border border-[#00BCD4]/30">
                       <Image
-                        src="/images/case-studies/hoopwrld-logo-badge.png"
-                        alt="Hoopwrld Logo"
+                        src="/images/case-studies/courtmetrics/logo-badge.png"
+                        alt="CourtMetrics Logo"
                         width={24}
                         height={24}
                         className="object-contain"
@@ -297,7 +297,7 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
               </div>
             </div>
           </Link>
-        ) : study.id === "progress-partners" ? (
+        ) : study.id === "growthpulse" ? (
           <Link
             href={`/case-studies/${study.slug}`}
             aria-label={`View case study: ${study.brand}`}

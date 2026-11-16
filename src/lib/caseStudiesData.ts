@@ -153,9 +153,11 @@ export interface CaseStudyItem {
 export const CASE_STUDY_SLUG_ALIASES: Record<string, string> = {
   "tuitionstime-marketplace": "tuitionstime",
   "edtech-marketplace": "tuitionstime",
-  "hoopwrld-analytics": "hoopwrld",
-  "hoopwrld-case-study": "hoopwrld",
-  "gaming-analytics": "hoopwrld",
+  "courtmetrics-analytics": "courtmetrics",
+  "courtmetrics-case-study": "courtmetrics",
+  "gaming-analytics": "courtmetrics",
+  "growthpulse-analytics": "growthpulse",
+  "growthpulse-case-study": "growthpulse",
   "healthcare-analytics": "healthcare-ai-triage",
   "healthcare-analytics-platform": "healthcare-ai-triage",
   "enterprise-rag": "enterprise-rag-copilot",
@@ -182,22 +184,22 @@ export function getCanonicalSlug(slug: string): string {
 
 export const CASE_STUDIES_DATA: CaseStudyItem[] = [
   // =========================================================================
-  // HOOPWRLD (FEATURED CASE STUDY: DATA ANALYTICS & BI)
+  // COURTMETRICS (FEATURED CASE STUDY: DATA ANALYTICS & BI)
   // =========================================================================
   {
-    slug: "hoopwrld",
+    slug: "courtmetrics",
     title: "Turning Fragmented Gaming Data Into Reliable Player Analytics",
-    tagline: "We gave Hoopwrld one reliable, mobile-friendly view of how players start, finish and come back to the game",
+    tagline: "We gave CourtMetrics one reliable, mobile-friendly view of how players start, finish and come back to the game",
     industry: "Gaming (Browser-Based Basketball)",
     clientType: "Browser-Based Gaming & Sports Platform",
-    heroImage: "/images/case-studies/hoopwrld-hero-visual.png",
+    heroImage: "/images/case-studies/courtmetrics/hero-dashboard-laptop.webp",
     galleryImages: [
-      "/images/case-studies/hoopwrld-challenge-before.png",
-      "/images/case-studies/hoopwrld-solution-mobile.png",
-      "/images/case-studies/hoopwrld-solution-gameplay.png",
+      "/images/case-studies/courtmetrics/challenge-before.png",
+      "/images/case-studies/courtmetrics/solution-mobile.png",
+      "/images/case-studies/courtmetrics/solution-gameplay.png",
     ],
     shortDescription:
-      "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance across 5 disparate source systems.",
+      "A unified reporting solution that helps CourtMetrics understand player activity, game completion, retention, and acquisition performance across 5 disparate source systems.",
     teamSize: "Data & BI Engineers",
     duration: "Delivered in Weeks",
     activeUsers: "Open Gym & The League",
@@ -214,7 +216,7 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
     ],
     technologies: ["Looker Studio", "PostgreSQL", "Google Analytics 4", "Clerk", "Google Ads", "Windsor.ai"],
     problemStatement:
-      "Hoopwrld's data came from several disparate systems: PostgreSQL for gameplay, GA4 for the website, Clerk for sign-ups, and individual ad platforms. Dashboards mixed GA4 event counts with database records, creating discrepancies in game starts, completions, and player counts.",
+      "CourtMetrics's data came from several disparate systems: PostgreSQL for gameplay, GA4 for the website, Clerk for sign-ups, and individual ad platforms. Dashboards mixed GA4 event counts with database records, creating discrepancies in game starts, completions, and player counts.",
     businessGoals: [
       "Unify 5 data sources into one reliable reporting architecture.",
       "Eliminate metric discrepancies by separating gameplay records from web events.",
@@ -282,7 +284,7 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
         category: "Mobile BI",
         description: "Mobile-first Looker Studio dashboard showing previous-day starts, completions, completion rate, unique players, registrations, and 7-day trends.",
         keyFeatures: ["Mobile-optimized layout", "7-day trend indicators", "Open Gym vs League breakdown", "Clerk registration sync"],
-        image: "/images/case-studies/hoopwrld-solution-mobile.png",
+        image: "/images/case-studies/courtmetrics/solution-mobile.png",
       },
       {
         id: "gameplay-overview",
@@ -291,7 +293,7 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
         category: "Looker Studio",
         description: "Executive and gameplay dashboards reorganized around new-player health, performance by game mode, and activity from established players.",
         keyFeatures: ["PostgreSQL reporting views", "Consistent start/completion math", "Game mode segmentation", "Player activity cohorts"],
-        image: "/images/case-studies/hoopwrld-solution-gameplay.png",
+        image: "/images/case-studies/courtmetrics/solution-gameplay.png",
       },
       {
         id: "before-report",
@@ -300,11 +302,11 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
         category: "Audit",
         description: "Original report showing metric discrepancies caused by mixing GA4 events with database records.",
         keyFeatures: ["Mixed event sources", "Duplicate chart structures", "Unclear retention windows", "Unreconciled player counts"],
-        image: "/images/case-studies/hoopwrld-challenge-before.png",
+        image: "/images/case-studies/courtmetrics/challenge-before.png",
       },
     ],
     solution:
-      "CodePlaced reorganized Hoopwrld's reporting so each dashboard answers a specific business question. Gameplay numbers were standardized exclusively on PostgreSQL reporting views, a mobile-first Daily Pulse was built from scratch, and acquisition reporting was cleanly decoupled into a dedicated Media dashboard.",
+      "CodePlaced reorganized CourtMetrics's reporting so each dashboard answers a specific business question. Gameplay numbers were standardized exclusively on PostgreSQL reporting views, a mobile-first Daily Pulse was built from scratch, and acquisition reporting was cleanly decoupled into a dedicated Media dashboard.",
     solutionHighlights: [
       "Standardized all gameplay metrics on PostgreSQL reporting views verified with developers.",
       "Engineered mobile-first Daily Pulse covering starts, completions, players, registrations, and 7-day trends.",
@@ -322,7 +324,7 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
       {
         technology: "PostgreSQL Reporting Views vs GA4",
         problem: "GA4 client-side events dropped or differed from backend database records, causing conflicting completion numbers.",
-        decision: "Standardized all authoritative gameplay metrics on PostgreSQL reporting views and verified output with Hoopwrld's developer.",
+        decision: "Standardized all authoritative gameplay metrics on PostgreSQL reporting views and verified output with CourtMetrics's developer.",
         benefit: "100% data consistency between game servers and executive reporting.",
       },
       {
@@ -346,9 +348,9 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
       { metric: "Dashboard Layout", before: "Duplicate charts without clear questions", after: "Dedicated reporting views per question", improvement: "Structured" },
     ],
     showcaseModules: [
-      { name: "Daily Pulse", tag: "Mobile BI", desc: "Game starts, completions, completion rate, unique players, registrations, and 7-day trends.", image: "/images/case-studies/hoopwrld-solution-mobile.png" },
-      { name: "Gameplay Analytics", tag: "Looker Studio", desc: "New-player health, game mode performance, and established player activity.", image: "/images/case-studies/hoopwrld-solution-gameplay.png" },
-      { name: "Media Reporting", tag: "Acquisition", desc: "Dedicated reporting for Google Ads, Meta, TikTok, and Reddit covering spend, CTR, CPC, and conversions.", image: "/images/case-studies/hoopwrld-challenge-before.png" },
+      { name: "Daily Pulse", tag: "Mobile BI", desc: "Game starts, completions, completion rate, unique players, registrations, and 7-day trends.", image: "/images/case-studies/courtmetrics/solution-mobile.png" },
+      { name: "Gameplay Analytics", tag: "Looker Studio", desc: "New-player health, game mode performance, and established player activity.", image: "/images/case-studies/courtmetrics/solution-gameplay.png" },
+      { name: "Media Reporting", tag: "Acquisition", desc: "Dedicated reporting for Google Ads, Meta, TikTok, and Reddit covering spend, CTR, CPC, and conversions.", image: "/images/case-studies/courtmetrics/challenge-before.png" },
     ],
     process: [
       { step: "01", title: "Audit & Source Analysis", desc: "Audited existing Looker Studio dashboards, PostgreSQL tables, GA4 events, and Clerk registrations to identify discrepancies.", deliverables: ["Metric discrepancy matrix", "Data lineage audit"] },
@@ -364,7 +366,7 @@ export const CASE_STUDIES_DATA: CaseStudyItem[] = [
       { title: "Focused Acquisition", value: "Multi-Platform", description: "Dedicated views make advertising spend, CTR, CPC, and conversions easy to evaluate." },
     ],
     businessImpact:
-      "Hoopwrld transitioned from conflicting, fragmented reporting to reliable dashboards the team can trust. With daily operations, gameplay analytics, and acquisition reporting kept distinct, leadership makes data-informed decisions with speed and clarity.",
+      "CourtMetrics transitioned from conflicting, fragmented reporting to reliable dashboards the team can trust. With daily operations, gameplay analytics, and acquisition reporting kept distinct, leadership makes data-informed decisions with speed and clarity.",
   },
   // =========================================================================
   // 0. TUITIONSTIME (FEATURED CASE STUDY)

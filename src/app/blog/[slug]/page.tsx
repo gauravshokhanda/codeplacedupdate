@@ -429,10 +429,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#007F9C]">
-                  CONTINUE READING
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#101820] tracking-tight mt-1">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#101820] tracking-tight">
                   Related Insights & Technical Guides
                 </h2>
               </div>

@@ -71,9 +71,6 @@ export default function DataPlatformsPage() {
         <section className="section-py site-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-5">
-              <span className="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">
-                The Enterprise Bottleneck
-              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
                 Why Legacy Data Pipelines Break Under Modern Demands
               </h2>
@@ -124,9 +121,6 @@ export default function DataPlatformsPage() {
         <section className="section-py bg-[#F8FAFC] border-y border-slate-200/80">
           <div className="site-container">
             <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-                Core Pillars
-              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
                 Architectural Capabilities
               </h2>
@@ -183,9 +177,6 @@ export default function DataPlatformsPage() {
         {/* 4. 4-Week Delivery Methodology */}
         <section className="section-py site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-              Execution Rhythm
-            </span>
             <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
               From Discovery to Live Lakehouse in 4 Weeks
             </h2>
@@ -229,10 +220,7 @@ export default function DataPlatformsPage() {
         <section className="section-py bg-[#082F49] text-white">
           <div className="site-container max-w-4xl mx-auto text-center space-y-8">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-cyan-300">
-                Battle-Tested Infrastructure
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-white mt-2">
+              <h2 className="text-3xl sm:text-4xl font-black text-white">
                 Production Data Stack
               </h2>
             </div>
@@ -264,6 +252,9 @@ export default function DataPlatformsPage() {
         {/* 6. FAQ Section */}
         <section className="section-py site-container max-w-3xl mx-auto">
           <div className="text-center space-y-4 mb-12">
+            <span className="text-xs font-mono font-bold tracking-[0.16em] text-[#00AFC8] block">
+              FAQs
+            </span>
             <h2 className="text-3xl font-black text-[#082F49]">
               Frequently Asked Questions
             </h2>

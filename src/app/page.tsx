@@ -76,7 +76,7 @@ const SERVICES_DATA = [
       "Predictive Analytics & Governance",
     ],
     icon: Database,
-    href: "/services/data-platforms",
+    href: "/services/data-analytics-engineering",
   },
   {
     num: "04",
@@ -521,10 +521,7 @@ export default function HomePage() {
       {/* ===================================================================== */}
       <section className="py-7 sm:py-8 lg:py-9 bg-[#000000] border-b border-[#292929] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              CLIENT SUCCESS
-            </span>
+          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               What Our Clients Say
             </h2>
@@ -661,14 +658,11 @@ export default function HomePage() {
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative bg-white">
           {/* Centered Editorial Section Header with Clean Breathing Room */}
-          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1 sm:space-y-1.5 lg:space-y-2 2xl:space-y-2.5 shrink-0">
-            <span className="text-[10.5px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              CORE CAPABILITIES
-            </span>
+          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1.5 lg:space-y-2 shrink-0">
             <h2 className="text-xl sm:text-3xl lg:text-[28px] xl:text-[36px] 2xl:text-[44px] font-extrabold tracking-tight text-[#111827] leading-[1.15] lg:leading-[1.12] max-w-[760px] xl:max-w-[820px] mx-auto">
               Everything You Need to Build and Scale to Market.
             </h2>
-            <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal pt-0.5">
+            <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal">
               End-to-end technical solutions designed for scale, performance, and measurable business impact — from rapid MVP builds to enterprise-grade architectures.
             </p>
           </div>
@@ -830,10 +824,7 @@ export default function HomePage() {
 
             {/* Right Column (55%): Company Content, Principles, Verified Stats & CTA */}
             <div className="w-full lg:w-[55%] flex flex-col justify-between space-y-2.5 sm:space-y-4 lg:pl-3">
-              <div className="space-y-1 sm:space-y-2">
-                <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                  WHY CHOOSE CODEPLACED
-                </span>
+              <div className="space-y-1.5 sm:space-y-2">
                 <h2 className="text-lg xs:text-xl sm:text-2xl lg:text-[36px] font-extrabold tracking-tight text-white leading-tight">
                   Built for Speed, Scale & Engineering Excellence.
                 </h2>
@@ -916,10 +907,7 @@ export default function HomePage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header with Left-Aligned Title and Right-Aligned Link */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-2.5 sm:gap-4 mb-3 sm:mb-6">
-            <div className="space-y-1 max-w-2xl text-left">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                FEATURED CLIENT WORK
-              </span>
+            <div className="max-w-2xl text-left">
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
                 Real Project with Real ROI
               </h2>
@@ -1050,9 +1038,6 @@ export default function HomePage() {
           <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Heading & Supporting Text */}
             <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                CROSS-INDUSTRY DOMAIN EXPERTISE
-              </span>
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 Industries We Transform
               </h2>
@@ -1105,9 +1090,6 @@ export default function HomePage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              HOW WE WORK
-            </span>
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
               A Clear Path From Discovery to Scale.
             </h2>
@@ -1157,8 +1139,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
             {/* Left Column */}
             <div className="lg:col-span-5 space-y-2 sm:space-y-3">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                FAQS
+              <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#00AFC8] block">
+                FAQs
               </span>
 
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
