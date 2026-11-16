@@ -67,9 +67,6 @@ export default function CloudInfrastructurePage() {
         {/* 2. Capabilities */}
         <section className="section-py site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-              Core Pillars
-            </span>
             <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
               Architectural Capabilities
             </h2>

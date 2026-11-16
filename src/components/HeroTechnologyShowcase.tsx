@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Bot,
   Code2,
-  BarChart3,
   Database,
   TrendingUp,
   ArrowUpRight,
@@ -27,7 +26,7 @@ interface EcosystemNode {
   particleDelay: string;
 }
 
-const CX = 380;
+const CX = 400;
 const CY = 280;
 
 const ECOSYSTEM_NODES: EcosystemNode[] = [
@@ -39,9 +38,9 @@ const ECOSYSTEM_NODES: EcosystemNode[] = [
     tags: ["LangGraph", "Python", "OpenAI"],
     href: "/services/ai-copilots",
     icon: Bot,
-    positionClass: "top-[3%] left-[0%]",
-    pathD: `M ${CX} ${CY} C 305 235, 272 118, 212 104`,
-    target: { x: 212, y: 104 },
+    positionClass: "top-[5%] left-[0%]",
+    pathD: `M ${CX} ${CY} C 325 220, 285 142, 224 114`,
+    target: { x: 224, y: 114 },
     particleDurationOut: "2.9s",
     particleDurationIn: "4.1s",
     particleDelay: "0s",
@@ -54,57 +53,42 @@ const ECOSYSTEM_NODES: EcosystemNode[] = [
     tags: ["Next.js", "TypeScript", "PostgreSQL"],
     href: "/services/app-web-development",
     icon: Code2,
-    positionClass: "top-[2%] right-[0%]",
-    pathD: `M ${CX} ${CY} C 455 210, 500 105, 578 88`,
-    target: { x: 578, y: 88 },
+    positionClass: "top-[5%] right-[0%]",
+    pathD: `M ${CX} ${CY} C 475 220, 515 142, 576 114`,
+    target: { x: 576, y: 114 },
     particleDurationOut: "3.3s",
     particleDurationIn: "4.4s",
     particleDelay: "-0.7s",
   },
   {
-    id: "data-analytics-bi",
+    id: "data-analytics-engineering",
     num: "03",
-    title: "Data Analytics & Business Intelligence",
-    sla: "Real-Time BI",
-    tags: ["Power BI", "SQL", "Tableau"],
-    href: "/services/executive-dashboards",
-    icon: BarChart3,
-    positionClass: "top-[37%] right-[0%]",
-    pathD: `M ${CX} ${CY} C 455 282, 515 262, 576 266`,
-    target: { x: 576, y: 266 },
-    particleDurationOut: "2.7s",
-    particleDurationIn: "3.8s",
-    particleDelay: "-1.3s",
-  },
-  {
-    id: "data-engineering",
-    num: "04",
-    title: "Data Engineering",
-    sla: "1.4M Events/s",
-    tags: ["Snowflake", "BigQuery", "dbt", "Airflow"],
-    href: "/services/data-platforms",
+    title: "Data Analytics & Engineering",
+    sla: "Pipelines & BI",
+    tags: ["Snowflake", "dbt", "Power BI", "SQL"],
+    href: "/services/data-analytics-engineering",
     icon: Database,
-    positionClass: "bottom-[2%] right-[0%]",
-    pathD: `M ${CX} ${CY} C 460 358, 502 456, 578 470`,
-    target: { x: 578, y: 470 },
-    particleDurationOut: "3.1s",
-    particleDurationIn: "4.0s",
-    particleDelay: "-1.9s",
+    positionClass: "bottom-[5%] right-[0%]",
+    pathD: `M ${CX} ${CY} C 475 340, 515 418, 576 446`,
+    target: { x: 576, y: 446 },
+    particleDurationOut: "2.8s",
+    particleDurationIn: "3.9s",
+    particleDelay: "-1.4s",
   },
   {
     id: "digital-marketing",
-    num: "05",
+    num: "04",
     title: "Digital Marketing",
     sla: "AEO & Growth",
     tags: ["AEO & SEO", "Google Ads", "GA4"],
     href: "/services/digital-marketing",
     icon: TrendingUp,
-    positionClass: "top-[57%] left-[0%]",
-    pathD: `M ${CX} ${CY} C 302 325, 272 382, 214 388`,
-    target: { x: 214, y: 388 },
+    positionClass: "bottom-[5%] left-[0%]",
+    pathD: `M ${CX} ${CY} C 325 340, 285 418, 224 446`,
+    target: { x: 224, y: 446 },
     particleDurationOut: "3.4s",
     particleDurationIn: "4.3s",
-    particleDelay: "-2.4s",
+    particleDelay: "-2.1s",
   },
 ];
 
@@ -325,7 +309,7 @@ export function HeroTechnologyShowcase() {
         </svg>
 
         {/* CENTER REACTOR ("CODEPLACED CORE HUB") */}
-        <div className="pointer-events-none absolute left-[47.5%] top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
           <div className="relative flex items-center justify-center w-[154px] h-[154px] xl:w-[178px] xl:h-[178px]">
             {/* Pulsing Deep Core Cyan & Subtle Blue Bloom */}
             <div

@@ -677,9 +677,6 @@ export function DigitalMarketingClient() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              WHAT WE OFFER
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               Everything You Need to Grow Your Digital Presence.
             </h2>
@@ -758,9 +755,6 @@ export function DigitalMarketingClient() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              CONNECTED GROWTH SYSTEM
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               One Connected Strategy. Better Business Outcomes.
             </h2>
@@ -986,9 +980,6 @@ export function DigitalMarketingClient() {
 
             {/* Right Side: Explanation & Capability Highlights */}
             <div className="lg:col-span-6 space-y-5 order-1 lg:order-2">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                PERFORMANCE MARKETING &amp; ANALYTICS
-              </span>
               <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-neutral-900 leading-tight">
                 Turn Marketing Data Into Actionable Decisions.
               </h2>
@@ -1021,9 +1012,6 @@ export function DigitalMarketingClient() {
       <section className="py-12 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              ORGANIC &amp; AI DISCOVERABILITY
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               Get Found Where Your Customers Search.
             </h2>
@@ -1166,9 +1154,6 @@ export function DigitalMarketingClient() {
       <section className="py-12 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              PAID MEDIA &amp; ACQUISITION
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               Reach the Right Audience. Generate Better Opportunities.
             </h2>
@@ -1301,9 +1286,6 @@ export function DigitalMarketingClient() {
             {/* Left 7 Cols: Heading, Description, and 6 Feature Areas */}
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-2.5">
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                  SOCIAL MEDIA &amp; BRANDING
-                </span>
                 <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-white leading-tight">
                   Build a Stronger Brand Across Every Digital Touchpoint.
                 </h2>
@@ -1416,9 +1398,6 @@ export function DigitalMarketingClient() {
       <section className="py-12 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              OUR PROCESS
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               From Strategy to Measurable Growth.
             </h2>
@@ -1469,9 +1448,6 @@ export function DigitalMarketingClient() {
       <section className="py-12 sm:py-16 lg:py-24 bg-[#000000] border-b border-[#222222] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              WHY CHOOSE CODEPLACED
-            </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-tight">
               Marketing Backed by Technology and Data.
             </h2>
@@ -1513,8 +1489,8 @@ export function DigitalMarketingClient() {
       <section className="py-12 sm:py-16 lg:py-24 bg-[#FFFFFF] border-b border-[#E5E7EB] text-neutral-900">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
           <div className="text-center space-y-2">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              FREQUENTLY ASKED QUESTIONS
+            <span className="text-xs font-mono font-bold tracking-widest text-[#00AFC8] block">
+              FAQs
             </span>
             <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-neutral-900 leading-tight">
               Questions About Our Digital Marketing Services

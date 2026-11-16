@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     "We turn messy data into reliable pipelines, executive dashboards, and practical AI copilots. Enterprise-grade AI native development, lakehouse architectures, and full-stack software delivered in 2-4 weeks.",
   keywords: [
     "AI Development",
+    "Data Analytics & Engineering",
     "Data Engineering",
     "Executive Dashboards",
     "AI Copilot",

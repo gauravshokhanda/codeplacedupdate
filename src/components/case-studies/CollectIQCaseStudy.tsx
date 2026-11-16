@@ -217,17 +217,17 @@ const RELATED_STUDIES: CaseStudyData[] = [
     ],
   },
   {
-    id: "hoopwrld",
-    slug: "hoopwrld",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Hoopwrld",
+    id: "courtmetrics",
+    slug: "courtmetrics",
+    category: "DATA ANALYTICS & ENGINEERING",
+    brand: "CourtMetrics",
     brandIcon: Gamepad2,
     titlePrefix: "Turning Gameplay Data Into ",
     highlightWord: "Reliable Player Analytics",
     description:
-      "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
-    image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
-    imageAlt: "Hoopwrld Player Analytics Dashboard",
+      "A unified reporting solution that helps CourtMetrics understand player activity, game completion, retention, and acquisition performance.",
+    image: "/images/case-studies/courtmetrics/hero-dashboard-laptop.webp",
+    imageAlt: "CourtMetrics Player Analytics Dashboard",
     techTags: ["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"],
     metrics: [
       { value: "5 Sources", label: "Data Sources Integrated", icon: Database },
@@ -236,17 +236,17 @@ const RELATED_STUDIES: CaseStudyData[] = [
     ],
   },
   {
-    id: "progress-partners",
-    slug: "progress-partners",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Progress Partners",
+    id: "growthpulse",
+    slug: "growthpulse",
+    category: "DATA ANALYTICS & ENGINEERING",
+    brand: "GrowthPulse",
     brandIcon: BarChart3,
     titlePrefix: "Turning Complex Data Into ",
     highlightWord: "Clearer Growth Decisions",
     description:
-      "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
-    image: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    imageAlt: "Progress Partners Revenue Dashboard",
+      "We helped GrowthPulse turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
+    image: "/images/case-studies/growthpulse/hero-dashboard.webp",
+    imageAlt: "GrowthPulse Revenue Dashboard",
     techTags: ["BigQuery", "SQL", "Preset", "GA4", "Stripe", "Amplitude"],
     metrics: [
       { value: "8 Sources", label: "Data Sources Unified", icon: Database },
@@ -396,9 +396,6 @@ export function CollectIQCaseStudy() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3 mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-black/[0.05] border border-black/10 text-[#00BCD4]">
-              <span>COLLECTIQ / PRODUCT CASE STUDY</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-tight text-[#101214]">
               The Challenge: Disconnected Collections Operations
             </h2>
@@ -441,9 +438,6 @@ export function CollectIQCaseStudy() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3 mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/[0.05] border border-white/10 text-[#00BCD4]">
-              <span>ONE CONNECTED SAAS ECOSYSTEM</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-tight text-white">
               The Solution: One Connected SaaS Ecosystem
             </h2>
@@ -868,9 +862,6 @@ export function CollectIQCaseStudy() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3 mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-black/[0.05] border border-black/10 text-[#00BCD4]">
-              <span>END-TO-END COLLECTIONS OPERATIONS</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-tight text-[#101214]">
               Beyond the Dashboard: End-to-End Operations
             </h2>
@@ -913,9 +904,6 @@ export function CollectIQCaseStudy() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3 mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/[0.05] border border-white/10 text-[#00BCD4]">
-              <span>SYSTEM ARCHITECTURE</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-tight text-white">
               Architecture: Connected Operations by Design
             </h2>
@@ -1012,9 +1000,6 @@ export function CollectIQCaseStudy() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3 mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-black/[0.05] border border-black/10 text-[#00BCD4]">
-              <span>IMPLEMENTATION METHODOLOGY</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-tight text-[#101214]">
               How We Approach Complex SaaS Delivery
             </h2>
@@ -1057,9 +1042,6 @@ export function CollectIQCaseStudy() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3 mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/[0.05] border border-white/10 text-[#00BCD4]">
-              <span>PRODUCT OUTCOMES & VALUE</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-tight text-white">
               Outcomes: What the Platform Enables
             </h2>
@@ -1107,9 +1089,6 @@ export function CollectIQCaseStudy() {
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="space-y-3 text-left max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-black/[0.05] border border-black/10 text-[#00BCD4]">
-                <span>PORTFOLIO &bull; CASE STUDIES</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight text-[#101214]">
                 Explore More Case Studies
               </h2>

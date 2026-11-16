@@ -281,19 +281,19 @@ const RELATED_STUDIES: CaseStudyData[] = [
     ],
   },
   {
-    id: "hoopwrld",
-    slug: "hoopwrld",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Hoopwrld",
+    id: "courtmetrics",
+    slug: "courtmetrics",
+    category: "DATA ANALYTICS & ENGINEERING",
+    brand: "CourtMetrics",
     brandIcon: Gamepad2,
-    brandLogoUrl: "/images/case-studies/hoopwrld-logo-badge.png",
+    brandLogoUrl: "/images/case-studies/courtmetrics/logo-badge.png",
     titlePrefix: "Turning Gameplay Data Into ",
     highlightWord: "Reliable Player Analytics",
     description:
-      "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
-    image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
-    mobileImage: "/images/case-studies/hoopwrld-after-laptop-front.webp",
-    imageAlt: "Hoopwrld Player Analytics & Business Intelligence Dashboard",
+      "A unified reporting solution that helps CourtMetrics understand player activity, game completion, retention, and acquisition performance.",
+    image: "/images/case-studies/courtmetrics/hero-dashboard-laptop.webp",
+    mobileImage: "/images/case-studies/courtmetrics/after-laptop-front.webp",
+    imageAlt: "CourtMetrics Player Analytics & Business Intelligence Dashboard",
     techTags: ["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"],
     metrics: [
       { value: "5 Sources", label: "Data Sources Integrated", icon: Database },
@@ -302,18 +302,18 @@ const RELATED_STUDIES: CaseStudyData[] = [
     ],
   },
   {
-    id: "progress-partners",
-    slug: "progress-partners",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Progress Partners",
+    id: "growthpulse",
+    slug: "growthpulse",
+    category: "DATA ANALYTICS & ENGINEERING",
+    brand: "GrowthPulse",
     brandIcon: BarChart3,
     titlePrefix: "Turning Complex Data Into ",
     highlightWord: "Clearer Growth Decisions",
     description:
-      "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
-    image: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    mobileImage: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    imageAlt: "Progress Partners Business Intelligence & Revenue Analytics Dashboard",
+      "We helped GrowthPulse turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
+    image: "/images/case-studies/growthpulse/hero-dashboard.webp",
+    mobileImage: "/images/case-studies/growthpulse/hero-dashboard.webp",
+    imageAlt: "GrowthPulse Business Intelligence & Revenue Analytics Dashboard",
     techTags: ["BigQuery", "SQL", "Preset", "GA4", "Stripe", "Solidgate", "Amplitude", "AnyTrack"],
     metrics: [
       { value: "8 Sources", label: "Data Sources Unified", icon: Database },
@@ -457,9 +457,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00838F]">
-              PROBLEM TO BE SOLVED
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
               The Challenge.
             </h2>
@@ -505,9 +502,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-              ONE CONNECTED WORKFLOW
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               The Solution.
             </h2>
@@ -548,9 +542,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00838F]">
-              THE CANDIDATE JOURNEY
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
               An End-to-End Interview Operating Flow.
             </h2>
@@ -595,9 +586,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-              KEY PRODUCT FEATURES &bull; PART 1
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Key Product Features: Setup &amp; Calibration.
             </h2>
@@ -846,9 +834,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           {/* Section Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00838F]">
-              INTEGRITY &amp; READINESS &bull; PART 2
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
               Pre-flight Verification &amp; Proctoring.
             </h2>
@@ -1042,9 +1027,6 @@ export function TopPlacedAICaseStudy() {
 
             {/* Right Content Column (45%) */}
             <div className="lg:col-span-5 space-y-4 text-left order-1 lg:order-2">
-              <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-                MULTI-SURFACE WORKSPACE
-              </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                 Conversational AI Meets Hands-On Evaluation.
               </h2>
@@ -1122,9 +1104,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00838F]">
-              IMPLEMENTATION THINKING
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
               A Product Architecture That Supports the Journey.
             </h2>
@@ -1175,9 +1154,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header */}
           <div className="max-w-3xl text-left space-y-3">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-              DELIVERED VALUE
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               From Disconnected Practice to One Connected Workflow.
             </h2>
@@ -1220,9 +1196,6 @@ export function TopPlacedAICaseStudy() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Section Header */}
           <div className="space-y-2 max-w-3xl text-left">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00838F]">
-              EXPLORE MORE CASE STUDIES
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101214] tracking-tight">
               Explore More Case Studies.
             </h2>
@@ -1255,11 +1228,6 @@ export function TopPlacedAICaseStudy() {
         />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#00BCD4]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>START A CONVERSATION</span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
             Build Your Next AI Product With Clarity.
           </h2>

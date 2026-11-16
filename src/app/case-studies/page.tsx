@@ -34,7 +34,7 @@ const FILTERS_BY_CATEGORY: Record<FilterCategory, FilterOption[]> = {
   ],
   services: [
     { id: "all", label: "All" },
-    { id: "analytics", label: "Data Analytics & BI" },
+    { id: "analytics", label: "Data Analytics & Engineering" },
     { id: "full-stack", label: "Full-Stack Development" },
     { id: "architecture", label: "Product Architecture" },
     { id: "automation", label: "Automation & Workflows" },
@@ -91,19 +91,19 @@ const FEATURED_CASE_STUDIES: (CaseStudyData & {
       },
     },
     {
-      id: "hoopwrld",
-      slug: "hoopwrld",
-      category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-      brand: "Hoopwrld",
+      id: "courtmetrics",
+      slug: "courtmetrics",
+      category: "DATA ANALYTICS & ENGINEERING",
+      brand: "CourtMetrics",
       brandIcon: Gamepad2,
-      brandLogoUrl: "/images/case-studies/hoopwrld-logo-badge.png",
+      brandLogoUrl: "/images/case-studies/courtmetrics/logo-badge.png",
       titlePrefix: "Turning Gameplay Data Into ",
       highlightWord: "Reliable Player Analytics",
       description:
-        "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
-      image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
-      mobileImage: "/images/case-studies/hoopwrld-after-laptop-front.webp",
-      imageAlt: "Hoopwrld Player Analytics & Business Intelligence Dashboard",
+        "A unified reporting solution that helps CourtMetrics understand player activity, game completion, retention, and acquisition performance.",
+      image: "/images/case-studies/courtmetrics/hero-dashboard-laptop.webp",
+      mobileImage: "/images/case-studies/courtmetrics/after-laptop-front.webp",
+      imageAlt: "CourtMetrics Player Analytics & Business Intelligence Dashboard",
       techTags: ["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"],
       metrics: [
         { value: "5 Sources", label: "Data Sources Integrated", icon: Database },
@@ -121,18 +121,18 @@ const FEATURED_CASE_STUDIES: (CaseStudyData & {
       },
     },
     {
-      id: "progress-partners",
-      slug: "progress-partners",
-      category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-      brand: "Progress Partners",
+      id: "growthpulse",
+      slug: "growthpulse",
+      category: "DATA ANALYTICS & ENGINEERING",
+      brand: "GrowthPulse",
       brandIcon: BarChart3,
       titlePrefix: "Turning Complex Data Into ",
       highlightWord: "Clearer Growth Decisions",
       description:
-        "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
-      image: "/images/case-studies/progress-partners/hero-dashboard.webp",
-      mobileImage: "/images/case-studies/progress-partners/hero-dashboard.webp",
-      imageAlt: "Progress Partners Business Intelligence & Revenue Analytics Dashboard",
+        "We helped GrowthPulse turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
+      image: "/images/case-studies/growthpulse/hero-dashboard.webp",
+      mobileImage: "/images/case-studies/growthpulse/hero-dashboard.webp",
+      imageAlt: "GrowthPulse Business Intelligence & Revenue Analytics Dashboard",
       techTags: ["BigQuery", "SQL", "Preset", "GA4", "Stripe", "Solidgate", "Amplitude", "AnyTrack"],
       metrics: [
         { value: "8 Sources", label: "Data Sources Unified", icon: Database },
@@ -471,9 +471,6 @@ export default function CaseStudiesPage() {
               transition={{ duration: 0.5 }}
               className="max-w-3xl mb-4 sm:mb-6 md:mb-12"
             >
-              <div className="inline-flex items-center px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#087FA5] mb-2 sm:mb-3">
-                BEHIND EVERY PROJECT
-              </div>
               <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[46px] font-black tracking-tight text-[#101820] leading-[1.15]">
                 From Business Challenges to Working Solutions
               </h2>

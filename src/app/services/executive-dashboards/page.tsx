@@ -67,9 +67,6 @@ export default function ExecutiveDashboardsPage() {
         <section className="section-py site-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-5">
-              <span className="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">
-                The Executive Dilemma
-              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
                 Why Standard BI Tools Frustrate Executive Leadership
               </h2>
@@ -120,9 +117,6 @@ export default function ExecutiveDashboardsPage() {
         <section className="section-py bg-[#F8FAFC] border-y border-slate-200/80">
           <div className="site-container">
             <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-                Core Pillars
-              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
                 Architectural Capabilities
               </h2>
@@ -176,9 +170,6 @@ export default function ExecutiveDashboardsPage() {
         {/* 4. Delivery Process */}
         <section className="section-py site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-              Execution Rhythm
-            </span>
             <h2 className="text-3xl sm:text-4xl font-black text-[#082F49] tracking-tight">
               Executive Dashboard in 3 Weeks
             </h2>

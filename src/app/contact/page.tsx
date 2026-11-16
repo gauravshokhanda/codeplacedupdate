@@ -7,21 +7,17 @@ import {
   Sparkles,
   ShieldCheck,
   Mail,
-  Phone,
   Clock,
   CheckCircle2,
   Lock,
   Star,
   Database,
   Cpu,
-  Cloud,
   Code2,
-  Layers,
   ChevronDown,
   Check,
   Send,
   HelpCircle,
-  Briefcase,
   TrendingUp,
 } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -209,13 +205,8 @@ const CAPABILITY_CARDS = [
     icon: Code2,
   },
   {
-    title: "Data Analytics & BI",
-    desc: "Executive command centers, KPI telemetry, and predictive metrics.",
-    icon: Cloud,
-  },
-  {
-    title: "Data Engineering",
-    desc: "Modern lakehouse architectures, ETL pipelines, and warehousing.",
+    title: "Data Analytics & Engineering",
+    desc: "Scalable ETL pipelines, lakehouses, executive dashboards, and BI systems.",
     icon: Database,
   },
   {
@@ -227,28 +218,32 @@ const CAPABILITY_CARDS = [
 
 const WHY_CONTACT_REASONS = [
   {
-    title: "Build Data Platforms",
-    desc: "Modern warehouses, ETL pipelines and reporting systems.",
-    icon: Database,
-    tag: "Lakehouse Architecture",
-  },
-  {
-    title: "Deploy AI Solutions",
-    desc: "LLM applications, AI copilots and business automation.",
+    title: "Automate Business Processes",
+    desc: "Build AI-powered workflows, intelligent assistants, and automation solutions that reduce manual effort.",
     icon: Cpu,
-    tag: "Sub-200ms RAG",
+    tag: "Intelligent Automation",
+    bottomLabel: "AI & Automation",
   },
   {
-    title: "Modernize Infrastructure",
-    desc: "Cloud-native architecture and DevOps optimization.",
-    icon: Cloud,
-    tag: "Cloud-Native Scale",
+    title: "Build Scalable Software",
+    desc: "Develop web applications, mobile platforms, and SaaS products designed around your business needs.",
+    icon: Code2,
+    tag: "Custom Development",
+    bottomLabel: "Software Development",
   },
   {
-    title: "Scale Software Products",
-    desc: "Enterprise applications and digital platforms.",
-    icon: Layers,
-    tag: "High Concurrency",
+    title: "Turn Data Into Insights",
+    desc: "Connect data sources, build reliable pipelines, and create dashboards that support smarter business decisions.",
+    icon: Database,
+    tag: "Data-Driven Decisions",
+    bottomLabel: "Data Analytics & Engineering",
+  },
+  {
+    title: "Grow Your Digital Presence",
+    desc: "Reach the right audience through SEO, AEO, paid advertising, analytics, social media, and branding.",
+    icon: TrendingUp,
+    tag: "Digital Growth",
+    bottomLabel: "Digital Marketing",
   },
 ];
 
@@ -285,7 +280,7 @@ const TESTIMONIALS = [
 const FAQ_ITEMS = [
   {
     q: "What services does CodePlaced provide?",
-    a: "We specialize in end-to-end Data Engineering (pipelines, lakehouses, warehousing), AI & Automation (agentic workflows, private RAG systems, LLMs), Cloud Architecture & FinOps (AWS, Azure, GCP), and Custom Software Development (high-concurrency web, mobile, and SaaS platforms).",
+    a: "We specialize in 4 core services: AI & Automation (agentic workflows, private RAG systems, LLMs), Software Development (high-concurrency web, mobile, and SaaS platforms), Data Analytics & Engineering (ETL/ELT pipelines, lakehouses, warehousing, executive dashboards, and BI), and Digital Marketing (AEO, SEO, paid acquisition, and GA4 telemetry).",
   },
   {
     q: "How long does a project typically take?",
@@ -445,7 +440,7 @@ export default function ContactPage() {
         <div className="min-h-[calc(100dvh-77px)] sm:min-h-[calc(100dvh-81px)] flex flex-col justify-start py-6 sm:py-8 lg:pt-8 xl:pt-10 lg:pb-12">
           <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,49fr)_minmax(0,51fr)] gap-6 sm:gap-8 lg:gap-10 xl:gap-12 items-start">
-              {/* LEFT SIDE (~49%): Heading, Description & 5-Card Overview */}
+              {/* LEFT SIDE (~49%): Heading, Description & 4-Card Overview */}
               <div className="space-y-2.5 sm:space-y-3 text-left">
                 {/* Pill Badge */}
                 <motion.div
@@ -483,7 +478,7 @@ export default function ContactPage() {
                   digital solutions.
                 </motion.p>
 
-                {/* Desktop Only: Compact 2x2 Grid + Full-Width Digital Marketing Card */}
+                {/* Desktop Only: Balanced 2x2 Capability Grid */}
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -495,9 +490,7 @@ export default function ContactPage() {
                     return (
                       <div
                         key={idx}
-                        className={`h-full p-3.5 xl:p-4 rounded-2xl bg-[#101820] border border-[#1B242B] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#00C8E8]/55 flex flex-col group ${
-                          idx === 4 ? "col-span-2" : ""
-                        }`}
+                        className="h-full p-3.5 xl:p-4 rounded-2xl bg-[#101820] border border-[#1B242B] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#00C8E8]/55 flex flex-col group"
                       >
                         <div className="w-8 h-8 rounded-lg bg-[#050505] text-[#00C8E8] border border-[#1B242B] group-hover:bg-[#00C8E8] group-hover:text-black transition-colors flex items-center justify-center mb-2.5">
                           <Icon className="w-4 h-4 text-[#00C8E8] group-hover:text-black transition-colors" />
@@ -764,10 +757,6 @@ export default function ContactPage() {
       <section className="py-8 sm:py-11 lg:py-14 bg-[#F7F9FB] border-b border-[#E5EAF0]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[850px] mx-auto text-center mb-6 sm:mb-8 space-y-1.5 sm:space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-white text-[#101820] border border-[#E5EAF0]">
-              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-              <span>PROVEN CLIENT OUTCOMES</span>
-            </div>
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#101820]">
               Helping Businesses Transform With Technology
             </h2>
@@ -895,78 +884,37 @@ export default function ContactPage() {
       {/* ========================================================================= */}
       <section className="pt-8 pb-6 sm:pt-11 sm:pb-8 lg:pt-14 lg:pb-10 bg-white text-neutral-900">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Mobile View: Compact 2-Column Grid */}
-          <div className="lg:hidden space-y-4">
-            <div className="text-center space-y-1">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#007F9C]">
-                DIRECT COMMUNICATION
-              </span>
+          {/* Mobile View: Compact Official Email + Business Hours & Response Promise */}
+          <div className="lg:hidden space-y-3.5">
+            <div className="text-center">
               <h2 className="text-xl font-black text-[#101820] tracking-tight">
-                Direct Contact Channels
+                Office Contact &amp; Hours
               </h2>
             </div>
 
+            <a
+              href="mailto:hello@codeplaced.com"
+              className="p-4 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] flex items-center justify-between gap-3 hover:border-[#00BCD4] transition-all group"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-9 h-9 rounded-lg bg-white border border-[#E5EAF0] flex items-center justify-center text-[#007F9C] shrink-0">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
+                    General Inquiries
+                  </div>
+                  <div className="text-sm font-extrabold text-[#101820] group-hover:text-[#007F9C] transition-colors truncate">
+                    hello@codeplaced.com
+                  </div>
+                </div>
+              </div>
+              <span className="text-[11px] font-semibold text-[#566171] bg-white border border-[#E5EAF0] px-2.5 py-1 rounded-full shrink-0">
+                Email Us
+              </span>
+            </a>
+
             <div className="grid grid-cols-2 gap-2.5">
-              <a
-                href="mailto:hello@codeplaced.com"
-                className="p-3 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] space-y-1 block hover:border-[#00BCD4] transition-all"
-              >
-                <div className="w-7 h-7 rounded-lg bg-white border border-[#E5EAF0] flex items-center justify-center text-[#007F9C]">
-                  <Mail className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
-                  General Inquiries
-                </div>
-                <div className="text-xs font-bold text-[#101820] truncate">
-                  hello@codeplaced.com
-                </div>
-              </a>
-
-              <a
-                href="mailto:contact@codeplaced.com"
-                className="p-3 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] space-y-1 block hover:border-[#00BCD4] transition-all"
-              >
-                <div className="w-7 h-7 rounded-lg bg-white border border-[#E5EAF0] flex items-center justify-center text-[#007F9C]">
-                  <Briefcase className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
-                  Business & Sales
-                </div>
-                <div className="text-xs font-bold text-[#101820] truncate">
-                  contact@codeplaced.com
-                </div>
-              </a>
-
-              <a
-                href="tel:+919999999999"
-                className="p-3 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] space-y-1 block hover:border-[#00BCD4] transition-all"
-              >
-                <div className="w-7 h-7 rounded-lg bg-white border border-[#E5EAF0] flex items-center justify-center text-emerald-600">
-                  <Phone className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
-                  Direct Phone
-                </div>
-                <div className="text-xs font-bold text-[#101820] truncate">
-                  +91 99999 99999
-                </div>
-              </a>
-
-              <a
-                href="mailto:careers@codeplaced.com"
-                className="p-3 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] space-y-1 block hover:border-[#00BCD4] transition-all"
-              >
-                <div className="w-7 h-7 rounded-lg bg-white border border-[#E5EAF0] flex items-center justify-center text-[#007F9C]">
-                  <Sparkles className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#566171]">
-                  Careers & Talent
-                </div>
-                <div className="text-xs font-bold text-[#101820] truncate">
-                  careers@codeplaced.com
-                </div>
-              </a>
-
               <div className="p-3 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] space-y-1">
                 <div className="w-7 h-7 rounded-lg bg-white border border-[#E5EAF0] flex items-center justify-center text-[#007F9C]">
                   <Clock className="w-3.5 h-3.5" />
@@ -993,107 +941,64 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Desktop View: Original Two-Column Layout */}
+          {/* Desktop View: Balanced Two-Column Layout */}
           <div className="hidden lg:grid grid-cols-12 gap-6 lg:gap-8 items-stretch">
             {/* Left Column: Direct Office Contact */}
-            <div className="col-span-6 h-full rounded-[18px] bg-white border border-[#E5EAF0] p-6 lg:p-7 flex flex-col justify-between space-y-5">
+            <div className="col-span-6 h-full rounded-[18px] bg-white border border-[#E5EAF0] p-6 lg:p-7 flex flex-col justify-between">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20 mb-4">
-                  <Mail className="w-3.5 h-3.5 text-[#007F9C]" />
-                  <span>COMMUNICATION CHANNELS</span>
-                </div>
                 <h3 className="text-2xl font-black text-[#101820] mb-2">
                   Office Contact
                 </h3>
-                <p className="text-xs sm:text-sm text-[#566171] mb-6">
-                  Direct channels to reach our technical leadership, partnerships, and talent pods.
+                <p className="text-xs sm:text-sm text-[#566171] mb-6 leading-relaxed">
+                  Direct communication channel for project consultations, technical scoping, and general inquiries.
                 </p>
 
-                <div className="space-y-4">
-                  <div className="p-4 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-white text-[#101820] border border-[#E5EAF0] flex items-center justify-center">
-                        <Mail className="w-4 h-4 text-[#007F9C]" />
+                <a
+                  href="mailto:hello@codeplaced.com"
+                  className="p-5 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] hover:border-[#00BCD4]/60 flex flex-col gap-3 transition-all group"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="w-10 h-10 rounded-lg bg-white text-[#007F9C] border border-[#E5EAF0] group-hover:bg-[#00BCD4]/10 group-hover:border-[#00BCD4]/40 flex items-center justify-center shrink-0 transition-colors">
+                        <Mail className="w-5 h-5" />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-wider text-[#566171]">
                           General Inquiries
                         </div>
-                        <a
-                          href="mailto:hello@codeplaced.com"
-                          className="text-sm font-extrabold text-[#101820] hover:text-[#007F9C] transition-colors"
-                        >
+                        <div className="text-base font-extrabold text-[#101820] group-hover:text-[#007F9C] transition-colors truncate">
                           hello@codeplaced.com
-                        </a>
+                        </div>
                       </div>
                     </div>
-                    <span className="text-xs text-[#566171] font-medium">Primary</span>
+                    <span className="text-[11px] font-semibold text-[#566171] bg-white border border-[#E5EAF0] px-2.5 py-1 rounded-full shrink-0">
+                      Official Email
+                    </span>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-white text-[#101820] border border-[#E5EAF0] flex items-center justify-center">
-                        <Briefcase className="w-4 h-4 text-[#007F9C]" />
-                      </div>
-                      <div>
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-[#566171]">
-                          Business & Partnerships
-                        </div>
-                        <a
-                          href="mailto:contact@codeplaced.com"
-                          className="text-sm font-extrabold text-[#101820] hover:text-[#007F9C] transition-colors"
-                        >
-                          contact@codeplaced.com
-                        </a>
-                      </div>
-                    </div>
-                    <span className="text-xs text-[#566171] font-medium">Sales</span>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-[#F7F9FB] border border-[#E5EAF0] flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-white text-[#101820] border border-[#E5EAF0] flex items-center justify-center">
-                        <Sparkles className="w-4 h-4 text-[#007F9C]" />
-                      </div>
-                      <div>
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-[#566171]">
-                          Careers & Engineering
-                        </div>
-                        <a
-                          href="mailto:careers@codeplaced.com"
-                          className="text-sm font-extrabold text-[#101820] hover:text-[#007F9C] transition-colors"
-                        >
-                          careers@codeplaced.com
-                        </a>
-                      </div>
-                    </div>
-                    <span className="text-xs text-[#566171] font-medium">Talent</span>
-                  </div>
-                </div>
+                  <p className="text-xs text-[#566171] leading-relaxed pl-[54px]">
+                    Reach our team directly for new projects, architecture reviews, and general questions.
+                  </p>
+                </a>
               </div>
 
-              <div className="pt-4 border-t border-[#E5EAF0] flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#566171]">
-                    Direct Phone Line
-                  </div>
-                  <div className="text-sm font-extrabold text-[#101820]">
-                    +91 99999 99999
-                  </div>
-                </div>
+              <div className="pt-6 mt-6 border-t border-[#E5EAF0] flex items-center justify-between text-xs text-[#566171]">
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#007F9C]" />
+                  <span>Direct Leadership Inbox</span>
+                </span>
+                <a
+                  href="mailto:hello@codeplaced.com"
+                  className="px-4 py-2 rounded-full bg-[#101820] hover:bg-[#007F9C] text-white font-extrabold text-xs transition-colors"
+                >
+                  Email Us
+                </a>
               </div>
             </div>
 
             {/* Right Column: Business Hours & Response Promise */}
             <div className="col-span-6 h-full rounded-[18px] bg-[#0B1117] border border-[#1B242B] text-white p-6 lg:p-7 flex flex-col justify-between space-y-5">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-[#00C8E8] border border-white/20 mb-4">
-                  <Clock className="w-3.5 h-3.5 text-[#00C8E8]" />
-                  <span>OPERATIONAL CADENCE</span>
-                </div>
                 <h3 className="text-2xl font-black text-white mb-2">
                   Business Hours & Support
                 </h3>
@@ -1161,49 +1066,48 @@ export default function ContactPage() {
       <section className="pt-7 pb-8 sm:pt-9 sm:pb-11 lg:pt-10 lg:pb-14 bg-[#FAFBFD] border-t border-b border-[#E5EAF0]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="max-w-[850px] mx-auto text-center mb-5 sm:mb-8 space-y-1.5 sm:space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#007F9C]" />
-              <span>CORE ARCHITECTURAL STRENGTHS</span>
-            </div>
-            <h2 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#101820]">
-              Why Companies Contact CodePlaced
+          <div className="max-w-[850px] mx-auto text-center mb-6 sm:mb-9 space-y-2 sm:space-y-2.5">
+            <span className="inline-block font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#007F9C]">
+              WHY CODEPLACED
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#101820]">
+              Why Businesses Choose CodePlaced
             </h2>
-            <p className="text-xs sm:text-base text-[#566171] max-w-[680px] mx-auto leading-relaxed">
-              We eliminate technical debt and bridge the gap between complex data architectures and
-              high-growth digital execution.
+            <p className="text-xs sm:text-base text-[#566171] max-w-[700px] mx-auto leading-relaxed">
+              From intelligent automation and custom software to data-driven decisions and digital
+              growth, we help businesses solve challenges with the right technology and strategy.
             </p>
           </div>
 
-          {/* 2-Column on Mobile, 4-Column on Desktop */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 items-stretch">
+          {/* Stacked on Mobile, 2x2 on Tablet, 4-Column Horizontal on Desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
             {WHY_CONTACT_REASONS.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="h-full rounded-xl sm:rounded-[18px] bg-white border border-[#E5EAF0] p-3.5 sm:p-5 lg:p-6 hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] hover:border-[#00C8E8] transition-all duration-300 flex flex-col justify-between group"
+                  className="h-full rounded-xl sm:rounded-[18px] bg-white border border-[#E5EAF0] p-5 lg:p-6 hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] hover:border-[#00C8E8] transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-2.5 sm:mb-4">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#F7F9FB] text-[#101820] border border-[#E5EAF0] group-hover:bg-[#101820] group-hover:text-white transition-colors duration-300 flex items-center justify-center">
-                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#007F9C]" />
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#F7F9FB] text-[#101820] border border-[#E5EAF0] group-hover:bg-[#101820] group-hover:text-white transition-colors duration-300 flex items-center justify-center shrink-0">
+                        <Icon className="w-5 h-5 text-[#007F9C]" />
                       </div>
-                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-bold bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20 truncate max-w-[85px] sm:max-w-none">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20 whitespace-nowrap">
                         {item.tag}
                       </span>
                     </div>
-                    <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#101820] mb-1 sm:mb-1.5 group-hover:text-[#00C8E8] transition-colors leading-tight">
+                    <h3 className="text-base lg:text-lg font-bold text-[#101820] mb-1.5 group-hover:text-[#00C8E8] transition-colors leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-[10px] sm:text-sm text-[#566171] leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
+                    <p className="text-xs sm:text-sm text-[#566171] leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="mt-3 sm:mt-5 pt-2 sm:pt-3.5 border-t border-[#E5EAF0] flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-[#101820]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#007F9C]" />
-                    <span>Production Standard</span>
+                  <div className="mt-5 pt-3.5 border-t border-[#E5EAF0] flex items-center gap-2 text-xs font-bold text-[#101820]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#007F9C] shrink-0" />
+                    <span>{item.bottomLabel}</span>
                   </div>
                 </div>
               );
@@ -1219,9 +1123,9 @@ export default function ContactPage() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[1000px] mx-auto">
             <div className="text-center mb-5 sm:mb-8 space-y-1.5 sm:space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-white text-[#101820] border border-[#E5EAF0]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wider bg-white text-[#101820] border border-[#E5EAF0]">
                 <HelpCircle className="w-3.5 h-3.5 text-[#007F9C]" />
-                <span>FREQUENTLY ASKED QUESTIONS</span>
+                <span>FAQs</span>
               </div>
               <h2 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#101820]">
                 Questions About Working With Us

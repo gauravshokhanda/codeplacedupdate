@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { CaseStudyCard, CaseStudyData } from "@/components/case-studies/CaseStudyCard";
 
-export type CaseStudySlug = "tuitionstime" | "hoopwrld" | "progress-partners" | "topplaced-ai" | "collectiq";
+export type CaseStudySlug = "tuitionstime" | "courtmetrics" | "growthpulse" | "topplaced-ai" | "collectiq";
 
 type RelatedCaseStudyItem = CaseStudyData;
 
@@ -47,19 +47,19 @@ const ALL_CASE_STUDIES: RelatedCaseStudyItem[] = [
     ],
   },
   {
-    id: "hoopwrld",
-    slug: "hoopwrld",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Hoopwrld",
+    id: "courtmetrics",
+    slug: "courtmetrics",
+    category: "DATA ANALYTICS & ENGINEERING",
+    brand: "CourtMetrics",
     brandIcon: Gamepad2,
-    brandLogoUrl: "/images/case-studies/hoopwrld-logo-badge.png",
+    brandLogoUrl: "/images/case-studies/courtmetrics/logo-badge.png",
     titlePrefix: "Turning Gameplay Data Into ",
     highlightWord: "Reliable Player Analytics",
     description:
-      "A unified reporting solution that helps Hoopwrld understand player activity, game completion, retention, and acquisition performance.",
-    image: "/images/case-studies/hoopwrld-hero-basketball-laptop-perfect.webp",
-    mobileImage: "/images/case-studies/hoopwrld-after-laptop-front.webp",
-    imageAlt: "Hoopwrld Player Analytics & Business Intelligence Dashboard",
+      "A unified reporting solution that helps CourtMetrics understand player activity, game completion, retention, and acquisition performance.",
+    image: "/images/case-studies/courtmetrics/hero-dashboard-laptop.webp",
+    mobileImage: "/images/case-studies/courtmetrics/after-laptop-front.webp",
+    imageAlt: "CourtMetrics Player Analytics & Business Intelligence Dashboard",
     techTags: ["Looker Studio", "PostgreSQL", "GA4", "Clerk", "Google Ads"],
     metrics: [
       { value: "5 Sources", label: "Data Sources Integrated", icon: Database },
@@ -68,18 +68,18 @@ const ALL_CASE_STUDIES: RelatedCaseStudyItem[] = [
     ],
   },
   {
-    id: "progress-partners",
-    slug: "progress-partners",
-    category: "DATA ANALYTICS & BUSINESS INTELLIGENCE",
-    brand: "Progress Partners",
+    id: "growthpulse",
+    slug: "growthpulse",
+    category: "DATA ANALYTICS & ENGINEERING",
+    brand: "GrowthPulse",
     brandIcon: BarChart3,
     titlePrefix: "Turning Complex Data Into ",
     highlightWord: "Clearer Growth Decisions",
     description:
-      "We helped Progress Partners turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
-    image: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    mobileImage: "/images/case-studies/progress-partners/hero-dashboard.webp",
-    imageAlt: "Progress Partners Business Intelligence & Revenue Analytics Dashboard",
+      "We helped GrowthPulse turn complex marketing, subscription and payment data into reliable KPIs for tracking revenue growth, customer retention and advertising performance.",
+    image: "/images/case-studies/growthpulse/hero-dashboard.webp",
+    mobileImage: "/images/case-studies/growthpulse/hero-dashboard.webp",
+    imageAlt: "GrowthPulse Business Intelligence & Revenue Analytics Dashboard",
     techTags: ["BigQuery", "SQL", "Preset", "GA4", "Stripe", "Solidgate", "Amplitude", "AnyTrack"],
     metrics: [
       { value: "8 Sources", label: "Data Sources Unified", icon: Database },
@@ -150,9 +150,6 @@ export function RelatedCaseStudies({ currentSlug, className = "" }: RelatedCaseS
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Section Header */}
         <div className="space-y-2 max-w-3xl text-left">
-          <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#00BCD4]">
-            EXPLORE MORE CASE STUDIES
-          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Explore More Case Studies.
           </h2>

@@ -162,10 +162,6 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
-              <Layers className="w-3.5 h-3.5 text-[#007F9C]" />
-              <span>CORE CAPABILITIES</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#101820]">
               What We Build & Deliver
             </h2>
@@ -205,10 +201,6 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
         <div className="max-w-[1280px] mx-auto space-y-16 relative z-10">
           
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-white/5 text-[#00C8E8] border border-[#1B242B]">
-              <Server className="w-3.5 h-3.5 text-[#00C8E8]" />
-              <span>ARCHITECTURE BLUEPRINT</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
               Production Architecture Topology
             </h2>
@@ -260,10 +252,6 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
         <div className="max-w-[1280px] mx-auto space-y-12">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#101820] border border-[#E5EAF0]">
-              <Cpu className="w-3.5 h-3.5 text-[#007F9C]" />
-              <span>CORE TOOLING</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#101820]">
               Technology Stack Used
             </h2>
@@ -302,11 +290,7 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
           
           {/* Left Column: Deliverables (6 Cols) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#007F9C]" />
-                <span>WHAT YOU RECEIVE</span>
-              </div>
+            <div>
               <h2 className="text-3xl font-black tracking-tight text-[#101820]">
                 Production Deliverables
               </h2>
@@ -328,9 +312,9 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
           {/* Right Column: FAQs Accordion (6 Cols) */}
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider bg-[#EBF9FC] text-[#007F9C] border border-[#00C8E8]/20">
                 <HelpCircle className="w-3.5 h-3.5 text-[#007F9C]" />
-                <span>COMMON QUESTIONS</span>
+                <span>FAQs</span>
               </div>
               <h2 className="text-3xl font-black tracking-tight text-[#101820]">
                 Frequently Asked Questions
@@ -377,11 +361,7 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
         <div className="max-w-[1280px] mx-auto space-y-12">
           
           <div className="flex items-center justify-between">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#101820] border border-[#E5EAF0]">
-                <Workflow className="w-3.5 h-3.5 text-[#007F9C]" />
-                <span>EXPLORE ALL DISCIPLINES</span>
-              </div>
+            <div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#101820]">
                 Other Engineering Disciplines
               </h2>
@@ -437,11 +417,6 @@ export function ServiceDetailClient({ service, otherServices }: ServiceDetailCli
       <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#050505] text-white relative overflow-hidden">
         <div className="max-w-[1200px] mx-auto rounded-[36px] p-10 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-2xl bg-[#101820] border border-[#1B242B]">
           <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/5 text-[#00C8E8] border border-[#1B242B]">
-              <Sparkles className="w-3.5 h-3.5 text-[#00C8E8]" />
-              <span>START YOUR PROJECT</span>
-            </div>
-
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
               Ready To Engineer Your{" "}
               <span className="text-[#00C8E8]">

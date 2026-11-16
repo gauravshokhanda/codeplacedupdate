@@ -14,7 +14,6 @@ import {
   Bot,
   Code2,
   Database,
-  BarChart3,
   HeartPulse,
   ShoppingBag,
   GraduationCap,
@@ -67,34 +66,20 @@ const SERVICES_DATA = [
   },
   {
     num: "03",
-    title: "Data Analytics & Business Intelligence",
+    title: "Data Analytics & Engineering",
     description:
-      "Transform complex data into single-source-of-truth executive dashboards, KPI telemetry, and predictive metrics.",
+      "Turn complex data into actionable insights with scalable data pipelines, modern data platforms, executive dashboards, and business intelligence solutions.",
     capabilities: [
-      "Executive Cockpits & Dashboards",
-      "Power BI, Tableau & Looker",
-      "Cross-Platform Attribution",
-      "Cohort & Retention Analytics",
+      "Data Pipelines & ETL/ELT",
+      "Data Warehousing & Architecture",
+      "BI Dashboards & Analytics",
+      "Predictive Analytics & Reporting",
     ],
-    icon: BarChart3,
-    href: "/services/executive-dashboards",
+    icon: Database,
+    href: "/services/data-analytics-engineering",
   },
   {
     num: "04",
-    title: "Data Engineering",
-    description:
-      "Build resilient automated data pipelines, lakehouse architectures, and warehousing solutions with zero data loss.",
-    capabilities: [
-      "Automated ETL/ELT Pipelines",
-      "Lakehouse & Data Warehouses",
-      "Cross-System Integrations",
-      "Data Governance & SLA Audits",
-    ],
-    icon: Database,
-    href: "/services/data-platforms",
-  },
-  {
-    num: "05",
     title: "Digital Marketing",
     description:
       "Grow your online presence and attract the right customers through search optimization, performance advertising, analytics, social media, and brand strategy.",
@@ -291,14 +276,13 @@ export default function HomePage() {
   const col2Ref = useRef<HTMLDivElement>(null);
   const col3Ref = useRef<HTMLDivElement>(null);
   const col4Ref = useRef<HTMLDivElement>(null);
-  const col5Ref = useRef<HTMLDivElement>(null);
   const servicesBtnRef = useRef<HTMLDivElement>(null);
 
   // =========================================================================
   // GSAP SCROLLTRIGGER: APPINVENTIV-INSPIRED STAIRCASE SERVICES ANIMATION
   // Phase A: Initial descending staircase (Col 1 at top, Col 2..Col 5 staggered)
   // Phase B (0.00 -> 0.72): Progressive column rising toward Column 1
-  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 5-column layout & CTA
+  // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 4-column layout & CTA
   // Phase D (0.90 -> 1.00): Natural release into About CodePlaced
   // =========================================================================
   useEffect(() => {
@@ -322,20 +306,19 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
-        const col5 = col5Ref.current;
         const btn = servicesBtnRef.current;
-        if (!col2 || !col3 || !col4 || !col5) return;
+        if (!col2 || !col3 || !col4) return;
 
         // Viewport height calculation: ensure pinned section and stagger fit comfortably within viewport
         const navbarHeight = 80;
         const availableHeight = window.innerHeight - navbarHeight;
         if (availableHeight < 620) {
-          gsap.set([col2, col3, col4, col5], { y: 0 });
+          gsap.set([col2, col3, col4], { y: 0 });
           if (btn) gsap.set(btn, { y: 0 });
           return;
         }
 
-        // Proportioned 5-column staircase offsets on standard and compact viewports
+        // Proportioned 4-column staircase offsets on standard and compact viewports
         let staggerStep = 80;
         if (availableHeight >= 960) {
           staggerStep = 80;
@@ -350,13 +333,11 @@ export default function HomePage() {
         const col2Offset = staggerStep;
         const col3Offset = staggerStep * 2;
         const col4Offset = staggerStep * 3;
-        const col5Offset = staggerStep * 4;
         const btnOffset = col3Offset;
 
         gsap.set(col2, { y: col2Offset });
         gsap.set(col3, { y: col3Offset });
         gsap.set(col4, { y: col4Offset });
-        gsap.set(col5, { y: col5Offset });
         if (btn) gsap.set(btn, { y: btnOffset });
 
         // Single coordinated ScrollTrigger timeline pinned right below the 80px navbar
@@ -377,7 +358,6 @@ export default function HomePage() {
         tl.to(col2, { y: 0, duration: 0.42, ease: "none" }, 0.00);
         tl.to(col3, { y: 0, duration: 0.46, ease: "none" }, 0.08);
         tl.to(col4, { y: 0, duration: 0.48, ease: "none" }, 0.16);
-        tl.to(col5, { y: 0, duration: 0.50, ease: "none" }, 0.22);
 
         // View All Services button rises in sync with Column 3 to arrive directly below the aligned cards
         if (btn) {
@@ -395,10 +375,9 @@ export default function HomePage() {
         const col2 = col2Ref.current;
         const col3 = col3Ref.current;
         const col4 = col4Ref.current;
-        const col5 = col5Ref.current;
         const btn = servicesBtnRef.current;
-        if (col2 && col3 && col4 && col5) {
-          gsap.set([col2, col3, col4, col5], { y: 0 });
+        if (col2 && col3 && col4) {
+          gsap.set([col2, col3, col4], { y: 0 });
         }
         if (btn) {
           gsap.set(btn, { y: 0 });
@@ -542,10 +521,7 @@ export default function HomePage() {
       {/* ===================================================================== */}
       <section className="py-7 sm:py-8 lg:py-9 bg-[#000000] border-b border-[#292929] text-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-              CLIENT SUCCESS
-            </span>
+          <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               What Our Clients Say
             </h2>
@@ -682,24 +658,21 @@ export default function HomePage() {
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative bg-white">
           {/* Centered Editorial Section Header with Clean Breathing Room */}
-          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1 sm:space-y-1.5 lg:space-y-2 2xl:space-y-2.5 shrink-0">
-            <span className="text-[10.5px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              CORE CAPABILITIES
-            </span>
+          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-6 lg:mb-4 xl:mb-5.5 2xl:mb-8 space-y-1.5 lg:space-y-2 shrink-0">
             <h2 className="text-xl sm:text-3xl lg:text-[28px] xl:text-[36px] 2xl:text-[44px] font-extrabold tracking-tight text-[#111827] leading-[1.15] lg:leading-[1.12] max-w-[760px] xl:max-w-[820px] mx-auto">
               Everything You Need to Build and Scale to Market.
             </h2>
-            <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal pt-0.5">
+            <p className="text-xs sm:text-sm lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] text-[#56616B] leading-relaxed max-w-2xl mx-auto font-normal">
               End-to-end technical solutions designed for scale, performance, and measurable business impact — from rapid MVP builds to enterprise-grade architectures.
             </p>
           </div>
 
           {/* DESKTOP 5-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
           <div className="hidden lg:block w-full relative">
-            <div className="grid grid-cols-5 border-t border-[#E5E5E5] relative bg-white">
+            <div className="grid grid-cols-4 border-t border-[#E5E5E5] relative bg-white">
               {SERVICES_DATA.map((service, idx) => {
                 const ServiceIcon = service.icon;
-                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref, col5Ref];
+                const colRefs = [col1Ref, col2Ref, col3Ref, col4Ref];
                 return (
                   <div
                     key={idx}
@@ -777,9 +750,7 @@ export default function HomePage() {
                 return (
                   <div
                     key={idx}
-                    className={`p-3.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group ${
-                      idx === 4 ? "sm:col-span-2" : ""
-                    }`}
+                    className="p-3.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group"
                   >
                     <div>
                       <div className="flex items-center justify-between">
@@ -851,10 +822,7 @@ export default function HomePage() {
 
             {/* Right Column (55%): Company Content, Principles, Verified Stats & CTA */}
             <div className="w-full lg:w-[55%] flex flex-col justify-between space-y-2.5 sm:space-y-4 lg:pl-3">
-              <div className="space-y-1 sm:space-y-2">
-                <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                  WHY CHOOSE CODEPLACED
-                </span>
+              <div className="space-y-1.5 sm:space-y-2">
                 <h2 className="text-lg xs:text-xl sm:text-2xl lg:text-[36px] font-extrabold tracking-tight text-white leading-tight">
                   Built for Speed, Scale & Engineering Excellence.
                 </h2>
@@ -937,10 +905,7 @@ export default function HomePage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header with Left-Aligned Title and Right-Aligned Link */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-2.5 sm:gap-4 mb-3 sm:mb-6">
-            <div className="space-y-1 max-w-2xl text-left">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                FEATURED CLIENT WORK
-              </span>
+            <div className="max-w-2xl text-left">
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
                 Real Project with Real ROI
               </h2>
@@ -1071,9 +1036,6 @@ export default function HomePage() {
           <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Heading & Supporting Text */}
             <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00BCD4] block">
-                CROSS-INDUSTRY DOMAIN EXPERTISE
-              </span>
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 Industries We Transform
               </h2>
@@ -1126,9 +1088,6 @@ export default function HomePage() {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-6 lg:mb-8 space-y-1 sm:space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-              HOW WE WORK
-            </span>
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">
               A Clear Path From Discovery to Scale.
             </h2>
@@ -1178,8 +1137,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
             {/* Left Column */}
             <div className="lg:col-span-5 space-y-2 sm:space-y-3">
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-[#00AFC8] block">
-                FAQS
+              <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#00AFC8] block">
+                FAQs
               </span>
 
               <h2 className="text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-tight text-[#111827] leading-tight">

@@ -476,9 +476,6 @@ export default function AiCopilotsPage() {
         <section id="capabilities" className="section-py bg-white border-y border-slate-200/80">
           <div className="site-container">
             <div className="max-w-3xl mb-14 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-                Full Spectrum AI Capabilities
-              </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
                 Architectural Modules Built for Scale
               </h2>
@@ -805,9 +802,6 @@ export default function AiCopilotsPage() {
         {/* ========================================================================= */}
         <section className="section-py site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-              Execution Methodology
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
               From Discovery to Live Copilot in 4 Weeks
             </h2>
@@ -853,9 +847,6 @@ export default function AiCopilotsPage() {
         <section className="section-py bg-white border-t border-slate-200/80">
           <div className="site-container">
             <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-                Client Success Stories
-              </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
                 Enterprise AI in Production
               </h2>
@@ -949,9 +940,6 @@ export default function AiCopilotsPage() {
         <section className="section-py bg-[#050505] text-white border-y border-[#1B242B]">
           <div className="site-container">
             <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.14em] text-[#00C8E8]">
-                The CodePlaced Advantage
-              </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
                 Enterprise AI Engineering You Can Trust
               </h2>
@@ -993,9 +981,6 @@ export default function AiCopilotsPage() {
         {/* ========================================================================= */}
         <section className="section-py site-container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-              Battle-Tested Tooling
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#082F49] tracking-tight">
               Production AI Technology Stack
             </h2>
@@ -1029,8 +1014,8 @@ export default function AiCopilotsPage() {
         <section className="section-py bg-white border-t border-slate-200/80">
           <div className="site-container max-w-3xl mx-auto">
             <div className="text-center space-y-4 mb-12">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#0E7490]">
-                Direct Answers
+              <span className="text-xs font-mono font-bold tracking-[0.14em] text-[#0E7490] block">
+                FAQs
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#082F49]">
                 Frequently Asked Questions

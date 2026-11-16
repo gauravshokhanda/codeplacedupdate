@@ -130,7 +130,7 @@ const ENGINEERING_TEAM = [
     image: "/team/team-2.jpg",
   },
   {
-    name: "Prajwal Kumar Rathi",
+    name: "Prajwal",
     role: "Data Analyst",
     image: "/team/team-7.jpg",
   },
@@ -145,17 +145,17 @@ const ENGINEERING_TEAM = [
     image: "/team/team-3.jpg",
   },
   {
-    name: "Sadiya Ansari",
+    name: "Sadiya",
     role: "Growth & Editing Specialist",
     image: "/team/team-6.jpg",
   },
   {
-    name: "Tanya Gupta",
+    name: "Tanya",
     role: "Marketing Specialist",
     image: "/team/tanya-gupta.webp",
   },
   {
-    name: "Aditya Kumar",
+    name: "Aditya",
     role: "Data Analyst",
     image: "/team/aditya-kumar.webp",
   },
@@ -328,9 +328,6 @@ export default function AboutPage() {
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
             <div className="lg:col-span-5 space-y-4">
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#06B6D4] block">
-                OUR STORY
-              </span>
               <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold tracking-[-0.03em] text-[#070B0E] leading-[1.14]">
                 Great Solutions Start With Understanding the Problem.
               </h2>
@@ -373,9 +370,6 @@ export default function AboutPage() {
       >
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-2xl mx-auto text-center space-y-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#06B6D4] block">
-              PURPOSE &amp; DIRECTION
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-[-0.03em] text-[#FFFFFF]">
               Mission &amp; Vision
             </h2>
@@ -439,10 +433,7 @@ export default function AboutPage() {
         className="scroll-mt-20 py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] text-[#070B0E] border-b border-[#070B0E]/10"
       >
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="max-w-2xl mx-auto text-center space-y-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#06B6D4] block">
-              OUR VALUES
-            </span>
+          <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-[-0.03em] text-[#070B0E]">
               The Principles Behind Every Project
             </h2>
@@ -489,9 +480,6 @@ export default function AboutPage() {
         >
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-2xl mx-auto text-center space-y-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#06B6D4] block">
-              LEADERSHIP
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-[-0.03em] text-[#FFFFFF]">
               The People Leading CodePlaced.
             </h2>
@@ -575,9 +563,6 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 lg:py-24 bg-[#F8FAFC] text-[#070B0E] border-b border-[#070B0E]/10">
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-2xl mx-auto text-center space-y-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#06B6D4] block">
-              THE TEAM
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold tracking-[-0.03em] text-[#070B0E]">
               Meet Our Team
             </h2>
@@ -618,8 +603,8 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 lg:py-24 bg-[#FFFFFF] text-[#070B0E] border-b border-[#070B0E]/10">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#06B6D4] block">
-              COMMON QUESTIONS
+            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#06B6D4] block">
+              FAQs
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold tracking-[-0.03em] text-[#070B0E]">
               Questions About Working With Us

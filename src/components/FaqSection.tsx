@@ -23,8 +23,8 @@ export function FaqSection({ onOpenBookAudit }: FaqSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column */}
           <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs">
-              <HelpCircle className="w-3.5 h-3.5 text-[#0E7490]" /> Direct Answers
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider bg-[#ECFEFF] text-[#0B4F6C] border border-[#0B4F6C]/20 shadow-xs">
+              <HelpCircle className="w-3.5 h-3.5 text-[#0E7490]" /> FAQs
             </div>
 
             <h2 className="text-[28px] sm:text-[36px] lg:text-[48px] font-black text-[#082F49] tracking-tight leading-[1.15]">

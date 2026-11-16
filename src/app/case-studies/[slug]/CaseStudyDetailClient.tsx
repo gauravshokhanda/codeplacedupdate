@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { TuitionstimeCaseStudy } from "@/components/case-studies/TuitionstimeCaseStudy";
-import { HoopwrldCaseStudy } from "@/components/case-studies/HoopwrldCaseStudy";
+import { CourtMetricsCaseStudy } from "@/components/case-studies/CourtMetricsCaseStudy";
+import { GrowthPulseCaseStudy } from "@/components/case-studies/GrowthPulseCaseStudy";
 import { TopPlacedAICaseStudy } from "@/components/case-studies/TopPlacedAICaseStudy";
 import { CollectIQCaseStudy } from "@/components/case-studies/CollectIQCaseStudy";
 import { motion } from "framer-motion";
@@ -67,7 +68,7 @@ export function CaseStudyDetailClient({
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
-    if (study.slug === "tuitionstime" || study.slug === "hoopwrld") return;
+    if (study.slug === "tuitionstime" || study.slug === "courtmetrics" || study.slug === "growthpulse") return;
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight <= 0) return;
@@ -84,8 +85,12 @@ export function CaseStudyDetailClient({
     return <TuitionstimeCaseStudy />;
   }
 
-  if (study.slug === "hoopwrld") {
-    return <HoopwrldCaseStudy />;
+  if (study.slug === "courtmetrics") {
+    return <CourtMetricsCaseStudy />;
+  }
+
+  if (study.slug === "growthpulse") {
+    return <GrowthPulseCaseStudy />;
   }
 
   if (study.slug === "topplaced-ai") {
@@ -298,10 +303,6 @@ export function CaseStudyDetailClient({
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">
-              <AlertCircle className="w-3.5 h-3.5 text-rose-500" />
-              <span>THE OPERATIONAL BOTTLENECK</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
               From Fragmented Data To Unified Intelligence
             </h2>
@@ -376,10 +377,6 @@ export function CaseStudyDetailClient({
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              <Workflow className="w-3.5 h-3.5 text-[#16D3F5]" />
-              <span>THE THREE-PILLAR STORY</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
               Challenge &bull; Solution &bull; Outcome
             </h2>
@@ -516,10 +513,6 @@ export function CaseStudyDetailClient({
         <div className="max-w-[1280px] mx-auto space-y-16 relative z-10">
           
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-white/10 text-cyan-300 border border-white/15">
-              <Server className="w-3.5 h-3.5 text-[#16D3F5]" />
-              <span>INTERACTIVE SYSTEM TOPOLOGY</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
               Production Architecture
             </h2>
@@ -572,10 +565,6 @@ export function CaseStudyDetailClient({
           <div className="max-w-[1280px] mx-auto space-y-16">
             
             <div className="text-center max-w-3xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-                <Sparkles className="w-3.5 h-3.5 text-[#16D3F5]" />
-                <span>PRODUCT EXPERIENCE</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
                 Interface & Cockpit Showcase
               </h2>
@@ -625,10 +614,6 @@ export function CaseStudyDetailClient({
           <div className="max-w-[1280px] mx-auto space-y-16">
             
             <div className="text-center max-w-3xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-                <Cpu className="w-3.5 h-3.5 text-[#16D3F5]" />
-                <span>ARCHITECTURAL RATIONALE</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
                 Why We Built It This Way
               </h2>
@@ -683,10 +668,6 @@ export function CaseStudyDetailClient({
         <div className="max-w-[1280px] mx-auto space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-              <Workflow className="w-3.5 h-3.5 text-[#16D3F5]" />
-              <span>SPRINT PROGRESSION</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
               Implementation Timeline
             </h2>
@@ -727,10 +708,6 @@ export function CaseStudyDetailClient({
           <div className="max-w-[1280px] mx-auto space-y-16">
             
             <div className="text-center max-w-3xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-                <BarChart3 className="w-3.5 h-3.5 text-[#16D3F5]" />
-                <span>TRANSFORMATION COMPARISON</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#072C4C]">
                 Before vs After Implementation
               </h2>
@@ -779,11 +756,7 @@ export function CaseStudyDetailClient({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Business Impact Grid (7 Cols) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-                  <Award className="w-3.5 h-3.5 text-[#16D3F5]" />
-                  <span>VERIFIED COMMERCIAL GAINS</span>
-                </div>
+              <div>
                 <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#072C4C]">
                   Business Impact Dashboard
                 </h2>
@@ -853,11 +826,7 @@ export function CaseStudyDetailClient({
           <div className="max-w-[1280px] mx-auto space-y-12">
             
             <div className="flex items-center justify-between">
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F7FC] text-[#072C4C] border border-[#16D3F5]/30">
-                  <Briefcase className="w-3.5 h-3.5 text-[#16D3F5]" />
-                  <span>CONTINUE EXPLORING</span>
-                </div>
+              <div>
                 <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#072C4C]">
                   Related Case Studies
                 </h2>
@@ -924,11 +893,6 @@ export function CaseStudyDetailClient({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#16D3F5]/14 rounded-full blur-[130px] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/10 text-cyan-300 border border-white/15">
-            <Sparkles className="w-3.5 h-3.5 text-[#16D3F5]" />
-            <span>START YOUR PROJECT</span>
-          </div>
-
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
             Ready To Engineer Your Next{" "}
             <span
