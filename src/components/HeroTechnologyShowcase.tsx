@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   Bot,
@@ -18,16 +18,14 @@ interface EcosystemNode {
   tags: string[];
   href: string;
   icon: React.ElementType;
-  positionClass: string;
-  pathD: string;
-  target: { x: number; y: number };
+  baseAngleDeg: number;
   particleDurationOut: string;
   particleDurationIn: string;
   particleDelay: string;
 }
 
-const CX = 400;
-const CY = 280;
+const ORBIT_DURATION_MS = 72000; // Calm ~72s full revolution
+const ORBIT_ANGULAR_SPEED = (Math.PI * 2) / ORBIT_DURATION_MS;
 
 const ECOSYSTEM_NODES: EcosystemNode[] = [
   {
@@ -38,9 +36,7 @@ const ECOSYSTEM_NODES: EcosystemNode[] = [
     tags: ["LangGraph", "Python", "OpenAI"],
     href: "/services/ai-copilots",
     icon: Bot,
-    positionClass: "top-[5%] left-[0%]",
-    pathD: `M ${CX} ${CY} C 325 220, 285 142, 224 114`,
-    target: { x: 224, y: 114 },
+    baseAngleDeg: -135,
     particleDurationOut: "2.9s",
     particleDurationIn: "4.1s",
     particleDelay: "0s",
@@ -53,9 +49,7 @@ const ECOSYSTEM_NODES: EcosystemNode[] = [
     tags: ["Next.js", "TypeScript", "PostgreSQL"],
     href: "/services/app-web-development",
     icon: Code2,
-    positionClass: "top-[5%] right-[0%]",
-    pathD: `M ${CX} ${CY} C 475 220, 515 142, 576 114`,
-    target: { x: 576, y: 114 },
+    baseAngleDeg: -45,
     particleDurationOut: "3.3s",
     particleDurationIn: "4.4s",
     particleDelay: "-0.7s",
@@ -66,11 +60,9 @@ const ECOSYSTEM_NODES: EcosystemNode[] = [
     title: "Data Analytics & Engineering",
     sla: "Real-Time Data & BI",
     tags: ["Snowflake", "dbt", "Power BI"],
-    href: "/services/data-platforms",
+    href: "/services/data-analytics-engineering",
     icon: Database,
-    positionClass: "top-[37%] right-[0%]",
-    pathD: `M ${CX} ${CY} C 455 282, 515 262, 576 266`,
-    target: { x: 576, y: 266 },
+    baseAngleDeg: 45,
     particleDurationOut: "2.7s",
     particleDurationIn: "3.8s",
     particleDelay: "-1.3s",
@@ -83,9 +75,7 @@ const ECOSYSTEM_NODES: EcosystemNode[] = [
     tags: ["AEO & SEO", "Google Ads", "GA4"],
     href: "/services/digital-marketing",
     icon: TrendingUp,
-    positionClass: "bottom-[5%] left-[0%]",
-    pathD: `M ${CX} ${CY} C 325 340, 285 418, 224 446`,
-    target: { x: 224, y: 446 },
+    baseAngleDeg: 135,
     particleDurationOut: "3.4s",
     particleDurationIn: "4.3s",
     particleDelay: "-2.1s",
@@ -105,8 +95,236 @@ const AMBIENT_PARTICLES = [
   { top: "36%", left: "16%", size: "w-1 h-1", color: "bg-[#20D7F5]", delay: "-4.8s", duration: "8.1s" },
 ];
 
+interface StageMetrics {
+  width: number;
+  height: number;
+  cx: number;
+  cy: number;
+  rx: number;
+  ry: number;
+  hubAttachR: number;
+  cards: Record<string, { w: number; h: number }>;
+}
+
 export function HeroTechnologyShowcase() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const hubRef = useRef<HTMLDivElement | null>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const outerTrackRef = useRef<SVGEllipseElement | null>(null);
+  const innerTrackRef = useRef<SVGEllipseElement | null>(null);
+  const cardWrapperRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const pathRefs = useRef<Record<string, (SVGPathElement | null)[]>>({});
+  const dotRefs = useRef<Record<string, SVGCircleElement | null>>({});
+
+  const metricsRef = useRef<StageMetrics | null>(null);
+  const angleOffsetRef = useRef<number>(0);
+  const isPausedRef = useRef<boolean>(false);
+  const speedFactorRef = useRef<number>(1);
+  const reducedMotionRef = useRef<boolean>(false);
+
+  const setHovered = useCallback((id: string | null) => {
+    setHoveredId(id);
+    isPausedRef.current = id !== null;
+  }, []);
+
+  const setPathRef = useCallback(
+    (nodeId: string, slot: number) => (el: SVGPathElement | null) => {
+      if (!pathRefs.current[nodeId]) {
+        pathRefs.current[nodeId] = [];
+      }
+      pathRefs.current[nodeId][slot] = el;
+    },
+    []
+  );
+
+  // Compute stage bounds and safe elliptical orbital radii inside the hero container
+  const measureMetrics = useCallback(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    if (width === 0 || height === 0) {
+      metricsRef.current = null;
+      return;
+    }
+
+    const cx = width / 2;
+    const cy = height / 2;
+    const hubW = hubRef.current?.offsetWidth || 154;
+    const hubAttachR = hubW * 0.43;
+
+    let maxCardW = 200;
+    let maxCardH = 120;
+    const cards: Record<string, { w: number; h: number }> = {};
+
+    for (const node of ECOSYSTEM_NODES) {
+      const wrapper = cardWrapperRefs.current[node.id];
+      const w = wrapper?.offsetWidth || 200;
+      const h = wrapper?.offsetHeight || 118;
+      cards[node.id] = { w, h };
+      if (w > maxCardW) maxCardW = w;
+      if (h > maxCardH) maxCardH = h;
+    }
+
+    // Clamp orbital radii so orbiting cards stay strictly inside the stage without clipping or touching left hero copy
+    const rx = Math.max(90, Math.min(width * 0.37, cx - maxCardW / 2 - 6));
+    const ry = Math.max(95, Math.min(height * 0.37, cy - maxCardH / 2 - 6));
+
+    metricsRef.current = { width, height, cx, cy, rx, ry, hubAttachR, cards };
+
+    if (svgRef.current) {
+      svgRef.current.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    }
+    if (outerTrackRef.current) {
+      outerTrackRef.current.setAttribute("cx", cx.toFixed(1));
+      outerTrackRef.current.setAttribute("cy", cy.toFixed(1));
+      outerTrackRef.current.setAttribute("rx", rx.toFixed(1));
+      outerTrackRef.current.setAttribute("ry", ry.toFixed(1));
+    }
+    if (innerTrackRef.current) {
+      innerTrackRef.current.setAttribute("cx", cx.toFixed(1));
+      innerTrackRef.current.setAttribute("cy", cy.toFixed(1));
+      innerTrackRef.current.setAttribute("rx", (rx * 0.62).toFixed(1));
+      innerTrackRef.current.setAttribute("ry", (ry * 0.62).toFixed(1));
+    }
+  }, []);
+
+  // Apply orbital card transforms and dynamically anchored SVG curved paths directly to DOM nodes (zero React re-renders)
+  const renderOrbitFrame = useCallback((angleOffset: number) => {
+    const m = metricsRef.current;
+    if (!m) return;
+
+    const { cx, cy, rx, ry, hubAttachR, cards } = m;
+
+    for (const node of ECOSYSTEM_NODES) {
+      const wrapper = cardWrapperRefs.current[node.id];
+      const cardDim = cards[node.id];
+      if (!wrapper || !cardDim) continue;
+
+      const theta = (node.baseAngleDeg * Math.PI) / 180 + angleOffset;
+      const px = cx + rx * Math.cos(theta);
+      const py = cy + ry * Math.sin(theta);
+
+      // Keep each card horizontal/upright via GPU translate3d
+      const txLeft = px - cardDim.w / 2;
+      const tyTop = py - cardDim.h / 2;
+      wrapper.style.transform = `translate3d(${txLeft.toFixed(2)}px, ${tyTop.toFixed(2)}px, 0)`;
+
+      // Compute ray from card center back toward core hub center & intersect card border cleanly
+      const toCenterDx = cx - px;
+      const toCenterDy = cy - py;
+      const halfW = cardDim.w / 2;
+      const halfH = cardDim.h / 2;
+      const hitScale =
+        1 / Math.max(Math.abs(toCenterDx) / halfW, Math.abs(toCenterDy) / halfH, 0.0001);
+
+      const borderX = px + toCenterDx * hitScale;
+      const borderY = py + toCenterDy * hitScale;
+
+      // Tuck path endpoint 2px behind card border so line never separates visually
+      const lenToCenter = Math.hypot(toCenterDx, toCenterDy) || 1;
+      const ux = toCenterDx / lenToCenter;
+      const uy = toCenterDy / lenToCenter;
+      const pathEndX = borderX - ux * 2;
+      const pathEndY = borderY - uy * 2;
+
+      // Start at hub outer energy ring toward planet node
+      const hx = cx - ux * hubAttachR;
+      const hy = cy - uy * hubAttachR;
+
+      // Gentle tangential orbital sweep for curved solar-system energy spline
+      const perpX = uy;
+      const perpY = -ux;
+      const bend = Math.min(26, lenToCenter * 0.14);
+      const ctrlX = (hx + pathEndX) / 2 + perpX * bend;
+      const ctrlY = (hy + pathEndY) / 2 + perpY * bend;
+
+      const d = `M ${hx.toFixed(1)} ${hy.toFixed(1)} Q ${ctrlX.toFixed(1)} ${ctrlY.toFixed(1)}, ${pathEndX.toFixed(1)} ${pathEndY.toFixed(1)}`;
+
+      const paths = pathRefs.current[node.id];
+      if (paths) {
+        for (let i = 0; i < paths.length; i++) {
+          const p = paths[i];
+          if (p) p.setAttribute("d", d);
+        }
+      }
+
+      const dot = dotRefs.current[node.id];
+      if (dot) {
+        dot.setAttribute("cx", borderX.toFixed(1));
+        dot.setAttribute("cy", borderY.toFixed(1));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reducedMotionRef.current = mediaQuery.matches;
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      reducedMotionRef.current = e.matches;
+    };
+    mediaQuery.addEventListener("change", handleMotionChange);
+
+    measureMetrics();
+    renderOrbitFrame(angleOffsetRef.current);
+
+    let rafId = 0;
+    let readyFrame = window.requestAnimationFrame(() => {
+      measureMetrics();
+      renderOrbitFrame(angleOffsetRef.current);
+      setIsReady(true);
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      measureMetrics();
+      renderOrbitFrame(angleOffsetRef.current);
+    });
+
+    resizeObserver.observe(stage);
+    Object.values(cardWrapperRefs.current).forEach((el) => {
+      if (el) resizeObserver.observe(el);
+    });
+
+    let lastTime = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min(now - lastTime, 64);
+      lastTime = now;
+
+      if (metricsRef.current && !reducedMotionRef.current) {
+        // Smooth velocity easing on hover pause & resume
+        const targetSpeed = isPausedRef.current ? 0 : 1;
+        speedFactorRef.current += (targetSpeed - speedFactorRef.current) * Math.min(1, dt * 0.012);
+
+        if (speedFactorRef.current > 0.001) {
+          angleOffsetRef.current =
+            (angleOffsetRef.current + dt * ORBIT_ANGULAR_SPEED * speedFactorRef.current) %
+            (Math.PI * 2);
+          renderOrbitFrame(angleOffsetRef.current);
+        }
+      }
+
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    rafId = window.requestAnimationFrame(tick);
+
+    return () => {
+      window.cancelAnimationFrame(readyFrame);
+      window.cancelAnimationFrame(rafId);
+      resizeObserver.disconnect();
+      mediaQuery.removeEventListener("change", handleMotionChange);
+      readyFrame = 0;
+    };
+  }, [measureMetrics, renderOrbitFrame]);
 
   return (
     <div className="hidden md:block relative w-full max-w-[780px] mx-auto select-none">
@@ -116,7 +334,7 @@ export function HeroTechnologyShowcase() {
         className="pointer-events-none absolute -inset-6 sm:-inset-10"
         style={{
           background:
-            "radial-gradient(circle at 48% 50%, rgba(0, 188, 212, 0.14) 0%, rgba(8, 127, 165, 0.08) 38%, rgba(0, 0, 0, 0) 70%)",
+            "radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.14) 0%, rgba(8, 127, 165, 0.08) 38%, rgba(0, 0, 0, 0) 70%)",
         }}
       />
 
@@ -140,13 +358,18 @@ export function HeroTechnologyShowcase() {
       </div>
 
       {/* =================================================================== */}
-      {/* DESKTOP / TABLET ORGANIC ORBITAL NETWORK (md: & above)              */}
+      {/* DESKTOP / TABLET SOLAR-SYSTEM ORBITAL ECOSYSTEM (md: & above)       */}
       {/* =================================================================== */}
-      <div className="hidden md:block relative w-full h-[520px] lg:h-[545px] xl:h-[570px]">
-        {/* Animated Dashed-Neon SVG Neural Splines */}
+      <div
+        ref={stageRef}
+        className={`hidden md:block relative w-full h-[500px] lg:h-[535px] xl:h-[570px] transition-opacity duration-300 ${
+          isReady ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {/* Dynamic SVG Orbital Tracks & Synchronized Cyan Connections */}
         <svg
-          viewBox="0 0 800 560"
-          preserveAspectRatio="none"
+          ref={svgRef}
+          viewBox="0 0 760 560"
           aria-hidden="true"
           className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible"
         >
@@ -172,23 +395,30 @@ export function HeroTechnologyShowcase() {
             </linearGradient>
           </defs>
 
-          {/* Subtle Outer Orbital Radar Hairlines Around Center Core */}
-          <circle
-            cx={CX}
-            cy={CY}
-            r="142"
+          {/* Primary Elliptical Planetary Orbit Track */}
+          <ellipse
+            ref={outerTrackRef}
+            cx={380}
+            cy={280}
+            rx={240}
+            ry={190}
             fill="none"
-            stroke="rgba(0, 188, 212, 0.12)"
+            stroke={hoveredId ? "rgba(0, 188, 212, 0.22)" : "rgba(0, 188, 212, 0.13)"}
             strokeWidth="1"
-            strokeDasharray="3 7"
+            strokeDasharray="4 8"
             vectorEffect="non-scaling-stroke"
+            className="transition-colors duration-300"
           />
-          <circle
-            cx={CX}
-            cy={CY}
-            r="102"
+
+          {/* Inner Concentric Elliptical Orbit Ring */}
+          <ellipse
+            ref={innerTrackRef}
+            cx={380}
+            cy={280}
+            rx={148}
+            ry={118}
             fill="none"
-            stroke={hoveredId ? "rgba(0, 188, 212, 0.4)" : "rgba(8, 127, 165, 0.22)"}
+            stroke={hoveredId ? "rgba(0, 188, 212, 0.32)" : "rgba(8, 127, 165, 0.2)"}
             strokeWidth="1"
             strokeDasharray="5 5"
             vectorEffect="non-scaling-stroke"
@@ -203,25 +433,27 @@ export function HeroTechnologyShowcase() {
               <g
                 key={node.id}
                 style={{
-                  opacity: isDimmed ? 0.28 : 1,
+                  opacity: isDimmed ? 0.24 : 1,
                   transition: "opacity 280ms ease",
                 }}
               >
                 {/* Faint ambient substrate path */}
                 <path
-                  d={node.pathD}
+                  ref={setPathRef(node.id, 0)}
+                  d="M 380 280 Q 380 280, 380 280"
                   fill="none"
                   stroke="rgba(255, 255, 255, 0.06)"
                   strokeWidth="1.25"
                   vectorEffect="non-scaling-stroke"
                 />
 
-                {/* Dashed-neon spline with continuous stroke-dashoffset flow */}
+                {/* Dashed cyan orbital tether */}
                 <path
-                  d={node.pathD}
+                  ref={setPathRef(node.id, 1)}
+                  d="M 380 280 Q 380 280, 380 280"
                   fill="none"
                   stroke={isActive ? "#00BCD4" : "url(#splineCyanGrad)"}
-                  strokeWidth={isActive ? 2.4 : 1.35}
+                  strokeWidth={isActive ? 2.4 : 1.4}
                   strokeDasharray={isActive ? "7 5" : "5 7"}
                   filter={isActive ? "url(#hudCyanGlow)" : undefined}
                   vectorEffect="non-scaling-stroke"
@@ -231,13 +463,14 @@ export function HeroTechnologyShowcase() {
                   }}
                 />
 
-                {/* Outbound glowing light particle (Core -> Service Node) */}
+                {/* Outbound glowing light particle (Core Hub -> Planet Node) */}
                 <path
-                  d={node.pathD}
+                  ref={setPathRef(node.id, 2)}
+                  d="M 380 280 Q 380 280, 380 280"
                   pathLength={100}
                   fill="none"
                   stroke={isActive ? "#67E8F9" : "#00BCD4"}
-                  strokeWidth={isActive ? 3.6 : 2.2}
+                  strokeWidth={isActive ? 3.6 : 2.3}
                   strokeLinecap="round"
                   strokeDasharray="6 94"
                   filter="url(#particleBloom)"
@@ -251,9 +484,10 @@ export function HeroTechnologyShowcase() {
                   }}
                 />
 
-                {/* Inbound telemetry light particle (Service Node -> Core) */}
+                {/* Inbound telemetry light particle (Planet Node -> Core Hub) */}
                 <path
-                  d={node.pathD}
+                  ref={setPathRef(node.id, 3)}
+                  d="M 380 280 Q 380 280, 380 280"
                   pathLength={100}
                   fill="none"
                   stroke="#22D3EE"
@@ -272,45 +506,50 @@ export function HeroTechnologyShowcase() {
                   }}
                 />
 
-                {/* Additional high-energy digital particle surge when active */}
-                {isActive && (
-                  <path
-                    d={node.pathD}
-                    pathLength={100}
-                    fill="none"
-                    stroke="#67E8F9"
-                    strokeWidth={3.8}
-                    strokeLinecap="round"
-                    strokeDasharray="3 97"
-                    filter="url(#particleBloom)"
-                    vectorEffect="non-scaling-stroke"
-                    className="animate-spline-surge-fast"
-                    style={{
-                      animationDuration: "0.85s",
-                      animationDelay: "-0.42s",
-                    }}
-                  />
-                )}
+                {/* Active surge boost particle */}
+                <path
+                  ref={setPathRef(node.id, 4)}
+                  d="M 380 280 Q 380 280, 380 280"
+                  pathLength={100}
+                  fill="none"
+                  stroke="#67E8F9"
+                  strokeWidth={3.8}
+                  strokeLinecap="round"
+                  strokeDasharray="3 97"
+                  filter="url(#particleBloom)"
+                  vectorEffect="non-scaling-stroke"
+                  className={isActive ? "animate-spline-surge-fast" : "opacity-0"}
+                  style={{
+                    animationDuration: "0.85s",
+                    animationDelay: "-0.42s",
+                    opacity: isActive ? 1 : 0,
+                  }}
+                />
 
-                {/* Terminal Node Socket Dot */}
+                {/* Terminal Node Socket Dot Attached Flush to Card Perimeter */}
                 <circle
-                  cx={node.target.x}
-                  cy={node.target.y}
-                  r={isActive ? 5.5 : 3.2}
+                  ref={(el) => {
+                    dotRefs.current[node.id] = el;
+                  }}
+                  cx={380}
+                  cy={280}
+                  r={isActive ? 5.2 : 3.2}
                   fill={isActive ? "#00BCD4" : "#050A0E"}
                   stroke={isActive ? "#67E8F9" : "#00BCD4"}
                   strokeWidth={isActive ? 2 : 1.4}
                   filter={isActive ? "url(#hudCyanGlow)" : undefined}
-                  className="transition-all duration-300"
                 />
               </g>
             );
           })}
         </svg>
 
-        {/* CENTER REACTOR ("CODEPLACED CORE HUB") */}
+        {/* STATIONARY CENTRAL SUN ("CODEPLACED CORE HUB") */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
-          <div className="relative flex items-center justify-center w-[154px] h-[154px] xl:w-[178px] xl:h-[178px]">
+          <div
+            ref={hubRef}
+            className="relative flex items-center justify-center w-[132px] h-[132px] xl:w-[168px] xl:h-[168px]"
+          >
             {/* Pulsing Deep Core Cyan & Subtle Blue Bloom */}
             <div
               className={`absolute inset-2 rounded-full animate-core-pulse transition-all duration-300 ${
@@ -327,7 +566,7 @@ export function HeroTechnologyShowcase() {
             </div>
 
             {/* Secondary Intersecting Orbital Track (Counter-Clockwise Spin) */}
-            <div className="absolute inset-3.5 rounded-full border border-[#087FA5]/40 border-t-[#00BCD4]/85 border-r-transparent animate-orbit-ccw">
+            <div className="absolute inset-3 rounded-full border border-[#087FA5]/40 border-t-[#00BCD4]/85 border-r-transparent animate-orbit-ccw">
               <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#67E8F9] shadow-[0_0_10px_#00BCD4]" />
             </div>
 
@@ -337,105 +576,114 @@ export function HeroTechnologyShowcase() {
               style={{ animationDuration: "14s", transformOrigin: "center" }}
             />
 
-            {/* Center Reactor Core Typography */}
+            {/* Center Core Hub Badge */}
             <div
-              className={`relative z-10 w-[100px] h-[100px] xl:w-[116px] xl:h-[116px] rounded-full bg-[#06090D]/90 backdrop-blur-xl border flex flex-col items-center justify-center text-center px-2 transition-all duration-300 ${
+              className={`relative z-10 w-[88px] h-[88px] xl:w-[112px] xl:h-[112px] rounded-full bg-[#06090D]/92 backdrop-blur-xl border flex flex-col items-center justify-center text-center px-2 transition-all duration-300 ${
                 hoveredId
                   ? "border-[#00BCD4]/90 scale-105 shadow-[0_0_38px_rgba(0,188,212,0.42),inset_0_0_18px_rgba(0,188,212,0.2)]"
                   : "border-[#00BCD4]/45 shadow-[0_0_26px_rgba(0,188,212,0.24),inset_0_0_14px_rgba(8,127,165,0.16)]"
               }`}
             >
-              <span className="font-[family-name:var(--font-jakarta)] text-[11px] xl:text-xs font-extrabold tracking-[0.14em] text-white leading-none">
+              <span className="font-[family-name:var(--font-jakarta)] text-[10px] xl:text-xs font-extrabold tracking-[0.13em] text-white leading-none">
                 CODEPLACED
               </span>
-              <span className="mt-1.5 font-mono text-[8.5px] xl:text-[9.5px] font-semibold uppercase tracking-[0.2em] text-[#00BCD4] leading-none">
+              <span className="mt-1.5 font-mono text-[8px] xl:text-[9.5px] font-semibold uppercase tracking-[0.18em] text-[#00BCD4] leading-none">
                 CORE HUB
               </span>
             </div>
           </div>
         </div>
 
-        {/* 5 FULL-CARD CLICKABLE FLOATING HUD SERVICE NODES */}
+        {/* 4 ORBITING SERVICE CARDS (ALWAYS UPRIGHT VIA translate3d WRAPPER) */}
         {ECOSYSTEM_NODES.map((node) => {
           const Icon = node.icon;
           const isActive = hoveredId === node.id;
           const isDimmed = hoveredId !== null && !isActive;
 
           return (
-            <Link
+            <div
               key={node.id}
-              href={node.href}
-              onMouseEnter={() => setHoveredId(node.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              onFocus={() => setHoveredId(node.id)}
-              onBlur={() => setHoveredId(null)}
-              aria-label={`${node.title} — ${node.sla}. Open service details.`}
-              className={`group block absolute ${node.positionClass} w-[184px] lg:w-[196px] xl:w-[234px] 2xl:w-[246px] rounded-xl backdrop-blur-md bg-gradient-to-br from-white/[0.06] via-[#0B1016]/82 to-[#05080B]/92 border p-3 xl:p-3.5 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#00BCD4] focus-visible:outline-offset-2 ${
-                isActive
-                  ? "z-40 scale-[1.055] border-[#00BCD4]/85 shadow-[0_0_32px_rgba(0,188,212,0.28),inset_0_1px_0_rgba(255,255,255,0.14)]"
-                  : isDimmed
-                  ? "z-30 opacity-60 scale-[0.985] border-white/[0.09] shadow-[0_12px_30px_rgba(0,0,0,0.45)]"
-                  : "z-30 opacity-100 border-white/[0.12] hover:border-[#00BCD4]/75 shadow-[0_12px_30px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.06)]"
+              ref={(el) => {
+                cardWrapperRefs.current[node.id] = el;
+              }}
+              className={`absolute top-0 left-0 will-change-transform w-[168px] lg:w-[178px] xl:w-[216px] 2xl:w-[232px] ${
+                isActive ? "z-40" : "z-30"
               }`}
             >
-              {/* Node Header: Icon + Node Num + Arrow */}
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="flex items-center gap-1.5">
+              <Link
+                href={node.href}
+                onMouseEnter={() => setHovered(node.id)}
+                onMouseLeave={() => setHovered(null)}
+                onFocus={() => setHovered(node.id)}
+                onBlur={() => setHovered(null)}
+                aria-label={`${node.title} — ${node.sla}. Open service details.`}
+                className={`group block w-full rounded-xl backdrop-blur-md bg-gradient-to-br from-white/[0.06] via-[#0B1016]/85 to-[#05080B]/92 border p-2.5 lg:p-3 xl:p-3.5 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#00BCD4] focus-visible:outline-offset-2 ${
+                  isActive
+                    ? "scale-[1.055] border-[#00BCD4]/85 shadow-[0_0_32px_rgba(0,188,212,0.28),inset_0_1px_0_rgba(255,255,255,0.14)]"
+                    : isDimmed
+                    ? "opacity-60 scale-[0.985] border-white/[0.09] shadow-[0_12px_30px_rgba(0,0,0,0.45)]"
+                    : "opacity-100 border-white/[0.12] hover:border-[#00BCD4]/75 shadow-[0_12px_30px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.06)]"
+                }`}
+              >
+                {/* Node Header: Icon + Node Num + Arrow */}
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className={`inline-flex items-center justify-center w-5 h-5 rounded-md border transition-colors ${
+                        isActive
+                          ? "bg-[#00BCD4]/20 border-[#00BCD4]/70 text-[#22D3EE]"
+                          : "bg-white/[0.04] border-white/[0.1] text-[#00BCD4]"
+                      }`}
+                    >
+                      <Icon className="w-3 h-3" aria-hidden="true" />
+                    </span>
+                    <span className="font-mono text-[9px] font-semibold uppercase tracking-wider text-slate-400">
+                      NODE {node.num}
+                    </span>
+                  </div>
+
                   <span
-                    className={`inline-flex items-center justify-center w-5 h-5 rounded-md border transition-colors ${
+                    aria-hidden="true"
+                    className={`w-5 h-5 xl:w-6 xl:h-6 rounded-full border flex items-center justify-center transition-all duration-200 ${
                       isActive
-                        ? "bg-[#00BCD4]/20 border-[#00BCD4]/70 text-[#22D3EE]"
-                        : "bg-white/[0.04] border-white/[0.1] text-[#00BCD4]"
+                        ? "bg-[#00BCD4] border-[#00BCD4] text-[#050505]"
+                        : "bg-white/[0.04] border-white/[0.12] text-slate-400 group-hover:border-[#00BCD4] group-hover:text-[#00BCD4]"
                     }`}
                   >
-                    <Icon className="w-3 h-3" aria-hidden="true" />
-                  </span>
-                  <span className="font-mono text-[9.5px] font-semibold uppercase tracking-wider text-slate-400">
-                    NODE {node.num}
+                    <ArrowUpRight className="w-3 h-3 xl:w-3.5 xl:h-3.5" />
                   </span>
                 </div>
 
-                <span
-                  aria-hidden="true"
-                  className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all duration-200 ${
-                    isActive
-                      ? "bg-[#00BCD4] border-[#00BCD4] text-[#050505]"
-                      : "bg-white/[0.04] border-white/[0.12] text-slate-400 group-hover:border-[#00BCD4] group-hover:text-[#00BCD4]"
+                {/* Service Name */}
+                <h2
+                  className={`font-[family-name:var(--font-jakarta)] text-[12px] xl:text-[13.5px] font-bold leading-snug tracking-tight transition-colors ${
+                    isActive ? "text-[#22D3EE]" : "text-white group-hover:text-[#00BCD4]"
                   }`}
                 >
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
+                  {node.title}
+                </h2>
 
-              {/* Service Name */}
-              <h2
-                className={`font-[family-name:var(--font-jakarta)] text-[12.5px] xl:text-[13.5px] font-bold leading-snug tracking-tight transition-colors ${
-                  isActive ? "text-[#22D3EE]" : "text-white group-hover:text-[#00BCD4]"
-                }`}
-              >
-                {node.title}
-              </h2>
-
-              {/* SLA Telemetry Pill */}
-              <div className="mt-1.5 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#00BCD4]/[0.1] border border-[#00BCD4]/30">
-                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
-                <span className="font-mono text-[9.5px] font-semibold text-[#00BCD4]">
-                  {node.sla}
-                </span>
-              </div>
-
-              {/* Stack Tags */}
-              <div className="mt-2.5 flex flex-wrap gap-1">
-                {node.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-[9px] xl:text-[9.5px] px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-slate-300"
-                  >
-                    {tag}
+                {/* SLA Telemetry Pill */}
+                <div className="mt-1.5 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#00BCD4]/[0.1] border border-[#00BCD4]/30">
+                  <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-[#00BCD4]" />
+                  <span className="font-mono text-[9px] font-semibold text-[#00BCD4]">
+                    {node.sla}
                   </span>
-                ))}
-              </div>
-            </Link>
+                </div>
+
+                {/* Stack Tags */}
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {node.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-[8.5px] xl:text-[9.5px] px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-slate-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            </div>
           );
         })}
       </div>

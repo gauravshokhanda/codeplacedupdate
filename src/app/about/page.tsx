@@ -126,11 +126,11 @@ const LEADERSHIP_TEAM = [
 const ENGINEERING_TEAM = [
   {
     name: "Ankit",
-    role: "Data Analyst Manager",
+    role: "Data Analytics Manager",
     image: "/team/team-2.jpg",
   },
   {
-    name: "Prajwal",
+    name: "Prajjwal",
     role: "Data Analyst",
     image: "/team/team-7.jpg",
   },
@@ -203,13 +203,14 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="font-sans relative min-h-screen bg-[#070B0E] text-[#FFFFFF] selection:bg-[#06B6D4] selection:text-[#070B0E]">
+    <div className="font-sans relative min-h-screen bg-[#000000] text-[#FFFFFF] selection:bg-[#06B6D4] selection:text-[#070B0E]">
       {/* ===================================================================== */}
       {/* 01. UPGRADED HERO — ASYMMETRIC ARCHITECTURAL LAYOUT + EDITORIAL LEDGER */}
       {/* ===================================================================== */}
-      <section className="relative overflow-hidden bg-[#070B0E] text-[#FFFFFF] border-b border-white/10 pt-28 pb-16 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28">
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[58fr_42fr] gap-12 lg:gap-16 xl:gap-20 items-center">
+      <section className="relative overflow-x-clip bg-[#000000] text-[#FFFFFF] border-b border-white/10 pt-[77px] sm:pt-[81px]">
+        <div className="min-h-[calc(100svh-77px)] sm:min-h-[calc(100svh-81px)] flex flex-col justify-center py-10 sm:py-12 lg:py-14">
+          <div className="max-w-[1320px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[58fr_42fr] gap-10 lg:gap-16 xl:gap-20 items-center">
             {/* Left Column (58%) */}
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -314,6 +315,7 @@ export default function AboutPage() {
                 </ul>
               </nav>
             </motion.div>
+          </div>
           </div>
         </div>
       </section>
@@ -478,82 +480,82 @@ export default function AboutPage() {
           id="leadership"
           className="scroll-mt-20 py-16 sm:py-20 lg:py-24 bg-[#070B0E] text-[#FFFFFF] border-b border-white/10"
         >
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="max-w-2xl mx-auto text-center space-y-3">
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-[-0.03em] text-[#FFFFFF]">
-              The People Leading CodePlaced.
-            </h2>
-            <p className="text-sm sm:text-base text-white/65 leading-relaxed">
-              Built by experienced professionals focused on technology,
-              analytics, innovation, and business growth.
-            </p>
-          </div>
+          <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="max-w-2xl mx-auto text-center space-y-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-[-0.03em] text-[#FFFFFF]">
+                The People Leading CodePlaced.
+              </h2>
+              <p className="text-sm sm:text-base text-white/65 leading-relaxed">
+                Built by experienced professionals focused on technology,
+                analytics, innovation, and business growth.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-5xl mx-auto items-stretch">
-            {LEADERSHIP_TEAM.map((leader) => (
-              <div
-                key={leader.name}
-                className="rounded-2xl bg-[#FFFFFF] border border-white/15 overflow-hidden flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="relative w-full h-[280px] sm:h-[360px] lg:h-[420px] bg-[#F8FAFC] overflow-hidden">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className={`w-full h-full object-cover ${leader.imagePosition} grayscale contrast-[1.04] group-hover:scale-[1.02] transition-transform duration-500 ease-out`}
-                    />
-                  </div>
-
-                  <div className="p-6 sm:p-8 space-y-4 text-[#070B0E]">
-                    <div className="space-y-1">
-                      <span className="inline-block font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#06B6D4]">
-                        {leader.role}
-                      </span>
-                      <h3 className="text-2xl sm:text-[26px] font-extrabold tracking-[-0.02em] text-[#070B0E]">
-                        {leader.name}
-                      </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-5xl mx-auto items-stretch">
+              {LEADERSHIP_TEAM.map((leader) => (
+                <div
+                  key={leader.name}
+                  className="rounded-2xl bg-[#FFFFFF] border border-white/15 overflow-hidden flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="relative w-full h-[280px] sm:h-[360px] lg:h-[420px] bg-[#F8FAFC] overflow-hidden">
+                      <img
+                        src={leader.image}
+                        alt={leader.name}
+                        className={`w-full h-full object-cover ${leader.imagePosition} grayscale contrast-[1.04] group-hover:scale-[1.02] transition-transform duration-500 ease-out`}
+                      />
                     </div>
 
-                    <p className="text-sm sm:text-[15px] text-[#070B0E]/75 leading-relaxed">
-                      {leader.bio}
-                    </p>
+                    <div className="p-6 sm:p-8 space-y-4 text-[#070B0E]">
+                      <div className="space-y-1">
+                        <span className="inline-block font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#06B6D4]">
+                          {leader.role}
+                        </span>
+                        <h3 className="text-2xl sm:text-[26px] font-extrabold tracking-[-0.02em] text-[#070B0E]">
+                          {leader.name}
+                        </h3>
+                      </div>
 
-                    <div className="space-y-2 pt-1">
-                      <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#070B0E]/45 block">
-                        Focus Areas
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {leader.focusAreas.map((area) => (
-                          <span
-                            key={area}
-                            className="px-2.5 py-1 rounded-md bg-[#F8FAFC] border border-[#070B0E]/10 text-xs font-medium text-[#070B0E]/80"
-                          >
-                            {area}
-                          </span>
-                        ))}
+                      <p className="text-sm sm:text-[15px] text-[#070B0E]/75 leading-relaxed">
+                        {leader.bio}
+                      </p>
+
+                      <div className="space-y-2 pt-1">
+                        <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#070B0E]/45 block">
+                          Focus Areas
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {leader.focusAreas.map((area) => (
+                            <span
+                              key={area}
+                              className="px-2.5 py-1 rounded-md bg-[#F8FAFC] border border-[#070B0E]/10 text-xs font-medium text-[#070B0E]/80"
+                            >
+                              {area}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="px-6 pb-6 sm:px-8 sm:pb-8 pt-0">
-                  <div className="pt-4 border-t border-[#070B0E]/10">
-                    <a
-                      href={leader.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Connect on LinkedIn with ${leader.name} (opens in new tab)`}
-                      className="h-11 w-full rounded-xl bg-[#070B0E] hover:bg-[#06B6D4] text-[#FFFFFF] hover:text-[#070B0E] font-bold text-sm flex items-center justify-center gap-2 transition-colors focus-visible:outline-2 focus-visible:outline-[#06B6D4] focus-visible:outline-offset-2 group/btn"
-                    >
-                      <span>Connect on LinkedIn</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
-                    </a>
+                  <div className="px-6 pb-6 sm:px-8 sm:pb-8 pt-0">
+                    <div className="pt-4 border-t border-[#070B0E]/10">
+                      <a
+                        href={leader.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Connect on LinkedIn with ${leader.name} (opens in new tab)`}
+                        className="h-11 w-full rounded-xl bg-[#070B0E] hover:bg-[#06B6D4] text-[#FFFFFF] hover:text-[#070B0E] font-bold text-sm flex items-center justify-center gap-2 transition-colors focus-visible:outline-2 focus-visible:outline-[#06B6D4] focus-visible:outline-offset-2 group/btn"
+                      >
+                        <span>Connect on LinkedIn</span>
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
         </section>
       </div>
 
@@ -634,11 +636,10 @@ export default function AboutPage() {
                     </span>
                     <span
                       aria-hidden="true"
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-                        isOpen
-                          ? "bg-[#06B6D4] text-[#070B0E]"
-                          : "bg-[#F8FAFC] text-[#06B6D4] border border-[#070B0E]/10"
-                      }`}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${isOpen
+                        ? "bg-[#06B6D4] text-[#070B0E]"
+                        : "bg-[#F8FAFC] text-[#06B6D4] border border-[#070B0E]/10"
+                        }`}
                     >
                       {isOpen ? (
                         <Minus className="w-4 h-4" />

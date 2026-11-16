@@ -264,12 +264,14 @@ export function Header({ onOpenBookAudit }: HeaderProps) {
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. UNIFIED FIXED NAVBAR — OBSIDIAN #070B0E AT ALL SCROLL POSITIONS */}
+      {/* 1. UNIFIED SEAMLESS NAVBAR — BLENDS CONTINUOUSLY WITH PAGE BACKGROUND */}
       {/* ========================================================================= */}
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-200 bg-[#070B0E]/92 backdrop-blur-xl border-b border-white/[0.08] ${
-          showSticky ? "shadow-lg shadow-black/70" : ""
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-colors duration-200 ${
+          showSticky || megaMenuOpen || industriesMenuOpen || mobileMenuOpen
+            ? "bg-[#000000]/90 backdrop-blur-xl"
+            : "bg-transparent"
         }`}
       >
         {/* Main Navbar */}

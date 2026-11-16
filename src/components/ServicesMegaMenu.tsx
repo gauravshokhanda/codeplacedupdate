@@ -8,10 +8,10 @@ import {
   Smartphone,
   Layers,
   Boxes,
-  ShieldCheck,
   Bot,
   Database,
   BarChart3,
+  LineChart,
   Cloud,
   Workflow,
   Terminal,
@@ -106,31 +106,19 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
   },
   {
     title: "Data Analytics & Engineering",
-    categoryHref: "/services/data-platforms",
+    categoryHref: "/services/data-analytics-engineering",
     items: [
       {
         title: "Executive BI Dashboards",
         desc: "Executive command centers & automated KPI reporting",
-        href: "/services/executive-dashboards",
+        href: "/services/data-analytics-engineering",
         icon: BarChart3,
       },
       {
         title: "Power BI & Looker Studio",
         desc: "Visual business analytics & interactive drilldowns",
-        href: "/services/executive-dashboards",
-        icon: BarChart3,
-      },
-      {
-        title: "Embedded Analytics",
-        desc: "Customer-facing analytical widgets & data portals",
-        href: "/services/embedded-analytics",
+        href: "/services/data-analytics-engineering",
         icon: LineChart,
-      },
-      {
-        title: "Predictive Analytics & Forecasting",
-        desc: "Demand forecasting, churn predictors & ML modeling",
-        href: "/services/data-engineering-analytics",
-        icon: Sparkles,
       },
       {
         title: "Data Pipelines & ETL/ELT",
@@ -143,12 +131,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         desc: "Snowflake, BigQuery & medallion architecture schemas",
         href: "/services/data-analytics-engineering",
         icon: Cloud,
-      },
-      {
-        title: "Executive BI & Looker Studio",
-        desc: "Executive command centers & Power BI KPI reporting",
-        href: "/services/data-analytics-engineering",
-        icon: BarChart3,
       },
     ],
   },
@@ -199,15 +181,15 @@ export function ServicesMegaMenu({
           className="absolute top-full left-0 right-0 w-full z-[1000] border-t border-b border-x border-[#E5EAF0] bg-white rounded-b-[16px] max-h-[calc(100vh-90px)] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.12)] text-[#101820] transition-colors duration-200"
         >
           {/* Main 4-Column Categorized Grid */}
-          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-5 sm:py-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-[auto_1fr] gap-6 xl:gap-x-6 xl:gap-y-0">
+          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-4 sm:py-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[auto_1fr] gap-5 lg:gap-x-6 lg:gap-y-0">
               {SERVICE_COLUMNS.map((col, cIdx) => (
                 <div
                   key={cIdx}
-                  className="flex flex-col gap-3 lg:row-span-2 lg:grid lg:grid-rows-subgrid lg:gap-y-3"
+                  className="flex flex-col gap-2.5 lg:row-span-2 lg:grid lg:grid-rows-subgrid lg:gap-y-2.5"
                 >
                   {/* Column Header (Uniform Height via Subgrid on Desktop & Min-Height on Tablet) */}
-                  <div className="flex items-start pb-2.5 border-b border-[#E5EAF0] md:min-h-[44px] lg:min-h-0">
+                  <div className="flex items-center pb-2.5 border-b border-[#E5EAF0] md:min-h-[42px] lg:min-h-0">
                     <Link
                       href={col.categoryHref}
                       onClick={onClose}
@@ -217,8 +199,8 @@ export function ServicesMegaMenu({
                     </Link>
                   </div>
 
-                  {/* Services List (4 Subservices per Category — Icon & Title Only) */}
-                  <div className="space-y-1">
+                  {/* Services List (4 Subservices per Category — Equal Row Alignment) */}
+                  <div className="grid grid-rows-4 gap-1">
                     {col.items.map((item, iIdx) => {
                       const ItemIcon = item.icon;
                       return (
@@ -226,7 +208,7 @@ export function ServicesMegaMenu({
                           key={iIdx}
                           href={item.href}
                           onClick={onClose}
-                          className="group px-2.5 py-2 -mx-2.5 min-h-[48px] rounded-xl transition-all duration-150 flex items-center gap-3 border border-transparent hover:bg-[#EBF9FC] hover:border-[#00C8E8]/25"
+                          className="group px-2.5 py-2 -mx-2.5 min-h-[46px] rounded-xl transition-all duration-150 flex items-center gap-3 border border-transparent hover:bg-[#EBF9FC] hover:border-[#00C8E8]/25"
                         >
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-150 bg-[#F7F9FB] border border-[#E5EAF0] text-[#007F9C] group-hover:bg-[#00C8E8] group-hover:text-black group-hover:border-[#00C8E8]">
                             <ItemIcon className="w-4 h-4" />
@@ -244,7 +226,7 @@ export function ServicesMegaMenu({
           </div>
 
           {/* Bottom CTA Bar */}
-          <div className="border-t border-[#E5EAF0] px-6 sm:px-8 py-4 bg-[#F7F9FB]">
+          <div className="border-t border-[#E5EAF0] px-6 sm:px-8 py-3.5 bg-[#F7F9FB]">
             <div className="max-w-[1360px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <h4 className="text-sm font-extrabold text-[#101820]">

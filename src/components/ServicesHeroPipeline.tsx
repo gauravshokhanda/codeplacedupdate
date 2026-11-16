@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
   Bot,
   Code2,
@@ -18,15 +18,18 @@ interface ServicePillar {
   floatDelay: string;
 }
 
-interface PipelineStream {
+interface StreamConfig {
   id: string;
   from: string;
   to: string;
+  pulseDuration: string;
+  pulseDelay: string;
+}
+
+interface ComputedStream extends StreamConfig {
   pathD: string;
   start: { x: number; y: number };
   end: { x: number; y: number };
-  pulseDuration: string;
-  pulseDelay: string;
 }
 
 const SERVICE_PILLARS: ServicePillar[] = [
@@ -68,38 +71,29 @@ const SERVICE_PILLARS: ServicePillar[] = [
   },
 ];
 
-// Pipeline Data Streams:
-// Pillar 02 (Software) -> Pillar 01 (AI) -> Pillar 03 (Data) -> Pillar 04 (Digital Growth)
-const PIPELINE_STREAMS: PipelineStream[] = [
+// Connected bottom-up network across all 4 services:
+// Software Development (02) -> AI & Automation (01) -> Data Analytics & Engineering (03) -> Digital Marketing (04)
+const STREAM_CONFIGS: StreamConfig[] = [
   {
     id: "stream-02-01",
     from: "pillar-02",
     to: "pillar-01",
-    pathD: "M 475 326 C 425 282, 385 276, 338 268",
-    start: { x: 475, y: 326 },
-    end: { x: 338, y: 268 },
     pulseDuration: "2.2s",
-    pulseDelay: "-0.7s",
+    pulseDelay: "0s",
   },
   {
-    id: "stream-01-04",
+    id: "stream-01-03",
     from: "pillar-01",
     to: "pillar-03",
-    pathD: "M 480 250 C 430 205, 385 198, 338 184",
-    start: { x: 480, y: 250 },
-    end: { x: 338, y: 184 },
     pulseDuration: "2.3s",
-    pulseDelay: "-1.1s",
+    pulseDelay: "-0.75s",
   },
   {
     id: "stream-03-04",
     from: "pillar-03",
     to: "pillar-04",
-    pathD: "M 205 128 C 248 76, 305 68, 342 56",
-    start: { x: 205, y: 128 },
-    end: { x: 342, y: 56 },
     pulseDuration: "2.1s",
-    pulseDelay: "-1.4s",
+    pulseDelay: "-1.5s",
   },
 ];
 
@@ -111,15 +105,119 @@ const MOBILE_FLOW_PILLARS: ServicePillar[] = [
   SERVICE_PILLARS[0], // 04 Digital Marketing & Growth
 ];
 
+interface CardBox {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+  width: number;
+  height: number;
+}
+
 export function ServicesHeroPipeline() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [svgData, setSvgData] = useState<{
+    width: number;
+    height: number;
+    streams: ComputedStream[];
+  } | null>(null);
+
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const activeId = hoveredId ?? selectedId;
 
   const handleToggleSelect = (id: string) => {
     setSelectedId((prev) => (prev === id ? null : id));
   };
+
+  const recomputeStreams = useCallback(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const stageWidth = stage.clientWidth;
+    const stageHeight = stage.clientHeight;
+    if (stageWidth === 0 || stageHeight === 0) return;
+
+    const getBox = (id: string): CardBox | null => {
+      const el = cardRefs.current[id];
+      if (!el || el.offsetWidth === 0 || el.offsetHeight === 0) return null;
+      return {
+        left: el.offsetLeft,
+        top: el.offsetTop,
+        right: el.offsetLeft + el.offsetWidth,
+        bottom: el.offsetTop + el.offsetHeight,
+        width: el.offsetWidth,
+        height: el.offsetHeight,
+      };
+    };
+
+    const c01 = getBox("pillar-01");
+    const c02 = getBox("pillar-02");
+    const c03 = getBox("pillar-03");
+    const c04 = getBox("pillar-04");
+    if (!c01 || !c02 || !c03 || !c04) return;
+
+    const boxes: Record<string, CardBox> = {
+      "pillar-01": c01,
+      "pillar-02": c02,
+      "pillar-03": c03,
+      "pillar-04": c04,
+    };
+
+    const computed: ComputedStream[] = STREAM_CONFIGS.map((cfg) => {
+      const fromBox = boxes[cfg.from];
+      const toBox = boxes[cfg.to];
+      const fromIsLeft = fromBox.left < toBox.left;
+
+      // Anchor smoothly from the open top corridor of the lower card to the facing side edge of the upper card.
+      const startX = fromIsLeft
+        ? Math.min(fromBox.left + fromBox.width * 0.56, toBox.left - 24)
+        : Math.max(fromBox.left + fromBox.width * 0.44, toBox.right + 24);
+      const startY = fromBox.top + 2;
+
+      const endX = fromIsLeft ? toBox.left + 2 : toBox.right - 2;
+      const endY = toBox.top + toBox.height * 0.55;
+
+      const dx = Math.max(40, Math.abs(endX - startX));
+      const dy = Math.max(40, Math.abs(startY - endY));
+
+      const cp1X = startX;
+      const cp1Y = startY - dy * 0.62;
+      const cp2X = fromIsLeft ? endX - dx * 0.55 : endX + dx * 0.55;
+      const cp2Y = endY;
+
+      return {
+        ...cfg,
+        pathD: `M ${startX.toFixed(1)} ${startY.toFixed(1)} C ${cp1X.toFixed(1)} ${cp1Y.toFixed(1)}, ${cp2X.toFixed(1)} ${cp2Y.toFixed(1)}, ${endX.toFixed(1)} ${endY.toFixed(1)}`,
+        start: { x: startX, y: fromBox.top },
+        end: { x: fromIsLeft ? toBox.left : toBox.right, y: endY },
+      };
+    });
+
+    setSvgData({ width: stageWidth, height: stageHeight, streams: computed });
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const rafId = window.requestAnimationFrame(recomputeStreams);
+    const observer = new ResizeObserver(() => {
+      recomputeStreams();
+    });
+
+    observer.observe(stage);
+    Object.values(cardRefs.current).forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
+  }, [recomputeStreams]);
 
   return (
     <div className="relative w-full max-w-[700px] mx-auto select-none">
@@ -136,154 +234,153 @@ export function ServicesHeroPipeline() {
       {/* =================================================================== */}
       {/* DESKTOP / TABLET FLOATING 3D STEPPED ARCHITECTURAL CASCADE (md+)    */}
       {/* =================================================================== */}
-      <div className="hidden md:block relative w-full h-[610px] lg:h-[630px]">
-        {/* Architectural Isometric Perspective Floor Guides (Borderless Hairlines) */}
-        <svg
-          viewBox="0 0 680 620"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible"
-        >
-          <defs>
-            <filter id="servicesCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="3.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <filter id="servicesWhitePulse" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <linearGradient id="pipelineCyanWhiteGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.9" />
-              <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.95" />
-            </linearGradient>
-          </defs>
+      <div
+        ref={stageRef}
+        className="hidden md:block relative w-full h-[610px] lg:h-[630px]"
+      >
+        {/* Architectural Isometric Perspective Guides + Dynamically Anchored Streams */}
+        {svgData && (
+          <svg
+            viewBox={`0 0 ${svgData.width} ${svgData.height}`}
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full pointer-events-none z-25 overflow-visible"
+          >
+            <defs>
+              <filter id="servicesCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="servicesWhitePulse" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-          {/* Subtle Isometric Depth Reference Grid Lines (Structural White/Cyan) */}
-          <path
-            d="M 40 530 L 640 280 M 40 360 L 640 110 M 140 595 L 540 35"
-            fill="none"
-            stroke="rgba(255, 255, 255, 0.045)"
-            strokeWidth="1"
-            strokeDasharray="4 8"
-            vectorEffect="non-scaling-stroke"
-          />
+            {/* Subtle Isometric Depth Reference Grid Lines (Proportional to Container) */}
+            <path
+              d={`M ${(svgData.width * 0.06).toFixed(1)} ${(svgData.height * 0.85).toFixed(1)} L ${(svgData.width * 0.94).toFixed(1)} ${(svgData.height * 0.45).toFixed(1)} M ${(svgData.width * 0.06).toFixed(1)} ${(svgData.height * 0.58).toFixed(1)} L ${(svgData.width * 0.94).toFixed(1)} ${(svgData.height * 0.18).toFixed(1)} M ${(svgData.width * 0.21).toFixed(1)} ${(svgData.height * 0.96).toFixed(1)} L ${(svgData.width * 0.79).toFixed(1)} ${(svgData.height * 0.06).toFixed(1)}`}
+              fill="none"
+              stroke="rgba(255, 255, 255, 0.045)"
+              strokeWidth="1"
+              strokeDasharray="4 8"
+              vectorEffect="non-scaling-stroke"
+            />
 
-          {PIPELINE_STREAMS.map((stream) => {
-            const isConnected =
-              activeId === stream.from || activeId === stream.to;
-            const isDimmed = activeId !== null && !isConnected;
+            {svgData.streams.map((stream) => {
+              const isConnected =
+                activeId === stream.from || activeId === stream.to;
+              const isDimmed = activeId !== null && !isConnected;
 
-            return (
-              <g
-                key={stream.id}
-                style={{
-                  opacity: isDimmed ? 0.2 : 1,
-                  transition: "opacity 280ms ease",
-                }}
-              >
-                {/* Structural base hairline */}
-                <path
-                  d={stream.pathD}
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.1)"
-                  strokeWidth="1.25"
-                  vectorEffect="non-scaling-stroke"
-                />
-
-                {/* Animated dashed cyan stream */}
-                <path
-                  d={stream.pathD}
-                  fill="none"
-                  stroke={isConnected ? "#06B6D4" : "rgba(6, 182, 212, 0.55)"}
-                  strokeWidth={isConnected ? 2.4 : 1.5}
-                  strokeDasharray={isConnected ? "7 5" : "5 7"}
-                  filter={isConnected ? "url(#servicesCyanGlow)" : undefined}
-                  vectorEffect="non-scaling-stroke"
-                  className="animate-spline-dash transition-all duration-300"
+              return (
+                <g
+                  key={stream.id}
                   style={{
-                    animationDuration: isConnected ? "0.9s" : "2.4s",
+                    opacity: isDimmed ? 0.2 : 1,
+                    transition: "opacity 280ms ease",
                   }}
-                />
+                >
+                  {/* Structural base hairline */}
+                  <path
+                    d={stream.pathD}
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.12)"
+                    strokeWidth="1.25"
+                    vectorEffect="non-scaling-stroke"
+                  />
 
-                {/* Traveling Electric Cyan Light Pulse */}
-                <path
-                  d={stream.pathD}
-                  pathLength={100}
-                  fill="none"
-                  stroke="#06B6D4"
-                  strokeWidth={isConnected ? 3.8 : 2.5}
-                  strokeLinecap="round"
-                  strokeDasharray="9 91"
-                  filter="url(#servicesCyanGlow)"
-                  vectorEffect="non-scaling-stroke"
-                  className={
-                    isConnected
-                      ? "animate-spline-surge-fast"
-                      : "animate-spline-particle-out"
-                  }
-                  style={{
-                    animationDuration: isConnected ? "0.95s" : stream.pulseDuration,
-                    animationDelay: stream.pulseDelay,
-                  }}
-                />
+                  {/* Animated dashed cyan stream */}
+                  <path
+                    d={stream.pathD}
+                    fill="none"
+                    stroke={isConnected ? "#06B6D4" : "rgba(6, 182, 212, 0.6)"}
+                    strokeWidth={isConnected ? 2.4 : 1.6}
+                    strokeDasharray={isConnected ? "7 5" : "5 7"}
+                    filter={isConnected ? "url(#servicesCyanGlow)" : undefined}
+                    vectorEffect="non-scaling-stroke"
+                    className="animate-spline-dash transition-all duration-300"
+                    style={{
+                      animationDuration: isConnected ? "0.9s" : "2.4s",
+                    }}
+                  />
 
-                {/* Crisp Pure White Lead Spark Traveling with Cyan Stream */}
-                <path
-                  d={stream.pathD}
-                  pathLength={100}
-                  fill="none"
-                  stroke="#FFFFFF"
-                  strokeWidth={isConnected ? 3.2 : 2.1}
-                  strokeLinecap="round"
-                  strokeDasharray="3.5 96.5"
-                  filter="url(#servicesWhitePulse)"
-                  vectorEffect="non-scaling-stroke"
-                  className={
-                    isConnected
-                      ? "animate-spline-surge-fast"
-                      : "animate-spline-particle-out"
-                  }
-                  style={{
-                    animationDuration: isConnected ? "0.95s" : stream.pulseDuration,
-                    animationDelay: isConnected
-                      ? "-0.42s"
-                      : `${parseFloat(stream.pulseDelay) - 0.18}s`,
-                  }}
-                />
+                  {/* Traveling Electric Cyan Light Pulse */}
+                  <path
+                    d={stream.pathD}
+                    pathLength={100}
+                    fill="none"
+                    stroke="#06B6D4"
+                    strokeWidth={isConnected ? 3.8 : 2.6}
+                    strokeLinecap="round"
+                    strokeDasharray="9 91"
+                    filter="url(#servicesCyanGlow)"
+                    vectorEffect="non-scaling-stroke"
+                    className={
+                      isConnected
+                        ? "animate-spline-surge-fast"
+                        : "animate-spline-particle-out"
+                    }
+                    style={{
+                      animationDuration: isConnected ? "0.95s" : stream.pulseDuration,
+                      animationDelay: stream.pulseDelay,
+                    }}
+                  />
 
-                {/* Source & Destination Terminal Ports */}
-                <circle
-                  cx={stream.start.x}
-                  cy={stream.start.y}
-                  r={isConnected ? 4.5 : 3}
-                  fill={isConnected ? "#FFFFFF" : "#070B0E"}
-                  stroke="#06B6D4"
-                  strokeWidth={isConnected ? 2 : 1.5}
-                  filter={isConnected ? "url(#servicesCyanGlow)" : undefined}
-                />
-                <circle
-                  cx={stream.end.x}
-                  cy={stream.end.y}
-                  r={isConnected ? 4.5 : 3}
-                  fill={isConnected ? "#06B6D4" : "#070B0E"}
-                  stroke="#FFFFFF"
-                  strokeWidth={isConnected ? 2 : 1.25}
-                  filter={isConnected ? "url(#servicesWhitePulse)" : undefined}
-                />
-              </g>
-            );
-          })}
-        </svg>
+                  {/* Crisp Pure White Lead Spark Traveling with Cyan Stream */}
+                  <path
+                    d={stream.pathD}
+                    pathLength={100}
+                    fill="none"
+                    stroke="#FFFFFF"
+                    strokeWidth={isConnected ? 3.2 : 2.1}
+                    strokeLinecap="round"
+                    strokeDasharray="3.5 96.5"
+                    filter="url(#servicesWhitePulse)"
+                    vectorEffect="non-scaling-stroke"
+                    className={
+                      isConnected
+                        ? "animate-spline-surge-fast"
+                        : "animate-spline-particle-out"
+                    }
+                    style={{
+                      animationDuration: isConnected ? "0.95s" : stream.pulseDuration,
+                      animationDelay: isConnected
+                        ? "-0.42s"
+                        : `${parseFloat(stream.pulseDelay) - 0.18}s`,
+                    }}
+                  />
 
-        {/* 5 FLOATING STEPPED PILLAR CARDS */}
+                  {/* Source & Destination Terminal Ports Anchored Exactly on Card Edges */}
+                  <circle
+                    cx={stream.start.x}
+                    cy={stream.start.y}
+                    r={isConnected ? 4.5 : 3.2}
+                    fill={isConnected ? "#FFFFFF" : "#070B0E"}
+                    stroke="#06B6D4"
+                    strokeWidth={isConnected ? 2 : 1.5}
+                    filter={isConnected ? "url(#servicesCyanGlow)" : undefined}
+                  />
+                  <circle
+                    cx={stream.end.x}
+                    cy={stream.end.y}
+                    r={isConnected ? 4.5 : 3.2}
+                    fill={isConnected ? "#06B6D4" : "#070B0E"}
+                    stroke="#FFFFFF"
+                    strokeWidth={isConnected ? 2 : 1.35}
+                    filter={isConnected ? "url(#servicesWhitePulse)" : undefined}
+                  />
+                </g>
+              );
+            })}
+          </svg>
+        )}
+
+        {/* 4 FLOATING STEPPED PILLAR CARDS */}
         {SERVICE_PILLARS.map((pillar) => {
           const Icon = pillar.icon;
           const isActive = activeId === pillar.id;
@@ -293,6 +390,9 @@ export function ServicesHeroPipeline() {
           return (
             <div
               key={pillar.id}
+              ref={(el) => {
+                cardRefs.current[pillar.id] = el;
+              }}
               className={`absolute ${pillar.positionClass} w-[51.5%] max-w-[338px] transition-opacity duration-300 ${
                 isActive ? "z-40" : isDimmed ? "z-20 opacity-45" : "z-30 opacity-100"
               }`}
