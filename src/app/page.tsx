@@ -33,7 +33,7 @@ import { ServicesMarquee } from "@/components/ServicesMarquee";
 import { HeroTechnologyShowcase } from "@/components/HeroTechnologyShowcase";
 
 // =========================================================================
-// 1. DATA: FIVE CORE SERVICES (5-COLUMN STAGGERED SHOWCASE)
+// 1. DATA: FOUR CORE SERVICES (4-COLUMN STAGGERED SHOWCASE)
 // =========================================================================
 const SERVICES_DATA = [
   {
@@ -68,12 +68,12 @@ const SERVICES_DATA = [
     num: "03",
     title: "Data Analytics & Engineering",
     description:
-      "Turn complex data into actionable insights with scalable data pipelines, modern data platforms, executive dashboards, and business intelligence solutions.",
+      "Build reliable data foundations and turn complex information into actionable dashboards, KPI telemetry, and predictive insights.",
     capabilities: [
-      "Data Pipelines & ETL/ELT",
-      "Data Warehousing & Architecture",
-      "BI Dashboards & Analytics",
-      "Predictive Analytics & Reporting",
+      "Automated ETL/ELT Pipelines",
+      "Lakehouses & Data Warehouses",
+      "Power BI, Tableau & Looker",
+      "Predictive Analytics & Governance",
     ],
     icon: Database,
     href: "/services/data-analytics-engineering",
@@ -280,7 +280,7 @@ export default function HomePage() {
 
   // =========================================================================
   // GSAP SCROLLTRIGGER: APPINVENTIV-INSPIRED STAIRCASE SERVICES ANIMATION
-  // Phase A: Initial descending staircase (Col 1 at top, Col 2..Col 5 staggered)
+  // Phase A: Initial descending staircase (Col 1 at top, Col 2..Col 4 staggered)
   // Phase B (0.00 -> 0.72): Progressive column rising toward Column 1
   // Phase C (0.72 -> 0.90): Stationary hold of the fully aligned 4-column layout & CTA
   // Phase D (0.90 -> 1.00): Natural release into About CodePlaced
@@ -667,7 +667,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* DESKTOP 5-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
+          {/* DESKTOP 4-COLUMN STAGGERED SCROLL-ALIGNED GRID */}
           <div className="hidden lg:block w-full relative">
             <div className="grid grid-cols-4 border-t border-[#E5E5E5] relative bg-white">
               {SERVICES_DATA.map((service, idx) => {
@@ -750,7 +750,9 @@ export default function HomePage() {
                 return (
                   <div
                     key={idx}
-                    className="p-3.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group"
+                    className={`p-3.5 sm:p-4.5 bg-white border border-[#E5E5E5] rounded-xl flex flex-col justify-between hover:border-[#00BCD4]/50 transition-all duration-200 shadow-xs group ${
+                      idx === 3 ? "sm:col-span-1" : ""
+                    }`}
                   >
                     <div>
                       <div className="flex items-center justify-between">

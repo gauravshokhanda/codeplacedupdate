@@ -206,7 +206,7 @@ const CAPABILITY_CARDS = [
   },
   {
     title: "Data Analytics & Engineering",
-    desc: "Scalable ETL pipelines, lakehouses, executive dashboards, and BI systems.",
+    desc: "Modern lakehouses, ETL pipelines, executive dashboards, and predictive insights.",
     icon: Database,
   },
   {
@@ -323,7 +323,8 @@ export default function ContactPage() {
     email?: string;
     phone?: string;
   }>({});
-  const [copiedSummary, setCopiedSummary] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const scrollToForm = () => {
@@ -366,59 +367,56 @@ export default function ContactPage() {
     return Object.keys(errors).length === 0;
   };
 
-  const buildMailtoHref = () => {
-    const subject = `Project Inquiry from ${formData.fullName.trim() || "Prospective Client"}${
-      formData.company.trim() ? ` (${formData.company.trim()})` : ""
-    }`;
-    const bodyLines = [
-      `Name: ${formData.fullName.trim()}`,
-      `Work Email: ${formData.email.trim()}`,
-      formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : null,
-      formData.company.trim() ? `Company: ${formData.company.trim()}` : null,
-      "",
-      "Project Description:",
-      formData.description.trim() || "(Not provided)",
-    ]
-      .filter((line): line is string => line !== null)
-      .join("\n");
-
-    return `mailto:contact@codeplaced.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyLines)}`;
-  };
-
-  const handleCopyInquiry = async () => {
-    const summary = [
-      `Name: ${formData.fullName.trim()}`,
-      `Work Email: ${formData.email.trim()}`,
-      formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : null,
-      formData.company.trim() ? `Company: ${formData.company.trim()}` : null,
-      formData.description.trim()
-        ? `Description: ${formData.description.trim()}`
-        : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    try {
-      await navigator.clipboard.writeText(summary);
-      setCopiedSummary(true);
-      setTimeout(() => setCopiedSummary(false), 2500);
-    } catch {
-      setCopiedSummary(false);
-    }
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+    setSubmissionError("");
     if (!validateForm()) return;
 
-    // No backend form endpoint is currently connected; do not display a false confirmation.
     setIsSubmitting(true);
-    setCopiedSummary(false);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const response = await fetch("https://crmapi.codeplaced.com/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "omit",
+        body: JSON.stringify({
+          fullName: formData.fullName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          company: formData.company.trim(),
+          description: formData.description.trim(),
+          website: "",
+        }),
+      });
+
+      const result: unknown = await response.json().catch(() => null);
+      const message =
+        result &&
+        typeof result === "object" &&
+        "message" in result &&
+        typeof result.message === "string"
+          ? result.message
+          : "";
+
+      if (!response.ok) {
+        throw new Error(message || "We couldn't submit your inquiry. Please review your details and try again.");
+      }
+
+      setSuccessMessage(message || "Your inquiry has been submitted successfully.");
+      setFormData({ fullName: "", email: "", company: "", phone: "", description: "" });
+      setFormErrors({});
+      setIsSubmitted(true);
+    } catch (error) {
+      setSubmissionError(
+        error instanceof Error
+          ? error.message
+          : "We couldn't submit your inquiry. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const toggleFaq = (idx: number) => {
@@ -535,61 +533,28 @@ export default function ContactPage() {
                       role="status"
                       className="py-5 sm:py-8 text-center space-y-4"
                     >
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 lg:text-amber-300 text-[11px] font-mono font-bold uppercase tracking-wider">
-                        Backend Submission Unavailable
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 lg:text-emerald-300 text-[11px] font-mono font-bold uppercase tracking-wider">
+                        Inquiry Submitted
                       </div>
                       <h3 className="text-xl sm:text-2xl font-black text-neutral-900 lg:text-white">
-                        Send Your Inquiry Directly via Email
+                        Thank You for Reaching Out
                       </h3>
-                      <p className="text-neutral-600 lg:text-[#A1AAB7] text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-                        Automated form submission is not yet connected to a mail server, so your message has{" "}
-                        <strong className="text-neutral-950 lg:text-white">not</strong> been transmitted automatically. Use your email app below to send these pre-filled details to{" "}
-                        <span className="font-semibold text-neutral-900 lg:text-white">contact@codeplaced.com</span>.
+                      <p className="text-neutral-600 lg:text-[#A1AAB7] text-xs sm:text-sm max-w-md mx-auto leading-relaxed" aria-live="polite">
+                        {successMessage}
                       </p>
-                      <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-50 lg:bg-[#050505] border border-slate-200 lg:border-[#1B242B] text-left text-xs text-neutral-700 lg:text-[#A1AAB7] space-y-1.5 max-w-md mx-auto">
-                        <div>
-                          <strong className="text-neutral-900 lg:text-white">Name:</strong> {formData.fullName.trim()}
-                        </div>
-                        <div>
-                          <strong className="text-neutral-900 lg:text-white">Email:</strong> {formData.email.trim()}
-                        </div>
-                        {formData.phone.trim() && (
-                          <div>
-                            <strong className="text-neutral-900 lg:text-white">Phone:</strong> {formData.phone.trim()}
-                          </div>
-                        )}
-                        {formData.company.trim() && (
-                          <div>
-                            <strong className="text-neutral-900 lg:text-white">Company:</strong> {formData.company.trim()}
-                          </div>
-                        )}
-                      </div>
                       <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5">
-                        <a
-                          href={buildMailtoHref()}
-                          className="px-5 py-2.5 rounded-full bg-[#00BCD4] hover:bg-[#20d7f5] text-black text-xs font-extrabold transition-all inline-flex items-center gap-2"
-                        >
-                          <Send className="w-3.5 h-3.5 text-black" />
-                          <span>Open Email App</span>
-                        </a>
-                        <button
-                          type="button"
-                          onClick={handleCopyInquiry}
-                          className="px-4 py-2.5 rounded-full border border-slate-200 lg:border-[#1B242B] text-neutral-800 lg:text-white hover:border-[#00C8E8] text-xs font-bold transition-all cursor-pointer"
-                        >
-                          {copiedSummary ? "Copied Summary" : "Copy Details"}
-                        </button>
                         <button
                           type="button"
                           onClick={() => setIsSubmitted(false)}
                           className="px-4 py-2.5 rounded-full bg-neutral-900 hover:bg-black text-white lg:bg-white/10 lg:hover:bg-white/15 lg:text-white text-xs font-bold transition-all cursor-pointer"
                         >
-                          Edit Form
+                          Send Another Inquiry
                         </button>
                       </div>
                     </motion.div>
                   ) : (
                     <form onSubmit={handleFormSubmit} noValidate className="space-y-3.5 sm:space-y-4">
+                      <input type="hidden" name="website" value="" readOnly />
                       {/* Full Name */}
                       <div>
                         <label htmlFor="contact-full-name" className="block text-xs sm:text-[13px] font-bold text-neutral-800 lg:text-white mb-1.5">
@@ -709,6 +674,11 @@ export default function ContactPage() {
                       </div>
 
                       {/* Submit Button */}
+                      {submissionError && (
+                        <p role="alert" aria-live="assertive" className="text-xs text-rose-500 font-medium">
+                          {submissionError}
+                        </p>
+                      )}
                       <div className="pt-1.5">
                         <button
                           type="submit"

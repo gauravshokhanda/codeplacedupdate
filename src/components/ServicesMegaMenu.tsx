@@ -106,8 +106,32 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
   },
   {
     title: "Data Analytics & Engineering",
-    categoryHref: "/services/data-analytics-engineering",
+    categoryHref: "/services/data-platforms",
     items: [
+      {
+        title: "Executive BI Dashboards",
+        desc: "Executive command centers & automated KPI reporting",
+        href: "/services/executive-dashboards",
+        icon: BarChart3,
+      },
+      {
+        title: "Power BI & Looker Studio",
+        desc: "Visual business analytics & interactive drilldowns",
+        href: "/services/executive-dashboards",
+        icon: BarChart3,
+      },
+      {
+        title: "Embedded Analytics",
+        desc: "Customer-facing analytical widgets & data portals",
+        href: "/services/embedded-analytics",
+        icon: LineChart,
+      },
+      {
+        title: "Predictive Analytics & Forecasting",
+        desc: "Demand forecasting, churn predictors & ML modeling",
+        href: "/services/data-engineering-analytics",
+        icon: Sparkles,
+      },
       {
         title: "Data Pipelines & ETL/ELT",
         desc: "Automated lakehouse pipelines & real-time streaming",
@@ -125,12 +149,6 @@ export const SERVICE_COLUMNS: ServiceCategory[] = [
         desc: "Executive command centers & Power BI KPI reporting",
         href: "/services/data-analytics-engineering",
         icon: BarChart3,
-      },
-      {
-        title: "Predictive Analytics & Governance",
-        desc: "Demand forecasting, churn models & audited compliance",
-        href: "/services/data-analytics-engineering",
-        icon: ShieldCheck,
       },
     ],
   },
@@ -182,7 +200,7 @@ export function ServicesMegaMenu({
         >
           {/* Main 4-Column Categorized Grid */}
           <div className="max-w-[1360px] mx-auto px-6 sm:px-8 py-5 sm:py-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[auto_1fr] gap-6 lg:gap-x-6 xl:gap-x-8 lg:gap-y-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-[auto_1fr] gap-6 xl:gap-x-6 xl:gap-y-0">
               {SERVICE_COLUMNS.map((col, cIdx) => (
                 <div
                   key={cIdx}

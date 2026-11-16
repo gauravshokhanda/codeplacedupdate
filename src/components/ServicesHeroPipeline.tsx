@@ -33,11 +33,20 @@ const SERVICE_PILLARS: ServicePillar[] = [
   {
     id: "pillar-04",
     num: "04",
-    title: "DIGITAL MARKETING",
+    title: "DIGITAL MARKETING & GROWTH",
     pills: ["AEO & SEO", "Google & Meta Ads", "GA4 Tracking & Branding"],
     icon: TrendingUp,
     positionClass: "top-[3%] right-[0%]",
     floatDelay: "-1.2s",
+  },
+  {
+    id: "pillar-03",
+    num: "03",
+    title: "DATA ANALYTICS & ENGINEERING",
+    pills: ["ETL/ELT & Lakehouses", "Power BI & Looker", "Predictive Analytics"],
+    icon: Database,
+    positionClass: "top-[28%] left-[0%]",
+    floatDelay: "-2.4s",
   },
   {
     id: "pillar-01",
@@ -45,7 +54,7 @@ const SERVICE_PILLARS: ServicePillar[] = [
     title: "AI & AUTOMATION",
     pills: ["AI Copilots & RAG", "Agent Swarms", "Workflow Automation", "Document AI"],
     icon: Bot,
-    positionClass: "top-[27%] left-[0%]",
+    positionClass: "top-[56%] right-[0%]",
     floatDelay: "0s",
   },
   {
@@ -54,33 +63,14 @@ const SERVICE_PILLARS: ServicePillar[] = [
     title: "SOFTWARE DEVELOPMENT",
     pills: ["SaaS Development", "Web & Mobile Apps", "APIs & Microservices"],
     icon: Code2,
-    positionClass: "top-[51%] right-[0%]",
-    floatDelay: "-2.4s",
-  },
-  {
-    id: "pillar-03",
-    num: "03",
-    title: "DATA ANALYTICS & ENGINEERING",
-    pills: ["ETL/ELT Pipelines", "Data Warehouses", "BI Dashboards", "Predictive Analytics"],
-    icon: Database,
-    positionClass: "bottom-[3%] left-[0%]",
+    positionClass: "bottom-[0%] left-[0%]",
     floatDelay: "-3.6s",
   },
 ];
 
 // Pipeline Data Streams:
-// Pillar 03 (Data Foundation) -> Pillar 02 (Software) -> Pillar 01 (AI) -> Pillar 04 (Digital Marketing)
+// Pillar 02 (Software) -> Pillar 01 (AI) -> Pillar 03 (Data) -> Pillar 04 (Digital Growth)
 const PIPELINE_STREAMS: PipelineStream[] = [
-  {
-    id: "stream-03-02",
-    from: "pillar-03",
-    to: "pillar-02",
-    pathD: "M 205 492 C 250 442, 300 428, 342 418",
-    start: { x: 205, y: 492 },
-    end: { x: 342, y: 418 },
-    pulseDuration: "2.4s",
-    pulseDelay: "0s",
-  },
   {
     id: "stream-02-01",
     from: "pillar-02",
@@ -94,21 +84,31 @@ const PIPELINE_STREAMS: PipelineStream[] = [
   {
     id: "stream-01-04",
     from: "pillar-01",
+    to: "pillar-03",
+    pathD: "M 480 250 C 430 205, 385 198, 338 184",
+    start: { x: 480, y: 250 },
+    end: { x: 338, y: 184 },
+    pulseDuration: "2.3s",
+    pulseDelay: "-1.1s",
+  },
+  {
+    id: "stream-03-04",
+    from: "pillar-03",
     to: "pillar-04",
-    pathD: "M 205 176 C 250 128, 300 116, 342 106",
-    start: { x: 205, y: 176 },
-    end: { x: 342, y: 106 },
+    pathD: "M 205 128 C 248 76, 305 68, 342 56",
+    start: { x: 205, y: 128 },
+    end: { x: 342, y: 56 },
     pulseDuration: "2.1s",
     pulseDelay: "-1.4s",
   },
 ];
 
-// Bottom-up pipeline order for responsive mobile stacked flow (03 -> 02 -> 01 -> 04)
+// Bottom-up pipeline order for responsive mobile stacked flow (02 -> 01 -> 03 -> 04)
 const MOBILE_FLOW_PILLARS: ServicePillar[] = [
-  SERVICE_PILLARS[3], // 03 Data Analytics & Engineering (Foundation)
-  SERVICE_PILLARS[2], // 02 Software Development
-  SERVICE_PILLARS[1], // 01 AI & Automation
-  SERVICE_PILLARS[0], // 04 Digital Marketing
+  SERVICE_PILLARS[3], // 02 Software Development
+  SERVICE_PILLARS[2], // 01 AI & Automation
+  SERVICE_PILLARS[1], // 03 Data Analytics & Engineering
+  SERVICE_PILLARS[0], // 04 Digital Marketing & Growth
 ];
 
 export function ServicesHeroPipeline() {
